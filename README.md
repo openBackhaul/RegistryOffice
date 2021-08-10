@@ -9,7 +9,7 @@
 - [Documentation of the ApplicationPattern](https://github.com/openBackhaul/ApplicationPattern/tree/tsi)
 
 ### Open API specification (Swagger)
-- [RegistryOffice_0.0.1_tsi.210807.1640a](./RegistryOffice_0.0.1_tsi.210807.1640a.yaml)
+- [RegistryOffice_0.0.1_tsi.210807.1640b](./RegistryOffice_0.0.1_tsi.210807.1640b.yaml)
 
 ### Test Cases (Postman Export) and Data File
 -
