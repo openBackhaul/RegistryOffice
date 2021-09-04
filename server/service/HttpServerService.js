@@ -5,7 +5,7 @@
  * Returns application name
  *
  * uuid String 
- * returns inline_response_200_11
+ * returns inline_response_200_12
  **/
 exports.getHttpServerApplicationName = function(uuid) {
   return new Promise(function(resolve, reject) {
@@ -26,7 +26,7 @@ exports.getHttpServerApplicationName = function(uuid) {
  * Returns application purpose
  *
  * uuid String 
- * returns inline_response_200_13
+ * returns inline_response_200_14
  **/
 exports.getHttpServerApplicationPurpose = function(uuid) {
   return new Promise(function(resolve, reject) {
@@ -47,13 +47,13 @@ exports.getHttpServerApplicationPurpose = function(uuid) {
  * Returns update periode
  *
  * uuid String 
- * returns inline_response_200_14
+ * returns inline_response_200_15
  **/
 exports.getHttpServerDataUpdatePeriode = function(uuid) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "http-server-interface-1-0:data-update-period" : "real-time"
+  "http-server-interface-1-0:data-update-period" : "http-server-interface-1-0:DATA_UPDATE_PERIOD_TYPE_REAL_TIME"
 };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
@@ -68,7 +68,7 @@ exports.getHttpServerDataUpdatePeriode = function(uuid) {
  * Returns owner email address
  *
  * uuid String 
- * returns inline_response_200_16
+ * returns inline_response_200_17
  **/
 exports.getHttpServerOwnerEmailAddress = function(uuid) {
   return new Promise(function(resolve, reject) {
@@ -89,7 +89,7 @@ exports.getHttpServerOwnerEmailAddress = function(uuid) {
  * Returns owner name
  *
  * uuid String 
- * returns inline_response_200_15
+ * returns inline_response_200_16
  **/
 exports.getHttpServerOwnerName = function(uuid) {
   return new Promise(function(resolve, reject) {
@@ -110,7 +110,7 @@ exports.getHttpServerOwnerName = function(uuid) {
  * Returns list of releases
  *
  * uuid String 
- * returns inline_response_200_17
+ * returns inline_response_200_18
  **/
 exports.getHttpServerReleaseList = function(uuid) {
   return new Promise(function(resolve, reject) {
@@ -135,7 +135,7 @@ exports.getHttpServerReleaseList = function(uuid) {
  * Returns release number
  *
  * uuid String 
- * returns inline_response_200_12
+ * returns inline_response_200_13
  **/
 exports.getHttpServerReleaseNumber = function(uuid) {
   return new Promise(function(resolve, reject) {

@@ -4,14 +4,9 @@
 /**
  * Returns entire data tree
  *
- * user String User identifier from the system starting the service call
- * originator String 'Identification for the system consuming the API, as defined in  [/core-model-1-4:control-construct/logical-termination-point={uuid}/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]' 
- * xCorrelator String UUID for the service execution flow that allows to correlate requests and responses
- * traceIndicator String Sequence of request numbers along the flow
- * customerJourney String Holds information supporting customer’s journey to which the execution applies
- * returns inline_response_200_7
+ * returns inline_response_200_8
  **/
-exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicator,customerJourney) {
+exports.getControlConstruct = function() {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
@@ -20,10 +15,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
       "profile" : [ ]
     },
     "logical-termination-point" : [ {
-      "uuid" : "op-s-0002",
+      "uuid" : "ro-0-0-1-op-s-0002",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-s-0000" ],
+      "server-ltp" : [ "ro-0-0-1-http-s-0000" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -38,28 +33,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-s-0003",
+      "uuid" : "ro-0-0-1-op-s-0003",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-s-0000" ],
-      "layer-protocol" : [ {
-        "local-id" : "0",
-        "layer-protocol-name" : "operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
-        "operation-server-interface-1-0:operation-server-interface-pac" : {
-          "operation-server-interface-capability" : {
-            "operation-name" : "/v1/stop-notifying-service-requests"
-          },
-          "operation-server-interface-configuration" : {
-            "life-cycle-state" : "operation-server-interface-1-0:LIFE_CYCLE_STATE_TYPE_EXPERIMENTAL",
-            "operation-key" : "Operation key not yet provided."
-          }
-        }
-      } ]
-    }, {
-      "uuid" : "op-s-0004",
-      "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
-      "client-ltp" : [ ],
-      "server-ltp" : [ "http-s-0000" ],
+      "server-ltp" : [ "ro-0-0-1-http-s-0000" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -74,16 +51,16 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-s-0005",
+      "uuid" : "ro-0-0-1-op-s-0004",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-s-0000" ],
+      "server-ltp" : [ "ro-0-0-1-http-s-0000" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
         "operation-server-interface-1-0:operation-server-interface-pac" : {
           "operation-server-interface-capability" : {
-            "operation-name" : "/v1/stop-notifying-oam-requests"
+            "operation-name" : "/v1/end-subscription"
           },
           "operation-server-interface-configuration" : {
             "life-cycle-state" : "operation-server-interface-1-0:LIFE_CYCLE_STATE_TYPE_EXPERIMENTAL",
@@ -92,10 +69,28 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-s-2000",
+      "uuid" : "ro-0-0-1-op-s-0005",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-s-0000" ],
+      "server-ltp" : [ "ro-0-0-1-http-s-0000" ],
+      "layer-protocol" : [ {
+        "local-id" : "0",
+        "layer-protocol-name" : "operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
+        "operation-server-interface-1-0:operation-server-interface-pac" : {
+          "operation-server-interface-capability" : {
+            "operation-name" : "/v1/inquire-oam-request-approvals"
+          },
+          "operation-server-interface-configuration" : {
+            "life-cycle-state" : "operation-server-interface-1-0:LIFE_CYCLE_STATE_TYPE_EXPERIMENTAL",
+            "operation-key" : "Operation key not yet provided."
+          }
+        }
+      } ]
+    }, {
+      "uuid" : "ro-0-0-1-op-s-2000",
+      "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
+      "client-ltp" : [ ],
+      "server-ltp" : [ "ro-0-0-1-http-s-0000" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -110,10 +105,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-s-2001",
+      "uuid" : "ro-0-0-1-op-s-2001",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-s-0000" ],
+      "server-ltp" : [ "ro-0-0-1-http-s-0000" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -128,10 +123,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-s-2002",
+      "uuid" : "ro-0-0-1-op-s-2002",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-s-0000" ],
+      "server-ltp" : [ "ro-0-0-1-http-s-0000" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -146,10 +141,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-s-2003",
+      "uuid" : "ro-0-0-1-op-s-2003",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-s-0000" ],
+      "server-ltp" : [ "ro-0-0-1-http-s-0000" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -164,10 +159,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-s-2004",
+      "uuid" : "ro-0-0-1-op-s-2004",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-s-0000" ],
+      "server-ltp" : [ "ro-0-0-1-http-s-0000" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -182,10 +177,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-s-3000",
+      "uuid" : "ro-0-0-1-op-s-3000",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-s-0000" ],
+      "server-ltp" : [ "ro-0-0-1-http-s-0000" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -200,10 +195,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-s-3001",
+      "uuid" : "ro-0-0-1-op-s-3001",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-s-0000" ],
+      "server-ltp" : [ "ro-0-0-1-http-s-0000" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -218,10 +213,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-s-3002",
+      "uuid" : "ro-0-0-1-op-s-3002",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-s-0000" ],
+      "server-ltp" : [ "ro-0-0-1-http-s-0000" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -236,10 +231,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-s-3003",
+      "uuid" : "ro-0-0-1-op-s-3003",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-s-0000" ],
+      "server-ltp" : [ "ro-0-0-1-http-s-0000" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -254,10 +249,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-s-3004",
+      "uuid" : "ro-0-0-1-op-s-3004",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-s-0000" ],
+      "server-ltp" : [ "ro-0-0-1-http-s-0000" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -272,10 +267,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-s-3005",
+      "uuid" : "ro-0-0-1-op-s-3005",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-s-0000" ],
+      "server-ltp" : [ "ro-0-0-1-http-s-0000" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -290,10 +285,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-s-3006",
+      "uuid" : "ro-0-0-1-op-s-3006",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-s-0000" ],
+      "server-ltp" : [ "ro-0-0-1-http-s-0000" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -308,10 +303,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-s-3007",
+      "uuid" : "ro-0-0-1-op-s-3007",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-s-0000" ],
+      "server-ltp" : [ "ro-0-0-1-http-s-0000" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -326,10 +321,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-s-3008",
+      "uuid" : "ro-0-0-1-op-s-3008",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-s-0000" ],
+      "server-ltp" : [ "ro-0-0-1-http-s-0000" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -344,28 +339,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-s-3009",
+      "uuid" : "ro-0-0-1-http-s-0000",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
-      "client-ltp" : [ ],
-      "server-ltp" : [ "http-s-0000" ],
-      "layer-protocol" : [ {
-        "local-id" : "0",
-        "layer-protocol-name" : "operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
-        "operation-server-interface-1-0:operation-server-interface-pac" : {
-          "operation-server-interface-capability" : {
-            "operation-name" : "/v1/stop-notifying-application"
-          },
-          "operation-server-interface-configuration" : {
-            "life-cycle-state" : "operation-server-interface-1-0:LIFE_CYCLE_STATE_TYPE_EXPERIMENTAL",
-            "operation-key" : "Operation key not yet provided."
-          }
-        }
-      } ]
-    }, {
-      "uuid" : "http-s-0000",
-      "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
-      "client-ltp" : [ "op-s-0002", "op-s-0003" ],
-      "server-ltp" : [ "tcp-s-0000" ],
+      "client-ltp" : [ "ro-0-0-1-op-s-0002", "ro-0-0-1-op-s-0003" ],
+      "server-ltp" : [ "ro-0-0-1-tcp-s-0000" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "http-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER",
@@ -374,21 +351,21 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
             "application-name" : "RegistryOffice",
             "release-number" : "0.0.1",
             "application-purpose" : "All applications being part of the MBH SDN must be register here.",
-            "data-update-period" : "real-time",
+            "data-update-period" : "http-server-interface-1-0:DATA_UPDATE_PERIOD_TYPE_REAL_TIME",
             "owner-name" : "Thorsten Heinze",
             "owner-email-address" : "Thorsten.Heinze@telefonica.com",
             "release-list" : [ {
               "release-number" : "0.0.1",
               "release-date" : "16.07.2021",
-              "changes" : "Initial version"
+              "changes" : "Initial version."
             } ]
           }
         }
       } ]
     }, {
-      "uuid" : "tcp-s-0000",
+      "uuid" : "ro-0-0-1-tcp-s-0000",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
-      "client-ltp" : [ "http-s-0000" ],
+      "client-ltp" : [ "ro-0-0-1-http-s-0000" ],
       "server-ltp" : [ ],
       "layer-protocol" : [ {
         "local-id" : "0",
@@ -403,10 +380,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-c-3010",
+      "uuid" : "ro-0-0-1-op-c-3010",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-c-3010" ],
+      "server-ltp" : [ "ro-0-0-1-http-c-3010" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -422,10 +399,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-c-3011",
+      "uuid" : "ro-0-0-1-op-c-3011",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-c-3010" ],
+      "server-ltp" : [ "ro-0-0-1-http-c-3010" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -441,10 +418,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-c-3012",
+      "uuid" : "ro-0-0-1-op-c-3012",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-c-3010" ],
+      "server-ltp" : [ "ro-0-0-1-http-c-3010" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -460,16 +437,18 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "http-c-3010",
+      "uuid" : "ro-0-0-1-http-c-3010",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
-      "client-ltp" : [ "op-c-3010", "op-c-3011" ],
-      "server-ltp" : [ "tcp-c-3010" ],
+      "client-ltp" : [ "ro-0-0-1-op-c-3010", "ro-0-0-1-op-c-3011" ],
+      "server-ltp" : [ "ro-0-0-1-tcp-c-3010" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER",
         "http-client-interface-1-0:http-client-interface-pac" : {
           "http-client-interface-capability" : {
-            "application-name" : "TypeApprovalRegister",
+            "application-name" : "TypeApprovalRegister"
+          },
+          "http-client-interface-configuration" : {
             "release-number" : "0.0.1"
           },
           "http-client-interface-status" : {
@@ -478,9 +457,9 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "tcp-c-3010",
+      "uuid" : "ro-0-0-1-tcp-c-3010",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
-      "client-ltp" : [ "http-c-3010" ],
+      "client-ltp" : [ "ro-0-0-1-http-c-3010" ],
       "server-ltp" : [ ],
       "layer-protocol" : [ {
         "local-id" : "0",
@@ -499,10 +478,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-c-0020",
+      "uuid" : "ro-0-0-1-op-c-0020",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-c-0020" ],
+      "server-ltp" : [ "ro-0-0-1-http-c-0020" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -519,10 +498,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-c-3020",
+      "uuid" : "ro-0-0-1-op-c-3020",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-c-0020" ],
+      "server-ltp" : [ "ro-0-0-1-http-c-0020" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -538,10 +517,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-c-3021",
+      "uuid" : "ro-0-0-1-op-c-3021",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-c-0020" ],
+      "server-ltp" : [ "ro-0-0-1-http-c-0020" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -557,10 +536,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-c-3022",
+      "uuid" : "ro-0-0-1-op-c-3022",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-c-0020" ],
+      "server-ltp" : [ "ro-0-0-1-http-c-0020" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -576,16 +555,18 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "http-c-0020",
+      "uuid" : "ro-0-0-1-http-c-0020",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
-      "client-ltp" : [ "op-c-0020", "op-c-3020" ],
-      "server-ltp" : [ "tcp-c-0020" ],
+      "client-ltp" : [ "ro-0-0-1-op-c-0020", "ro-0-0-1-op-c-3020" ],
+      "server-ltp" : [ "ro-0-0-1-tcp-c-0020" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER",
         "http-client-interface-1-0:http-client-interface-pac" : {
           "http-client-interface-capability" : {
-            "application-name" : "ExecutionAndTraceLog",
+            "application-name" : "ExecutionAndTraceLog"
+          },
+          "http-client-interface-configuration" : {
             "release-number" : "0.0.1"
           },
           "http-client-interface-status" : {
@@ -594,9 +575,9 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "tcp-c-0020",
+      "uuid" : "ro-0-0-1-tcp-c-0020",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
-      "client-ltp" : [ "http-c-0020" ],
+      "client-ltp" : [ "ro-0-0-1-http-c-0020" ],
       "server-ltp" : [ ],
       "layer-protocol" : [ {
         "local-id" : "0",
@@ -615,10 +596,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-c-0030",
+      "uuid" : "ro-0-0-1-op-c-0030",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-c-0030" ],
+      "server-ltp" : [ "ro-0-0-1-http-c-0030" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -634,10 +615,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-c-3030",
+      "uuid" : "ro-0-0-1-op-c-3030",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-c-0030" ],
+      "server-ltp" : [ "ro-0-0-1-http-c-0030" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -653,10 +634,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-c-3031",
+      "uuid" : "ro-0-0-1-op-c-3031",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-c-0030" ],
+      "server-ltp" : [ "ro-0-0-1-http-c-0030" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -672,10 +653,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-c-3032",
+      "uuid" : "ro-0-0-1-op-c-3032",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-c-0030" ],
+      "server-ltp" : [ "ro-0-0-1-http-c-0030" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -691,16 +672,18 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "http-c-0030",
+      "uuid" : "ro-0-0-1-http-c-0030",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
-      "client-ltp" : [ "op-c-0030", "op-c-3030" ],
-      "server-ltp" : [ "tcp-c-0030" ],
+      "client-ltp" : [ "ro-0-0-1-op-c-0030", "ro-0-0-1-op-c-3030" ],
+      "server-ltp" : [ "ro-0-0-1-tcp-c-0030" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER",
         "http-client-interface-1-0:http-client-interface-pac" : {
           "http-client-interface-capability" : {
-            "application-name" : "OamLog",
+            "application-name" : "OamLog"
+          },
+          "http-client-interface-configuration" : {
             "release-number" : "0.0.1"
           },
           "http-client-interface-status" : {
@@ -709,9 +692,9 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "tcp-c-0030",
+      "uuid" : "ro-0-0-1-tcp-c-0030",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
-      "client-ltp" : [ "http-c-0030" ],
+      "client-ltp" : [ "ro-0-0-1-http-c-0030" ],
       "server-ltp" : [ ],
       "layer-protocol" : [ {
         "local-id" : "0",
@@ -730,10 +713,29 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-c-3300",
+      "uuid" : "ro-0-0-1-op-c-0040",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-c-3300" ],
+      "server-ltp" : [ "ro-0-0-1-http-c-0040" ],
+      "layer-protocol" : [ {
+        "local-id" : "0",
+        "layer-protocol-name" : "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
+        "operation-client-interface-1-0:operation-client-interface-pac" : {
+          "operation-client-interface-configuration" : {
+            "operation-name" : "/v1/approve-oam-request",
+            "operation-key" : "Operation key not yet provided."
+          },
+          "operation-client-interface-status" : {
+            "operational-state" : "operation-client-interface-1-0:OPERATIONAL_STATE_TYPE_NOT_YET_DEFINED",
+            "life-cycle-state" : "operation-client-interface-1-0:LIFE_CYCLE_STATE_TYPE_NOT_YET_DEFINED"
+          }
+        }
+      } ]
+    }, {
+      "uuid" : "ro-0-0-1-op-c-3040",
+      "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
+      "client-ltp" : [ ],
+      "server-ltp" : [ "ro-0-0-1-http-c-0040" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -749,16 +751,116 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "http-c-3300",
+      "uuid" : "ro-0-0-1-op-c-3041",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
-      "client-ltp" : [ "op-c-3300" ],
-      "server-ltp" : [ "tcp-c-3300" ],
+      "client-ltp" : [ ],
+      "server-ltp" : [ "ro-0-0-1-http-c-0040" ],
+      "layer-protocol" : [ {
+        "local-id" : "0",
+        "layer-protocol-name" : "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
+        "operation-client-interface-1-0:operation-client-interface-pac" : {
+          "operation-client-interface-configuration" : {
+            "operation-name" : "/v1/regard-application",
+            "operation-key" : "Operation key not yet provided."
+          },
+          "operation-client-interface-status" : {
+            "operational-state" : "operation-client-interface-1-0:OPERATIONAL_STATE_TYPE_NOT_YET_DEFINED",
+            "life-cycle-state" : "operation-client-interface-1-0:LIFE_CYCLE_STATE_TYPE_NOT_YET_DEFINED"
+          }
+        }
+      } ]
+    }, {
+      "uuid" : "ro-0-0-1-op-c-3042",
+      "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
+      "client-ltp" : [ ],
+      "server-ltp" : [ "ro-0-0-1-http-c-0040" ],
+      "layer-protocol" : [ {
+        "local-id" : "0",
+        "layer-protocol-name" : "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
+        "operation-client-interface-1-0:operation-client-interface-pac" : {
+          "operation-client-interface-configuration" : {
+            "operation-name" : "/v1/disregard-application",
+            "operation-key" : "Operation key not yet provided."
+          },
+          "operation-client-interface-status" : {
+            "operational-state" : "operation-client-interface-1-0:OPERATIONAL_STATE_TYPE_NOT_YET_DEFINED",
+            "life-cycle-state" : "operation-client-interface-1-0:LIFE_CYCLE_STATE_TYPE_NOT_YET_DEFINED"
+          }
+        }
+      } ]
+    }, {
+      "uuid" : "ro-0-0-1-http-c-0040",
+      "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
+      "client-ltp" : [ "ro-0-0-1-op-c-0040", "ro-0-0-1-op-c-3040" ],
+      "server-ltp" : [ "ro-0-0-1-tcp-c-0040" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER",
         "http-client-interface-1-0:http-client-interface-pac" : {
           "http-client-interface-capability" : {
-            "application-name" : "CurrentController",
+            "application-name" : "AdministratorAdministration"
+          },
+          "http-client-interface-configuration" : {
+            "release-number" : "0.0.1"
+          },
+          "http-client-interface-status" : {
+            "approval-status" : "http-client-interface-1-0:APPROVAL_STATUS_TYPE_APPROVED"
+          }
+        }
+      } ]
+    }, {
+      "uuid" : "ro-0-0-1-tcp-c-0040",
+      "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
+      "client-ltp" : [ "ro-0-0-1-http-c-0040" ],
+      "server-ltp" : [ ],
+      "layer-protocol" : [ {
+        "local-id" : "0",
+        "layer-protocol-name" : "tcp-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_TCP_LAYER",
+        "tcp-client-interface-1-0:tcp-client-interface-pac" : {
+          "tcp-client-interface-configuration" : {
+            "remote-address" : {
+              "ip-address" : {
+                "ipv-4-address" : "10.118.125.157",
+                "ipv-6-address" : "0:0:0:0:0:0:0:0"
+              },
+              "domain-name" : "Not yet defined."
+            },
+            "remote-port" : 1004
+          }
+        }
+      } ]
+    }, {
+      "uuid" : "ro-0-0-1-op-c-3300",
+      "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
+      "client-ltp" : [ ],
+      "server-ltp" : [ "ro-0-0-1-http-c-3300" ],
+      "layer-protocol" : [ {
+        "local-id" : "0",
+        "layer-protocol-name" : "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
+        "operation-client-interface-1-0:operation-client-interface-pac" : {
+          "operation-client-interface-configuration" : {
+            "operation-name" : "/v1/embed-yourself",
+            "operation-key" : "Operation key not yet provided."
+          },
+          "operation-client-interface-status" : {
+            "operational-state" : "operation-client-interface-1-0:OPERATIONAL_STATE_TYPE_NOT_YET_DEFINED",
+            "life-cycle-state" : "operation-client-interface-1-0:LIFE_CYCLE_STATE_TYPE_NOT_YET_DEFINED"
+          }
+        }
+      } ]
+    }, {
+      "uuid" : "ro-0-0-1-http-c-3300",
+      "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
+      "client-ltp" : [ "ro-0-0-1-op-c-3300" ],
+      "server-ltp" : [ "ro-0-0-1-tcp-c-3300" ],
+      "layer-protocol" : [ {
+        "local-id" : "0",
+        "layer-protocol-name" : "http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER",
+        "http-client-interface-1-0:http-client-interface-pac" : {
+          "http-client-interface-capability" : {
+            "application-name" : "CurrentController"
+          },
+          "http-client-interface-configuration" : {
             "release-number" : "0.0.6"
           },
           "http-client-interface-status" : {
@@ -767,9 +869,9 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "tcp-c-3300",
+      "uuid" : "ro-0-0-1-tcp-c-3300",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
-      "client-ltp" : [ "http-c-3300" ],
+      "client-ltp" : [ "ro-0-0-1-http-c-3300" ],
       "server-ltp" : [ ],
       "layer-protocol" : [ {
         "local-id" : "0",
@@ -788,10 +890,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-c-3310",
+      "uuid" : "ro-0-0-1-op-c-3310",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-c-3310" ],
+      "server-ltp" : [ "ro-0-0-1-http-c-3310" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -807,16 +909,18 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "http-c-3310",
+      "uuid" : "ro-0-0-1-http-c-3310",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
-      "client-ltp" : [ "op-c-3310" ],
-      "server-ltp" : [ "tcp-c-3310" ],
+      "client-ltp" : [ "ro-0-0-1-op-c-3310" ],
+      "server-ltp" : [ "ro-0-0-1-tcp-c-3310" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER",
         "http-client-interface-1-0:http-client-interface-pac" : {
           "http-client-interface-capability" : {
-            "application-name" : "Resolver",
+            "application-name" : "Resolver"
+          },
+          "http-client-interface-configuration" : {
             "release-number" : "0.0.1"
           },
           "http-client-interface-status" : {
@@ -825,9 +929,9 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "tcp-c-3310",
+      "uuid" : "ro-0-0-1-tcp-c-3310",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
-      "client-ltp" : [ "http-c-3310" ],
+      "client-ltp" : [ "ro-0-0-1-http-c-3310" ],
       "server-ltp" : [ ],
       "layer-protocol" : [ {
         "local-id" : "0",
@@ -846,10 +950,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-c-3320",
+      "uuid" : "ro-0-0-1-op-c-3320",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-c-3320" ],
+      "server-ltp" : [ "ro-0-0-1-http-c-3320" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -865,16 +969,18 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "http-c-3320",
+      "uuid" : "ro-0-0-1-http-c-3320",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
-      "client-ltp" : [ "op-c-3320" ],
-      "server-ltp" : [ "tcp-c-3320" ],
+      "client-ltp" : [ "ro-0-0-1-op-c-3320" ],
+      "server-ltp" : [ "ro-0-0-1-tcp-c-3320" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER",
         "http-client-interface-1-0:http-client-interface-pac" : {
           "http-client-interface-capability" : {
-            "application-name" : "Connector2LtpUuid",
+            "application-name" : "Connector2LtpUuid"
+          },
+          "http-client-interface-configuration" : {
             "release-number" : "0.0.1"
           },
           "http-client-interface-status" : {
@@ -883,9 +989,9 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "tcp-c-3320",
+      "uuid" : "ro-0-0-1-tcp-c-3320",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
-      "client-ltp" : [ "http-c-3320" ],
+      "client-ltp" : [ "ro-0-0-1-http-c-3320" ],
       "server-ltp" : [ ],
       "layer-protocol" : [ {
         "local-id" : "0",
@@ -904,10 +1010,10 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "op-c-9990",
+      "uuid" : "ro-0-0-1-op-c-9990",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
       "client-ltp" : [ ],
-      "server-ltp" : [ "http-c-9990" ],
+      "server-ltp" : [ "ro-0-0-1-http-c-9990" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
@@ -923,16 +1029,18 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "http-c-9990",
+      "uuid" : "ro-0-0-1-http-c-9990",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
-      "client-ltp" : [ "op-c-9990" ],
-      "server-ltp" : [ "tcp-c-9990" ],
+      "client-ltp" : [ "ro-0-0-1-op-c-9990" ],
+      "server-ltp" : [ "ro-0-0-1-tcp-c-9990" ],
       "layer-protocol" : [ {
         "local-id" : "0",
         "layer-protocol-name" : "http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER",
         "http-client-interface-1-0:http-client-interface-pac" : {
           "http-client-interface-capability" : {
-            "application-name" : "BadApplication",
+            "application-name" : "BadApplication"
+          },
+          "http-client-interface-configuration" : {
             "release-number" : "0.0.1"
           },
           "http-client-interface-status" : {
@@ -941,9 +1049,9 @@ exports.getControlConstruct = function(user,originator,xCorrelator,traceIndicato
         }
       } ]
     }, {
-      "uuid" : "tcp-c-9990",
+      "uuid" : "ro-0-0-1-tcp-c-9990",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SINK",
-      "client-ltp" : [ "http-c-9990" ],
+      "client-ltp" : [ "ro-0-0-1-http-c-9990" ],
       "server-ltp" : [ ],
       "layer-protocol" : [ {
         "local-id" : "0",

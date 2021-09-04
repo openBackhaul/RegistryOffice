@@ -83,16 +83,6 @@ module.exports.registerApplication = function registerApplication (req, res, nex
     });
 };
 
-module.exports.stopNotifyingApplication = function stopNotifyingApplication (req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
-  IndividualServices.stopNotifyingApplication(body, user, originator, xCorrelator, traceIndicator, customerJourney)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
-
 module.exports.updateApprovalStatus = function updateApprovalStatus (req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
   IndividualServices.updateApprovalStatus(body, user, originator, xCorrelator, traceIndicator, customerJourney)
     .then(function (response) {

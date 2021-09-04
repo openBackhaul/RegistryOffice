@@ -5,7 +5,7 @@
  * Returns name of application to be addressed
  *
  * uuid String 
- * returns inline_response_200_25
+ * returns inline_response_200_26
  **/
 exports.getHttpClientApplicationName = function(uuid) {
   return new Promise(function(resolve, reject) {
@@ -26,7 +26,7 @@ exports.getHttpClientApplicationName = function(uuid) {
  * Returns approval status of the addressed application
  *
  * uuid String 
- * returns inline_response_200_27
+ * returns inline_response_200_7
  **/
 exports.getHttpClientApprovalStatus = function(uuid) {
   return new Promise(function(resolve, reject) {
@@ -47,7 +47,7 @@ exports.getHttpClientApprovalStatus = function(uuid) {
  * Returns release number of application to be addressed
  *
  * uuid String 
- * returns inline_response_200_26
+ * returns inline_response_200_27
  **/
 exports.getHttpClientReleaseNumber = function(uuid) {
   return new Promise(function(resolve, reject) {
@@ -60,6 +60,20 @@ exports.getHttpClientReleaseNumber = function(uuid) {
     } else {
       resolve();
     }
+  });
+}
+
+
+/**
+ * Configures release number of application to be addressed
+ *
+ * body Httpclientinterfaceconfiguration_releasenumber_body 
+ * uuid String 
+ * no response value expected for this operation
+ **/
+exports.putHttpClientReleaseNumber = function(body,uuid) {
+  return new Promise(function(resolve, reject) {
+    resolve();
   });
 }
 

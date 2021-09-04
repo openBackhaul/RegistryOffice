@@ -3,8 +3,8 @@
 var utils = require('../utils/writer.js');
 var OperationClient = require('../service/OperationClientService');
 
-module.exports.getOperationClientDetailedLoggingIsOn = function getOperationClientDetailedLoggingIsOn (req, res, next, user, originator, xCorrelator, traceIndicator, customerJourney) {
-  OperationClient.getOperationClientDetailedLoggingIsOn(user, originator, xCorrelator, traceIndicator, customerJourney)
+module.exports.getOperationClientDetailedLoggingIsOn = function getOperationClientDetailedLoggingIsOn (req, res, next) {
+  OperationClient.getOperationClientDetailedLoggingIsOn()
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -53,8 +53,8 @@ module.exports.getOperationClientOperationalState = function getOperationClientO
     });
 };
 
-module.exports.putOperationClientDetailedLoggingIsOn = function putOperationClientDetailedLoggingIsOn (req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
-  OperationClient.putOperationClientDetailedLoggingIsOn(body, user, originator, xCorrelator, traceIndicator, customerJourney)
+module.exports.putOperationClientDetailedLoggingIsOn = function putOperationClientDetailedLoggingIsOn (req, res, next, body) {
+  OperationClient.putOperationClientDetailedLoggingIsOn(body)
     .then(function (response) {
       utils.writeJson(res, response);
     })

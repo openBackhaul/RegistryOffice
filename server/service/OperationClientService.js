@@ -4,14 +4,9 @@
 /**
  * Returns detailed logging configuration.
  *
- * user String User identifier from the system starting the service call
- * originator String 'Identification for the system consuming the API, as defined in  [/core-model-1-4:control-construct/logical-termination-point={uuid}/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]' 
- * xCorrelator String UUID for the service execution flow that allows to correlate requests and responses
- * traceIndicator String Sequence of request numbers along the flow
- * customerJourney String Holds information supporting customer’s journey to which the execution applies
- * returns inline_response_200_24
+ * returns inline_response_200_25
  **/
-exports.getOperationClientDetailedLoggingIsOn = function(user,originator,xCorrelator,traceIndicator,customerJourney) {
+exports.getOperationClientDetailedLoggingIsOn = function() {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
@@ -30,7 +25,7 @@ exports.getOperationClientDetailedLoggingIsOn = function(user,originator,xCorrel
  * Returns life cycle state of the operation
  *
  * uuid String 
- * returns inline_response_200_23
+ * returns inline_response_200_24
  **/
 exports.getOperationClientLifeCycleState = function(uuid) {
   return new Promise(function(resolve, reject) {
@@ -51,7 +46,7 @@ exports.getOperationClientLifeCycleState = function(uuid) {
  * Returns key used for connecting to server.
  *
  * uuid String 
- * returns inline_response_200_21
+ * returns inline_response_200_22
  **/
 exports.getOperationClientOperationKey = function(uuid) {
   return new Promise(function(resolve, reject) {
@@ -72,7 +67,7 @@ exports.getOperationClientOperationKey = function(uuid) {
  * Returns operation name
  *
  * uuid String 
- * returns inline_response_200_20
+ * returns inline_response_200_21
  **/
 exports.getOperationClientOperationName = function(uuid) {
   return new Promise(function(resolve, reject) {
@@ -93,7 +88,7 @@ exports.getOperationClientOperationName = function(uuid) {
  * Returns operational state of the operation
  *
  * uuid String 
- * returns inline_response_200_22
+ * returns inline_response_200_23
  **/
 exports.getOperationClientOperationalState = function(uuid) {
   return new Promise(function(resolve, reject) {
@@ -114,14 +109,9 @@ exports.getOperationClientOperationalState = function(uuid) {
  * Configures detailed logging on/off.
  *
  * body Operationclientinterfaceconfiguration_detailedloggingison_body 
- * user String User identifier from the system starting the service call
- * originator String 'Identification for the system consuming the API, as defined in  [/core-model-1-4:control-construct/logical-termination-point={uuid}/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]' 
- * xCorrelator String UUID for the service execution flow that allows to correlate requests and responses
- * traceIndicator String Sequence of request numbers along the flow
- * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * no response value expected for this operation
  **/
-exports.putOperationClientDetailedLoggingIsOn = function(body,user,originator,xCorrelator,traceIndicator,customerJourney) {
+exports.putOperationClientDetailedLoggingIsOn = function(body) {
   return new Promise(function(resolve, reject) {
     resolve();
   });

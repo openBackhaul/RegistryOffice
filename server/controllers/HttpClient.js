@@ -32,3 +32,13 @@ module.exports.getHttpClientReleaseNumber = function getHttpClientReleaseNumber 
       utils.writeJson(res, response);
     });
 };
+
+module.exports.putHttpClientReleaseNumber = function putHttpClientReleaseNumber (req, res, next, body, uuid) {
+  HttpClient.putHttpClientReleaseNumber(body, uuid)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};

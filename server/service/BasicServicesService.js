@@ -2,6 +2,24 @@
 
 
 /**
+ * Stops sending notifications of a specific subscription
+ *
+ * body V1_endsubscription_body 
+ * user String User identifier from the system starting the service call
+ * originator String 'Identification for the system consuming the API, as defined in  [/core-model-1-4:control-construct/logical-termination-point={uuid}/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]' 
+ * xCorrelator String UUID for the service execution flow that allows to correlate requests and responses
+ * traceIndicator String Sequence of request numbers along the flow
+ * customerJourney String Holds information supporting customer’s journey to which the execution applies
+ * no response value expected for this operation
+ **/
+exports.endSubscription = function(body,user,originator,xCorrelator,traceIndicator,customerJourney) {
+  return new Promise(function(resolve, reject) {
+    resolve();
+  });
+}
+
+
+/**
  * Returns administrative information
  *
  * user String User identifier from the system starting the service call
@@ -145,6 +163,24 @@ exports.informAboutReleaseHistoryInGenericRepresentation = function(user,origina
 
 
 /**
+ * Receives information about where to ask for approval of OaM requests
+ *
+ * body V1_inquireoamrequestapprovals_body 
+ * user String User identifier from the system starting the service call
+ * originator String 'Identification for the system consuming the API, as defined in  [/core-model-1-4:control-construct/logical-termination-point={uuid}/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]' 
+ * xCorrelator String UUID for the service execution flow that allows to correlate requests and responses
+ * traceIndicator String Sequence of request numbers along the flow
+ * customerJourney String Holds information supporting customer’s journey to which the execution applies
+ * no response value expected for this operation
+ **/
+exports.inquireOamRequestApprovals = function(body,user,originator,xCorrelator,traceIndicator,customerJourney) {
+  return new Promise(function(resolve, reject) {
+    resolve();
+  });
+}
+
+
+/**
  * Offers subscription to OaM change notifications
  *
  * body V1_notifyoamrequests_body 
@@ -212,40 +248,6 @@ exports.startApplicationInGenericRepresentation = function(user,originator,xCorr
     } else {
       resolve();
     }
-  });
-}
-
-
-/**
- * Stops sending records of OaM requests
- *
- * user String User identifier from the system starting the service call
- * originator String 'Identification for the system consuming the API, as defined in  [/core-model-1-4:control-construct/logical-termination-point={uuid}/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]' 
- * xCorrelator String UUID for the service execution flow that allows to correlate requests and responses
- * traceIndicator String Sequence of request numbers along the flow
- * customerJourney String Holds information supporting customer’s journey to which the execution applies
- * no response value expected for this operation
- **/
-exports.stopNotifyingOamRequests = function(user,originator,xCorrelator,traceIndicator,customerJourney) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
-}
-
-
-/**
- * Stops sending of service request records
- *
- * user String User identifier from the system starting the service call
- * originator String 'Identification for the system consuming the API, as defined in  [/core-model-1-4:control-construct/logical-termination-point={uuid}/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]' 
- * xCorrelator String UUID for the service execution flow that allows to correlate requests and responses
- * traceIndicator String Sequence of request numbers along the flow
- * customerJourney String Holds information supporting customer’s journey to which the execution applies
- * no response value expected for this operation
- **/
-exports.stopNotifyingServiceRequests = function(user,originator,xCorrelator,traceIndicator,customerJourney) {
-  return new Promise(function(resolve, reject) {
-    resolve();
   });
 }
 
