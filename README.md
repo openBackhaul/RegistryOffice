@@ -10,12 +10,14 @@
 
 ### Open API specification (Swagger)
 - [RegistryOffice_0.0.1_tsi.210817.1035](./RegistryOffice_0.0.1_tsi.210817.1035.yaml)
+- [RegistryOffice_0.0.1_tsi.211011.1810](./RegistryOffice_0.0.1_tsi.211011.1810.yaml)
 
 ### Test Cases (Postman Export) and Data File
 -
 
 ### Load File (JSON)
 - [RegistryOffice_0.0.1_tsi.210817.1035+data.1](./RegistryOffice_0.0.1_tsi.210817.1035+data.1.json)
+- [RegistryOffice_0.0.1_tsi.211011.1810+data.1](./RegistryOffice_0.0.1_tsi.211011.1810+data.1.json)
 
 ### Publication
 - No official publication planned
