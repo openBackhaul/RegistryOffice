@@ -36,44 +36,22 @@ exports.listApplications = function(user,originator,xCorrelator,traceIndicator,c
   "application-name" : "TypeApprovalRegister",
   "release-number" : "0.0.1",
   "application-address" : "10.118.125.157",
-  "application-port" : 1001,
-  "approval-status" : "APPROVED"
+  "application-port" : 1001
 }, {
   "application-name" : "ExecutionAndTraceLog",
   "release-number" : "0.0.1",
   "application-address" : "10.118.125.157",
-  "application-port" : 1002,
-  "approval-status" : "APPROVED"
+  "application-port" : 1002
 }, {
   "application-name" : "OamLog",
   "release-number" : "0.0.1",
   "application-address" : "10.118.125.157",
-  "application-port" : 1003,
-  "approval-status" : "APPROVED"
-}, {
-  "application-name" : "CurrentController",
-  "release-number" : "0.0.6",
-  "application-address" : "10.118.125.186",
-  "application-port" : 2000,
-  "approval-status" : "APPROVED"
-}, {
-  "application-name" : "Resolver",
-  "release-number" : "0.0.1",
-  "application-address" : "10.118.125.186",
-  "application-port" : 2001,
-  "approval-status" : "REGISTERED"
-}, {
-  "application-name" : "Connector2LtpUuid",
-  "release-number" : "0.0.1",
-  "application-address" : "10.118.125.186",
-  "application-port" : 2002,
-  "approval-status" : "REGISTERED"
+  "application-port" : 1003
 }, {
   "application-name" : "BadApplication",
   "release-number" : "0.0.1",
   "application-address" : "10.118.125.186",
-  "application-port" : 9999,
-  "approval-status" : "BARRED"
+  "application-port" : 9999
 } ];
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
@@ -109,18 +87,6 @@ exports.listApplicationsInGenericRepresentation = function(user,originator,xCorr
     "datatype" : "String"
   }, {
     "field-name" : "OamLog",
-    "value" : "0.0.1",
-    "datatype" : "String"
-  }, {
-    "field-name" : "CurrentController",
-    "value" : "0.0.6",
-    "datatype" : "String"
-  }, {
-    "field-name" : "Resolver",
-    "value" : "0.0.1",
-    "datatype" : "String"
-  }, {
-    "field-name" : "Connector2LtpUuid",
     "value" : "0.0.1",
     "datatype" : "String"
   }, {
@@ -177,7 +143,7 @@ exports.notifyDeregistrations = function(body,user,originator,xCorrelator,traceI
 /**
  * Offers subscribing to notifications about new registrations
  *
- * body V1_notifyregistrations_body 
+ * body V1_inquireapplicationtypeapprovals_body 
  * user String User identifier from the system starting the service call
  * originator String 'Identification for the system consuming the API, as defined in  [/core-model-1-4:control-construct/logical-termination-point={uuid}/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]' 
  * xCorrelator String UUID for the service execution flow that allows to correlate requests and responses
@@ -193,7 +159,7 @@ exports.notifyRegistrations = function(body,user,originator,xCorrelator,traceInd
 
 
 /**
- * Offers subscribing to notifications about deregistered applications and withdrawn approvals
+ * Offers subscribing to notifications about withdrawn approvals
  *
  * body V1_notifywithdrawnapprovals_body 
  * user String User identifier from the system starting the service call
@@ -231,7 +197,7 @@ exports.registerApplication = function(body,user,originator,xCorrelator,traceInd
 /**
  * Updates the approval status of an already registered application
  *
- * body V1_updateapprovalstatus_body 
+ * body V1_regardupdatedapprovalstatus_body 
  * user String User identifier from the system starting the service call
  * originator String 'Identification for the system consuming the API, as defined in  [/core-model-1-4:control-construct/logical-termination-point={uuid}/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]' 
  * xCorrelator String UUID for the service execution flow that allows to correlate requests and responses

@@ -13,16 +13,6 @@ module.exports.getHttpClientApplicationName = function getHttpClientApplicationN
     });
 };
 
-module.exports.getHttpClientApprovalStatus = function getHttpClientApprovalStatus (req, res, next, uuid) {
-  HttpClient.getHttpClientApprovalStatus(uuid)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
-
 module.exports.getHttpClientReleaseNumber = function getHttpClientReleaseNumber (req, res, next, uuid) {
   HttpClient.getHttpClientReleaseNumber(uuid)
     .then(function (response) {

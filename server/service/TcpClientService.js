@@ -2,22 +2,16 @@
 
 
 /**
- * Returns remote IP address or hostname
+ * Returns remote IPv4 address
  *
  * uuid String 
- * returns inline_response_200_28
+ * returns inline_response_200_27
  **/
-exports.getTcpClientRemoteAddress = function(uuid) {
+exports.getTcpClientRemoteIpv4Address = function(uuid) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "tcp-client-interface-1-0:remote-address" : {
-    "domain-name" : "Not yet defined.",
-    "ip-address" : {
-      "ipv-4-address" : "10.118.125.157",
-      "ipv-6-address" : "0:0:0:0:0:0:0:0"
-    }
-  }
+  "tcp-client-interface-1-0:ipv-4-address" : "10.118.125.157"
 };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
@@ -32,7 +26,7 @@ exports.getTcpClientRemoteAddress = function(uuid) {
  * Returns target TCP port at server
  *
  * uuid String 
- * returns inline_response_200_29
+ * returns inline_response_200_28
  **/
 exports.getTcpClientRemotePort = function(uuid) {
   return new Promise(function(resolve, reject) {
@@ -50,13 +44,13 @@ exports.getTcpClientRemotePort = function(uuid) {
 
 
 /**
- * Configures remote IP address or hostname
+ * Configures remote IPv4 address
  *
- * body Tcpclientinterfaceconfiguration_remoteaddress_body 
+ * body Ipaddress_ipv4address_body 
  * uuid String 
  * no response value expected for this operation
  **/
-exports.putTcpClientRemoteAddress = function(body,uuid) {
+exports.putTcpClientRemoteIpv4Address = function(body,uuid) {
   return new Promise(function(resolve, reject) {
     resolve();
   });

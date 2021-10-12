@@ -4,7 +4,7 @@
 /**
  * Returns detailed logging configuration.
  *
- * returns inline_response_200_25
+ * returns inline_response_200_24
  **/
 exports.getOperationClientDetailedLoggingIsOn = function() {
   return new Promise(function(resolve, reject) {
@@ -25,7 +25,7 @@ exports.getOperationClientDetailedLoggingIsOn = function() {
  * Returns life cycle state of the operation
  *
  * uuid String 
- * returns inline_response_200_24
+ * returns inline_response_200_23
  **/
 exports.getOperationClientLifeCycleState = function(uuid) {
   return new Promise(function(resolve, reject) {
@@ -46,7 +46,7 @@ exports.getOperationClientLifeCycleState = function(uuid) {
  * Returns key used for connecting to server.
  *
  * uuid String 
- * returns inline_response_200_22
+ * returns inline_response_200_21
  **/
 exports.getOperationClientOperationKey = function(uuid) {
   return new Promise(function(resolve, reject) {
@@ -67,7 +67,7 @@ exports.getOperationClientOperationKey = function(uuid) {
  * Returns operation name
  *
  * uuid String 
- * returns inline_response_200_21
+ * returns inline_response_200_20
  **/
 exports.getOperationClientOperationName = function(uuid) {
   return new Promise(function(resolve, reject) {
@@ -88,7 +88,7 @@ exports.getOperationClientOperationName = function(uuid) {
  * Returns operational state of the operation
  *
  * uuid String 
- * returns inline_response_200_23
+ * returns inline_response_200_22
  **/
 exports.getOperationClientOperationalState = function(uuid) {
   return new Promise(function(resolve, reject) {

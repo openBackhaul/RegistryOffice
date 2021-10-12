@@ -3,8 +3,8 @@
 var utils = require('../utils/writer.js');
 var TcpClient = require('../service/TcpClientService');
 
-module.exports.getTcpClientRemoteAddress = function getTcpClientRemoteAddress (req, res, next, uuid) {
-  TcpClient.getTcpClientRemoteAddress(uuid)
+module.exports.getTcpClientRemoteIpv4Address = function getTcpClientRemoteIpv4Address (req, res, next, uuid) {
+  TcpClient.getTcpClientRemoteIpv4Address(uuid)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -23,8 +23,8 @@ module.exports.getTcpClientRemotePort = function getTcpClientRemotePort (req, re
     });
 };
 
-module.exports.putTcpClientRemoteAddress = function putTcpClientRemoteAddress (req, res, next, body, uuid) {
-  TcpClient.putTcpClientRemoteAddress(body, uuid)
+module.exports.putTcpClientRemoteIpv4Address = function putTcpClientRemoteIpv4Address (req, res, next, body, uuid) {
+  TcpClient.putTcpClientRemoteIpv4Address(body, uuid)
     .then(function (response) {
       utils.writeJson(res, response);
     })

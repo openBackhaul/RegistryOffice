@@ -5,7 +5,7 @@
  * Returns the configured life cycle state of the operation
  *
  * uuid String 
- * returns inline_response_200_10
+ * returns inline_response_200_9
  **/
 exports.getOperationServerLifeCycleState = function(uuid) {
   return new Promise(function(resolve, reject) {
@@ -26,7 +26,7 @@ exports.getOperationServerLifeCycleState = function(uuid) {
  * Returns key for connecting
  *
  * uuid String 
- * returns inline_response_200_11
+ * returns inline_response_200_10
  **/
 exports.getOperationServerOperationKey = function(uuid) {
   return new Promise(function(resolve, reject) {
@@ -47,13 +47,13 @@ exports.getOperationServerOperationKey = function(uuid) {
  * Returns operation name
  *
  * uuid String 
- * returns inline_response_200_9
+ * returns inline_response_200_8
  **/
 exports.getOperationServerOperationName = function(uuid) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "operation-server-interface-1-0:operation-name" : "/v1/notify-service-requests"
+  "operation-server-interface-1-0:operation-name" : "/v1/redirect-service-request-information"
 };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);

@@ -3,8 +3,8 @@
 var utils = require('../utils/writer.js');
 var TcpServer = require('../service/TcpServerService');
 
-module.exports.getTcpServerLocalAddress = function getTcpServerLocalAddress (req, res, next, uuid) {
-  TcpServer.getTcpServerLocalAddress(uuid)
+module.exports.getTcpServerLocalIpv4Address = function getTcpServerLocalIpv4Address (req, res, next, uuid) {
+  TcpServer.getTcpServerLocalIpv4Address(uuid)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -23,8 +23,8 @@ module.exports.getTcpServerLocalPort = function getTcpServerLocalPort (req, res,
     });
 };
 
-module.exports.putTcpServerLocalAddress = function putTcpServerLocalAddress (req, res, next, body, uuid) {
-  TcpServer.putTcpServerLocalAddress(body, uuid)
+module.exports.putTcpServerLocalIpv4Address = function putTcpServerLocalIpv4Address (req, res, next, body, uuid) {
+  TcpServer.putTcpServerLocalIpv4Address(body, uuid)
     .then(function (response) {
       utils.writeJson(res, response);
     })

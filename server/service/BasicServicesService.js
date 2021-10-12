@@ -183,7 +183,7 @@ exports.inquireOamRequestApprovals = function(body,user,originator,xCorrelator,t
 /**
  * Offers subscription to OaM change notifications
  *
- * body V1_notifyoamrequests_body 
+ * body V1_redirectoamrequestinformation_body 
  * user String User identifier from the system starting the service call
  * originator String 'Identification for the system consuming the API, as defined in  [/core-model-1-4:control-construct/logical-termination-point={uuid}/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]' 
  * xCorrelator String UUID for the service execution flow that allows to correlate requests and responses
@@ -201,7 +201,7 @@ exports.notifyOamRequests = function(body,user,originator,xCorrelator,traceIndic
 /**
  * Offers subscription to execution and tracing notifications
  *
- * body V1_notifyservicerequests_body 
+ * body V1_redirectservicerequestinformation_body 
  * user String User identifier from the system starting the service call
  * originator String 'Identification for the system consuming the API, as defined in  [/core-model-1-4:control-construct/logical-termination-point={uuid}/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]' 
  * xCorrelator String UUID for the service execution flow that allows to correlate requests and responses

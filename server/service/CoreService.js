@@ -4,7 +4,7 @@
 /**
  * Returns entire data tree
  *
- * returns inline_response_200_8
+ * returns inline_response_200_7
  **/
 exports.getControlConstruct = function() {
   return new Promise(function(resolve, reject) {
@@ -14,6 +14,318 @@ exports.getControlConstruct = function() {
     "profile-collection" : {
       "profile" : [ ]
     },
+    "forwarding-domain" : [ {
+      "uuid" : "ro-0-0-1-op-fd-0000",
+      "forwarding-construct" : [ {
+        "uuid" : "ro-0-0-1-op-fc-3000",
+        "name" : [ {
+          "value-name" : "ForwardingKind",
+          "value" : "core-model-1-4:FORWARDING_KIND_TYPE_PROCESS_SNIPPET"
+        }, {
+          "value-name" : "ForwardingName",
+          "value" : "TypeApprovalCausesRequestForEmbedding"
+        } ],
+        "fc-port" : [ {
+          "local-id" : "000",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
+          "logical-termination-point" : "ro-0-0-1-op-s-3000"
+        }, {
+          "local-id" : "001",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
+          "logical-termination-point" : "ro-0-0-1-op-s-3001"
+        }, {
+          "local-id" : "100",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+          "logical-termination-point" : "ro-0-0-1-op-s-3002"
+        }, {
+          "local-id" : "200",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
+          "logical-termination-point" : "ro-0-0-1-op-c-3010"
+        }, {
+          "local-id" : "201",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
+          "logical-termination-point" : "ro-0-0-1-op-c-3020"
+        }, {
+          "local-id" : "202",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
+          "logical-termination-point" : "ro-0-0-1-op-c-3030"
+        }, {
+          "local-id" : "203",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
+          "logical-termination-point" : "ro-0-0-1-op-c-3040"
+        }, {
+          "local-id" : "204",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
+          "logical-termination-point" : "ro-0-0-1-op-c-3300"
+        }, {
+          "local-id" : "205",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
+          "logical-termination-point" : "ro-0-0-1-op-c-3310"
+        }, {
+          "local-id" : "206",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
+          "logical-termination-point" : "ro-0-0-1-op-c-3320"
+        }, {
+          "local-id" : "207",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
+          "logical-termination-point" : "ro-0-0-1-op-c-9990"
+        } ]
+      }, {
+        "uuid" : "ro-0-0-1-op-fc-3005",
+        "name" : [ {
+          "value-name" : "ForwardingKind",
+          "value" : "core-model-1-4:FORWARDING_KIND_TYPE_INVARIANT_PROCESS_SNIPPET"
+        }, {
+          "value-name" : "ForwardingName",
+          "value" : "InquiryForUpdatesOnApplicationTypeApproval"
+        } ],
+        "fc-port" : [ {
+          "local-id" : "000",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
+          "logical-termination-point" : "ro-0-0-1-op-s-3005"
+        }, {
+          "local-id" : "100",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+          "logical-termination-point" : "ro-0-0-1-op-s-3000"
+        }, {
+          "local-id" : "200",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
+          "logical-termination-point" : "ro-0-0-1-op-c-3011"
+        } ]
+      }, {
+        "uuid" : "ro-0-0-1-op-fc-3006",
+        "name" : [ {
+          "value-name" : "ForwardingKind",
+          "value" : "core-model-1-4:FORWARDING_KIND_TYPE_SUBSCRIPTION"
+        }, {
+          "value-name" : "ForwardingName",
+          "value" : "DeregistrationNotification"
+        } ],
+        "fc-port" : [ {
+          "local-id" : "000",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
+          "logical-termination-point" : "ro-0-0-1-op-s-3006"
+        }, {
+          "local-id" : "001",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
+          "logical-termination-point" : "ro-0-0-1-op-s-0004"
+        }, {
+          "local-id" : "100",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+          "logical-termination-point" : "ro-0-0-1-op-s-3001"
+        }, {
+          "local-id" : "200",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
+          "logical-termination-point" : "ro-0-0-1-op-c-3012"
+        }, {
+          "local-id" : "201",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
+          "logical-termination-point" : "ro-0-0-1-op-c-3022"
+        }, {
+          "local-id" : "202",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
+          "logical-termination-point" : "ro-0-0-1-op-c-3032"
+        }, {
+          "local-id" : "203",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
+          "logical-termination-point" : "ro-0-0-1-op-c-3042"
+        } ]
+      }, {
+        "uuid" : "ro-0-0-1-op-fc-3007",
+        "name" : [ {
+          "value-name" : "ForwardingKind",
+          "value" : "core-model-1-4:FORWARDING_KIND_TYPE_SUBSCRIPTION"
+        }, {
+          "value-name" : "ForwardingName",
+          "value" : "ApprovalNotification"
+        } ],
+        "fc-port" : [ {
+          "local-id" : "000",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
+          "logical-termination-point" : "ro-0-0-1-op-s-3007"
+        }, {
+          "local-id" : "001",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
+          "logical-termination-point" : "ro-0-0-1-op-s-0004"
+        }, {
+          "local-id" : "100",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+          "logical-termination-point" : "ro-0-0-1-op-s-3002"
+        }, {
+          "local-id" : "200",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
+          "logical-termination-point" : "ro-0-0-1-op-c-3021"
+        }, {
+          "local-id" : "201",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
+          "logical-termination-point" : "ro-0-0-1-op-c-3031"
+        }, {
+          "local-id" : "202",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
+          "logical-termination-point" : "ro-0-0-1-op-c-3041"
+        } ]
+      }, {
+        "uuid" : "ro-0-0-1-op-fc-3008",
+        "name" : [ {
+          "value-name" : "ForwardingKind",
+          "value" : "core-model-1-4:FORWARDING_KIND_TYPE_SUBSCRIPTION"
+        }, {
+          "value-name" : "ForwardingName",
+          "value" : "WithdrawnApprovalNotification"
+        } ],
+        "fc-port" : [ {
+          "local-id" : "000",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
+          "logical-termination-point" : "ro-0-0-1-op-s-3008"
+        }, {
+          "local-id" : "001",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
+          "logical-termination-point" : "ro-0-0-1-op-s-0004"
+        }, {
+          "local-id" : "100",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+          "logical-termination-point" : "ro-0-0-1-op-s-3002"
+        }, {
+          "local-id" : "200",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
+          "logical-termination-point" : "ro-0-0-1-op-c-3022"
+        }, {
+          "local-id" : "201",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
+          "logical-termination-point" : "ro-0-0-1-op-c-3032"
+        }, {
+          "local-id" : "202",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
+          "logical-termination-point" : "ro-0-0-1-op-c-3042"
+        } ]
+      }, {
+        "uuid" : "ro-0-0-1-op-fc-0002",
+        "name" : [ {
+          "value-name" : "ForwardingKind",
+          "value" : "core-model-1-4:FORWARDING_KIND_TYPE_INVARIANT_PROCESS_SNIPPET"
+        }, {
+          "value-name" : "ForwardingName",
+          "value" : "ServiceRequestNotification"
+        } ],
+        "fc-port" : [ {
+          "local-id" : "000",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
+          "logical-termination-point" : "ro-0-0-1-op-s-0002"
+        }, {
+          "local-id" : "100",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+          "logical-termination-point" : "ro-0-0-1-op-s-0002"
+        }, {
+          "local-id" : "101",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+          "logical-termination-point" : "ro-0-0-1-op-s-0003"
+        }, {
+          "local-id" : "102",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+          "logical-termination-point" : "ro-0-0-1-op-s-0004"
+        }, {
+          "local-id" : "103",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+          "logical-termination-point" : "ro-0-0-1-op-s-0005"
+        }, {
+          "local-id" : "104",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+          "logical-termination-point" : "ro-0-0-1-op-s-2000"
+        }, {
+          "local-id" : "105",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+          "logical-termination-point" : "ro-0-0-1-op-s-2001"
+        }, {
+          "local-id" : "106",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+          "logical-termination-point" : "ro-0-0-1-op-s-2002"
+        }, {
+          "local-id" : "107",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+          "logical-termination-point" : "ro-0-0-1-op-s-2003"
+        }, {
+          "local-id" : "108",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+          "logical-termination-point" : "ro-0-0-1-op-s-2004"
+        }, {
+          "local-id" : "109",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+          "logical-termination-point" : "ro-0-0-1-op-s-3000"
+        }, {
+          "local-id" : "110",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+          "logical-termination-point" : "ro-0-0-1-op-s-3001"
+        }, {
+          "local-id" : "111",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+          "logical-termination-point" : "ro-0-0-1-op-s-3002"
+        }, {
+          "local-id" : "112",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+          "logical-termination-point" : "ro-0-0-1-op-s-3003"
+        }, {
+          "local-id" : "113",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+          "logical-termination-point" : "ro-0-0-1-op-s-3004"
+        }, {
+          "local-id" : "114",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+          "logical-termination-point" : "ro-0-0-1-op-s-3005"
+        }, {
+          "local-id" : "115",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+          "logical-termination-point" : "ro-0-0-1-op-s-3006"
+        }, {
+          "local-id" : "116",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+          "logical-termination-point" : "ro-0-0-1-op-s-3007"
+        }, {
+          "local-id" : "117",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+          "logical-termination-point" : "ro-0-0-1-op-s-3008"
+        }, {
+          "local-id" : "200",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+          "logical-termination-point" : "ro-0-0-1-op-s-0020"
+        } ]
+      }, {
+        "uuid" : "ro-0-0-1-op-fc-0003",
+        "name" : [ {
+          "value-name" : "ForwardingKind",
+          "value" : "core-model-1-4:FORWARDING_KIND_TYPE_INVARIANT_PROCESS_SNIPPET"
+        }, {
+          "value-name" : "ForwardingName",
+          "value" : "OamRequestNotification"
+        } ],
+        "fc-port" : [ {
+          "local-id" : "000",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
+          "logical-termination-point" : "ro-0-0-1-op-s-0003"
+        }, {
+          "local-id" : "200",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
+          "logical-termination-point" : "ro-0-0-1-op-c-0030"
+        } ]
+      }, {
+        "uuid" : "ro-0-0-1-op-fc-0005",
+        "name" : [ {
+          "value-name" : "ForwardingKind",
+          "value" : "core-model-1-4:FORWARDING_KIND_TYPE_INVARIANT_PROCESS_SNIPPET"
+        }, {
+          "value-name" : "ForwardingName",
+          "value" : "OamRequestCausesInquiryForAuthentication"
+        } ],
+        "fc-port" : [ {
+          "local-id" : "000",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
+          "logical-termination-point" : "ro-0-0-1-op-s-0005"
+        }, {
+          "local-id" : "200",
+          "port-direction" : "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
+          "logical-termination-point" : "ro-0-0-1-op-c-0040"
+        } ]
+      } ]
+    } ],
     "logical-termination-point" : [ {
       "uuid" : "ro-0-0-1-op-s-0002",
       "ltp-direction" : "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
@@ -24,7 +336,7 @@ exports.getControlConstruct = function() {
         "layer-protocol-name" : "operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
         "operation-server-interface-1-0:operation-server-interface-pac" : {
           "operation-server-interface-capability" : {
-            "operation-name" : "/v1/notify-service-requests"
+            "operation-name" : "/v1/redirect-service-request-information"
           },
           "operation-server-interface-configuration" : {
             "life-cycle-state" : "operation-server-interface-1-0:LIFE_CYCLE_STATE_TYPE_EXPERIMENTAL",
@@ -42,7 +354,7 @@ exports.getControlConstruct = function() {
         "layer-protocol-name" : "operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
         "operation-server-interface-1-0:operation-server-interface-pac" : {
           "operation-server-interface-capability" : {
-            "operation-name" : "/v1/notify-oam-requests"
+            "operation-name" : "/v1/redirect-oam-request-information"
           },
           "operation-server-interface-configuration" : {
             "life-cycle-state" : "operation-server-interface-1-0:LIFE_CYCLE_STATE_TYPE_EXPERIMENTAL",
@@ -222,7 +534,7 @@ exports.getControlConstruct = function() {
         "layer-protocol-name" : "operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
         "operation-server-interface-1-0:operation-server-interface-pac" : {
           "operation-server-interface-capability" : {
-            "operation-name" : "/v1/update-approval-status"
+            "operation-name" : "/v1/regard-updated-approval-status"
           },
           "operation-server-interface-configuration" : {
             "life-cycle-state" : "operation-server-interface-1-0:LIFE_CYCLE_STATE_TYPE_EXPERIMENTAL",
@@ -276,7 +588,7 @@ exports.getControlConstruct = function() {
         "layer-protocol-name" : "operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
         "operation-server-interface-1-0:operation-server-interface-pac" : {
           "operation-server-interface-capability" : {
-            "operation-name" : "/v1/notify-registrations"
+            "operation-name" : "/v1/inquire-application-type-approvals"
           },
           "operation-server-interface-configuration" : {
             "life-cycle-state" : "operation-server-interface-1-0:LIFE_CYCLE_STATE_TYPE_EXPERIMENTAL",
@@ -450,9 +762,6 @@ exports.getControlConstruct = function() {
           },
           "http-client-interface-configuration" : {
             "release-number" : "0.0.1"
-          },
-          "http-client-interface-status" : {
-            "approval-status" : "http-client-interface-1-0:APPROVAL_STATUS_TYPE_APPROVED"
           }
         }
       } ]
@@ -468,10 +777,8 @@ exports.getControlConstruct = function() {
           "tcp-client-interface-configuration" : {
             "remote-address" : {
               "ip-address" : {
-                "ipv-4-address" : "10.118.125.157",
-                "ipv-6-address" : "0:0:0:0:0:0:0:0"
-              },
-              "domain-name" : "Not yet defined."
+                "ipv-4-address" : "10.118.125.157"
+              }
             },
             "remote-port" : 1001
           }
@@ -568,9 +875,6 @@ exports.getControlConstruct = function() {
           },
           "http-client-interface-configuration" : {
             "release-number" : "0.0.1"
-          },
-          "http-client-interface-status" : {
-            "approval-status" : "http-client-interface-1-0:APPROVAL_STATUS_TYPE_APPROVED"
           }
         }
       } ]
@@ -586,10 +890,8 @@ exports.getControlConstruct = function() {
           "tcp-client-interface-configuration" : {
             "remote-address" : {
               "ip-address" : {
-                "ipv-4-address" : "10.118.125.157",
-                "ipv-6-address" : "0:0:0:0:0:0:0:0"
-              },
-              "domain-name" : "Not yet defined."
+                "ipv-4-address" : "10.118.125.157"
+              }
             },
             "remote-port" : 1002
           }
@@ -685,9 +987,6 @@ exports.getControlConstruct = function() {
           },
           "http-client-interface-configuration" : {
             "release-number" : "0.0.1"
-          },
-          "http-client-interface-status" : {
-            "approval-status" : "http-client-interface-1-0:APPROVAL_STATUS_TYPE_APPROVED"
           }
         }
       } ]
@@ -703,10 +1002,8 @@ exports.getControlConstruct = function() {
           "tcp-client-interface-configuration" : {
             "remote-address" : {
               "ip-address" : {
-                "ipv-4-address" : "10.118.125.157",
-                "ipv-6-address" : "0:0:0:0:0:0:0:0"
-              },
-              "domain-name" : "Not yet defined."
+                "ipv-4-address" : "10.118.125.157"
+              }
             },
             "remote-port" : 1003
           }
@@ -802,9 +1099,6 @@ exports.getControlConstruct = function() {
           },
           "http-client-interface-configuration" : {
             "release-number" : "0.0.1"
-          },
-          "http-client-interface-status" : {
-            "approval-status" : "http-client-interface-1-0:APPROVAL_STATUS_TYPE_APPROVED"
           }
         }
       } ]
@@ -820,10 +1114,8 @@ exports.getControlConstruct = function() {
           "tcp-client-interface-configuration" : {
             "remote-address" : {
               "ip-address" : {
-                "ipv-4-address" : "10.118.125.157",
-                "ipv-6-address" : "0:0:0:0:0:0:0:0"
-              },
-              "domain-name" : "Not yet defined."
+                "ipv-4-address" : "10.118.125.157"
+              }
             },
             "remote-port" : 1004
           }
@@ -862,9 +1154,6 @@ exports.getControlConstruct = function() {
           },
           "http-client-interface-configuration" : {
             "release-number" : "0.0.6"
-          },
-          "http-client-interface-status" : {
-            "approval-status" : "http-client-interface-1-0:APPROVAL_STATUS_TYPE_APPROVED"
           }
         }
       } ]
@@ -880,10 +1169,8 @@ exports.getControlConstruct = function() {
           "tcp-client-interface-configuration" : {
             "remote-address" : {
               "ip-address" : {
-                "ipv-4-address" : "10.118.125.186",
-                "ipv-6-address" : "0:0:0:0:0:0:0:0"
-              },
-              "domain-name" : "Not yet defined."
+                "ipv-4-address" : "10.118.125.186"
+              }
             },
             "remote-port" : 2000
           }
@@ -922,9 +1209,6 @@ exports.getControlConstruct = function() {
           },
           "http-client-interface-configuration" : {
             "release-number" : "0.0.1"
-          },
-          "http-client-interface-status" : {
-            "approval-status" : "http-client-interface-1-0:APPROVAL_STATUS_TYPE_REGISTERED"
           }
         }
       } ]
@@ -940,10 +1224,8 @@ exports.getControlConstruct = function() {
           "tcp-client-interface-configuration" : {
             "remote-address" : {
               "ip-address" : {
-                "ipv-4-address" : "10.118.125.186",
-                "ipv-6-address" : "0:0:0:0:0:0:0:0"
-              },
-              "domain-name" : "Not yet defined."
+                "ipv-4-address" : "10.118.125.186"
+              }
             },
             "remote-port" : 2001
           }
@@ -982,9 +1264,6 @@ exports.getControlConstruct = function() {
           },
           "http-client-interface-configuration" : {
             "release-number" : "0.0.1"
-          },
-          "http-client-interface-status" : {
-            "approval-status" : "http-client-interface-1-0:APPROVAL_STATUS_TYPE_REGISTERED"
           }
         }
       } ]
@@ -1000,10 +1279,8 @@ exports.getControlConstruct = function() {
           "tcp-client-interface-configuration" : {
             "remote-address" : {
               "ip-address" : {
-                "ipv-4-address" : "10.118.125.186",
-                "ipv-6-address" : "0:0:0:0:0:0:0:0"
-              },
-              "domain-name" : "Not yet defined."
+                "ipv-4-address" : "10.118.125.186"
+              }
             },
             "remote-port" : 2002
           }
@@ -1042,9 +1319,6 @@ exports.getControlConstruct = function() {
           },
           "http-client-interface-configuration" : {
             "release-number" : "0.0.1"
-          },
-          "http-client-interface-status" : {
-            "approval-status" : "http-client-interface-1-0:APPROVAL_STATUS_TYPE_BARRED"
           }
         }
       } ]
@@ -1060,10 +1334,8 @@ exports.getControlConstruct = function() {
           "tcp-client-interface-configuration" : {
             "remote-address" : {
               "ip-address" : {
-                "ipv-4-address" : "10.118.125.186",
-                "ipv-6-address" : "0:0:0:0:0:0:0:0"
-              },
-              "domain-name" : "Not yet defined."
+                "ipv-4-address" : "10.118.125.186"
+              }
             },
             "remote-port" : 9999
           }
