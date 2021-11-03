@@ -7,17 +7,17 @@
 
 ### Documentation
 - [Documentation of the ApplicationPattern](https://github.com/openBackhaul/ApplicationPattern/tree/tsi)
+- [Overview Clients and Servers of the RegistryOffice](./211103_RO_Clients_and_Servers.xlsx)
+- [Sketch of the Embedding Process](./211103_Process_of_RO_embedding.xlsx)
 
 ### Open API specification (Swagger)
-- [RegistryOffice_0.0.1_tsi.210817.1035](./RegistryOffice_0.0.1_tsi.210817.1035.yaml)
-- [RegistryOffice_0.0.1_tsi.211011.1810](./RegistryOffice_0.0.1_tsi.211011.1810.yaml)
+- [RegistryOffice_0.0.1_tsi.211103.1450](./RegistryOffice_0.0.1_tsi.211103.1450.yaml)
 
 ### Test Cases (Postman Export) and Data File
 -
 
 ### Load File (JSON)
-- [RegistryOffice_0.0.1_tsi.210817.1035+data.1](./RegistryOffice_0.0.1_tsi.210817.1035+data.1.json)
-- [RegistryOffice_0.0.1_tsi.211011.1810+data.1](./RegistryOffice_0.0.1_tsi.211011.1810+data.1.json)
+- [RegistryOffice_0.0.1_tsi.211103.1450+data.1](./RegistryOffice_0.0.1_tsi.211103.1450+data.1.json)
 
 ### Publication
 - No official publication planned
