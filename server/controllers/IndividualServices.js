@@ -13,6 +13,16 @@ module.exports.deregisterApplication = function deregisterApplication (req, res,
     });
 };
 
+module.exports.inquireApplicationTypeApprovals = function inquireApplicationTypeApprovals (req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  IndividualServices.inquireApplicationTypeApprovals(body, user, originator, xCorrelator, traceIndicator, customerJourney)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
 module.exports.listApplications = function listApplications (req, res, next, user, originator, xCorrelator, traceIndicator, customerJourney) {
   IndividualServices.listApplications(user, originator, xCorrelator, traceIndicator, customerJourney)
     .then(function (response) {
@@ -53,16 +63,6 @@ module.exports.notifyDeregistrations = function notifyDeregistrations (req, res,
     });
 };
 
-module.exports.notifyRegistrations = function notifyRegistrations (req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
-  IndividualServices.notifyRegistrations(body, user, originator, xCorrelator, traceIndicator, customerJourney)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
-
 module.exports.notifyWithdrawnApprovals = function notifyWithdrawnApprovals (req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
   IndividualServices.notifyWithdrawnApprovals(body, user, originator, xCorrelator, traceIndicator, customerJourney)
     .then(function (response) {
@@ -75,6 +75,16 @@ module.exports.notifyWithdrawnApprovals = function notifyWithdrawnApprovals (req
 
 module.exports.registerApplication = function registerApplication (req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
   IndividualServices.registerApplication(body, user, originator, xCorrelator, traceIndicator, customerJourney)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
+module.exports.relayServerReplacement = function relayServerReplacement (req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  IndividualServices.relayServerReplacement(body, user, originator, xCorrelator, traceIndicator, customerJourney)
     .then(function (response) {
       utils.writeJson(res, response);
     })

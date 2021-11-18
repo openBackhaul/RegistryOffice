@@ -20,6 +20,24 @@ exports.deregisterApplication = function(body,user,originator,xCorrelator,traceI
 
 
 /**
+ * Offers subscribing to notifications about new registrations
+ *
+ * body V1_inquireapplicationtypeapprovals_body 
+ * user String User identifier from the system starting the service call
+ * originator String 'Identification for the system consuming the API, as defined in  [/core-model-1-4:control-construct/logical-termination-point={uuid}/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]' 
+ * xCorrelator String UUID for the service execution flow that allows to correlate requests and responses
+ * traceIndicator String Sequence of request numbers along the flow
+ * customerJourney String Holds information supporting customer’s journey to which the execution applies
+ * no response value expected for this operation
+ **/
+exports.inquireApplicationTypeApprovals = function(body,user,originator,xCorrelator,traceIndicator,customerJourney) {
+  return new Promise(function(resolve, reject) {
+    resolve();
+  });
+}
+
+
+/**
  * Provides list of applications
  *
  * user String User identifier from the system starting the service call
@@ -42,16 +60,6 @@ exports.listApplications = function(user,originator,xCorrelator,traceIndicator,c
   "release-number" : "0.0.1",
   "application-address" : "10.118.125.157",
   "application-port" : 1002
-}, {
-  "application-name" : "OamLog",
-  "release-number" : "0.0.1",
-  "application-address" : "10.118.125.157",
-  "application-port" : 1003
-}, {
-  "application-name" : "BadApplication",
-  "release-number" : "0.0.1",
-  "application-address" : "10.118.125.186",
-  "application-port" : 9999
 } ];
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
@@ -83,14 +91,6 @@ exports.listApplicationsInGenericRepresentation = function(user,originator,xCorr
     "datatype" : "String"
   }, {
     "field-name" : "ExecutionAndTraceLog",
-    "value" : "0.0.1",
-    "datatype" : "String"
-  }, {
-    "field-name" : "OamLog",
-    "value" : "0.0.1",
-    "datatype" : "String"
-  }, {
-    "field-name" : "BadApplication",
     "value" : "0.0.1",
     "datatype" : "String"
   } ]
@@ -141,24 +141,6 @@ exports.notifyDeregistrations = function(body,user,originator,xCorrelator,traceI
 
 
 /**
- * Offers subscribing to notifications about new registrations
- *
- * body V1_inquireapplicationtypeapprovals_body 
- * user String User identifier from the system starting the service call
- * originator String 'Identification for the system consuming the API, as defined in  [/core-model-1-4:control-construct/logical-termination-point={uuid}/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]' 
- * xCorrelator String UUID for the service execution flow that allows to correlate requests and responses
- * traceIndicator String Sequence of request numbers along the flow
- * customerJourney String Holds information supporting customer’s journey to which the execution applies
- * no response value expected for this operation
- **/
-exports.notifyRegistrations = function(body,user,originator,xCorrelator,traceIndicator,customerJourney) {
-  return new Promise(function(resolve, reject) {
-    resolve();
-  });
-}
-
-
-/**
  * Offers subscribing to notifications about withdrawn approvals
  *
  * body V1_notifywithdrawnapprovals_body 
@@ -188,6 +170,24 @@ exports.notifyWithdrawnApprovals = function(body,user,originator,xCorrelator,tra
  * no response value expected for this operation
  **/
 exports.registerApplication = function(body,user,originator,xCorrelator,traceIndicator,customerJourney) {
+  return new Promise(function(resolve, reject) {
+    resolve();
+  });
+}
+
+
+/**
+ * Offers broadcasting of information about updated serving application
+ *
+ * body V1_relayserverreplacement_body 
+ * user String User identifier from the system starting the service call
+ * originator String 'Identification for the system consuming the API, as defined in  [/core-model-1-4:control-construct/logical-termination-point={uuid}/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]' 
+ * xCorrelator String UUID for the service execution flow that allows to correlate requests and responses
+ * traceIndicator String Sequence of request numbers along the flow
+ * customerJourney String Holds information supporting customer’s journey to which the execution applies
+ * no response value expected for this operation
+ **/
+exports.relayServerReplacement = function(body,user,originator,xCorrelator,traceIndicator,customerJourney) {
   return new Promise(function(resolve, reject) {
     resolve();
   });

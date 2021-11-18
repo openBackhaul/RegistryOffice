@@ -5,7 +5,7 @@
  * Returns remote IPv4 address
  *
  * uuid String 
- * returns inline_response_200_27
+ * returns inline_response_200_28
  **/
 exports.getTcpClientRemoteIpv4Address = function(uuid) {
   return new Promise(function(resolve, reject) {
@@ -26,7 +26,7 @@ exports.getTcpClientRemoteIpv4Address = function(uuid) {
  * Returns target TCP port at server
  *
  * uuid String 
- * returns inline_response_200_28
+ * returns inline_response_200_29
  **/
 exports.getTcpClientRemotePort = function(uuid) {
   return new Promise(function(resolve, reject) {

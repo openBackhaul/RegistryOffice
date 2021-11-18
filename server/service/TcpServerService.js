@@ -5,7 +5,7 @@
  * Returns IPv4 address of the server
  *
  * uuid String 
- * returns inline_response_200_18
+ * returns inline_response_200_19
  **/
 exports.getTcpServerLocalIpv4Address = function(uuid) {
   return new Promise(function(resolve, reject) {
@@ -26,7 +26,7 @@ exports.getTcpServerLocalIpv4Address = function(uuid) {
  * Returns TCP port of the server
  *
  * uuid String 
- * returns inline_response_200_19
+ * returns inline_response_200_20
  **/
 exports.getTcpServerLocalPort = function(uuid) {
   return new Promise(function(resolve, reject) {

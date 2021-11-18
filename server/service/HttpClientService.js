@@ -5,7 +5,7 @@
  * Returns name of application to be addressed
  *
  * uuid String 
- * returns inline_response_200_25
+ * returns inline_response_200_26
  **/
 exports.getHttpClientApplicationName = function(uuid) {
   return new Promise(function(resolve, reject) {
@@ -26,7 +26,7 @@ exports.getHttpClientApplicationName = function(uuid) {
  * Returns release number of application to be addressed
  *
  * uuid String 
- * returns inline_response_200_26
+ * returns inline_response_200_27
  **/
 exports.getHttpClientReleaseNumber = function(uuid) {
   return new Promise(function(resolve, reject) {

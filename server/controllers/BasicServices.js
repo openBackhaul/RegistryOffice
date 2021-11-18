@@ -3,6 +3,26 @@
 var utils = require('../utils/writer.js');
 var BasicServices = require('../service/BasicServicesService');
 
+module.exports.bequeathYourDataAndDie = function bequeathYourDataAndDie (req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  BasicServices.bequeathYourDataAndDie(body, user, originator, xCorrelator, traceIndicator, customerJourney)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
+module.exports.embedYourself = function embedYourself (req, res, next, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  BasicServices.embedYourself(user, originator, xCorrelator, traceIndicator, customerJourney)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
 module.exports.endSubscription = function endSubscription (req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
   BasicServices.endSubscription(body, user, originator, xCorrelator, traceIndicator, customerJourney)
     .then(function (response) {
@@ -63,8 +83,8 @@ module.exports.inquireOamRequestApprovals = function inquireOamRequestApprovals 
     });
 };
 
-module.exports.notifyOamRequests = function notifyOamRequests (req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
-  BasicServices.notifyOamRequests(body, user, originator, xCorrelator, traceIndicator, customerJourney)
+module.exports.listLtpsAndFcs = function listLtpsAndFcs (req, res, next, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  BasicServices.listLtpsAndFcs(user, originator, xCorrelator, traceIndicator, customerJourney)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -73,8 +93,38 @@ module.exports.notifyOamRequests = function notifyOamRequests (req, res, next, b
     });
 };
 
-module.exports.notifyServiceRequests = function notifyServiceRequests (req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
-  BasicServices.notifyServiceRequests(body, user, originator, xCorrelator, traceIndicator, customerJourney)
+module.exports.redirectOamRequestInformation = function redirectOamRequestInformation (req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  BasicServices.redirectOamRequestInformation(body, user, originator, xCorrelator, traceIndicator, customerJourney)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
+module.exports.redirectServiceRequestInformation = function redirectServiceRequestInformation (req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  BasicServices.redirectServiceRequestInformation(body, user, originator, xCorrelator, traceIndicator, customerJourney)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
+module.exports.redirectTopologyChangeInformation = function redirectTopologyChangeInformation (req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  BasicServices.redirectTopologyChangeInformation(body, user, originator, xCorrelator, traceIndicator, customerJourney)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
+module.exports.registerYourself = function registerYourself (req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  BasicServices.registerYourself(body, user, originator, xCorrelator, traceIndicator, customerJourney)
     .then(function (response) {
       utils.writeJson(res, response);
     })
@@ -85,6 +135,26 @@ module.exports.notifyServiceRequests = function notifyServiceRequests (req, res,
 
 module.exports.startApplicationInGenericRepresentation = function startApplicationInGenericRepresentation (req, res, next, user, originator, xCorrelator, traceIndicator, customerJourney) {
   BasicServices.startApplicationInGenericRepresentation(user, originator, xCorrelator, traceIndicator, customerJourney)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
+module.exports.updateClient = function updateClient (req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  BasicServices.updateClient(body, user, originator, xCorrelator, traceIndicator, customerJourney)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
+module.exports.updateOperationKey = function updateOperationKey (req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  BasicServices.updateOperationKey(body, user, originator, xCorrelator, traceIndicator, customerJourney)
     .then(function (response) {
       utils.writeJson(res, response);
     })
