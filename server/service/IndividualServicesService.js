@@ -52,12 +52,12 @@ exports.listApplications = function(user,originator,xCorrelator,traceIndicator,c
     var examples = {};
     examples['application/json'] = [ {
   "application-name" : "TypeApprovalRegister",
-  "release-number" : "0.0.1",
+  "application-release-number" : "0.0.1",
   "application-address" : "10.118.125.157",
   "application-port" : 1001
 }, {
   "application-name" : "ExecutionAndTraceLog",
-  "release-number" : "0.0.1",
+  "application-release-number" : "0.0.1",
   "application-address" : "10.118.125.157",
   "application-port" : 1002
 } ];

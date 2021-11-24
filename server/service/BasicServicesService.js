@@ -22,6 +22,7 @@ exports.bequeathYourDataAndDie = function(body,user,originator,xCorrelator,trace
 /**
  * Embed yourself into the MBH SDN application layer
  *
+ * body V1_embedyourself_body 
  * user String User identifier from the system starting the service call
  * originator String 'Identification for the system consuming the API, as defined in  [/core-model-1-4:control-construct/logical-termination-point={uuid}/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]' 
  * xCorrelator String UUID for the service execution flow that allows to correlate requests and responses
@@ -29,7 +30,7 @@ exports.bequeathYourDataAndDie = function(body,user,originator,xCorrelator,trace
  * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * no response value expected for this operation
  **/
-exports.embedYourself = function(user,originator,xCorrelator,traceIndicator,customerJourney) {
+exports.embedYourself = function(body,user,originator,xCorrelator,traceIndicator,customerJourney) {
   return new Promise(function(resolve, reject) {
     resolve();
   });
@@ -69,7 +70,7 @@ exports.informAboutApplication = function(user,originator,xCorrelator,traceIndic
     var examples = {};
     examples['application/json'] = {
   "application-name" : "RegistryOffice",
-  "release-number" : "0.0.1",
+  "application-release-number" : "0.0.1",
   "application-purpose" : "All applications being part of the MBH SDN must be register here.",
   "data-update-period" : "real-time",
   "owner-name" : "Thorsten Heinze",

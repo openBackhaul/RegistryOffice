@@ -13,8 +13,8 @@ module.exports.bequeathYourDataAndDie = function bequeathYourDataAndDie (req, re
     });
 };
 
-module.exports.embedYourself = function embedYourself (req, res, next, user, originator, xCorrelator, traceIndicator, customerJourney) {
-  BasicServices.embedYourself(user, originator, xCorrelator, traceIndicator, customerJourney)
+module.exports.embedYourself = function embedYourself (req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  BasicServices.embedYourself(body, user, originator, xCorrelator, traceIndicator, customerJourney)
     .then(function (response) {
       utils.writeJson(res, response);
     })

@@ -338,9 +338,50 @@ paths:
         TypeApprovalCausesRequestForEmbedding:
           https://{$request.body#application-address}:{$request.body#application-port}{$request.body#embedding-operation}:
             post:
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      required:
+                      - deregistration-operation
+                      - registry-office-address
+                      - registry-office-application
+                      - registry-office-application-release-number
+                      - registry-office-port
+                      - relay-server-replacement-operation
+                      type: object
+                      properties:
+                        registry-office-application:
+                          type: string
+                          description: "'Own application name from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-s-0000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-name]'\n"
+                        registry-office-application-release-number:
+                          type: string
+                          description: "'Own release number from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-s-0000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-number]'\n"
+                        relay-server-replacement-operation:
+                          type: string
+                          description: "'Operation for requesting for broadcasting\
+                            \ a new server address from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-s-3009/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name]'\n"
+                        deregistration-operation:
+                          type: string
+                          description: "'Operation for deregistering from the application\
+                            \ layer from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-s-3001/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name]'\n"
+                        registry-office-address:
+                          type: string
+                          description: "'Own IP address from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-s-0000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address]'\n"
+                        registry-office-port:
+                          type: integer
+                          description: "'Own TCP port from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-s-0000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-port]'\n"
+                      example:
+                        registry-office-application: RegistryOffice
+                        registry-office-application-release-number: 0.0.1
+                        relay-server-replacement-operation: /v1/relay-server-replacement
+                        deregistration-operation: /v1/deregister-application
+                        registry-office-address: 10.118.125.157
+                        registry-office-port: 1000
+                required: true
               responses:
                 "204":
-                  description: Will embed into the application layer
+                  description: Will embed into the MBH SDN application layer
                   headers:
                     x-correlator:
                       description: UUID for the service execution flow that allows
@@ -371,8 +412,8 @@ paths:
                         type: integer
                         example: 850
                     life-cycle-state:
-                      description: |
-                        'Life cyle state of the consumed service'
+                      description: "'Life cyle state of the consumed service find\
+                        \ in [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-s-0001/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configurationy/life-cycle-state]'\n"
                       style: simple
                       explode: false
                       schema:
@@ -1699,11 +1740,11 @@ paths:
                 type: array
                 example:
                 - application-name: TypeApprovalRegister
-                  release-number: 0.0.1
+                  application-release-number: 0.0.1
                   application-address: 10.118.125.157
                   application-port: 1001
                 - application-name: ExecutionAndTraceLog
-                  release-number: 0.0.1
+                  application-release-number: 0.0.1
                   application-address: 10.118.125.157
                   application-port: 1002
                 items:
@@ -2595,22 +2636,20 @@ paths:
                     schema:
                       required:
                       - application-name
-                      - release-number
+                      - application-release-number
                       type: object
                       properties:
                         application-name:
                           type: string
                           description: "'Name of application that registered from\
                             \ [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'\n"
-                        release-number:
-                          pattern: "^([0-9]+)\\.([0-9]+)\\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\\\
-                            .[0-9A-Za-z-]+)*))?(?:\\+[0-9A-Za-z-]+)?$"
+                        application-release-number:
                           type: string
                           description: "'Release of application that registered from\
                             \ [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'\n"
                       example:
                         application-name: Resolver
-                        release-number: 0.0.1
+                        application-release-number: 0.0.1
                 required: true
               responses:
                 "204":
@@ -3222,22 +3261,20 @@ paths:
                     schema:
                       required:
                       - application-name
-                      - release-number
+                      - application-release-number
                       type: object
                       properties:
                         application-name:
                           type: string
                           description: "'Name of application that deregistered from\
                             \ [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'\n"
-                        release-number:
-                          pattern: "^([0-9]+)\\.([0-9]+)\\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\\\
-                            .[0-9A-Za-z-]+)*))?(?:\\+[0-9A-Za-z-]+)?$"
+                        application-release-number:
                           type: string
                           description: "'Release of application that deregistered\
                             \ from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'\n"
                       example:
                         application-name: CurrentController
-                        release-number: 0.0.5
+                        application-release-number: 0.0.5
                 required: true
               responses:
                 "204":
@@ -3852,14 +3889,14 @@ paths:
                       - application-address
                       - application-name
                       - application-port
-                      - release-number
+                      - application-release-number
                       type: object
                       properties:
                         application-name:
                           type: string
                           description: "'Name of application that is approved from\
                             \ [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'\n"
-                        release-number:
+                        application-release-number:
                           type: string
                           description: "'Release of application that is approved from\
                             \ [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'\n"
@@ -3873,7 +3910,7 @@ paths:
                             \ from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'\n"
                       example:
                         application-name: CurrentController
-                        release-number: 0.0.6
+                        application-release-number: 0.0.6
                         subscriber-address: 10.118.125.186
                         subscriber-port: 2000
                 required: true
@@ -4488,20 +4525,20 @@ paths:
                     schema:
                       required:
                       - application-name
-                      - release-number
+                      - application-release-number
                       type: object
                       properties:
                         application-name:
                           type: string
                           description: "'Name of application that has been withdrawn\
                             \ from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'\n"
-                        release-number:
+                        application-release-number:
                           type: string
                           description: "'Release of application that has been withdrawn\
                             \ from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'\n"
                       example:
                         application-name: CurrentController
-                        release-number: 0.0.5
+                        application-release-number: 0.0.5
                 required: true
               responses:
                 "204":
@@ -5439,7 +5476,7 @@ paths:
       tags:
       - BasicServices
       summary: Returns administrative information
-      operationId: inform-about-application
+      operationId: informAboutApplication
       parameters:
       - name: user
         in: header
@@ -6470,7 +6507,7 @@ paths:
         currently active RegistryOffice
       description: Shall also automatically execute without receiving any request
         every time the application starts
-      operationId: register-yourself
+      operationId: registerYourself
       parameters:
       - name: user
         in: header
@@ -6795,8 +6832,8 @@ paths:
                 $ref: '#/components/schemas/errorDescription'
       callbacks:
         PromptForRegisteringCausesRegistrationRequest:
-          ? https://[/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-0020/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-0020/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-0020/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
-          : post:
+          https://{$request.body#registry-office-address}:{$request.body#registry-office-port}{$request.body#registration-operation}:
+            post:
               requestBody:
                 content:
                   application/json:
@@ -6805,15 +6842,25 @@ paths:
                       - application-address
                       - application-name
                       - application-port
-                      - release-number
+                      - application-release-number
+                      - client-update-operation
+                      - embedding-operation
                       type: object
                       properties:
                         application-name:
                           type: string
                           description: "'Own application name from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-s-0000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-name]'\n"
-                        release-number:
+                        application-release-number:
                           type: string
                           description: "'Own release number from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-s-0000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-number]'\n"
+                        embedding-operation:
+                          type: string
+                          description: "'Name of service for initiating embedding\
+                            \ process from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-s-0001/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name]'\n"
+                        client-update-operation:
+                          type: string
+                          description: "'Name of service for broadcasting server changes\
+                            \ from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-s-0007/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name]'\n"
                         application-address:
                           type: string
                           description: "'Own IP address from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-s-0000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address]'\n"
@@ -6822,7 +6869,9 @@ paths:
                           description: "'Own TCP port from[/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-s-0000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-port]'\n"
                       example:
                         application-name: RegistryOffice
-                        release-number: 0.0.1
+                        application-release-number: 0.0.1
+                        embedding-operation: /v1/embed-yourself
+                        client-update-operation: /v1/update-client
                         application-address: 10.118.125.157
                         application-port: 1000
                 required: true
@@ -7157,6 +7206,12 @@ paths:
         schema:
           type: string
           example: Unknown value
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1_embedyourself_body'
+        required: true
       responses:
         "204":
           description: Will embed into the MBH SDN application layer
@@ -8735,7 +8790,6 @@ paths:
                   application/json:
                     schema:
                       required:
-                      - UserName
                       - application-name
                       - method
                       - release-number
@@ -8743,6 +8797,7 @@ paths:
                       - response-code
                       - stringified-body
                       - timestamp
+                      - user-name
                       type: object
                       properties:
                         application-name:
@@ -8767,7 +8822,7 @@ paths:
                           type: integer
                           description: "Response code answered to the OaM request,\
                             \ which is to be recorded"
-                        UserName:
+                        user-name:
                           type: string
                           description: "user header of the OaM request, which is to\
                             \ be recorded"
@@ -8783,7 +8838,7 @@ paths:
                         stringified-body: "{\"tcp-server-interface-1-0:local-port\"\
                           :\"1000\"}"
                         response-code: 204
-                        UserName: Max Mustermann
+                        user-name: Max Mustermann
                         timestamp: 2010-11-20T14:00:00+01:02
                 required: true
               responses:
@@ -11018,7 +11073,7 @@ paths:
                       required:
                       - oam-approval-address
                       - oam-approval-application
-                      - oam-approval-application-release
+                      - oam-approval-application-release-number
                       - oam-approval-operation
                       - oam-approval-port
                       type: object
@@ -11027,7 +11082,7 @@ paths:
                           type: string
                           description: "'Name of application that shall approve the\
                             \ OaM requests from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-0060/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'\n"
-                        oam-approval-application-release:
+                        oam-approval-application-release-number:
                           type: string
                           description: "'Release of application that shall approve\
                             \ the OaM requests from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-0060/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'\n"
@@ -11045,7 +11100,7 @@ paths:
                             \ OaM requests from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-0060/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'\n"
                       example:
                         oam-approval-application: AdministratorAdministration
-                        oam-approval-application-release: 0.0.1
+                        oam-approval-application-release-number: 0.0.1
                         oam-approval-operation: /v1/approve-oam-request
                         oam-approval-address: 10.118.125.157
                         oam-approval-port: 1004
@@ -11332,7 +11387,9 @@ paths:
                       - topology-application-address
                       - topology-application-port
                       - topology-application-release-number
+                      - topology-operation-application-update
                       - topology-operation-fc-port-deletion
+                      - topology-operation-fc-port-update
                       - topology-operation-fc-update
                       - topology-operation-ltp-deletion
                       - topology-operation-ltp-update
@@ -11346,6 +11403,10 @@ paths:
                           type: string
                           description: "'Release of application that shall document\
                             \ the application layer topology from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-0070/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'\n"
+                        topology-operation-application-update:
+                          type: string
+                          description: "'Operation for updating the entire information\
+                            \ about an application from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-0070/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
                         topology-operation-ltp-update:
                           type: string
                           description: "'Operation for updating an LTP from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-0071/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
@@ -11355,9 +11416,13 @@ paths:
                         topology-operation-fc-update:
                           type: string
                           description: "'Operation for updating an FC port from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-0073/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
+                        topology-operation-fc-port-update:
+                          type: string
+                          description: "'Operation for updating an FC port update\
+                            \ or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-0074/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
                         topology-operation-fc-port-deletion:
                           type: string
-                          description: "'Operation for deleting an FC port from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-0074/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
+                          description: "'Operation for deleting an FC port from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-0075/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
                         topology-application-address:
                           type: string
                           description: "'IP address of application that shall record\
@@ -11369,9 +11434,11 @@ paths:
                       example:
                         topology-application: ApplicationLayerTopology
                         topology-application-release-number: 0.0.1
+                        topology-operation-application-update: /v1/update-all-ltps-and-fcs
                         topology-operation-ltp-update: /v1/update-ltp
-                        topology-operation-ltp-deletion: /v1/delete-ltp
+                        topology-operation-ltp-deletion: /v1/delete-ltp-and-dependents
                         topology-operation-fc-update: /v1/update-fc
+                        topology-operation-fc-port-update: /v1/update-fc-port
                         topology-operation-fc-port-deletion: /v1/delete-fc-port
                         topology-application-address: 10.118.125.157
                         topology-application-port: 1005
@@ -11654,22 +11721,22 @@ paths:
                   application/json:
                     schema:
                       required:
-                      - subscriber-address
-                      - subscriber-application
-                      - subscriber-operation
-                      - subscriber-port
-                      - subscriber-release
+                      - approval-application
+                      - approval-application-address
+                      - approval-application-port
+                      - approval-application-release-number
+                      - approval-operation
                       type: object
                       properties:
-                        subscriber-application:
+                        approval-application:
                           type: string
                           description: "'Name of application that wants to receive\
                             \ information about new registrations from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-2030/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'\n"
-                        subscriber-release:
+                        approval-application-release-number:
                           type: string
                           description: "'Release of application that wants to receive\
                             \ information about new registrations from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-2030/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'\n"
-                        subscriber-operation:
+                        approval-operation:
                           type: string
                           description: "'Operation that shall be addressed by information\
                             \ about new registrations from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-3031/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
@@ -11682,11 +11749,11 @@ paths:
                           description: "'TCP port of application that wants to receive\
                             \ information about new registrations from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-2030/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'\n"
                       example:
-                        subscriber-application: TypeApprovalRegister
-                        subscriber-release: 0.0.1
-                        subscriber-operation: /v1/regard-application
-                        subscriber-address: 10.118.125.157
-                        subscriber-port: 1001
+                        approval-application: TypeApprovalRegister
+                        approval-application-release-number: 0.0.1
+                        approval-operation: /v1/regard-application
+                        approval-application-address: 10.118.125.157
+                        approval-application-port: 1001
                 required: true
               responses:
                 "204":
@@ -11969,14 +12036,14 @@ paths:
                       - subscriber-application
                       - subscriber-operation
                       - subscriber-port
-                      - subscriber-release
+                      - subscriber-release-number
                       type: object
                       properties:
                         subscriber-application:
                           type: string
                           description: "'Name of application that wants to receive\
                             \ notifications about obsolete registrations from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'\n"
-                        subscriber-release:
+                        subscriber-release-number:
                           type: string
                           description: "'Release of application that wants to receive\
                             \ notifications about obsolete registrations from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'\n"
@@ -11994,7 +12061,7 @@ paths:
                             \ notifications about obsolete registrations from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'\n"
                       example:
                         subscriber-application: TypeApprovalRegister
-                        subscriber-release: 0.0.1
+                        subscriber-release-number: 0.0.1
                         subscriber-operation: /v1/disregard-application
                         subscriber-address: 10.118.125.157
                         subscriber-port: 1001
@@ -12280,14 +12347,14 @@ paths:
                       - subscriber-application
                       - subscriber-operation
                       - subscriber-port
-                      - subscriber-release
+                      - subscriber-release-number
                       type: object
                       properties:
                         subscriber-application:
                           type: string
                           description: "'Name of application that wants to receive\
                             \ notifications about new approvals from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'\n"
-                        subscriber-release:
+                        subscriber-release-number:
                           type: string
                           description: "'Release of application that wants to receive\
                             \ notifications about new approvals from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'\n"
@@ -12305,7 +12372,7 @@ paths:
                             \ notifications about new approvals from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'\n"
                       example:
                         subscriber-application: ExecutionAndTraceLog
-                        subscriber-release: 0.0.1
+                        subscriber-release-number: 0.0.1
                         subscriber-operation: /v1/regard-application
                         subscriber-address: 10.118.125.157
                         subscriber-port: 1002
@@ -12591,14 +12658,14 @@ paths:
                       - subscriber-application
                       - subscriber-operation
                       - subscriber-port
-                      - subscriber-release
+                      - subscriber-release-number
                       type: object
                       properties:
                         subscriber-application:
                           type: string
                           description: "'Name of application that wants to receive\
                             \ notifications about withdrawn approvals from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'\n"
-                        subscriber-release:
+                        subscriber-release-number:
                           type: string
                           description: "'Release of application that wants to receive\
                             \ notifications about withdrawn approvals from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'\n"
@@ -12616,7 +12683,7 @@ paths:
                             \ notifications about withdrawn approvals from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'\n"
                       example:
                         subscriber-application: AdministratorAdministration
-                        subscriber-release: 0.0.1
+                        subscriber-release-number: 0.0.1
                         subscriber-operation: /v1/disregard-application
                         subscriber-address: 10.118.125.157
                         subscriber-port: 1004
@@ -12901,17 +12968,27 @@ paths:
                       - application-address
                       - application-name
                       - application-port
-                      - release-number
+                      - application-release-number
+                      - client-update-operation
+                      - embedding-operation
                       type: object
                       properties:
                         application-name:
                           type: string
                           description: "'Name of application that wants to register\
                             \ from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'\n"
-                        release-number:
+                        application-release-number:
                           type: string
                           description: "'Release of application that wants to register\
                             \ from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'\n"
+                        embedding-operation:
+                          type: string
+                          description: "'Name of service for initiating embedding\
+                            \ process from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-*/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
+                        client-update-operation:
+                          type: string
+                          description: "'Name of service for broadcasting server changes\
+                            \ from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-*/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
                         application-address:
                           type: string
                           description: "'IP address of application that wants to register\
@@ -12922,7 +12999,9 @@ paths:
                             \ from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'\n"
                       example:
                         application-name: TypeApprovalRegister
-                        release-number: 0.0.1
+                        application-release-number: 0.0.1
+                        embedding-operation: /v1/embed-yourself
+                        client-update-operation: /v1/update-client
                         application-address: 10.118.125.157
                         application-port: 1001
                 required: true
@@ -13207,13 +13286,13 @@ paths:
                       - subscriber-application
                       - subscriber-operation
                       - subscriber-port
-                      - subscriber-release
+                      - subscriber-release-number
                       type: object
                       properties:
                         subscriber-application:
                           type: string
                           description: "'Own application name from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-s-0000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-name]'\n"
-                        subscriber-release:
+                        subscriber-release-number:
                           type: string
                           description: "'New release number from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-s-0010/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-number]'\n"
                         subscriber-operation:
@@ -13229,7 +13308,7 @@ paths:
                           description: "'New TCP port from[/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-s-0010/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-port]'\n"
                       example:
                         subscriber-application: RegistryOffice
-                        subscriber-release: 0.0.2
+                        subscriber-release-number: 0.0.2
                         subscriber-operation: /v1/regard-updated-approval-status
                         subscriber-address: 10.118.125.157
                         subscriber-port: 1007
@@ -13512,314 +13591,472 @@ paths:
                   application/json:
                     schema:
                       required:
-                      - application-name
-                      - release-number
+                      - core-model-1-4:control-construct
                       type: object
                       properties:
-                        application-name:
-                          type: string
-                          description: "'Own application name from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-s-0000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-name]'\n"
-                        release-number:
-                          type: string
-                          description: "'New release number from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-s-0010/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-number]'\n"
-                      example:
-                        subscriber-application: RegistryOffice
-                        subscriber-release: 0.0.2
+                        core-model-1-4:control-construct:
+                          required:
+                          - forwarding-domain
+                          - logical-termination-point
+                          type: object
+                          properties:
+                            logical-termination-point:
+                              uniqueItems: true
+                              type: array
+                              example:
+                              - uuid: ro-0-0-1-op-s-0002
+                                ltp-direction: core-model-1-4:TERMINATION_DIRECTION_SOURCE
+                                client-ltp: []
+                                server-ltp:
+                                - ro-0-0-1-http-s-0000
+                                layer-protocol:
+                                - local-id: "0"
+                                  layer-protocol-name: operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER
+                                  operation-server-interface-1-0:operation-server-interface-pac:
+                                    operation-server-interface-capability:
+                                      operation-name: /v1/redirect-service-request-information
+                                    operation-server-interface-configuration:
+                                      life-cycle-state: operation-server-interface-1-0:LIFE_CYCLE_STATE_TYPE_EXPERIMENTAL
+                                      operation-key: Operation key not yet provided.
+                              - uuid: ro-0-0-1-http-s-0000
+                                ltp-direction: core-model-1-4:TERMINATION_DIRECTION_SOURCE
+                                client-ltp:
+                                - ro-0-0-1-op-s-0002
+                                - ro-0-0-1-op-s-0003
+                                server-ltp:
+                                - ro-0-0-1-tcp-s-0000
+                                layer-protocol:
+                                - local-id: "0"
+                                  layer-protocol-name: http-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER
+                                  http-server-interface-1-0:http-server-interface-pac:
+                                    http-server-interface-capability:
+                                      application-name: RegistryOffice
+                                      release-number: 0.0.1
+                                      application-purpose: All applications being
+                                        part of the MBH SDN must be register here.
+                                      data-update-period: http-server-interface-1-0:DATA_UPDATE_PERIOD_TYPE_REAL_TIME
+                                      owner-name: Thorsten Heinze
+                                      owner-email-address: Thorsten.Heinze@telefonica.com
+                                      release-list:
+                                      - release-number: 0.0.1
+                                        release-date: 16.07.2021
+                                        changes: Initial version.
+                              items:
+                                required:
+                                - client-ltp
+                                - layer-protocol
+                                - ltp-direction
+                                - server-ltp
+                                - uuid
+                                type: object
+                                properties:
+                                  uuid:
+                                    type: string
+                                  ltp-direction:
+                                    type: string
+                                    enum:
+                                    - core-model-1-4:TERMINATION_DIRECTION_BIDIRECTIONAL
+                                    - core-model-1-4:TERMINATION_DIRECTION_SINK
+                                    - core-model-1-4:TERMINATION_DIRECTION_SOURCE
+                                    - core-model-1-4:TERMINATION_DIRECTION_UNDEFINED_OR_UNKNOWN
+                                  client-ltp:
+                                    uniqueItems: true
+                                    type: array
+                                    items:
+                                      type: string
+                                  server-ltp:
+                                    uniqueItems: true
+                                    type: array
+                                    items:
+                                      type: string
+                                  layer-protocol:
+                                    maxItems: 1
+                                    minItems: 1
+                                    type: array
+                                    items:
+                                      oneOf:
+                                      - required:
+                                        - layer-protocol-name
+                                        - local-id
+                                        - operation-server-interface-1-0:operation-server-interface-pac
+                                        type: object
+                                        properties:
+                                          local-id:
+                                            type: string
+                                          layer-protocol-name:
+                                            type: string
+                                            enum:
+                                            - operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER
+                                            - http-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER
+                                            - tcp-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_TCP_LAYER
+                                            - operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER
+                                            - http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER
+                                            - tcp-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_TCP_LAYER
+                                          operation-server-interface-1-0:operation-server-interface-pac:
+                                            required:
+                                            - operation-server-interface-capability
+                                            - operation-server-interface-configuration
+                                            type: object
+                                            properties:
+                                              operation-server-interface-capability:
+                                                required:
+                                                - operation-name
+                                                type: object
+                                                properties:
+                                                  operation-name:
+                                                    type: string
+                                              operation-server-interface-configuration:
+                                                required:
+                                                - life-cycle-state
+                                                - operation-key
+                                                type: object
+                                                properties:
+                                                  life-cycle-state:
+                                                    type: string
+                                                    enum:
+                                                    - operation-server-interface-1-0:LIFE_CYCLE_STATE_TYPE_EXPERIMENTAL
+                                                    - operation-server-interface-1-0:LIFE_CYCLE_STATE_TYPE_OPERATIONAL
+                                                    - operation-server-interface-1-0:LIFE_CYCLE_STATE_TYPE_DEPRICATED
+                                                    - operation-server-interface-1-0:LIFE_CYCLE_STATE_TYPE_OBSOLETE
+                                                    - operation-server-interface-1-0:LIFE_CYCLE_STATE_TYPE_UNKNOWN
+                                                    - operation-server-interface-1-0:LIFE_CYCLE_STATE_TYPE_NOT_YET_DEFINED
+                                                  operation-key:
+                                                    type: string
+                                        description: operation server
+                                      - required:
+                                        - http-server-interface-1-0:http-server-interface-pac
+                                        - layer-protocol-name
+                                        - local-id
+                                        type: object
+                                        properties:
+                                          local-id:
+                                            type: string
+                                          layer-protocol-name:
+                                            type: string
+                                            enum:
+                                            - operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER
+                                            - http-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER
+                                            - tcp-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_TCP_LAYER
+                                            - operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER
+                                            - http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER
+                                            - tcp-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_TCP_LAYER
+                                          http-server-interface-1-0:http-server-interface-pac:
+                                            required:
+                                            - http-server-interface-capability
+                                            type: object
+                                            properties:
+                                              http-server-interface-capability:
+                                                required:
+                                                - application-name
+                                                - application-purpose
+                                                - data-update-period
+                                                - owner-email-address
+                                                - owner-name
+                                                - release-list
+                                                - release-number
+                                                type: object
+                                                properties:
+                                                  application-name:
+                                                    type: string
+                                                  release-number:
+                                                    type: string
+                                                  application-purpose:
+                                                    type: string
+                                                  data-update-period:
+                                                    type: string
+                                                    enum:
+                                                    - http-server-interface-1-0:DATA_UPDATE_PERIOD_TYPE_REAL_TIME
+                                                    - http-server-interface-1-0:DATA_UPDATE_PERIOD_TYPE_1H_PERIOD
+                                                    - http-server-interface-1-0:DATA_UPDATE_PERIOD_TYPE_24H_PERIOD
+                                                    - http-server-interface-1-0:DATA_UPDATE_PERIOD_TYPE_MANUAL
+                                                  owner-name:
+                                                    type: string
+                                                  owner-email-address:
+                                                    type: string
+                                                  release-list:
+                                                    uniqueItems: true
+                                                    type: array
+                                                    items:
+                                                      required:
+                                                      - changes
+                                                      - release-date
+                                                      - release-number
+                                                      type: object
+                                                      properties:
+                                                        release-number:
+                                                          type: string
+                                                        release-date:
+                                                          type: string
+                                                        changes:
+                                                          type: string
+                                        description: http server
+                                      - required:
+                                        - layer-protocol-name
+                                        - local-id
+                                        - tcp-server-interface-1-0:tcp-server-interface-pac
+                                        type: object
+                                        properties:
+                                          local-id:
+                                            type: string
+                                          layer-protocol-name:
+                                            type: string
+                                            enum:
+                                            - operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER
+                                            - http-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER
+                                            - tcp-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_TCP_LAYER
+                                            - operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER
+                                            - http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER
+                                            - tcp-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_TCP_LAYER
+                                          tcp-server-interface-1-0:tcp-server-interface-pac:
+                                            required:
+                                            - tcp-server-interface-configuration
+                                            type: object
+                                            properties:
+                                              tcp-server-interface-configuration:
+                                                required:
+                                                - local-address
+                                                - local-port
+                                                type: object
+                                                properties:
+                                                  local-address:
+                                                    type: object
+                                                    properties:
+                                                      ipv-4-address:
+                                                        pattern: "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\
+                                                          .){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+                                                        type: string
+                                                  local-port:
+                                                    maximum: 65535
+                                                    minimum: 0
+                                                    type: integer
+                                        description: tcp server
+                                      - required:
+                                        - layer-protocol-name
+                                        - local-id
+                                        - operation-client-interface-1-0:operation-client-interface-pac
+                                        type: object
+                                        properties:
+                                          local-id:
+                                            type: string
+                                          layer-protocol-name:
+                                            type: string
+                                            enum:
+                                            - operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER
+                                            - http-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER
+                                            - tcp-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_TCP_LAYER
+                                            - operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER
+                                            - http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER
+                                            - tcp-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_TCP_LAYER
+                                          operation-client-interface-1-0:operation-client-interface-pac:
+                                            required:
+                                            - operation-client-interface-configuration
+                                            - operation-client-interface-status
+                                            type: object
+                                            properties:
+                                              operation-client-interface-configuration:
+                                                required:
+                                                - operation-key
+                                                - operation-name
+                                                type: object
+                                                properties:
+                                                  operation-name:
+                                                    type: string
+                                                  operation-key:
+                                                    type: string
+                                              operation-client-interface-status:
+                                                required:
+                                                - life-cycle-state
+                                                - operational-state
+                                                type: object
+                                                properties:
+                                                  operational-state:
+                                                    type: string
+                                                    enum:
+                                                    - operation-client-interface-1-0:OPERATIONAL_STATE_TYPE_AVAILABLE
+                                                    - operation-client-interface-1-0:OPERATIONAL_STATE_TYPE_UNAVAILABLE
+                                                    - operation-client-interface-1-0:OPERATIONAL_STATE_TYPE_NOT_YET_DEFINED
+                                                  life-cycle-state:
+                                                    type: string
+                                                    enum:
+                                                    - operation-client-interface-1-0:LIFE_CYCLE_STATE_TYPE_EXPERIMENTAL
+                                                    - operation-client-interface-1-0:LIFE_CYCLE_STATE_TYPE_OPERATIONAL
+                                                    - operation-client-interface-1-0:LIFE_CYCLE_STATE_TYPE_DEPRICATED
+                                                    - operation-client-interface-1-0:LIFE_CYCLE_STATE_TYPE_OBSOLETE
+                                                    - operation-client-interface-1-0:LIFE_CYCLE_STATE_TYPE_UNKNOWN
+                                                    - operation-client-interface-1-0:LIFE_CYCLE_STATE_TYPE_NOT_YET_DEFINED
+                                        description: operation client
+                                      - required:
+                                        - http-client-interface-1-0:http-client-interface-pac
+                                        - layer-protocol-name
+                                        - local-id
+                                        type: object
+                                        properties:
+                                          local-id:
+                                            type: string
+                                          layer-protocol-name:
+                                            type: string
+                                            enum:
+                                            - operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER
+                                            - http-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER
+                                            - tcp-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_TCP_LAYER
+                                            - operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER
+                                            - http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER
+                                            - tcp-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_TCP_LAYER
+                                          http-client-interface-1-0:http-client-interface-pac:
+                                            required:
+                                            - http-client-interface-capability
+                                            - http-client-interface-configuration
+                                            type: object
+                                            properties:
+                                              http-client-interface-capability:
+                                                required:
+                                                - application-name
+                                                type: object
+                                                properties:
+                                                  application-name:
+                                                    type: string
+                                              http-client-interface-configuration:
+                                                required:
+                                                - release-number
+                                                type: object
+                                                properties:
+                                                  release-number:
+                                                    type: string
+                                        description: http client
+                                      - required:
+                                        - layer-protocol-name
+                                        - local-id
+                                        - tcp-client-interface-1-0:tcp-client-interface-pac
+                                        type: object
+                                        properties:
+                                          local-id:
+                                            type: string
+                                          layer-protocol-name:
+                                            type: string
+                                            enum:
+                                            - operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER
+                                            - http-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER
+                                            - tcp-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_TCP_LAYER
+                                            - operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER
+                                            - http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER
+                                            - tcp-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_TCP_LAYER
+                                          tcp-client-interface-1-0:tcp-client-interface-pac:
+                                            required:
+                                            - tcp-client-interface-configuration
+                                            type: object
+                                            properties:
+                                              tcp-client-interface-configuration:
+                                                required:
+                                                - remote-address
+                                                - remote-port
+                                                type: object
+                                                properties:
+                                                  remote-address:
+                                                    required:
+                                                    - ip-address
+                                                    type: object
+                                                    properties:
+                                                      ip-address:
+                                                        required:
+                                                        - ipv-4-address
+                                                        type: object
+                                                        properties:
+                                                          ipv-4-address:
+                                                            pattern: "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\\
+                                                              .){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+                                                            type: string
+                                                  remote-port:
+                                                    maximum: 65535
+                                                    minimum: 0
+                                                    type: integer
+                                        description: tcp client
+                            forwarding-domain:
+                              maxItems: 1
+                              minItems: 1
+                              type: array
+                              example:
+                              - uuid: ro-0-0-1-op-fd-0000
+                                forwarding-construct:
+                                - uuid: ro-0-0-1-op-fc-0003
+                                  name:
+                                  - value-name: ForwardingKind
+                                    value: core-model-1-4:FORWARDING_KIND_TYPE_INVARIANT_PROCESS_SNIPPET
+                                  - value-name: ForwardingName
+                                    value: OamRequestCausesLoggingRequest
+                                  fc-port:
+                                  - local-id: "000"
+                                    port-direction: core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT
+                                    logical-termination-point: ro-0-0-1-op-s-0003
+                                  - local-id: "200"
+                                    port-direction: core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT
+                                    logical-termination-point: ro-0-0-1-op-c-0050
+                                - uuid: ro-0-0-1-op-fc-0004
+                                  name:
+                                  - value-name: ForwardingKind
+                                    value: core-model-1-4:FORWARDING_KIND_TYPE_INVARIANT_PROCESS_SNIPPET
+                                  - value-name: ForwardingName
+                                    value: OamRequestCausesInquiryForAuthentication
+                                  fc-port:
+                                  - local-id: "000"
+                                    port-direction: core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT
+                                    logical-termination-point: ro-0-0-1-op-s-0005
+                                  - local-id: "200"
+                                    port-direction: core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT
+                                    logical-termination-point: ro-0-0-1-op-c-0060
+                              items:
+                                required:
+                                - forwarding-construct
+                                - uuid
+                                type: object
+                                properties:
+                                  uuid:
+                                    type: string
+                                  forwarding-construct:
+                                    type: array
+                                    items:
+                                      required:
+                                      - fc-port
+                                      - name
+                                      - uuid
+                                      type: object
+                                      properties:
+                                        uuid:
+                                          type: string
+                                        name:
+                                          type: array
+                                          items:
+                                            required:
+                                            - value
+                                            - value-name
+                                            type: object
+                                            properties:
+                                              value-name:
+                                                type: string
+                                              value:
+                                                type: string
+                                        fc-port:
+                                          type: array
+                                          items:
+                                            required:
+                                            - local-id
+                                            - logical-termination-point
+                                            - port-direction
+                                            type: object
+                                            properties:
+                                              local-id:
+                                                type: string
+                                              port-direction:
+                                                type: string
+                                                enum:
+                                                - core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT
+                                                - core-model-1-4:PORT_DIRECTION_TYPE_INPUT
+                                                - core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT
+                                              logical-termination-point:
+                                                type: string
                 required: true
               responses:
                 "204":
-                  description: Subscribed for notifications about withdrawn approvals
-                  headers:
-                    x-correlator:
-                      description: UUID for the service execution flow that allows
-                        to correlate requests and responses. Its value must be identical
-                        at the response compared with its corresponding request
-                      style: simple
-                      explode: false
-                      schema:
-                        type: string
-                        example: 550e8400-e29b-11d4-a716-446655440000
-                    exec-time:
-                      description: "Value written by the service provider, reporting\
-                        \ the total elapsed time for the execution, including all\
-                        \ the additional processing needed to retrieve the data from\
-                        \ the backend service. Expressed in milliseconds"
-                      style: simple
-                      explode: false
-                      schema:
-                        type: integer
-                        example: 1100
-                    backend-time:
-                      description: "Value written by the service provider, reporting\
-                        \ the elapsed time for data retrieval from the backend (service\
-                        \ invocation, database access…). Expressed in milliseconds"
-                      style: simple
-                      explode: false
-                      schema:
-                        type: integer
-                        example: 850
-                    life-cycle-state:
-                      description: "'Life cyle state of the consumed service find\
-                        \ in [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-s-3008/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configurationy/life-cycle-state]'\n"
-                      style: simple
-                      explode: false
-                      schema:
-                        type: string
-                        example: EXPERIMENTAL
-                        enum:
-                        - EXPERIMENTAL
-                        - OPERATIONAL
-                        - DEPRICATED
-                        - OBSOLETE
-                        - UNKNOWN
-                        - NOT_YET_DEFINED
-                "400":
-                  description: Response in case of errored service requests
-                  headers:
-                    x-correlator:
-                      description: UUID for the service execution flow that allows
-                        to correlate requests and responses. Its value must be identical
-                        at the response compared with its corresponding request
-                      style: simple
-                      explode: false
-                      schema:
-                        pattern: "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$"
-                        type: string
-                        example: 550e8400-e29b-11d4-a716-446655440000
-                    exec-time:
-                      description: "Value written by the service provider, reporting\
-                        \ the total elapsed time for the execution, including all\
-                        \ the additional processing needed to retrieve the data from\
-                        \ the backend service. Expressed in milliseconds"
-                      style: simple
-                      explode: false
-                      schema:
-                        type: integer
-                        example: 1100
-                    backend-time:
-                      description: "Value written by the service provider, reporting\
-                        \ the elapsed time for data retrieval from the backend (service\
-                        \ invocation, database access…). Expressed in milliseconds"
-                      style: simple
-                      explode: false
-                      schema:
-                        type: integer
-                        example: 850
-                  content:
-                    application/json:
-                      schema:
-                        $ref: '#/components/schemas/errorDescription'
-                "401":
-                  description: Response in case of errored service requests
-                  headers:
-                    x-correlator:
-                      description: UUID for the service execution flow that allows
-                        to correlate requests and responses. Its value must be identical
-                        at the response compared with its corresponding request
-                      style: simple
-                      explode: false
-                      schema:
-                        pattern: "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$"
-                        type: string
-                        example: 550e8400-e29b-11d4-a716-446655440000
-                    exec-time:
-                      description: "Value written by the service provider, reporting\
-                        \ the total elapsed time for the execution, including all\
-                        \ the additional processing needed to retrieve the data from\
-                        \ the backend service. Expressed in milliseconds"
-                      style: simple
-                      explode: false
-                      schema:
-                        type: integer
-                        example: 1100
-                    backend-time:
-                      description: "Value written by the service provider, reporting\
-                        \ the elapsed time for data retrieval from the backend (service\
-                        \ invocation, database access…). Expressed in milliseconds"
-                      style: simple
-                      explode: false
-                      schema:
-                        type: integer
-                        example: 850
-                  content:
-                    application/json:
-                      schema:
-                        $ref: '#/components/schemas/errorDescription'
-                "403":
-                  description: Response in case of errored service requests
-                  headers:
-                    x-correlator:
-                      description: UUID for the service execution flow that allows
-                        to correlate requests and responses. Its value must be identical
-                        at the response compared with its corresponding request
-                      style: simple
-                      explode: false
-                      schema:
-                        pattern: "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$"
-                        type: string
-                        example: 550e8400-e29b-11d4-a716-446655440000
-                    exec-time:
-                      description: "Value written by the service provider, reporting\
-                        \ the total elapsed time for the execution, including all\
-                        \ the additional processing needed to retrieve the data from\
-                        \ the backend service. Expressed in milliseconds"
-                      style: simple
-                      explode: false
-                      schema:
-                        type: integer
-                        example: 1100
-                    backend-time:
-                      description: "Value written by the service provider, reporting\
-                        \ the elapsed time for data retrieval from the backend (service\
-                        \ invocation, database access…). Expressed in milliseconds"
-                      style: simple
-                      explode: false
-                      schema:
-                        type: integer
-                        example: 850
-                  content:
-                    application/json:
-                      schema:
-                        $ref: '#/components/schemas/errorDescription'
-                "404":
-                  description: Response in case of errored service requests
-                  headers:
-                    x-correlator:
-                      description: UUID for the service execution flow that allows
-                        to correlate requests and responses. Its value must be identical
-                        at the response compared with its corresponding request
-                      style: simple
-                      explode: false
-                      schema:
-                        pattern: "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$"
-                        type: string
-                        example: 550e8400-e29b-11d4-a716-446655440000
-                    exec-time:
-                      description: "Value written by the service provider, reporting\
-                        \ the total elapsed time for the execution, including all\
-                        \ the additional processing needed to retrieve the data from\
-                        \ the backend service. Expressed in milliseconds"
-                      style: simple
-                      explode: false
-                      schema:
-                        type: integer
-                        example: 1100
-                    backend-time:
-                      description: "Value written by the service provider, reporting\
-                        \ the elapsed time for data retrieval from the backend (service\
-                        \ invocation, database access…). Expressed in milliseconds"
-                      style: simple
-                      explode: false
-                      schema:
-                        type: integer
-                        example: 850
-                  content:
-                    application/json:
-                      schema:
-                        $ref: '#/components/schemas/errorDescription'
-                "500":
-                  description: Response in case of errored service requests
-                  headers:
-                    x-correlator:
-                      description: UUID for the service execution flow that allows
-                        to correlate requests and responses. Its value must be identical
-                        at the response compared with its corresponding request
-                      style: simple
-                      explode: false
-                      schema:
-                        pattern: "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$"
-                        type: string
-                        example: 550e8400-e29b-11d4-a716-446655440000
-                    exec-time:
-                      description: "Value written by the service provider, reporting\
-                        \ the total elapsed time for the execution, including all\
-                        \ the additional processing needed to retrieve the data from\
-                        \ the backend service. Expressed in milliseconds"
-                      style: simple
-                      explode: false
-                      schema:
-                        type: integer
-                        example: 1100
-                    backend-time:
-                      description: "Value written by the service provider, reporting\
-                        \ the elapsed time for data retrieval from the backend (service\
-                        \ invocation, database access…). Expressed in milliseconds"
-                      style: simple
-                      explode: false
-                      schema:
-                        type: integer
-                        example: 850
-                  content:
-                    application/json:
-                      schema:
-                        $ref: '#/components/schemas/errorDescription'
-                default:
-                  description: Response in case of errored service requests
-                  headers:
-                    x-correlator:
-                      description: UUID for the service execution flow that allows
-                        to correlate requests and responses. Its value must be identical
-                        at the response compared with its corresponding request
-                      style: simple
-                      explode: false
-                      schema:
-                        pattern: "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$"
-                        type: string
-                        example: 550e8400-e29b-11d4-a716-446655440000
-                    exec-time:
-                      description: "Value written by the service provider, reporting\
-                        \ the total elapsed time for the execution, including all\
-                        \ the additional processing needed to retrieve the data from\
-                        \ the backend service. Expressed in milliseconds"
-                      style: simple
-                      explode: false
-                      schema:
-                        type: integer
-                        example: 1100
-                    backend-time:
-                      description: "Value written by the service provider, reporting\
-                        \ the elapsed time for data retrieval from the backend (service\
-                        \ invocation, database access…). Expressed in milliseconds"
-                      style: simple
-                      explode: false
-                      schema:
-                        type: integer
-                        example: 850
-                  content:
-                    application/json:
-                      schema:
-                        $ref: '#/components/schemas/errorDescription'
-            parameters:
-            - $ref: '#/components/parameters/user'
-            - $ref: '#/components/parameters/originator'
-            - $ref: '#/components/parameters/x-correlator'
-            - $ref: '#/components/parameters/trace-indicator'
-            - $ref: '#/components/parameters/customer-journey'
-        PromptForBequeathingDataCausesOKMbeingRequestedToUpdateClientKeysOnNewApplication:
-          ? https://[/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-0080/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-0080/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-0080/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
-          : post:
-              requestBody:
-                content:
-                  application/json:
-                    schema:
-                      required:
-                      - application-name
-                      - release-number
-                      type: object
-                      properties:
-                        application-name:
-                          type: string
-                          description: "'Own application name from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-s-0000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-name]'\n"
-                        release-number:
-                          type: string
-                          description: "'New release number from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-s-0010/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-number]'\n"
-                      example:
-                        subscriber-application: RegistryOffice
-                        subscriber-release: 0.0.2
-                required: true
-              responses:
-                "204":
-                  description: Subscribed for notifications about withdrawn approvals
+                  description: Updated all LTPs and FCs of application
                   headers:
                     x-correlator:
                       description: UUID for the service execution flow that allows
@@ -14106,16 +14343,16 @@ paths:
                           description: "'Own application name from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-s-0000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-name]'\n"
                         old-application-release-number:
                           type: string
-                          description: "'Old release number find [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-0000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'\n"
+                          description: "'Old release number from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-0000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'\n"
                         new-application-release-number:
                           type: string
-                          description: "'Future release number find [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-0010/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'\n"
+                          description: "'Future release number from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-0010/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'\n"
                         new-application-address:
                           type: string
-                          description: "'Future IP address find [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-0010/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'\n"
+                          description: "'Future IP address from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-0010/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'\n"
                         new-application-port:
                           type: integer
-                          description: "'Future port update [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-0010/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'\n"
+                          description: "'Future port from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-0010/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'\n"
                       example:
                         application-name: RegistryOffice
                         old-application-release-number: 0.0.1
@@ -14401,18 +14638,18 @@ paths:
                     schema:
                       required:
                       - application-name
-                      - release-number
+                      - application-release-number
                       type: object
                       properties:
                         application-name:
                           type: string
                           description: "'Own application name from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-s-0000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-name]'\n"
-                        release-number:
+                        application-release-number:
                           type: string
                           description: "'Own release number from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-s-0000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-number]'\n"
                       example:
                         application-name: BadApplication
-                        release-number: 0.0.1
+                        application-release-number: 0.0.1
                 required: true
               responses:
                 "204":
@@ -16484,11 +16721,24 @@ paths:
                     schema:
                       required:
                       - fc-port
+                      - name
                       - uuid
                       type: object
                       properties:
                         uuid:
                           type: string
+                        name:
+                          type: array
+                          items:
+                            required:
+                            - value
+                            - value-name
+                            type: object
+                            properties:
+                              value-name:
+                                type: string
+                              value:
+                                type: string
                         fc-port:
                           type: array
                           items:
@@ -16505,14 +16755,19 @@ paths:
                               logical-termination-point:
                                 type: string
                       example:
-                        uuid: ro-0-0-1-op-fc-3000
+                        uuid: ro-0-0-1-op-fc-0003
+                        name:
+                        - value-name: ForwardingKind
+                          value: core-model-1-4:FORWARDING_KIND_TYPE_INVARIANT_PROCESS_SNIPPET
+                        - value-name: ForwardingName
+                          value: OamRequestCausesLoggingRequest
                         fc-port:
                         - local-id: "000"
                           port-direction: core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT
-                          logical-termination-point: ro-0-0-1-op-s-3000
-                        - local-id: "100"
-                          port-direction: core-model-1-4:PORT_DIRECTION_TYPE_INPUT
-                          logical-termination-point: ro-0-0-1-op-s-3002
+                          logical-termination-point: ro-0-0-1-op-s-0003
+                        - local-id: "200"
+                          port-direction: core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT
+                          logical-termination-point: ro-0-0-1-op-c-0050
                 required: true
               responses:
                 "204":
@@ -16792,21 +17047,35 @@ paths:
                   application/json:
                     schema:
                       required:
-                      - fc-port-local-id
+                      - fc-port
                       - fc-uuid
-                      - logical-termination-point
                       type: object
                       properties:
                         fc-uuid:
                           type: string
-                        fc-port-local-id:
-                          type: string
-                        logical-termination-point:
-                          type: string
+                        fc-port:
+                          required:
+                          - local-id
+                          - logical-termination-point
+                          - port-direction
+                          type: object
+                          properties:
+                            local-id:
+                              type: string
+                            port-direction:
+                              type: string
+                              enum:
+                              - core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT
+                              - core-model-1-4:PORT_DIRECTION_TYPE_INPUT
+                              - core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT
+                            logical-termination-point:
+                              type: string
                       example:
-                        fc-uuid: ro-0-0-1-op-fc-3000
-                        fc-port-local-id: "000"
-                        logical-termination-point: ro-0-0-1-op-s-3000
+                        fc-uuid: ro-0-0-1-op-fc-0003
+                        fc-port:
+                          local-id: "000"
+                          port-direction: core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT
+                          logical-termination-point: ro-0-0-1-op-s-0003
                 required: true
               responses:
                 "204":
@@ -17087,15 +17356,15 @@ paths:
                     schema:
                       required:
                       - fc-port-local-id
-                      - forwarding-construct-uuid
+                      - fc-uuid
                       type: object
                       properties:
-                        forwarding-construct-uuid:
+                        fc-uuid:
                           type: string
                         fc-port-local-id:
                           type: string
                       example:
-                        forwarding-construct-uuid: ro-0-0-1-op-fc-3000
+                        fc-uuid: ro-0-0-1-op-fc-3000
                         fc-port-local-id: "202"
                 required: true
               responses:
@@ -18173,11 +18442,24 @@ paths:
                     schema:
                       required:
                       - fc-port
+                      - name
                       - uuid
                       type: object
                       properties:
                         uuid:
                           type: string
+                        name:
+                          type: array
+                          items:
+                            required:
+                            - value
+                            - value-name
+                            type: object
+                            properties:
+                              value-name:
+                                type: string
+                              value:
+                                type: string
                         fc-port:
                           type: array
                           items:
@@ -18194,14 +18476,327 @@ paths:
                               logical-termination-point:
                                 type: string
                       example:
-                        uuid: ro-0-0-1-op-fc-3000
+                        uuid: ro-0-0-1-op-fc-0003
+                        name:
+                        - value-name: ForwardingKind
+                          value: core-model-1-4:FORWARDING_KIND_TYPE_INVARIANT_PROCESS_SNIPPET
+                        - value-name: ForwardingName
+                          value: OamRequestCausesLoggingRequest
                         fc-port:
                         - local-id: "000"
                           port-direction: core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT
-                          logical-termination-point: ro-0-0-1-op-s-3000
-                        - local-id: "100"
-                          port-direction: core-model-1-4:PORT_DIRECTION_TYPE_INPUT
-                          logical-termination-point: ro-0-0-1-op-s-3002
+                          logical-termination-point: ro-0-0-1-op-s-0003
+                        - local-id: "200"
+                          port-direction: core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT
+                          logical-termination-point: ro-0-0-1-op-c-0050
+                required: true
+              responses:
+                "204":
+                  description: FC port will be updated
+                  headers:
+                    x-correlator:
+                      description: UUID for the service execution flow that allows
+                        to correlate requests and responses. Its value must be identical
+                        at the response compared with its corresponding request
+                      style: simple
+                      explode: false
+                      schema:
+                        type: string
+                        example: 550e8400-e29b-11d4-a716-446655440000
+                    exec-time:
+                      description: "Value written by the service provider, reporting\
+                        \ the total elapsed time for the execution, including all\
+                        \ the additional processing needed to retrieve the data from\
+                        \ the backend service. Expressed in milliseconds"
+                      style: simple
+                      explode: false
+                      schema:
+                        type: integer
+                        example: 1100
+                    backend-time:
+                      description: "Value written by the service provider, reporting\
+                        \ the elapsed time for data retrieval from the backend (service\
+                        \ invocation, database access…). Expressed in milliseconds"
+                      style: simple
+                      explode: false
+                      schema:
+                        type: integer
+                        example: 850
+                    life-cycle-state:
+                      description: Life cyle state of the consumed service
+                      style: simple
+                      explode: false
+                      schema:
+                        type: string
+                        example: EXPERIMENTAL
+                        enum:
+                        - EXPERIMENTAL
+                        - OPERATIONAL
+                        - DEPRICATED
+                        - OBSOLETE
+                        - UNKNOWN
+                        - NOT_YET_DEFINED
+                "400":
+                  description: Response in case of errored service requests
+                  headers:
+                    x-correlator:
+                      description: UUID for the service execution flow that allows
+                        to correlate requests and responses. Its value must be identical
+                        at the response compared with its corresponding request
+                      style: simple
+                      explode: false
+                      schema:
+                        pattern: "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$"
+                        type: string
+                        example: 550e8400-e29b-11d4-a716-446655440000
+                    exec-time:
+                      description: "Value written by the service provider, reporting\
+                        \ the total elapsed time for the execution, including all\
+                        \ the additional processing needed to retrieve the data from\
+                        \ the backend service. Expressed in milliseconds"
+                      style: simple
+                      explode: false
+                      schema:
+                        type: integer
+                        example: 1100
+                    backend-time:
+                      description: "Value written by the service provider, reporting\
+                        \ the elapsed time for data retrieval from the backend (service\
+                        \ invocation, database access…). Expressed in milliseconds"
+                      style: simple
+                      explode: false
+                      schema:
+                        type: integer
+                        example: 850
+                  content:
+                    application/json:
+                      schema:
+                        $ref: '#/components/schemas/errorDescription'
+                "401":
+                  description: Response in case of errored service requests
+                  headers:
+                    x-correlator:
+                      description: UUID for the service execution flow that allows
+                        to correlate requests and responses. Its value must be identical
+                        at the response compared with its corresponding request
+                      style: simple
+                      explode: false
+                      schema:
+                        pattern: "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$"
+                        type: string
+                        example: 550e8400-e29b-11d4-a716-446655440000
+                    exec-time:
+                      description: "Value written by the service provider, reporting\
+                        \ the total elapsed time for the execution, including all\
+                        \ the additional processing needed to retrieve the data from\
+                        \ the backend service. Expressed in milliseconds"
+                      style: simple
+                      explode: false
+                      schema:
+                        type: integer
+                        example: 1100
+                    backend-time:
+                      description: "Value written by the service provider, reporting\
+                        \ the elapsed time for data retrieval from the backend (service\
+                        \ invocation, database access…). Expressed in milliseconds"
+                      style: simple
+                      explode: false
+                      schema:
+                        type: integer
+                        example: 850
+                  content:
+                    application/json:
+                      schema:
+                        $ref: '#/components/schemas/errorDescription'
+                "403":
+                  description: Response in case of errored service requests
+                  headers:
+                    x-correlator:
+                      description: UUID for the service execution flow that allows
+                        to correlate requests and responses. Its value must be identical
+                        at the response compared with its corresponding request
+                      style: simple
+                      explode: false
+                      schema:
+                        pattern: "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$"
+                        type: string
+                        example: 550e8400-e29b-11d4-a716-446655440000
+                    exec-time:
+                      description: "Value written by the service provider, reporting\
+                        \ the total elapsed time for the execution, including all\
+                        \ the additional processing needed to retrieve the data from\
+                        \ the backend service. Expressed in milliseconds"
+                      style: simple
+                      explode: false
+                      schema:
+                        type: integer
+                        example: 1100
+                    backend-time:
+                      description: "Value written by the service provider, reporting\
+                        \ the elapsed time for data retrieval from the backend (service\
+                        \ invocation, database access…). Expressed in milliseconds"
+                      style: simple
+                      explode: false
+                      schema:
+                        type: integer
+                        example: 850
+                  content:
+                    application/json:
+                      schema:
+                        $ref: '#/components/schemas/errorDescription'
+                "404":
+                  description: Response in case of errored service requests
+                  headers:
+                    x-correlator:
+                      description: UUID for the service execution flow that allows
+                        to correlate requests and responses. Its value must be identical
+                        at the response compared with its corresponding request
+                      style: simple
+                      explode: false
+                      schema:
+                        pattern: "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$"
+                        type: string
+                        example: 550e8400-e29b-11d4-a716-446655440000
+                    exec-time:
+                      description: "Value written by the service provider, reporting\
+                        \ the total elapsed time for the execution, including all\
+                        \ the additional processing needed to retrieve the data from\
+                        \ the backend service. Expressed in milliseconds"
+                      style: simple
+                      explode: false
+                      schema:
+                        type: integer
+                        example: 1100
+                    backend-time:
+                      description: "Value written by the service provider, reporting\
+                        \ the elapsed time for data retrieval from the backend (service\
+                        \ invocation, database access…). Expressed in milliseconds"
+                      style: simple
+                      explode: false
+                      schema:
+                        type: integer
+                        example: 850
+                  content:
+                    application/json:
+                      schema:
+                        $ref: '#/components/schemas/errorDescription'
+                "500":
+                  description: Response in case of errored service requests
+                  headers:
+                    x-correlator:
+                      description: UUID for the service execution flow that allows
+                        to correlate requests and responses. Its value must be identical
+                        at the response compared with its corresponding request
+                      style: simple
+                      explode: false
+                      schema:
+                        pattern: "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$"
+                        type: string
+                        example: 550e8400-e29b-11d4-a716-446655440000
+                    exec-time:
+                      description: "Value written by the service provider, reporting\
+                        \ the total elapsed time for the execution, including all\
+                        \ the additional processing needed to retrieve the data from\
+                        \ the backend service. Expressed in milliseconds"
+                      style: simple
+                      explode: false
+                      schema:
+                        type: integer
+                        example: 1100
+                    backend-time:
+                      description: "Value written by the service provider, reporting\
+                        \ the elapsed time for data retrieval from the backend (service\
+                        \ invocation, database access…). Expressed in milliseconds"
+                      style: simple
+                      explode: false
+                      schema:
+                        type: integer
+                        example: 850
+                  content:
+                    application/json:
+                      schema:
+                        $ref: '#/components/schemas/errorDescription'
+                default:
+                  description: Response in case of errored service requests
+                  headers:
+                    x-correlator:
+                      description: UUID for the service execution flow that allows
+                        to correlate requests and responses. Its value must be identical
+                        at the response compared with its corresponding request
+                      style: simple
+                      explode: false
+                      schema:
+                        pattern: "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$"
+                        type: string
+                        example: 550e8400-e29b-11d4-a716-446655440000
+                    exec-time:
+                      description: "Value written by the service provider, reporting\
+                        \ the total elapsed time for the execution, including all\
+                        \ the additional processing needed to retrieve the data from\
+                        \ the backend service. Expressed in milliseconds"
+                      style: simple
+                      explode: false
+                      schema:
+                        type: integer
+                        example: 1100
+                    backend-time:
+                      description: "Value written by the service provider, reporting\
+                        \ the elapsed time for data retrieval from the backend (service\
+                        \ invocation, database access…). Expressed in milliseconds"
+                      style: simple
+                      explode: false
+                      schema:
+                        type: integer
+                        example: 850
+                  content:
+                    application/json:
+                      schema:
+                        $ref: '#/components/schemas/errorDescription'
+            parameters:
+            - $ref: '#/components/parameters/user'
+            - $ref: '#/components/parameters/originator'
+            - $ref: '#/components/parameters/x-correlator'
+            - $ref: '#/components/parameters/trace-indicator'
+            - $ref: '#/components/parameters/customer-journey'
+        OamRequestCausesFcPortUpdateRequest:
+          ? https://{$request.body#topology-application-address}:{$request.body#topology-application-port}{$request.body#topology-operation-fc-port-update}
+          : description: To be activated whenever an OaM request causes an FC port
+              being updated
+            post:
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      required:
+                      - fc-port
+                      - fc-uuid
+                      type: object
+                      properties:
+                        fc-uuid:
+                          type: string
+                        fc-port:
+                          required:
+                          - local-id
+                          - logical-termination-point
+                          - port-direction
+                          type: object
+                          properties:
+                            local-id:
+                              type: string
+                            port-direction:
+                              type: string
+                              enum:
+                              - core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT
+                              - core-model-1-4:PORT_DIRECTION_TYPE_INPUT
+                              - core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT
+                            logical-termination-point:
+                              type: string
+                      example:
+                        fc-uuid: ro-0-0-1-op-fc-0003
+                        fc-port:
+                          local-id: "000"
+                          port-direction: core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT
+                          logical-termination-point: ro-0-0-1-op-s-0003
                 required: true
               responses:
                 "204":
@@ -18482,15 +19077,15 @@ paths:
                     schema:
                       required:
                       - fc-port-local-id
-                      - forwarding-construct-uuid
+                      - fc-uuid
                       type: object
                       properties:
-                        forwarding-construct-uuid:
+                        fc-uuid:
                           type: string
                         fc-port-local-id:
                           type: string
                       example:
-                        forwarding-construct-uuid: ro-0-0-1-op-fc-3000
+                        fc-uuid: ro-0-0-1-op-fc-3000
                         fc-port-local-id: "202"
                 required: true
               responses:
@@ -20699,7 +21294,7 @@ paths:
         schema:
           pattern: "^ro-0-0-1-http-c-\\d{4}$"
           type: string
-          example: ro-0-0-1-op-c-0020
+          example: ro-0-0-1-http-c-0020
       responses:
         "200":
           description: Release number provided
@@ -20760,7 +21355,7 @@ paths:
         schema:
           pattern: "^ro-0-0-1-http-c-\\d{4}$"
           type: string
-          example: ro-0-0-1-op-c-0020
+          example: ro-0-0-1-http-c-0020
       requestBody:
         content:
           application/json:
@@ -21077,9 +21672,9 @@ components:
       - application-address
       - application-name
       - application-port
+      - application-release-number
       - client-update-operation
       - embedding-operation
-      - release-number
       type: object
       properties:
         application-name:
@@ -21087,12 +21682,22 @@ components:
           type: string
           description: "'Name of application that wants to register find or create\
             \ [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'\n"
-        release-number:
+        application-release-number:
           pattern: "^([0-9]+)\\.([0-9]+)\\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\\
             +[0-9A-Za-z-]+)?$"
           type: string
           description: "'Release of application that wants to register find or create\
             \ [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'\n"
+        embedding-operation:
+          minLength: 3
+          type: string
+          description: "'Name of service for initiating embedding process update or\
+            \ create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-*/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
+        client-update-operation:
+          minLength: 3
+          type: string
+          description: "'Name of service for broadcasting server changes update or\
+            \ create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-*/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
         application-address:
           pattern: "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
           type: string
@@ -21104,34 +21709,24 @@ components:
           type: integer
           description: "'TCP port of application that wants to register update or\
             \ create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'\n"
-        embedding-operation:
-          minLength: 3
-          type: string
-          description: "'Name of service for initiating embedding process update or\
-            \ create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-*/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
-        client-update-operation:
-          minLength: 3
-          type: string
-          description: "'Name of service for broadcasting server changes update or\
-            \ create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-*/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
       example:
         application-name: TypeApprovalRegister
-        release-number: 0.0.1
-        application-address: 10.118.125.157
-        application-port: 1001
+        application-release-number: 0.0.1
         embedding-operation: /v1/embed-yourself
         client-update-operation: /v1/update-client
+        application-address: 10.118.125.157
+        application-port: 1001
     v1_deregisterapplication_body:
       required:
       - application-name
-      - release-number
+      - application-release-number
       type: object
       properties:
         application-name:
           type: string
           description: "'Name of application that shall be removed from the register\
             \ find in [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'\n"
-        release-number:
+        application-release-number:
           pattern: "^([0-9]+)\\.([0-9]+)\\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\\
             +[0-9A-Za-z-]+)?$"
           type: string
@@ -21139,12 +21734,12 @@ components:
             \ find in [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'\n"
       example:
         application-name: BadApplication
-        release-number: 0.0.1
+        application-release-number: 0.0.1
     v1_regardupdatedapprovalstatus_body:
       required:
       - application-name
+      - application-release-number
       - approval-status
-      - release-number
       type: object
       properties:
         application-name:
@@ -21152,13 +21747,13 @@ components:
           description: "'Name of application with updated approval status if approval-status==APPROVED\
             \ : /v1/notify-approvals::callbacks::ApprovalNotification::requestBody::application-name\
             \ else : /v1/notify-withdrawn-approvals::callbacks::WithdrawnApprovalNotification::requestBody::application-name'\n"
-        release-number:
+        application-release-number:
           pattern: "^([0-9]+)\\.([0-9]+)\\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\\
             +[0-9A-Za-z-]+)?$"
           type: string
           description: "'Release of application with updated approval status if approval-status==APPROVED\
-            \ : /v1/notify-approvals::callbacks::ApprovalNotification::requestBody::release-number\
-            \ else : /v1/notify-withdrawn-approvals::callbacks::WithdrawnApprovalNotification::requestBody::release-number'\n"
+            \ : /v1/notify-approvals::callbacks::ApprovalNotification::requestBody::application-release-number\
+            \ else : /v1/notify-withdrawn-approvals::callbacks::WithdrawnApprovalNotification::requestBody::application-release-number'\n"
         approval-status:
           type: string
           description: "'Updated approval status, which activates callback on either\
@@ -21170,20 +21765,20 @@ components:
           - NOT_YET_DEFINED
       example:
         application-name: BadApplication
-        release-number: 0.0.1
+        application-release-number: 0.0.1
         approval-status: BARRED
     inline_response_200:
       required:
       - application-address
       - application-name
       - application-port
-      - release-number
+      - application-release-number
       type: object
       properties:
         application-name:
           type: string
           description: "from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]"
-        release-number:
+        application-release-number:
           type: string
           description: "from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]"
         application-address:
@@ -21227,58 +21822,58 @@ components:
           datatype: String
     v1_inquireapplicationtypeapprovals_body:
       required:
-      - subscriber-address
-      - subscriber-application
-      - subscriber-operation
-      - subscriber-port
-      - subscriber-release
+      - approval-application
+      - approval-application-address
+      - approval-application-port
+      - approval-application-release-number
+      - approval-operation
       type: object
       properties:
-        subscriber-application:
+        approval-application:
           type: string
           description: "'Name of application that wants to receive information about\
             \ new registrations find or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-2030/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'\n"
-        subscriber-release:
+        approval-application-release-number:
           pattern: "^([0-9]+)\\.([0-9]+)\\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\\
             +[0-9A-Za-z-]+)?$"
           type: string
           description: "'Release of application that wants to receive information\
             \ about new registrations find or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-2030/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'\n"
-        subscriber-operation:
+        approval-operation:
           type: string
           description: "'Operation that shall be addressed by information about new\
             \ registrations update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-3031/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
-        subscriber-address:
+        approval-application-address:
           pattern: "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
           type: string
           description: "'IP address of application that wants to receive information\
             \ about new registrations update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-2030/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'\n"
-        subscriber-port:
+        approval-application-port:
           maximum: 65535
           minimum: 0
           type: integer
           description: "'TCP port of application that wants to receive information\
             \ about new registrations update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-2030/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'\n"
       example:
-        subscriber-application: TypeApprovalRegister
-        subscriber-release: 0.0.1
-        subscriber-operation: /v1/regard-application
-        subscriber-address: 10.118.125.157
-        subscriber-port: 1001
+        approval-application: TypeApprovalRegister
+        approval-application-release-number: 0.0.1
+        approval-operation: /v1/regard-application
+        approval-application-address: 10.118.125.157
+        approval-application-port: 1001
     v1_notifyderegistrations_body:
       required:
       - subscriber-address
       - subscriber-application
       - subscriber-operation
       - subscriber-port
-      - subscriber-release
+      - subscriber-release-number
       type: object
       properties:
         subscriber-application:
           type: string
           description: "'Name of application that wants to receive notifications about\
             \ obsolete registrations find or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'\n"
-        subscriber-release:
+        subscriber-release-number:
           pattern: "^([0-9]+)\\.([0-9]+)\\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\\
             +[0-9A-Za-z-]+)?$"
           type: string
@@ -21301,7 +21896,7 @@ components:
             \ about obsolete registrations update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'\n"
       example:
         subscriber-application: TypeApprovalRegister
-        subscriber-release: 0.0.1
+        subscriber-release-number: 0.0.1
         subscriber-operation: /v1/disregard-application
         subscriber-address: 10.118.125.157
         subscriber-port: 1001
@@ -21311,14 +21906,14 @@ components:
       - subscriber-application
       - subscriber-operation
       - subscriber-port
-      - subscriber-release
+      - subscriber-release-number
       type: object
       properties:
         subscriber-application:
           type: string
           description: "'Name of application that wants to receive notifications about\
             \ new approvals find or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'\n"
-        subscriber-release:
+        subscriber-release-number:
           pattern: "^([0-9]+)\\.([0-9]+)\\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\\
             +[0-9A-Za-z-]+)?$"
           type: string
@@ -21341,7 +21936,7 @@ components:
             \ about new approvals update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'\n"
       example:
         subscriber-application: ExecutionAndTraceLog
-        subscriber-release: 0.0.1
+        subscriber-release-number: 0.0.1
         subscriber-operation: /v1/regard-application
         subscriber-address: 10.118.125.157
         subscriber-port: 1002
@@ -21351,14 +21946,14 @@ components:
       - subscriber-application
       - subscriber-operation
       - subscriber-port
-      - subscriber-release
+      - subscriber-release-number
       type: object
       properties:
         subscriber-application:
           type: string
           description: "'Name of application that wants to receive notifications about\
             \ withdrawn approvals find or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'\n"
-        subscriber-release:
+        subscriber-release-number:
           pattern: "^([0-9]+)\\.([0-9]+)\\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\\
             +[0-9A-Za-z-]+)?$"
           type: string
@@ -21381,7 +21976,7 @@ components:
             \ about withdrawn approvals update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'\n"
       example:
         subscriber-application: AdministratorAdministration
-        subscriber-release: 0.0.1
+        subscriber-release-number: 0.0.1
         subscriber-operation: /v1/disregard-application
         subscriber-address: 10.118.125.157
         subscriber-port: 1004
@@ -21469,10 +22064,10 @@ components:
       required:
       - application-name
       - application-purpose
+      - application-release-number
       - data-update-period
       - owner-email-address
       - owner-name
-      - release-number
       type: object
       properties:
         application-name:
@@ -21480,12 +22075,12 @@ components:
           description: "'Own application name from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-s-0000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-name]'\n"
           enum:
           - RegistryOffice
-        release-number:
+        application-release-number:
           type: string
           description: "'Own release number from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-s-0000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-number]'\n"
         application-purpose:
           type: string
-          description: "'Own release number from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-s-0000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-purpose]'\n"
+          description: "'Own application purpose from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-s-0000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-purpose]'\n"
         data-update-period:
           type: string
           description: "from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-s-0000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/data-update-period]"
@@ -21502,7 +22097,7 @@ components:
           description: "from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-s-0000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/owner-email-address]"
       example:
         application-name: RegistryOffice
-        release-number: 0.0.1
+        application-release-number: 0.0.1
         application-purpose: All applications being part of the MBH SDN must be register
           here.
         data-update-period: real-time
@@ -21622,27 +22217,87 @@ components:
           datatype: String
     v1_registeryourself_body:
       required:
-      - registration-address
       - registration-operation
-      - registration-port
+      - registry-office-address
+      - registry-office-application
+      - registry-office-application-release-number
+      - registry-office-port
       type: object
       properties:
-        registration-address:
+        registry-office-application:
+          type: string
+          description: "'If body provided, name of RegistryOffice application find\
+            \ or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-0020/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'\n"
+        registry-office-application-release-number:
+          pattern: "^([0-9]+)\\.([0-9]+)\\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\\
+            +[0-9A-Za-z-]+)?$"
+          type: string
+          description: "'If body provided, rrelease of RegistryOffice application\
+            \ update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-0020/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'\n"
+        registration-operation:
+          type: string
+          description: "'If body provided, operation for registering update or create\
+            \ [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-0020/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
+        registry-office-address:
           pattern: "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
           type: string
-          description: "'If body provided,  update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-0020/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'\n"
-        registration-port:
+          description: "'If body provided, IP address of RegistryOffice application\
+            \ update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-0020/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'\n"
+        registry-office-port:
           maximum: 65535
           minimum: 0
           type: integer
-          description: "'If body provided,  update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-0020/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'\n"
-        registration-operation:
-          type: string
-          description: "'If body provided, update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-0020/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
+          description: "'If body provided, port of RegistryOffice application update\
+            \ or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-0020/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'\n"
       example:
-        registration-address: 10.118.125.157
-        registration-port: 1000
+        registry-office-application: RegistryOffice
+        registry-office-application-release-number: 0.0.1
         registration-operation: /v1/register-application
+        registry-office-address: 10.118.125.157
+        registry-office-port: 1000
+    v1_embedyourself_body:
+      required:
+      - deregistration-operation
+      - registry-office-address
+      - registry-office-application
+      - registry-office-application-release-number
+      - registry-office-port
+      - relay-server-replacement-operation
+      type: object
+      properties:
+        registry-office-application:
+          type: string
+          description: "'Name of RegistryOffice application find or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-0020/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'\n"
+        registry-office-application-release-number:
+          pattern: "^([0-9]+)\\.([0-9]+)\\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\\
+            +[0-9A-Za-z-]+)?$"
+          type: string
+          description: "'Release of RegistryOffice application update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-0020/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'\n"
+        relay-server-replacement-operation:
+          type: string
+          description: "'Operation for requesting for broadcasting a new server address\
+            \ update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-0021/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
+        deregistration-operation:
+          type: string
+          description: "'Operation for deregistering from the application layer update\
+            \ or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-0022/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
+        registry-office-address:
+          pattern: "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+          type: string
+          description: "'IP address of RegistryOffice application update or create\
+            \ [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-0020/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'\n"
+        registry-office-port:
+          maximum: 65535
+          minimum: 0
+          type: integer
+          description: "'Port of RegistryOffice application update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-0020/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'\n"
+      example:
+        registry-office-application: RegistryOffice
+        registry-office-application-release-number: 0.0.1
+        relay-server-replacement-operation: /v1/relay-server-replacement
+        deregistration-operation: /v1/deregister-application
+        registry-office-address: 10.118.125.157
+        registry-office-port: 1000
     v1_redirectservicerequestinformation_body:
       required:
       - service-log-address
@@ -21725,7 +22380,7 @@ components:
     v1_endsubscription_body:
       required:
       - subscriber-application
-      - subscriber-release
+      - subscriber-release-number
       - subscription
       type: object
       properties:
@@ -21733,7 +22388,7 @@ components:
           type: string
           description: "'Name of application that no longer wants to receive notifications\
             \ find [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'\n"
-        subscriber-release:
+        subscriber-release-number:
           pattern: "^([0-9]+)\\.([0-9]+)\\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\\
             +[0-9A-Za-z-]+)?$"
           type: string
@@ -21745,13 +22400,13 @@ components:
             \ notifications find [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-s-*/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name]'\n"
       example:
         subscriber-application: TypeApprovalRegister
-        subscriber-release: 0.0.1
+        subscriber-release-number: 0.0.1
         subscription: /v1/notify-deregistrations
     v1_inquireoamrequestapprovals_body:
       required:
       - oam-approval-address
       - oam-approval-application
-      - oam-approval-application-release
+      - oam-approval-application-release-number
       - oam-approval-operation
       - oam-approval-port
       type: object
@@ -21760,7 +22415,7 @@ components:
           type: string
           description: "'Name of application that shall approve the OaM requests find\
             \ or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-0060/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'\n"
-        oam-approval-application-release:
+        oam-approval-application-release-number:
           pattern: "^([0-9]+)\\.([0-9]+)\\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\\
             +[0-9A-Za-z-]+)?$"
           type: string
@@ -21783,7 +22438,7 @@ components:
             \ or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-0060/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'\n"
       example:
         oam-approval-application: AdministratorAdministration
-        oam-approval-application-release: 0.0.1
+        oam-approval-application-release-number: 0.0.1
         oam-approval-operation: /v1/approve-oam-request
         oam-approval-address: 10.118.125.157
         oam-approval-port: 1004
@@ -21934,6 +22589,7 @@ components:
       - topology-application-address
       - topology-application-port
       - topology-application-release-number
+      - topology-operation-application-update
       - topology-operation-fc-port-deletion
       - topology-operation-fc-port-update
       - topology-operation-fc-update
@@ -21951,6 +22607,10 @@ components:
           type: string
           description: "'Release of application that shall document the application\
             \ layer topology update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-0070/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'\n"
+        topology-operation-application-update:
+          type: string
+          description: "'Operation for updating the entire information about an application\
+            \ update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-0070/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
         topology-operation-ltp-update:
           type: string
           description: "'Operation for updating an LTP update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-0071/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
@@ -21980,8 +22640,9 @@ components:
       example:
         topology-application: ApplicationLayerTopology
         topology-application-release-number: 0.0.1
+        topology-operation-application-update: /v1/update-all-ltps-and-fcs
         topology-operation-ltp-update: /v1/update-ltp
-        topology-operation-ltp-deletion: /v1/delete-ltp
+        topology-operation-ltp-deletion: /v1/delete-ltp-and-dependents
         topology-operation-fc-update: /v1/update-fc
         topology-operation-fc-port-update: /v1/update-fc-port
         topology-operation-fc-port-deletion: /v1/delete-fc-port
@@ -23259,15 +23920,18 @@ components:
                     oam-record-profile-capability:
                       required:
                       - application-name
-                      - authorization
                       - method
+                      - release-number
                       - resource
                       - response-code
                       - stringified-body
                       - timestamp
+                      - user-name
                       type: object
                       properties:
                         application-name:
+                          type: string
+                        release-number:
                           type: string
                         method:
                           type: string
@@ -23282,7 +23946,7 @@ components:
                           type: string
                         response-code:
                           type: integer
-                        authorization:
+                        user-name:
                           type: string
                         timestamp:
                           type: string
