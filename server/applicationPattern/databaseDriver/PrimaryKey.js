@@ -1,5 +1,5 @@
 /*************************************************************************************************************************************************************
- * This class contains constant values that can be used accross different classes/functions in the application 
+ * This file contains the primary key for the list attributes in core-model 
  * 
  * @author      prathiba.jeevan.external@telefonica.com
  * @since       07.08.2021

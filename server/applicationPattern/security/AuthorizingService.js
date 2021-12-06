@@ -14,12 +14,6 @@ const restRequestBuilder = require('../rest/client/RequestBuilder');
 const onfAttributeFormatter = require('../onfModel/utility/OnfAttributeFormatter');
 const authorizationCodeDecoder = require('../utility/AuthorizationDecoder');
 
-test();
-
-async function test()
-{
-    isAuthorized("Basic c2VudGhpbHZlbC5zOlBSU2UwOA==","PUT");
-}
 /**
  * This function authorizes the user credentials<br>
  * @param {string} authorizationCode authorization code received from the header<br>

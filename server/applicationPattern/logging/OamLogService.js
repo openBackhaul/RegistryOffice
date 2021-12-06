@@ -16,11 +16,6 @@ const onfAttributeFormatter = require('../onfModel/utility/OnfAttributeFormatter
 const authorizationCodeDecoder = require('../utility/AuthorizationDecoder');
 const moment = require('moment');
 
-test();
-
-async function test() {
-    recordOamRequest("test", "prathiba", 200, "Basic c2VudGhpbHZlbC5zOlBSU2UwOA==", "PUT");
-}
 /**
  * This function recods the OAM request to the OAM lof application<br>
  * @param {string} oamPath oam path that is accessed during the request<br>
