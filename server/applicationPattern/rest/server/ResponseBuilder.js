@@ -10,9 +10,9 @@
 'use strict';
 const OnfAttributeFormatter = require("../../onfModel/utility/OnfAttributeFormatter");
 
-exports.buildResponse = function (response, responseBody, responseCode, responseHeader) {
+exports.buildResponse = function (response, responseCode, responseBody, responseHeader) {
   /**if no response code given, we default to 500 */
-  if (responseCode == undefined || responseCode.length == 0) {
+  if (responseCode == undefined || responseCode.length == 0 || responseCode == 500) {
     responseCode = 500;
     responseBody = {
       "message": "Internal server error"

@@ -1,5 +1,5 @@
 'use strict';
-
+var fileOperation = require('../applicationPattern/databaseDriver/JSONDriver');
 
 /**
  * Returns application name
@@ -7,16 +7,21 @@
  * uuid String 
  * returns inline_response_200_12
  **/
-exports.getHttpServerApplicationName = function(uuid) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "http-server-interface-1-0:application-name" : "RegistryOffice"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
+exports.getHttpServerApplicationName = function (url) {
+  return new Promise(async function (resolve, reject) {
+    try {
+      var value = await fileOperation.readFromDatabase(url);
+      var response = {};
+      response['application/json'] = {
+        "http-server-interface-1-0:application-name": value
+      };
+      if (Object.keys(response).length > 0) {
+        resolve(response[Object.keys(response)[0]]);
+      } else {
+        resolve();
+      }
+    } catch (error) {
+      reject();
     }
   });
 }
@@ -28,16 +33,21 @@ exports.getHttpServerApplicationName = function(uuid) {
  * uuid String 
  * returns inline_response_200_14
  **/
-exports.getHttpServerApplicationPurpose = function(uuid) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "http-server-interface-1-0:application-purpose" : "All applications being part of the MBH SDN must be register here."
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
+exports.getHttpServerApplicationPurpose = function (url) {
+  return new Promise(async function (resolve, reject) {
+    try {
+      var value = await fileOperation.readFromDatabase(url);
+      var response = {};
+      response['application/json'] = {
+        "http-server-interface-1-0:application-purpose": value
+      };
+      if (Object.keys(response).length > 0) {
+        resolve(response[Object.keys(response)[0]]);
+      } else {
+        resolve();
+      }
+    } catch (error) {
+      reject();
     }
   });
 }
@@ -49,16 +59,21 @@ exports.getHttpServerApplicationPurpose = function(uuid) {
  * uuid String 
  * returns inline_response_200_15
  **/
-exports.getHttpServerDataUpdatePeriode = function(uuid) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "http-server-interface-1-0:data-update-period" : "http-server-interface-1-0:DATA_UPDATE_PERIOD_TYPE_REAL_TIME"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
+exports.getHttpServerDataUpdatePeriode = function (url) {
+  return new Promise(async function (resolve, reject) {
+    try {
+      var value = await fileOperation.readFromDatabase(url);
+      var response = {};
+      response['application/json'] = {
+        "http-server-interface-1-0:data-update-period": value
+      };
+      if (Object.keys(response).length > 0) {
+        resolve(response[Object.keys(response)[0]]);
+      } else {
+        resolve();
+      }
+    } catch (error) {
+      reject();
     }
   });
 }
@@ -70,16 +85,21 @@ exports.getHttpServerDataUpdatePeriode = function(uuid) {
  * uuid String 
  * returns inline_response_200_17
  **/
-exports.getHttpServerOwnerEmailAddress = function(uuid) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "http-server-interface-1-0:owner-email-address" : "Thorsten.Heinze@telefonica.com"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
+exports.getHttpServerOwnerEmailAddress = function (url) {
+  return new Promise(async function (resolve, reject) {
+    try {
+      var value = await fileOperation.readFromDatabase(url);
+      var response = {};
+      response['application/json'] = {
+        "http-server-interface-1-0:owner-email-address": value
+      };
+      if (Object.keys(response).length > 0) {
+        resolve(response[Object.keys(response)[0]]);
+      } else {
+        resolve();
+      }
+    } catch (error) {
+      reject();
     }
   });
 }
@@ -91,16 +111,21 @@ exports.getHttpServerOwnerEmailAddress = function(uuid) {
  * uuid String 
  * returns inline_response_200_16
  **/
-exports.getHttpServerOwnerName = function(uuid) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "http-server-interface-1-0:owner-name" : "Thorsten Heinze"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
+exports.getHttpServerOwnerName = function (url) {
+  return new Promise(async function (resolve, reject) {
+    try {
+      var value = await fileOperation.readFromDatabase(url);
+      var response = {};
+      response['application/json'] = {
+        "http-server-interface-1-0:owner-name": value
+      };
+      if (Object.keys(response).length > 0) {
+        resolve(response[Object.keys(response)[0]]);
+      } else {
+        resolve();
+      }
+    } catch (error) {
+      reject();
     }
   });
 }
@@ -112,20 +137,21 @@ exports.getHttpServerOwnerName = function(uuid) {
  * uuid String 
  * returns inline_response_200_18
  **/
-exports.getHttpServerReleaseList = function(uuid) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "http-server-interface-1-0:release-list" : [ {
-    "release-number" : "0.0.1",
-    "release-date" : "16.07.2021",
-    "changes" : "Initial version."
-  } ]
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
+exports.getHttpServerReleaseList = function (url) {
+  return new Promise(async function (resolve, reject) {
+    try {
+      var value = await fileOperation.readFromDatabase(url);
+      var response = {};
+      response['application/json'] = {
+        "http-server-interface-1-0:release-list": value
+      };
+      if (Object.keys(response).length > 0) {
+        resolve(response[Object.keys(response)[0]]);
+      } else {
+        resolve();
+      }
+    } catch (error) {
+      reject();
     }
   });
 }
@@ -137,17 +163,21 @@ exports.getHttpServerReleaseList = function(uuid) {
  * uuid String 
  * returns inline_response_200_13
  **/
-exports.getHttpServerReleaseNumber = function(uuid) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "http-server-interface-1-0:release-number" : "0.0.1"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
+exports.getHttpServerReleaseNumber = function (url) {
+  return new Promise(async function (resolve, reject) {
+    try {
+      var value = await fileOperation.readFromDatabase(url);
+      var response = {};
+      response['application/json'] = {
+        "http-server-interface-1-0:release-number": value
+      };
+      if (Object.keys(response).length > 0) {
+        resolve(response[Object.keys(response)[0]]);
+      } else {
+        resolve();
+      }
+    } catch (error) {
+      reject();
     }
   });
 }
-

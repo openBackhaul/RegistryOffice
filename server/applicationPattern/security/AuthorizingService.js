@@ -9,10 +9,11 @@
 
 const forwardingConstruct = require('../OnfModel/models/ForwardingConstruct');
 const operationClientInterface = require('../OnfModel/models/layerprotocols/OperationClientInterface');
+const httpServerInterface = require('../OnfModel/models/layerprotocols/HttpServerInterface');
 const requestHeader = require('../rest/client/RequestHeader');
 const restRequestBuilder = require('../rest/client/RequestBuilder');
 const onfAttributeFormatter = require('../onfModel/utility/OnfAttributeFormatter');
-const authorizationCodeDecoder = require('../utility/AuthorizationDecoder');
+const authorizationCodeDecoder = require('./AuthorizationDecoder');
 
 /**
  * This function authorizes the user credentials<br>
@@ -28,27 +29,28 @@ const authorizationCodeDecoder = require('../utility/AuthorizationDecoder');
  */
 exports.isAuthorized = function(authorizationCode, method) {
     return new Promise(async function (resolve, reject) {
+        let isAuthorized = false;
         try {
             let operationClientUuid = await getOperationClientToAuthenticateTheRequest();
             let serviceName = await operationClientInterface.getOperationName(operationClientUuid);
             let ipAddressAndPort = await operationClientInterface.getTcpIpAddressAndPortForTheOperationClient(operationClientUuid);
             let operationKey = await operationClientInterface.getOperationKey(operationClientUuid);
             let userName = authorizationCodeDecoder.decodeAuthorizationCodeAndExtractUserName(authorizationCode);
-            let applicationName = await HttpServerInterface.getApplicationName();
-            let applicationReleaseNumber = await HttpServerInterface.getReleaseNumber();
+            let applicationName = await httpServerInterface.getApplicationName();
+            let applicationReleaseNumber = await httpServerInterface.getReleaseNumber();
             let httpRequestHeader = onfAttributeFormatter.modifyJsonObjectKeysToKebabCase(new requestHeader(userName, applicationName, "", "", "unknown", operationKey));
             let httpRequestBody = formulateResponseBody(applicationName,applicationReleaseNumber, authorizationCode, method)
             let response = await restRequestBuilder.BuildAndTriggerRestRequest(ipAddressAndPort, serviceName, "POST", httpRequestHeader, httpRequestBody);
             if (response !== undefined && response.status === 200) {
                 let responseBody = response.data;
                 if (responseBody["oam-request-is-approved"] == true) {
-                    resolve(true);
+                    isAuthorized = true;
                 }
             }
-            resolve(false);
+            resolve(isAuthorized);
         } catch (error) {
             console.log(error);
-            resolve(false);
+            resolve(isAuthorized);
         }
     });
 }
@@ -87,7 +89,7 @@ exports.isAuthorized = function(authorizationCode, method) {
     return new Promise(async function (resolve, reject) {
         try {
             let operationClientUuid = undefined;
-            let operationClientUuidList = await forwardingConstruct.getFcOutputUuidListForTheGivenFcName("OamRequestCausesInquiryForAuthentication");
+            let operationClientUuidList = await forwardingConstruct.getFcPortOutputDirectionLogicalTerminationPointListForTheForwardingName("OamRequestCausesInquiryForAuthentication");
             if (operationClientUuidList != undefined) {
                 operationClientUuid = operationClientUuidList[0];
             }

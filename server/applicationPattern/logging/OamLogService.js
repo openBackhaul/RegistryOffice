@@ -10,16 +10,17 @@
 
 const forwardingConstruct = require('../onfModel/models/ForwardingConstruct');
 const operationClientInterface = require('../onfModel/models/layerprotocols/OperationClientInterface');
+const httpServerInterface = require('../OnfModel/models/layerprotocols/HttpServerInterface');
 const requestHeader = require('../rest/client/RequestHeader');
 const requestBuilder = require('../rest/client/RequestBuilder');
 const onfAttributeFormatter = require('../onfModel/utility/OnfAttributeFormatter');
-const authorizationCodeDecoder = require('../utility/AuthorizationDecoder');
+const authorizationCodeDecoder = require('../security/AuthorizationDecoder');
 const moment = require('moment');
 
 /**
  * This function recods the OAM request to the OAM lof application<br>
  * @param {string} oamPath oam path that is accessed during the request<br>
- * @param {string} stringifiedBody incase if it is a put request, then the request body of the request<br>
+ * @param {string} requestBody incase if it is a put request, then the request body of the request<br>
  * @param {string} responseCode response code of the rest call execution<br>
  * @param {string} authorizationCode authorization code used to access the oam layer. This will then decoded to findout the username<br>
  * @param {string} method HTTP method of the OAM layer call. It can be PUT,GET<br>
@@ -31,16 +32,17 @@ const moment = require('moment');
  * 4. If the customerJourney is empty , then the value "unknown value" will be added<br>
  * 5. If trace-indicator value is empty , then the value will be assigned to 1<br>
  */
-exports.recordOamRequest = function (oamPath, stringifiedBody, responseCode, authorizationCode, method) {
+exports.recordOamRequest = function (oamPath, requestBody, responseCode, authorizationCode, method) {
     return new Promise(async function (resolve, reject) {
         try {
             let operationClientUuid = await getOperationClientToLogOamRequest();
             let serviceName = await operationClientInterface.getOperationName(operationClientUuid);
             let ipAddressAndPort = await operationClientInterface.getTcpIpAddressAndPortForTheOperationClient(operationClientUuid);
             let operationKey = await operationClientInterface.getOperationKey(operationClientUuid);
-            let applicationName = await HttpServerInterface.getApplicationName();
+            let applicationName = await httpServerInterface.getApplicationName();
             let timestamp = moment().format();
             let userName = authorizationCodeDecoder.decodeAuthorizationCodeAndExtractUserName(authorizationCode);
+            let stringifiedBody = JSON.stringify(requestBody);
             let httpRequestHeader = onfAttributeFormatter.modifyJsonObjectKeysToKebabCase(new requestHeader(userName, applicationName, "", "", "unknown", operationKey));
             let httpRequestBody = formulateResponseBody(method, oamPath, stringifiedBody, responseCode, userName, timestamp);
             let response = await requestBuilder.BuildAndTriggerRestRequest(ipAddressAndPort, serviceName, "POST", httpRequestHeader, httpRequestBody);
@@ -94,7 +96,7 @@ async function getOperationClientToLogOamRequest() {
     return new Promise(async function (resolve, reject) {
         try {
             let operationClientUuid = undefined;
-            let operationClientUuidList = await forwardingConstruct.getFcOutputUuidListForTheGivenFcName("OamRequestCausesLoggingRequest");
+            let operationClientUuidList = await forwardingConstruct.getFcPortOutputDirectionLogicalTerminationPointListForTheForwardingName("OamRequestCausesLoggingRequest");
             if (operationClientUuidList != undefined) {
                 operationClientUuid = operationClientUuidList[0];
             }
