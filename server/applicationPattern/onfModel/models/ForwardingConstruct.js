@@ -19,9 +19,14 @@ class ForwardingConstruct {
     nameList; //array of keyvalue pair  
     fcPortList;
 
-    name = class name {
+    static name = class name {
         valueName;
         name;
+        static forwardingConstructKindEnum = {
+            INVARIANT_PROCESS_SNIPPET: "core-model-1-4:FORWARDING_KIND_TYPE_INVARIANT_PROCESS_SNIPPET",
+            SUBSCRIPTION: "core-model-1-4:FORWARDING_KIND_TYPE_SUBSCRIPTION",
+            PROCESS_SNIPPET: "core-model-1-4:FORWARDING_KIND_TYPE_PROCESS_SNIPPET"
+        }
         /**
          * constructor 
          * @param {object} valueName input for the "value-name" entry.
@@ -393,6 +398,28 @@ class ForwardingConstruct {
                 let fcPortResourcePath = fcPortPath.replace("{fcUuid}", forwardingConstructUuid);
                 onfAttributeFormatter.modifyJsonObjectKeysToKebabCase(fcPort);
                 isCreated = await fileOperation.writeToDatabase(fcPortResourcePath, fcPort, true);
+                resolve(isCreated);
+            } catch (error) {
+                reject(false);
+            }
+        });
+    }
+
+    /**
+     * @description This function adds an Fc port to the forwarding-construct<br>
+     * @param {String} forwardingConstructUuid uuid of the forwarding-construct<br>
+     * @param {String} fcPortLocalId fc-port local id<br>
+     * @returns {promise} returns true if the fc-port is added to the list<br>
+     * <b><u>Procedure :</u></b><br>
+     * <b>step 1 :</b> Construct the fcPortResourcePath for the provided forwarding-construct uuid<br>
+     * <b>step 2 :</b> add the fc-port to the fc-port list in the database file using the writeToDatabase() method <br>
+     **/
+     static deleteFcPort(forwardingConstructUuid, fcPortLocalId) {
+        return new Promise(async function (resolve, reject) {
+            let isCreated = false;
+            try {
+                let fcPortResourcePath = fcPortPath.replace("{fcUuid}", forwardingConstructUuid) + "=" + fcPortLocalId;
+                isCreated = await fileOperation.deletefromDatabase(fcPortResourcePath, true);
                 resolve(isCreated);
             } catch (error) {
                 reject(false);

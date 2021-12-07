@@ -11,6 +11,8 @@
 const coreModel = require('../CoreModel');
 const layerProtocol = require('../LayerProtocol');
 const logicalTerminationPoint = require('../LogicalTerminationPoint');
+const fileOperation = require('../../../databaseDriver/JSONDriver.js');
+const releaeNumberAttributePath = "/core-model-1-4:control-construct/logical-termination-point={uuid}/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number";
 
 /** 
  * @extends layerProtocol
@@ -113,6 +115,28 @@ class HttpClientInterface extends layerProtocol {
                 resolve(httpClientReleaseNumber);
             } catch (error) {
                 resolve(undefined);
+            }
+        });
+    }
+
+    /**
+     * @description This function sets the release number for the http client uuid<br>
+     * @param {String} httpClientUuid uuid of the http-client-interface <br>
+     * @param {String} newReleaseNumber new release number of the http-client-interface <br>
+     * @returns {promise} returns true if the value is set<br>
+      * <b><u>Procedure :</u></b><br>
+     * <b>step 1 :</b> formulate the path to point to the release-number for the provided logical-termination-point<br>
+     * <b>step 2 :</b> set the new release number<br>
+     **/
+     static setReleaseNumber(httpClientUuid,newReleaseNumber) {
+        return new Promise(async function (resolve, reject) {
+            let isUpdated = false;
+            try {
+                let setReleaseNumberUrl = releaeNumberAttributePath.replace("{uuid}",httpClientUuid);
+                isUpdated = await fileOperation.writeToDatabase(setReleaseNumberUrl, newReleaseNumber, false);
+                resolve(isUpdated);
+            } catch (error) {
+                resolve(isUpdated);
             }
         });
     }

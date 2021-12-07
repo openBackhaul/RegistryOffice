@@ -25,12 +25,12 @@ const HttpServerInterface = require('../onfModel/models/layerProtocols/HttpServe
   * @param {string} originator originator of the request<br>
   * @param {string} operationName name of the called service<br>
   * @param {string} responseCode response code of the rest call execution<br>
-  * @param {string} stringifiedBody stringified request body<br>
-  * @param {string} stringifiedResponse stringified response body<br>
+  * @param {string} requestBody  request body<br>
+  * @param {string} responseBody  response body<br>
   * @returns {object} return the formulated responseBody<br>
   */
 exports.recordServiceRequest = function(xCorrelator, traceIndicator, userName, originator,
-    operationName,responseCode,stringifiedBody, stringifiedResponse) {
+    operationName,responseCode,requestBody, responseBody) {
      return new Promise(async function (resolve, reject) {
          try {
              let operationClientUuid = await getOperationClientToLogServiceRequest();
@@ -41,8 +41,10 @@ exports.recordServiceRequest = function(xCorrelator, traceIndicator, userName, o
              let applicationName = await HttpServerInterface.getApplicationName();
              let applicationReleaseNumber = await HttpServerInterface.getReleaseNumber();
              let httpRequestHeader = onfAttributeFormatter.modifyJsonObjectKeysToKebabCase(new requestHeader(userName, applicationName, "", "", "unknown", operationKey));
+             let stringifiedRequestBody = JSON.stringify(requestBody);
+             let stringifiedResponseBody = JSON.stringify(responseBody);
              let httpRequestBody = formulateResponseBody(xCorrelator, traceIndicator, userName, originator, applicationName, applicationReleaseNumber,
-                operationName,responseCode,timestamp,stringifiedBody, stringifiedResponse);
+                operationName,responseCode,timestamp,stringifiedRequestBody, stringifiedResponseBody);
              let response = await requestBuilder.BuildAndTriggerRestRequest(ipAddressAndPort, serviceName, "POST", httpRequestHeader, httpRequestBody);
              if (response !== undefined && response.status === 200) {
                  resolve(true);

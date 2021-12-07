@@ -150,6 +150,43 @@ class ForwardingDomain {
         });
     }
 
+    /**
+     * @description This function returns the forwarding-construct instance list for the fc-port output direction<br>
+     * @param {string} FcPortOutputDirectionUuid fc-port output direction logical-termination-point attribute value<br>
+     * @returns {promise} returns forwarding-construct instance list <br>
+     * <b><u>Procedure :</u></b><br>
+     * <b>step 1 :</b> Get the forwarding construct list from the method getForwardingConstructList()<br>
+     * <b>step 2 :</b> Iterate through the list and get the value of the output direction fc-port's logical-termination-point<br>
+     * <b>step 2 :</b> If the output direction fc-port's logical-termination-point is equal to the input uuid then add the instance to the outputList<br>
+     **/
+     static async getForwardingConstructListForTheFcPortOutputDirection(FcPortOutputDirectionUuid) {
+        return new Promise(async function (resolve, reject) {
+            try {
+                let forwardingConstructInstanceList = [];
+                let entireForwardingConstructList = await ForwardingDomain.getForwardingConstructList();
+                if (entireForwardingConstructList != undefined) {
+                    for (let i = 0; i < entireForwardingConstructList.length; i++) {
+                        let forwardingConstructList = entireForwardingConstructList[i];
+                        for (let j = 0; j < forwardingConstructList.length; j++) {
+                            let forwardingConstructInstance = forwardingConstructList[j];
+                            let fcPortList = forwardingConstructInstance["fc-port"];
+                            for (let k = 0; k < fcPortList.length; k++) {
+                                if (fcPortList[k]["port-direction"] == "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT" &&
+                                    fcPortList[k]["logical-termination-point"] == FcPortOutputDirectionUuid) {
+                                    forwardingConstructInstanceList.push(forwardingConstructInstance);
+                                }
+                            }
+                        }
+
+                    }
+                }
+                resolve(forwardingConstructInstanceList);
+            } catch (error) {
+                reject(undefined);
+            }
+        });
+    }
+
 }
 
 module.exports = ForwardingDomain;

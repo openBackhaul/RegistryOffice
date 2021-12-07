@@ -10,6 +10,8 @@
 'use strict';
 const coreModel = require('../CoreModel');
 const layerProtocol = require('../LayerProtocol');
+const fileOperation = require('../../../databaseDriver/JSONDriver'); 
+const operationKeyAttributePath = "/core-model-1-4:control-construct/logical-termination-point={uuid}/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/operation-key";
 
 /** 
  * @extends layerProtocol
@@ -92,6 +94,50 @@ class OperationServerInterface extends layerProtocol {
                 resolve(operationName);
             } catch (error) {
                 resolve(undefined);
+            }
+        });
+    }
+
+    /**
+     * @description This function returns the operation key of the operation server.<br>
+     * @param {String} operationServerUuid uuid of the operation server<br>
+     * @returns {promise} returns the operation key<br>
+     * <b><u>Procedure :</u></b><br>
+     * <b>step 1 :</b> Get the logical-termination-point instance for the uuid using the method getLogicalTerminationPointForTheUuid() in core-model<br>
+     * <b>step 2 :</b> Iterate through the object and get the operation key from the configuration<br>
+     **/
+     static getOperationKey(operationServerUuid) {
+        return new Promise(async function (resolve, reject) {
+            let operationKey = undefined;
+            try {
+                let operationLogicalTerminationPointInstance = await coreModel.getLogicalTerminationPointForTheUuid(operationServerUuid);
+                operationKey = operationLogicalTerminationPointInstance["layer-protocol"][0]["operation-server-interface-1-0:operation-server-interface-pac"]
+                    ["operation-server-interface-configuration"]["operation-key"];
+                resolve(operationKey);
+            } catch (error) {
+                resolve(undefined);
+            }
+        });
+    }
+
+    /**
+     * @description This function sets the operation key of the operation server.<br>
+     * @param {String} operationServerUuid uuid of the operation server<br>
+     * @param {String} operationKey operation key that needs to be updated<br>
+     * @returns {promise} returns true if the operaiton is successful<br>
+     * <b><u>Procedure :</u></b><br>
+     * <b>step 1 :</b> formulate the path to point to the operation key for the provided logical-termination-point<br>
+     * <b>step 2 :</b> set the new operation key<br>
+     **/
+     static setOperationKey(operationServerUuid,operationKey) {
+        return new Promise(async function (resolve, reject) {
+            let isUpdated = false;
+            try {
+                let setOperationKeyUrl = operationKeyAttributePath.replace("{uuid}",operationServerUuid);
+                isUpdated = await fileOperation.writeToDatabase(setOperationKeyUrl, operationKey, false);
+                resolve(isUpdated);
+            } catch (error) {
+                resolve(isUpdated);
             }
         });
     }

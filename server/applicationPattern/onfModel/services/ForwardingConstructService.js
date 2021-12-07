@@ -124,7 +124,7 @@ function ConfigureForwardingConstruct(operationServerUuid, forwardingConstructCo
                             if (!isFcPortExists) {
                                 let fcPortOutputUuid = await forwardingConstruct.getFcPortOutputDirectionLogicalTerminationPointListForTheUuid(forwardingConstructUuid);
                                 let fcPortLocalId = await forwardingConstruct.getFcPortLocalId(forwardingConstructUuid, fcPortOutputUuid[0]);
-                                await forwardingConstruct.addFcPort(forwardingConstructUuid, fcPortLocalId, operationClientUuid);
+                                await forwardingConstruct.modifyFcPortLogicalTerminationPointUuid(forwardingConstructUuid, fcPortLocalId, operationClientUuid);
                             }
                         } else {
                             if (!isFcPortExists) {

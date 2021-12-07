@@ -227,7 +227,7 @@ function deleteAttributeValueFromDataBase(coreModelJsonObject, oamPath, valueToB
                             coreModelJsonObjectTemp = findMatchingInstanceAndDeleteFromList(individualFieldOfTheOAMPathList[i], coreModelJsonObjectTemp);
                             writeToFile(coreModelJsonObject);
                         } else {
-                            coreModelJsonObjectTemp = findMatchingInstanceFromList(individualFieldOfTheOAMPathList[i], coreModelJscoreModelJsonObjectTemponObject);
+                            coreModelJsonObjectTemp = findMatchingInstanceFromList(individualFieldOfTheOAMPathList[i], coreModelJsonObjectTemp);
                         }
                     } else {
                         if (isLastIndexOfTheList(individualFieldOfTheOAMPathList, i)) {
