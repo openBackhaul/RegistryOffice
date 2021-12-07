@@ -19,9 +19,105 @@ exports.prepareRequestBody = function (clientApplicationName, operationName, att
     return new Promise(async function (resolve, reject) {
         let httpRequestBody = {};
         try {
-            /** Individual service specific operation client services attributes will be formulated here. 
-             * Please refer the function prepareRequestBody in ../BasicService.js file on how to model the logic here.
-             */            
+            if (operationName.includes("disregard-application")) {
+                let applicationName;
+                let releaseNumber;
+                for (let i = 0; i < attributeList.length; i++) {
+                    if (attributeList[i]["name"] == "application-name") {
+                        applicationName = attributeList[i]["value"];
+                    } else if (attributeList[i]["name"] == "application-release-number") {
+                        releaseNumber = attributeList[i]["value"];
+                    }
+                }
+                httpRequestBody = {
+                    "application-name": applicationName,
+                    "release-number": releaseNumber
+                }
+            } else if (operationName.includes("regard-application")) {
+                if (clientApplicationName == "TypeApprovalRegister") {
+                    let applicationName;
+                    let releaseNumber;
+                    for (let i = 0; i < attributeList.length; i++) {
+                        if (attributeList[i]["name"] == "application-name") {
+                            applicationName = attributeList[i]["value"];
+                        } else if (attributeList[i]["name"] == "release-number") {
+                            releaseNumber = attributeList[i]["value"];
+                        }
+                    }
+                    httpRequestBody = {
+                        "application-name": applicationName,
+                        "release-number": releaseNumber
+                    }
+                } else {
+                    let applicationName;
+                    let releaseNumber;
+                    let applicationAddress;
+                    let applicationPort;
+                    for (let i = 0; i < attributeList.length; i++) {
+                        if (attributeList[i]["name"] == "application-name") {
+                            applicationName = attributeList[i]["value"];
+                        } else if (attributeList[i]["name"] == "release-number") {
+                            releaseNumber = attributeList[i]["value"];
+                        } else if (attributeList[i]["name"] == "application-address") {
+                            applicationAddress = attributeList[i]["value"];
+                        } else if (attributeList[i]["name"] == "application-port") {
+                            applicationPort = attributeList[i]["value"];
+                        }
+                    }
+                    httpRequestBody = {
+                        "application-name": applicationName,
+                        "application-release-number": releaseNumber,
+                        "application-address": applicationAddress,
+                        "application-port": applicationPort
+                    }
+                }
+            } else if (operationName.includes("update-client")) {
+                let applicationName;
+                let oldApplicationReleaseNumber;
+                let newApplicationReleaseNumber;
+                let newApplicationAddress;
+                let newApplicationPort;
+                for (let i = 0; i < attributeList.length; i++) {
+                    if (attributeList[i]["name"] == "application-name") {
+                        applicationName = attributeList[i]["value"];
+                    } else if (attributeList[i]["name"] == "old-application-release-number") {
+                        oldApplicationReleaseNumber = attributeList[i]["value"];
+                    } else if (attributeList[i]["name"] == "new-application-release-number") {
+                        newApplicationReleaseNumber = attributeList[i]["value"];
+                    } else if (attributeList[i]["name"] == "new-application-address") {
+                        newApplicationAddress = attributeList[i]["value"];
+                    } else if (attributeList[i]["name"] == "new-application-port") {
+                        newApplicationPort = attributeList[i]["value"];
+                    }
+                }
+                httpRequestBody = {
+                    "application-name": applicationName,
+                    "old-application-release-number": oldApplicationReleaseNumber,
+                    "new-application-release-number": newApplicationReleaseNumber,
+                    "new-application-address": newApplicationAddress,
+                    "new-application-port": newApplicationPort
+                }
+            } else if (operationName.includes("update-ltp")) {
+
+                // need to update after getting ALT application 
+
+            } else if (operationName.includes("delete-ltp-and-dependents")) {
+
+                // need to update after getting ALT application 
+
+            } else if (operationName.includes("update-fc")) {
+
+                // need to update after getting ALT application 
+
+            } else if (operationName.includes("update-fc-port")) {
+
+                // need to update after getting ALT application 
+
+            } else if (operationName.includes("delete-fc-port")) {
+
+                // need to update after getting ALT application 
+
+            }
             resolve(httpRequestBody);
         } catch (error) {
             console.log(error);

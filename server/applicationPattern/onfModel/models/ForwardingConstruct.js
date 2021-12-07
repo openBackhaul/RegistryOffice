@@ -10,6 +10,8 @@
 const fileOperation = require('../../databaseDriver/JSONDriver.js');
 const onfAttributeFormatter = require('../utility/OnfAttributeFormatter.js');
 const forwardingDomain = require('./ForwardingDomain.js');
+const logicalTerminationPoint = require('./LogicalTerminationPoint');
+const httpClientInterface = require('./layerProtocols/HttpClientInterface');
 const fcPortLogicalTerminationPointPath = "/core-model-1-4:control-construct/forwarding-domain=ro-0-0-1-op-fd-0000/forwarding-construct={fcUuid}/fc-port={fcPortLocalId}/logical-termination-point";
 const fcPortPath = "/core-model-1-4:control-construct/forwarding-domain=ro-0-0-1-op-fd-0000/forwarding-construct={fcUuid}/fc-port";
 
@@ -206,10 +208,10 @@ class ForwardingConstruct {
                                     if (forwardingConstructKind.includes("TYPE_PROCESS_SNIPPET")) {
                                         for (let l = 0; l < fcPortList.length; l++) {
                                             if (fcPortList[l]["port-direction"] == ForwardingConstruct.FcPort.portDirectionEnum.OUTPUT) {
-                                                let serverLtpList = await LogicalTerminationPoint.getServerLtpList(fcPortList[l]["logical-termination-point"]);
-                                                let applicationName = await HttpClientInterface.getApplicationName(serverLtpList[0]);
+                                                let serverLtpList = await logicalTerminationPoint.getServerLtpList(fcPortList[l]["logical-termination-point"]);
+                                                let applicationName = await httpClientInterface.getApplicationName(serverLtpList[0]);
                                                 if (context == undefined) {
-                                                    forwardingConstructOutputFcPort.push(fcPortList[l]["logical-termination-point"]);
+                                                    FcPortOutputDirectionLogicalTerminationPointList.push(fcPortList[l]["logical-termination-point"]);
                                                 } else if (context != undefined && applicationName == context) {
                                                     FcPortOutputDirectionLogicalTerminationPointList.push(fcPortList[l]["logical-termination-point"]);
                                                 }

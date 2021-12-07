@@ -467,6 +467,7 @@ exports.createLogicalTerminationPointInstanceGroup = function (applicationName, 
  * @description This function deletes the tcp,http,operation client for the provided application and release number.
  * @param {String} applicationName name of the client application<br>
  * @param {String} releaseNumber release of the client application<br>
+ * @returns {Promise} OperationClientLists associated to the application
  * <b><u>Procedure :</u></b><br>
  * <b>step 1 :</b> get the httpClientUuid for the application name and release number <br>
  * <b>step 2 :</b> get the server ltp list of the http-client to get the tcp-client uuid<br>
@@ -487,7 +488,7 @@ exports.deleteLogicalTerminationPointInstanceGroup = function (applicationName, 
             for (let i = 0; i < uuidList.length; i++) {
                 await coreModel.deleteALogicalTerminationPointFromTheLogicalTerminationPointList(uuidList[i]);
             }
-            resolve();
+            resolve(operationClientUuidList);
         } catch (error) {
             reject();
         }

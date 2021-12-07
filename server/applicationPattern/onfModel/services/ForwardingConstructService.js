@@ -48,12 +48,39 @@ class ForwardingConstructInformation {
  * <b>step 1 :</b> configures the forwarding construct by calling the method ConfigureForwardingConstruct()<br>
  * <b>step 2 :</b> automates the forwarding construct by using the method automateForwardingConstruct()<br>
  **/
-exports.configureAndAutomateForwardingConstruct = function (isCreate,serviceType, operationServerUuid, forwardingConstructConfigurationList,
+exports.configureAndAutomateForwardingConstruct = function (isCreate, serviceType, operationServerUuid, forwardingConstructConfigurationList,
     attributeList, user, xCorrelator, traceIndicator, customerJourney) {
     return new Promise(async function (resolve, reject) {
         try {
             await ConfigureForwardingConstruct(operationServerUuid, forwardingConstructConfigurationList);
-            automateForwardingConstruct(serviceType,operationServerUuid, attributeList, user, xCorrelator, traceIndicator, customerJourney);
+            automateForwardingConstruct(serviceType, operationServerUuid, attributeList, user, xCorrelator, traceIndicator, customerJourney);
+            resolve();
+        } catch (error) {
+            reject();
+        }
+    });
+}
+
+/**
+ * @description This function removes the configured operation clients in the forwarding construct based on the provided operation client information and automates the forwarding construct.
+ * @param {String} serviceType service type can be basic or individual<br>
+ * @param {String} operationServerUuid operation server uuid of the request url<br>
+ * @param {String} operationClientUuidLists list of operation client uuids that needs to be deleted<br>
+ * @param {list}   attributeList list of attributes required during forwarding construct automation(to send in the request body)<br>
+ * @param {String} user user who initiates this request<br>
+ * @param {string} xCorrelator flow id of this request<br>
+ * @param {string} traceIndicator trace indicator of the request<br>
+ * @param {string} customerJourney customer journey of the request<br>
+ * <b><u>Procedure :</u></b><br>
+ * <b>step 1 :</b> removes the configured forwarding construct by calling the method unConfigureForwardingConstruct()<br>
+ * <b>step 2 :</b> automates the forwarding construct by using the method automateForwardingConstruct()<br>
+ **/
+exports.unConfigureAndAutomateForwardingConstruct = function (serviceType, operationServerUuid, operationClientUuidLists,
+    attributeList, user, xCorrelator, traceIndicator, customerJourney) {
+    return new Promise(async function (resolve, reject) {
+        try {
+            await unConfigureForwardingConstruct(operationServerUuid, operationClientUuidLists);
+            automateForwardingConstruct(serviceType, operationServerUuid, attributeList, user, xCorrelator, traceIndicator, customerJourney);
             resolve();
         } catch (error) {
             reject();
@@ -75,7 +102,7 @@ exports.configureAndAutomateForwardingConstruct = function (isCreate,serviceType
  * <b>step 2 :</b> gather information that needs to be dispatched as rest calls to appropriate rest servers<br>
  * <b>step 3 :</b> call the method dispatchEvent() to dispatch the rest requests <br>
  **/
-function automateForwardingConstruct(serviceType,operationServerUuid,
+function automateForwardingConstruct(serviceType, operationServerUuid,
     attributeList, user, xCorrelator, traceIndicator, customerJourney) {
     return new Promise(async function (resolve, reject) {
         try {
@@ -88,7 +115,7 @@ function automateForwardingConstruct(serviceType,operationServerUuid,
                 let operationName = await operationClientInterface.getOperationName(operationClientUuid);
                 let remoteIpAndPort = await operationClientInterface.getTcpIpAddressAndPortForTheOperationClient(operationClientUuid);
                 let newTraceIndicator = traceIndicator + "." + (i + 1);
-                await eventDispatcher.dispatchEvent(serviceType,remoteIpAndPort, clientApplicationName, operationName, operationKey,
+                await eventDispatcher.dispatchEvent(serviceType, remoteIpAndPort, clientApplicationName, operationName, operationKey,
                     attributeList, user, xCorrelator, newTraceIndicator, customerJourney);
             }
         } catch (error) {
@@ -132,6 +159,46 @@ function ConfigureForwardingConstruct(operationServerUuid, forwardingConstructCo
                                 await forwardingConstruct.addFcPort(forwardingConstructUuid, nextLocalId,
                                     forwardingConstruct.FcPort.portDirectionEnum.OUTPUT, operationClientUuid);
                             }
+                        }
+                    }
+                }
+            }
+            resolve();
+        } catch (error) {
+            reject();
+        }
+    });
+}
+
+/**
+ * @description This function removes the fc-port from the forwarding construct based on the fcPort management directions for the provided operationServerUuid.<br>
+ * @param {String} operationServerUuid operation server uuid of the request url<br>
+ * @param {list}   operationClientUuidLists it consistes of the operationClientUuid that needs to be deleted from the fcPort<br>
+ * <b><u>Procedure :</u></b><br>
+ * <b>step 1 :</b> get the fcPort output list for the given operation server uuid<br>
+ * <b>step 2 :</b> check if any fcPort matches any entry in the operationClientUuidList<br>
+ * <b>step 3 :</b> if fcPort exists, perform step 4 to 6 <br>
+ * <b>step 4 :</b> Find the forwardingKind of the forwardingConstruct <br>
+ * <b>step 5 :</b> If the forwardingKind is of type INVARIANT_PROCESS_SNIPPET , then modify the logical-termination-point to -1<br>
+ * <b>step 6 :</b> If the forwardingKind is not of type INVARIANT_PROCESS_SNIPPET , then delete the fc-port from the fc-port list <br> 
+ **/
+function unConfigureForwardingConstruct(operationServerUuid, operationClientUuidLists) {
+    return new Promise(async function (resolve, reject) {
+        try {
+            //get the forwarding construct uuid for which it is management port
+            let forwardingConstructInformationList = await instantiateForwardingConstructInformationListForManagementFcPort(operationServerUuid);
+            for (let j = 0; j < operationClientUuidLists.length; j++) {
+                let operationClientUuid = operationClientUuidLists[j];
+                for (let i = 0; i < forwardingConstructInformationList.length; i++) {
+                    let forwardingConstructUuid = forwardingConstructInformationList[i].uuid;
+                    let forwardingConstructKind = forwardingConstructInformationList[i].forwardingKind;
+                    let isFcPortExists = await forwardingConstruct.isFcPortExists(forwardingConstructUuid, operationClientUuid);
+                    if (isFcPortExists) {
+                        let localIdOfFcPort = await forwardingConstruct.getFcPortLocalId(forwardingConstructUuid,operationClientUuid);
+                        if (forwardingConstructKind.includes("INVARIANT_PROCESS_SNIPPET")) {
+                            await forwardingConstruct.modifyFcPortLogicalTerminationPointUuid(forwardingConstructUuid,localIdOfFcPort,"-1");
+                        } else {
+                            await forwardingConstruct.deleteFcPort(forwardingConstructUuid,localIdOfFcPort);
                         }
                     }
                 }

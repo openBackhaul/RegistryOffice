@@ -1214,10 +1214,10 @@
                             "tcp-client-interface-configuration": {
                                 "remote-address": {
                                     "ip-address": {
-                                        "ipv-4-address": "10.118.125.157"
+                                        "ipv-4-address": "192.168.178.22"
                                     }
                                 },
-                                "remote-port": 1000
+                                "remote-port": 8080
                             }
                         }
                     }
@@ -1386,7 +1386,7 @@
                             "tcp-client-interface-configuration": {
                                 "remote-address": {
                                     "ip-address": {
-                                        "ipv-4-address": "10.118.125.157"
+                                        "ipv-4-address": "192.168.178.22"
                                     }
                                 },
                                 "remote-port": 1001
@@ -1998,7 +1998,7 @@
                         "layer-protocol-name": "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
                         "operation-client-interface-1-0:operation-client-interface-pac": {
                             "operation-client-interface-configuration": {
-                                "operation-name": "/v2/update-fc",
+                                "operation-name": "/v1/update-fc",
                                 "operation-key": "Operation key not yet provided."
                             },
                             "operation-client-interface-status": {
@@ -3389,7 +3389,7 @@
                             {
                                 "local-id": "200",
                                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                                "logical-termination-point": "ro-0-0-1-op-c-3073"
+                                "logical-termination-point": "ro-0-0-1-op-c-0073"
                             }
                         ]
                     },
@@ -3654,7 +3654,7 @@
                             {
                                 "local-id": "200",
                                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                                "logical-termination-point": "ro-0-0-1-op-c-3073"
+                                "logical-termination-point": "ro-0-0-1-op-c-0073"
                             }
                         ]
                     },
