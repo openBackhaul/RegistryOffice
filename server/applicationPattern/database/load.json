@@ -674,7 +674,7 @@
                         "tcp-server-interface-1-0:tcp-server-interface-pac": {
                             "tcp-server-interface-configuration": {
                                 "local-address": {
-                                    "ipv-4-address": "10.118.125.157"
+                                    "ipv-4-address": "1.1.1.1"
                                 },
                                 "local-port": 1000
                             }
@@ -745,7 +745,7 @@
                             "tcp-client-interface-configuration": {
                                 "remote-address": {
                                     "ip-address": {
-                                        "ipv-4-address": "10.118.125.157"
+                                        "ipv-4-address": "1.1.1.1"
                                     }
                                 },
                                 "remote-port": 1000
@@ -1042,7 +1042,7 @@
                             "tcp-client-interface-configuration": {
                                 "remote-address": {
                                     "ip-address": {
-                                        "ipv-4-address": "10.118.125.157"
+                                        "ipv-4-address": "1.1.1.1"
                                     }
                                 },
                                 "remote-port": 8000
@@ -1214,7 +1214,7 @@
                             "tcp-client-interface-configuration": {
                                 "remote-address": {
                                     "ip-address": {
-                                        "ipv-4-address": "192.168.178.22"
+                                        "ipv-4-address": "1.1.1.1"
                                     }
                                 },
                                 "remote-port": 8080
@@ -1386,7 +1386,7 @@
                             "tcp-client-interface-configuration": {
                                 "remote-address": {
                                     "ip-address": {
-                                        "ipv-4-address": "192.168.178.22"
+                                        "ipv-4-address": "1.1.1.1"
                                     }
                                 },
                                 "remote-port": 1001
@@ -1559,7 +1559,7 @@
                             "tcp-client-interface-configuration": {
                                 "remote-address": {
                                     "ip-address": {
-                                        "ipv-4-address": "192.168.178.22"
+                                        "ipv-4-address": "1.1.1.1"
                                     }
                                 },
                                 "remote-port": 3002
@@ -1731,7 +1731,7 @@
                             "tcp-client-interface-configuration": {
                                 "remote-address": {
                                     "ip-address": {
-                                        "ipv-4-address": "192.168.178.22"
+                                        "ipv-4-address": "1.1.1.1"
                                     }
                                 },
                                 "remote-port": 3002
@@ -1904,7 +1904,7 @@
                             "tcp-client-interface-configuration": {
                                 "remote-address": {
                                     "ip-address": {
-                                        "ipv-4-address": "192.168.178.22"
+                                        "ipv-4-address": "1.1.1.1"
                                     }
                                 },
                                 "remote-port": 3001
@@ -2202,7 +2202,7 @@
                             "tcp-client-interface-configuration": {
                                 "remote-address": {
                                     "ip-address": {
-                                        "ipv-4-address": "192.168.178.22"
+                                        "ipv-4-address": "1.1.1.1"
                                     }
                                 },
                                 "remote-port": 3000
@@ -2349,7 +2349,7 @@
                             "tcp-client-interface-configuration": {
                                 "remote-address": {
                                     "ip-address": {
-                                        "ipv-4-address": "10.118.125.157"
+                                        "ipv-4-address": "1.1.1.1"
                                     }
                                 },
                                 "remote-port": 1006
@@ -2446,7 +2446,7 @@
                             "tcp-client-interface-configuration": {
                                 "remote-address": {
                                     "ip-address": {
-                                        "ipv-4-address": "10.118.125.186"
+                                        "ipv-4-address": "1.1.1.1"
                                     }
                                 },
                                 "remote-port": 2000
