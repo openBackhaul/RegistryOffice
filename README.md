@@ -6,16 +6,16 @@
 - 1.0.0-tsi.d.t : Defintion to be used within the Transport SDN Introduction at Telefonica Germany
 
 ### Services
-- [RegistryOffice_0.0.1_tsi.211123.1655+services.1](./RegistryOffice_0.0.1_tsi.211123.1655+services.1.xlsx)
+- [RegistryOffice_0.0.1_tsi.211220.1505+services.1](./RegistryOffice_0.0.1_tsi.211220.1505+services.1.xlsx)
 
 ### Forwardings
-- [RegistryOffice_0.0.1_tsi.211123.1655+forwardings.1](./RegistryOffice_0.0.1_tsi.211123.1655+forwardings.1.xlsx)
+- [RegistryOffice_0.0.1_tsi.211220.1505+forwardings.1](./RegistryOffice_0.0.1_tsi.211220.1505+forwardings.1.xlsx)
 
 ### Open API specification (Swagger)
-- [RegistryOffice_0.0.1_tsi.211123.1655](./RegistryOffice_0.0.1_tsi.211123.1655.yaml)
+- [RegistryOffice_0.0.1_tsi.211220.1505](./RegistryOffice_0.0.1_tsi.211220.1505.yaml)
 
 ### Load File (JSON)
-- [RegistryOffice_0.0.1_tsi.211123.1655+data.1](./RegistryOffice_0.0.1_tsi.211123.1655+data.1.json)
+- [RegistryOffice_0.0.1_tsi.211220.1505+data.1](./RegistryOffice_0.0.1_tsi.211220.1505+data.1.json)
 
 ### Test Cases (Postman Export) and Data File
 -
