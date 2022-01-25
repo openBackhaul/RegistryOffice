@@ -125,6 +125,50 @@ function automateForwardingConstruct(serviceType, operationServerUuid,
 }
 
 /**
+ * @description This function automates the forwarding construct by calling the appropriate call back operations based on the fcPort input and output directions.
+ * @param {String} forwardingName forwarding name of the function<br>
+ * @param {list}   attributeList list of attributes required during forwarding construct automation(to send in the request body)<br>
+ * @param {String} user user who initiates this request<br>
+ * @param {string} originator originator of the request<br>
+ * @param {string} xCorrelator flow id of this request<br>
+ * @param {string} traceIndicator trace indicator of the request<br>
+ * @param {string} customerJourney customer journey of the request<br>
+ * <b><u>Procedure :</u></b><br>
+ * <b>step 1 :</b> get the fcPort output list for the given operation server uuid<br>
+ * <b>step 2 :</b> gather information that needs to be dispatched as rest calls to appropriate rest servers<br>
+ * <b>step 3 :</b> call the method dispatchEvent() to dispatch the rest requests <br>
+ **/
+ exports.automateForwardingConstructForNIteration = function (serviceType, forwardingName,
+    attributeList, user, xCorrelator, traceIndicator, customerJourney) {
+    return new Promise(async function (resolve, reject) {
+        try {
+            let result = true;
+            let FcPortOutputDirectionLogicalTerminationPointList = await forwardingConstruct.getFcPortOutputDirectionLogicalTerminationPointListForTheForwardingName(forwardingName);
+            for (let i = 0; i < FcPortOutputDirectionLogicalTerminationPointList.length; i++) {
+                let operationClientUuid = FcPortOutputDirectionLogicalTerminationPointList[i];
+                for (let j = 0; j < attributeList.length; j++) {
+                    let attributeListForOperation = attributeList[j];
+                    let httpClientUuid = (await logicalTerminationPoint.getServerLtpList(operationClientUuid))[0];
+                    let clientApplicationName = await httpClientInterface.getApplicationName(httpClientUuid);
+                    let operationKey = await operationClientInterface.getOperationKey(operationClientUuid);
+                    let operationName = await operationClientInterface.getOperationName(operationClientUuid);
+                    let remoteIpAndPort = await operationClientInterface.getTcpIpAddressAndPortForTheOperationClient(operationClientUuid);
+                    let newTraceIndicator = traceIndicator + "." + (i + 1);
+                    result = await eventDispatcher.dispatchEvent(serviceType, remoteIpAndPort, clientApplicationName, operationName, operationKey,
+                        attributeListForOperation, user, xCorrelator, newTraceIndicator, customerJourney);
+                    if (result == false) {
+                        throw result;
+                    } 
+                }
+            }
+            resolve(result);
+        } catch (error) {
+            reject();
+        }
+    });
+}
+
+/**
  * @description This function configures the forwarding construct based on the fcPort management directions for the provided forwardingConstructConfigurationList.<br>
  * @param {String} operationServerUuid operation server uuid of the request url<br>
  * @param {list}   forwardingConstructConfigurationList it consistes of the forwardingConstructName and the operationClientUuid that needs to be added as a fcPort<br>

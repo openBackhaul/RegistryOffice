@@ -216,6 +216,34 @@ class OperationClientInterface extends layerProtocol {
     }
 
     /**
+     * @description This function returns the operation client uuid information for the given http-client uuid and operation name<br>
+     * @param {String} httpClientUuid uuid of the http-client<br>
+     * @param {String} operationName name of the operation<br>
+     * @returns {promise} returns the operation client uuid for the operation name<br>
+     * <b><u>Procedure :</u></b><br>
+     * <b>step 1 :</b> Get the existing operaiton client list for the given http client uuid <br>
+     * <b>step 2 :</b> find the operation client uuid for the operation name by iterating through each operation client<br>
+     * <b>step 3 :</b> return the uuid for which the operation name is matched<br>
+     **/
+     static getOperationClientUuidThatContainsTheOperationName(httpClientUuid, operationName) {
+        return new Promise(async function (resolve, reject) {
+            let operationClientUuid;
+            try {
+                let existingOperationClientUuidList = await logicalTerminationPoint.getClientLtpList(httpClientUuid);
+                for (let i = 0; i < existingOperationClientUuidList.length; i++) {
+                    let existingOperationName = await OperationClientInterface.getOperationName(existingOperationClientUuidList[i]);
+                    if (existingOperationName.includes(operationName)) {
+                        operationClientUuid = existingOperationClientUuidList[i];
+                    }
+                }
+                resolve(operationClientUuid);
+            } catch (error) {
+                resolve(operationClientUuid);
+            }
+        });
+    }
+
+    /**
      * @description This function generates the operation client uuid for the given http client uuid and operation name<br>
      * @param {String} httpClientUuid uuid of the http client logical termination point.<br>
      * @param {String} operationName operation name of the operaiton client<br>

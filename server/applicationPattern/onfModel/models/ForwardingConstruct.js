@@ -204,7 +204,8 @@ class ForwardingConstruct {
                             let forwardingConstructName = await ForwardingConstruct.getForwardingNameForTheUuid(forwardingConstructInstance["uuid"]);
                             let fcPortList = forwardingConstructInstance["fc-port"];
                             for (let k = 0; k < fcPortList.length; k++) {
-                                if (fcPortList[k]["port-direction"] == ForwardingConstruct.FcPort.portDirectionEnum.INPUT && fcPortList[k]["logical-termination-point"] == fcPortLogicalTerminationPoint && forwardingConstructName != "ServiceRequestCausesLoggingRequest") {
+                                if (fcPortList[k]["port-direction"] == ForwardingConstruct.FcPort.portDirectionEnum.INPUT && fcPortList[k]["logical-termination-point"] == fcPortLogicalTerminationPoint && 
+                                (forwardingConstructName != "ServiceRequestCausesLoggingRequest" && !forwardingConstructName.includes("PromptForBequeathing"))) {
                                     if (forwardingConstructKind.includes("TYPE_PROCESS_SNIPPET")) {
                                         for (let l = 0; l < fcPortList.length; l++) {
                                             if (fcPortList[l]["port-direction"] == ForwardingConstruct.FcPort.portDirectionEnum.OUTPUT) {

@@ -15,6 +15,7 @@ const logicalTerminationPoint = require('../applicationPattern/OnfModel/models/L
 const tcpClientInterface = require('../applicationPattern/OnfModel/models/layerprotocols/TcpClientInterface');
 const forwardingDomain = require('../applicationPattern/OnfModel/models/ForwardingDomain');
 const forwardingConstruct = require('../applicationPattern/onfModel/models/ForwardingConstruct');
+const softwareUpgrade = require('../applicationPattern/softwareUpgrade/BequeathYourDataAndDie')
 
 const serviceType = "Basic";
 const protocol = "http";
@@ -31,9 +32,54 @@ const protocol = "http";
  * @param {String} customerJourney String Holds information supporting customer’s journey to which the execution applies
  * @returns {promise} returns whether the operation is sucessful or not<br>
  **/
-exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, traceIndicator, customerJourney) {
-  return new Promise(function (resolve, reject) {
-    resolve();
+exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, traceIndicator, customerJourney,originalUrl) {
+  return new Promise(async function (resolve, reject) {
+    try {
+      /****************************************************************************************
+       * Setting up required local variables from the request body
+       ****************************************************************************************/
+      let newApplicationName = body["new-application-name"];
+      let newReleaseNumber = body["new-application-release"];
+      let newApplicationAddress = body["new-application-address"];
+      let newApplicationPort = body["new-application-port"];
+      /*********************************************************************************************************
+       * Prepare attributes and configure logical-termination-point
+       * 1. Check if the new-application-name is same as the application-name in the http-server/capability
+       * 2. If the new-application-name is not equals to application-name , then return 500 response code
+       * 3. configure the newRelease http and tcp client
+       *********************************************************************************************************/
+      let currentApplicationName = await httpServerInterface.getApplicationName();
+      if (currentApplicationName != newApplicationName) {
+        throw 500;
+      }
+      let newReleaseHttpClientUuid = await httpClientInterface.getHttpClientUuidForTheApplicationName("NewRelease");
+      let newReleaseTcpClientUuid = (await logicalTerminationPoint.getServerLtpList(newReleaseHttpClientUuid))[0];
+      await httpClientInterface.setReleaseNumber(newReleaseHttpClientUuid, newReleaseNumber);
+      await tcpClientInterface.setTcpRemoteAddressAndPortForTheUuid(newReleaseTcpClientUuid, newApplicationAddress, newApplicationPort);
+
+      /*********************************************************************************************************************************
+       * Prepare attributes to configure forwarding-construct
+       *********************************************************************************************************************************/
+      let forwardingConstructConfigurationList = [];
+
+      /*********************************************************************************************************************************
+       * Prepare attributes to automate forwarding-construct
+       * 1. Prepare object for newReleaseHttpClientUuid and update it to Application layer topology using /update-ltp
+       * 2. Prepare object for newReleaseTcpClientUuid and update it to Application layer topology using /update-ltp
+       ********************************************************************************************************************************/
+      let attributeList = [];
+
+      /********************************************************************************************************************************
+       * Configure and automate forwarding construct
+       *******************************************************************************************************************************/
+      let operationServerUuid = await operationServerInterface.getOperationServerUuidForTheOperationName(originalUrl);
+      await forwardingConstructService.configureAndAutomateForwardingConstruct(true, serviceType, operationServerUuid,
+          forwardingConstructConfigurationList, attributeList, user, xCorrelator, traceIndicator, customerJourney);
+      softwareUpgrade.upgradeSoftwareVersion(user, xCorrelator, traceIndicator, customerJourney);
+      resolve();
+    } catch (error) {
+      reject();
+    }
   });
 }
 
@@ -170,25 +216,22 @@ exports.endSubscription = function (body, user, originator, xCorrelator, traceIn
       if (httpClientUuid != undefined) {
         let operationServerUuid = await operationServerInterface.getOperationServerUuidForTheOperationName(subscription);
         let forwardingConstructListForTheSubscription = await forwardingDomain.getForwardingConstructListForTheFcPortManagementDirection(operationServerUuid);
-        for(let i=0;i < forwardingConstructListForTheSubscription.length; i++){
+        for (let i = 0; i < forwardingConstructListForTheSubscription.length; i++) {
           let forwardingConstructUuid = forwardingConstructListForTheSubscription[i].uuid;
           let forwardingConstructKind = await forwardingConstruct.getForwardingKindForTheUuid(forwardingConstructUuid);
           let fcPortOutputList = await forwardingConstruct.getFcPortOutputDirectionLogicalTerminationPointListForTheUuid(forwardingConstructUuid);
-          for(let j=0;j<fcPortOutputList.length;j++){            
-            if(operationClientList.includes(fcPortOutputList[j]))
-            {
-              let localIdOfFcPort = await forwardingConstruct.getFcPortLocalId(forwardingConstructUuid,fcPortOutputList[j]);
-              if(forwardingConstructKind == forwardingConstruct.name.forwardingConstructKindEnum.INVARIANT_PROCESS_SNIPPET)
-              {
-                await forwardingConstruct.modifyFcPortLogicalTerminationPointUuid(forwardingConstructUuid,localIdOfFcPort,"-1");
-              }else
-              {
-                await forwardingConstruct.deleteFcPort(forwardingConstructUuid,localIdOfFcPort);
+          for (let j = 0; j < fcPortOutputList.length; j++) {
+            if (operationClientList.includes(fcPortOutputList[j])) {
+              let localIdOfFcPort = await forwardingConstruct.getFcPortLocalId(forwardingConstructUuid, fcPortOutputList[j]);
+              if (forwardingConstructKind == forwardingConstruct.name.forwardingConstructKindEnum.INVARIANT_PROCESS_SNIPPET) {
+                await forwardingConstruct.modifyFcPortLogicalTerminationPointUuid(forwardingConstructUuid, localIdOfFcPort, "-1");
+              } else {
+                await forwardingConstruct.deleteFcPort(forwardingConstructUuid, localIdOfFcPort);
               }
             }
           }
         }
-      }      
+      }
     } catch (error) {
       console.log(error);
     }
@@ -921,7 +964,7 @@ exports.updateClient = function (body, user, originator, xCorrelator, traceIndic
           await httpClientInterface.setReleaseNumber(httpClientUuid, newApplicationReleaseNumber);
           await tcpClientInterface.setTcpRemoteAddressAndPortForTheUuid(tcpClientUuid, newApplicationAddress, newApplicationPort);
         }
-      }      
+      }
     } catch (error) {
       console.log(error);
     }
