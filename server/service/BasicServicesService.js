@@ -46,7 +46,7 @@ exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, 
        * Prepare attributes and configure logical-termination-point
        * 1. Check if the new-application-name is same as the application-name in the http-server/capability
        * 2. If the new-application-name is not equals to application-name , then return 500 response code
-       * 3. configure the newRelease http and tcp client
+       * 3. configure the newRelease http and tcp client 
        *********************************************************************************************************/
       let currentApplicationName = await httpServerInterface.getApplicationName();
       if (currentApplicationName != newApplicationName) {
