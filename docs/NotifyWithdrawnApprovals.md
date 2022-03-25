@@ -5,8 +5,6 @@
 This service allows applications to subscribe for notifications about application approval. Whenever the Type Approval Application approves an application , a callback will be initiated for the applications subscribed for this notification. Any application with a valid operation key can subscribe for this service.
 
 ![](./images/NotifyWithdrawnApproval/Picture1.jpg)
-
-
 ## Configuration:
 
 The following interfaces will be created and added to the logical-termination-point list in the control-construct,
