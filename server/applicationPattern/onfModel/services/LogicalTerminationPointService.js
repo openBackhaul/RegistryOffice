@@ -1,9 +1,5 @@
 /**
  * @file This module provides classes and functionality to manipulate the logical termination point
- * @author      prathiba.jeevan.external@telefonica.com
- * @since       23.09.2021
- * @version     1.0
- * @copyright   Telefónica Germany GmbH & Co. OHG* 
  **/
 
 'use strict';
