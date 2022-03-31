@@ -30,4 +30,4 @@
 - [RegistryOffice/issues](../../issues)
 
 ### Comments
-This application is part of the TinyApplicationController for managing the REST applications forming the MBH SDN application layer at Telefonica Germany.
+This application is part of the TinyApplicationController for managing the REST applications forming the MBH SDN application layer.
