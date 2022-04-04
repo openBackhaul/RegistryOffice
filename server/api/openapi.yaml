@@ -3,7 +3,7 @@ info:
   title: RegistryOffice
   version: 0.0.2
 servers:
-- url: https://10.118.125.157:1000
+- url: http://localhost:3000
   description: Initial deployment
 paths:
   /v1/bequeath-your-data-and-die:
