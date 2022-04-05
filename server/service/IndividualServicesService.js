@@ -26,6 +26,8 @@ const onfAttributes = require('onf-core-model-ap/applicationPattern/onfModel/con
 
 
 const fileOperation = require('onf-core-model-ap/applicationPattern/databaseDriver/JSONDriver');
+const logicalTerminationPoint = require('onf-core-model-ap/applicationPattern/onfModel/models/LogicalTerminationPoint');
+const tcpClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/TcpClientInterface');
 /**
  * Initiates process of embedding a new release
  *
@@ -219,14 +221,14 @@ exports.registerApplication = function (body, user, originator, xCorrelator, tra
       /****************************************************************************************
        * Setting up required local variables from the request body
        ****************************************************************************************/
-       let applicationName = body["application-name"];
-       let releaseNumber = body["application-release-number"];
-       let applicationAddress = body["application-address"];
-       let applicationPort = body["application-port"];
-       let embeddingOperation = body["embedding-operation"];
-       let clientUpdateOperation = body["client-update-operation"];
-       let clientOperationUpdateOperation = "/v1/update-operation-client";
- 
+      let applicationName = body["application-name"];
+      let releaseNumber = body["application-release-number"];
+      let applicationAddress = body["application-address"];
+      let applicationPort = body["application-port"];
+      let embeddingOperation = body["embedding-operation"];
+      let clientUpdateOperation = body["client-update-operation"];
+      let clientOperationUpdateOperation = "/v1/update-operation-client";
+
 
       /****************************************************************************************
        * Prepare logicalTerminatinPointConfigurationInput object to 
@@ -381,8 +383,107 @@ exports.startApplicationInGenericRepresentation = function (user, originator, xC
  * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * no response value expected for this operation
  **/
-exports.updateApprovalStatus = function (body, user, originator, xCorrelator, traceIndicator, customerJourney) {
-  return new Promise(function (resolve, reject) {
-    resolve();
+exports.updateApprovalStatus = function (body, user, originator, xCorrelator, traceIndicator, customerJourney, operationServerName) {
+  return new Promise(async function (resolve, reject) {
+    try {
+
+      /****************************************************************************************
+       * Setting up required local variables from the request body
+       ****************************************************************************************/
+      let applicationName = body["application-name"];
+      let releaseNumber = body["application-release-number"];
+      let approvalStatus = body["approval-status"];
+      let updateClientOperationName = 'update-client';
+      let updateOperationClientOperationName = 'update-operation-client';
+      let httpClientUuid = await httpClientInterface.getHttpClientUuidAsync(applicationName,
+        releaseNumber);
+
+      /****************************************************************************************
+       * Prepare attributes to configure forwarding-construct
+       * If the approval status is approved , then create forwarding construct for update-operation-client and update-client
+       * If the approval status is not barred , check if any fc-port created, if so delete them 
+       ****************************************************************************************/
+      let forwardingConstructConfigurationStatus;      
+
+      if (httpClientUuid) {
+        let operationClientUuidList = await logicalTerminationPoint.getClientLtpListAsync(httpClientUuid);
+        let operationListForConfiguration = [];
+        let forwardingConfigurationInputList;
+        if (operationClientUuidList) {
+
+          for (let i = 0; i < operationClientUuidList.length; i++) {
+            let operationClientUuid = operationClientUuidList[i];
+            let operationName = await operationClientInterface.getOperationNameAsync(operationClientUuid);
+
+            if (operationName.includes(updateClientOperationName)) {
+              updateClientOperationName = operationName;
+              operationListForConfiguration.push(operationClientUuid);
+            } else if (operationName.includes(updateOperationClientOperationName)) {
+              updateOperationClientOperationName = operationName;
+              operationListForConfiguration.push(operationClientUuid);
+            }
+          }
+
+          if (operationListForConfiguration.length > 0) {
+            forwardingConfigurationInputList = await prepareForwardingConfiguration.updateApprovalStatus(
+              operationListForConfiguration,
+              updateClientOperationName,
+              updateOperationClientOperationName
+            );
+
+            if (approvalStatus == 'APPROVED') {
+              forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
+              configureForwardingConstructAsync(
+                operationServerName,
+                forwardingConfigurationInputList
+              );
+            } else if (approvalStatus == 'BARRED') {
+              forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
+              unConfigureForwardingConstructAsync(
+                operationServerName,
+                forwardingConfigurationInputList
+              );
+            }
+
+          }
+        }
+      }
+
+
+      /****************************************************************************************
+       * Prepare attributes to automate forwarding-construct
+       * If the approval status is approved , then embed-yourself, regard-application will be executed
+       * If the approval status is barred , then disregard-application will be executed
+       ****************************************************************************************/
+      let forwardingAutomationInputList;
+      if(approvalStatus == 'APPROVED') {
+        forwardingAutomationInputList = await prepareForwardingAutomation.updateApprovalStatusApproved(
+          undefined,
+          forwardingConstructConfigurationStatus,
+          applicationName,
+          releaseNumber
+        );
+      }else if (approvalStatus == 'BARRED') {
+        forwardingAutomationInputList = await prepareForwardingAutomation.updateApprovalStatusBarred(
+          undefined,
+          forwardingConstructConfigurationStatus,
+          applicationName,
+          releaseNumber
+        );
+      }
+      if(forwardingAutomationInputList){
+      ForwardingAutomationService.automateForwardingConstructAsync(
+        operationServerName,
+        forwardingAutomationInputList,
+        user,
+        xCorrelator,
+        traceIndicator,
+        customerJourney
+      );
+    }
+      resolve();
+    } catch (error) {
+      reject(error);
+    }
   });
 }
