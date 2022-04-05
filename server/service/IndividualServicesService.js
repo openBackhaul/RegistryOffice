@@ -1,6 +1,31 @@
 'use strict';
 
+const LogicalTerminatinPointConfigurationInput = require('onf-core-model-ap/applicationPattern/onfModel/services/models/logicalTerminationPoint/ConfigurationInput');
+const LogicalTerminationPointService = require('onf-core-model-ap/applicationPattern/onfModel/services/LogicalTerminationPointServices');
+const LogicalTerminationPointConfigurationStatus = require('onf-core-model-ap/applicationPattern/onfModel/services/models/logicalTerminationPoint/ConfigurationStatus');
+const layerProtocol = require('onf-core-model-ap/applicationPattern/onfModel/models/LayerProtocol');
 
+const ForwardingConfigurationService = require('onf-core-model-ap/applicationPattern/onfModel/services/ForwardingConstructConfigurationServices');
+const ForwardingAutomationService = require('onf-core-model-ap/applicationPattern/onfModel/services/ForwardingConstructAutomationServices');
+const prepareForwardingConfiguration = require('./individualServices/PrepareForwardingConfiguration');
+const prepareForwardingAutomation = require('./individualServices/PrepareForwardingAutomation');
+const ConfigurationStatus = require('onf-core-model-ap/applicationPattern/onfModel/services/models/ConfigurationStatus');
+
+const httpServerInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/HttpServerInterface');
+const tcpServerInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/TcpServerInterface');
+const operationServerInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/OperationServerInterface');
+const operationClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/OperationClientInterface');
+const httpClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/HttpClientInterface');
+
+const onfAttributeFormatter = require('onf-core-model-ap/applicationPattern/onfModel/utility/OnfAttributeFormatter');
+const consequentAction = require('onf-core-model-ap/applicationPattern/rest/server/responseBody/ConsequentAction');
+const responseValue = require('onf-core-model-ap/applicationPattern/rest/server/responseBody/ResponseValue');
+
+const onfPaths = require('onf-core-model-ap/applicationPattern/onfModel/constants/OnfPaths');
+const onfAttributes = require('onf-core-model-ap/applicationPattern/onfModel/constants/OnfAttributes');
+
+
+const fileOperation = require('onf-core-model-ap/applicationPattern/databaseDriver/JSONDriver');
 /**
  * Initiates process of embedding a new release
  *
@@ -12,8 +37,8 @@
  * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * no response value expected for this operation
  **/
-exports.bequeathYourDataAndDie = function(body,user,originator,xCorrelator,traceIndicator,customerJourney) {
-  return new Promise(function(resolve, reject) {
+exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  return new Promise(function (resolve, reject) {
     resolve();
   });
 }
@@ -30,8 +55,8 @@ exports.bequeathYourDataAndDie = function(body,user,originator,xCorrelator,trace
  * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * no response value expected for this operation
  **/
-exports.deregisterApplication = function(body,user,originator,xCorrelator,traceIndicator,customerJourney) {
-  return new Promise(function(resolve, reject) {
+exports.deregisterApplication = function (body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  return new Promise(function (resolve, reject) {
     resolve();
   });
 }
@@ -48,8 +73,8 @@ exports.deregisterApplication = function(body,user,originator,xCorrelator,traceI
  * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * no response value expected for this operation
  **/
-exports.inquireApplicationTypeApprovals = function(body,user,originator,xCorrelator,traceIndicator,customerJourney) {
-  return new Promise(function(resolve, reject) {
+exports.inquireApplicationTypeApprovals = function (body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  return new Promise(function (resolve, reject) {
     resolve();
   });
 }
@@ -65,20 +90,20 @@ exports.inquireApplicationTypeApprovals = function(body,user,originator,xCorrela
  * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * returns List
  **/
-exports.listApplications = function(user,originator,xCorrelator,traceIndicator,customerJourney) {
-  return new Promise(function(resolve, reject) {
+exports.listApplications = function (user, originator, xCorrelator, traceIndicator, customerJourney) {
+  return new Promise(function (resolve, reject) {
     var examples = {};
-    examples['application/json'] = [ {
-  "application-name" : "TypeApprovalRegister",
-  "application-release-number" : "0.0.1",
-  "application-address" : "10.118.125.157",
-  "application-port" : 1001
-}, {
-  "application-name" : "ExecutionAndTraceLog",
-  "application-release-number" : "0.0.1",
-  "application-address" : "10.118.125.157",
-  "application-port" : 1002
-} ];
+    examples['application/json'] = [{
+      "application-name": "TypeApprovalRegister",
+      "application-release-number": "0.0.1",
+      "application-address": "10.118.125.157",
+      "application-port": 1001
+    }, {
+      "application-name": "ExecutionAndTraceLog",
+      "application-release-number": "0.0.1",
+      "application-address": "10.118.125.157",
+      "application-port": 1002
+    }];
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
@@ -98,21 +123,21 @@ exports.listApplications = function(user,originator,xCorrelator,traceIndicator,c
  * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * returns inline_response_200_2
  **/
-exports.listApplicationsInGenericRepresentation = function(user,originator,xCorrelator,traceIndicator,customerJourney) {
-  return new Promise(function(resolve, reject) {
+exports.listApplicationsInGenericRepresentation = function (user, originator, xCorrelator, traceIndicator, customerJourney) {
+  return new Promise(function (resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "consequent-action-list" : [ ],
-  "response-value-list" : [ {
-    "field-name" : "TypeApprovalRegister",
-    "value" : "0.0.1",
-    "datatype" : "String"
-  }, {
-    "field-name" : "ExecutionAndTraceLog",
-    "value" : "0.0.1",
-    "datatype" : "String"
-  } ]
-};
+      "consequent-action-list": [],
+      "response-value-list": [{
+        "field-name": "TypeApprovalRegister",
+        "value": "0.0.1",
+        "datatype": "String"
+      }, {
+        "field-name": "ExecutionAndTraceLog",
+        "value": "0.0.1",
+        "datatype": "String"
+      }]
+    };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
@@ -133,8 +158,8 @@ exports.listApplicationsInGenericRepresentation = function(user,originator,xCorr
  * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * no response value expected for this operation
  **/
-exports.notifyApprovals = function(body,user,originator,xCorrelator,traceIndicator,customerJourney) {
-  return new Promise(function(resolve, reject) {
+exports.notifyApprovals = function (body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  return new Promise(function (resolve, reject) {
     resolve();
   });
 }
@@ -151,8 +176,8 @@ exports.notifyApprovals = function(body,user,originator,xCorrelator,traceIndicat
  * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * no response value expected for this operation
  **/
-exports.notifyDeregistrations = function(body,user,originator,xCorrelator,traceIndicator,customerJourney) {
-  return new Promise(function(resolve, reject) {
+exports.notifyDeregistrations = function (body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  return new Promise(function (resolve, reject) {
     resolve();
   });
 }
@@ -169,8 +194,8 @@ exports.notifyDeregistrations = function(body,user,originator,xCorrelator,traceI
  * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * no response value expected for this operation
  **/
-exports.notifyWithdrawnApprovals = function(body,user,originator,xCorrelator,traceIndicator,customerJourney) {
-  return new Promise(function(resolve, reject) {
+exports.notifyWithdrawnApprovals = function (body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  return new Promise(function (resolve, reject) {
     resolve();
   });
 }
@@ -187,9 +212,86 @@ exports.notifyWithdrawnApprovals = function(body,user,originator,xCorrelator,tra
  * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * no response value expected for this operation
  **/
-exports.registerApplication = function(body,user,originator,xCorrelator,traceIndicator,customerJourney) {
-  return new Promise(function(resolve, reject) {
-    resolve();
+exports.registerApplication = function (body, user, originator, xCorrelator, traceIndicator, customerJourney, operationServerName) {
+  return new Promise(async function (resolve, reject) {
+    try {
+
+      /****************************************************************************************
+       * Setting up required local variables from the request body
+       ****************************************************************************************/
+       let applicationName = body["application-name"];
+       let releaseNumber = body["application-release-number"];
+       let applicationAddress = body["application-address"];
+       let applicationPort = body["application-port"];
+       let embeddingOperation = body["embedding-operation"];
+       let clientUpdateOperation = body["client-update-operation"];
+       let clientOperationUpdateOperation = "/v1/update-operation-client";
+ 
+
+      /****************************************************************************************
+       * Prepare logicalTerminatinPointConfigurationInput object to 
+       * configure logical-termination-point
+       ****************************************************************************************/
+
+      let operationList = [
+        embeddingOperation,
+        clientUpdateOperation,
+        clientOperationUpdateOperation
+      ];
+      let logicalTerminatinPointConfigurationInput = new LogicalTerminatinPointConfigurationInput(
+        applicationName,
+        releaseNumber,
+        applicationAddress,
+        applicationPort,
+        operationList
+      );
+      let logicalTerminationPointconfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationInformationAsync(
+        logicalTerminatinPointConfigurationInput
+      );
+
+
+      /****************************************************************************************
+       * Prepare attributes to configure forwarding-construct
+       ****************************************************************************************/
+
+      let forwardingConfigurationInputList = [];
+      let forwardingConstructConfigurationStatus;
+      let operationClientConfigurationStatusList = logicalTerminationPointconfigurationStatus.operationClientConfigurationStatusList;
+
+      if (operationClientConfigurationStatusList) {
+        forwardingConfigurationInputList = await prepareForwardingConfiguration.registerApplication(
+          operationClientConfigurationStatusList,
+          embeddingOperation
+        );
+        forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
+        configureForwardingConstructAsync(
+          operationServerName,
+          forwardingConfigurationInputList
+        );
+      }
+
+      /****************************************************************************************
+       * Prepare attributes to automate forwarding-construct
+       ****************************************************************************************/
+      let forwardingAutomationInputList = await prepareForwardingAutomation.registerApplication(
+        logicalTerminationPointconfigurationStatus,
+        forwardingConstructConfigurationStatus,
+        applicationName,
+        releaseNumber
+      );
+      ForwardingAutomationService.automateForwardingConstructAsync(
+        operationServerName,
+        forwardingAutomationInputList,
+        user,
+        xCorrelator,
+        traceIndicator,
+        customerJourney
+      );
+
+      resolve();
+    } catch (error) {
+      reject(error);
+    }
   });
 }
 
@@ -205,8 +307,8 @@ exports.registerApplication = function(body,user,originator,xCorrelator,traceInd
  * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * no response value expected for this operation
  **/
-exports.relayOperationUpdate = function(body,user,originator,xCorrelator,traceIndicator,customerJourney) {
-  return new Promise(function(resolve, reject) {
+exports.relayOperationUpdate = function (body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  return new Promise(function (resolve, reject) {
     resolve();
   });
 }
@@ -223,8 +325,8 @@ exports.relayOperationUpdate = function(body,user,originator,xCorrelator,traceIn
  * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * no response value expected for this operation
  **/
-exports.relayServerReplacement = function(body,user,originator,xCorrelator,traceIndicator,customerJourney) {
-  return new Promise(function(resolve, reject) {
+exports.relayServerReplacement = function (body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  return new Promise(function (resolve, reject) {
     resolve();
   });
 }
@@ -240,25 +342,25 @@ exports.relayServerReplacement = function(body,user,originator,xCorrelator,trace
  * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * returns inline_response_200
  **/
-exports.startApplicationInGenericRepresentation = function(user,originator,xCorrelator,traceIndicator,customerJourney) {
-  return new Promise(function(resolve, reject) {
+exports.startApplicationInGenericRepresentation = function (user, originator, xCorrelator, traceIndicator, customerJourney) {
+  return new Promise(function (resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "consequent-action-list" : [ {
-    "label" : "List Registered Applications",
-    "request" : "https://10.118.125.157:1000/v1/list-applications-in-generic-representation",
-    "display-in-new-browser-window" : false
-  }, {
-    "label" : "Inform about Application",
-    "request" : "https://10.118.125.157:1000/v1/inform-about-application-in-generic-representation",
-    "display-in-new-browser-window" : false
-  } ],
-  "response-value-list" : [ {
-    "field-name" : "applicationName",
-    "value" : "OwnApplicationName",
-    "datatype" : "String"
-  } ]
-};
+      "consequent-action-list": [{
+        "label": "List Registered Applications",
+        "request": "https://10.118.125.157:1000/v1/list-applications-in-generic-representation",
+        "display-in-new-browser-window": false
+      }, {
+        "label": "Inform about Application",
+        "request": "https://10.118.125.157:1000/v1/inform-about-application-in-generic-representation",
+        "display-in-new-browser-window": false
+      }],
+      "response-value-list": [{
+        "field-name": "applicationName",
+        "value": "OwnApplicationName",
+        "datatype": "String"
+      }]
+    };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
@@ -279,9 +381,8 @@ exports.startApplicationInGenericRepresentation = function(user,originator,xCorr
  * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * no response value expected for this operation
  **/
-exports.updateApprovalStatus = function(body,user,originator,xCorrelator,traceIndicator,customerJourney) {
-  return new Promise(function(resolve, reject) {
+exports.updateApprovalStatus = function (body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  return new Promise(function (resolve, reject) {
     resolve();
   });
 }
-
