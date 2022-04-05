@@ -36,6 +36,45 @@ exports.registerApplication = function (operationClientConfigurationStatusList, 
     });
 }
 
+exports.updateApprovalStatus = function (operationClientList, updateClientOperationName, updateOperationClientOperationName) {
+    return new Promise(async function (resolve, reject) {
+        let forwardingConfigurationInputList = [];
+        try {
+            for (let i = 0; i < operationClientList.length; i++) {
+                let operationClientUuid = operationClientList[i];
+                let operationClientName = await operationClientInterface.
+                getOperationNameAsync(operationClientUuid);
+                let forwardingConfigurationInput;
+                let forwardingName;
+                if (operationClientName == updateClientOperationName) {
+                    forwardingName =
+                        "ServerReplacementBroadcast";
+                    forwardingConfigurationInput = new forwardingConstructConfigurationInput(
+                        forwardingName,
+                        operationClientUuid
+                    );
+                    forwardingConfigurationInputList.push(
+                        forwardingConfigurationInput
+                    );
+                }else if (operationClientName == updateOperationClientOperationName) {
+                    forwardingName =
+                        "OperationUpdateBroadcast";
+                    forwardingConfigurationInput = new forwardingConstructConfigurationInput(
+                        forwardingName,
+                        operationClientUuid
+                    );
+                    forwardingConfigurationInputList.push(
+                        forwardingConfigurationInput
+                    );
+                }                 
+            }
+            resolve(forwardingConfigurationInputList);
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
 
 /**
  * @description This function automates the forwarding construct by calling the appropriate call back operations based on the fcPort input and output directions.
