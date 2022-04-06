@@ -57,9 +57,67 @@ exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, 
  * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * no response value expected for this operation
  **/
-exports.deregisterApplication = function (body, user, originator, xCorrelator, traceIndicator, customerJourney) {
-  return new Promise(function (resolve, reject) {
-    resolve();
+exports.deregisterApplication = function (body, user, originator, xCorrelator, traceIndicator, customerJourney, operationServerName) {
+  return new Promise(async function (resolve, reject) {
+    try {
+
+      /****************************************************************************************
+       * Setting up required local variables from the request body
+       ****************************************************************************************/
+      let applicationName = body["application-name"];
+      let applicationReleaseNumber = body["application-release-number"];
+
+      /****************************************************************************************
+       * Prepare logicalTerminatinPointConfigurationInput object to 
+       * configure logical-termination-point
+       ****************************************************************************************/
+
+      let logicalTerminationPointconfigurationStatus = await LogicalTerminationPointService.deleteApplicationInformationAsync(
+        applicationName,
+        applicationReleaseNumber
+      );
+
+      /****************************************************************************************
+       * Prepare attributes to configure forwarding-construct
+       ****************************************************************************************/
+
+      let forwardingConfigurationInputList = [];
+      let forwardingConstructConfigurationStatus;
+      let operationClientConfigurationStatusList = logicalTerminationPointconfigurationStatus.operationClientConfigurationStatusList;
+
+      if (operationClientConfigurationStatusList) {
+        forwardingConfigurationInputList = await prepareForwardingConfiguration.deregisterApplication(
+          operationClientConfigurationStatusList
+        );
+        forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
+        unConfigureForwardingConstructAsync(
+          operationServerName,
+          forwardingConfigurationInputList
+        );
+      }
+
+      /****************************************************************************************
+       * Prepare attributes to automate forwarding-construct
+       ****************************************************************************************/
+      let forwardingAutomationInputList = await prepareForwardingAutomation.deregisterApplication(
+        logicalTerminationPointconfigurationStatus,
+        forwardingConstructConfigurationStatus,
+        applicationName,
+        applicationReleaseNumber
+      );
+      ForwardingAutomationService.automateForwardingConstructAsync(
+        operationServerName,
+        forwardingAutomationInputList,
+        user,
+        xCorrelator,
+        traceIndicator,
+        customerJourney
+      );
+
+      resolve();
+    } catch (error) {
+      reject(error);
+    }
   });
 }
 
@@ -403,7 +461,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
        * If the approval status is approved , then create forwarding construct for update-operation-client and update-client
        * If the approval status is not barred , check if any fc-port created, if so delete them 
        ****************************************************************************************/
-      let forwardingConstructConfigurationStatus;      
+      let forwardingConstructConfigurationStatus;
 
       if (httpClientUuid) {
         let operationClientUuidList = await logicalTerminationPoint.getClientLtpListAsync(httpClientUuid);
@@ -456,14 +514,14 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
        * If the approval status is barred , then disregard-application will be executed
        ****************************************************************************************/
       let forwardingAutomationInputList;
-      if(approvalStatus == 'APPROVED') {
+      if (approvalStatus == 'APPROVED') {
         forwardingAutomationInputList = await prepareForwardingAutomation.updateApprovalStatusApproved(
           undefined,
           forwardingConstructConfigurationStatus,
           applicationName,
           releaseNumber
         );
-      }else if (approvalStatus == 'BARRED') {
+      } else if (approvalStatus == 'BARRED') {
         forwardingAutomationInputList = await prepareForwardingAutomation.updateApprovalStatusBarred(
           undefined,
           forwardingConstructConfigurationStatus,
@@ -471,16 +529,16 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
           releaseNumber
         );
       }
-      if(forwardingAutomationInputList){
-      ForwardingAutomationService.automateForwardingConstructAsync(
-        operationServerName,
-        forwardingAutomationInputList,
-        user,
-        xCorrelator,
-        traceIndicator,
-        customerJourney
-      );
-    }
+      if (forwardingAutomationInputList) {
+        ForwardingAutomationService.automateForwardingConstructAsync(
+          operationServerName,
+          forwardingAutomationInputList,
+          user,
+          xCorrelator,
+          traceIndicator,
+          customerJourney
+        );
+      }
       resolve();
     } catch (error) {
       reject(error);

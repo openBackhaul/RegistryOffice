@@ -27,6 +27,38 @@ exports.registerApplication = function (operationClientConfigurationStatusList, 
                     forwardingConfigurationInputList.push(
                         forwardingConfigurationInput
                     );
+                }
+            }
+            resolve(forwardingConfigurationInputList);
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
+exports.deregisterApplication = function (operationClientConfigurationStatusList) {
+    return new Promise(async function (resolve, reject) {
+        let forwardingConfigurationInputList = [];
+        try {
+            for (let i = 0; i < operationClientConfigurationStatusList.length; i++) {
+
+                let configurationStatus = operationClientConfigurationStatusList[i];
+                let operationClientUuid = configurationStatus.uuid;
+
+                let forwardingConstructList = await forwardingDomain.getForwardingConstructListForTheFcPortAsync(
+                    operationClientUuid,
+                    FcPort.portDirectionEnum.OUTPUT);
+
+                for (let j = 0; j < forwardingConstructList.length; j++) {
+                    let fcNameList = forwardingConstructList[j]["name"];
+                    let forwardingName = getValueFromKey(fcNameList, "ForwardingName");
+                    let forwardingConfigurationInput = new forwardingConstructConfigurationInput(
+                        forwardingName,
+                        operationClientUuid
+                    );
+                    forwardingConfigurationInputList.push(
+                        forwardingConfigurationInput
+                    );
                 }                
             }
             resolve(forwardingConfigurationInputList);
@@ -56,7 +88,7 @@ exports.updateApprovalStatus = function (operationClientList, updateClientOperat
                     forwardingConfigurationInputList.push(
                         forwardingConfigurationInput
                     );
-                }else if (operationClientName == updateOperationClientOperationName) {
+                } else if (operationClientName == updateOperationClientOperationName) {
                     forwardingName =
                         "OperationUpdateBroadcast";
                     forwardingConfigurationInput = new forwardingConstructConfigurationInput(
@@ -66,7 +98,7 @@ exports.updateApprovalStatus = function (operationClientList, updateClientOperat
                     forwardingConfigurationInputList.push(
                         forwardingConfigurationInput
                     );
-                }                 
+                }
             }
             resolve(forwardingConfigurationInputList);
         } catch (error) {
@@ -86,7 +118,7 @@ exports.updateApprovalStatus = function (operationClientList, updateClientOperat
  * @param {string} traceIndicator trace indicator of the request
  * @param {string} customerJourney customer journey of the request
  **/
- function getValueFromKey(nameList, key) {
+function getValueFromKey(nameList, key) {
     for (let i = 0; i < nameList.length; i++) {
         let valueName = nameList[i]["value-name"];
         if (valueName == key) {
