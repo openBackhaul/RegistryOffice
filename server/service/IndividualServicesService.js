@@ -133,9 +133,79 @@ exports.deregisterApplication = function (body, user, originator, xCorrelator, t
  * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * no response value expected for this operation
  **/
-exports.inquireApplicationTypeApprovals = function (body, user, originator, xCorrelator, traceIndicator, customerJourney) {
-  return new Promise(function (resolve, reject) {
-    resolve();
+exports.inquireApplicationTypeApprovals = function (body, user, originator, xCorrelator, traceIndicator, customerJourney, operationServerName) {
+  return new Promise(async function (resolve, reject) {
+    try {
+
+      /****************************************************************************************
+       * Setting up required local variables from the request body
+       ****************************************************************************************/
+       let applicationName = body["approval-application"];
+       let releaseNumber = body["approval-application-release-number"];
+       let applicationAddress = body["approval-application-address"];
+       let applicationPort = body["approval-application-port"];
+       let subscriberOperation = body["approval-operation"]; 
+
+      /****************************************************************************************
+       * Prepare logicalTerminatinPointConfigurationInput object to 
+       * configure logical-termination-point
+       ****************************************************************************************/
+
+      let operationList = [
+        subscriberOperation
+      ];
+      let logicalTerminatinPointConfigurationInput = new LogicalTerminatinPointConfigurationInput(
+        applicationName,
+        releaseNumber,
+        applicationAddress,
+        applicationPort,
+        operationList
+      );
+      let logicalTerminationPointconfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationInformationAsync(
+        logicalTerminatinPointConfigurationInput
+      );
+
+
+      /****************************************************************************************
+       * Prepare attributes to configure forwarding-construct
+       ****************************************************************************************/
+
+      let forwardingConfigurationInputList = [];
+      let forwardingConstructConfigurationStatus;
+      let operationClientConfigurationStatusList = logicalTerminationPointconfigurationStatus.operationClientConfigurationStatusList;
+
+      if (operationClientConfigurationStatusList) {
+        forwardingConfigurationInputList = await prepareForwardingConfiguration.inquireApplicationTypeApprovals(
+          operationClientConfigurationStatusList,
+          subscriberOperation
+        );
+        forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
+        configureForwardingConstructAsync(
+          operationServerName,
+          forwardingConfigurationInputList
+        );
+      }
+
+      /****************************************************************************************
+       * Prepare attributes to automate forwarding-construct
+       ****************************************************************************************/
+      let forwardingAutomationInputList = await prepareForwardingAutomation.inquireApplicationTypeApprovals(
+        logicalTerminationPointconfigurationStatus,
+        forwardingConstructConfigurationStatus
+      );
+      ForwardingAutomationService.automateForwardingConstructAsync(
+        operationServerName,
+        forwardingAutomationInputList,
+        user,
+        xCorrelator,
+        traceIndicator,
+        customerJourney
+      );
+
+      resolve();
+    } catch (error) {
+      reject(error);
+    }
   });
 }
 
