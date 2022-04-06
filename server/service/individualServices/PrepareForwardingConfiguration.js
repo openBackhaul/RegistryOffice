@@ -137,6 +137,36 @@ exports.notifyWithdrawnApprovals = function (operationClientConfigurationStatusL
     });
 }
 
+exports.notifyApprovals = function (operationClientConfigurationStatusList, subscriberOperation) {
+    return new Promise(async function (resolve, reject) {
+        let forwardingConfigurationInputList = [];
+        try {
+            for (let i = 0; i < operationClientConfigurationStatusList.length; i++) {
+                let configurationStatus = operationClientConfigurationStatusList[i];
+                let operationClientUuid = configurationStatus.uuid;
+                let operationClientName = await operationClientInterface.
+                getOperationNameAsync(operationClientUuid);
+                let forwardingConfigurationInput;
+                let forwardingName;
+                if (operationClientName == subscriberOperation) {
+                    forwardingName =
+                        "ApprovalNotification";
+                    forwardingConfigurationInput = new forwardingConstructConfigurationInput(
+                        forwardingName,
+                        operationClientUuid
+                    );
+                }
+                forwardingConfigurationInputList.push(
+                    forwardingConfigurationInput
+                );
+            }
+            resolve(forwardingConfigurationInputList);
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
 exports.inquireApplicationTypeApprovals = function (operationClientConfigurationStatusList, subscriberOperation) {
     return new Promise(async function (resolve, reject) {
         let forwardingConfigurationInputList = [];
