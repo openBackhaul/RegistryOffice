@@ -137,6 +137,36 @@ exports.notifyWithdrawnApprovals = function (operationClientConfigurationStatusL
     });
 }
 
+exports.notifyDeregistrations = function (operationClientConfigurationStatusList, subscriberOperation) {
+    return new Promise(async function (resolve, reject) {
+        let forwardingConfigurationInputList = [];
+        try {
+            for (let i = 0; i < operationClientConfigurationStatusList.length; i++) {
+                let configurationStatus = operationClientConfigurationStatusList[i];
+                let operationClientUuid = configurationStatus.uuid;
+                let operationClientName = await operationClientInterface.
+                getOperationNameAsync(operationClientUuid);
+                let forwardingConfigurationInput;
+                let forwardingName;
+                if (operationClientName == subscriberOperation) {
+                    forwardingName =
+                        "DeregistrationNotification";
+                    forwardingConfigurationInput = new forwardingConstructConfigurationInput(
+                        forwardingName,
+                        operationClientUuid
+                    );
+                }
+                forwardingConfigurationInputList.push(
+                    forwardingConfigurationInput
+                );
+            }
+            resolve(forwardingConfigurationInputList);
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
 exports.notifyApprovals = function (operationClientConfigurationStatusList, subscriberOperation) {
     return new Promise(async function (resolve, reject) {
         let forwardingConfigurationInputList = [];
