@@ -221,25 +221,28 @@ exports.inquireApplicationTypeApprovals = function (body, user, originator, xCor
  * returns List
  **/
 exports.listApplications = function (user, originator, xCorrelator, traceIndicator, customerJourney) {
-  return new Promise(function (resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [{
-      "application-name": "TypeApprovalRegister",
-      "application-release-number": "0.0.1",
-      "application-address": "10.118.125.157",
-      "application-port": 1001
-    }, {
-      "application-name": "ExecutionAndTraceLog",
-      "application-release-number": "0.0.1",
-      "application-address": "10.118.125.157",
-      "application-port": 1002
-    }];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
+  return new Promise(async function (resolve, reject) {
+    let response = {};
+    try {
+      /****************************************************************************************
+       * Preparing response body
+       ****************************************************************************************/
+      let applicationList = await getAllRegisteredApplicationList();
+
+      /****************************************************************************************
+       * Setting 'application/json' response body
+       ****************************************************************************************/
+      response['application/json'] = onfAttributeFormatter.modifyJsonObjectKeysToKebabCase(applicationList);
+    } catch (error) {
+      console.log(error);
+    }
+    if (Object.keys(response).length > 0) {
+      resolve(response[Object.keys(response)[0]]);
     } else {
       resolve();
     }
   });
+
 }
 
 
@@ -254,27 +257,45 @@ exports.listApplications = function (user, originator, xCorrelator, traceIndicat
  * returns inline_response_200_2
  **/
 exports.listApplicationsInGenericRepresentation = function (user, originator, xCorrelator, traceIndicator, customerJourney) {
-  return new Promise(function (resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-      "consequent-action-list": [],
-      "response-value-list": [{
-        "field-name": "TypeApprovalRegister",
-        "value": "0.0.1",
-        "datatype": "String"
-      }, {
-        "field-name": "ExecutionAndTraceLog",
-        "value": "0.0.1",
-        "datatype": "String"
-      }]
-    };
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
+  return new Promise(async function (resolve, reject) {
+    let response = {};
+    try {
+      /****************************************************************************************
+       * Preparing consequent-action-list for response body
+       ****************************************************************************************/
+      let consequentActionList = [];
+
+      /****************************************************************************************
+       * Preparing response-value-list for response body
+       ****************************************************************************************/
+      let responseValueList = [];
+      let applicationList = await getAllRegisteredApplicationNameAndReleaseList();
+      for (let i = 0; i < applicationList.length; i++) {
+        let applicationName = applicationList[i]["application-name"];
+        let releaseNumber = applicationList[i]["release-number"];
+        let reponseValue = new responseValue(applicationName, releaseNumber, typeof releaseNumber);
+        responseValueList.push(reponseValue);
+      }
+
+      /****************************************************************************************
+       * Setting 'application/json' response body
+       ****************************************************************************************/
+      response['application/json'] = onfAttributeFormatter.modifyJsonObjectKeysToKebabCase({
+        consequentActionList,
+        responseValueList
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
+    if (Object.keys(response).length > 0) {
+      resolve(response[Object.keys(response)[0]]);
     } else {
       resolve();
     }
   });
 }
+
 
 
 /**
@@ -824,3 +845,91 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
     }
   });
 }
+
+/****************************************************************************************
+ * Functions utilized by individual services
+ ****************************************************************************************/
+
+/**
+ * @description This function returns list of registered application information application-name , release-number, application-address, application-port.
+ * @return {Promise} return the list of application information
+ * <b><u>Procedure :</u></b><br>
+ * <b>step 1 :</b> get all http client Interface and get the application name, release number and server-ltp<br>
+ * <b>step 2 :</b> get the ipaddress and port name of each associated tcp-client <br>
+ **/
+ function getAllRegisteredApplicationList() {
+  return new Promise(async function (resolve, reject) {
+    let clientApplicationList = [];
+    try {
+
+      /** 
+       * This class instantiate objects that holds the application name , release number, 
+       * IpAddress and port information of the registered client applications
+       */
+      let clientApplicationInformation = class ClientApplicationInformation {
+        applicationName;
+        applicationReleaseNumber;
+        applicationAddress;
+        applicationPort;
+
+        /**
+         * @constructor 
+         * @param {String} applicationName name of the client application.
+         * @param {String} applicationReleaseNumber release number of the application.
+         * @param {String} applicationAddress ip address of the application.
+         * @param {String} applicationPort port of the application.
+         **/
+        constructor(applicationName, applicationReleaseNumber, applicationAddress, applicationPort) {
+          this.applicationName = applicationName;
+          this.applicationReleaseNumber = applicationReleaseNumber;
+          this.applicationAddress = applicationAddress;
+          this.applicationPort = applicationPort;
+        }
+      };
+      let httpClientUuidList = await logicalTerminationPoint.getUuidListForTheProtocolAsync(layerProtocol.layerProtocolNameEnum.HTTP_CLIENT);
+      for (let i = 0; i < httpClientUuidList.length; i++) {
+        let httpClientUuid = httpClientUuidList[i];
+        let applicationName = await httpClientInterface.getApplicationNameAsync(httpClientUuid);
+        let applicationReleaseNumber = await httpClientInterface.getReleaseNumberAsync(httpClientUuid);
+        let serverLtp = await logicalTerminationPoint.getServerLtpListAsync(httpClientUuid);
+        let tcpClientUuid = serverLtp[0];
+        let applicationAddress = await tcpClientInterface.getRemoteAddressAsync(tcpClientUuid);
+        let applicationPort = await tcpClientInterface.getRemotePortAsync(tcpClientUuid);
+        let clientApplication = new clientApplicationInformation(applicationName, applicationReleaseNumber, applicationAddress, applicationPort);
+        clientApplicationList.push(clientApplication);
+      }
+      resolve(clientApplicationList);
+    } catch (error) {
+      reject();
+    }
+  });
+}
+
+/**
+ * @description This function returns list of registered application information application-name , release-number.
+ * @return {Promise} return the list of application information
+ * <b><u>Procedure :</u></b><br>
+ * <b>step 1 :</b> get all http client Interface and get the application name, release number and server-ltp<br>
+ * <b>step 2 :</b> get the ipaddress and port name of each associated tcp-client <br>
+ **/
+ function getAllRegisteredApplicationNameAndReleaseList() {
+  return new Promise(async function (resolve, reject) {
+    let clientApplicationList = [];
+    try {
+      let httpClientUuidList = await logicalTerminationPoint.getUuidListForTheProtocolAsync(layerProtocol.layerProtocolNameEnum.HTTP_CLIENT);
+      for (let i = 0; i < httpClientUuidList.length; i++) {
+        let clientApplication = {};
+        let httpClientUuid = httpClientUuidList[i];
+        let applicationName = await httpClientInterface.getApplicationNameAsync(httpClientUuid);
+        let applicationReleaseNumber = await httpClientInterface.getReleaseNumberAsync(httpClientUuid);
+        clientApplication["application-name"] = applicationName;
+        clientApplication["release-number"] = applicationReleaseNumber;
+        clientApplicationList.push(clientApplication);
+      }
+      resolve(clientApplicationList);
+    } catch (error) {
+      reject();
+    }
+  });
+}
+
