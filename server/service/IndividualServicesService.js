@@ -28,6 +28,8 @@ const onfAttributes = require('onf-core-model-ap/applicationPattern/onfModel/con
 const fileOperation = require('onf-core-model-ap/applicationPattern/databaseDriver/JSONDriver');
 const logicalTerminationPoint = require('onf-core-model-ap/applicationPattern/onfModel/models/LogicalTerminationPoint');
 const tcpClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/TcpClientInterface');
+const ForwardingDomain = require('onf-core-model-ap/applicationPattern/onfModel/models/ForwardingDomain');
+const ForwardingConstruct = require('onf-core-model-ap/applicationPattern/onfModel/models/ForwardingConstruct');
 /**
  * Initiates process of embedding a new release
  *
@@ -685,9 +687,75 @@ exports.relayOperationUpdate = function (body, user, originator, xCorrelator, tr
  * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * no response value expected for this operation
  **/
-exports.relayServerReplacement = function (body, user, originator, xCorrelator, traceIndicator, customerJourney) {
-  return new Promise(function (resolve, reject) {
-    resolve();
+exports.relayServerReplacement = function (body, user, originator, xCorrelator, traceIndicator, customerJourney, operationServerName) {
+  return new Promise(async function (resolve, reject) {
+    try {
+
+      /****************************************************************************************
+       * Setting up required local variables from the request body
+       ****************************************************************************************/
+      let applicationName = body["application-name"];
+      let oldApplicationReleaseNumber = body["old-application-release-number"];
+      let newApplicationReleaseNumber = body["new-application-release-number"];
+      let newApplicationAddress = body["new-application-address"];
+      let newApplicationPort = body["new-application-port"];
+
+      /****************************************************************************************
+       * decision making before proceeding with relay the server information
+       ****************************************************************************************/
+      let isRequestEligibleForRelaying = true;
+      let httpClientUuidOfNewApplication = await httpClientInterface.getHttpClientUuidAsync(applicationName, newApplicationReleaseNumber);
+      if (oldApplicationReleaseNumber == newApplicationReleaseNumber) {
+        isRequestEligibleForRelaying = false;
+      } else if (httpClientUuidOfNewApplication == undefined) {
+        isRequestEligibleForRelaying = false;
+      } else {
+        let updateClientOperationName = "/v1/update-client";
+        let operationClientUuidOfUpdateClientOperationName = await operationClientInterface.getOperationClientUuidAsync(
+          httpClientUuidOfNewApplication, 
+          updateClientOperationName
+          );
+        let forwardingConstructUuidOfServerReplacementBroadcast = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(
+          "ServerReplacementBroadcast");
+        let forwardingConstructUuidOfServerReplacementBroadcastUuid = forwardingConstructUuidOfServerReplacementBroadcast[onfAttributes.GLOBAL_CLASS.UUID];
+        let isFcPortExistsForUpdateClientOperationName = await ForwardingConstruct.isFcPortExistsAsync(
+          forwardingConstructUuidOfServerReplacementBroadcastUuid, 
+          operationClientUuidOfUpdateClientOperationName
+          );
+        if (!isFcPortExistsForUpdateClientOperationName) {
+          isRequestEligibleForRelaying = false;
+        }
+      }
+      
+     /****************************************************************************************
+       * Prepare attributes to automate forwarding-construct
+       ****************************************************************************************/
+      if(isRequestEligibleForRelaying){
+        let forwardingAutomationInputList;
+      
+        forwardingAutomationInputList = await prepareForwardingAutomation.relayServerReplacement(
+          applicationName,
+          oldApplicationReleaseNumber,
+          newApplicationReleaseNumber,
+          newApplicationAddress,
+          newApplicationPort
+        );
+
+      if (forwardingAutomationInputList) {
+        ForwardingAutomationService.automateForwardingConstructAsync(
+          operationServerName,
+          forwardingAutomationInputList,
+          user,
+          xCorrelator,
+          traceIndicator,
+          customerJourney
+        );
+      }
+      }      
+      resolve();
+    } catch (error) {
+      reject(error);
+    }
   });
 }
 

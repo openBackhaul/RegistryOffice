@@ -319,3 +319,34 @@ exports.inquireApplicationTypeApprovals = function (logicalTerminationPointconfi
         }
     });
 }
+
+exports.relayServerReplacement = function (applicationName, oldApplicationReleaseNumber, newApplicationReleaseNumber, newApplicationAddress, newApplicationPort) {
+    return new Promise(async function (resolve, reject) {
+        let forwardingConstructAutomationList = [];
+        try {
+
+            /***********************************************************************************
+             * ServerReplacementBroadcast /v1/update-client
+             ************************************************************************************/
+            let serverReplacementBroadcastForwardingName = "ServerReplacementBroadcast";
+            let serverReplacementBroadcastContext;
+            let serverReplacementBroadcastRequestBody = {};
+            serverReplacementBroadcastRequestBody.applicationName = applicationName;
+            serverReplacementBroadcastRequestBody.oldApplicationReleaseNumber = oldApplicationReleaseNumber;
+            serverReplacementBroadcastRequestBody.newApplicationReleaseNumber = newApplicationReleaseNumber;
+            serverReplacementBroadcastRequestBody.newApplicationAddress = newApplicationAddress;
+            serverReplacementBroadcastRequestBody.newApplicationPort = newApplicationPort;
+            serverReplacementBroadcastRequestBody = onfFormatter.modifyJsonObjectKeysToKebabCase(serverReplacementBroadcastRequestBody);
+            let forwardingAutomation = new forwardingConstructAutomationInput(
+                serverReplacementBroadcastForwardingName,
+                serverReplacementBroadcastRequestBody,
+                serverReplacementBroadcastContext
+            );
+            forwardingConstructAutomationList.push(forwardingAutomation);
+
+            resolve(forwardingConstructAutomationList);
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
