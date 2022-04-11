@@ -2081,7 +2081,7 @@
                                 "application-name": "AdministratorAdministration"
                             },
                             "http-client-interface-configuration": {
-                                "release-number": "0.0.1"
+                                "release-number": "0.0.6"
                             }
                         }
                     }
@@ -2424,10 +2424,10 @@
                             "tcp-client-interface-configuration": {
                                 "remote-address": {
                                     "ip-address": {
-                                        "ipv-4-address": "10.118.125.157"
+                                        "ipv-4-address": "192.168.178.22"
                                     }
                                 },
-                                "remote-port": 1005
+                                "remote-port": 8080
                             }
                         }
                     }
