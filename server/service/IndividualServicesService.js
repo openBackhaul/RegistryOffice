@@ -669,9 +669,73 @@ exports.registerApplication = function (body, user, originator, xCorrelator, tra
  * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * no response value expected for this operation
  **/
-exports.relayOperationUpdate = function (body, user, originator, xCorrelator, traceIndicator, customerJourney) {
-  return new Promise(function (resolve, reject) {
-    resolve();
+exports.relayOperationUpdate = function (body, user, originator, xCorrelator, traceIndicator, customerJourney, operationServerName) {
+  return new Promise(async function (resolve, reject) {
+    try {
+
+      /****************************************************************************************
+       * Setting up required local variables from the request body
+       ****************************************************************************************/
+      let applicationName = body["application-name"];
+      let applicationReleaseNumber = body["application-release-number"];
+      let oldOperationName = body["old-operation-name"];
+      let newOperationName = body["new-operation-name"];
+
+      /****************************************************************************************
+       * decision making before proceeding with relay the server information
+       ****************************************************************************************/
+      let isRequestEligibleForRelaying = true;
+      let httpClientUuidOfNewApplication = await httpClientInterface.getHttpClientUuidAsync(applicationName, applicationReleaseNumber);
+      if (oldOperationName == newOperationName) {
+        isRequestEligibleForRelaying = false;
+      } else if (httpClientUuidOfNewApplication == undefined) {
+        isRequestEligibleForRelaying = false;
+      } else {
+        let updateClientOperationName = "/v1/update-operation-client";
+        let operationClientUuidOfUpdateClientOperationName = await operationClientInterface.getOperationClientUuidAsync(
+          httpClientUuidOfNewApplication, 
+          updateClientOperationName
+          );
+        let forwardingConstructUuidOfOperationUpdateBroadcast = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(
+          "OperationUpdateBroadcast");
+        let forwardingConstructUuidOfOperationUpdateBroadcastUuid = forwardingConstructUuidOfOperationUpdateBroadcast[onfAttributes.GLOBAL_CLASS.UUID];
+        let isFcPortExistsForUpdateOperationClientOperationName = await ForwardingConstruct.isFcPortExistsAsync(
+          forwardingConstructUuidOfOperationUpdateBroadcastUuid, 
+          operationClientUuidOfUpdateClientOperationName
+          );
+        if (!isFcPortExistsForUpdateOperationClientOperationName) {
+          isRequestEligibleForRelaying = false;
+        }
+      }
+      
+     /****************************************************************************************
+       * Prepare attributes to automate forwarding-construct
+       ****************************************************************************************/
+      if(isRequestEligibleForRelaying){
+        let forwardingAutomationInputList;
+      
+        forwardingAutomationInputList = await prepareForwardingAutomation.relayOperationUpdate(
+          applicationName,
+          applicationReleaseNumber,
+          oldOperationName,
+          newOperationName
+        );
+
+      if (forwardingAutomationInputList) {
+        ForwardingAutomationService.automateForwardingConstructAsync(
+          operationServerName,
+          forwardingAutomationInputList,
+          user,
+          xCorrelator,
+          traceIndicator,
+          customerJourney
+        );
+      }
+      }      
+      resolve();
+    } catch (error) {
+      reject(error);
+    }
   });
 }
 
