@@ -142,11 +142,11 @@ exports.inquireApplicationTypeApprovals = function (body, user, originator, xCor
       /****************************************************************************************
        * Setting up required local variables from the request body
        ****************************************************************************************/
-       let applicationName = body["approval-application"];
-       let releaseNumber = body["approval-application-release-number"];
-       let applicationAddress = body["approval-application-address"];
-       let applicationPort = body["approval-application-port"];
-       let subscriberOperation = body["approval-operation"]; 
+      let applicationName = body["approval-application"];
+      let releaseNumber = body["approval-application-release-number"];
+      let applicationAddress = body["approval-application-address"];
+      let applicationPort = body["approval-application-port"];
+      let subscriberOperation = body["approval-operation"];
 
       /****************************************************************************************
        * Prepare logicalTerminatinPointConfigurationInput object to 
@@ -318,11 +318,11 @@ exports.notifyApprovals = function (body, user, originator, xCorrelator, traceIn
       /****************************************************************************************
        * Setting up required local variables from the request body
        ****************************************************************************************/
-       let applicationName = body["subscriber-application"];
-       let releaseNumber = body["subscriber-release-number"];
-       let applicationAddress = body["subscriber-address"];
-       let applicationPort = body["subscriber-port"];
-       let subscriberOperation = body["subscriber-operation"]; 
+      let applicationName = body["subscriber-application"];
+      let releaseNumber = body["subscriber-release-number"];
+      let applicationAddress = body["subscriber-address"];
+      let applicationPort = body["subscriber-port"];
+      let subscriberOperation = body["subscriber-operation"];
 
       /****************************************************************************************
        * Prepare logicalTerminatinPointConfigurationInput object to 
@@ -405,11 +405,11 @@ exports.notifyDeregistrations = function (body, user, originator, xCorrelator, t
       /****************************************************************************************
        * Setting up required local variables from the request body
        ****************************************************************************************/
-       let applicationName = body["subscriber-application"];
-       let releaseNumber = body["subscriber-release-number"];
-       let applicationAddress = body["subscriber-address"];
-       let applicationPort = body["subscriber-port"];
-       let subscriberOperation = body["subscriber-operation"]; 
+      let applicationName = body["subscriber-application"];
+      let releaseNumber = body["subscriber-release-number"];
+      let applicationAddress = body["subscriber-address"];
+      let applicationPort = body["subscriber-port"];
+      let subscriberOperation = body["subscriber-operation"];
 
       /****************************************************************************************
        * Prepare logicalTerminatinPointConfigurationInput object to 
@@ -493,11 +493,11 @@ exports.notifyWithdrawnApprovals = function (body, user, originator, xCorrelator
       /****************************************************************************************
        * Setting up required local variables from the request body
        ****************************************************************************************/
-       let applicationName = body["subscriber-application"];
-       let releaseNumber = body["subscriber-release-number"];
-       let applicationAddress = body["subscriber-address"];
-       let applicationPort = body["subscriber-port"];
-       let subscriberOperation = body["subscriber-operation"]; 
+      let applicationName = body["subscriber-application"];
+      let releaseNumber = body["subscriber-release-number"];
+      let applicationAddress = body["subscriber-address"];
+      let applicationPort = body["subscriber-port"];
+      let subscriberOperation = body["subscriber-operation"];
 
       /****************************************************************************************
        * Prepare logicalTerminatinPointConfigurationInput object to 
@@ -693,27 +693,27 @@ exports.relayOperationUpdate = function (body, user, originator, xCorrelator, tr
       } else {
         let updateClientOperationName = "/v1/update-operation-client";
         let operationClientUuidOfUpdateClientOperationName = await operationClientInterface.getOperationClientUuidAsync(
-          httpClientUuidOfNewApplication, 
+          httpClientUuidOfNewApplication,
           updateClientOperationName
-          );
+        );
         let forwardingConstructUuidOfOperationUpdateBroadcast = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(
           "OperationUpdateBroadcast");
         let forwardingConstructUuidOfOperationUpdateBroadcastUuid = forwardingConstructUuidOfOperationUpdateBroadcast[onfAttributes.GLOBAL_CLASS.UUID];
         let isFcPortExistsForUpdateOperationClientOperationName = await ForwardingConstruct.isFcPortExistsAsync(
-          forwardingConstructUuidOfOperationUpdateBroadcastUuid, 
+          forwardingConstructUuidOfOperationUpdateBroadcastUuid,
           operationClientUuidOfUpdateClientOperationName
-          );
+        );
         if (!isFcPortExistsForUpdateOperationClientOperationName) {
           isRequestEligibleForRelaying = false;
         }
       }
-      
-     /****************************************************************************************
+
+      /****************************************************************************************
        * Prepare attributes to automate forwarding-construct
        ****************************************************************************************/
-      if(isRequestEligibleForRelaying){
+      if (isRequestEligibleForRelaying) {
         let forwardingAutomationInputList;
-      
+
         forwardingAutomationInputList = await prepareForwardingAutomation.relayOperationUpdate(
           applicationName,
           applicationReleaseNumber,
@@ -721,17 +721,17 @@ exports.relayOperationUpdate = function (body, user, originator, xCorrelator, tr
           newOperationName
         );
 
-      if (forwardingAutomationInputList) {
-        ForwardingAutomationService.automateForwardingConstructAsync(
-          operationServerName,
-          forwardingAutomationInputList,
-          user,
-          xCorrelator,
-          traceIndicator,
-          customerJourney
-        );
+        if (forwardingAutomationInputList) {
+          ForwardingAutomationService.automateForwardingConstructAsync(
+            operationServerName,
+            forwardingAutomationInputList,
+            user,
+            xCorrelator,
+            traceIndicator,
+            customerJourney
+          );
+        }
       }
-      }      
       resolve();
     } catch (error) {
       reject(error);
@@ -776,27 +776,27 @@ exports.relayServerReplacement = function (body, user, originator, xCorrelator, 
       } else {
         let updateClientOperationName = "/v1/update-client";
         let operationClientUuidOfUpdateClientOperationName = await operationClientInterface.getOperationClientUuidAsync(
-          httpClientUuidOfNewApplication, 
+          httpClientUuidOfNewApplication,
           updateClientOperationName
-          );
+        );
         let forwardingConstructUuidOfServerReplacementBroadcast = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(
           "ServerReplacementBroadcast");
         let forwardingConstructUuidOfServerReplacementBroadcastUuid = forwardingConstructUuidOfServerReplacementBroadcast[onfAttributes.GLOBAL_CLASS.UUID];
         let isFcPortExistsForUpdateClientOperationName = await ForwardingConstruct.isFcPortExistsAsync(
-          forwardingConstructUuidOfServerReplacementBroadcastUuid, 
+          forwardingConstructUuidOfServerReplacementBroadcastUuid,
           operationClientUuidOfUpdateClientOperationName
-          );
+        );
         if (!isFcPortExistsForUpdateClientOperationName) {
           isRequestEligibleForRelaying = false;
         }
       }
-      
-     /****************************************************************************************
+
+      /****************************************************************************************
        * Prepare attributes to automate forwarding-construct
        ****************************************************************************************/
-      if(isRequestEligibleForRelaying){
+      if (isRequestEligibleForRelaying) {
         let forwardingAutomationInputList;
-      
+
         forwardingAutomationInputList = await prepareForwardingAutomation.relayServerReplacement(
           applicationName,
           oldApplicationReleaseNumber,
@@ -805,17 +805,17 @@ exports.relayServerReplacement = function (body, user, originator, xCorrelator, 
           newApplicationPort
         );
 
-      if (forwardingAutomationInputList) {
-        ForwardingAutomationService.automateForwardingConstructAsync(
-          operationServerName,
-          forwardingAutomationInputList,
-          user,
-          xCorrelator,
-          traceIndicator,
-          customerJourney
-        );
+        if (forwardingAutomationInputList) {
+          ForwardingAutomationService.automateForwardingConstructAsync(
+            operationServerName,
+            forwardingAutomationInputList,
+            user,
+            xCorrelator,
+            traceIndicator,
+            customerJourney
+          );
+        }
       }
-      }      
       resolve();
     } catch (error) {
       reject(error);
@@ -835,30 +835,66 @@ exports.relayServerReplacement = function (body, user, originator, xCorrelator, 
  * returns inline_response_200
  **/
 exports.startApplicationInGenericRepresentation = function (user, originator, xCorrelator, traceIndicator, customerJourney) {
-  return new Promise(function (resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-      "consequent-action-list": [{
-        "label": "List Registered Applications",
-        "request": "https://10.118.125.157:1000/v1/list-applications-in-generic-representation",
-        "display-in-new-browser-window": false
-      }, {
-        "label": "Inform about Application",
-        "request": "https://10.118.125.157:1000/v1/inform-about-application-in-generic-representation",
-        "display-in-new-browser-window": false
-      }],
-      "response-value-list": [{
-        "field-name": "applicationName",
-        "value": "OwnApplicationName",
-        "datatype": "String"
-      }]
-    };
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
+  return new Promise(async function (resolve, reject) {
+    let response = {};
+    try {
+      /****************************************************************************************
+       * Preparing consequent-action-list for response body
+       ****************************************************************************************/
+      let consequentActionList = [];
+
+      let protocol = "https";
+      let applicationAddress = await tcpServerInterface.getLocalAddress();
+      let applicationPort = await tcpServerInterface.getLocalPort();
+      let baseUrl = protocol + "://" + applicationAddress + ":" + applicationPort;
+
+      let LabelForListRegisteredApplication = "List Registered Applications";
+      let requestForListRegisteredApplication = baseUrl + await operationServerInterface.getOperationNameAsync("ro-0-0-1-op-s-3005");
+      let consequentActionForListRegisteredApplication = new consequentAction(
+        LabelForListRegisteredApplication,
+        requestForListRegisteredApplication,
+        false
+      );
+      consequentActionList.push(consequentActionForListRegisteredApplication);
+
+      let LabelForInformAboutApplication = "Inform about Application";
+      let requestForInformAboutApplication = baseUrl + await operationServerInterface.getOperationNameAsync("ro-0-0-1-op-s-2002");
+      let consequentActionForInformAboutApplication = new consequentAction(
+        LabelForInformAboutApplication,
+        requestForInformAboutApplication,
+        false
+      );
+      consequentActionList.push(consequentActionForInformAboutApplication);
+
+      /****************************************************************************************
+       * Preparing response-value-list for response body
+       ****************************************************************************************/
+      let responseValueList = [];
+      let applicationName = await httpServerInterface.getApplicationNameAsync();
+      let reponseValue = new responseValue(
+        "applicationName",
+        applicationName,
+        typeof applicationName
+      );
+      responseValueList.push(reponseValue);
+
+      /****************************************************************************************
+       * Setting 'application/json' response body
+       ****************************************************************************************/
+      response['application/json'] = onfAttributeFormatter.modifyJsonObjectKeysToKebabCase({
+        consequentActionList,
+        responseValueList
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    if (Object.keys(response).length > 0) {
+      resolve(response[Object.keys(response)[0]]);
     } else {
       resolve();
     }
   });
+
 }
 
 
@@ -989,7 +1025,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
  * <b>step 1 :</b> get all http client Interface and get the application name, release number and server-ltp<br>
  * <b>step 2 :</b> get the ipaddress and port name of each associated tcp-client <br>
  **/
- function getAllRegisteredApplicationList() {
+function getAllRegisteredApplicationList() {
   return new Promise(async function (resolve, reject) {
     let clientApplicationList = [];
     try {
@@ -1044,7 +1080,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
  * <b>step 1 :</b> get all http client Interface and get the application name, release number and server-ltp<br>
  * <b>step 2 :</b> get the ipaddress and port name of each associated tcp-client <br>
  **/
- function getAllRegisteredApplicationNameAndReleaseList() {
+function getAllRegisteredApplicationNameAndReleaseList() {
   return new Promise(async function (resolve, reject) {
     let clientApplicationList = [];
     try {
@@ -1064,4 +1100,3 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
     }
   });
 }
-
