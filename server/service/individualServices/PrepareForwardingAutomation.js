@@ -350,3 +350,33 @@ exports.relayServerReplacement = function (applicationName, oldApplicationReleas
         }
     });
 }
+
+exports.relayOperationUpdate = function (applicationName, applicationReleaseNumber, oldOperationName, newOperationName) {
+    return new Promise(async function (resolve, reject) {
+        let forwardingConstructAutomationList = [];
+        try {
+
+            /***********************************************************************************
+             * OperationUpdateBroadcast /v1/update-operation-client
+             ************************************************************************************/
+            let operationUpdateBroadcastForwardingName = "OperationUpdateBroadcast";
+            let operationUpdateBroadcastContext;
+            let operationUpdateBroadcastRequestBody = {};
+            operationUpdateBroadcastRequestBody.applicationName = applicationName;
+            operationUpdateBroadcastRequestBody.applicationReleaseNumber = applicationReleaseNumber;
+            operationUpdateBroadcastRequestBody.oldOperationName = oldOperationName;
+            operationUpdateBroadcastRequestBody.newOperationName = newOperationName;
+            operationUpdateBroadcastRequestBody = onfFormatter.modifyJsonObjectKeysToKebabCase(operationUpdateBroadcastRequestBody);
+            let forwardingAutomation = new forwardingConstructAutomationInput(
+                operationUpdateBroadcastForwardingName,
+                operationUpdateBroadcastRequestBody,
+                operationUpdateBroadcastContext
+            );
+            forwardingConstructAutomationList.push(forwardingAutomation);
+
+            resolve(forwardingConstructAutomationList);
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
