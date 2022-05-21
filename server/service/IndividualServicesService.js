@@ -65,8 +65,8 @@ exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, 
         let isUpdated = await httpClientInterface.setReleaseNumberAsync("ro-0-0-1-http-c-0000", releaseNumber);
         let currentApplicationRemoteAddress = await TcpServerInterface.getLocalAddress();
         let currentApplicationRemotePort = await TcpServerInterface.getLocalPort();
-        if((applicationAddress == currentApplicationRemoteAddress) && 
-        (applicationPort == currentApplicationRemotePort)){
+        if ((applicationAddress == currentApplicationRemoteAddress) &&
+          (applicationPort == currentApplicationRemotePort)) {
           isdataTransferRequired = false;
         }
         if (isUpdated) {
@@ -97,9 +97,9 @@ exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, 
             traceIndicator,
             customerJourney
           );
-        }        
-      } 
-      softwareUpgrade.upgradeSoftwareVersion(isdataTransferRequired, user, xCorrelator, traceIndicator, customerJourney);   
+        }
+      }
+      softwareUpgrade.upgradeSoftwareVersion(isdataTransferRequired, user, xCorrelator, traceIndicator, customerJourney);
       resolve();
     } catch (error) {
       reject(error);
@@ -212,58 +212,60 @@ exports.inquireApplicationTypeApprovals = function (body, user, originator, xCor
        * Prepare logicalTerminatinPointConfigurationInput object to 
        * configure logical-termination-point
        ****************************************************************************************/
-
-      let operationList = [
-        subscriberOperation
-      ];
-      let logicalTerminatinPointConfigurationInput = new LogicalTerminatinPointConfigurationInput(
-        applicationName,
-        releaseNumber,
-        applicationAddress,
-        applicationPort,
-        operationList
-      );
-      let logicalTerminationPointconfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationInformationAsync(
-        logicalTerminatinPointConfigurationInput
-      );
-
-
-      /****************************************************************************************
-       * Prepare attributes to configure forwarding-construct
-       ****************************************************************************************/
-
-      let forwardingConfigurationInputList = [];
-      let forwardingConstructConfigurationStatus;
-      let operationClientConfigurationStatusList = logicalTerminationPointconfigurationStatus.operationClientConfigurationStatusList;
-
-      if (operationClientConfigurationStatusList) {
-        forwardingConfigurationInputList = await prepareForwardingConfiguration.inquireApplicationTypeApprovals(
-          operationClientConfigurationStatusList,
+      let httpClientUuidOfExistingTypeApprovalApplication = "ro-0-0-1-http-c-2030";
+      let existingTypeApprovalApplicationName = await httpClientInterface.getApplicationNameAsync(httpClientUuidOfExistingTypeApprovalApplication);
+      if (applicationName == existingTypeApprovalApplicationName) {
+        let operationList = [
           subscriberOperation
+        ];
+        let logicalTerminatinPointConfigurationInput = new LogicalTerminatinPointConfigurationInput(
+          applicationName,
+          releaseNumber,
+          applicationAddress,
+          applicationPort,
+          operationList
         );
-        forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
-        configureForwardingConstructAsync(
+        let logicalTerminationPointconfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationInformationAsync(
+          logicalTerminatinPointConfigurationInput
+        );
+
+
+        /****************************************************************************************
+         * Prepare attributes to configure forwarding-construct
+         ****************************************************************************************/
+
+        let forwardingConfigurationInputList = [];
+        let forwardingConstructConfigurationStatus;
+        let operationClientConfigurationStatusList = logicalTerminationPointconfigurationStatus.operationClientConfigurationStatusList;
+
+        if (operationClientConfigurationStatusList) {
+          forwardingConfigurationInputList = await prepareForwardingConfiguration.inquireApplicationTypeApprovals(
+            operationClientConfigurationStatusList,
+            subscriberOperation
+          );
+          forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
+          configureForwardingConstructAsync(
+            operationServerName,
+            forwardingConfigurationInputList
+          );
+        }
+
+        /****************************************************************************************
+         * Prepare attributes to automate forwarding-construct
+         ****************************************************************************************/
+        let forwardingAutomationInputList = await prepareForwardingAutomation.inquireApplicationTypeApprovals(
+          logicalTerminationPointconfigurationStatus,
+          forwardingConstructConfigurationStatus
+        );
+        ForwardingAutomationService.automateForwardingConstructAsync(
           operationServerName,
-          forwardingConfigurationInputList
+          forwardingAutomationInputList,
+          user,
+          xCorrelator,
+          traceIndicator,
+          customerJourney
         );
       }
-
-      /****************************************************************************************
-       * Prepare attributes to automate forwarding-construct
-       ****************************************************************************************/
-      let forwardingAutomationInputList = await prepareForwardingAutomation.inquireApplicationTypeApprovals(
-        logicalTerminationPointconfigurationStatus,
-        forwardingConstructConfigurationStatus
-      );
-      ForwardingAutomationService.automateForwardingConstructAsync(
-        operationServerName,
-        forwardingAutomationInputList,
-        user,
-        xCorrelator,
-        traceIndicator,
-        customerJourney
-      );
-
       resolve();
     } catch (error) {
       reject(error);
