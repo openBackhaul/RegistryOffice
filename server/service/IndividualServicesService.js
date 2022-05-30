@@ -54,15 +54,16 @@ exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, 
       let releaseNumber = body["new-application-release"];
       let applicationAddress = body["new-application-address"];
       let applicationPort = body["new-application-port"];
-
+      
       /****************************************************************************************
        * Prepare logicalTerminatinPointConfigurationInput object to 
        * configure logical-termination-point
        ****************************************************************************************/
       let isdataTransferRequired = true;
+      let newReleaseUuid = await httpClientInterface.getHttpClientUuidAsync("NewRelease");
       let currentApplicationName = await httpServerInterface.getApplicationNameAsync();
       if (currentApplicationName == applicationName) {
-        let isUpdated = await httpClientInterface.setReleaseNumberAsync("ro-0-0-1-http-c-0000", releaseNumber);
+        let isUpdated = await httpClientInterface.setReleaseNumberAsync(newReleaseUuid, releaseNumber);
         let currentApplicationRemoteAddress = await TcpServerInterface.getLocalAddress();
         let currentApplicationRemotePort = await TcpServerInterface.getLocalPort();
         if ((applicationAddress == currentApplicationRemoteAddress) &&
@@ -70,7 +71,7 @@ exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, 
           isdataTransferRequired = false;
         }
         if (isUpdated) {
-          applicationName = await httpClientInterface.getApplicationNameAsync("ro-0-0-1-http-c-0000");
+          applicationName = await httpClientInterface.getApplicationNameAsync(newReleaseUuid);
           let operationList = [];
           let logicalTerminatinPointConfigurationInput = new LogicalTerminatinPointConfigurationInput(
             applicationName,
