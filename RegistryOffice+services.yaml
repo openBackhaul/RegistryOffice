@@ -41,14 +41,35 @@ servers:
       individual:
         - service-name: /v1/start-application-in-generic-representation
           uuid: op-s-3000
-        ## Services specific to this application
+        - service-name: /v1/register-application
+          uuid: op-s-3001
+        - service-name: /v1/deregister-application
+          uuid: op-s-3002
+        - service-name: /v1/regard-updated-approval-status
+          uuid: op-s-3003
+        - service-name: /v1/list-applications
+          uuid: op-s-3004
+        - service-name: /v1/list-applications-in-generic-representation
+          uuid: op-s-3005
+        - service-name: /v1/inquire-application-type-approvals
+          uuid: op-s-3006
+        - service-name: /v1/notify-deregistrations
+          uuid: op-s-3007
+        - service-name: /v1/notify-approvals
+          uuid: op-s-3008
+        - service-name: /v1/notify-withdrawn-approvals
+          uuid: op-s-3009
+        - service-name: /v1/relay-server-replacement
+          uuid: op-s-3010
+        - service-name: /v1/relay-operation-update
+          uuid: op-s-3011
   http-server:
     own-application-name: RegistryOffice
-    own-release-number: ## OwnReleaseNumber (e.g. 0.0.1)
+    own-release-number: 1.0.0
     uuid: http-s-0000
   tpc-server:
-    own-ip-address: ## OwnIpAddress
-    own-tcp-port: ## OwnTcpPort
+    own-ip-address: 10.118.125.157
+    own-tcp-port: 1000
     uuid: tcp-s-0000
 
 
