@@ -78,11 +78,11 @@ clients:
 
   - http-client:
       application-name: OldRelease
-      release-number: ## Number of Release to be substituted (e.g. 0.0.1)
+      release-number: 1.0.0
       uuid: http-c-0000
     tcp:
-      ip-address: ## IpAddress of Release to be substituted
-      tcp-port: ## TcpPort of Release to be substituted
+      ip-address: 10.118.125.157
+      tcp-port: 1000
       uuid: tcp-c-0000
     operation-clients:
       own-oam:
@@ -96,17 +96,26 @@ clients:
 
   - http-client:
       application-name: NewRelease
-      release-number: ## Number of substituting Release (e.g. 0.0.2)
+      release-number: 1.0.0
       uuid: http-c-0010
     tcp:
-      ip-address: ## IpAddress of substituting Release
-      tcp-port: ## TcpPort of substituting Release
+      ip-address: 10.118.125.157
+      tcp-port: 1000
       uuid: tcp-c-0010
     operation-clients:
       own-oam:
         basic:
         individual:
-          ## Services required for handing-over configuration or data during update
+          - service-name: /v1/inquire-application-type-approvals
+            uuid: op-c-1010
+          - service-name: /v1/notify-deregistrations
+            uuid: op-c-1011
+          - service-name: /v1/notify-approvals
+            uuid: op-c-1012
+          - service-name: /v1/notify-withdrawn-approvals
+            uuid: op-c-1013
+          - service-name: /v1/register-application
+            uuid: op-c-1014
       service:
         basic:
         individual:
@@ -133,9 +142,13 @@ clients:
         individual:
       service:
         basic:
-          ## Clients specific to this application, but addressing all other applications
+          - service-name: /v1/embed-yourself
+            uuid: op-c-2020
+          - service-name: /v1/update-client
+            uuid: op-c-2021
+          - service-name: /v1/update-operation-client
+            uuid: op-c-2022
         individual:
-          ## Clients specific to this application
 
   - http-client:
       application-name: TypeApprovalRegister
@@ -151,9 +164,19 @@ clients:
         individual:
       service:
         basic:
-          ## Clients specific to this application, but addressing all other applications
+          - service-name: /v1/embed-yourself
+            uuid: op-c-2030
+          - service-name: /v1/update-client
+            uuid: op-c-2031
+          - service-name: /v1/update-operation-client
+            uuid: op-c-2032
         individual:
-          ## Clients specific to this application
+          - service-name: /v1/redirect-info-about-approval-status-changes
+            uuid: op-c-3030
+          - service-name: /v1/regard-application
+            uuid: op-c-3031
+          - service-name: /v1/disregard-application
+            uuid: op-c-3032
 
   - http-client:
       application-name: ExecutionAndTraceLog
@@ -171,9 +194,17 @@ clients:
         individual:
       service:
         basic:
-          ## Clients specific to this application, but addressing all other applications
+          - service-name: /v1/embed-yourself
+            uuid: op-c-2040
+          - service-name: /v1/update-client
+            uuid: op-c-2041
+          - service-name: /v1/update-operation-client
+            uuid: op-c-2042
         individual:
-          ## Clients specific to this application
+          - service-name: /v1/regard-application
+            uuid: op-c-3041
+          - service-name: /v1/disregard-application
+            uuid: op-c-3042
 
   - http-client:
       application-name: OamLog
@@ -191,9 +222,17 @@ clients:
         individual:
       service:
         basic:
-          ## Clients specific to this application, but addressing all other applications
+          - service-name: /v1/embed-yourself
+            uuid: op-c-2050
+          - service-name: /v1/update-client
+            uuid: op-c-2051
+          - service-name: /v1/update-operation-client
+            uuid: op-c-2052
         individual:
-          ## Clients specific to this application
+          - service-name: /v1/regard-application
+            uuid: op-c-3051
+          - service-name: /v1/disregard-application
+            uuid: op-c-3052
 
   - http-client:
       application-name: AdministratorAdministration
@@ -211,9 +250,17 @@ clients:
         individual:
       service:
         basic:
-          ## Clients specific to this application, but addressing all other applications
+          - service-name: /v1/embed-yourself
+            uuid: op-c-2060
+          - service-name: /v1/update-client
+            uuid: op-c-2061
+          - service-name: /v1/update-operation-client
+            uuid: op-c-2062
         individual:
-          ## Clients specific to this application
+          - service-name: /v1/regard-application
+            uuid: op-c-3061
+          - service-name: /v1/disregard-application
+            uuid: op-c-3062
 
   - http-client:
       application-name: ApplicationLayerTopology
@@ -241,9 +288,17 @@ clients:
         individual:
       service:
         basic:
-          ## Clients specific to this application, but addressing all other applications
+          - service-name: /v1/embed-yourself
+            uuid: op-c-2070
+          - service-name: /v1/update-client
+            uuid: op-c-2071
+          - service-name: /v1/update-operation-client
+            uuid: op-c-2072
         individual:
-          ## Clients specific to this application
+          - service-name: /v1/regard-application
+            uuid: op-c-3071
+          - service-name: /v1/disregard-application
+            uuid: op-c-3072
 
   - http-client:
       application-name: OperationKeyManagement
@@ -259,16 +314,24 @@ clients:
         individual:
       service:
         basic:
-          ## Clients specific to this application, but addressing all other applications
+          - service-name: /v1/embed-yourself
+            uuid: op-c-2080
+          - service-name: /v1/update-client
+            uuid: op-c-2081
+          - service-name: /v1/update-operation-client
+            uuid: op-c-2082
         individual:
-          ## Clients specific to this application
+          - service-name: /v1/regard-application
+            uuid: op-c-3081
+          - service-name: /v1/disregard-application
+            uuid: op-c-3082
 
   - http-client:
       application-name: CurrentController
       release-number: 0.0.1
       uuid: http-c-2300
     tcp:
-      ip-address: 10.118.125.157
+      ip-address: 10.118.125.186
       tcp-port: 2000
       uuid: tcp-c-2300
     operation-clients:
@@ -277,6 +340,10 @@ clients:
         individual:
       service:
         basic:
-          ## Clients specific to this application, but addressing all other applications
+          - service-name: /v1/embed-yourself
+            uuid: op-c-2300
+          - service-name: /v1/update-client
+            uuid: op-c-2301
+          - service-name: /v1/update-operation-client
+            uuid: op-c-2302
         individual:
-          ## Clients specific to this application
