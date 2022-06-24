@@ -6,7 +6,7 @@
 - 1.0.0-tsi.d.t : Defintion to be used within the Transport SDN Introduction at Telefonica Germany
 
 ### Services
-- [RegistryOffice_0.0.1_tsi.220210.1845+services.1](./RegistryOffice_0.0.1_tsi.220210.1845+services.1.xlsx)
+- [RegistryOffice+services](./RegistryOffice+services.yaml)
 
 ### Forwardings
 - [RegistryOffice_0.0.1_tsi.220210.1845+forwardings.1](./RegistryOffice_0.0.1_tsi.220210.1845+forwardings.1.xlsx)
