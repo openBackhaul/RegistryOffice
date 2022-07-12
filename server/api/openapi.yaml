@@ -3,7 +3,7 @@ info:
   title: RegistryOffice
   version: 0.0.2
 paths:
-  /v1/bequeath-your-data-and-die:
+  /ro/v1/bequeath-your-data-and-die:
     post:
       tags:
       - IndividualServices
@@ -3094,7 +3094,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: IndividualServices
-  /v1/start-application-in-generic-representation:
+  /ro/v1/start-application-in-generic-representation:
     post:
       tags:
       - IndividualServices
@@ -3423,7 +3423,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: IndividualServices
-  /v1/register-application:
+  /ro/v1/register-application:
     post:
       tags:
       - IndividualServices
@@ -4074,7 +4074,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: IndividualServices
-  /v1/deregister-application:
+  /ro/v1/deregister-application:
     post:
       tags:
       - IndividualServices
@@ -4405,7 +4405,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: IndividualServices
-  /v1/regard-updated-approval-status:
+  /ro/v1/regard-updated-approval-status:
     post:
       tags:
       - IndividualServices
@@ -5355,7 +5355,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: IndividualServices
-  /v1/list-applications:
+  /ro/v1/list-applications:
     post:
       tags:
       - IndividualServices
@@ -5697,7 +5697,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: IndividualServices
-  /v1/list-applications-in-generic-representation:
+  /ro/v1/list-applications-in-generic-representation:
     post:
       tags:
       - IndividualServices
@@ -6026,7 +6026,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: IndividualServices
-  /v1/inquire-application-type-approvals:
+  /ro/v1/inquire-application-type-approvals:
     post:
       tags:
       - IndividualServices
@@ -6650,7 +6650,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: IndividualServices
-  /v1/notify-deregistrations:
+  /ro/v1/notify-deregistrations:
     post:
       tags:
       - IndividualServices
@@ -7274,7 +7274,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: IndividualServices
-  /v1/notify-approvals:
+  /ro/v1/notify-approvals:
     post:
       tags:
       - IndividualServices
@@ -7912,7 +7912,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: IndividualServices
-  /v1/notify-withdrawn-approvals:
+  /ro/v1/notify-withdrawn-approvals:
     post:
       tags:
       - IndividualServices
@@ -8538,7 +8538,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: IndividualServices
-  /v1/relay-server-replacement:
+  /ro/v1/relay-server-replacement:
     post:
       tags:
       - IndividualServices
@@ -8869,7 +8869,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: IndividualServices
-  /v1/relay-operation-update:
+  /ro/v1/relay-operation-update:
     post:
       tags:
       - IndividualServices
@@ -9200,7 +9200,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: IndividualServices
-  /v1/register-yourself:
+  /ro/v1/register-yourself:
     post:
       tags:
       - BasicServices
@@ -9846,7 +9846,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: BasicServices
-  /v1/embed-yourself:
+  /ro/v1/embed-yourself:
     post:
       tags:
       - BasicServices
@@ -10479,7 +10479,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: BasicServices
-  /v1/redirect-service-request-information:
+  /ro/v1/redirect-service-request-information:
     post:
       tags:
       - BasicServices
@@ -11153,7 +11153,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: BasicServices
-  /v1/redirect-oam-request-information:
+  /ro/v1/redirect-oam-request-information:
     post:
       tags:
       - BasicServices
@@ -11812,7 +11812,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: BasicServices
-  /v1/end-subscription:
+  /ro/v1/end-subscription:
     post:
       tags:
       - BasicServices
@@ -12143,7 +12143,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: BasicServices
-  /v1/inquire-oam-request-approvals:
+  /ro/v1/inquire-oam-request-approvals:
     post:
       tags:
       - BasicServices
@@ -12820,7 +12820,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: BasicServices
-  /v1/update-client:
+  /ro/v1/update-client:
     post:
       tags:
       - BasicServices
@@ -13151,7 +13151,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: BasicServices
-  /v1/list-ltps-and-fcs:
+  /ro/v1/list-ltps-and-fcs:
     post:
       tags:
       - BasicServices
@@ -13480,7 +13480,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: BasicServices
-  /v1/redirect-topology-change-information:
+  /ro/v1/redirect-topology-change-information:
     post:
       tags:
       - BasicServices
@@ -17875,7 +17875,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: BasicServices
-  /v1/update-operation-key:
+  /ro/v1/update-operation-key:
     post:
       tags:
       - BasicServices
@@ -18206,7 +18206,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: BasicServices
-  /v1/update-operation-client:
+  /ro/v1/update-operation-client:
     post:
       tags:
       - BasicServices
@@ -18538,7 +18538,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: BasicServices
-  /v1/inform-about-application:
+  /ro/v1/inform-about-application:
     post:
       tags:
       - BasicServices
@@ -18793,7 +18793,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorDescription'
       x-swagger-router-controller: BasicServices
-  /v1/inform-about-application-in-generic-representation:
+  /ro/v1/inform-about-application-in-generic-representation:
     post:
       tags:
       - BasicServices
@@ -19048,7 +19048,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorDescription'
       x-swagger-router-controller: BasicServices
-  /v1/inform-about-release-history:
+  /ro/v1/inform-about-release-history:
     post:
       tags:
       - BasicServices
@@ -19311,7 +19311,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorDescription'
       x-swagger-router-controller: BasicServices
-  /v1/inform-about-release-history-in-generic-representation:
+  /ro/v1/inform-about-release-history-in-generic-representation:
     post:
       tags:
       - BasicServices
@@ -21582,7 +21582,6 @@ components:
           description: "'Release of application that shall be target of the handover\
             \ process find or update [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-0010/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'\n"
         new-application-address:
-          pattern: "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
           type: string
           description: "'IP address of application that shall be target of the handover\
             \ process update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-0010/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'\n"
@@ -21671,7 +21670,6 @@ components:
           description: "'Name of service for broadcasting server changes update or\
             \ create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-*/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
         application-address:
-          pattern: "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
           type: string
           description: "'IP address of application that wants to register update or\
             \ create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'\n"
@@ -21816,7 +21814,6 @@ components:
           description: "'Operation that shall be addressed by information about new\
             \ registrations update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-3031/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
         approval-application-address:
-          pattern: "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
           type: string
           description: "'IP address of application that wants to receive information\
             \ about new registrations update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-2030/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'\n"
@@ -21856,7 +21853,6 @@ components:
           description: "'Names of the operation that shall be addressed by notifications\
             \ about obsolete registrations update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-3??2/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
         subscriber-address:
-          pattern: "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
           type: string
           description: "'IP address of application that wants to receive notifications\
             \ about obsolete registrations update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'\n"
@@ -21896,7 +21892,6 @@ components:
           description: "'Names of the operation that shall be addressed by notifications\
             \ about new approvals update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-???1/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
         subscriber-address:
-          pattern: "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
           type: string
           description: "'IP address of application that wants to receive notifications\
             \ about new approvals update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'\n"
@@ -21936,7 +21931,6 @@ components:
           description: "'Names of the operation that shall be addressed by notifications\
             \ about withdrawn approvals update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-c-???2/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
         subscriber-address:
-          pattern: "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
           type: string
           description: "'IP address of application that wants to receive notifications\
             \ about withdrawn approvals update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'\n"
@@ -21980,7 +21974,6 @@ components:
           description: "'Future release number of the application that has updated\
             \ connection data forward to [$/v1/regard-updated-approval-status.callbacks.ServerReplacementBroadcast.body#new-application-release-number]'\n"
         new-application-address:
-          pattern: "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
           type: string
           description: "'Future IP address of the application that has updated connection\
             \ data forward to [$/v1/regard-updated-approval-status.callbacks.ServerReplacementBroadcast.body#new-application-address]'\n"
@@ -22051,7 +22044,6 @@ components:
           description: "'If body provided, operation for registering update or create\
             \ [/core-model-1-4:control-construct/logical-termination-point=*-0-0-1-op-c-0020/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
         registry-office-address:
-          pattern: "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
           type: string
           description: "'If body provided, IP address of RegistryOffice application\
             \ update or create [/core-model-1-4:control-construct/logical-termination-point=*-0-0-1-tcp-c-0020/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'\n"
@@ -22099,7 +22091,6 @@ components:
           description: "'Operation for deregistering from the application layer update\
             \ or create [/core-model-1-4:control-construct/logical-termination-point=*-0-0-1-op-c-0022/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
         registry-office-address:
-          pattern: "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
           type: string
           description: "'IP address of RegistryOffice application update or create\
             \ [/core-model-1-4:control-construct/logical-termination-point=*-0-0-1-tcp-c-0020/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'\n"
@@ -22139,7 +22130,6 @@ components:
           type: string
           description: "'Operation for recording the service requests update [/core-model-1-4:control-construct/logical-termination-point=*-0-0-1-op-c-0040/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
         service-log-address:
-          pattern: "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
           type: string
           description: "'IP address of application that shall record the service requests\
             \ update [/core-model-1-4:control-construct/logical-termination-point=*-0-0-1-tcp-c-0040/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'\n"
@@ -22178,7 +22168,6 @@ components:
           type: string
           description: "'Operation for recording the OaM requests update [/core-model-1-4:control-construct/logical-termination-point=*-0-0-1-op-c-0050/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
         oam-log-address:
-          pattern: "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
           type: string
           description: "'IP address of application that shall record the OaM requests\
             \ update [/core-model-1-4:control-construct/logical-termination-point=*-0-0-1-tcp-c-0050/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'\n"
@@ -22243,7 +22232,6 @@ components:
           description: "'Operation for approving the OaM requests update or create\
             \ [/core-model-1-4:control-construct/logical-termination-point=*-0-0-1-op-c-0060/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
         oam-approval-address:
-          pattern: "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
           type: string
           description: "'IP address of application that shall approve the OaM requests\
             \ update or create [/core-model-1-4:control-construct/logical-termination-point=*-0-0-1-tcp-c-0060/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'\n"
@@ -22285,7 +22273,6 @@ components:
           description: "'Future release number of the application that has updated\
             \ connection data update [/core-model-1-4:control-construct/logical-termination-point=*-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'\n"
         new-application-address:
-          pattern: "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
           type: string
           description: "'Future IP address of the application that has updated connection\
             \ data update [/core-model-1-4:control-construct/logical-termination-point=*-0-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'\n"
@@ -22411,7 +22398,6 @@ components:
           type: string
           description: "'Operation for deleting an FC port update or create [/core-model-1-4:control-construct/logical-termination-point=*-0-0-1-op-c-0075/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'\n"
         topology-application-address:
-          pattern: "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
           type: string
           description: "'IP address of application that shall record the service requests\
             \ update or create [/core-model-1-4:control-construct/logical-termination-point=*-0-0-1-tcp-c-0070/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'\n"
@@ -22890,7 +22876,6 @@ components:
       type: object
       properties:
         tcp-server-interface-1-0:ipv-4-address:
-          pattern: "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
           type: string
           example: 10.118.125.157
     inline_response_200_20:
@@ -23045,7 +23030,6 @@ components:
       type: object
       properties:
         tcp-client-interface-1-0:ipv-4-address:
-          pattern: "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
           type: string
           example: 10.118.125.157
     inline_response_200_29:
