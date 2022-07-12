@@ -4,7 +4,7 @@ var path = require('path');
 var http = require('http');
 
 var oas3Tools = require('oas3-tools');
-var serverPort = 3000;
+var serverPort = 3010;
 
 const authorizingService = require('onf-core-model-ap-bs/basicServices/AuthorizingService');
 const operationServerInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/OperationServerInterface');
