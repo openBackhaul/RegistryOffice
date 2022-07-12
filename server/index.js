@@ -33,6 +33,9 @@ var options = {
                 basicAuth: validateBasicAuth
             }
         }
+    },
+    swaggerUI : {
+        swaggerUIPath: '/ro/docs'
     }
 };
 
