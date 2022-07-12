@@ -2,8 +2,11 @@ openapi: 3.0.0
 info:
   title: RegistryOffice
   version: 0.0.2
+servers:
+- url: /ro
+  description: Initial deployment
 paths:
-  /ro/v1/bequeath-your-data-and-die:
+  /v1/bequeath-your-data-and-die:
     post:
       tags:
       - IndividualServices
@@ -3094,7 +3097,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: IndividualServices
-  /ro/v1/start-application-in-generic-representation:
+  /v1/start-application-in-generic-representation:
     post:
       tags:
       - IndividualServices
@@ -3423,7 +3426,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: IndividualServices
-  /ro/v1/register-application:
+  /v1/register-application:
     post:
       tags:
       - IndividualServices
@@ -4074,7 +4077,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: IndividualServices
-  /ro/v1/deregister-application:
+  /v1/deregister-application:
     post:
       tags:
       - IndividualServices
@@ -4405,7 +4408,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: IndividualServices
-  /ro/v1/regard-updated-approval-status:
+  /v1/regard-updated-approval-status:
     post:
       tags:
       - IndividualServices
@@ -5355,7 +5358,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: IndividualServices
-  /ro/v1/list-applications:
+  /v1/list-applications:
     post:
       tags:
       - IndividualServices
@@ -5697,7 +5700,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: IndividualServices
-  /ro/v1/list-applications-in-generic-representation:
+  /v1/list-applications-in-generic-representation:
     post:
       tags:
       - IndividualServices
@@ -6026,7 +6029,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: IndividualServices
-  /ro/v1/inquire-application-type-approvals:
+  /v1/inquire-application-type-approvals:
     post:
       tags:
       - IndividualServices
@@ -6650,7 +6653,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: IndividualServices
-  /ro/v1/notify-deregistrations:
+  /v1/notify-deregistrations:
     post:
       tags:
       - IndividualServices
@@ -7274,7 +7277,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: IndividualServices
-  /ro/v1/notify-approvals:
+  /v1/notify-approvals:
     post:
       tags:
       - IndividualServices
@@ -7912,7 +7915,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: IndividualServices
-  /ro/v1/notify-withdrawn-approvals:
+  /v1/notify-withdrawn-approvals:
     post:
       tags:
       - IndividualServices
@@ -8538,7 +8541,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: IndividualServices
-  /ro/v1/relay-server-replacement:
+  /v1/relay-server-replacement:
     post:
       tags:
       - IndividualServices
@@ -8869,7 +8872,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: IndividualServices
-  /ro/v1/relay-operation-update:
+  /v1/relay-operation-update:
     post:
       tags:
       - IndividualServices
@@ -9200,7 +9203,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: IndividualServices
-  /ro/v1/register-yourself:
+  /v1/register-yourself:
     post:
       tags:
       - BasicServices
@@ -9846,7 +9849,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: BasicServices
-  /ro/v1/embed-yourself:
+  /v1/embed-yourself:
     post:
       tags:
       - BasicServices
@@ -10479,7 +10482,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: BasicServices
-  /ro/v1/redirect-service-request-information:
+  /v1/redirect-service-request-information:
     post:
       tags:
       - BasicServices
@@ -11153,7 +11156,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: BasicServices
-  /ro/v1/redirect-oam-request-information:
+  /v1/redirect-oam-request-information:
     post:
       tags:
       - BasicServices
@@ -11812,7 +11815,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: BasicServices
-  /ro/v1/end-subscription:
+  /v1/end-subscription:
     post:
       tags:
       - BasicServices
@@ -12143,7 +12146,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: BasicServices
-  /ro/v1/inquire-oam-request-approvals:
+  /v1/inquire-oam-request-approvals:
     post:
       tags:
       - BasicServices
@@ -12820,7 +12823,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: BasicServices
-  /ro/v1/update-client:
+  /v1/update-client:
     post:
       tags:
       - BasicServices
@@ -13151,7 +13154,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: BasicServices
-  /ro/v1/list-ltps-and-fcs:
+  /v1/list-ltps-and-fcs:
     post:
       tags:
       - BasicServices
@@ -13480,7 +13483,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: BasicServices
-  /ro/v1/redirect-topology-change-information:
+  /v1/redirect-topology-change-information:
     post:
       tags:
       - BasicServices
@@ -17875,7 +17878,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: BasicServices
-  /ro/v1/update-operation-key:
+  /v1/update-operation-key:
     post:
       tags:
       - BasicServices
@@ -18206,7 +18209,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: BasicServices
-  /ro/v1/update-operation-client:
+  /v1/update-operation-client:
     post:
       tags:
       - BasicServices
@@ -18538,7 +18541,7 @@ paths:
       security:
       - apiKeyAuth: []
       x-swagger-router-controller: BasicServices
-  /ro/v1/inform-about-application:
+  /v1/inform-about-application:
     post:
       tags:
       - BasicServices
@@ -18793,7 +18796,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorDescription'
       x-swagger-router-controller: BasicServices
-  /ro/v1/inform-about-application-in-generic-representation:
+  /v1/inform-about-application-in-generic-representation:
     post:
       tags:
       - BasicServices
@@ -19048,7 +19051,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorDescription'
       x-swagger-router-controller: BasicServices
-  /ro/v1/inform-about-release-history:
+  /v1/inform-about-release-history:
     post:
       tags:
       - BasicServices
@@ -19311,7 +19314,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/errorDescription'
       x-swagger-router-controller: BasicServices
-  /ro/v1/inform-about-release-history-in-generic-representation:
+  /v1/inform-about-release-history-in-generic-representation:
     post:
       tags:
       - BasicServices
