@@ -6,6 +6,7 @@ var restResponseHeader = require('onf-core-model-ap/applicationPattern/rest/serv
 var restResponseBuilder = require('onf-core-model-ap/applicationPattern/rest/server/ResponseBuilder');
 var executionAndTraceService = require('onf-core-model-ap-bs/basicServices/ExecutionAndTraceService');
 var IndividualServices = require('../service/IndividualServicesService');
+const ms = require('microseconds')
 
 module.exports.bequeathYourDataAndDie = async function bequeathYourDataAndDie(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
   try {
@@ -194,6 +195,8 @@ module.exports.registerApplication = async function registerApplication(req, res
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
+    const now = ms.now();
+    console.log("registerApplication $$$$$$$$$$$$$$ " + ms.parse(now) + "$$$$$$$$$$$$$$")
   } catch (error) {}
 };
 
@@ -278,5 +281,7 @@ module.exports.updateApprovalStatus = async function updateApprovalStatus(req, r
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
+    const now = ms.now();
+    console.log("updateApprovalStatus $$$$$$$$$$$$$$ " + ms.parse(now) + "$$$$$$$$$$$$$$")
   } catch (error) {}
 };
