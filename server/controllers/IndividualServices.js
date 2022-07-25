@@ -195,8 +195,9 @@ module.exports.registerApplication = async function registerApplication(req, res
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
+    let applicationName = body["application-name"];
     const now = ms.now();
-    console.log("registerApplication $$$$$$$$$$$$$$ " + ms.parse(now) + "$$$$$$$$$$$$$$")
+    console.log("Timestamp for registering the application " + applicationName + " is " + ms.parse(now) )
   } catch (error) {}
 };
 
@@ -281,7 +282,8 @@ module.exports.updateApprovalStatus = async function updateApprovalStatus(req, r
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
+    let applicationName = body["application-name"];
     const now = ms.now();
-    console.log("updateApprovalStatus $$$$$$$$$$$$$$ " + ms.parse(now) + "$$$$$$$$$$$$$$")
+    console.log("Timestamp for receiving approval status for the " + applicationName + " is " + ms.parse(now) )
   } catch (error) {}
 };
