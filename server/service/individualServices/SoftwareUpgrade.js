@@ -25,7 +25,7 @@ const OperationServerInterface = require('onf-core-model-ap/applicationPattern/o
  * @param {String} xCorrelator String UUID for the service execution flow that allows to correlate requests and responses
  * @param {String} traceIndicator String Sequence of request numbers along the flow
  * @param {String} customerJourney String Holds information supporting customer’s journey to which the execution applies
- * @returns {boolean} return true if the operation is success or else return false<br>
+ * @returns {Promise} Promise is resolved if the operation succeeded else the Promise is rejected<br>
  * The following are the list of forwarding-construct that will be automated to transfer the data from this current release to next release
  * 1. PromptForBequeathingDataCausesNewApplicationBeingRequestedToInquireForApplicationTypeApprovals
  * 2. PromptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredApplications
