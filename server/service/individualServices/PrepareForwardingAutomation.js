@@ -80,7 +80,7 @@ exports.deregisterApplication = function (logicalTerminationPointconfigurationSt
             /***********************************************************************************
              * forwardings for application layer topology
              ************************************************************************************/
-            let applicationLayerTopologyForwardingInputList = await prepareALTForwardingAutomation.getALTForwardingAutomationInputAsync(
+            let applicationLayerTopologyForwardingInputList = await prepareALTForwardingAutomation.getALTUnConfigureForwardingAutomationInputAsync(
                 logicalTerminationPointconfigurationStatus,
                 forwardingConstructConfigurationStatus
             );
