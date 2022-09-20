@@ -9,7 +9,7 @@
 - [RegistryOffice+services](./RegistryOffice+services.yaml)
 
 ### Forwardings
-- [RegistryOffice_0.0.1_tsi.220210.1845+forwardings.1](./RegistryOffice_0.0.1_tsi.220210.1845+forwardings.1.xlsx)
+- [RegistryOffice_0.0.1_tsi.220210.1845+forwardings.2](./RegistryOffice_0.0.1_tsi.220210.1845+forwardings.2.xlsx)
 
 ### Open API specification (Swagger)
 - [RegistryOffice_0.0.1_tsi.220210.1845](./RegistryOffice_0.0.1_tsi.date.time.yaml)
