@@ -105,6 +105,16 @@ clients:
     operation-clients:
       own-oam:
         basic:
+          - service-name: /v1/embed-yourself
+            uuid: ro-1-0-0-op-c-0010
+          - service-name: /v1/redirect-service-request-information
+            uuid: ro-1-0-0-op-c-0011
+          - service-name: /v1/redirect-oam-request-information
+            uuid: ro-1-0-0-op-c-0012
+          - service-name: /v1/inquire-oam-request-approvals
+            uuid: ro-1-0-0-op-c-0013
+          - service-name: /v1/redirect-topology-change-information
+            uuid: ro-1-0-0-op-c-0014
         individual:
           - service-name: /v1/inquire-application-type-approvals
             uuid: ro-1-0-0-op-c-1010
