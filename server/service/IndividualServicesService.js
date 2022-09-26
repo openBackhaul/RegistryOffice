@@ -32,6 +32,7 @@ const tcpClientInterface = require('onf-core-model-ap/applicationPattern/onfMode
 const ForwardingDomain = require('onf-core-model-ap/applicationPattern/onfModel/models/ForwardingDomain');
 const ForwardingConstruct = require('onf-core-model-ap/applicationPattern/onfModel/models/ForwardingConstruct');
 const TcpServerInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/TcpServerInterface');
+const FcPort = require('onf-core-model-ap/applicationPattern/onfModel/models/FcPort');
 /**
  * Initiates process of embedding a new release
  *
@@ -1086,12 +1087,17 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
  * @description This function returns list of registered application information application-name , release-number, application-address, application-port.
  * @return {Promise} return the list of application information
  * <b><u>Procedure :</u></b><br>
- * <b>step 1 :</b> get all http client Interface and get the application name, release number and server-ltp<br>
- * <b>step 2 :</b> get the ipaddress and port name of each associated tcp-client <br>
+ * <b>step 1 :</b> Get forwarding-construct based on ForwardingName
+ * <b>step 2 :</b> Get forwarding-construct UUID
+ * <b>step 3 :</b> Get fc-port list using forwarding-construct UUID
+ * <b>step 4 :</b> Fetch http-client-list using logical-termination-point uuid from fc-port
+ * <b>step 5 :</b> get the application name, release number and server-ltp<br>
+ * <b>step 6 :</b> get the ipaddress and port name of each associated tcp-client <br>
  **/
 function getAllRegisteredApplicationList() {
   return new Promise(async function (resolve, reject) {
     let clientApplicationList = [];
+    const forwardingName = "ServerReplacementBroadcast";
     try {
 
       /** 
@@ -1118,7 +1124,18 @@ function getAllRegisteredApplicationList() {
           this.applicationPort = applicationPort;
         }
       };
-      let httpClientUuidList = await logicalTerminationPoint.getUuidListForTheProtocolAsync(layerProtocol.layerProtocolNameEnum.HTTP_CLIENT);
+      let forwardingConstructForTheForwardingName = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(forwardingName);
+      let forwardingConstructUuid = forwardingConstructForTheForwardingName[onfAttributes.GLOBAL_CLASS.UUID];
+      let fcPortList = await ForwardingConstruct.getFcPortListAsync(forwardingConstructUuid);
+      let httpClientUuidList = []
+
+      for(let fcPortIndex = 0; fcPortIndex < fcPortList.length; fcPortIndex++){
+        if(fcPortList[fcPortIndex][onfAttributes.FC_PORT.PORT_DIRECTION] === FcPort.portDirectionEnum.OUTPUT){
+            let serverLtpList = await logicalTerminationPoint.getServerLtpListAsync(fcPortList[fcPortIndex][onfAttributes.FC_PORT.LOGICAL_TERMINATION_POINT])
+            httpClientUuidList = httpClientUuidList.concat(serverLtpList)
+        }
+      }
+
       for (let i = 0; i < httpClientUuidList.length; i++) {
         let httpClientUuid = httpClientUuidList[i];
         let applicationName = await httpClientInterface.getApplicationNameAsync(httpClientUuid);
@@ -1141,14 +1158,30 @@ function getAllRegisteredApplicationList() {
  * @description This function returns list of registered application information application-name , release-number.
  * @return {Promise} return the list of application information
  * <b><u>Procedure :</u></b><br>
- * <b>step 1 :</b> get all http client Interface and get the application name, release number and server-ltp<br>
- * <b>step 2 :</b> get the ipaddress and port name of each associated tcp-client <br>
+ * <b>step 1 :</b> Get forwarding-construct based on ForwardingName
+ * <b>step 2 :</b> Get forwarding-construct UUID
+ * <b>step 3 :</b> Get fc-port list using forwarding-construct UUID
+ * <b>step 4 :</b> Fetch http-client-list using logical-termination-point uuid from fc-port
+ * <b>step 5 :</b> get the application name, release number and server-ltp<br>
+ * <b>step 6 :</b> get the ipaddress and port name of each associated tcp-client <br>
  **/
 function getAllRegisteredApplicationNameAndReleaseList() {
   return new Promise(async function (resolve, reject) {
     let clientApplicationList = [];
+    const forwardingName = "ServerReplacementBroadcast";
     try {
-      let httpClientUuidList = await logicalTerminationPoint.getUuidListForTheProtocolAsync(layerProtocol.layerProtocolNameEnum.HTTP_CLIENT);
+      let forwardingConstructForTheForwardingName = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(forwardingName);
+      let forwardingConstructUuid = forwardingConstructForTheForwardingName[onfAttributes.GLOBAL_CLASS.UUID];
+      let fcPortList = await ForwardingConstruct.getFcPortListAsync(forwardingConstructUuid);
+      let httpClientUuidList = []
+
+      for(let fcPortIndex = 0; fcPortIndex < fcPortList.length; fcPortIndex++){
+        if(fcPortList[fcPortIndex][onfAttributes.FC_PORT.PORT_DIRECTION] === FcPort.portDirectionEnum.OUTPUT){
+            let serverLtpList = await logicalTerminationPoint.getServerLtpListAsync(fcPortList[fcPortIndex][onfAttributes.FC_PORT.LOGICAL_TERMINATION_POINT])
+            httpClientUuidList = httpClientUuidList.concat(serverLtpList)
+        }
+      }
+
       for (let i = 0; i < httpClientUuidList.length; i++) {
         let clientApplication = {};
         let httpClientUuid = httpClientUuidList[i];
