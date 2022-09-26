@@ -2,28 +2,33 @@
 - Administrates the list of registered Applications.
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
 
-### Branch
-- 1.0.0-tsi.d.t : Defintion to be used within the Transport SDN Introduction at Telefonica Germany
-
-### Services
+### ServiceList
 - [RegistryOffice+services](./RegistryOffice+services.yaml)
 
-### Forwardings
+### ProfileList and ProfileInstanceList
+- [RegistryOffice+profiles](./RegistryOffice+profiles.yaml)
+- [RegistryOffice+profileInstances](./RegistryOffice+profileInstances.yaml)
+
+### ForwardingList
 - [RegistryOffice_0.0.1_tsi.220210.1845+forwardings.2](./RegistryOffice_0.0.1_tsi.220210.1845+forwardings.2.xlsx)
 
 ### Open API specification (Swagger)
 - [RegistryOffice_0.0.1_tsi.220210.1845](./RegistryOffice_0.0.1_tsi.date.time.yaml)
 
-### Load File (JSON)
+### CONFIGfile (JSON)
+- to be provided
+
+### Test Cases (Postman Export) and DATAfile
+- to be provided
 - [RegistryOffice_0.0.1_tsi.220210.1845+data.1](./RegistryOffice_0.0.1_tsi.date.time+data.no.json)
 
-### Test Cases (Postman Export) and Data File
--
+### NodeJS Implementation
+- to be provided
 
 ### Publication
 - No official publication planned
 
-### Aspired Model Classification
+### Aspired Classification
 - Live Network
 
 ### Open Issue List
