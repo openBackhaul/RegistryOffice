@@ -19,7 +19,7 @@ Temporarily added [link to an ordered list of issues](../../issues/122)
 - [RegistryOffice](./RegistryOffice.yaml)
 
 ### CONFIGfile (JSON)
-- to be provided
+- [RegistryOffice+config](./RegistryOffice+config.json)
 
 ### Test Cases (Postman Export) and DATAfile
 - to be provided
