@@ -13,7 +13,7 @@ Temporarily added [link to an ordered list of issues](../../issues/122)
 - [RegistryOffice+profileInstances](./RegistryOffice+profileInstances.yaml)
 
 ### ForwardingList
-- [RegistryOffice_0.0.1_tsi.220210.1845+forwardings.2](./RegistryOffice_0.0.1_tsi.220210.1845+forwardings.2.xlsx)
+- [RegistryOffice+forwardings](./RegistryOffice+forwardings.yaml)
 
 ### Open API specification (Swagger)
 - [RegistryOffice_0.0.1_tsi.220210.1845](./RegistryOffice_0.0.1_tsi.date.time.yaml)
