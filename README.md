@@ -23,7 +23,7 @@ Temporarily added [link to an ordered list of issues](../../issues/122)
 
 ### Test Cases (Postman Export) and DATAfile
 - to be provided
-- [RegistryOffice_0.0.1_tsi.220210.1845+data.1](./RegistryOffice_0.0.1_tsi.date.time+data.no.json)
+- [RegistryOffice+data](./RegistryOffice+data.json)
 
 ### NodeJS Implementation
 - to be provided
