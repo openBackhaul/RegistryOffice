@@ -16,7 +16,7 @@ Temporarily added [link to an ordered list of issues](../../issues/122)
 - [RegistryOffice+forwardings](./RegistryOffice+forwardings.yaml)
 
 ### Open API specification (Swagger)
-- [RegistryOffice_0.0.1_tsi.220210.1845](./RegistryOffice_0.0.1_tsi.date.time.yaml)
+- [RegistryOffice](./RegistryOffice.yaml)
 
 ### CONFIGfile (JSON)
 - to be provided
