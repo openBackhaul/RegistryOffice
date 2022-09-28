@@ -22,7 +22,7 @@ Temporarily added [link to an ordered list of issues](../../issues/122)
 - [RegistryOffice+config](./RegistryOffice+config.json)
 
 ### Test Cases (Postman Export) and DATAfile
-- to be provided
+- [RegistryOffice+testcases](./RegistryOffice+testcases.json)
 - [RegistryOffice+data](./RegistryOffice+data.json)
 
 ### NodeJS Implementation
