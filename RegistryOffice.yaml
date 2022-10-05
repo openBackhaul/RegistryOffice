@@ -1,7 +1,7 @@
 ﻿openapi: 3.0.0
 info:
   title: RegistryOffice
-  version: 1.0.0
+  version: 2.0.0
 
 paths:
 ########################################
@@ -40,7 +40,7 @@ paths:
                     find or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-0010/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'
                 new-application-release:
                   type: string
-                  pattern: '^([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?$'
+                  pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
                   description: >
                     'Release of application that shall be target of the handover process
                     find or update [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-0010/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
@@ -59,7 +59,7 @@ paths:
                     update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-0010/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
               example:
                 new-application-name: 'NewApplicationName'
-                new-application-release: '0.0.2'
+                new-application-release: '2.0.0'
                 new-application-address: '10.118.125.157'
                 new-application-port: 7000
       responses:
@@ -157,7 +157,7 @@ paths:
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-2030/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
                       example:
                         approval-application: 'TypeApprovalRegister'
-                        approval-application-release-number: '0.0.1'
+                        approval-application-release-number: '1.0.0'
                         approval-operation: '/v1/regard-application'
                         approval-application-address: '10.118.125.157'
                         approval-application-port: 1001
@@ -253,7 +253,7 @@ paths:
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
                       example:
                         subscriber-application: 'TypeApprovalRegister'
-                        subscriber-release-number: '0.0.1'
+                        subscriber-release-number: '1.0.0'
                         subscriber-operation: '/v1/disregard-application'
                         subscriber-address: '10.118.125.157'
                         subscriber-port: 1001
@@ -349,7 +349,7 @@ paths:
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
                       example:
                         subscriber-application: 'ExecutionAndTraceLog'
-                        subscriber-release-number: '0.0.1'
+                        subscriber-release-number: '1.0.0'
                         subscriber-operation: '/v1/regard-application'
                         subscriber-address: '10.118.125.157'
                         subscriber-port: 1002
@@ -445,7 +445,7 @@ paths:
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
                       example:
                         subscriber-application: 'AdministratorAdministration'
-                        subscriber-release-number: '0.0.1'
+                        subscriber-release-number: '1.0.0'
                         subscriber-operation: '/v1/disregard-application'
                         subscriber-address: '10.118.125.157'
                         subscriber-port: 1004
@@ -547,7 +547,7 @@ paths:
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
                       example:
                             application-name: 'TypeApprovalRegister'
-                            application-release-number: '0.0.1'
+                            application-release-number: '1.0.0'
                             embedding-operation: '/v1/embed-yourself'
                             client-update-operation: '/v1/update-client'
                             application-address: '10.118.125.157'
@@ -644,7 +644,7 @@ paths:
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-0010/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
                       example:
                         subscriber-application: 'RegistryOffice'
-                        subscriber-release-number: '0.0.2'
+                        subscriber-release-number: '2.0.0'
                         subscriber-operation: '/v1/regard-updated-approval-status'
                         subscriber-address: '10.118.125.157'
                         subscriber-port: 7000
@@ -740,8 +740,8 @@ paths:
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-0010/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
                       example:
                         application-name: 'RegistryOffice'
-                        old-application-release-number: '0.0.1'
-                        new-application-release-number: '0.0.2'
+                        old-application-release-number: '1.0.0'
+                        new-application-release-number: '2.0.0'
                         new-application-address: '10.118.125.157'
                         new-application-port: 7000
               responses:
@@ -818,7 +818,7 @@ paths:
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-s-0000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-number]'
                       example:
                         application-name: 'BadApplication'
-                        application-release-number: '0.0.1'
+                        application-release-number: '1.0.0'
               responses:
                 '204':
                   description: 'Application deregistered'
@@ -905,7 +905,7 @@ paths:
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-op-s-*/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name]'
                       example:
                         application-name: 'AdministratorAdministration'
-                        application-release-number: '0.0.2'
+                        application-release-number: '1.0.0'
                         old-operation-name: '/v1/regard-application'
                         new-operation-name: '/v2/regard-application'
               responses:
@@ -1136,7 +1136,7 @@ paths:
                     find or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'
                 application-release-number:
                   type: string
-                  pattern: '^([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?$'
+                  pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
                   description: >
                     'Release of application that wants to register
                     find or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
@@ -1167,7 +1167,7 @@ paths:
                     update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
               example:
                 application-name: 'TypeApprovalRegister'
-                application-release-number: '0.0.1'
+                application-release-number: '1.0.0'
                 embedding-operation: '/v1/embed-yourself'
                 client-update-operation: '/v1/update-client'
                 application-address: '10.118.125.157'
@@ -1412,13 +1412,13 @@ paths:
                     find in [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'
                 application-release-number:
                   type: string
-                  pattern: '^([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?$'
+                  pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
                   description: >
                     'Release of application that shall be removed from the register
                     find in [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
               example:
                 application-name: 'BadApplication'
-                application-release-number: '0.0.1'
+                application-release-number: '1.0.0'
       responses:
         '204':
           description: 'Application deregistered'
@@ -1497,7 +1497,7 @@ paths:
                     else : /v1/notify-withdrawn-approvals::callbacks::WithdrawnApprovalNotification::requestBody::application-name'
                 application-release-number:
                   type: string
-                  pattern: '^([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?$'
+                  pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
                   description: >
                     'Release of application with updated approval status
                     if approval-status==APPROVED : /v1/notify-approvals::callbacks::ApprovalNotification::requestBody::application-release-number
@@ -1513,7 +1513,7 @@ paths:
                     'Updated approval status, which activates callback on either /v1/notify-approvals or /v1/notify-withdrawn-approvals'
               example:
                 application-name: 'BadApplication'
-                application-release-number: '0.0.1'
+                application-release-number: '1.0.0'
                 approval-status: 'BARRED'
       responses:
         '204':
@@ -1611,8 +1611,8 @@ paths:
                             from [$/v1/relay-server-replacement.body#new-application-port]'
                       example:
                         application-name: 'RegistryOffice'
-                        old-application-release-number: '0.0.1'
-                        new-application-release-number: '0.0.2'
+                        old-application-release-number: '1.0.0'
+                        new-application-release-number: '2.0.0'
                         new-application-address: '10.118.125.157'
                         new-application-port: 7000
               responses:
@@ -1702,7 +1702,7 @@ paths:
                             from /v1/relay-operation-update::requestBody::new-operation-name'
                       example:
                         application-name: 'RegistryOffice'
-                        application-release-number: '0.0.2'
+                        application-release-number: '2.0.0'
                         old-operation-name: '/v1/register-application'
                         new-operation-name: '/v2/register-application'
               responses:
@@ -1792,11 +1792,11 @@ paths:
                       description: 'from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
                 example:
                   - application-name: 'TypeApprovalRegister'
-                    application-release-number: '0.0.1'
+                    application-release-number: '1.0.0'
                     application-address: '10.118.125.157'
                     application-port: 1001
                   - application-name: 'ExecutionAndTraceLog'
-                    application-release-number: '0.0.1'
+                    application-release-number: '1.0.0'
                     application-address: '10.118.125.157'
                     application-port: 1002
           headers:
@@ -1888,10 +1888,10 @@ paths:
                             - 'String'
                     example:
                       - field-name: 'TypeApprovalRegister'
-                        value: '0.0.1'
+                        value: '1.0.0'
                         datatype: 'String'
                       - field-name: 'ExecutionAndTraceLog'
-                        value: '0.0.1'
+                        value: '1.0.0'
                         datatype: 'String'
                   consequent-action-list:
                     type: array
@@ -2003,7 +2003,7 @@ paths:
                     find or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-2030/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'
                 approval-application-release-number:
                   type: string
-                  pattern: '^([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?$'
+                  pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
                   description: >
                     'Release of application that wants to receive information about new registrations
                     find or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-2030/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
@@ -2027,7 +2027,7 @@ paths:
                     update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-2030/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
               example:
                 approval-application: 'TypeApprovalRegister'
-                approval-application-release-number: '0.0.1'
+                approval-application-release-number: '1.0.0'
                 approval-operation: '/v1/regard-application'
                 approval-application-address: '10.118.125.157'
                 approval-application-port: 1001
@@ -2108,7 +2108,7 @@ paths:
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
                       example:
                         application-name: 'Resolver'
-                        application-release-number: '0.0.1'
+                        application-release-number: '1.0.0'
               responses:
                 '204':
                   description: 'Application added'
@@ -2186,7 +2186,7 @@ paths:
                     find or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'
                 subscriber-release-number:
                   type: string
-                  pattern: '^([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?$'
+                  pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
                   description: >
                     'Release of application that wants to receive notifications about obsolete registrations
                     find or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
@@ -2210,7 +2210,7 @@ paths:
                     update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
               example:
                 subscriber-application: 'TypeApprovalRegister'
-                subscriber-release-number: '0.0.1'
+                subscriber-release-number: '1.0.0'
                 subscriber-operation: '/v1/disregard-application'
                 subscriber-address: '10.118.125.157'
                 subscriber-port: 1001
@@ -2369,7 +2369,7 @@ paths:
                     find or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'
                 subscriber-release-number:
                   type: string
-                  pattern: '^([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?$'
+                  pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
                   description: >
                     'Release of application that wants to receive notifications about new approvals
                     find or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
@@ -2393,7 +2393,7 @@ paths:
                     update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
               example:
                 subscriber-application: 'ExecutionAndTraceLog'
-                subscriber-release-number: '0.0.1'
+                subscriber-release-number: '1.0.0'
                 subscriber-operation: '/v1/regard-application'
                 subscriber-address: '10.118.125.157'
                 subscriber-port: 1002
@@ -2487,7 +2487,7 @@ paths:
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
                       example:
                         application-name: 'CurrentController'
-                        application-release-number: '0.0.6'
+                        application-release-number: '1.0.0'
                         subscriber-address: '10.118.125.186'
                         subscriber-port: 2000
               responses:
@@ -2567,7 +2567,7 @@ paths:
                     find or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'
                 subscriber-release-number:
                   type: string
-                  pattern: '^([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?$'
+                  pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
                   description: >
                     'Release of application that wants to receive notifications about withdrawn approvals
                     find or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
@@ -2591,7 +2591,7 @@ paths:
                     update or create [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
               example:
                 subscriber-application: 'AdministratorAdministration'
-                subscriber-release-number: '0.0.1'
+                subscriber-release-number: '1.0.0'
                 subscriber-operation: '/v1/disregard-application'
                 subscriber-address: '10.118.125.157'
                 subscriber-port: 1004
@@ -2752,14 +2752,14 @@ paths:
                     and forward to [$/v1/regard-updated-approval-status.callbacks.ServerReplacementBroadcast.body#application-name]'
                 old-application-release-number:
                   type: string
-                  pattern: '^([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?$'
+                  pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
                   description: >
                     'Currently addressed release of the application that has updated connection data
                     find [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]
                     and forward to [$/v1/regard-updated-approval-status.callbacks.ServerReplacementBroadcast.body#old-application-release-number]'
                 new-application-release-number:
                   type: string
-                  pattern: '^([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?$'
+                  pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
                   description: >
                     'Future release number of the application that has updated connection data
                     forward to [$/v1/regard-updated-approval-status.callbacks.ServerReplacementBroadcast.body#new-application-release-number]'
@@ -2778,8 +2778,8 @@ paths:
                     forward to [$/v1/regard-updated-approval-status.callbacks.ServerReplacementBroadcast.body#new-application-port]'
               example:
                 application-name: 'RegistryOffice'
-                old-application-release-number: '0.0.1'
-                new-application-release-number: '0.0.2'
+                old-application-release-number: '1.0.0'
+                new-application-release-number: '2.0.0'
                 new-application-address: '10.118.125.157'
                 new-application-port: 7000
       responses:
@@ -2860,7 +2860,7 @@ paths:
                     find [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'
                 application-release-number:
                   type: string
-                  pattern: '^([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?$'
+                  pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
                   description: >
                     'Release number of the application that has an updated operation
                     find [/core-model-1-4:control-construct/logical-termination-point=ro-0-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
@@ -2876,7 +2876,7 @@ paths:
                     to /v1/regard-updated-approval-status::callbacks::OperationUpdateBroadcast::requestBody::new-operation-name'
               example:
                 application-name: 'RegistryOffice'
-                application-release-number: '0.0.2'
+                application-release-number: '2.0.0'
                 old-operation-name: '/v1/register-application'
                 new-operation-name: '/v2/register-application'
       responses:
