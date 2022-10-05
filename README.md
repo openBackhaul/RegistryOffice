@@ -2,8 +2,8 @@
 - Administrates the list of registered Applications.
 - Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
 
-### Roadmap
-Temporarily added [link to an ordered list of issues](../../issues/122)
+### Roadmap to RO v2.0.0_spec
+Temporarily added [link to an ordered list of issues](../../milestone/1)
 
 ### ServiceList
 - [RegistryOffice+services](./RegistryOffice+services.yaml)
