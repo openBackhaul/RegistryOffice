@@ -105,7 +105,7 @@ forwardings:
         uuid: ro-1-0-0-op-s-is-011
     consequent-requests:
       - client-name: ExecutionAndTraceLog://v1/record-service-request
-        uuid: ro-1-0-0-op-c-bm-eatl-1-0-0-000
+        uuid: ro-1-0-0-op-c-bs-eatl-1-0-0-000
 
   - forwarding-name: OamRequestCausesLoggingRequest
     uuid: ro-1-0-0-op-fc-bm-003
@@ -122,7 +122,7 @@ forwardings:
     initiating-requests:
     consequent-requests:
       - client-name: OamLog://v1/record-oam-request
-        uuid: ro-1-0-0-op-c-bm-ol-1-0-0-000
+        uuid: ro-1-0-0-op-c-bs-ol-1-0-0-000
 
   - forwarding-name: OamRequestCausesInquiryForAuthentication
     uuid: ro-1-0-0-op-fc-bm-004
@@ -139,7 +139,7 @@ forwardings:
     initiating-requests:
     consequent-requests:
       - client-name: AdministratorAdministration://v1/approve-oam-request
-        uuid: ro-1-0-0-op-c-bm-aa-1-0-0-000
+        uuid: ro-1-0-0-op-c-bs-aa-1-0-0-000
 
   - forwarding-name: PromptForBequeathingDataCausesNewApplicationBeingRequestedToInquireForApplicationTypeApprovals
     uuid: ro-1-0-0-op-fc-im-110
@@ -229,7 +229,7 @@ forwardings:
         uuid: ro-1-0-0-op-s-im-000
     consequent-requests:
       - client-name: TypeApprovalRegister:://v1/redirect-info-about-approval-status-changes
-        uuid: ro-1-0-0-op-c-is-tar-1-0-0-000
+        uuid: ro-1-0-0-op-c-im-tar-1-0-0-005
 
   - forwarding-name: PromptForBequeathingDataCausesRequestForBroadcastingInfoAboutServerReplacement
     uuid: ro-1-0-0-op-fc-bm-105
@@ -542,7 +542,7 @@ forwardings:
         uuid: ro-1-0-0-op-s-is-001
     consequent-requests:
       - client-name: TypeApprovalRegister:://v1/regard-application
-        uuid: ro-1-0-0-op-c-is-tar-1-0-0-001
+        uuid: ro-1-0-0-op-c-im-tar-1-0-0-003
 
   - forwarding-name: DeregistrationNotification
     uuid: ro-1-0-0-op-fc-is-006
@@ -561,17 +561,17 @@ forwardings:
         uuid: ro-1-0-0-op-s-is-002
     consequent-requests:
       - client-name: TypeApprovalRegister:://v1/disregard-application
-        uuid: ro-1-0-0-op-c-is-tar-1-0-0-002
+        uuid: ro-1-0-0-op-c-im-tar-1-0-0-004
       - client-name: ExecutionAndTraceLog:://v1/disregard-application
-        uuid: ro-1-0-0-op-c-is-eatl-1-0-0-002
+        uuid: ro-1-0-0-op-c-im-eatl-1-0-0-004
       - client-name: OamLog:://v1/disregard-application
-        uuid: ro-1-0-0-op-c-is-ol-1-0-0-002
+        uuid: ro-1-0-0-op-c-im-ol-1-0-0-004
       - client-name: AdministratorAdministration:://v1/disregard-application
-        uuid: ro-1-0-0-op-c-is-aa-1-0-0-002
+        uuid: ro-1-0-0-op-c-im-aa-1-0-0-004
       - client-name: ApplicationLayerTopology:://v1/disregard-application
-        uuid: ro-1-0-0-op-c-is-alt-1-0-0-002
+        uuid: ro-1-0-0-op-c-im-alt-1-0-0-004
       - client-name: OperationKeyManagement:://v1/disregard-application
-        uuid: ro-1-0-0-op-c-is-okm-1-0-0-002
+        uuid: ro-1-0-0-op-c-im-okm-1-0-0-004
 
   - forwarding-name: TypeApprovalCausesRequestForEmbedding
     uuid: ro-1-0-0-op-fc-is-000
@@ -596,19 +596,19 @@ forwardings:
       - client-name: NewRelease:://v1/embed-yourself
         uuid: ro-1-0-0-op-c-bm-nr-1-0-0-000
       - client-name: TypeApprovalRegister:://v1/embed-yourself
-        uuid: ro-1-0-0-op-c-bs-tar-1-0-0-000
+        uuid: ro-1-0-0-op-c-im-tar-1-0-0-000
       - client-name: ExecutionAndTraceLog:://v1/embed-yourself
-        uuid: ro-1-0-0-op-c-bs-eatl-1-0-0-000
+        uuid: ro-1-0-0-op-c-im-eatl-1-0-0-000
       - client-name: OamLog:://v1/embed-yourself
-        uuid: ro-1-0-0-op-c-bs-ol-1-0-0-000
+        uuid: ro-1-0-0-op-c-im-ol-1-0-0-000
       - client-name: AdministratorAdministration:://v1/embed-yourself
-        uuid: ro-1-0-0-op-c-bs-aa-1-0-0-000
+        uuid: ro-1-0-0-op-c-im-aa-1-0-0-000
       - client-name: ApplicationLayerTopology:://v1/embed-yourself
-        uuid: ro-1-0-0-op-c-bs-alt-1-0-0-000
+        uuid: ro-1-0-0-op-c-im-alt-1-0-0-000
       - client-name: OperationKeyManagement:://v1/embed-yourself
-        uuid: ro-1-0-0-op-c-bs-okm-1-0-0-000
+        uuid: ro-1-0-0-op-c-im-okm-1-0-0-000
       - client-name: CurrentController:://v1/embed-yourself
-        uuid: ro-1-0-0-op-c-bs-cc-1-0-0-000
+        uuid: ro-1-0-0-op-c-im-cc-1-0-0-000
 
   - forwarding-name: ApprovalNotification
     uuid: ro-1-0-0-op-fc-is-007
@@ -631,15 +631,15 @@ forwardings:
         uuid: ro-1-0-0-op-s-is-003
     consequent-requests:
       - client-name: ExecutionAndTraceLog:://v1/regard-application
-        uuid: ro-1-0-0-op-c-is-eatl-1-0-0-001
+        uuid: ro-1-0-0-op-c-im-eatl-1-0-0-003
       - client-name: OamLog:://v1/regard-application
-        uuid: ro-1-0-0-op-c-is-ol-1-0-0-001
+        uuid: ro-1-0-0-op-c-im-ol-1-0-0-003
       - client-name: AdministratorAdministration:://v1/regard-application
-        uuid: ro-1-0-0-op-c-is-aa-1-0-0-001
+        uuid: ro-1-0-0-op-c-im-aa-1-0-0-003
       - client-name: ApplicationLayerTopology:://v1/regard-application
-        uuid: ro-1-0-0-op-c-is-alt-1-0-0-001
+        uuid: ro-1-0-0-op-c-im-alt-1-0-0-003
       - client-name: OperationKeyManagement:://v1/regard-application
-        uuid: ro-1-0-0-op-c-is-okm-1-0-0-001
+        uuid: ro-1-0-0-op-c-im-okm-1-0-0-003
 
   - forwarding-name: WithdrawnApprovalNotification
     uuid: ro-1-0-0-op-fc-is-008
@@ -662,15 +662,15 @@ forwardings:
         uuid: ro-1-0-0-op-s-is-003
     consequent-requests:
       - client-name: ExecutionAndTraceLog:://v1/disregard-application
-        uuid: ro-1-0-0-op-c-is-eatl-1-0-0-002
+        uuid: ro-1-0-0-op-c-im-eatl-1-0-0-004
       - client-name: OamLog:://v1/disregard-application
-        uuid: ro-1-0-0-op-c-is-ol-1-0-0-002
+        uuid: ro-1-0-0-op-c-im-ol-1-0-0-004
       - client-name: AdministratorAdministration:://v1/disregard-application
-        uuid: ro-1-0-0-op-c-is-aa-1-0-0-002
+        uuid: ro-1-0-0-op-c-im-aa-1-0-0-004
       - client-name: ApplicationLayerTopology:://v1/disregard-application
-        uuid: ro-1-0-0-op-c-is-alt-1-0-0-002
+        uuid: ro-1-0-0-op-c-im-alt-1-0-0-004
       - client-name: OperationKeyManagement:://v1/disregard-application
-        uuid: ro-1-0-0-op-c-is-okm-1-0-0-002
+        uuid: ro-1-0-0-op-c-im-okm-1-0-0-004
 
   - forwarding-name: ServerReplacementBroadcast
     uuid: ro-1-0-0-op-fc-is-009
@@ -693,21 +693,21 @@ forwardings:
         uuid: ro-1-0-0-op-s-is-010
     consequent-requests:
       - client-name: RegistryOffice:://v1/update-client
-        uuid: ro-1-0-0-op-c-bs-ro-1-0-0-001
+        uuid: ro-1-0-0-op-c-im-ro-1-0-0-001
       - client-name: TypeApprovalRegister:://v1/update-client
-        uuid: ro-1-0-0-op-c-bs-tar-1-0-0-001
+        uuid: ro-1-0-0-op-c-im-tar-1-0-0-001
       - client-name: ExecutionAndTraceLog:://v1/update-client
-        uuid: ro-1-0-0-op-c-bs-eatl-1-0-0-001
+        uuid: ro-1-0-0-op-c-im-eatl-1-0-0-001
       - client-name: OamLog:://v1/update-client
-        uuid: ro-1-0-0-op-c-bs-ol-1-0-0-001
+        uuid: ro-1-0-0-op-c-im-ol-1-0-0-001
       - client-name: AdministratorAdministration:://v1/update-client
-        uuid: ro-1-0-0-op-c-bs-aa-1-0-0-001
+        uuid: ro-1-0-0-op-c-im-aa-1-0-0-001
       - client-name: ApplicationLayerTopology:://v1/update-client
-        uuid: ro-1-0-0-op-c-bs-alt-1-0-0-001
+        uuid: ro-1-0-0-op-c-im-alt-1-0-0-001
       - client-name: OperationKeyManagement:://v1/update-client
-        uuid: ro-1-0-0-op-c-bs-okm-1-0-0-001
+        uuid: ro-1-0-0-op-c-im-okm-1-0-0-001
       - client-name: CurrentController:://v1/update-client
-        uuid: ro-1-0-0-op-c-bs-cc-1-0-0-001
+        uuid: ro-1-0-0-op-c-im-cc-1-0-0-001
 
   - forwarding-name: OperationUpdateBroadcast
     uuid: ro-1-0-0-op-fc-is-010
@@ -730,16 +730,16 @@ forwardings:
         uuid: ro-1-0-0-op-s-is-011
     consequent-requests:
       - client-name: TypeApprovalRegister:://v1/update-operation-client
-        uuid: ro-1-0-0-op-c-bs-tar-1-0-0-002
+        uuid: ro-1-0-0-op-c-im-tar-1-0-0-002
       - client-name: ExecutionAndTraceLog:://v1/update-operation-client
-        uuid: ro-1-0-0-op-c-bs-eatl-1-0-0-002
+        uuid: ro-1-0-0-op-c-im-eatl-1-0-0-002
       - client-name: OamLog:://v1/update-operation-client
-        uuid: ro-1-0-0-op-c-bs-ol-1-0-0-002
+        uuid: ro-1-0-0-op-c-im-ol-1-0-0-002
       - client-name: AdministratorAdministration:://v1/update-operation-client
-        uuid: ro-1-0-0-op-c-bs-aa-1-0-0-002
+        uuid: ro-1-0-0-op-c-im-aa-1-0-0-002
       - client-name: ApplicationLayerTopology:://v1/update-operation-client
-        uuid: ro-1-0-0-op-c-bs-alt-1-0-0-002
+        uuid: ro-1-0-0-op-c-im-alt-1-0-0-002
       - client-name: OperationKeyManagement:://v1/update-operation-client
-        uuid: ro-1-0-0-op-c-bs-okm-1-0-0-002
+        uuid: ro-1-0-0-op-c-im-okm-1-0-0-002
       - client-name: CurrentController:://v1/update-operation-client
-        uuid: ro-1-0-0-op-c-bs-cc-1-0-0-002
+        uuid: ro-1-0-0-op-c-im-cc-1-0-0-002
