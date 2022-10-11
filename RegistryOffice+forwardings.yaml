@@ -154,7 +154,7 @@ forwardings:
         uuid: ro-2-0-0-op-s-im-000
     consequent-requests:
       - client-name: NewRelease:://v1/inquire-application-type-approvals
-        uuid: ro-2-0-0-op-c-im-nr-1-0-0-000
+        uuid: ro-2-0-0-op-c-im-nr-2-0-0-000
 
   - forwarding-name: PromptForBequeathingDataCausesNewApplicationBeingRequestedToDocumentSubscriptionsForDeregistrationNotifications
     uuid: ro-2-0-0-op-fc-im-111
@@ -169,7 +169,7 @@ forwardings:
         uuid: ro-2-0-0-op-s-im-000
     consequent-requests:
       - client-name: NewRelease:://v1/notify-deregistrations
-        uuid: ro-2-0-0-op-c-im-nr-1-0-0-001
+        uuid: ro-2-0-0-op-c-im-nr-2-0-0-001
 
   - forwarding-name: PromptForBequeathingDataCausesNewApplicationBeingRequestedToDocumentSubscriptionsForApprovalNotifications
     uuid: ro-2-0-0-op-fc-im-112
@@ -184,7 +184,7 @@ forwardings:
         uuid: ro-2-0-0-op-s-im-000
     consequent-requests:
       - client-name: NewRelease:://v1/notify-approvals
-        uuid: ro-2-0-0-op-c-im-nr-1-0-0-002
+        uuid: ro-2-0-0-op-c-im-nr-2-0-0-002
 
   - forwarding-name: PromptForBequeathingDataCausesNewApplicationBeingRequestedToDocumentSubscriptionsForWithdrawnApprovalNotifications
     uuid: ro-2-0-0-op-fc-im-113
@@ -199,7 +199,7 @@ forwardings:
         uuid: ro-2-0-0-op-s-im-000
     consequent-requests:
       - client-name: NewRelease:://v1/notify-withdrawn-approvals
-        uuid: ro-2-0-0-op-c-im-nr-1-0-0-003
+        uuid: ro-2-0-0-op-c-im-nr-2-0-0-003
 
   - forwarding-name: PromptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredApplications
     uuid: ro-2-0-0-op-fc-im-114
@@ -214,7 +214,7 @@ forwardings:
         uuid: ro-2-0-0-op-s-im-000
     consequent-requests:
       - client-name: NewRelease:://v1/register-application
-        uuid: ro-2-0-0-op-c-im-nr-1-0-0-004
+        uuid: ro-2-0-0-op-c-im-nr-2-0-0-004
 
   - forwarding-name: PromptForBequeathingDataCausesTARbeingRequestedToRedirectInfoAboutApprovalsToNewApplication
     uuid: ro-2-0-0-op-fc-im-115
@@ -594,7 +594,7 @@ forwardings:
         uuid: ro-2-0-0-op-s-is-003
     consequent-requests:
       - client-name: NewRelease:://v1/embed-yourself
-        uuid: ro-2-0-0-op-c-bm-nr-1-0-0-000
+        uuid: ro-2-0-0-op-c-bm-nr-2-0-0-000
       - client-name: TypeApprovalRegister:://v1/embed-yourself
         uuid: ro-2-0-0-op-c-im-tar-1-0-0-000
       - client-name: ExecutionAndTraceLog:://v1/embed-yourself
