@@ -17,7 +17,7 @@ forwardings:
         uuid: ro-2-0-0-op-s-bm-000
     consequent-requests:
       - client-name: RegistryOffice://v1/register-application
-        uuid: ro-2-0-0-op-c-bm-ro-2-0-0-000
+        uuid: ro-2-0-0-op-c-bm-ro-1-0-0-000
 
   - forwarding-name: PromptForEmbeddingCausesRequestForBequeathingData
     uuid: ro-2-0-0-op-fc-bm-001
@@ -248,7 +248,7 @@ forwardings:
         uuid: ro-2-0-0-op-s-im-000
     consequent-requests:
       - client-name: RegistryOffice://v1/relay-server-replacement
-        uuid: ro-2-0-0-op-c-bm-ro-2-0-0-001
+        uuid: ro-2-0-0-op-c-bm-ro-1-0-0-001
 
   - forwarding-name: PromptForBequeathingDataCausesRequestForDeregisteringOfOldRelease
     uuid: ro-2-0-0-op-fc-bm-106
@@ -267,7 +267,7 @@ forwardings:
         uuid: ro-2-0-0-op-s-im-000
     consequent-requests:
       - client-name: RegistryOffice://v1/deregister-application
-        uuid: ro-2-0-0-op-c-bm-ro-2-0-0-002
+        uuid: ro-2-0-0-op-c-bm-ro-1-0-0-002
 
   - forwarding-name: PromptingNewReleaseForUpdatingServerCausesRequestForBroadcastingInfoAboutBackwardCompatibleUpdateOfOperation
     uuid: ro-2-0-0-op-fc-bm-107
@@ -286,7 +286,7 @@ forwardings:
         uuid: ro-2-0-0-op-s-bm-007
     consequent-requests:
       - client-name: RegistryOffice://v1/relay-operation-update
-        uuid: ro-2-0-0-op-c-bm-ro-2-0-0-003
+        uuid: ro-2-0-0-op-c-bm-ro-1-0-0-003
 
   - forwarding-name: PromptForRedirectingTopologyInformationCausesSendingAnInitialStateToALT
     uuid: ro-2-0-0-op-fc-bm-005
@@ -693,7 +693,7 @@ forwardings:
         uuid: ro-2-0-0-op-s-is-010
     consequent-requests:
       - client-name: RegistryOffice:://v1/update-client
-        uuid: ro-2-0-0-op-c-im-ro-2-0-0-001
+        uuid: ro-2-0-0-op-c-im-ro-1-0-0-001
       - client-name: TypeApprovalRegister:://v1/update-client
         uuid: ro-2-0-0-op-c-im-tar-1-0-0-001
       - client-name: ExecutionAndTraceLog:://v1/update-client
