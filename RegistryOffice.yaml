@@ -1026,9 +1026,9 @@ paths:
                           type: string
                           description: >
                             'https://
-                            [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-s-bm-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address]
+                            [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address]
                             :
-                            [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-s-bm-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-port]
+                            [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-port]
                             and either
                             [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-s-is-005/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name]
                             or
@@ -1284,17 +1284,17 @@ paths:
                                   type: string
                                   description: >
                                     'Own IP address
-                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-s-bm-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address]'
+                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address]'
                             domain-name:
                               type: string
                               description: >
                                   'Own domain name
-                                  from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-s-bm-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/domain-name]'
+                                  from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/domain-name]'
                         registry-office-port:
                           type: integer
                           description: >
                             'Own TCP port
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-s-bm-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-port]'
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-port]'
                         old-release-address:
                           type: object
                           minProperties: 1
