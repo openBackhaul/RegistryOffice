@@ -37,26 +37,26 @@ paths:
                   type: string
                   description: >
                     'Name of application that shall be target of the handover process
-                    find or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-nr-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'
+                    find or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-nr-2-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]'
                 new-application-release:
                   type: string
                   pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
                   description: >
                     'Release of application that shall be target of the handover process
-                    find or update [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-nr-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
+                    find or update [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-nr-2-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
                 new-application-address:
                   type: string
                   pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
                   description: >
                     'IP address of application that shall be target of the handover process
-                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
+                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
                 new-application-port:
                   type: integer
                   minimum: 0
                   maximum: 65535
                   description: >
                     'Port of application that shall be target of the handover process
-                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
+                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
               example:
                 new-application-name: 'NewApplicationName'
                 new-application-release: '2.0.0'
@@ -109,7 +109,7 @@ paths:
           $ref: '#/components/responses/responseForErroredServiceRequests'
       callbacks:
         PromptForBequeathingDataCausesNewApplicationBeingRequestedToInquireForApplicationTypeApprovals:
-          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-nr-1-0-0-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
+          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-nr-2-0-0-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
             parameters:
               - $ref: '#/components/parameters/user'
               - $ref: '#/components/parameters/originator'
@@ -205,7 +205,7 @@ paths:
                 default:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
         PromptForBequeathingDataCausesNewApplicationBeingRequestedToDocumentSubscriptionsForDeregistrationNotifications:
-          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-nr-1-0-0-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
+          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-nr-2-0-0-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
             parameters:
               - $ref: '#/components/parameters/user'
               - $ref: '#/components/parameters/originator'
@@ -240,7 +240,7 @@ paths:
                           type: string
                           description: >
                             'Names of the operation that shall be addressed by notifications about obsolete registrations
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-is-*-1-0-0-??2/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-004/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
                         subscriber-address:
                           type: string
                           description: >
@@ -301,7 +301,7 @@ paths:
                 default:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
         PromptForBequeathingDataCausesNewApplicationBeingRequestedToDocumentSubscriptionsForApprovalNotifications:
-          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-nr-1-0-0-002/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
+          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-nr-2-0-0-002/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
             parameters:
               - $ref: '#/components/parameters/user'
               - $ref: '#/components/parameters/originator'
@@ -336,7 +336,7 @@ paths:
                           type: string
                           description: >
                             'Names of the operation that shall be addressed by notifications about new approvals
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-*-*-1-0-0-??1/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-003/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
                         subscriber-address:
                           type: string
                           description: >
@@ -397,7 +397,7 @@ paths:
                 default:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
         PromptForBequeathingDataCausesNewApplicationBeingRequestedToDocumentSubscriptionsForWithdrawnApprovalNotifications:
-          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-nr-1-0-0-003/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
+          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-nr-2-0-0-003/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
             parameters:
               - $ref: '#/components/parameters/user'
               - $ref: '#/components/parameters/originator'
@@ -432,7 +432,7 @@ paths:
                           type: string
                           description: >
                             'Names of the operation that shall be addressed by notifications about withdrawn approvals
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-*-*-1-0-0-??2/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-004/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
                         subscriber-address:
                           type: string
                           description: >
@@ -493,7 +493,7 @@ paths:
                 default:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
         PromptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredApplications:
-          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-nr-1-0-0-004/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
+          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-nr-2-0-0-004/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
             parameters:
               - $ref: '#/components/parameters/user'
               - $ref: '#/components/parameters/originator'
@@ -529,12 +529,12 @@ paths:
                           type: string
                           description: >
                             'Name of service for initiating embedding process
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-*/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
                         client-update-operation:
                           type: string
                           description: >
                             'Name of service for broadcasting server changes
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-*/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
                         application-address:
                           type: string
                           description: >
@@ -626,7 +626,7 @@ paths:
                           type: string
                           description: >
                             'Future release number
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-nr-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-nr-2-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
                         subscriber-operation:
                           type: string
                           description: >
@@ -636,12 +636,12 @@ paths:
                           type: string
                           description: >
                             'Future IP address
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
                         subscriber-port:      
                           type: integer
                           description: >
                             'Future IP address
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
                       example:
                         subscriber-application: 'RegistryOffice'
                         subscriber-release-number: '2.0.0'
@@ -692,7 +692,7 @@ paths:
                 default:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
         PromptForBequeathingDataCausesRequestForBroadcastingInfoAboutServerReplacement:
-          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-ro-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-ro-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-bm-ro-2-0-0-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
+          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-ro-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-ro-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-bm-ro-1-0-0-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
             parameters:
               - $ref: '#/components/parameters/user'
               - $ref: '#/components/parameters/originator'
@@ -727,17 +727,17 @@ paths:
                           type: string
                           description: >
                             'Future release number
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-nr-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-nr-2-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
                         new-application-address:
                           type: string
                           description: >
                             'Future IP address
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
                         new-application-port:
                           type: integer
                           description: >
                             'Future port
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
                       example:
                         application-name: 'RegistryOffice'
                         old-application-release-number: '1.0.0'
@@ -788,7 +788,7 @@ paths:
                 default:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
         PromptForBequeathingDataCausesRequestForDeregisteringOfOldRelease:
-          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-ro-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-ro-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-bm-ro-2-0-0-002/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
+          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-ro-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-ro-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-bm-ro-1-0-0-002/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
             parameters:
               - $ref: '#/components/parameters/user'
               - $ref: '#/components/parameters/originator'
@@ -863,7 +863,7 @@ paths:
                 default:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
         PromptingNewReleaseForUpdatingServerCausesRequestForBroadcastingInfoAboutBackwardCompatibleUpdateOfOperation:
-          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-ro-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-ro-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-bm-ro-2-0-0-003/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
+          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-ro-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-ro-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-bm-ro-1-0-0-003/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
             parameters:
               - $ref: '#/components/parameters/user'
               - $ref: '#/components/parameters/originator'
@@ -1026,9 +1026,9 @@ paths:
                           type: string
                           description: >
                             'https://
-                            [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-s-bm-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address]
+                            [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address]
                             :
-                            [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-s-bm-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-port]
+                            [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-port]
                             and either
                             [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-s-is-005/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name]
                             or
@@ -1145,13 +1145,13 @@ paths:
                   minLength: 3
                   description: >
                     'Name of service for initiating embedding process
-                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-bs-*/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
                 client-update-operation:
                   type: string
                   minLength: 3
                   description: >
                     'Name of service for broadcasting server changes
-                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-bs-*/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
                 application-address:
                   type: string
                   pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
@@ -1284,17 +1284,17 @@ paths:
                                   type: string
                                   description: >
                                     'Own IP address
-                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-s-bm-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address]'
+                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address]'
                             domain-name:
                               type: string
                               description: >
                                   'Own domain name
-                                  from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-s-bm-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/domain-name]'
+                                  from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/domain-name]'
                         registry-office-port:
                           type: integer
                           description: >
                             'Own TCP port
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-s-bm-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-port]'
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-port]'
                         old-release-address:
                           type: object
                           minProperties: 1
@@ -1562,7 +1562,7 @@ paths:
           $ref: '#/components/responses/responseForErroredServiceRequests'
       callbacks:
         ServerReplacementBroadcast:
-          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-bs-*-1-0-0-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
+          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
             description: 'Exclusively approved applications shall get information about updated serving applications.'
             parameters:
               - $ref: '#/components/parameters/user'
@@ -1659,7 +1659,7 @@ paths:
                 default:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
         OperationUpdateBroadcast:
-          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-bs-*-1-0-0-002/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
+          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-002/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
             description: 'Exclusively approved applications shall get information about updated operations.'
             parameters:
               - $ref: '#/components/parameters/user'
@@ -2194,7 +2194,7 @@ paths:
                   type: string
                   description: >
                     'Names of the operation that shall be addressed by notifications about obsolete registrations
-                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-is-*-1-0-0-002/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-004/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
                 subscriber-address:
                   type: string
                   pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
@@ -2377,7 +2377,7 @@ paths:
                   type: string
                   description: >
                     'Names of the operation that shall be addressed by notifications about new approvals
-                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-*-*-1-0-0-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-003/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
                 subscriber-address:
                   type: string
                   pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
@@ -2575,7 +2575,7 @@ paths:
                   type: string
                   description: >
                     'Names of the operation that shall be addressed by notifications about withdrawn approvals
-                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-*-*-1-0-0-??2/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-004/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
                 subscriber-address:
                   type: string
                   pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
