@@ -23085,7 +23085,7 @@ components:
         datatype:
           type: string
           enum:
-          - String
+          - string
       example: null
     inline_response_200_inputvaluelist:
       required:
@@ -23144,7 +23144,7 @@ components:
         datatype:
           type: string
           enum:
-          - String
+          - string
       example: null
     inline_response_200_2_consequentactionlist:
       required:
@@ -23656,7 +23656,7 @@ components:
         datatype:
           type: string
           enum:
-          - String
+          - string
       example: null
     inline_response_200_7_consequentactionlist:
       required:
