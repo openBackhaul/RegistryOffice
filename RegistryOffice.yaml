@@ -2415,7 +2415,7 @@ paths:
                              'IPv4 address of application that wants to receive notifications about obsolete registrations
                              update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
                     domain-name:
-                      type: object
+                      type: string
                       pattern: '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$'
                       description:
                         'Domain name of application that wants to receive notifications about obsolete registrations
@@ -2729,8 +2729,8 @@ paths:
                                 ipv-4-address:
                                   type: string
                                   description: >
-                                  'IPv4 address of application that is approved
-                                  from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
+                                    'IPv4 address of application that is approved
+                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
                             domain-name:
                               type: string
                               description: >
