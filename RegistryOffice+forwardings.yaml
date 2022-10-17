@@ -674,7 +674,7 @@ forwardings:
 
   - forwarding-name: ServerReplacementBroadcast
     uuid: ro-2-0-0-op-fc-is-009
-    forwarding-type: Process Snippet
+    forwarding-type: Subscription
     management-requests:
       operation-client-update:
         - server-name: /v1/register-application
@@ -711,7 +711,7 @@ forwardings:
 
   - forwarding-name: OperationUpdateBroadcast
     uuid: ro-2-0-0-op-fc-is-010
-    forwarding-type: Process Snippet
+    forwarding-type: Subscription
     management-requests:
       operation-client-update:
         - server-name: /v1/register-application
