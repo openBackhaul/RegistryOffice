@@ -1287,13 +1287,13 @@ paths:
                     find or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
                 embedding-operation:
                   type: string
-                  minLength: 3
+                  minLength: 6
                   description: >
                     'Name of service for initiating embedding process
                     update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
                 client-update-operation:
                   type: string
-                  minLength: 3
+                  minLength: 6
                   description: >
                     'Name of service for broadcasting server changes
                     update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
@@ -2192,6 +2192,7 @@ paths:
                     find or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-im-tar-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
                 approval-operation:
                   type: string
+                  minLength: 6
                   description: >
                     'Operation that shall be addressed by information about new registrations
                     update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-tar-1-0-0-003/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
@@ -2394,6 +2395,7 @@ paths:
                     find or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
                 subscriber-operation:
                   type: string
+                  minLength: 6
                   description: >
                     'Names of the operation that shall be addressed by notifications about obsolete registrations
                     update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-004/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
@@ -2596,6 +2598,7 @@ paths:
                     find or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
                 subscriber-operation:
                   type: string
+                  minLength: 6
                   description: >
                     'Names of the operation that shall be addressed by notifications about new approvals
                     update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-003/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
@@ -2831,6 +2834,7 @@ paths:
                     find or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
                 subscriber-operation:
                   type: string
+                  minLength: 6
                   description: >
                     'Names of the operation that shall be addressed by notifications about withdrawn approvals
                     update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-004/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
@@ -3162,11 +3166,13 @@ paths:
                     find [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
                 old-operation-name:
                   type: string
+                  minLength: 6
                   description: >
                     'Name of the deprecated operation
                     to /v1/regard-updated-approval-status::callbacks::OperationUpdateBroadcast::requestBody::old-operation-name'
                 new-operation-name:
                   type: string
+                  minLength: 6
                   description: >
                     'Name of the replacing operation
                     to /v1/regard-updated-approval-status::callbacks::OperationUpdateBroadcast::requestBody::new-operation-name'
