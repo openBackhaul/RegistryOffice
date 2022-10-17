@@ -97,11 +97,11 @@ clients:
   - http-client:
       application-name: NewRelease
       release-number: 2.0.0
-      uuid: ro-2-0-0-http-c-bm-nr-2-0-0-000
+      uuid: ro-2-0-0-http-c-im-nr-2-0-0-000
     tcp-client:
       ip-address: 1.1.3.8
       tcp-port: 3008
-      uuid: ro-2-0-0-tcp-c-bm-nr-2-0-0-000
+      uuid: ro-2-0-0-tcp-c-im-nr-2-0-0-000
     operation-clients:
       own-oam:
         basic:
