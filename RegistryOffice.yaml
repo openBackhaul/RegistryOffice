@@ -1164,24 +1164,17 @@ paths:
                       properties:
                         label:
                           type: string
-                          enum:
-                            - 'List Registered Applications'
-                            - 'Inform about Application'
+                          description: >
+                            'Label that shall be presented on the button
+                            from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-action-p-000/action-profile-1-0:action-profile-pac/action-profile-capability/label or /core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-action-p-000/action-profile-1-0:action-profile-pac/action-profile-capability/label]'
                         request:
                           type: string
                           description: >
-                            'https://
-                            [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address]
-                            :
-                            [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-port]
-                            and either
-                            [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-s-is-005/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name]
-                            or
-                            [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-s-bs-002/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name]'
+                            'Request that shall be called, when button gets pressed
+                            from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-action-p-000/action-profile-1-0:action-profile-pac/action-profile-configuration/request or /core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-action-p-001/action-profile-1-0:action-profile-pac/action-profile-configuration/request]'
                         input-value-list:
                           type: array
                           uniqueItems: true
-                          maxItems: 0
                           items:
                             type: object
                             required:
@@ -1189,12 +1182,19 @@ paths:
                             properties:
                               field-name:
                                 type: string
+                                description: >
+                                  'Name of an input value required for executing the Request
+                                  from [/core-model-1-4:control-construct/profile-collection/profile=*-2-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-capability/input-value-list=*/name]'
                               unit:
                                 type: string
+                                description: >
+                                  'Unit of an input value required for executing the Request
+                                  from [/core-model-1-4:control-construct/profile-collection/profile=*-2-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-capability/input-value-list=*/unit]'
                         display-in-new-browser-window:
                           type: boolean
-                          enum:
-                            - false
+                          description: >
+                            'True in case Request shall be represented in a new browser window
+                            from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-action-p-000/action-profile-1-0:action-profile-pac/action-profile-capability/display-in-new-browser-window]'
                     example:
                       - label: 'List Registered Applications'
                         request: 'https://10.118.125.157:1000/v1/list-applications-in-generic-representation'
@@ -2090,12 +2090,17 @@ paths:
                       properties:
                         label:
                           type: string
+                          description: >
+                            'Label that shall be presented on the button
+                            from [/core-model-1-4:control-construct/profile-collection/profile=*-2-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-capability/label]'
                         request:
                           type: string
+                          description: >
+                            'Request that shall be called, when button gets pressed
+                            from [/core-model-1-4:control-construct/profile-collection/profile=*-2-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-configuration/request]'
                         input-value-list:
                           type: array
                           uniqueItems: true
-                          maxItems: 0
                           items:
                             type: object
                             required:
@@ -2103,12 +2108,19 @@ paths:
                             properties:
                               field-name:
                                 type: string
+                                description: >
+                                  'Name of an input value required for executing the Request
+                                  from [/core-model-1-4:control-construct/profile-collection/profile=*-2-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-capability/input-value-list=*/name]'
                               unit:
                                 type: string
+                                description: >
+                                  'Unit of an input value required for executing the Request
+                                  from [/core-model-1-4:control-construct/profile-collection/profile=*-2-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-capability/input-value-list=*/unit]'
                         display-in-new-browser-window:
                           type: boolean
-                          enum:
-                            - false
+                          description: >
+                            'True in case Request shall be represented in a new browser window
+                            from [/core-model-1-4:control-construct/profile-collection/profile=*-2-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-capability/display-in-new-browser-window]'
           headers:
             x-correlator:
               schema: 

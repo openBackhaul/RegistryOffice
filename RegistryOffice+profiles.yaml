@@ -1,3 +1,14 @@
 profiles:
 
-## No Profiles applied in the RegistryOffice
+- profile-name: 'ActionProfile'
+    uuid: '^[a-z]{2,6}-([0-9]+)-([0-9]+)-([0-9]+)-action-p-[0-9]{3}$'
+    capability:
+      operation-name: string
+      label: string
+      input-value-list:
+        - field-name: string
+          unit: string
+      display-in-new-browser-window: boolean
+    configuration:
+      request: string
+
