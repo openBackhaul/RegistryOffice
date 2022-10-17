@@ -60,13 +60,13 @@ paths:
                           pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
                           description: >
                             'IPv4 address of application that shall be target of the handover process
-                            update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
+                            update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
                     domain-name:
                       type: string
                       pattern: '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$'
                       description: >
                         'Domain name of application that shall be target of the handover process
-                        update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
+                        update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
                 new-application-port:
                   type: integer
                   minimum: 0
@@ -75,12 +75,12 @@ paths:
                     'Port of application that shall be target of the handover process
                     update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
               example:
-                new-application-name: 'NewApplicationName'
+                new-application-name: 'RegistryOffice'
                 new-application-release: '2.0.0'
                 new-application-address: 
                   ip-address:
-                    ipv-4-address: '10.118.125.157'
-                new-application-port: 7000
+                    ipv-4-address: '1.1.3.8'
+                new-application-port: 3008
       responses:
         '204':
           description: 'Process of embedding a new release initiated'
@@ -128,7 +128,7 @@ paths:
           $ref: '#/components/responses/responseForErroredServiceRequests'
       callbacks:
         PromptForBequeathingDataCausesNewApplicationBeingRequestedToInquireForApplicationTypeApprovals:
-          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-nr-2-0-0-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
+          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-nr-2-0-0-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
             parameters:
               - $ref: '#/components/parameters/user'
               - $ref: '#/components/parameters/originator'
@@ -196,8 +196,8 @@ paths:
                         approval-operation: '/v1/regard-application'
                         approval-application-address: 
                           ip-address:
-                            ipv-4-address: '10.118.125.157'
-                        approval-application-port: 1001
+                            ipv-4-address: '1.1.3.2'
+                        approval-application-port: 3002
               responses:
                 '204':
                   description: 'Subscribed for notifications about new registrations'
@@ -242,7 +242,7 @@ paths:
                 default:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
         PromptForBequeathingDataCausesNewApplicationBeingRequestedToDocumentSubscriptionsForDeregistrationNotifications:
-          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-nr-2-0-0-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
+          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-nr-2-0-0-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
             parameters:
               - $ref: '#/components/parameters/user'
               - $ref: '#/components/parameters/originator'
@@ -310,8 +310,8 @@ paths:
                         subscriber-operation: '/v1/disregard-application'
                         subscriber-address: 
                           ip-address:
-                            ipv-4-address: '10.118.125.157'
-                        subscriber-port: 1001
+                            ipv-4-address: '1.1.3.2'
+                        subscriber-port: 3002
               responses:
                 '204':
                   description: 'Subscribed for notifications about deregistrations'
@@ -356,7 +356,7 @@ paths:
                 default:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
         PromptForBequeathingDataCausesNewApplicationBeingRequestedToDocumentSubscriptionsForApprovalNotifications:
-          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-nr-2-0-0-002/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
+          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-nr-2-0-0-002/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
             parameters:
               - $ref: '#/components/parameters/user'
               - $ref: '#/components/parameters/originator'
@@ -424,8 +424,8 @@ paths:
                         subscriber-operation: '/v1/regard-application'
                         subscriber-address: 
                           ip-address:
-                            ipv-4-address: '10.118.125.157'
-                        subscriber-port: 1002
+                            ipv-4-address: '1.1.3.3'
+                        subscriber-port: 3003
               responses:
                 '204':
                   description: 'Subscribed for notifications about new approvals'
@@ -470,7 +470,7 @@ paths:
                 default:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
         PromptForBequeathingDataCausesNewApplicationBeingRequestedToDocumentSubscriptionsForWithdrawnApprovalNotifications:
-          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-nr-2-0-0-003/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
+          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-nr-2-0-0-003/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
             parameters:
               - $ref: '#/components/parameters/user'
               - $ref: '#/components/parameters/originator'
@@ -538,8 +538,8 @@ paths:
                         subscriber-operation: '/v1/disregard-application'
                         subscriber-address: 
                           ip-address:
-                            ipv-4-address: '10.118.125.157'
-                        subscriber-port: 1004
+                            ipv-4-address: '1.1.3.5'
+                        subscriber-port: 3005
               responses:
                 '204':
                   description: 'Subscribed for notifications about withdrawn approvals'
@@ -584,7 +584,7 @@ paths:
                 default:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
         PromptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredApplications:
-          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-nr-2-0-0-004/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
+          https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-nr-2-0-0-004/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
             parameters:
               - $ref: '#/components/parameters/user'
               - $ref: '#/components/parameters/originator'
@@ -659,8 +659,8 @@ paths:
                             client-update-operation: '/v1/update-client'
                             application-address: 
                               ip-address:
-                                ipv-4-address: '10.118.125.157'
-                            application-port: 1001
+                                ipv-4-address: '1.1.3.2'
+                            application-port: 3002
               responses:
                 '204':
                   description: 'Application registered'
@@ -756,12 +756,12 @@ paths:
                                   type: string
                                   description: >
                                     'Future IPv4 address
-                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
+                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
                             domain-name:
                               type: string
                               description: >
                                     'Future Domain name
-                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'      
+                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'      
                         subscriber-port:      
                           type: integer
                           description: >
@@ -773,8 +773,8 @@ paths:
                         subscriber-operation: '/v1/regard-updated-approval-status'
                         subscriber-address: 
                           ip-address:
-                            ipv-4-address: '10.118.125.157'
-                        subscriber-port: 7000
+                            ipv-4-address: '1.1.3.8'
+                        subscriber-port: 3008
               responses:
                 '204':
                   description: 'Subscribed for notifications about approval status updates'
@@ -870,12 +870,12 @@ paths:
                                   type: string
                                   description: >
                                     'Future IPv4 address
-                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
+                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
                             domain-name:
                               type: string
                               description: >
                                 'Future domain name 
-                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
+                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
                         new-application-port:
                           type: integer
                           description: >
@@ -887,8 +887,8 @@ paths:
                         new-application-release-number: '2.0.0'
                         new-application-address: 
                           ip-address:
-                            ipv-4-address: '10.118.125.157'
-                        new-application-port: 7000
+                            ipv-4-address: '1.1.3.8'
+                        new-application-port: 3008
               responses:
                 '204':
                   description: 'Will broadcast server replacement'
@@ -1334,8 +1334,8 @@ paths:
                 client-update-operation: '/v1/update-client'
                 application-address: 
                   ip-address:
-                    ipv-4-address: '10.118.125.157'
-                application-port: 1001
+                    ipv-4-address: '1.1.3.9'
+                application-port: 3009
       responses:
         '204':
           description: 'Application registered'
@@ -1490,18 +1490,18 @@ paths:
                             otherwise TCP port of the newly approved application.'
                       example:
                         registry-office-application: 'RegistryOffice'
-                        registry-office-application-release-number: '1.0.0'
+                        registry-office-application-release-number: '2.0.0'
                         relay-server-replacement-operation: '/v1/relay-server-replacement'
                         relay-operation-update-operation: '/v1/relay-operation-update'
                         deregistration-operation: '/v1/deregister-application'
                         registry-office-address:
                           ip-address:
-                            ipv-4-address: '10.118.125.157'
-                        registry-office-port: 1000
+                            ipv-4-address: '1.1.3.8'
+                        registry-office-port: 3008
                         old-release-address:
                           ip-address:
-                            ipv-4-address: '10.118.125.157'
-                        old-release-port: 1001
+                            ipv-4-address: '1.1.3.1'
+                        old-release-port: 3001
               responses:
                 '204':
                   description: 'Will embed into the MBH SDN application layer'
@@ -1795,8 +1795,8 @@ paths:
                         new-application-release-number: '2.0.0'
                         new-application-address:
                           ip-address:
-                            ipv-4-address: '10.118.125.157'
-                        new-application-port: 7000
+                            ipv-4-address: '1.1.3.8'
+                        new-application-port: 3008
               responses:
                 '204':
                   description: 'Will update connection information'
@@ -1976,12 +1976,12 @@ paths:
                 example:
                   - application-name: 'TypeApprovalRegister'
                     application-release-number: '1.0.0'
-                    application-address: '10.118.125.157'
-                    application-port: 1001
+                    application-address: '1.1.3.2'
+                    application-port: 3002
                   - application-name: 'ExecutionAndTraceLog'
                     application-release-number: '1.0.0'
-                    application-address: '10.118.125.157'
-                    application-port: 1002
+                    application-address: '1.1.3.3'
+                    application-port: 3003
           headers:
             x-correlator:
               schema: 
@@ -2231,8 +2231,8 @@ paths:
                 approval-operation: '/v1/regard-application'
                 approval-application-address: 
                   ip-address:
-                    ipv-4-address: '10.118.125.157'
-                approval-application-port: 1001
+                    ipv-4-address: '1.1.3.2'
+                approval-application-port: 3002
       responses:
         '204':
           description: 'Subscribed for notifications about new registrations'
@@ -2433,8 +2433,8 @@ paths:
                 subscriber-operation: '/v1/disregard-application'
                 subscriber-address: 
                   ip-address:
-                    ipv-4-address: '10.118.125.157'
-                subscriber-port: 1001
+                    ipv-4-address: '1.1.3.2'
+                subscriber-port: 3002
       responses:
         '204':
           description: 'Subscribed for notifications about deregistrations'
@@ -2635,8 +2635,8 @@ paths:
                 subscriber-operation: '/v1/regard-application'
                 subscriber-address: 
                   ip-address:
-                    ipv-4-address: '10.118.125.157'
-                subscriber-port: 1002
+                    ipv-4-address: '1.1.3.3'
+                subscriber-port: 3003
       responses:
         '204':
           description: 'Subscribed for notifications about new approvals'
@@ -2746,8 +2746,8 @@ paths:
                         application-release-number: '1.0.0'
                         subscriber-address: 
                           ip-address:
-                            ipv-4-address: '10.118.125.186'
-                        subscriber-port: 2000
+                            ipv-4-address: '1.1.4.1'
+                        subscriber-port: 4001
               responses:
                 '204':
                   description: 'Application will be regarded'
@@ -2870,8 +2870,8 @@ paths:
                 subscriber-operation: '/v1/disregard-application'
                 subscriber-address:
                   ip-address:
-                    ipv-4-address: '10.118.125.157'
-                subscriber-port: 1004
+                    ipv-4-address: '1.1.3.5'
+                subscriber-port: 3005
       responses:
         '204':
           description: 'Subscribed for notifications about withdrawn approvals'
@@ -3076,8 +3076,8 @@ paths:
                 new-application-release-number: '2.0.0'
                 new-application-address: 
                   ip-address: 
-                    ipv-4-address: '10.118.125.157'
-                new-application-port: 7000
+                    ipv-4-address: '1.1.3.8'
+                new-application-port: 3008
       responses:
         '204':
           description: 'Will broadcast server replacement'
