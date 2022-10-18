@@ -1166,7 +1166,7 @@ paths:
                           type: string
                           description: >
                             'Label that shall be presented on the button
-                            from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-action-p-000/action-profile-1-0:action-profile-pac/action-profile-capability/label or /core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-action-p-000/action-profile-1-0:action-profile-pac/action-profile-capability/label]'
+                            from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-action-p-000/action-profile-1-0:action-profile-pac/action-profile-capability/label or /core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-action-p-001/action-profile-1-0:action-profile-pac/action-profile-capability/label]'
                         request:
                           type: string
                           description: >
@@ -1175,6 +1175,7 @@ paths:
                         input-value-list:
                           type: array
                           uniqueItems: true
+                          maxItems: 0
                           items:
                             type: object
                             required:
@@ -1194,7 +1195,7 @@ paths:
                           type: boolean
                           description: >
                             'True in case Request shall be represented in a new browser window
-                            from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-action-p-000/action-profile-1-0:action-profile-pac/action-profile-capability/display-in-new-browser-window]'
+                            from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-action-p-000/action-profile-1-0:action-profile-pac/action-profile-capability/display-in-new-browser-window or /core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-action-p-001/action-profile-1-0:action-profile-pac/action-profile-capability/display-in-new-browser-window]
                     example:
                       - label: 'List Registered Applications'
                         request: 'https://10.118.125.157:1000/v1/list-applications-in-generic-representation'
@@ -2101,6 +2102,7 @@ paths:
                         input-value-list:
                           type: array
                           uniqueItems: true
+                          maxItems: 0
                           items:
                             type: object
                             required:
