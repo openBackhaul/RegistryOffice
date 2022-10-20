@@ -864,10 +864,8 @@
             "local-id": "0",
             "layer-protocol-name": "http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER",
             "http-client-interface-1-0:http-client-interface-pac": {
-              "http-client-interface-capability": {
-                "application-name": "OldRelease"
-              },
               "http-client-interface-configuration": {
+                "application-name": "OldRelease",
                 "release-number": "1.0.0"
               }
             }
@@ -1042,10 +1040,8 @@
             "local-id": "0",
             "layer-protocol-name": "http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER",
             "http-client-interface-1-0:http-client-interface-pac": {
-              "http-client-interface-capability": {
-                "application-name": "NewRelease"
-              },
               "http-client-interface-configuration": {
+                "application-name": "NewRelease",
                 "release-number": "2.0.0"
               }
             }
@@ -1272,10 +1268,8 @@
             "local-id": "0",
             "layer-protocol-name": "http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER",
             "http-client-interface-1-0:http-client-interface-pac": {
-              "http-client-interface-capability": {
-                "application-name": "RegistryOffice"
-              },
               "http-client-interface-configuration": {
+                "application-name": "RegistryOffice",
                 "release-number": "1.0.0"
               }
             }
@@ -1476,10 +1470,8 @@
             "local-id": "0",
             "layer-protocol-name": "http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER",
             "http-client-interface-1-0:http-client-interface-pac": {
-              "http-client-interface-capability": {
-                "application-name": "TypeApprovalRegister"
-              },
               "http-client-interface-configuration": {
+                "application-name": "TypeApprovalRegister",
                 "release-number": "1.0.0"
               }
             }
@@ -1681,10 +1673,8 @@
             "local-id": "0",
             "layer-protocol-name": "http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER",
             "http-client-interface-1-0:http-client-interface-pac": {
-              "http-client-interface-capability": {
-                "application-name": "ExecutionAndTraceLog"
-              },
               "http-client-interface-configuration": {
+                "application-name": "ExecutionAndTraceLog",
                 "release-number": "1.0.0"
               }
             }
@@ -1885,10 +1875,8 @@
             "local-id": "0",
             "layer-protocol-name": "http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER",
             "http-client-interface-1-0:http-client-interface-pac": {
-              "http-client-interface-capability": {
-                "application-name": "OamLog"
-              },
               "http-client-interface-configuration": {
+                "application-name": "OamLog",
                 "release-number": "1.0.0"
               }
             }
@@ -2089,10 +2077,8 @@
             "local-id": "0",
             "layer-protocol-name": "http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER",
             "http-client-interface-1-0:http-client-interface-pac": {
-              "http-client-interface-capability": {
-                "application-name": "AdministratorAdministration"
-              },
               "http-client-interface-configuration": {
+                "application-name": "AdministratorAdministration",
                 "release-number": "1.0.0"
               }
             }
@@ -2423,10 +2409,8 @@
             "local-id": "0",
             "layer-protocol-name": "http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER",
             "http-client-interface-1-0:http-client-interface-pac": {
-              "http-client-interface-capability": {
-                "application-name": "ApplicationLayerTopology"
-              },
               "http-client-interface-configuration": {
+                "application-name": "ApplicationLayerTopology",
                 "release-number": "1.0.0"
               }
             }
@@ -2601,10 +2585,8 @@
             "local-id": "0",
             "layer-protocol-name": "http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER",
             "http-client-interface-1-0:http-client-interface-pac": {
-              "http-client-interface-capability": {
-                "application-name": "OperationKeyManagement"
-              },
               "http-client-interface-configuration": {
+                "application-name": "OperationKeyManagement",
                 "release-number": "1.0.0"
               }
             }
@@ -2727,10 +2709,8 @@
             "local-id": "0",
             "layer-protocol-name": "http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER",
             "http-client-interface-1-0:http-client-interface-pac": {
-              "http-client-interface-capability": {
-                "application-name": "CurrentController"
-              },
               "http-client-interface-configuration": {
+                "application-name": "CurrentController",
                 "release-number": "1.0.0"
               }
             }
