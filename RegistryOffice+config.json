@@ -1,4 +1,4 @@
-{
+{"ro-2-0-0-op-s-bs-000"
   "core-model-1-4:control-construct": {
     "uuid": "ro-2-0-0",
     "profile-collection": {
@@ -16,12 +16,12 @@
             },
             "action-profile-configuration": {
               "request": {
-                "protocol": "/core-model-1-4:control-construct/logical-termination-point=*-1-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/protocol",
+                "protocol-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/protocol",
                 "address": {
-                  "ipv-4-address": "/core-model-1-4:control-construct/logical-termination-point=*-1-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address"
+                  "ipv-4-address-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address"
                 },
-                "port": "/core-model-1-4:control-construct/logical-termination-point=*-1-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-port",
-                "operation": "/core-model-1-4:control-construct/logical-termination-point=*-1-0-0-op-s-bs-002/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name"
+                "port-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-port",
+                "operation-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-s-bs-002/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name"
               }
             }
           }
@@ -39,12 +39,12 @@
             },
             "action-profile-configuration": {
               "request": {
-                "protocol": "/core-model-1-4:control-construct/logical-termination-point=*-1-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/protocol",
+                "protocol-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/protocol",
                 "address": {
-                  "ipv-4-address": "/core-model-1-4:control-construct/logical-termination-point=*-1-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address"
+                  "ipv-4-address-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address"
                 },
-                "port": "/core-model-1-4:control-construct/logical-termination-point=*-1-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-port",
-                "operation": "/core-model-1-4:control-construct/logical-termination-point=*-1-0-0-op-s-bs-004/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name"
+                "port-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-port",
+                "operation-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-s-bs-004/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name"
               }
             }
           }
@@ -62,12 +62,12 @@
             },
             "action-profile-configuration": {
               "request": {
-                "protocol": "/core-model-1-4:control-construct/logical-termination-point=*-1-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/protocol",
+                "protocol-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/protocol",
                 "address": {
-                  "ipv-4-address": "/core-model-1-4:control-construct/logical-termination-point=*-1-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address"
+                  "ipv-4-address-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address"
                 },
-                "port": "/core-model-1-4:control-construct/logical-termination-point=*-1-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-port",
-                "operation": "/docs"
+                "port-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-port",
+                "operation-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-s-bs-005/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name"
               }
             }
           }
@@ -85,12 +85,316 @@
             },
             "action-profile-configuration": {
               "request": {
-                "protocol": "/core-model-1-4:control-construct/logical-termination-point=*-1-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/protocol",
+                "protocol-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/protocol",
                 "address": {
-                  "ipv-4-address": "/core-model-1-4:control-construct/logical-termination-point=*-1-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address"
+                  "ipv-4-address-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address"
                 },
-                "port": "/core-model-1-4:control-construct/logical-termination-point=*-1-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-port",
-                "operation": "/v1/list-applications-in-generic-representation"
+                "port-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-port",
+                "operation-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-s-is-005/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name"
+              }
+            }
+          }
+        },
+        {
+          "uuid": "ro-2-0-0-response-p-000",
+          "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
+          "response-profile-1-0:response-profile-pac": {
+            "response-profile-capability": {
+              "operation-name": "/v1/start-application-in-generic-representation",
+              "field-name": {
+                "static-field-name": "applicationName"
+              },
+              "description": "Own application name",
+              "datatype": "string"
+            },
+            "response-profile-configuration": {
+              "value": {
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-s-bm-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-name"
+              }
+            }
+          }
+        },
+        {
+          "uuid": "ro-2-0-0-response-p-001",
+          "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
+          "response-profile-1-0:response-profile-pac": {
+            "response-profile-capability": {
+              "operation-name": "/v1/inform-about-application-in-generic-representation",
+              "field-name": {
+                "static-field-name": "applicationName"
+              },
+              "description": "Name of this application",
+              "datatype": "string"
+            },
+            "response-profile-configuration": {
+              "value": {
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-s-bm-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-name"
+              }
+            }
+          }
+        },
+        {
+          "uuid": "ro-2-0-0-response-p-002",
+          "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
+          "response-profile-1-0:response-profile-pac": {
+            "response-profile-capability": {
+              "operation-name": "/v1/inform-about-application-in-generic-representation",
+              "field-name": {
+                "static-field-name": "releaseNumber"
+              },
+              "description": "Number of this release",
+              "datatype": "string"
+            },
+            "response-profile-configuration": {
+              "value": {
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-s-bm-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-number"
+              }
+            }
+          }
+        },
+        {
+          "uuid": "ro-2-0-0-response-p-003",
+          "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
+          "response-profile-1-0:response-profile-pac": {
+            "response-profile-capability": {
+              "operation-name": "/v1/inform-about-application-in-generic-representation",
+              "field-name": {
+                "static-field-name": "applicationPurpose"
+              },
+              "description": "Purpose of this application",
+              "datatype": "string"
+            },
+            "response-profile-configuration": {
+              "value": {
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-s-bm-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-purpose"
+              }
+            }
+          }
+        },
+        {
+          "uuid": "ro-2-0-0-response-p-004",
+          "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
+          "response-profile-1-0:response-profile-pac": {
+            "response-profile-capability": {
+              "operation-name": "/v1/inform-about-application-in-generic-representation",
+              "field-name": {
+                "static-field-name": "dataUpdatePeriod"
+              },
+              "description": "Period of updating the data inside this application",
+              "datatype": "string"
+            },
+            "response-profile-configuration": {
+              "value": {
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-s-bm-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/data-update-period"
+              }
+            }
+          }
+        },
+        {
+          "uuid": "ro-2-0-0-response-p-005",
+          "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
+          "response-profile-1-0:response-profile-pac": {
+            "response-profile-capability": {
+              "operation-name": "/v1/inform-about-application-in-generic-representation",
+              "field-name": {
+                "static-field-name": "ownerName"
+              },
+              "description": "Name of the ApplicationOwner",
+              "datatype": "string"
+            },
+            "response-profile-configuration": {
+              "value": {
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-s-bm-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/owner-name"
+              }
+            }
+          }
+        },
+        {
+          "uuid": "ro-2-0-0-response-p-006",
+          "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
+          "response-profile-1-0:response-profile-pac": {
+            "response-profile-capability": {
+              "operation-name": "/v1/inform-about-application-in-generic-representation",
+              "field-name": {
+                "static-field-name": "ownerEmailAddress"
+              },
+              "description": "Email address of the ApplicationOwner",
+              "datatype": "string"
+            },
+            "response-profile-configuration": {
+              "value": {
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-s-bm-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/owner-email-address"
+              }
+            }
+          }
+        },
+        {
+          "uuid": "ro-2-0-0-response-p-007",
+          "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
+          "response-profile-1-0:response-profile-pac": {
+            "response-profile-capability": {
+              "operation-name": "/v1/inform-about-release-history-in-generic-representation",
+              "field-name": {
+                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-s-bm-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-list=0/release-number"
+              },
+              "description": "Represents the first entry in the list of releases",
+              "datatype": "string"
+            },
+            "response-profile-configuration": {
+              "value": {
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-s-bm-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-list=0/changes"
+              }
+            }
+          }
+        },
+        {
+          "uuid": "ro-2-0-0-response-p-008",
+          "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
+          "response-profile-1-0:response-profile-pac": {
+            "response-profile-capability": {
+              "operation-name": "/v1/list-applications-in-generic-representation",
+              "field-name": {
+                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-ro-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
+              },
+              "description": "Represents the first entry in the list of releases",
+              "datatype": "string"
+            },
+            "response-profile-configuration": {
+              "value": {
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-ro-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
+              }
+            }
+          }
+        },
+        {
+          "uuid": "ro-2-0-0-response-p-009",
+          "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
+          "response-profile-1-0:response-profile-pac": {
+            "response-profile-capability": {
+              "operation-name": "/v1/list-applications-in-generic-representation",
+              "field-name": {
+                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-im-tar-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
+              },
+              "description": "Represents the first entry in the list of releases",
+              "datatype": "string"
+            },
+            "response-profile-configuration": {
+              "value": {
+                "value-reference": "core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-im-tar-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
+              }
+            }
+          }
+        },
+        {
+          "uuid": "ro-2-0-0-response-p-010",
+          "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
+          "response-profile-1-0:response-profile-pac": {
+            "response-profile-capability": {
+              "operation-name": "/v1/list-applications-in-generic-representation",
+              "field-name": {
+                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-eatl-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
+              },
+              "description": "Represents the first entry in the list of releases",
+              "datatype": "string"
+            },
+            "response-profile-configuration": {
+              "value": {
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-eatl-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
+              }
+            }
+          }
+        },
+        {
+          "uuid": "ro-2-0-0-response-p-011",
+          "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
+          "response-profile-1-0:response-profile-pac": {
+            "response-profile-capability": {
+              "operation-name": "/v1/list-applications-in-generic-representation",
+              "field-name": {
+                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-ol-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
+              },
+              "description": "Represents the first entry in the list of releases",
+              "datatype": "string"
+            },
+            "response-profile-configuration": {
+              "value": {
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-ol-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
+              }
+            }
+          }
+        },
+        {
+          "uuid": "ro-2-0-0-response-p-012",
+          "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
+          "response-profile-1-0:response-profile-pac": {
+            "response-profile-capability": {
+              "operation-name": "/v1/list-applications-in-generic-representation",
+              "field-name": {
+                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-aa-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
+              },
+              "description": "Represents the first entry in the list of releases",
+              "datatype": "string"
+            },
+            "response-profile-configuration": {
+              "value": {
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-aa-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
+              }
+            }
+          }
+        },
+        {
+          "uuid": "ro-2-0-0-response-p-013",
+          "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
+          "response-profile-1-0:response-profile-pac": {
+            "response-profile-capability": {
+              "operation-name": "/v1/list-applications-in-generic-representation",
+              "field-name": {
+                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-alt-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
+              },
+              "description": "Represents the first entry in the list of releases",
+              "datatype": "string"
+            },
+            "response-profile-configuration": {
+              "value": {
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-alt-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
+              }
+            }
+          }
+        },
+        {
+          "uuid": "ro-2-0-0-response-p-014",
+          "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
+          "response-profile-1-0:response-profile-pac": {
+            "response-profile-capability": {
+              "operation-name": "/v1/list-applications-in-generic-representation",
+              "field-name": {
+                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-okm-ro-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
+              },
+              "description": "Represents the first entry in the list of releases",
+              "datatype": "string"
+            },
+            "response-profile-configuration": {
+              "value": {
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-okm-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
+              }
+            }
+          }
+        },
+        {
+          "uuid": "ro-2-0-0-response-p-015",
+          "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
+          "response-profile-1-0:response-profile-pac": {
+            "response-profile-capability": {
+              "operation-name": "/v1/list-applications-in-generic-representation",
+              "field-name": {
+                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-cc-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
+              },
+              "description": "Represents the first entry in the list of releases",
+              "datatype": "string"
+            },
+            "response-profile-configuration": {
+              "value": {
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-cc-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
               }
             }
           }
@@ -387,6 +691,30 @@
         ]
       },
       {
+        "uuid": "ro-2-0-0-op-s-bs-000",
+        "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
+        "client-ltp": [
+        ],
+        "server-ltp": [
+          "ro-2-0-0-http-s-bm-000"
+        ],
+        "layer-protocol": [
+          {
+            "local-id": "0",
+            "layer-protocol-name": "operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
+            "operation-server-interface-1-0:operation-server-interface-pac": {
+              "operation-server-interface-capability": {
+                "operation-name": "/v1/start-application-in-generic-representation"
+              },
+              "operation-server-interface-configuration": {
+                "life-cycle-state": "operation-server-interface-1-0:LIFE_CYCLE_STATE_TYPE_EXPERIMENTAL",
+                "operation-key": "n.a."
+              }
+            }
+          }
+        ]
+      },
+      {
         "uuid": "ro-2-0-0-op-s-bs-001",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
@@ -473,30 +801,6 @@
             "operation-server-interface-1-0:operation-server-interface-pac": {
               "operation-server-interface-capability": {
                 "operation-name": "/v1/inform-about-release-history-in-generic-representation"
-              },
-              "operation-server-interface-configuration": {
-                "life-cycle-state": "operation-server-interface-1-0:LIFE_CYCLE_STATE_TYPE_EXPERIMENTAL",
-                "operation-key": "n.a."
-              }
-            }
-          }
-        ]
-      },
-      {
-        "uuid": "ro-2-0-0-op-s-is-000",
-        "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
-        "client-ltp": [
-        ],
-        "server-ltp": [
-          "ro-2-0-0-http-s-bm-000"
-        ],
-        "layer-protocol": [
-          {
-            "local-id": "0",
-            "layer-protocol-name": "operation-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
-            "operation-server-interface-1-0:operation-server-interface-pac": {
-              "operation-server-interface-capability": {
-                "operation-name": "/v1/start-application-in-generic-representation"
               },
               "operation-server-interface-configuration": {
                 "life-cycle-state": "operation-server-interface-1-0:LIFE_CYCLE_STATE_TYPE_EXPERIMENTAL",
@@ -786,11 +1090,11 @@
           "ro-2-0-0-op-s-bm-010",
           "ro-2-0-0-op-s-bm-011",
           "ro-2-0-0-op-s-im-000",
+          "ro-2-0-0-op-s-bs-000",
           "ro-2-0-0-op-s-bs-001",
           "ro-2-0-0-op-s-bs-002",
           "ro-2-0-0-op-s-bs-003",
           "ro-2-0-0-op-s-bs-004",
-          "ro-2-0-0-op-s-is-000",
           "ro-2-0-0-op-s-is-001",
           "ro-2-0-0-op-s-is-002",
           "ro-2-0-0-op-s-is-003",
@@ -2931,7 +3235,7 @@
               {
                 "local-id": "116",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-0-0-op-s-is-000"
+                "logical-termination-point": "ro-2-0-0-op-s-bs-000"
               },
               {
                 "local-id": "117",

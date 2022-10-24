@@ -30,6 +30,8 @@ servers:
           uuid: ro-2-0-0-op-s-im-000
     service:
       basic:
+        - service-name: /v1/start-application-in-generic-representation
+          uuid: ro-2-0-0-op-s-bs-000
         - service-name: /v1/inform-about-application
           uuid: ro-2-0-0-op-s-bs-001
         - service-name: /v1/inform-about-application-in-generic-representation
@@ -39,8 +41,6 @@ servers:
         - service-name: /v1/inform-about-release-history-in-generic-representation
           uuid: ro-2-0-0-op-s-bs-004
       individual:
-        - service-name: /v1/start-application-in-generic-representation
-          uuid: ro-2-0-0-op-s-is-000
         - service-name: /v1/register-application
           uuid: ro-2-0-0-op-s-is-001
         - service-name: /v1/deregister-application
