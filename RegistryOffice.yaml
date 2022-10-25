@@ -3166,17 +3166,17 @@ components:
                 type: string
                 description: >
                   'Field name
-                  from [/core-model-1-4:control-construct/profile-collection/profile=*-1-0-0-response-p-*/response-profile-1-0:response-profile-pac/response-profile-capability/field-name]'
+                  from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-response-p-*/response-profile-1-0:response-profile-pac/response-profile-capability/field-name]'
               value:
                 type: string
                 description: >
                   'Field value
-                  from [/core-model-1-4:control-construct/profile-collection/profile=*-1-0-0-response-p-*/response-profile-1-0:response-profile-pac/response-profile-configuration/value]'
+                  from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-response-p-*/response-profile-1-0:response-profile-pac/response-profile-configuration/value]'
               datatype:
                 type: string
                 description: >
                   'Field datatype
-                  from [/core-model-1-4:control-construct/profile-collection/profile=*-1-0-0-response-p-*/response-profile-1-0:response-profile-pac/response-profile-capability/datatype]'
+                  from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-response-p-*/response-profile-1-0:response-profile-pac/response-profile-capability/datatype]'
         consequent-action-list:
           type: array
           items:
@@ -3190,12 +3190,12 @@ components:
                 type: string
                 description: >
                   'Label that shall be presented on the button
-                  from [/core-model-1-4:control-construct/profile-collection/profile=*-1-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-capability/label]'
+                  from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-capability/label]'
               request:
                 type: string
                 description: >
                   'Request that shall be called, when button gets pressed
-                  from [/core-model-1-4:control-construct/profile-collection/profile=*-1-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-configuration/request]'
+                  from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-configuration/request]'
               input-value-list:
                 type: array
                 items:
@@ -3207,17 +3207,17 @@ components:
                       type: string
                       description: >
                         'Name of an input value required for executing the Request
-                        from [/core-model-1-4:control-construct/profile-collection/profile=*-1-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-capability/input-value-list=*/name]'
+                        from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-capability/input-value-list=*/name]'
                     unit:
                       type: string
                       description: >
                         'Unit of an input value required for executing the Request
-                        from [/core-model-1-4:control-construct/profile-collection/profile=*-1-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-capability/input-value-list=*/unit]'
+                        from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-capability/input-value-list=*/unit]'
               display-in-new-browser-window:
                 type: boolean
                 description: >
                   'True in case Request shall be represented in a new browser window
-                  from [/core-model-1-4:control-construct/profile-collection/profile=*-1-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-capability/display-in-new-browser-window]'
+                  from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-capability/display-in-new-browser-window]'
     logicalTerminationPoint:
       type: object
       required:

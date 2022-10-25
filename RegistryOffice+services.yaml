@@ -305,7 +305,7 @@ clients:
       release-number: 1.0.0
       uuid: ro-2-0-0-http-c-im-okm-1-0-0-000
     tcp-client:
-      ip-address: 11.1.3.7
+      ip-address: 1.1.3.7
       tcp-port: 3007
       uuid: ro-2-0-0-tcp-c-im-okm-1-0-0-000
     operation-clients:
