@@ -1,4 +1,4 @@
-{"ro-2-0-0-op-s-bs-000"
+{
   "core-model-1-4:control-construct": {
     "uuid": "ro-2-0-0",
     "profile-collection": {
@@ -16,7 +16,7 @@
             },
             "action-profile-configuration": {
               "request": {
-                "protocol-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/protocol",
+                "protocol-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-protocol",
                 "address": {
                   "ipv-4-address-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address"
                 },
@@ -39,7 +39,7 @@
             },
             "action-profile-configuration": {
               "request": {
-                "protocol-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/protocol",
+                "protocol-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-protocol",
                 "address": {
                   "ipv-4-address-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address"
                 },
@@ -62,7 +62,7 @@
             },
             "action-profile-configuration": {
               "request": {
-                "protocol-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/protocol",
+                "protocol-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-protocol",
                 "address": {
                   "ipv-4-address-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address"
                 },
@@ -85,7 +85,7 @@
             },
             "action-profile-configuration": {
               "request": {
-                "protocol-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/protocol",
+                "protocol-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-protocol",
                 "address": {
                   "ipv-4-address-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-001/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address"
                 },
@@ -1108,7 +1108,8 @@
           "ro-2-0-0-op-s-is-011"
         ],
         "server-ltp": [
-          "ro-2-0-0-tcp-s-bm-000"
+          "ro-2-0-0-tcp-s-bm-000",
+          "ro-2-0-0-tcp-s-bm-001"
         ],
         "layer-protocol": [
           {
@@ -1152,6 +1153,29 @@
                   "ipv-4-address": "1.1.3.8"
                 },
                 "local-port": 3008
+              }
+            }
+          }
+        ]
+      },
+      {
+        "uuid": "ro-2-0-0-tcp-s-bm-001",
+        "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
+        "client-ltp": [
+          "ro-2-0-0-http-s-bm-000"
+        ],
+        "server-ltp": [
+        ],
+        "layer-protocol": [
+          {
+            "local-id": "0",
+            "layer-protocol-name": "tcp-server-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_TCP_LAYER",
+            "tcp-server-interface-1-0:tcp-server-interface-pac": {
+              "tcp-server-interface-configuration": {
+                "local-address": {
+                  "ipv-4-address": "1.2.3.8"
+                },
+                "local-port": 3208
               }
             }
           }
