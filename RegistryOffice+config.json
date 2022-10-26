@@ -292,14 +292,14 @@
             "response-profile-capability": {
               "operation-name": "/v1/list-applications-in-generic-representation",
               "field-name": {
-                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-eatl-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
+                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-im-eatl-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
               },
               "description": "List of registered application names and release numbers",
               "datatype": "string"
             },
             "response-profile-configuration": {
               "value": {
-                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-eatl-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-im-eatl-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
               }
             }
           }
@@ -311,14 +311,14 @@
             "response-profile-capability": {
               "operation-name": "/v1/list-applications-in-generic-representation",
               "field-name": {
-                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-ol-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
+                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-im-ol-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
               },
               "description": "List of registered application names and release numbers",
               "datatype": "string"
             },
             "response-profile-configuration": {
               "value": {
-                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-ol-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-im-ol-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
               }
             }
           }
@@ -330,14 +330,14 @@
             "response-profile-capability": {
               "operation-name": "/v1/list-applications-in-generic-representation",
               "field-name": {
-                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-aa-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
+                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-im-aa-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
               },
               "description": "List of registered application names and release numbers",
               "datatype": "string"
             },
             "response-profile-configuration": {
               "value": {
-                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-aa-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-im-aa-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
               }
             }
           }
@@ -368,14 +368,14 @@
             "response-profile-capability": {
               "operation-name": "/v1/list-applications-in-generic-representation",
               "field-name": {
-                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-okm-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
+                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-im-okm-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
               },
               "description": "List of registered application names and release numbers",
               "datatype": "string"
             },
             "response-profile-configuration": {
               "value": {
-                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-okm-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-im-okm-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
               }
             }
           }
@@ -387,14 +387,14 @@
             "response-profile-capability": {
               "operation-name": "/v1/list-applications-in-generic-representation",
               "field-name": {
-                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-cc-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
+                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-im-cc-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
               },
               "description": "List of registered application names and release numbers",
               "datatype": "string"
             },
             "response-profile-configuration": {
               "value": {
-                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-bm-cc-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-im-cc-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
               }
             }
           }
