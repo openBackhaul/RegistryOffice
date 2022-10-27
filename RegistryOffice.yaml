@@ -3327,13 +3327,13 @@ components:
                         type: object
                         required:
                           - description
-                          - protocol
+                          - local-protocol
                           - local-address
                           - local-port
                         properties:
                           description:
                             type: string
-                          protocol:
+                          local-protocol:
                             type: string
                           local-address:
                             type: object
@@ -3459,9 +3459,12 @@ components:
                       tcp-client-interface-configuration:
                         type: object
                         required:
+                          - remote-protocol
                           - remote-address
                           - remote-port
                         properties:
+                          remote-protocol:
+                            type: string
                           remote-address:
                             type: object
                             minProperties: 1
