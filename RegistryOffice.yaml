@@ -55,7 +55,7 @@ paths:
                       minProperties: 1
                       additionalProperties: false
                       properties: 
-                        ipv-4-address: 
+                        ipv-4-address:
                           type: string
                           pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
                           description: >
@@ -1901,28 +1901,28 @@ paths:
                   response-value-list:
                   - field-name: 'RegistryOffice'
                     value: '2.0.0'
-                    datatype: 'String'
+                    datatype: 'string'
                   - field-name: 'TypeApprovalRegister'
                     value: '2.0.0'
-                    datatype: 'String'
+                    datatype: 'string'
                   - field-name: 'ExecutionAndTraceLog'
                     value: '2.0.0'
-                    datatype: 'String'
+                    datatype: 'string'
                   - field-name: 'OamLog'
                     value: '2.0.0'
-                    datatype: 'String'
+                    datatype: 'string'
                   - field-name: 'AdministratorAdministration'
                     value: '2.0.0'
-                    datatype: 'String'
+                    datatype: 'string'
                   - field-name: 'ApplicationLayerTopology'
                     value: '2.0.0'
-                    datatype: 'String'
+                    datatype: 'string'
                   - field-name: 'OperationKeyManagement'
                     value: '2.0.0'
-                    datatype: 'String'
+                    datatype: 'string'
                   - field-name: 'CurrentController'
                     value: '1.0.0'
-                    datatype: 'String'
+                    datatype: 'string'
           headers:
             x-correlator:
               schema: 
@@ -3166,17 +3166,17 @@ components:
                 type: string
                 description: >
                   'Field name
-                  from [/core-model-1-4:control-construct/profile-collection/profile=*-1-0-0-response-p-*/response-profile-1-0:response-profile-pac/response-profile-capability/field-name]'
+                  from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-response-p-*/response-profile-1-0:response-profile-pac/response-profile-capability/field-name]'
               value:
                 type: string
                 description: >
                   'Field value
-                  from [/core-model-1-4:control-construct/profile-collection/profile=*-1-0-0-response-p-*/response-profile-1-0:response-profile-pac/response-profile-configuration/value]'
+                  from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-response-p-*/response-profile-1-0:response-profile-pac/response-profile-configuration/value]'
               datatype:
                 type: string
                 description: >
                   'Field datatype
-                  from [/core-model-1-4:control-construct/profile-collection/profile=*-1-0-0-response-p-*/response-profile-1-0:response-profile-pac/response-profile-capability/datatype]'
+                  from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-response-p-*/response-profile-1-0:response-profile-pac/response-profile-capability/datatype]'
         consequent-action-list:
           type: array
           items:
@@ -3190,12 +3190,12 @@ components:
                 type: string
                 description: >
                   'Label that shall be presented on the button
-                  from [/core-model-1-4:control-construct/profile-collection/profile=*-1-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-capability/label]'
+                  from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-capability/label]'
               request:
                 type: string
                 description: >
                   'Request that shall be called, when button gets pressed
-                  from [/core-model-1-4:control-construct/profile-collection/profile=*-1-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-configuration/request]'
+                  from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-configuration/request]'
               input-value-list:
                 type: array
                 items:
@@ -3207,17 +3207,17 @@ components:
                       type: string
                       description: >
                         'Name of an input value required for executing the Request
-                        from [/core-model-1-4:control-construct/profile-collection/profile=*-1-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-capability/input-value-list=*/name]'
+                        from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-capability/input-value-list=*/name]'
                     unit:
                       type: string
                       description: >
                         'Unit of an input value required for executing the Request
-                        from [/core-model-1-4:control-construct/profile-collection/profile=*-1-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-capability/input-value-list=*/unit]'
+                        from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-capability/input-value-list=*/unit]'
               display-in-new-browser-window:
                 type: boolean
                 description: >
                   'True in case Request shall be represented in a new browser window
-                  from [/core-model-1-4:control-construct/profile-collection/profile=*-1-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-capability/display-in-new-browser-window]'
+                  from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-action-p-*/action-profile-1-0:action-profile-pac/action-profile-capability/display-in-new-browser-window]'
     logicalTerminationPoint:
       type: object
       required:
@@ -3327,13 +3327,13 @@ components:
                         type: object
                         required:
                           - description
-                          - protocol
+                          - local-protocol
                           - local-address
                           - local-port
                         properties:
                           description:
                             type: string
-                          protocol:
+                          local-protocol:
                             type: string
                           local-address:
                             type: object
@@ -3459,9 +3459,12 @@ components:
                       tcp-client-interface-configuration:
                         type: object
                         required:
+                          - remote-protocol
                           - remote-address
                           - remote-port
                         properties:
+                          remote-protocol:
+                            type: string
                           remote-address:
                             type: object
                             minProperties: 1

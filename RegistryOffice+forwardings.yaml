@@ -71,6 +71,8 @@ forwardings:
         uuid: ro-2-0-0-op-s-bm-011
       - server-name: /v1/bequeath-your-data-and-die
         uuid: ro-2-0-0-op-s-im-000
+      - server-name: /v1/start-application-in-generic-representation
+        uuid: ro-2-0-0-op-s-bs-000
       - server-name: /v1/inform-about-application
         uuid: ro-2-0-0-op-s-bs-001
       - server-name: /v1/inform-about-application-in-generic-representation
@@ -79,8 +81,6 @@ forwardings:
         uuid: ro-2-0-0-op-s-bs-003
       - server-name: /v1/inform-about-release-history-in-generic-representation
         uuid: ro-2-0-0-op-s-bs-004
-      - server-name: /v1/start-application-in-generic-representation
-        uuid: ro-2-0-0-op-s-is-000
       - service-name: /v1/register-application
         uuid: ro-2-0-0-op-s-is-001
       - service-name: /v1/deregister-application
