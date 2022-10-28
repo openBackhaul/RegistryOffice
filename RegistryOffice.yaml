@@ -164,7 +164,7 @@ paths:
                           description: >
                             'Operation that shall be addressed by information about new registrations
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-tar-1-0-0-003/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
-                        subscriber-address:
+                        approval-application-address:
                           type: object
                           minProperties: 1
                           maxProperties: 1
@@ -185,7 +185,7 @@ paths:
                               description: >
                                 'Domain name of application that wants to receive information about new registrations
                                 from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-tar-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'                    
-                        subscriber-port:      
+                        approval-application-port:      
                           type: integer
                           description: >
                             'TCP port of application that wants to receive information about new registrations
@@ -2093,7 +2093,7 @@ paths:
           $ref: '#/components/responses/responseForErroredServiceRequests'
       callbacks:
         RegistrationCausesInquiryForApplicationTypeApproval:
-          https://{$request.body#subscriber-address/ip-address/ipv-4-address or request.body#subscriber-address/domain-name}:{$request.body#subscriber-port}{$request.body#subscriber-operation}:
+          https://{$request.body#approval-application-address/ip-address/ipv-4-address or request.body#approval-application-address/domain-name}:{$request.body#approval-application-port}{$request.body#approval-operation}:
             parameters:
               - $ref: '#/components/parameters/user'
               - $ref: '#/components/parameters/originator'
