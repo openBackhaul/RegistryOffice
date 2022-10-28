@@ -1888,8 +1888,6 @@ paths:
       summary: 'Provides list of applications in generic representation'
       tags:
         - IndividualServices
-      security:
-        - apiKeyAuth: []
       responses:
         '200':
           description: 'List of applications provided in generic representation'
