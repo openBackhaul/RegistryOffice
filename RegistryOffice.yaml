@@ -129,13 +129,13 @@ paths:
       callbacks:
         PromptForBequeathingDataCausesNewApplicationBeingRequestedToInquireForApplicationTypeApprovals:
           https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-nr-2-0-0-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
-            parameters:
-              - $ref: '#/components/parameters/user'
-              - $ref: '#/components/parameters/originator'
-              - $ref: '#/components/parameters/x-correlator'
-              - $ref: '#/components/parameters/trace-indicator'
-              - $ref: '#/components/parameters/customer-journey'
             post:
+              parameters:
+                - $ref: '#/components/parameters/user'
+                - $ref: '#/components/parameters/originator'
+                - $ref: '#/components/parameters/x-correlator'
+                - $ref: '#/components/parameters/trace-indicator'
+                - $ref: '#/components/parameters/customer-journey'
               requestBody:
                 required: true
                 content:
@@ -243,13 +243,13 @@ paths:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
         PromptForBequeathingDataCausesNewApplicationBeingRequestedToDocumentSubscriptionsForDeregistrationNotifications:
           https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-nr-2-0-0-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
-            parameters:
-              - $ref: '#/components/parameters/user'
-              - $ref: '#/components/parameters/originator'
-              - $ref: '#/components/parameters/x-correlator'
-              - $ref: '#/components/parameters/trace-indicator'
-              - $ref: '#/components/parameters/customer-journey'
             post:
+              parameters:
+                - $ref: '#/components/parameters/user'
+                - $ref: '#/components/parameters/originator'
+                - $ref: '#/components/parameters/x-correlator'
+                - $ref: '#/components/parameters/trace-indicator'
+                - $ref: '#/components/parameters/customer-journey'
               requestBody:
                 required: true
                 content:
@@ -357,13 +357,13 @@ paths:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
         PromptForBequeathingDataCausesNewApplicationBeingRequestedToDocumentSubscriptionsForApprovalNotifications:
           https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-nr-2-0-0-002/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
-            parameters:
-              - $ref: '#/components/parameters/user'
-              - $ref: '#/components/parameters/originator'
-              - $ref: '#/components/parameters/x-correlator'
-              - $ref: '#/components/parameters/trace-indicator'
-              - $ref: '#/components/parameters/customer-journey'
             post:
+              parameters:
+                - $ref: '#/components/parameters/user'
+                - $ref: '#/components/parameters/originator'
+                - $ref: '#/components/parameters/x-correlator'
+                - $ref: '#/components/parameters/trace-indicator'
+                - $ref: '#/components/parameters/customer-journey'
               requestBody:
                 required: true
                 content:
@@ -471,13 +471,13 @@ paths:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
         PromptForBequeathingDataCausesNewApplicationBeingRequestedToDocumentSubscriptionsForWithdrawnApprovalNotifications:
           https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-nr-2-0-0-003/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
-            parameters:
-              - $ref: '#/components/parameters/user'
-              - $ref: '#/components/parameters/originator'
-              - $ref: '#/components/parameters/x-correlator'
-              - $ref: '#/components/parameters/trace-indicator'
-              - $ref: '#/components/parameters/customer-journey'
             post:
+              parameters:
+                - $ref: '#/components/parameters/user'
+                - $ref: '#/components/parameters/originator'
+                - $ref: '#/components/parameters/x-correlator'
+                - $ref: '#/components/parameters/trace-indicator'
+                - $ref: '#/components/parameters/customer-journey'
               requestBody:
                 required: true
                 content:
@@ -585,13 +585,13 @@ paths:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
         PromptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredApplications:
           https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-nr-2-0-0-004/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
-            parameters:
-              - $ref: '#/components/parameters/user'
-              - $ref: '#/components/parameters/originator'
-              - $ref: '#/components/parameters/x-correlator'
-              - $ref: '#/components/parameters/trace-indicator'
-              - $ref: '#/components/parameters/customer-journey'
             post:
+              parameters:
+                - $ref: '#/components/parameters/user'
+                - $ref: '#/components/parameters/originator'
+                - $ref: '#/components/parameters/x-correlator'
+                - $ref: '#/components/parameters/trace-indicator'
+                - $ref: '#/components/parameters/customer-journey'
               requestBody:
                 required: true
                 content:
@@ -706,13 +706,13 @@ paths:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
         PromptForBequeathingDataCausesTARbeingRequestedToRedirectInfoAboutApprovalsToNewApplication:
           https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-tar-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-tar-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-tar-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-tar-1-0-0-005/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
-            parameters:
-              - $ref: '#/components/parameters/user'
-              - $ref: '#/components/parameters/originator'
-              - $ref: '#/components/parameters/x-correlator'
-              - $ref: '#/components/parameters/trace-indicator'
-              - $ref: '#/components/parameters/customer-journey'
             post:
+              parameters:
+                - $ref: '#/components/parameters/user'
+                - $ref: '#/components/parameters/originator'
+                - $ref: '#/components/parameters/x-correlator'
+                - $ref: '#/components/parameters/trace-indicator'
+                - $ref: '#/components/parameters/customer-journey'
               requestBody:
                 required: true
                 content:
@@ -820,13 +820,13 @@ paths:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
         PromptForBequeathingDataCausesRequestForBroadcastingInfoAboutServerReplacement:
           https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-ro-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-ro-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-ro-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-bm-ro-1-0-0-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
-            parameters:
-              - $ref: '#/components/parameters/user'
-              - $ref: '#/components/parameters/originator'
-              - $ref: '#/components/parameters/x-correlator'
-              - $ref: '#/components/parameters/trace-indicator'
-              - $ref: '#/components/parameters/customer-journey'
             post:
+              parameters:
+                - $ref: '#/components/parameters/user'
+                - $ref: '#/components/parameters/originator'
+                - $ref: '#/components/parameters/x-correlator'
+                - $ref: '#/components/parameters/trace-indicator'
+                - $ref: '#/components/parameters/customer-journey'
               requestBody:
                 required: true
                 content:
@@ -934,13 +934,13 @@ paths:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
         PromptForBequeathingDataCausesRequestForDeregisteringOfOldRelease:
           https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-ro-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-ro-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-ro-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-bm-ro-1-0-0-002/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
-            parameters:
-              - $ref: '#/components/parameters/user'
-              - $ref: '#/components/parameters/originator'
-              - $ref: '#/components/parameters/x-correlator'
-              - $ref: '#/components/parameters/trace-indicator'
-              - $ref: '#/components/parameters/customer-journey'
             post:
+              parameters:
+                - $ref: '#/components/parameters/user'
+                - $ref: '#/components/parameters/originator'
+                - $ref: '#/components/parameters/x-correlator'
+                - $ref: '#/components/parameters/trace-indicator'
+                - $ref: '#/components/parameters/customer-journey'
               requestBody:
                 required: true
                 content:
@@ -1009,13 +1009,13 @@ paths:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
         PromptingNewReleaseForUpdatingServerCausesRequestForBroadcastingInfoAboutBackwardCompatibleUpdateOfOperation:
           https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-ro-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-ro-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-bm-ro-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-bm-ro-1-0-0-003/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
-            parameters:
-              - $ref: '#/components/parameters/user'
-              - $ref: '#/components/parameters/originator'
-              - $ref: '#/components/parameters/x-correlator'
-              - $ref: '#/components/parameters/trace-indicator'
-              - $ref: '#/components/parameters/customer-journey'
             post:
+              parameters:
+                - $ref: '#/components/parameters/user'
+                - $ref: '#/components/parameters/originator'
+                - $ref: '#/components/parameters/x-correlator'
+                - $ref: '#/components/parameters/trace-indicator'
+                - $ref: '#/components/parameters/customer-journey'
               requestBody:
                 required: true
                 content:
@@ -1236,13 +1236,13 @@ paths:
       callbacks:
         TypeApprovalCausesRequestForEmbedding:
           https://{$request.body#application-address/ip-address/ipv-4-address or $request.body#application-address/domain-name}:{$request.body#application-port}{$request.body#embedding-operation}:
-            parameters:
-              - $ref: '#/components/parameters/user'
-              - $ref: '#/components/parameters/originator'
-              - $ref: '#/components/parameters/x-correlator'
-              - $ref: '#/components/parameters/trace-indicator'
-              - $ref: '#/components/parameters/customer-journey'
             post:
+              parameters:
+                - $ref: '#/components/parameters/user'
+                - $ref: '#/components/parameters/originator'
+                - $ref: '#/components/parameters/x-correlator'
+                - $ref: '#/components/parameters/trace-indicator'
+                - $ref: '#/components/parameters/customer-journey'
               requestBody:
                 required: true
                 content:
@@ -1580,13 +1580,13 @@ paths:
         ServerReplacementBroadcast:
           https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
             description: 'Exclusively approved applications shall get information about updated serving applications.'
-            parameters:
-              - $ref: '#/components/parameters/user'
-              - $ref: '#/components/parameters/originator'
-              - $ref: '#/components/parameters/x-correlator'
-              - $ref: '#/components/parameters/trace-indicator'
-              - $ref: '#/components/parameters/customer-journey'
             post:
+              parameters:
+                - $ref: '#/components/parameters/user'
+                - $ref: '#/components/parameters/originator'
+                - $ref: '#/components/parameters/x-correlator'
+                - $ref: '#/components/parameters/trace-indicator'
+                - $ref: '#/components/parameters/customer-journey'
               requestBody:
                 required: true
                 content:
@@ -1695,13 +1695,13 @@ paths:
         OperationUpdateBroadcast:
           https://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-002/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
             description: 'Exclusively approved applications shall get information about updated operations.'
-            parameters:
-              - $ref: '#/components/parameters/user'
-              - $ref: '#/components/parameters/originator'
-              - $ref: '#/components/parameters/x-correlator'
-              - $ref: '#/components/parameters/trace-indicator'
-              - $ref: '#/components/parameters/customer-journey'
             post:
+              parameters:
+                - $ref: '#/components/parameters/user'
+                - $ref: '#/components/parameters/originator'
+                - $ref: '#/components/parameters/x-correlator'
+                - $ref: '#/components/parameters/trace-indicator'
+                - $ref: '#/components/parameters/customer-journey'
               requestBody:
                 required: true
                 content:
@@ -2094,13 +2094,13 @@ paths:
       callbacks:
         RegistrationCausesInquiryForApplicationTypeApproval:
           https://{$request.body#approval-application-address/ip-address/ipv-4-address or request.body#approval-application-address/domain-name}:{$request.body#approval-application-port}{$request.body#approval-operation}:
-            parameters:
-              - $ref: '#/components/parameters/user'
-              - $ref: '#/components/parameters/originator'
-              - $ref: '#/components/parameters/x-correlator'
-              - $ref: '#/components/parameters/trace-indicator'
-              - $ref: '#/components/parameters/customer-journey'
             post:
+              parameters:
+                - $ref: '#/components/parameters/user'
+                - $ref: '#/components/parameters/originator'
+                - $ref: '#/components/parameters/x-correlator'
+                - $ref: '#/components/parameters/trace-indicator'
+                - $ref: '#/components/parameters/customer-journey'
               requestBody:
                 required: true
                 content:
@@ -2297,13 +2297,13 @@ paths:
       callbacks:
         DeregistrationNotification:
           https://{$request.body#subscriber-address/ip-address/ipv-4-address or $request.body#subscriber-address/domain-name}:{$request.body#subscriber-port}{$request.body#subscriber-operation}:
-            parameters:
-              - $ref: '#/components/parameters/user'
-              - $ref: '#/components/parameters/originator'
-              - $ref: '#/components/parameters/x-correlator'
-              - $ref: '#/components/parameters/trace-indicator'
-              - $ref: '#/components/parameters/customer-journey'
             post:
+              parameters:
+                - $ref: '#/components/parameters/user'
+                - $ref: '#/components/parameters/originator'
+                - $ref: '#/components/parameters/x-correlator'
+                - $ref: '#/components/parameters/trace-indicator'
+                - $ref: '#/components/parameters/customer-journey'
               requestBody:
                 required: true
                 content:
@@ -2501,13 +2501,13 @@ paths:
         ApprovalNotification:
           https://{$request.body#subscriber-address/ip-address/ipv-4-address or $request.body#subscriber-address/domain-name}:{$request.body#subscriber-port}{$request.body#subscriber-operation}:
             description: 'To be activated, if received /v1/regard-updated-approval-status::requestBody::approval-status == APPROVED'
-            parameters:
-              - $ref: '#/components/parameters/user'
-              - $ref: '#/components/parameters/originator'
-              - $ref: '#/components/parameters/x-correlator'
-              - $ref: '#/components/parameters/trace-indicator'
-              - $ref: '#/components/parameters/customer-journey'
             post:
+              parameters:
+                - $ref: '#/components/parameters/user'
+                - $ref: '#/components/parameters/originator'
+                - $ref: '#/components/parameters/x-correlator'
+                - $ref: '#/components/parameters/trace-indicator'
+                - $ref: '#/components/parameters/customer-journey'
               requestBody:
                 required: true
                 content:
@@ -2737,13 +2737,13 @@ paths:
         WithdrawnApprovalNotification:
           https://{$request.body#subscriber-address/ip-address/ipv-4-address or $request.body#subscriber-address/domain-name}:{$request.body#subscriber-port}{$request.body#subscriber-operation}:
             description: 'To be activated, if received /v1/regard-updated-approval-status::requestBody::approval-status != APPROVED'
-            parameters:
-              - $ref: '#/components/parameters/user'
-              - $ref: '#/components/parameters/originator'
-              - $ref: '#/components/parameters/x-correlator'
-              - $ref: '#/components/parameters/trace-indicator'
-              - $ref: '#/components/parameters/customer-journey'
             post:
+              parameters:
+                - $ref: '#/components/parameters/user'
+                - $ref: '#/components/parameters/originator'
+                - $ref: '#/components/parameters/x-correlator'
+                - $ref: '#/components/parameters/trace-indicator'
+                - $ref: '#/components/parameters/customer-journey'
               requestBody:
                 required: true
                 content:
