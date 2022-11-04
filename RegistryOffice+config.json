@@ -398,7 +398,22 @@
               }
             }
           }
-        }
+        },
+        {
+          "uuid": "ro-2-0-0-integer-p-000",
+          "profile-name": "integer-profile-1-0:PROFILE_NAME_TYPE_INTEGER_PROFILE",
+          "integer-profile-1-0:integer-profile-pac": {
+            "integer-profile-capability": {
+              "integer-name": "waitTimeToApprove",
+              "unit": "second",
+              "minimum": 60,
+              "maximum": 1209600
+            },
+            "integer-profile-configuration": {
+              "integer-value": 259200
+            }
+          }
+        }        
       ]
     },
     "logical-termination-point": [
