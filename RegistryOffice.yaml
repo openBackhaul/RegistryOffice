@@ -156,6 +156,7 @@ paths:
                         - approval-application
                         - approval-application-release-number
                         - approval-operation
+                        - approval-application-protocol
                         - approval-application-address
                         - approval-application-port
                       properties:
@@ -174,6 +175,11 @@ paths:
                           description: >
                             'Operation that shall be addressed by information about new registrations
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-tar-1-0-0-003/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                        approval-application-protocol:
+                          type: string
+                          description: >
+                            'Protocol to be used for addressing the application that wants to receive information about new registrations
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-tar-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
                         approval-application-address:
                           type: object
                           minProperties: 1
@@ -204,7 +210,8 @@ paths:
                         approval-application: 'TypeApprovalRegister'
                         approval-application-release-number: '1.0.0'
                         approval-operation: '/v1/regard-application'
-                        approval-application-address: 
+                        approval-application-protocol: 'HTTP'
+                        approval-application-address:
                           ip-address:
                             ipv-4-address: '1.1.3.2'
                         approval-application-port: 3002
@@ -270,6 +277,7 @@ paths:
                         - subscriber-application
                         - subscriber-release-number
                         - subscriber-operation
+                        - subscriber-protocol
                         - subscriber-address
                         - subscriber-port
                       properties:
@@ -288,6 +296,11 @@ paths:
                           description: >
                             'Names of the operation that shall be addressed by notifications about obsolete registrations
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-004/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                        subscriber-protocol:
+                          type: string
+                          description: >
+                            'Protocol to be used for addressing the application that wants to receive notifications about obsolete registrations
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
                         subscriber-address:
                           type: object
                           minProperties: 1
@@ -318,7 +331,8 @@ paths:
                         subscriber-application: 'TypeApprovalRegister'
                         subscriber-release-number: '1.0.0'
                         subscriber-operation: '/v1/disregard-application'
-                        subscriber-address: 
+                        subscriber-protocol: 'HTTP'
+                        subscriber-address:
                           ip-address:
                             ipv-4-address: '1.1.3.2'
                         subscriber-port: 3002
@@ -384,6 +398,7 @@ paths:
                         - subscriber-application
                         - subscriber-release-number
                         - subscriber-operation
+                        - subscriber-protocol
                         - subscriber-address
                         - subscriber-port
                       properties:
@@ -402,6 +417,11 @@ paths:
                           description: >
                             'Names of the operation that shall be addressed by notifications about new approvals
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-003/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                        subscriber-protocol:
+                          type: string
+                          description: >
+                            'Protocol to be used for addressing the application that wants to receive notifications about new approvals
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
                         subscriber-address:
                           type: object
                           minProperties: 1
@@ -413,7 +433,7 @@ paths:
                               minProperties: 1
                               additionalProperties: false
                               properties:
-                                ipv-4-address: 
+                                ipv-4-address:
                                     type: string
                                     description: >
                                       'IPv4 address of application that wants to receive notifications about new approvals
@@ -432,7 +452,8 @@ paths:
                         subscriber-application: 'ExecutionAndTraceLog'
                         subscriber-release-number: '1.0.0'
                         subscriber-operation: '/v1/regard-application'
-                        subscriber-address: 
+                        subscriber-protocol: 'HTTP'
+                        subscriber-address:
                           ip-address:
                             ipv-4-address: '1.1.3.3'
                         subscriber-port: 3003
@@ -498,6 +519,7 @@ paths:
                         - subscriber-application
                         - subscriber-release-number
                         - subscriber-operation
+                        - subscriber-protocol
                         - subscriber-address
                         - subscriber-port
                       properties:
@@ -516,6 +538,11 @@ paths:
                           description: >
                             'Names of the operation that shall be addressed by notifications about withdrawn approvals
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-004/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                        subscriber-protocol:
+                          type: string
+                          description: >
+                            'Protocol to be used for addressing the application that wants to receive notifications about withdrawn approvals
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
                         subscriber-address:
                           type: object
                           minProperties: 1
@@ -546,7 +573,8 @@ paths:
                         subscriber-application: 'AdministratorAdministration'
                         subscriber-release-number: '1.0.0'
                         subscriber-operation: '/v1/disregard-application'
-                        subscriber-address: 
+                        subscriber-protocol: 'HTTP'
+                        subscriber-address:
                           ip-address:
                             ipv-4-address: '1.1.3.5'
                         subscriber-port: 3005
@@ -613,6 +641,7 @@ paths:
                         - application-release-number
                         - embedding-operation
                         - client-update-operation
+                        - application-protocol
                         - application-address
                         - application-port
                       properties:
@@ -636,6 +665,11 @@ paths:
                           description: >
                             'Name of service for broadcasting server changes
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                        application-protocol:
+                          type: string
+                          description: >
+                            'Protocol to be used for addressing the application that wants to register
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
                         application-address:
                           type: object
                           minProperties: 1
@@ -667,7 +701,8 @@ paths:
                             application-release-number: '1.0.0'
                             embedding-operation: '/v1/embed-yourself'
                             client-update-operation: '/v1/update-client'
-                            application-address: 
+                            application-protocol: 'HTTP'
+                            application-address:
                               ip-address:
                                 ipv-4-address: '1.1.3.2'
                             application-port: 3002
@@ -733,6 +768,7 @@ paths:
                         - subscriber-application
                         - subscriber-release-number
                         - subscriber-operation
+                        - subscriber-protocol
                         - subscriber-address
                         - subscriber-port
                       properties:
@@ -751,6 +787,11 @@ paths:
                           description: >
                             'Names of the operation that shall be addressed by notifications about documentation of an approval status
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-s-is-003/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                        subscriber-protocol:
+                          type: string
+                          description: >
+                            'Protocol to be used for addressing the application in future
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
                         subscriber-address:
                           type: object
                           minProperties: 1
@@ -781,7 +822,8 @@ paths:
                         subscriber-application: 'RegistryOffice'
                         subscriber-release-number: '2.0.0'
                         subscriber-operation: '/v1/regard-updated-approval-status'
-                        subscriber-address: 
+                        subscriber-protocol: 'HTTP'
+                        subscriber-address:
                           ip-address:
                             ipv-4-address: '1.1.3.8'
                         subscriber-port: 3008
@@ -847,6 +889,7 @@ paths:
                         - application-name
                         - old-application-release-number
                         - new-application-release-number
+                        - new-application-protocol
                         - new-application-address
                         - new-application-port
                       properties:
@@ -865,6 +908,11 @@ paths:
                           description: >
                             'Future release number
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-im-nr-2-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
+                        new-application-protocol:
+                          type: string
+                          description: >
+                            'Protocol to be used for addressing the application in future
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
                         new-application-address:
                           type: object
                           minProperties: 1
@@ -895,7 +943,8 @@ paths:
                         application-name: 'RegistryOffice'
                         old-application-release-number: '1.0.0'
                         new-application-release-number: '2.0.0'
-                        new-application-address: 
+                        new-application-protocol: 'HTTP'
+                        new-application-address:
                           ip-address:
                             ipv-4-address: '1.1.3.8'
                         new-application-port: 3008
@@ -1275,8 +1324,10 @@ paths:
                         - relay-server-replacement-operation
                         - relay-operation-update-operation
                         - deregistration-operation
+                        - registry-office-protocol
                         - registry-office-address
                         - registry-office-port
+                        - old-release-protocol
                         - old-release-address
                         - old-release-port
                       properties:
@@ -1305,6 +1356,11 @@ paths:
                           description: >
                             'Operation for deregistering from the application layer
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-s-is-002/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name]'
+                        registry-office-protocol:
+                          type: string
+                          description: >
+                            'Protocol for addressing the RegistryOffice application
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-protocol]'
                         registry-office-address:
                           type: object
                           minProperties: 1
@@ -1331,6 +1387,12 @@ paths:
                           description: >
                             'Own TCP port
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-s-bm-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-port]'
+                        old-release-protocol:
+                          type: string
+                          description: >
+                            'If application of the same name (but lower release number is already registered), Protocol for addressing the old release of the same application
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*-*-1-0-0-??0/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]
+                            otherwise protocol for addressing the newly approved application.'
                         old-release-address:
                           type: object
                           minProperties: 1
@@ -1366,10 +1428,12 @@ paths:
                         relay-server-replacement-operation: '/v1/relay-server-replacement'
                         relay-operation-update-operation: '/v1/relay-operation-update'
                         deregistration-operation: '/v1/deregister-application'
+                        registry-office-protocol: 'HTTP'
                         registry-office-address:
                           ip-address:
                             ipv-4-address: '1.1.3.8'
                         registry-office-port: 3008
+                        old-release-protocol: 'HTTP'
                         old-release-address:
                           ip-address:
                             ipv-4-address: '1.1.3.1'
@@ -1617,6 +1681,7 @@ paths:
                         - application-name
                         - old-application-release-number
                         - new-application-release-number
+                        - new-application-protocol
                         - new-application-address
                         - new-application-port
                       properties:
@@ -1635,6 +1700,11 @@ paths:
                           description: >
                             'Future release number of the application that has updated connection data
                             from [$/v1/relay-server-replacement.body#new-application-release-number]'
+                        new-application-protocol:
+                          type: string
+                          description: >
+                            'Protocol for addressing the application that has updated connection data
+                            from [$/v1/relay-server-replacement.body#new-application-protocol]'
                         new-application-address:
                           type: object
                           minProperties: 1
@@ -1665,6 +1735,7 @@ paths:
                         application-name: 'RegistryOffice'
                         old-application-release-number: '1.0.0'
                         new-application-release-number: '2.0.0'
+                        new-application-protocol: 'HTTP'
                         new-application-address:
                           ip-address:
                             ipv-4-address: '1.1.3.8'
@@ -1829,6 +1900,7 @@ paths:
                   required:
                   - application-name
                   - application-release-number
+                  - application-protocol
                   - application-address
                   - application-port
                   properties:
@@ -1838,6 +1910,9 @@ paths:
                     application-release-number:
                       type: string
                       description: 'from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
+                    application-protocol:
+                      type: string
+                      description: 'from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
                     application-address:
                       type: string
                       description: 'from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address or
@@ -1848,10 +1923,12 @@ paths:
                 example:
                   - application-name: 'TypeApprovalRegister'
                     application-release-number: '1.0.0'
+                    application-protocol: 'HTTP'
                     application-address: '1.1.3.2'
                     application-port: 3002
                   - application-name: 'ExecutionAndTraceLog'
                     application-release-number: '1.0.0'
+                    application-protocol: 'HTTP'
                     application-address: '1.1.3.3'
                     application-port: 3003
           headers:
@@ -2567,6 +2644,7 @@ paths:
                       required:
                         - application-name
                         - application-release-number
+                        - application-protocol
                         - application-address
                         - application-port
                       properties:
@@ -2580,6 +2658,11 @@ paths:
                           description: >
                             'Release of application that is approved
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
+                        application-protocol:
+                          type: string
+                          description: >
+                            'Protocol to be used for addressing the application that is approved
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
                         application-address:
                           type: object
                           minProperties: 1
@@ -2609,10 +2692,11 @@ paths:
                       example:
                         application-name: 'CurrentController'
                         application-release-number: '1.0.0'
-                        subscriber-address: 
+                        application-protocol: 'HTTP'
+                        application-address: 
                           ip-address:
                             ipv-4-address: '1.1.4.1'
-                        subscriber-port: 4001
+                        application-port: 4001
               responses:
                 '204':
                   description: 'Application will be regarded'
@@ -2894,6 +2978,7 @@ paths:
                 - application-name
                 - old-application-release-number
                 - new-application-release-number
+                - new-application-protocol
                 - new-application-address
                 - new-application-port
               properties:
@@ -2916,6 +3001,14 @@ paths:
                   description: >
                     'Future release number of the application that has updated connection data
                     forward to [$/v1/regard-updated-approval-status.callbacks.ServerReplacementBroadcast.body#new-application-release-number]'
+                new-application-protocol:
+                  type: string
+                  enum:
+                  - 'HTTP'
+                  - 'HTTPS'
+                  description: >
+                    'Protocol to be used in future for addressing the application that has updated connection data
+                    forward to [$/v1/regard-updated-approval-status.callbacks.ServerReplacementBroadcast.body#new-application-protocol]'
                 new-application-address:
                   type: object
                   minProperties: 1
@@ -2950,6 +3043,7 @@ paths:
                 application-name: 'RegistryOffice'
                 old-application-release-number: '1.0.0'
                 new-application-release-number: '2.0.0'
+                new-application-protocol: 'HTTP'
                 new-application-address: 
                   ip-address: 
                     ipv-4-address: '1.1.3.8'
