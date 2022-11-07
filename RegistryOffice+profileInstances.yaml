@@ -214,7 +214,7 @@ profile-instances:
     capability:
       integer-name: 'Wait time to approve'
       unit: 'second'
-      minimum: 60
+      minimum: 600
       maximum: 1209600
     configuration:
       integer-value: 259200

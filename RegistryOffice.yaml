@@ -1297,8 +1297,6 @@ paths:
                   find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-s-is-001/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
-        '401':
-          $ref: '#/components/responses/responseForErroredServiceRequests'
         '403':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '404':
@@ -2054,8 +2052,6 @@ paths:
                   'Life cycle state of the consumed service
                   find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-s-is-005/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
-          $ref: '#/components/responses/responseForErroredServiceRequests'
-        '401':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '403':
           $ref: '#/components/responses/responseForErroredServiceRequests'
@@ -3315,7 +3311,7 @@ paths:
                 properties:
                   integer-profile-1-0:minimum:
                     type: integer
-                    example: 60
+                    example: 600
         '400':
           $ref: '#/components/responses/responseForErroredOamRequests'
         '401':
