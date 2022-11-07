@@ -1186,6 +1186,7 @@ paths:
                 - application-release-number
                 - embedding-operation
                 - client-update-operation
+                - operation-client-update-operation
                 - application-protocol
                 - application-address
                 - application-port
@@ -1214,6 +1215,12 @@ paths:
                   description: >
                     'Name of service for broadcasting server changes
                     update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                operation-client-update-operation:
+                  type: string
+                  minLength: 6
+                  description: >
+                    'Name of service for broadcasting replacements of operations by backward compatible substitutes
+                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-002/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
                 application-protocol:
                   type: string
                   enum:
@@ -1257,6 +1264,7 @@ paths:
                 application-release-number: '1.0.0'
                 embedding-operation: '/v1/embed-yourself'
                 client-update-operation: '/v1/update-client'
+                operation-client-update-operation: '/v1/update-operation-client'
                 application-protocol: 'HTTP'
                 application-address: 
                   ip-address:
