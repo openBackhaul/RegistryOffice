@@ -727,6 +727,8 @@ forwardings:
       - service-name: /v1/relay-operation-update
         uuid: ro-2-0-0-op-s-is-011
     consequent-requests:
+      - client-name: RegistryOffice:://v1/update-operation-client
+        uuid: ro-2-0-0-op-c-im-ro-1-0-0-002
       - client-name: TypeApprovalRegister:://v1/update-operation-client
         uuid: ro-2-0-0-op-c-im-tar-1-0-0-002
       - client-name: ExecutionAndTraceLog:://v1/update-operation-client
