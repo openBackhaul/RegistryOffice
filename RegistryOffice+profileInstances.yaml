@@ -208,3 +208,13 @@ profile-instances:
       datatype: 'string'
     configuration:
       value-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-im-cc-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number'
+
+  - profile-name: 'IntegerProfile'
+    uuid: 'ro-2-0-0-integer-p-000'
+    capability:
+      integer-name: 'Wait time to approve'
+      unit: 'second'
+      minimum: 600
+      maximum: 1209600
+    configuration:
+      integer-value: 259200

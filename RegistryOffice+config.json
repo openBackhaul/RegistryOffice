@@ -398,7 +398,22 @@
               }
             }
           }
-        }
+        },
+        {
+          "uuid": "ro-2-0-0-integer-p-000",
+          "profile-name": "integer-profile-1-0:PROFILE_NAME_TYPE_INTEGER_PROFILE",
+          "integer-profile-1-0:integer-profile-pac": {
+            "integer-profile-capability": {
+              "integer-name": "waitTimeToApprove",
+              "unit": "second",
+              "minimum": 600,
+              "maximum": 1209600
+            },
+            "integer-profile-configuration": {
+              "integer-value": 259200
+            }
+          }
+        }        
       ]
     },
     "logical-termination-point": [
@@ -852,7 +867,7 @@
               },
               "operation-server-interface-configuration": {
                 "life-cycle-state": "operation-server-interface-1-0:LIFE_CYCLE_STATE_TYPE_EXPERIMENTAL",
-                "operation-key": "Operation key not yet provided."
+                "operation-key": "n.a."
               }
             }
           }
@@ -1398,7 +1413,7 @@
             "operation-client-interface-1-0:operation-client-interface-pac": {
               "operation-client-interface-configuration": {
                 "operation-name": "/v1/register-application",
-                "operation-key": "Operation key not yet provided."
+                "operation-key": "n.a."
               },
               "operation-client-interface-status": {
                 "operational-state": "operation-client-interface-1-0:OPERATIONAL_STATE_TYPE_NOT_YET_DEFINED",
@@ -1475,7 +1490,7 @@
             "operation-client-interface-1-0:operation-client-interface-pac": {
               "operation-client-interface-configuration": {
                 "operation-name": "/v1/register-application",
-                "operation-key": "Operation key not yet provided."
+                "operation-key": "n.a."
               },
               "operation-client-interface-status": {
                 "operational-state": "operation-client-interface-1-0:OPERATIONAL_STATE_TYPE_NOT_YET_DEFINED",
