@@ -180,12 +180,12 @@ clients:
             uuid: ro-2-0-0-op-c-im-tar-1-0-0-001
           - service-name: /v1/update-operation-client
             uuid: ro-2-0-0-op-c-im-tar-1-0-0-002
-          - service-name: /v1/redirect-info-about-approval-status-changes
-            uuid: ro-2-0-0-op-c-im-tar-1-0-0-005
           - service-name: /v1/regard-application
             uuid: ro-2-0-0-op-c-im-tar-1-0-0-003
           - service-name: /v1/disregard-application
             uuid: ro-2-0-0-op-c-im-tar-1-0-0-004
+          - service-name: /v1/redirect-info-about-approval-status-changes
+            uuid: ro-2-0-0-op-c-im-tar-1-0-0-005
       service:
         basic:
         individual:
