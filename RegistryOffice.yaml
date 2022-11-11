@@ -1940,6 +1940,7 @@ paths:
                   oneOf:
                     - description: 'no requestBody, or no required-protocol provided'
                       type: object
+                      additionalProperties: false
                       required:
                       - application-name
                       - application-release-number
