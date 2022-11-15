@@ -1187,9 +1187,7 @@ paths:
                 - embedding-operation
                 - client-update-operation
                 - operation-client-update-operation
-                - application-protocol
-                - application-address
-                - application-port
+                - tcp-server-list
               properties:
                 application-name:
                   type: string
@@ -1221,55 +1219,71 @@ paths:
                   description: >
                     'Name of service for broadcasting replacements of operations by backward compatible substitutes
                     update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-002/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
-                application-protocol:
-                  type: string
-                  enum:
-                  - 'HTTP'
-                  - 'HTTPS'
-                  description: >
-                    'Protocol to be used for addressing the application that wants to register
-                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
-                application-address:
-                  type: object
-                  minProperties: 1
-                  maxProperties: 1
-                  additionalProperties: false
-                  properties:
-                    ip-address:
-                      type: object
-                      minProperties: 1
-                      additionalProperties: false
-                      properties:
-                        ipv-4-address:
-                          type: string
-                          pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
-                          description: >
-                            'IPv4 address of application that wants to register
-                            update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
-                    domain-name:
-                      type: string
-                      pattern: '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$'
-                      description: >
-                        'Domain name of application that wants to register
-                        update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'  
-                application-port:
-                  type: integer
-                  minimum: 0
-                  maximum: 65535
-                  description: >
-                    'TCP port of application that wants to register
-                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
+                tcp-server-list:
+                  type: array
+                  minItems: 1
+                  items:
+                    type: object
+                    required:
+                      - protocol
+                      - address
+                      - port
+                    properties:
+                      protocol:
+                        type: string
+                        enum:
+                        - 'HTTP'
+                        - 'HTTPS'
+                        description: >
+                          'Protocol to be used for addressing the application that wants to register
+                          find or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
+                      address:
+                        type: object
+                        minProperties: 1
+                        maxProperties: 1
+                        additionalProperties: false
+                        properties:
+                          ip-address:
+                            type: object
+                            minProperties: 1
+                            additionalProperties: false
+                            properties:
+                              ipv-4-address:
+                                type: string
+                                pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+                                description: >
+                                  'IPv4 address of application that wants to register
+                                  update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
+                          domain-name:
+                            type: string
+                            pattern: '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$'
+                            description: >
+                              'Domain name of application that wants to register
+                              update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'  
+                      port:
+                        type: integer
+                        minimum: 0
+                        maximum: 65535
+                        description: >
+                          'TCP port of application that wants to register
+                          update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
               example:
                 application-name: 'TypeApprovalRegister'
                 application-release-number: '1.0.0'
                 embedding-operation: '/v1/embed-yourself'
                 client-update-operation: '/v1/update-client'
                 operation-client-update-operation: '/v1/update-operation-client'
-                application-protocol: 'HTTP'
-                application-address: 
-                  ip-address:
-                    ipv-4-address: '1.1.3.9'
-                application-port: 3009
+                tcp-server-list:
+                  - protocol: 'HTTP'
+                    address: 
+                      ip-address:
+                        ipv-4-address: '1.1.3.9'
+                    port: 3009
+                  - protocol: 'HTTPS'
+                    address: 
+                      ip-address:
+                        ipv-4-address: '1.2.3.9'
+                    port: 3209
       responses:
         '204':
           description: 'Application registered'
@@ -1898,6 +1912,22 @@ paths:
         - IndividualServices
       security:
         - apiKeyAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                required-protocol:
+                  type: string
+                  enum:
+                  - 'HTTP'
+                  - 'HTTPS'
+                  description: >
+                    'Whenever sent, addresses for this protocol shall be provided. 
+                    If requestBody or required-protocol attribute not sent, responseBody shall not contain any TCP/IP addresses.'
+              example:
+                required-protocol: 'HTTP'
       responses:
         '200':
           description: 'List of applications provided'
@@ -1907,41 +1937,53 @@ paths:
                 type: array
                 uniqueItems: true
                 items:
-                  type: object
-                  required:
-                  - application-name
-                  - application-release-number
-                  - application-protocol
-                  - application-address
-                  - application-port
-                  properties:
-                    application-name:
-                      type: string
-                      description: 'from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
-                    application-release-number:
-                      type: string
-                      description: 'from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
-                    application-protocol:
-                      type: string
-                      description: 'from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
-                    application-address:
-                      type: string
-                      description: 'from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address or
-                                    /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
-                    application-port:      
-                      type: integer
-                      description: 'from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
-                example:
-                  - application-name: 'TypeApprovalRegister'
-                    application-release-number: '1.0.0'
-                    application-protocol: 'HTTP'
-                    application-address: '1.1.3.2'
-                    application-port: 3002
-                  - application-name: 'ExecutionAndTraceLog'
-                    application-release-number: '1.0.0'
-                    application-protocol: 'HTTP'
-                    application-address: '1.1.3.3'
-                    application-port: 3003
+                  oneOf:
+                    - description: 'no requestBody, or no required-protocol provided'
+                      type: object
+                      additionalProperties: false
+                      required:
+                      - application-name
+                      - application-release-number
+                      properties:
+                        application-name:
+                          type: string
+                          description: 'from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
+                        application-release-number:
+                          type: string
+                          description: 'from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
+                      example:
+                        application-name: 'TypeApprovalRegister'
+                        application-release-number: '1.0.0'
+                    - description:  'required-protocol has been provided in requestBody'
+                      type: object
+                      required:
+                      - application-name
+                      - application-release-number
+                      - application-address
+                      - application-port
+                      properties:
+                        application-name:
+                          type: string
+                          description: 'from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
+                        application-release-number:
+                          type: string
+                          description: 'from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
+                        application-address:
+                          type: string
+                          description: >
+                            'find [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol] == {$request.body#required-protocol}
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address
+                            or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
+                        application-port:      
+                          type: integer
+                          description: >
+                            'find [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol] == {$request.body#required-protocol}
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
+                      example:
+                        application-name: 'TypeApprovalRegister'
+                        application-release-number: '1.0.0'
+                        application-address: '1.1.3.2'
+                        application-port: 3002
           headers:
             x-correlator:
               schema: 
