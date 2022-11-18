@@ -1165,9 +1165,14 @@
                 "owner-email-address": "Thorsten.Heinze@telefonica.com",
                 "release-list": [
                   {
+                    "release-number": "1.0.0",
+                    "release-date": "04.12.2021",
+                    "changes": "Initial version."
+                  },
+                  {
                     "release-number": "2.0.0",
-                    "release-date": "20.12.2022",
-                    "changes": "Adaption to ApplicationPattern v2.0.0."
+                    "release-date": "04.12.2022",
+                    "changes": "Update on ApplicationPattern 2.0.0."
                   }
                 ]
               }
