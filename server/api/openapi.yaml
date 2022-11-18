@@ -23610,7 +23610,7 @@ components:
         datatype:
           type: string
           enum:
-          - String
+          - string
       example: null
     inline_response_200_5_consequentactionlist:
       required:
