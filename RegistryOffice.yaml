@@ -1924,7 +1924,7 @@ paths:
                     - 'HTTP'
                     - 'HTTPS'
                   description: >
-                    'Whenever sent, addresses for this protocol shall be provided. 
+                    'Whenever sent, addresses for this protocol shall be provided.
                     If requestBody or required-protocol attribute not sent, responseBody shall not contain any TCP/IP addresses.'
               example:
                 required-protocol: 'HTTP'
@@ -2390,11 +2390,11 @@ paths:
                       additionalProperties: false
                       properties:
                       ipv-4-address:
-                          type: string
-                          pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
-                          description: >
-                            'IPv4 address of application that wants to receive notifications about obsolete registrations
-                            update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
+                        type: string
+                        pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+                        description: >
+                          'IPv4 address of application that wants to receive notifications about obsolete registrations
+                          update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
                     domain-name:
                       type: string
                       pattern: '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$'
