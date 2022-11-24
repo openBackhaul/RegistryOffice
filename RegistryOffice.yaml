@@ -48,8 +48,8 @@ paths:
                 new-application-protocol:
                   type: string
                   enum:
-                  - 'HTTP'
-                  - 'HTTPS'
+                    - 'HTTP'
+                    - 'HTTPS'
                   description: >
                     'Protocol to be used for addressing the application that shall be target of the handover process
                     update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
@@ -58,12 +58,12 @@ paths:
                   minProperties: 1
                   maxProperties: 1
                   additionalProperties: false
-                  properties: 
+                  properties:
                     ip-address:
                       type: object
                       minProperties: 1
                       additionalProperties: false
-                      properties: 
+                      properties:
                         ipv-4-address:
                           type: string
                           pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
@@ -87,7 +87,7 @@ paths:
                 new-application-name: 'RegistryOffice'
                 new-application-release: '2.0.0'
                 new-application-protocol: 'HTTP'
-                new-application-address: 
+                new-application-address:
                   ip-address:
                     ipv-4-address: '1.1.3.8'
                 new-application-port: 3008
@@ -185,23 +185,23 @@ paths:
                           minProperties: 1
                           maxProperties: 1
                           additionalProperties: false
-                          properties: 
+                          properties:
                             ip-address:
                               type: object
                               minProperties: 1
                               additionalProperties: false
-                              properties: 
-                                ipv-4-address: 
+                              properties:
+                                ipv-4-address:
                                   type: string
                                   description: >
                                     'IPv4 address of application that wants to receive information about new registrations
                                     from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-tar-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
                             domain-name:
-                              type: string 
+                              type: string
                               description: >
                                 'Domain name of application that wants to receive information about new registrations
-                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-tar-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'                    
-                        approval-application-port:      
+                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-tar-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
+                        approval-application-port:
                           type: integer
                           description: >
                             'TCP port of application that wants to receive information about new registrations
@@ -306,7 +306,7 @@ paths:
                           minProperties: 1
                           maxProperties: 1
                           additionalProperties: false
-                          properties: 
+                          properties:
                             ip-address:
                               type: object
                               minProperties: 1
@@ -321,8 +321,8 @@ paths:
                               type: string
                               description: >
                                 'Domain name of application that wants to receive notifications about obsolete registrations
-                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'       
-                        subscriber-port:      
+                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
+                        subscriber-port:
                           type: integer
                           description: >
                             'TCP port of application that wants to receive notifications about obsolete registrations
@@ -434,16 +434,16 @@ paths:
                               additionalProperties: false
                               properties:
                                 ipv-4-address:
-                                    type: string
-                                    description: >
-                                      'IPv4 address of application that wants to receive notifications about new approvals
-                                      from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'   
+                                  type: string
+                                  description: >
+                                    'IPv4 address of application that wants to receive notifications about new approvals
+                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
                             domain-name:
                               type: string
                               description: >
                                 'Domain name of application that wants to receive notifications about new approvals
-                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'   
-                        subscriber-port:      
+                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
+                        subscriber-port:
                           type: integer
                           description: >
                             'TCP port of application that wants to receive notifications about new approvals
@@ -555,16 +555,16 @@ paths:
                               additionalProperties: false
                               properties:
                                 ipv-4-address:
-                                   type: string
-                                   description: >
-                                     'IPv4 address of application that wants to receive notifications about withdrawn approvals
-                                     from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'   
+                                  type: string
+                                  description: >
+                                    'IPv4 address of application that wants to receive notifications about withdrawn approvals
+                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
                             domain-name:
                               type: string
                               description: >
                                 'Domain name of application that wants to receive notifications about withdrawn approvals
-                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'                               
-                        subscriber-port:      
+                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
+                        subscriber-port:
                           type: integer
                           description: >
                             'TCP port of application that wants to receive notifications about withdrawn approvals
@@ -677,35 +677,35 @@ paths:
                           additionalProperties: false
                           properties:
                             ip-address:
-                             type: object
-                             minProperties: 1
-                             additionalProperties: false 
-                             properties:
-                               ipv-4-address:
-                                 type: string
-                                 description: >
-                                   'IPv4 address of application that wants to register
-                                   from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'   
+                              type: object
+                              minProperties: 1
+                              additionalProperties: false
+                              properties:
+                                ipv-4-address:
+                                  type: string
+                                  description: >
+                                    'IPv4 address of application that wants to register
+                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
                             domain-name:
                               type: string
                               description: >
                                    'Domain name of application that wants to register
-                                   from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'   
-                        application-port:      
+                                   from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
+                        application-port:
                           type: integer
                           description: >
                             'TCP port of application that wants to register
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
-                      example:
-                            application-name: 'TypeApprovalRegister'
-                            application-release-number: '1.0.0'
-                            embedding-operation: '/v1/embed-yourself'
-                            client-update-operation: '/v1/update-client'
-                            application-protocol: 'HTTP'
-                            application-address:
-                              ip-address:
-                                ipv-4-address: '1.1.3.2'
-                            application-port: 3002
+                    example:
+                      application-name: 'TypeApprovalRegister'
+                      application-release-number: '1.0.0'
+                      embedding-operation: '/v1/embed-yourself'
+                      client-update-operation: '/v1/update-client'
+                      application-protocol: 'HTTP'
+                      application-address:
+                        ip-address:
+                          ipv-4-address: '1.1.3.2'
+                      application-port: 3002
               responses:
                 '204':
                   description: 'Application registered'
@@ -811,9 +811,9 @@ paths:
                             domain-name:
                               type: string
                               description: >
-                                    'Future Domain name
-                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'      
-                        subscriber-port:      
+                                'Future Domain name
+                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
+                        subscriber-port:
                           type: integer
                           description: >
                             'Future IP address
@@ -932,7 +932,7 @@ paths:
                             domain-name:
                               type: string
                               description: >
-                                'Future domain name 
+                                'Future domain name
                                 from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-nr-2-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
                         new-application-port:
                           type: integer
@@ -1172,7 +1172,7 @@ paths:
       tags:
         - IndividualServices
       description: >
-        'Registration service is not protected by operationKey. 
+        'Registration service is not protected by operationKey.
         Receiving a de-registration request shall be assumed after passing wait time to approve
         from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-0-integer-p-000/integer-profile-1-0:integer-profile-pac/integer-profile-configuration/integer-value]'
       requestBody:
@@ -1232,8 +1232,8 @@ paths:
                       protocol:
                         type: string
                         enum:
-                        - 'HTTP'
-                        - 'HTTPS'
+                          - 'HTTP'
+                          - 'HTTPS'
                         description: >
                           'Protocol to be used for addressing the application that wants to register
                           find or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
@@ -1259,7 +1259,7 @@ paths:
                             pattern: '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$'
                             description: >
                               'Domain name of application that wants to register
-                              update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'  
+                              update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
                       port:
                         type: integer
                         minimum: 0
@@ -1275,12 +1275,12 @@ paths:
                 operation-client-update-operation: '/v1/update-operation-client'
                 tcp-server-list:
                   - protocol: 'HTTP'
-                    address: 
+                    address:
                       ip-address:
                         ipv-4-address: '1.1.3.9'
                     port: 3009
                   - protocol: 'HTTPS'
-                    address: 
+                    address:
                       ip-address:
                         ipv-4-address: '1.2.3.9'
                     port: 3209
@@ -1921,10 +1921,10 @@ paths:
                 required-protocol:
                   type: string
                   enum:
-                  - 'HTTP'
-                  - 'HTTPS'
+                    - 'HTTP'
+                    - 'HTTPS'
                   description: >
-                    'Whenever sent, addresses for this protocol shall be provided. 
+                    'Whenever sent, addresses for this protocol shall be provided.
                     If requestBody or required-protocol attribute not sent, responseBody shall not contain any TCP/IP addresses.'
               example:
                 required-protocol: 'HTTP'
@@ -1942,8 +1942,8 @@ paths:
                       type: object
                       additionalProperties: false
                       required:
-                      - application-name
-                      - application-release-number
+                        - application-name
+                        - application-release-number
                       properties:
                         application-name:
                           type: string
@@ -1954,13 +1954,13 @@ paths:
                       example:
                         application-name: 'TypeApprovalRegister'
                         application-release-number: '1.0.0'
-                    - description:  'required-protocol has been provided in requestBody'
+                    - description: 'required-protocol has been provided in requestBody'
                       type: object
                       required:
-                      - application-name
-                      - application-release-number
-                      - application-address
-                      - application-port
+                        - application-name
+                        - application-release-number
+                        - application-address
+                        - application-port
                       properties:
                         application-name:
                           type: string
@@ -1974,7 +1974,7 @@ paths:
                             'find [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol] == {$request.body#required-protocol}
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address
                             or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
-                        application-port:      
+                        application-port:
                           type: integer
                           description: >
                             'find [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol] == {$request.body#required-protocol}
@@ -2047,30 +2047,30 @@ paths:
                 $ref: '#/components/schemas/genericRepresentation'
                 example:
                   response-value-list:
-                  - field-name: 'RegistryOffice'
-                    value: '2.0.0'
-                    datatype: 'string'
-                  - field-name: 'TypeApprovalRegister'
-                    value: '2.0.0'
-                    datatype: 'string'
-                  - field-name: 'ExecutionAndTraceLog'
-                    value: '2.0.0'
-                    datatype: 'string'
-                  - field-name: 'OamLog'
-                    value: '2.0.0'
-                    datatype: 'string'
-                  - field-name: 'AdministratorAdministration'
-                    value: '2.0.0'
-                    datatype: 'string'
-                  - field-name: 'ApplicationLayerTopology'
-                    value: '2.0.0'
-                    datatype: 'string'
-                  - field-name: 'OperationKeyManagement'
-                    value: '2.0.0'
-                    datatype: 'string'
-                  - field-name: 'CurrentController'
-                    value: '1.0.0'
-                    datatype: 'string'
+                    - field-name: 'RegistryOffice'
+                      value: '2.0.0'
+                      datatype: 'string'
+                    - field-name: 'TypeApprovalRegister'
+                      value: '2.0.0'
+                      datatype: 'string'
+                    - field-name: 'ExecutionAndTraceLog'
+                      value: '2.0.0'
+                      datatype: 'string'
+                    - field-name: 'OamLog'
+                      value: '2.0.0'
+                      datatype: 'string'
+                    - field-name: 'AdministratorAdministration'
+                      value: '2.0.0'
+                      datatype: 'string'
+                    - field-name: 'ApplicationLayerTopology'
+                      value: '2.0.0'
+                      datatype: 'string'
+                    - field-name: 'OperationKeyManagement'
+                      value: '2.0.0'
+                      datatype: 'string'
+                    - field-name: 'CurrentController'
+                      value: '1.0.0'
+                      datatype: 'string'
           headers:
             x-correlator:
               schema:
@@ -2160,8 +2160,8 @@ paths:
                 approval-application-protocol:
                   type: string
                   enum:
-                  - 'HTTP'
-                  - 'HTTPS'
+                    - 'HTTP'
+                    - 'HTTPS'
                   description: >
                     'Protocol to be used for addressing the application that wants to receive information about new registrations
                     update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-tar-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
@@ -2188,7 +2188,7 @@ paths:
                       description: >
                             'Domain name of application that wants to receive information about new registrations
                             update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-tar-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
-                approval-application-port:      
+                approval-application-port:
                   type: integer
                   minimum: 0
                   maximum: 65535
@@ -2200,7 +2200,7 @@ paths:
                 approval-application-release-number: '1.0.0'
                 approval-operation: '/v1/regard-application'
                 approval-application-protocol: 'HTTP'
-                approval-application-address: 
+                approval-application-address:
                   ip-address:
                     ipv-4-address: '1.1.3.2'
                 approval-application-port: 3002
@@ -2373,8 +2373,8 @@ paths:
                 subscriber-protocol:
                   type: string
                   enum:
-                  - 'HTTP'
-                  - 'HTTPS'
+                    - 'HTTP'
+                    - 'HTTPS'
                   description: >
                     'Protocol to be used for addressing the application that wants to receive notifications about obsolete registrations
                     update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
@@ -2385,23 +2385,23 @@ paths:
                   additionalProperties: false
                   properties:
                     ip-address:
-                       type: object
-                       minProperties: 1
-                       additionalProperties: false
-                       properties:
-                         ipv-4-address:
-                           type: string
-                           pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
-                           description: >
-                             'IPv4 address of application that wants to receive notifications about obsolete registrations
-                             update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
+                      type: object
+                      minProperties: 1
+                      additionalProperties: false
+                      properties:
+                      ipv-4-address:
+                        type: string
+                        pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+                        description: >
+                          'IPv4 address of application that wants to receive notifications about obsolete registrations
+                          update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
                     domain-name:
                       type: string
                       pattern: '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$'
                       description:
                         'Domain name of application that wants to receive notifications about obsolete registrations
                         update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
-                subscriber-port:      
+                subscriber-port:
                   type: integer
                   minimum: 0
                   maximum: 65535
@@ -2413,7 +2413,7 @@ paths:
                 subscriber-release-number: '1.0.0'
                 subscriber-operation: '/v1/disregard-application'
                 subscriber-protocol: 'HTTP'
-                subscriber-address: 
+                subscriber-address:
                   ip-address:
                     ipv-4-address: '1.1.3.2'
                 subscriber-port: 3002
@@ -2586,8 +2586,8 @@ paths:
                 subscriber-protocol:
                   type: string
                   enum:
-                  - 'HTTP'
-                  - 'HTTPS'
+                    - 'HTTP'
+                    - 'HTTPS'
                   description: >
                     'Protocol to be used for addressing the application that wants to receive notifications about new approvals
                     update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
@@ -2607,14 +2607,14 @@ paths:
                           pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
                           description: >
                             'IPv4 address of application that wants to receive notifications about new approvals
-                            update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'    
+                            update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
                     domain-name:
                       type: string
                       pattern: '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$'
                       description: >
                         'Domain name of application that wants to receive notifications about new approvals
                         update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
-                subscriber-port:      
+                subscriber-port:
                   type: integer
                   minimum: 0
                   maximum: 65535
@@ -2626,7 +2626,7 @@ paths:
                 subscriber-release-number: '1.0.0'
                 subscriber-operation: '/v1/regard-application'
                 subscriber-protocol: 'HTTP'
-                subscriber-address: 
+                subscriber-address:
                   ip-address:
                     ipv-4-address: '1.1.3.3'
                 subscriber-port: 3003
@@ -2734,8 +2734,8 @@ paths:
                               type: string
                               description: >
                                 'Domain name of application that is approved
-                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'           
-                        application-port:      
+                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
+                        application-port:
                           type: integer
                           description: >
                             'TCP port of application that is approved
@@ -2744,7 +2744,7 @@ paths:
                         application-name: 'CurrentController'
                         application-release-number: '1.0.0'
                         application-protocol: 'HTTP'
-                        application-address: 
+                        application-address:
                           ip-address:
                             ipv-4-address: '1.1.4.1'
                         application-port: 4001
@@ -2839,8 +2839,8 @@ paths:
                 subscriber-protocol:
                   type: string
                   enum:
-                  - 'HTTP'
-                  - 'HTTPS'
+                    - 'HTTP'
+                    - 'HTTPS'
                   description: >
                     'Protocol to be used for addressing the application that wants to receive notifications about withdrawn approvals
                     update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
@@ -2856,18 +2856,18 @@ paths:
                       additionalProperties: false
                       properties:
                         ipv-4-address:
-                            type: string
-                            pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
-                            description: >
-                              'IPv4 address of application that wants to receive notifications about withdrawn approvals
-                              update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
+                          type: string
+                          pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+                          description: >
+                            'IPv4 address of application that wants to receive notifications about withdrawn approvals
+                            update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
                     domain-name:
                       type: string
                       pattern: '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$'
                       description: >
                         'Domain name of application that wants to receive notifications about withdrawn approvals
-                        update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'                  
-                subscriber-port:      
+                        update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
+                subscriber-port:
                   type: integer
                   minimum: 0
                   maximum: 65535
@@ -3055,8 +3055,8 @@ paths:
                 new-application-protocol:
                   type: string
                   enum:
-                  - 'HTTP'
-                  - 'HTTPS'
+                    - 'HTTP'
+                    - 'HTTPS'
                   description: >
                     'Protocol to be used in future for addressing the application that has updated connection data
                     forward to [$/v1/regard-updated-approval-status.callbacks.ServerReplacementBroadcast.body#new-application-protocol]'
@@ -3065,12 +3065,12 @@ paths:
                   minProperties: 1
                   maxProperties: 1
                   additionalProperties: false
-                  properties: 
+                  properties:
                     ip-address:
                       type: object
                       minProperties: 1
                       additionalProperties: false
-                      properties: 
+                      properties:
                         ipv-4-address:
                           type: string
                           pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
@@ -3095,7 +3095,7 @@ paths:
                 old-application-release-number: '1.0.0'
                 new-application-release-number: '2.0.0'
                 new-application-protocol: 'HTTP'
-                new-application-address: 
+                new-application-address:
                   ip-address:
                     ipv-4-address: '1.1.3.8'
                 new-application-port: 3008
