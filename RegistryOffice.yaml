@@ -2186,8 +2186,8 @@ paths:
                       type: string
                       pattern: '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$'
                       description: >
-                            'Domain name of application that wants to receive information about new registrations
-                            update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-tar-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
+                        'Domain name of application that wants to receive information about new registrations
+                        update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-im-tar-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
                 approval-application-port:      
                   type: integer
                   minimum: 0
