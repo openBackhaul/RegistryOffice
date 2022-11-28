@@ -652,7 +652,7 @@ exports.registerApplication = function (body, user, originator, xCorrelator, tra
       let applicationPort = body["application-port"];
       let embeddingOperation = body["embedding-operation"];
       let clientUpdateOperation = body["client-update-operation"];
-      let clientOperationUpdateOperation = "/v1/update-operation-client";
+      let clientOperationUpdateOperation = body["operation-client-update-operation"];
 
 
       /****************************************************************************************
