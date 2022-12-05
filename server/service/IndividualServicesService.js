@@ -35,6 +35,9 @@ const TcpServerInterface = require('onf-core-model-ap/applicationPattern/onfMode
 const FcPort = require('onf-core-model-ap/applicationPattern/onfModel/models/FcPort');
 
 const MonitorTypeApprovalChannel = require('./individualServices/MonitorTypeApprovalChannel');
+const HttpClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/HttpClientInterface');
+const ResponseProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/ResponseProfile');
+const ProfileCollection = require('onf-core-model-ap/applicationPattern/onfModel/models/ProfileCollection');
 /**
  * Initiates process of embedding a new release
  *
@@ -57,7 +60,7 @@ exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, 
       let releaseNumber = body["new-application-release"];
       let applicationAddress = body["new-application-address"];
       let applicationPort = body["new-application-port"];
-      
+
       /****************************************************************************************
        * Prepare logicalTerminatinPointConfigurationInput object to 
        * configure logical-termination-point
@@ -162,7 +165,7 @@ exports.deregisterApplication = function (body, user, originator, xCorrelator, t
           forwardingConfigurationInputList
         );
       }
-      await MonitorTypeApprovalChannel.removeEntryFromMonitorApprovalStatusChannel(applicationName,applicationReleaseNumber);
+      await MonitorTypeApprovalChannel.removeEntryFromMonitorApprovalStatusChannel(applicationName, applicationReleaseNumber);
       /****************************************************************************************
        * Prepare attributes to automate forwarding-construct
        ****************************************************************************************/
@@ -179,7 +182,7 @@ exports.deregisterApplication = function (body, user, originator, xCorrelator, t
         xCorrelator,
         traceIndicator,
         customerJourney
-      );            
+      );
       resolve();
     } catch (error) {
       reject(error);
@@ -714,8 +717,9 @@ exports.registerApplication = function (body, user, originator, xCorrelator, tra
         xCorrelator,
         traceIndicator,
         customerJourney
-      );      
-      MonitorTypeApprovalChannel.AddEntryToMonitorApprovalStatusChannel(applicationName,releaseNumber);
+      );
+      MonitorTypeApprovalChannel.AddEntryToMonitorApprovalStatusChannel(applicationName, releaseNumber);
+      includeGenericResponseProfile(applicationName, releaseNumber);
       resolve();
     } catch (error) {
       reject(error);
@@ -1029,7 +1033,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
                 operationServerName,
                 forwardingConfigurationInputList
               );
-              await MonitorTypeApprovalChannel.removeEntryFromMonitorApprovalStatusChannel(applicationName,releaseNumber);
+              await MonitorTypeApprovalChannel.removeEntryFromMonitorApprovalStatusChannel(applicationName, releaseNumber);
             } else if (approvalStatus == 'BARRED') {
               forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
               unConfigureForwardingConstructAsync(
@@ -1131,10 +1135,10 @@ function getAllRegisteredApplicationList() {
       let fcPortList = await ForwardingConstruct.getFcPortListAsync(forwardingConstructUuid);
       let httpClientUuidList = []
 
-      for(let fcPortIndex = 0; fcPortIndex < fcPortList.length; fcPortIndex++){
-        if(fcPortList[fcPortIndex][onfAttributes.FC_PORT.PORT_DIRECTION] === FcPort.portDirectionEnum.OUTPUT){
-            let serverLtpList = await logicalTerminationPoint.getServerLtpListAsync(fcPortList[fcPortIndex][onfAttributes.FC_PORT.LOGICAL_TERMINATION_POINT])
-            httpClientUuidList = httpClientUuidList.concat(serverLtpList)
+      for (let fcPortIndex = 0; fcPortIndex < fcPortList.length; fcPortIndex++) {
+        if (fcPortList[fcPortIndex][onfAttributes.FC_PORT.PORT_DIRECTION] === FcPort.portDirectionEnum.OUTPUT) {
+          let serverLtpList = await logicalTerminationPoint.getServerLtpListAsync(fcPortList[fcPortIndex][onfAttributes.FC_PORT.LOGICAL_TERMINATION_POINT])
+          httpClientUuidList = httpClientUuidList.concat(serverLtpList)
         }
       }
 
@@ -1177,10 +1181,10 @@ function getAllRegisteredApplicationNameAndReleaseList() {
       let fcPortList = await ForwardingConstruct.getFcPortListAsync(forwardingConstructUuid);
       let httpClientUuidList = []
 
-      for(let fcPortIndex = 0; fcPortIndex < fcPortList.length; fcPortIndex++){
-        if(fcPortList[fcPortIndex][onfAttributes.FC_PORT.PORT_DIRECTION] === FcPort.portDirectionEnum.OUTPUT){
-            let serverLtpList = await logicalTerminationPoint.getServerLtpListAsync(fcPortList[fcPortIndex][onfAttributes.FC_PORT.LOGICAL_TERMINATION_POINT])
-            httpClientUuidList = httpClientUuidList.concat(serverLtpList)
+      for (let fcPortIndex = 0; fcPortIndex < fcPortList.length; fcPortIndex++) {
+        if (fcPortList[fcPortIndex][onfAttributes.FC_PORT.PORT_DIRECTION] === FcPort.portDirectionEnum.OUTPUT) {
+          let serverLtpList = await logicalTerminationPoint.getServerLtpListAsync(fcPortList[fcPortIndex][onfAttributes.FC_PORT.LOGICAL_TERMINATION_POINT])
+          httpClientUuidList = httpClientUuidList.concat(serverLtpList)
         }
       }
 
@@ -1194,6 +1198,39 @@ function getAllRegisteredApplicationNameAndReleaseList() {
         clientApplicationList.push(clientApplication);
       }
       resolve(clientApplicationList);
+    } catch (error) {
+      reject();
+    }
+  });
+}
+
+
+/**
+ * @description This function includes a new response profile if not exists for a registered application
+ * @return {Promise} return true if operation is successful
+ **/
+function includeGenericResponseProfile(applicationName, releaseNumber) {
+  return new Promise(async function (resolve, reject) {
+    let isUpdated = true;
+    try {
+      let httpClientUuid = await HttpClientInterface.getHttpClientUuidAsync(applicationName, releaseNumber);
+      if (httpClientUuid != undefined) {
+        let applicationNameReference = onfPaths.HTTP_CLIENT_APPLICATION_NAME.replace("{uuid}", httpClientUuid);
+        let isResponseProfileAlreadyExist = await ResponseProfile.findProfileUuidForFieldNameReferenceAsync(applicationNameReference);
+        if (!isResponseProfileAlreadyExist) {
+          let releaseNumberReference = onfPaths.HTTP_CLIENT_RELEASE_NUMBER.replace("{uuid}", httpClientUuid);
+          let operationName = "/v1/list-applications-in-generic-representation";
+          let description = "List of registered application names and release numbers";
+          let datatype = "string";
+          let responseProfile = await ResponseProfile.createProfileAsync(operationName,
+            applicationNameReference,
+            description,
+            datatype,
+            releaseNumberReference);
+          isUpdated = await ProfileCollection.addProfileAsync(responseProfile);
+        }
+      }
+      resolve(isUpdated);
     } catch (error) {
       reject();
     }
