@@ -33,6 +33,8 @@ const ForwardingDomain = require('onf-core-model-ap/applicationPattern/onfModel/
 const ForwardingConstruct = require('onf-core-model-ap/applicationPattern/onfModel/models/ForwardingConstruct');
 const TcpServerInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/TcpServerInterface');
 const FcPort = require('onf-core-model-ap/applicationPattern/onfModel/models/FcPort');
+
+const MonitorTypeApprovalChannel = require('./individualServices/MonitorTypeApprovalChannel');
 /**
  * Initiates process of embedding a new release
  *
@@ -160,7 +162,7 @@ exports.deregisterApplication = function (body, user, originator, xCorrelator, t
           forwardingConfigurationInputList
         );
       }
-
+      await MonitorTypeApprovalChannel.removeEntryFromMonitorApprovalStatusChannel(applicationName,applicationReleaseNumber);
       /****************************************************************************************
        * Prepare attributes to automate forwarding-construct
        ****************************************************************************************/
@@ -177,8 +179,7 @@ exports.deregisterApplication = function (body, user, originator, xCorrelator, t
         xCorrelator,
         traceIndicator,
         customerJourney
-      );
-
+      );            
       resolve();
     } catch (error) {
       reject(error);
@@ -713,8 +714,8 @@ exports.registerApplication = function (body, user, originator, xCorrelator, tra
         xCorrelator,
         traceIndicator,
         customerJourney
-      );
-
+      );      
+      MonitorTypeApprovalChannel.AddEntryToMonitorApprovalStatusChannel(applicationName,releaseNumber);
       resolve();
     } catch (error) {
       reject(error);
@@ -1028,6 +1029,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
                 operationServerName,
                 forwardingConfigurationInputList
               );
+              await MonitorTypeApprovalChannel.removeEntryFromMonitorApprovalStatusChannel(applicationName,releaseNumber);
             } else if (approvalStatus == 'BARRED') {
               forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
               unConfigureForwardingConstructAsync(

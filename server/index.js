@@ -21,6 +21,7 @@ var options = {
 var expressAppConfig = oas3Tools.expressAppConfig(path.join(__dirname, 'api/openapi.yaml'), options);
 var app = expressAppConfig.getApp();
 appCommons.setupExpressApp(app);
+const MonitorTypeApprovalChannel = require('./service/individualServices/MonitorTypeApprovalChannel');
 
 // Initialize the Swagger middleware
 http.createServer(app).listen(serverPort, function () {
@@ -30,3 +31,9 @@ http.createServer(app).listen(serverPort, function () {
 
 //setting the path to the database 
 global.databasePath = './database/load.json'
+global.applicationDataFile = './database/appData.json'
+
+setInterval( MonitorTypeApprovalChannel.MonitorApprovalStatusChannel, 5000);
+    
+
+
