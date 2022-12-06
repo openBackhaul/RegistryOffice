@@ -1,7 +1,7 @@
 'use strict';
 
-const LogicalTerminatinPointConfigurationInput = require('onf-core-model-ap/applicationPattern/onfModel/services/models/logicalTerminationPoint/ConfigurationInput');
-const LogicalTerminationPointService = require('onf-core-model-ap/applicationPattern/onfModel/services/LogicalTerminationPointServices');
+const LogicalTerminatinPointConfigurationInput = require('onf-core-model-ap/applicationPattern/onfModel/services/models/logicalTerminationPoint/ConfigurationInputWithMapping');
+const LogicalTerminationPointService = require('onf-core-model-ap/applicationPattern/onfModel/services/LogicalTerminationPointWithMappingServices');
 const LogicalTerminationPointConfigurationStatus = require('onf-core-model-ap/applicationPattern/onfModel/services/models/logicalTerminationPoint/ConfigurationStatus');
 const layerProtocol = require('onf-core-model-ap/applicationPattern/onfModel/models/LayerProtocol');
 
@@ -38,6 +38,9 @@ const MonitorTypeApprovalChannel = require('./individualServices/MonitorTypeAppr
 const HttpClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/HttpClientInterface');
 const ResponseProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/ResponseProfile');
 const ProfileCollection = require('onf-core-model-ap/applicationPattern/onfModel/models/ProfileCollection');
+
+
+const individualServicesOperationsMapping = require('./individualServices/IndividualServicesOperationsMapping')
 /**
  * Initiates process of embedding a new release
  *
@@ -663,19 +666,21 @@ exports.registerApplication = function (body, user, originator, xCorrelator, tra
        * Prepare logicalTerminatinPointConfigurationInput object to 
        * configure logical-termination-point
        ****************************************************************************************/
-
-      let operationList = [
-        embeddingOperation,
-        clientUpdateOperation,
-        clientOperationUpdateOperation
-      ];
+      let operationNamesByAttributes = new Map();
+      operationNamesByAttributes.set("embedding-operation", embeddingOperation);
+      operationNamesByAttributes.set("client-update-operation", clientUpdateOperation);
+      operationNamesByAttributes.set("operation-client-update-operation", clientOperationUpdateOperation);
+      
       let logicalTerminatinPointConfigurationInput = new LogicalTerminatinPointConfigurationInput(
         applicationName,
         releaseNumber,
         applicationAddress,
         applicationPort,
-        operationList
+        operationServerName,
+        operationNamesByAttributes,
+        individualServicesOperationsMapping.individualServicesOperationsMapping
       );
+
       let logicalTerminationPointconfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationInformationAsync(
         logicalTerminatinPointConfigurationInput
       );
