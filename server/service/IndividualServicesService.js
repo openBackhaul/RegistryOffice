@@ -634,7 +634,6 @@ exports.notifyWithdrawnApprovals = function (body, user, originator, xCorrelator
   });
 }
 
-
 /**
  * Adds to the list of known applications
  *
@@ -655,12 +654,10 @@ exports.registerApplication = function (body, user, originator, xCorrelator, tra
        ****************************************************************************************/
       let applicationName = body["application-name"];
       let releaseNumber = body["application-release-number"];
-      let applicationAddress = body["application-address"];
-      let applicationPort = body["application-port"];
+      let tcpServerList = body["tcp-server-list"];
       let embeddingOperation = body["embedding-operation"];
       let clientUpdateOperation = body["client-update-operation"];
       let clientOperationUpdateOperation = body["operation-client-update-operation"];
-
 
       /****************************************************************************************
        * Prepare logicalTerminatinPointConfigurationInput object to 
@@ -670,12 +667,17 @@ exports.registerApplication = function (body, user, originator, xCorrelator, tra
       operationNamesByAttributes.set("embedding-operation", embeddingOperation);
       operationNamesByAttributes.set("client-update-operation", clientUpdateOperation);
       operationNamesByAttributes.set("operation-client-update-operation", clientOperationUpdateOperation);
-      
+      let tcpObjectList = [];
+
+      for (let i = 0; i < tcpServerList.length; i++) {
+        let tcpObject = formulateTcpObject(tcpServerList[i]);
+        tcpObjectList.push(tcpObject);
+      }
+
       let logicalTerminatinPointConfigurationInput = new LogicalTerminatinPointConfigurationInput(
         applicationName,
         releaseNumber,
-        applicationAddress,
-        applicationPort,
+        tcpObjectList,
         operationServerName,
         operationNamesByAttributes,
         individualServicesOperationsMapping.individualServicesOperationsMapping
@@ -1240,4 +1242,25 @@ function includeGenericResponseProfile(applicationName, releaseNumber) {
       reject();
     }
   });
+}
+
+/**
+ * @description This function helps to formulate the tcpClient object in the format { protocol : "" , address : "" , port : ""}
+ * @return {Promise} return the formulated tcpClientObject
+ **/
+function formulateTcpObject(tcpInfo) {
+  let tcpInfoObject;
+  try {
+    let protocol = tcpInfo.protocol;
+    let address = tcpInfo.address;
+    let port = tcpInfo.port;
+    tcpInfoObject = {
+      "protocol": protocol,
+      "address": address,
+      "port": port
+    };
+  } catch (error) {
+    console.log("error in formulating tcp object");
+  }
+  return tcpInfoObject;
 }
