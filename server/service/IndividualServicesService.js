@@ -144,7 +144,8 @@ exports.deregisterApplication = function (body, user, originator, xCorrelator, t
        * Prepare logicalTerminatinPointConfigurationInput object to 
        * configure logical-termination-point
        ****************************************************************************************/
-
+      
+      await excludeGenericResponseProfile(applicationName, applicationReleaseNumber);
       let logicalTerminationPointconfigurationStatus = await LogicalTerminationPointService.deleteApplicationInformationAsync(
         applicationName,
         applicationReleaseNumber
@@ -1235,6 +1236,29 @@ function includeGenericResponseProfile(applicationName, releaseNumber) {
             datatype,
             releaseNumberReference);
           isUpdated = await ProfileCollection.addProfileAsync(responseProfile);
+        }
+      }
+      resolve(isUpdated);
+    } catch (error) {
+      reject();
+    }
+  });
+}
+
+/**
+ * @description This function excludes an existing response profile if not exists for a registered application
+ * @return {Promise} return true if operation is successful
+ **/
+function excludeGenericResponseProfile(applicationName, releaseNumber) {
+  return new Promise(async function (resolve, reject) {
+    let isUpdated = true;
+    try {
+      let httpClientUuid = await HttpClientInterface.getHttpClientUuidAsync(applicationName, releaseNumber);
+      if (httpClientUuid != undefined) {
+        let applicationNameReference = onfPaths.HTTP_CLIENT_APPLICATION_NAME.replace("{uuid}", httpClientUuid);
+        let responseProfileUuid = await ResponseProfile.findProfileUuidForFieldNameReferenceAsync(applicationNameReference);
+        if (responseProfileUuid) {
+          isUpdated = await ProfileCollection.deleteProfileAsync(responseProfileUuid);
         }
       }
       resolve(isUpdated);
