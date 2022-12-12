@@ -4059,6 +4059,11 @@
                                 "logical-termination-point": "ro-2-0-0-op-s-is-002"
                             },
                             {
+                                "local-id": "002",
+                                "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
+                                "logical-termination-point": "ro-2-0-0-op-s-is-003"
+                            },
+                            {
                                 "local-id": "100",
                                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
                                 "logical-termination-point": "ro-2-0-0-op-s-is-003"
