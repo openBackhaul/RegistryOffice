@@ -40,7 +40,9 @@ const ResponseProfile = require('onf-core-model-ap/applicationPattern/onfModel/m
 const ProfileCollection = require('onf-core-model-ap/applicationPattern/onfModel/models/ProfileCollection');
 
 
-const individualServicesOperationsMapping = require('./individualServices/IndividualServicesOperationsMapping')
+const individualServicesOperationsMapping = require('./individualServices/IndividualServicesOperationsMapping');
+const LogicalTerminationPoint = require('onf-core-model-ap/applicationPattern/onfModel/models/LogicalTerminationPoint');
+const OperationClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/OperationClientInterface');
 /**
  * Initiates process of embedding a new release
  *
@@ -997,11 +999,31 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
       let applicationName = body["application-name"];
       let releaseNumber = body["application-release-number"];
       let approvalStatus = body["approval-status"];
-      let updateClientOperationName = 'update-client';
-      let updateOperationClientOperationName = 'update-operation-client';
+      let updateClientOperationName;
+      let updateOperationClientOperationName;
+      let embeddingOperationName;
       let httpClientUuid = await httpClientInterface.getHttpClientUuidAsync(applicationName,
         releaseNumber);
 
+      /****************************************************************************************
+       * find the operation client uuid for the operations "update-client" and 'update-operation-client'
+       * configure logical-termination-point
+       ****************************************************************************************/
+       let operationClientUuidList = await LogicalTerminationPoint.getClientLtpListAsync(httpClientUuid);
+       for(let i = 0; i<operationClientUuidList.length;i++){
+        let operationClientUuid = operationClientUuidList[i];
+        let apiSegment = getApiSegmentOfOperationClient(operationClientUuid);
+        if(apiSegment == "im"){
+          if(operationClientUuid.endsWith("001")){
+            updateClientOperationName = await OperationClientInterface.getOperationNameAsync(operationClientUuid);
+          }else if(operationClientUuid.endsWith("002")){
+            updateOperationClientOperationName = await OperationClientInterface.getOperationNameAsync(operationClientUuid);
+          }else if(operationClientUuid.endsWith("000")){
+            embeddingOperationName = await OperationClientInterface.getOperationNameAsync(operationClientUuid);
+          }
+        }
+       }
+      
       /****************************************************************************************
        * Prepare attributes to configure forwarding-construct
        * If the approval status is approved , then create forwarding construct for update-operation-client and update-client
@@ -1025,6 +1047,9 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
             } else if (operationName.includes(updateOperationClientOperationName)) {
               updateOperationClientOperationName = operationName;
               operationListForConfiguration.push(operationClientUuid);
+            } else if (operationName.includes(embeddingOperationName)) {
+              embeddingOperationName = operationName;
+              operationListForConfiguration.push(operationClientUuid);
             }
           }
 
@@ -1032,7 +1057,8 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
             forwardingConfigurationInputList = await prepareForwardingConfiguration.updateApprovalStatus(
               operationListForConfiguration,
               updateClientOperationName,
-              updateOperationClientOperationName
+              updateOperationClientOperationName, 
+              embeddingOperationName
             );
 
             if (approvalStatus == 'APPROVED') {
@@ -1054,6 +1080,18 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
         }
       }
 
+      /****************************************************************************************
+       * Prepare logicalTerminatinPointConfigurationInput object to 
+       * configure logical-termination-point
+       ****************************************************************************************/
+      let logicalTerminationPointconfigurationStatus;
+      if (approvalStatus == 'BARRED') {
+      await excludeGenericResponseProfile(applicationName, releaseNumber);
+      logicalTerminationPointconfigurationStatus = await LogicalTerminationPointService.deleteApplicationInformationAsync(
+        applicationName,
+        releaseNumber
+      );
+      }
 
       /****************************************************************************************
        * Prepare attributes to automate forwarding-construct
@@ -1063,14 +1101,14 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
       let forwardingAutomationInputList;
       if (approvalStatus == 'APPROVED') {
         forwardingAutomationInputList = await prepareForwardingAutomation.updateApprovalStatusApproved(
-          undefined,
+          logicalTerminationPointconfigurationStatus,
           forwardingConstructConfigurationStatus,
           applicationName,
           releaseNumber
         );
       } else if (approvalStatus == 'BARRED') {
         forwardingAutomationInputList = await prepareForwardingAutomation.updateApprovalStatusBarred(
-          undefined,
+          logicalTerminationPointconfigurationStatus,
           forwardingConstructConfigurationStatus,
           applicationName,
           releaseNumber
@@ -1287,4 +1325,18 @@ function formulateTcpObject(tcpInfo) {
     console.log("error in formulating tcp object");
   }
   return tcpInfoObject;
+}
+
+/**
+ * @description This function helps to get the APISegment of the operationClient uuid
+ * @return {Promise} returns the APISegment
+ **/
+function getApiSegmentOfOperationClient(operationClientUuid) {
+  let APISegment;
+  try {
+    APISegment = operationClientUuid.split("-")[6];
+  } catch (error) {
+    console.log("error in extracting the APISegment");
+  }
+  return APISegment;
 }
