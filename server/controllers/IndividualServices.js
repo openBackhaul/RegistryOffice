@@ -71,12 +71,12 @@ module.exports.inquireApplicationTypeApprovals = async function inquireApplicati
 };
 
 
-module.exports.listApplications = async function listApplications(req, res, next, user, originator, xCorrelator, traceIndicator, customerJourney) {
+module.exports.listApplications = async function listApplications(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
   try {
     let startTime = process.hrtime();
     let responseCode = responseCodeEnum.code.OK;
     let responseBodyToDocument = {};
-    await IndividualServices.listApplications(user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
+    await IndividualServices.listApplications(body, user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
       .then(async function (responseBody) {
         responseBodyToDocument = responseBody;
         let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);

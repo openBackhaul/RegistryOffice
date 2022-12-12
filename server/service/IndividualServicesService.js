@@ -146,7 +146,7 @@ exports.deregisterApplication = function (body, user, originator, xCorrelator, t
        * Prepare logicalTerminatinPointConfigurationInput object to 
        * configure logical-termination-point
        ****************************************************************************************/
-      
+
       await excludeGenericResponseProfile(applicationName, applicationReleaseNumber);
       let logicalTerminationPointconfigurationStatus = await LogicalTerminationPointService.deleteApplicationInformationAsync(
         applicationName,
@@ -297,14 +297,20 @@ exports.inquireApplicationTypeApprovals = function (body, user, originator, xCor
  * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * returns List
  **/
-exports.listApplications = function (user, originator, xCorrelator, traceIndicator, customerJourney) {
+exports.listApplications = function (body, user, originator, xCorrelator, traceIndicator, customerJourney) {
   return new Promise(async function (resolve, reject) {
     let response = {};
     try {
+
+      /****************************************************************************************
+       * Setting up required local variables from the request body
+       ****************************************************************************************/
+      let protocol = body["required-protocol"];
+
       /****************************************************************************************
        * Preparing response body
        ****************************************************************************************/
-      let applicationList = await getAllRegisteredApplicationList();
+      let applicationList = await getAllRegisteredApplicationList(protocol);
 
       /****************************************************************************************
        * Setting 'application/json' response body
@@ -1009,21 +1015,21 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
        * find the operation client uuid for the operations "update-client" and 'update-operation-client'
        * configure logical-termination-point
        ****************************************************************************************/
-       let operationClientUuidList = await LogicalTerminationPoint.getClientLtpListAsync(httpClientUuid);
-       for(let i = 0; i<operationClientUuidList.length;i++){
+      let operationClientUuidList = await LogicalTerminationPoint.getClientLtpListAsync(httpClientUuid);
+      for (let i = 0; i < operationClientUuidList.length; i++) {
         let operationClientUuid = operationClientUuidList[i];
         let apiSegment = getApiSegmentOfOperationClient(operationClientUuid);
-        if(apiSegment == "im"){
-          if(operationClientUuid.endsWith("001")){
+        if (apiSegment == "im") {
+          if (operationClientUuid.endsWith("001")) {
             updateClientOperationName = await OperationClientInterface.getOperationNameAsync(operationClientUuid);
-          }else if(operationClientUuid.endsWith("002")){
+          } else if (operationClientUuid.endsWith("002")) {
             updateOperationClientOperationName = await OperationClientInterface.getOperationNameAsync(operationClientUuid);
-          }else if(operationClientUuid.endsWith("000")){
+          } else if (operationClientUuid.endsWith("000")) {
             embeddingOperationName = await OperationClientInterface.getOperationNameAsync(operationClientUuid);
           }
         }
-       }
-      
+      }
+
       /****************************************************************************************
        * Prepare attributes to configure forwarding-construct
        * If the approval status is approved , then create forwarding construct for update-operation-client and update-client
@@ -1057,7 +1063,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
             forwardingConfigurationInputList = await prepareForwardingConfiguration.updateApprovalStatus(
               operationListForConfiguration,
               updateClientOperationName,
-              updateOperationClientOperationName, 
+              updateOperationClientOperationName,
               embeddingOperationName
             );
 
@@ -1086,11 +1092,11 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
        ****************************************************************************************/
       let logicalTerminationPointconfigurationStatus;
       if (approvalStatus == 'BARRED') {
-      await excludeGenericResponseProfile(applicationName, releaseNumber);
-      logicalTerminationPointconfigurationStatus = await LogicalTerminationPointService.deleteApplicationInformationAsync(
-        applicationName,
-        releaseNumber
-      );
+        await excludeGenericResponseProfile(applicationName, releaseNumber);
+        logicalTerminationPointconfigurationStatus = await LogicalTerminationPointService.deleteApplicationInformationAsync(
+          applicationName,
+          releaseNumber
+        );
       }
 
       /****************************************************************************************
@@ -1146,7 +1152,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
  * <b>step 5 :</b> get the application name, release number and server-ltp<br>
  * <b>step 6 :</b> get the ipaddress and port name of each associated tcp-client <br>
  **/
-function getAllRegisteredApplicationList() {
+function getAllRegisteredApplicationList(protocol) {
   return new Promise(async function (resolve, reject) {
     let clientApplicationList = [];
     const forwardingName = "ServerReplacementBroadcast";
@@ -1159,8 +1165,6 @@ function getAllRegisteredApplicationList() {
       let clientApplicationInformation = class ClientApplicationInformation {
         applicationName;
         applicationReleaseNumber;
-        applicationAddress;
-        applicationPort;
 
         /**
          * @constructor 
@@ -1172,8 +1176,12 @@ function getAllRegisteredApplicationList() {
         constructor(applicationName, applicationReleaseNumber, applicationAddress, applicationPort) {
           this.applicationName = applicationName;
           this.applicationReleaseNumber = applicationReleaseNumber;
-          this.applicationAddress = applicationAddress;
-          this.applicationPort = applicationPort;
+          if (applicationAddress != undefined) {
+            this.applicationAddress = applicationAddress;
+          }
+          if (applicationPort != undefined) {
+            this.applicationPort = applicationPort;
+          }
         }
       };
       let forwardingConstructForTheForwardingName = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(forwardingName);
@@ -1192,12 +1200,23 @@ function getAllRegisteredApplicationList() {
         let httpClientUuid = httpClientUuidList[i];
         let applicationName = await httpClientInterface.getApplicationNameAsync(httpClientUuid);
         let applicationReleaseNumber = await httpClientInterface.getReleaseNumberAsync(httpClientUuid);
-        let serverLtp = await logicalTerminationPoint.getServerLtpListAsync(httpClientUuid);
-        let tcpClientUuid = serverLtp[0];
-        let applicationAddress = await tcpClientInterface.getRemoteAddressAsync(tcpClientUuid);
-        let applicationPort = await tcpClientInterface.getRemotePortAsync(tcpClientUuid);
-        let clientApplication = new clientApplicationInformation(applicationName, applicationReleaseNumber, applicationAddress, applicationPort);
-        clientApplicationList.push(clientApplication);
+        if (protocol == undefined) {
+          let clientApplication = new clientApplicationInformation(applicationName, applicationReleaseNumber);
+          clientApplicationList.push(clientApplication);
+        } else {
+          let tcpClientUuidList = await logicalTerminationPoint.getServerLtpListAsync(httpClientUuid);
+          for (let i = 0; i < tcpClientUuidList.length; i++) {
+            let tcpClientUuid = tcpClientUuidList[i];
+            let tcpClientProtocol = await tcpClientInterface.getRemoteProtocolAsync(tcpClientUuid);
+            if (tcpClientProtocol.toLowerCase() == protocol.toLowerCase()) {
+              let address = await tcpClientInterface.getRemoteAddressAsync(tcpClientUuid);
+              let applicationAddress = "domain-name" in address ? address["domain-name"] : address["ip-address"]["ipv-4-address"];
+              let applicationPort = await tcpClientInterface.getRemotePortAsync(tcpClientUuid);
+              let clientApplication = new clientApplicationInformation(applicationName, applicationReleaseNumber, applicationAddress, applicationPort);
+              clientApplicationList.push(clientApplication);
+            }
+          }
+        }
       }
       resolve(clientApplicationList);
     } catch (error) {
