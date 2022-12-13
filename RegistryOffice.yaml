@@ -1329,7 +1329,7 @@ paths:
           $ref: '#/components/responses/responseForErroredServiceRequests'
       callbacks:
         TypeApprovalCausesRequestForEmbedding:
-          url: #[{$request.body#application-protocol}]://[{$request.body#ipv-4-address} or {$request.body#domain-name}]:[{$request.body#application-port}][{$request.body#embedding-operation}]
+          url: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
             post:
               parameters:
                 - $ref: '#/components/parameters/user'
@@ -2251,7 +2251,7 @@ paths:
           $ref: '#/components/responses/responseForErroredServiceRequests'
       callbacks:
         RegistrationCausesInquiryForApplicationTypeApproval:
-          url: #[{$request.body#approval-application-protocol}]://[{$request.body#ipv-4-address} or {request.body#domain-name}]:[{$request.body#approval-application-port}][{$request.body#approval-operation}]
+          url: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-tar-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-tar-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-tar-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-tar-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-tar-1-0-0-003/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
             post:
               parameters:
                 - $ref: '#/components/parameters/user'
@@ -2464,7 +2464,7 @@ paths:
           $ref: '#/components/responses/responseForErroredServiceRequests'
       callbacks:
         DeregistrationNotification:
-          url: #[{$request.body#subscriber-protocol}]://[{$request.body#ipv-4-address} or {$request.body#domain-name}]:[{$request.body#subscriber-port}][{$request.body#subscriber-operation}]
+          url: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-004/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
             post:
               parameters:
                 - $ref: '#/components/parameters/user'
@@ -2677,7 +2677,7 @@ paths:
           $ref: '#/components/responses/responseForErroredServiceRequests'
       callbacks:
         ApprovalNotification:
-          url: #[{$request.body#subscriber-protocol}]://[{$request.body#ipv-4-address} or {$request.body#domain-name}]:[{$request.body#subscriber-port}][{$request.body#subscriber-operation}]
+          url: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-003/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
             description: 'To be activated, if received /v1/regard-updated-approval-status::requestBody::approval-status == APPROVED'
             post:
               parameters:
@@ -2930,7 +2930,7 @@ paths:
           $ref: '#/components/responses/responseForErroredServiceRequests'
       callbacks:
         WithdrawnApprovalNotification:
-          url: #[{$request.body#subscriber-protocol}]://[{$request.body#ipv-4-address} or {$request.body#domain-name}]:[{$request.body#subscriber-port}][{$request.body#subscriber-operation}]
+          url: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-im-*-1-0-0-004/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]:
             description: 'To be activated, if received /v1/regard-updated-approval-status::requestBody::approval-status != APPROVED'
             post:
               parameters:
