@@ -1,38 +1,16 @@
 # RegistryOffice
-- Administrates the list of registered Applications.
-- Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
 
-### ServiceList
-- [RegistryOffice+services](./RegistryOffice+services.yaml)
+### Location
+The RegistryOffice is part of the TinyApplicationController for managing the REST microservices of the application layer.  
 
-### ProfileList and ProfileInstanceList
-- [RegistryOffice+profiles](./RegistryOffice+profiles.yaml)
-- [RegistryOffice+profileInstances](./RegistryOffice+profileInstances.yaml)
+### Description
+Every application of the application layer must register itself at the RegistryOffice.  
+After positive feedback of the TypeApprovalRegister, the RegistryOffice informs all other applications of the TinyApplicationController about some new application, and it initiates the embedding process on the new application.  
+Its list of applications is always up-to-date, and it is made available to other applications.  
+The RegistryOffice offers a couple of broadcast services. It supports informing all applications about changed TCP/IP addresses and new, backward compatible operations at other applications.  
 
-### ForwardingList
-- [RegistryOffice+forwardings](./RegistryOffice+forwardings.yaml)
-
-### Open API specification (Swagger)
-- [RegistryOffice](./RegistryOffice.yaml)
-
-### CONFIGfile (JSON)
-- [RegistryOffice+config](./RegistryOffice+config.json)
-
-### Test Cases (Postman Export) and DATAfile
-- [RegistryOffice+testcases](./RegistryOffice+testcases.json)
-- [RegistryOffice+data](./RegistryOffice+data.json)
-
-### NodeJS Implementation
-- to be provided
-
-### Publication
-- No official publication planned
-
-### Aspired Classification
-- Live Network
-
-### Open Issue List
-- [RegistryOffice/issues](../../issues)
+### Relevance
+The RegistryOffice is core element of the application layer running in the live network at Telefonica Germany.
 
 ### Comments
-This application is part of the TinyApplicationController for managing the REST applications forming the MBH SDN application layer.
+./.
