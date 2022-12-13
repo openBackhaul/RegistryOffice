@@ -14,7 +14,7 @@ The RegistryOffice offers a couple of broadcast services: It supports informing 
 The RegistryOffice is core element of the application layer running in the live network at Telefonica Germany.
 
 #### Resources
-- [Specification](./spec/README.md)
+- [Specification](./spec/)
 - [Implementation](./server/)
 
 ### Comments
