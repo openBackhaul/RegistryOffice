@@ -1,38 +1,23 @@
 # RegistryOffice
-- Administrates the list of registered Applications.
-- Thorsten Heinze (Thorsten.Heinze@openBackhaul.com)
 
-### ServiceList
-- [RegistryOffice+services](./RegistryOffice+services.yaml)
+### Location
+The RegistryOffice is part of the TinyApplicationController.  
+The TinyApplicationController is for managing the REST microservices of the application layer.  
 
-### ProfileList and ProfileInstanceList
-- [RegistryOffice+profiles](./RegistryOffice+profiles.yaml)
-- [RegistryOffice+profileInstances](./RegistryOffice+profileInstances.yaml)
+### Description
+Every application must register at the RegistryOffice for becoming part of the application layer.  
+After positive feedback from the TypeApprovalRegister, the RegistryOffice informs all other applications of the TinyApplicationController about the new application, and it initiates the embedding process on the new application.  
+Its list of applications is always up-to-date, and it is made available to other applications.  
+The RegistryOffice offers services for completely dismantling an application from the application layer.  
+And it broadcasts information about changed TCP/IP addresses and new, backward compatible operations offered by other applications.  
 
-### ForwardingList
-- [RegistryOffice+forwardings](./RegistryOffice+forwardings.yaml)
+### Relevance
+The RegistryOffice is core element of the application layer running in the live network at Telefonica Germany.
 
-### Open API specification (Swagger)
-- [RegistryOffice](./RegistryOffice.yaml)
-
-### CONFIGfile (JSON)
-- [RegistryOffice+config](./RegistryOffice+config.json)
-
-### Test Cases (Postman Export) and DATAfile
-- [RegistryOffice+testcases](./RegistryOffice+testcases.json)
-- [RegistryOffice+data](./RegistryOffice+data.json)
-
-### NodeJS Implementation
-- to be provided
-
-### Publication
-- No official publication planned
-
-### Aspired Classification
-- Live Network
-
-### Open Issue List
-- [RegistryOffice/issues](../../issues)
+### Resources
+- [Specification](./spec/)
+- [TestSuite](./testing/)
+- [Implementation](./server/)
 
 ### Comments
-This application is part of the TinyApplicationController for managing the REST applications forming the MBH SDN application layer.
+./.
