@@ -1,6 +1,6 @@
 # RegistryOffice Testing
 
-### Test Cases (Postman Export) and DATAfile
+### Test Cases (Postman Export)
 - [RegistryOffice+testcases](./RegistryOffice+testcases.json)
 
 ### DATAfile
