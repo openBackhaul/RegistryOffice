@@ -1,4 +1,4 @@
-# RegistryOffice
+# RegistryOffice Specification
 
 ### ServiceList
 - [RegistryOffice+services](./RegistryOffice+services.yaml)
@@ -16,10 +16,5 @@
 ### CONFIGfile (JSON)
 - [RegistryOffice+config](./RegistryOffice+config.json)
 
-### Test Cases (Postman Export) and DATAfile
-- [RegistryOffice+testcases](./RegistryOffice+testcases.json)
-- [RegistryOffice+data](./RegistryOffice+data.json)
-
 ### Comments
 ./.
-
