@@ -121,11 +121,11 @@ profile-instances:
     uuid: 'ro-2-0-0-response-p-008'
     capability:
       operation-name: '/v1/list-applications-in-generic-representation'
-      field-name-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-ro-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name'
+      field-name-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-ro-2-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name'
       description: 'List of release numbers and changes'
       datatype: 'string'
     configuration:
-      value-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-ro-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number'
+      value-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-ro-2-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number'
 
   - profile-name: 'GenericResponseProfile'
     uuid: 'ro-2-0-0-response-p-009'
