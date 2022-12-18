@@ -197,6 +197,19 @@ profile-instances:
     configuration:
       value-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-cc-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number'
 
+
+  - profile-name: 'FileProfile'
+    uuid: 'ro-2-0-0-file-p-000'
+    capability:
+      file-identifier: 'LOADfile'
+      file-description: 'Application name, release number and registration time stamp'
+    configuration:
+      file-path: '../application-data/application-data.json'
+      user-name: 'RegistryOffice'
+      password: 'Operations to add password'
+      operation: 'write'
+
+
   - profile-name: 'IntegerProfile'
     uuid: 'ro-2-0-0-integer-p-000'
     capability:
