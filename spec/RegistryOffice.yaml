@@ -1689,24 +1689,24 @@ paths:
                           type: string
                           description: >
                             'Name of the application that has updated connection data
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]
-                            ==[$/v1/relay-server-replacement.body#application-name]'
+                            from [$/v1/relay-server-replacement.body#application-name]
+                            ==[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
                         old-release-number:
                           type: string
                           description: >
                             'Formerly addressed release of the application that has updated connection data
-                            from [$/v1/relay-server-replacement.body#old-application-release-number]'
+                            from [$/v1/relay-server-replacement.body#old-release-number]
+                            ==[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
                         new-release-number:
                           type: string
                           description: >
                             'New release number of the application that has updated connection data
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]
-                            ==[$/v1/relay-server-replacement.body#new-application-release-number]'
+                            from [$/v1/relay-server-replacement.body#new-release-number]'
                         new-protocol:
                           type: string
                           description: >
                             'Protocol for addressing the application that has updated connection data
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
+                            from [$/v1/relay-server-replacement.body#new-protocol]'
                         new-address:
                           type: object
                           properties:
@@ -1716,18 +1716,18 @@ paths:
                                 ipv-4-address:
                                   type: string
                                   description: >
-                                    'New IPv4 address of the application that has updated connection data
-                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
+                                    'Future IPv4 address of the application that has updated connection data
+                                    from [$/v1/relay-server-replacement.body#new-address/ip-address/ipv-4-address]'
                             domain-name:
                               type: string
                               description: >
                                 'Future domain name of the application that has updated connection data
-                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
+                                from [$/v1/relay-server-replacement.body#new-address/domain-name]'
                         new-port:
                           type: integer
                           description: >
                             'Future port of the application that has updated connection data
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
+                            from [$/v1/relay-server-replacement.body#new-port]'
                       example:
                         application-name: 'RegistryOffice'
                         old-release-number: '1.0.0'
@@ -1806,14 +1806,14 @@ paths:
                           type: string
                           description: >
                             'Name of the application that has an updated operation
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]
-                            ==[$/v1/relay-operation-update.body#application-name]'
+                            from [$/v1/relay-operation-update.body#application-name]
+                            ==[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
                         release-number:
                           type: string
                           description: >
                             'Release number of the application that has an updated operation
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]
-                            ==[$/v1/relay-operation-update.body#release-number]'
+                            from [$/v1/relay-operation-update.body#release-number]
+                            ==[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
                         old-operation-name:
                           type: string
                           description: >
@@ -1822,9 +1822,8 @@ paths:
                         new-operation-name:
                           type: string
                           description: >
-                            'Name of the new operation
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-*/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
-                            that formerly was ==[$/v1/relay-operation-update.body#old-operation-name]'
+                            'Name of the replacing operation
+                            from [$/v1/relay-operation-update.body#new-operation-name]'
                       example:
                         application-name: 'RegistryOffice'
                         release-number: '2.0.0'
@@ -3007,19 +3006,21 @@ paths:
                   type: string
                   description: >
                     'Name of the application that has updated connection data
-                    find [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
+                    find [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]
+                    and forward to [$/v1/regard-updated-approval-status.callbacks.ServerReplacementBroadcast.body#application-name]'
                 old-application-release-number:
                   type: string
                   pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
                   description: >
                     'Currently addressed release of the application that has updated connection data
-                    find [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
+                    find [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]
+                    and forward to [$/v1/regard-updated-approval-status.callbacks.ServerReplacementBroadcast.body#old-release-number]'
                 new-application-release-number:
                   type: string
                   pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
                   description: >
                     'Future release number of the application that has updated connection data
-                    update [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
+                    forward to [$/v1/regard-updated-approval-status.callbacks.ServerReplacementBroadcast.body#new-release-number]'
                 new-application-protocol:
                   type: string
                   enum:
@@ -3027,7 +3028,7 @@ paths:
                     - 'HTTPS'
                   description: >
                     'Protocol to be used in future for addressing the application that has updated connection data
-                    update [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
+                    forward to [$/v1/regard-updated-approval-status.callbacks.ServerReplacementBroadcast.body#new-protocol]'
                 new-application-address:
                   type: object
                   minProperties: 1
@@ -3044,20 +3045,20 @@ paths:
                           pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
                           description: >
                             'Future IPv4 address of the application that has updated connection data
-                            update [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
+                            forward to [$/v1/regard-updated-approval-status.callbacks.ServerReplacementBroadcast.body#new-address/ip-address/ipv-4-address]'
                     domain-name:
                       type: string
                       pattern: '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$'
                       description: >
                         'Future domain name of the application that has updated connection data
-                        update [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
+                        forward to [$/v1/regard-updated-approval-status.callbacks.ServerReplacementBroadcast.body#new-address/domain-name]'
                 new-application-port:
                   type: integer
                   minimum: 0
                   maximum: 65535
                   description: >
                     'Future port of the application that has updated connection data
-                    update [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
+                    forward to [$/v1/regard-updated-approval-status.callbacks.ServerReplacementBroadcast.body#new-port]'
               example:
                 application-name: 'RegistryOffice'
                 old-application-release-number: '1.0.0'
@@ -3142,25 +3143,27 @@ paths:
                   type: string
                   description: >
                     'Name of the application that has an updated operation
-                    find [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
+                    find [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]
+                    and forward to [$/v1/regard-updated-approval-status.callbacks.OperationUpdateBroadcast.body#application-name]'
                 release-number:
                   type: string
                   pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
                   description: >
                     'Release number of the application that has an updated operation
-                    find [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
+                    find [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]
+                    and forward to [$/v1/regard-updated-approval-status.callbacks.OperationUpdateBroadcast.body#release-number]'
                 old-operation-name:
                   type: string
                   minLength: 6
                   description: >
                     'Name of the deprecated operation
-                    find [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-*/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                    forward to [$/v1/regard-updated-approval-status.callbacks.OperationUpdateBroadcast.body#old-operation-name]'
                 new-operation-name:
                   type: string
                   minLength: 6
                   description: >
                     'Name of the replacing operation
-                    update [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-c-*/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                    forward to [$/v1/regard-updated-approval-status.callbacks.OperationUpdateBroadcast.body#new-operation-name]'
               example:
                 application-name: 'RegistryOffice'
                 release-number: '2.0.0'
