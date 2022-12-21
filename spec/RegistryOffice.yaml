@@ -770,8 +770,8 @@ paths:
                         subscriber-application:
                           type: string
                           description: >
-                            'Own application name
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-name]'
+                            'Future application name
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-nr-*-*-*-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
                         subscriber-release-number:
                           type: string
                           description: >
@@ -892,7 +892,7 @@ paths:
                           type: string
                           description: >
                             'Old release number
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-or-*-*-*-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-number]'
                         new-application-release-number:
                           type: string
                           description: >
@@ -2209,8 +2209,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-s-is-006/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-op-s-is-006/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '401':
