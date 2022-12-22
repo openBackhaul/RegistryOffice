@@ -1709,12 +1709,14 @@ paths:
                           type: string
                           description: >
                             'Name of the application that has updated connection data
-                            from [$/v1/relay-server-replacement.body#future-application-name]'
+                            from [$/v1/relay-server-replacement.body#future-application-name]
+                            ==[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
                         future-release-number:
                           type: string
                           description: >
                             'New release number of the application that has updated connection data
-                            from [$/v1/relay-server-replacement.body#future-release-number]'
+                            from [$/v1/relay-server-replacement.body#future-release-number]
+                            ==[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
                         future-protocol:
                           type: string
                           description: >
@@ -3034,12 +3036,14 @@ paths:
                   type: string
                   description: >
                     'Future name of the application that has updated connection data
+                    find [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]
                     and forward to [$/v1/regard-updated-approval-status.callbacks.ServerReplacementBroadcast.body#future-application-name]'
                 future-release-number:
                   type: string
                   pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
                   description: >
                     'Future release number of the application that has updated connection data
+                    find [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]
                     forward to [$/v1/regard-updated-approval-status.callbacks.ServerReplacementBroadcast.body#new-release-number]'
                 future-protocol:
                   type: string
