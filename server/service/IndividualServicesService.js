@@ -43,6 +43,8 @@ const ProfileCollection = require('onf-core-model-ap/applicationPattern/onfModel
 const individualServicesOperationsMapping = require('./individualServices/IndividualServicesOperationsMapping');
 const LogicalTerminationPoint = require('onf-core-model-ap/applicationPattern/onfModel/models/LogicalTerminationPoint');
 const OperationClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/OperationClientInterface');
+
+const genericRepresentation = require('onf-core-model-ap-bs/basicServices/GenericRepresentation');
 /**
  * Initiates process of embedding a new release
  *
@@ -346,19 +348,12 @@ exports.listApplicationsInGenericRepresentation = function (user, originator, xC
       /****************************************************************************************
        * Preparing consequent-action-list for response body
        ****************************************************************************************/
-      let consequentActionList = [];
+      let consequentActionList = await genericRepresentation.getConsequentActionList("/v1/list-applications-in-generic-representation");
 
       /****************************************************************************************
        * Preparing response-value-list for response body
        ****************************************************************************************/
-      let responseValueList = [];
-      let applicationList = await getAllRegisteredApplicationNameAndReleaseList();
-      for (let i = 0; i < applicationList.length; i++) {
-        let applicationName = applicationList[i]["application-name"];
-        let releaseNumber = applicationList[i]["release-number"];
-        let reponseValue = new responseValue(applicationName, releaseNumber, typeof releaseNumber);
-        responseValueList.push(reponseValue);
-      }
+      let responseValueList = await genericRepresentation.getResponseValueList("/v1/list-applications-in-generic-representation");
 
       /****************************************************************************************
        * Setting 'application/json' response body
