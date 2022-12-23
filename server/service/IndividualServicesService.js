@@ -1,7 +1,7 @@
 'use strict';
 
-const LogicalTerminatinPointConfigurationInput = require('onf-core-model-ap/applicationPattern/onfModel/services/models/logicalTerminationPoint/ConfigurationInput');
-const LogicalTerminationPointService = require('onf-core-model-ap/applicationPattern/onfModel/services/LogicalTerminationPointServices');
+const LogicalTerminatinPointConfigurationInput = require('onf-core-model-ap/applicationPattern/onfModel/services/models/logicalTerminationPoint/ConfigurationInputWithMapping');
+const LogicalTerminationPointService = require('onf-core-model-ap/applicationPattern/onfModel/services/LogicalTerminationPointWithMappingServices');
 const LogicalTerminationPointConfigurationStatus = require('onf-core-model-ap/applicationPattern/onfModel/services/models/logicalTerminationPoint/ConfigurationStatus');
 const layerProtocol = require('onf-core-model-ap/applicationPattern/onfModel/models/LayerProtocol');
 
@@ -33,6 +33,18 @@ const ForwardingDomain = require('onf-core-model-ap/applicationPattern/onfModel/
 const ForwardingConstruct = require('onf-core-model-ap/applicationPattern/onfModel/models/ForwardingConstruct');
 const TcpServerInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/TcpServerInterface');
 const FcPort = require('onf-core-model-ap/applicationPattern/onfModel/models/FcPort');
+
+const MonitorTypeApprovalChannel = require('./individualServices/MonitorTypeApprovalChannel');
+const HttpClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/HttpClientInterface');
+const ResponseProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/ResponseProfile');
+const ProfileCollection = require('onf-core-model-ap/applicationPattern/onfModel/models/ProfileCollection');
+
+
+const individualServicesOperationsMapping = require('./individualServices/IndividualServicesOperationsMapping');
+const LogicalTerminationPoint = require('onf-core-model-ap/applicationPattern/onfModel/models/LogicalTerminationPoint');
+const OperationClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/OperationClientInterface');
+
+const genericRepresentation = require('onf-core-model-ap-bs/basicServices/GenericRepresentation');
 /**
  * Initiates process of embedding a new release
  *
@@ -55,7 +67,7 @@ exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, 
       let releaseNumber = body["new-application-release"];
       let applicationAddress = body["new-application-address"];
       let applicationPort = body["new-application-port"];
-      
+
       /****************************************************************************************
        * Prepare logicalTerminatinPointConfigurationInput object to 
        * configure logical-termination-point
@@ -137,6 +149,7 @@ exports.deregisterApplication = function (body, user, originator, xCorrelator, t
        * configure logical-termination-point
        ****************************************************************************************/
 
+      await excludeGenericResponseProfile(applicationName, applicationReleaseNumber);
       let logicalTerminationPointconfigurationStatus = await LogicalTerminationPointService.deleteApplicationInformationAsync(
         applicationName,
         applicationReleaseNumber
@@ -160,7 +173,7 @@ exports.deregisterApplication = function (body, user, originator, xCorrelator, t
           forwardingConfigurationInputList
         );
       }
-
+      await MonitorTypeApprovalChannel.removeEntryFromMonitorApprovalStatusChannel(applicationName, applicationReleaseNumber);
       /****************************************************************************************
        * Prepare attributes to automate forwarding-construct
        ****************************************************************************************/
@@ -178,7 +191,6 @@ exports.deregisterApplication = function (body, user, originator, xCorrelator, t
         traceIndicator,
         customerJourney
       );
-
       resolve();
     } catch (error) {
       reject(error);
@@ -287,14 +299,20 @@ exports.inquireApplicationTypeApprovals = function (body, user, originator, xCor
  * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * returns List
  **/
-exports.listApplications = function (user, originator, xCorrelator, traceIndicator, customerJourney) {
+exports.listApplications = function (body, user, originator, xCorrelator, traceIndicator, customerJourney) {
   return new Promise(async function (resolve, reject) {
     let response = {};
     try {
+
+      /****************************************************************************************
+       * Setting up required local variables from the request body
+       ****************************************************************************************/
+      let protocol = body["required-protocol"];
+
       /****************************************************************************************
        * Preparing response body
        ****************************************************************************************/
-      let applicationList = await getAllRegisteredApplicationList();
+      let applicationList = await getAllRegisteredApplicationList(protocol);
 
       /****************************************************************************************
        * Setting 'application/json' response body
@@ -330,19 +348,12 @@ exports.listApplicationsInGenericRepresentation = function (user, originator, xC
       /****************************************************************************************
        * Preparing consequent-action-list for response body
        ****************************************************************************************/
-      let consequentActionList = [];
+      let consequentActionList = await genericRepresentation.getConsequentActionList("/v1/list-applications-in-generic-representation");
 
       /****************************************************************************************
        * Preparing response-value-list for response body
        ****************************************************************************************/
-      let responseValueList = [];
-      let applicationList = await getAllRegisteredApplicationNameAndReleaseList();
-      for (let i = 0; i < applicationList.length; i++) {
-        let applicationName = applicationList[i]["application-name"];
-        let releaseNumber = applicationList[i]["release-number"];
-        let reponseValue = new responseValue(applicationName, releaseNumber, typeof releaseNumber);
-        responseValueList.push(reponseValue);
-      }
+      let responseValueList = await genericRepresentation.getResponseValueList("/v1/list-applications-in-generic-representation");
 
       /****************************************************************************************
        * Setting 'application/json' response body
@@ -627,7 +638,6 @@ exports.notifyWithdrawnApprovals = function (body, user, originator, xCorrelator
   });
 }
 
-
 /**
  * Adds to the list of known applications
  *
@@ -648,30 +658,35 @@ exports.registerApplication = function (body, user, originator, xCorrelator, tra
        ****************************************************************************************/
       let applicationName = body["application-name"];
       let releaseNumber = body["application-release-number"];
-      let applicationAddress = body["application-address"];
-      let applicationPort = body["application-port"];
+      let tcpServerList = body["tcp-server-list"];
       let embeddingOperation = body["embedding-operation"];
       let clientUpdateOperation = body["client-update-operation"];
-      let clientOperationUpdateOperation = "/v1/update-operation-client";
-
+      let clientOperationUpdateOperation = body["operation-client-update-operation"];
 
       /****************************************************************************************
        * Prepare logicalTerminatinPointConfigurationInput object to 
        * configure logical-termination-point
        ****************************************************************************************/
+      let operationNamesByAttributes = new Map();
+      operationNamesByAttributes.set("embedding-operation", embeddingOperation);
+      operationNamesByAttributes.set("client-update-operation", clientUpdateOperation);
+      operationNamesByAttributes.set("operation-client-update-operation", clientOperationUpdateOperation);
+      let tcpObjectList = [];
 
-      let operationList = [
-        embeddingOperation,
-        clientUpdateOperation,
-        clientOperationUpdateOperation
-      ];
+      for (let i = 0; i < tcpServerList.length; i++) {
+        let tcpObject = formulateTcpObject(tcpServerList[i]);
+        tcpObjectList.push(tcpObject);
+      }
+
       let logicalTerminatinPointConfigurationInput = new LogicalTerminatinPointConfigurationInput(
         applicationName,
         releaseNumber,
-        applicationAddress,
-        applicationPort,
-        operationList
+        tcpObjectList,
+        operationServerName,
+        operationNamesByAttributes,
+        individualServicesOperationsMapping.individualServicesOperationsMapping
       );
+
       let logicalTerminationPointconfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationInformationAsync(
         logicalTerminatinPointConfigurationInput
       );
@@ -714,7 +729,8 @@ exports.registerApplication = function (body, user, originator, xCorrelator, tra
         traceIndicator,
         customerJourney
       );
-
+      MonitorTypeApprovalChannel.AddEntryToMonitorApprovalStatusChannel(applicationName, releaseNumber);
+      includeGenericResponseProfile(applicationName, releaseNumber);
       resolve();
     } catch (error) {
       reject(error);
@@ -984,10 +1000,30 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
       let applicationName = body["application-name"];
       let releaseNumber = body["application-release-number"];
       let approvalStatus = body["approval-status"];
-      let updateClientOperationName = 'update-client';
-      let updateOperationClientOperationName = 'update-operation-client';
+      let updateClientOperationName;
+      let updateOperationClientOperationName;
+      let embeddingOperationName;
       let httpClientUuid = await httpClientInterface.getHttpClientUuidAsync(applicationName,
         releaseNumber);
+
+      /****************************************************************************************
+       * find the operation client uuid for the operations "update-client" and 'update-operation-client'
+       * configure logical-termination-point
+       ****************************************************************************************/
+      let operationClientUuidList = await LogicalTerminationPoint.getClientLtpListAsync(httpClientUuid);
+      for (let i = 0; i < operationClientUuidList.length; i++) {
+        let operationClientUuid = operationClientUuidList[i];
+        let apiSegment = getApiSegmentOfOperationClient(operationClientUuid);
+        if (apiSegment == "im") {
+          if (operationClientUuid.endsWith("001")) {
+            updateClientOperationName = await OperationClientInterface.getOperationNameAsync(operationClientUuid);
+          } else if (operationClientUuid.endsWith("002")) {
+            updateOperationClientOperationName = await OperationClientInterface.getOperationNameAsync(operationClientUuid);
+          } else if (operationClientUuid.endsWith("000")) {
+            embeddingOperationName = await OperationClientInterface.getOperationNameAsync(operationClientUuid);
+          }
+        }
+      }
 
       /****************************************************************************************
        * Prepare attributes to configure forwarding-construct
@@ -1012,6 +1048,9 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
             } else if (operationName.includes(updateOperationClientOperationName)) {
               updateOperationClientOperationName = operationName;
               operationListForConfiguration.push(operationClientUuid);
+            } else if (operationName.includes(embeddingOperationName)) {
+              embeddingOperationName = operationName;
+              operationListForConfiguration.push(operationClientUuid);
             }
           }
 
@@ -1019,7 +1058,8 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
             forwardingConfigurationInputList = await prepareForwardingConfiguration.updateApprovalStatus(
               operationListForConfiguration,
               updateClientOperationName,
-              updateOperationClientOperationName
+              updateOperationClientOperationName,
+              embeddingOperationName
             );
 
             if (approvalStatus == 'APPROVED') {
@@ -1028,6 +1068,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
                 operationServerName,
                 forwardingConfigurationInputList
               );
+              await MonitorTypeApprovalChannel.removeEntryFromMonitorApprovalStatusChannel(applicationName, releaseNumber);
             } else if (approvalStatus == 'BARRED') {
               forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
               unConfigureForwardingConstructAsync(
@@ -1040,6 +1081,18 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
         }
       }
 
+      /****************************************************************************************
+       * Prepare logicalTerminatinPointConfigurationInput object to 
+       * configure logical-termination-point
+       ****************************************************************************************/
+      let logicalTerminationPointconfigurationStatus;
+      if (approvalStatus == 'BARRED') {
+        await excludeGenericResponseProfile(applicationName, releaseNumber);
+        logicalTerminationPointconfigurationStatus = await LogicalTerminationPointService.deleteApplicationInformationAsync(
+          applicationName,
+          releaseNumber
+        );
+      }
 
       /****************************************************************************************
        * Prepare attributes to automate forwarding-construct
@@ -1049,14 +1102,14 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
       let forwardingAutomationInputList;
       if (approvalStatus == 'APPROVED') {
         forwardingAutomationInputList = await prepareForwardingAutomation.updateApprovalStatusApproved(
-          undefined,
+          logicalTerminationPointconfigurationStatus,
           forwardingConstructConfigurationStatus,
           applicationName,
           releaseNumber
         );
       } else if (approvalStatus == 'BARRED') {
         forwardingAutomationInputList = await prepareForwardingAutomation.updateApprovalStatusBarred(
-          undefined,
+          logicalTerminationPointconfigurationStatus,
           forwardingConstructConfigurationStatus,
           applicationName,
           releaseNumber
@@ -1094,7 +1147,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
  * <b>step 5 :</b> get the application name, release number and server-ltp<br>
  * <b>step 6 :</b> get the ipaddress and port name of each associated tcp-client <br>
  **/
-function getAllRegisteredApplicationList() {
+function getAllRegisteredApplicationList(protocol) {
   return new Promise(async function (resolve, reject) {
     let clientApplicationList = [];
     const forwardingName = "ServerReplacementBroadcast";
@@ -1107,8 +1160,6 @@ function getAllRegisteredApplicationList() {
       let clientApplicationInformation = class ClientApplicationInformation {
         applicationName;
         applicationReleaseNumber;
-        applicationAddress;
-        applicationPort;
 
         /**
          * @constructor 
@@ -1120,8 +1171,12 @@ function getAllRegisteredApplicationList() {
         constructor(applicationName, applicationReleaseNumber, applicationAddress, applicationPort) {
           this.applicationName = applicationName;
           this.applicationReleaseNumber = applicationReleaseNumber;
-          this.applicationAddress = applicationAddress;
-          this.applicationPort = applicationPort;
+          if (applicationAddress != undefined) {
+            this.applicationAddress = applicationAddress;
+          }
+          if (applicationPort != undefined) {
+            this.applicationPort = applicationPort;
+          }
         }
       };
       let forwardingConstructForTheForwardingName = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(forwardingName);
@@ -1129,10 +1184,10 @@ function getAllRegisteredApplicationList() {
       let fcPortList = await ForwardingConstruct.getFcPortListAsync(forwardingConstructUuid);
       let httpClientUuidList = []
 
-      for(let fcPortIndex = 0; fcPortIndex < fcPortList.length; fcPortIndex++){
-        if(fcPortList[fcPortIndex][onfAttributes.FC_PORT.PORT_DIRECTION] === FcPort.portDirectionEnum.OUTPUT){
-            let serverLtpList = await logicalTerminationPoint.getServerLtpListAsync(fcPortList[fcPortIndex][onfAttributes.FC_PORT.LOGICAL_TERMINATION_POINT])
-            httpClientUuidList = httpClientUuidList.concat(serverLtpList)
+      for (let fcPortIndex = 0; fcPortIndex < fcPortList.length; fcPortIndex++) {
+        if (fcPortList[fcPortIndex][onfAttributes.FC_PORT.PORT_DIRECTION] === FcPort.portDirectionEnum.OUTPUT) {
+          let serverLtpList = await logicalTerminationPoint.getServerLtpListAsync(fcPortList[fcPortIndex][onfAttributes.FC_PORT.LOGICAL_TERMINATION_POINT])
+          httpClientUuidList = httpClientUuidList.concat(serverLtpList)
         }
       }
 
@@ -1140,12 +1195,23 @@ function getAllRegisteredApplicationList() {
         let httpClientUuid = httpClientUuidList[i];
         let applicationName = await httpClientInterface.getApplicationNameAsync(httpClientUuid);
         let applicationReleaseNumber = await httpClientInterface.getReleaseNumberAsync(httpClientUuid);
-        let serverLtp = await logicalTerminationPoint.getServerLtpListAsync(httpClientUuid);
-        let tcpClientUuid = serverLtp[0];
-        let applicationAddress = await tcpClientInterface.getRemoteAddressAsync(tcpClientUuid);
-        let applicationPort = await tcpClientInterface.getRemotePortAsync(tcpClientUuid);
-        let clientApplication = new clientApplicationInformation(applicationName, applicationReleaseNumber, applicationAddress, applicationPort);
-        clientApplicationList.push(clientApplication);
+        if (protocol == undefined) {
+          let clientApplication = new clientApplicationInformation(applicationName, applicationReleaseNumber);
+          clientApplicationList.push(clientApplication);
+        } else {
+          let tcpClientUuidList = await logicalTerminationPoint.getServerLtpListAsync(httpClientUuid);
+          for (let i = 0; i < tcpClientUuidList.length; i++) {
+            let tcpClientUuid = tcpClientUuidList[i];
+            let tcpClientProtocol = await tcpClientInterface.getRemoteProtocolAsync(tcpClientUuid);
+            if (tcpClientProtocol.toLowerCase() == protocol.toLowerCase()) {
+              let address = await tcpClientInterface.getRemoteAddressAsync(tcpClientUuid);
+              let applicationAddress = "domain-name" in address ? address["domain-name"] : address["ip-address"]["ipv-4-address"];
+              let applicationPort = await tcpClientInterface.getRemotePortAsync(tcpClientUuid);
+              let clientApplication = new clientApplicationInformation(applicationName, applicationReleaseNumber, applicationAddress, applicationPort);
+              clientApplicationList.push(clientApplication);
+            }
+          }
+        }
       }
       resolve(clientApplicationList);
     } catch (error) {
@@ -1175,10 +1241,10 @@ function getAllRegisteredApplicationNameAndReleaseList() {
       let fcPortList = await ForwardingConstruct.getFcPortListAsync(forwardingConstructUuid);
       let httpClientUuidList = []
 
-      for(let fcPortIndex = 0; fcPortIndex < fcPortList.length; fcPortIndex++){
-        if(fcPortList[fcPortIndex][onfAttributes.FC_PORT.PORT_DIRECTION] === FcPort.portDirectionEnum.OUTPUT){
-            let serverLtpList = await logicalTerminationPoint.getServerLtpListAsync(fcPortList[fcPortIndex][onfAttributes.FC_PORT.LOGICAL_TERMINATION_POINT])
-            httpClientUuidList = httpClientUuidList.concat(serverLtpList)
+      for (let fcPortIndex = 0; fcPortIndex < fcPortList.length; fcPortIndex++) {
+        if (fcPortList[fcPortIndex][onfAttributes.FC_PORT.PORT_DIRECTION] === FcPort.portDirectionEnum.OUTPUT) {
+          let serverLtpList = await logicalTerminationPoint.getServerLtpListAsync(fcPortList[fcPortIndex][onfAttributes.FC_PORT.LOGICAL_TERMINATION_POINT])
+          httpClientUuidList = httpClientUuidList.concat(serverLtpList)
         }
       }
 
@@ -1196,4 +1262,95 @@ function getAllRegisteredApplicationNameAndReleaseList() {
       reject();
     }
   });
+}
+
+
+/**
+ * @description This function includes a new response profile if not exists for a registered application
+ * @return {Promise} return true if operation is successful
+ **/
+function includeGenericResponseProfile(applicationName, releaseNumber) {
+  return new Promise(async function (resolve, reject) {
+    let isUpdated = true;
+    try {
+      let httpClientUuid = await HttpClientInterface.getHttpClientUuidAsync(applicationName, releaseNumber);
+      if (httpClientUuid != undefined) {
+        let applicationNameReference = onfPaths.HTTP_CLIENT_APPLICATION_NAME.replace("{uuid}", httpClientUuid);
+        let isResponseProfileAlreadyExist = await ResponseProfile.findProfileUuidForFieldNameReferenceAsync(applicationNameReference);
+        if (!isResponseProfileAlreadyExist) {
+          let releaseNumberReference = onfPaths.HTTP_CLIENT_RELEASE_NUMBER.replace("{uuid}", httpClientUuid);
+          let operationName = "/v1/list-applications-in-generic-representation";
+          let description = "List of registered application names and release numbers";
+          let datatype = "string";
+          let responseProfile = await ResponseProfile.createProfileAsync(operationName,
+            applicationNameReference,
+            description,
+            datatype,
+            releaseNumberReference);
+          isUpdated = await ProfileCollection.addProfileAsync(responseProfile);
+        }
+      }
+      resolve(isUpdated);
+    } catch (error) {
+      reject();
+    }
+  });
+}
+
+/**
+ * @description This function excludes an existing response profile if not exists for a registered application
+ * @return {Promise} return true if operation is successful
+ **/
+function excludeGenericResponseProfile(applicationName, releaseNumber) {
+  return new Promise(async function (resolve, reject) {
+    let isUpdated = true;
+    try {
+      let httpClientUuid = await HttpClientInterface.getHttpClientUuidAsync(applicationName, releaseNumber);
+      if (httpClientUuid != undefined) {
+        let applicationNameReference = onfPaths.HTTP_CLIENT_APPLICATION_NAME.replace("{uuid}", httpClientUuid);
+        let responseProfileUuid = await ResponseProfile.findProfileUuidForFieldNameReferenceAsync(applicationNameReference);
+        if (responseProfileUuid) {
+          isUpdated = await ProfileCollection.deleteProfileAsync(responseProfileUuid);
+        }
+      }
+      resolve(isUpdated);
+    } catch (error) {
+      reject();
+    }
+  });
+}
+
+/**
+ * @description This function helps to formulate the tcpClient object in the format { protocol : "" , address : "" , port : ""}
+ * @return {Promise} return the formulated tcpClientObject
+ **/
+function formulateTcpObject(tcpInfo) {
+  let tcpInfoObject;
+  try {
+    let protocol = tcpInfo.protocol;
+    let address = tcpInfo.address;
+    let port = tcpInfo.port;
+    tcpInfoObject = {
+      "protocol": protocol,
+      "address": address,
+      "port": port
+    };
+  } catch (error) {
+    console.log("error in formulating tcp object");
+  }
+  return tcpInfoObject;
+}
+
+/**
+ * @description This function helps to get the APISegment of the operationClient uuid
+ * @return {Promise} returns the APISegment
+ **/
+function getApiSegmentOfOperationClient(operationClientUuid) {
+  let APISegment;
+  try {
+    APISegment = operationClientUuid.split("-")[6];
+  } catch (error) {
+    console.log("error in extracting the APISegment");
+  }
+  return APISegment;
 }

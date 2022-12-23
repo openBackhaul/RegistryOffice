@@ -12,6 +12,7 @@ const onfPaths = require('onf-core-model-ap/applicationPattern/onfModel/constant
 const fileOperation = require('onf-core-model-ap/applicationPattern/databaseDriver/JSONDriver');
 const httpClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/HttpClientInterface');
 const tcpClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/TcpClientInterface');
+const ControlConstruct = require('onf-core-model-ap/applicationPattern/onfModel/models/ControlConstruct');
 
 exports.registerApplication = function (logicalTerminationPointconfigurationStatus, forwardingConstructConfigurationStatus,
     applicationName, applicationReleaseNumber) {
@@ -113,9 +114,18 @@ exports.updateApprovalStatusApproved = function (logicalTerminationPointconfigur
             let embedYourselfRequestBody = {};
             embedYourselfRequestBody.registryOfficeApplication = await httpServerInterface.getApplicationNameAsync();
             embedYourselfRequestBody.registryOfficeApplicationReleaseNumber = await httpServerInterface.getReleaseNumberAsync();
-            embedYourselfRequestBody.relayServerReplacementOperation = await operationServerInterface.getOperationNameAsync("ro-0-0-1-op-s-3010");
-            embedYourselfRequestBody.relayOperationUpdateOperation = await operationServerInterface.getOperationNameAsync("ro-0-0-1-op-s-3011");
-            embedYourselfRequestBody.deregistrationOperation = await operationServerInterface.getOperationNameAsync("ro-0-0-1-op-s-3002");
+            
+            let controlConstructUuid = await ControlConstruct.getUuidAsync();
+
+            let relayServerReplacementOperationUuid = controlConstructUuid + "-op-s-is-010";
+            embedYourselfRequestBody.relayServerReplacementOperation = await operationServerInterface.getOperationNameAsync(relayServerReplacementOperationUuid);
+
+            let relayOperationUpdateOperationUuid = controlConstructUuid + "-op-s-is-011";
+            embedYourselfRequestBody.relayOperationUpdateOperation = await operationServerInterface.getOperationNameAsync(relayOperationUpdateOperationUuid);
+
+            let deregistrationOperationUuid = controlConstructUuid + "-op-s-is-002";
+            embedYourselfRequestBody.deregistrationOperation = await operationServerInterface.getOperationNameAsync(deregistrationOperationUuid);
+
             embedYourselfRequestBody.registryOfficeAddress = await tcpServerInterface.getLocalAddress();
             embedYourselfRequestBody.registryOfficePort = await tcpServerInterface.getLocalPort();
             embedYourselfRequestBody = onfFormatter.modifyJsonObjectKeysToKebabCase(embedYourselfRequestBody);

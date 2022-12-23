@@ -68,7 +68,7 @@ exports.deregisterApplication = function (operationClientConfigurationStatusList
     });
 }
 
-exports.updateApprovalStatus = function (operationClientList, updateClientOperationName, updateOperationClientOperationName) {
+exports.updateApprovalStatus = function (operationClientList, updateClientOperationName, updateOperationClientOperationName, embeddingOperation) {
     return new Promise(async function (resolve, reject) {
         let forwardingConfigurationInputList = [];
         try {
@@ -91,6 +91,16 @@ exports.updateApprovalStatus = function (operationClientList, updateClientOperat
                 } else if (operationClientName == updateOperationClientOperationName) {
                     forwardingName =
                         "OperationUpdateBroadcast";
+                    forwardingConfigurationInput = new forwardingConstructConfigurationInput(
+                        forwardingName,
+                        operationClientUuid
+                    );
+                    forwardingConfigurationInputList.push(
+                        forwardingConfigurationInput
+                    );
+                } else if (operationClientName == embeddingOperation) {
+                    forwardingName =
+                        "TypeApprovalCausesRequestForEmbedding";
                     forwardingConfigurationInput = new forwardingConstructConfigurationInput(
                         forwardingName,
                         operationClientUuid
