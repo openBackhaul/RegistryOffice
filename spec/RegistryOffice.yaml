@@ -634,6 +634,16 @@ paths:
                           description: >
                             'Release of application that wants to register
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
+                        preceding-application-name:
+                          type: string
+                          description: >
+                            'If provided, the new application will address /v1/bequeath-your-data-and-die at the preceding application after receiving /v1/embed-yourself
+                            from LOADfile'
+                        preceding-release-number:
+                          type: string
+                          description: >
+                            'If provided, the new application will address /v1/bequeath-your-data-and-die at the preceding release after receiving /v1/embed-yourself
+                            from LOADfile'
                         embedding-operation:
                           type: string
                           description: >
@@ -1195,6 +1205,7 @@ paths:
                     find or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
                 preceding-application-name:
                   type: string
+                  minLength: 3
                   description: >
                     'If provided, the new application will address /v1/bequeath-your-data-and-die at the preceding application after receiving /v1/embed-yourself
                     update or create in LOADfile'
