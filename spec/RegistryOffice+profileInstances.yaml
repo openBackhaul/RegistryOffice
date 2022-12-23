@@ -202,7 +202,7 @@ profile-instances:
     uuid: 'ro-2-0-0-file-p-000'
     capability:
       file-identifier: 'LOADfile'
-      file-description: 'Application name, release number and registration time stamp'
+      file-description: 'Application name, release number, registration time stamp, preceding-application-name and preceding-release-number'
     configuration:
       file-path: '../application-data/application-data.json'
       user-name: 'RegistryOffice'
