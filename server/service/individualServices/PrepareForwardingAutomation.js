@@ -330,7 +330,8 @@ exports.inquireApplicationTypeApprovals = function (logicalTerminationPointconfi
     });
 }
 
-exports.relayServerReplacement = function (applicationName, oldApplicationReleaseNumber, newApplicationReleaseNumber, newApplicationAddress, newApplicationPort) {
+exports.relayServerReplacement = function (currentApplicationName, currentReleaseNumber, futureApplicationName,futureReleaseNumber, 
+    futureProtocol,futureAddress, futurePort) {
     return new Promise(async function (resolve, reject) {
         let forwardingConstructAutomationList = [];
         try {
@@ -341,11 +342,13 @@ exports.relayServerReplacement = function (applicationName, oldApplicationReleas
             let serverReplacementBroadcastForwardingName = "ServerReplacementBroadcast";
             let serverReplacementBroadcastContext;
             let serverReplacementBroadcastRequestBody = {};
-            serverReplacementBroadcastRequestBody.applicationName = applicationName;
-            serverReplacementBroadcastRequestBody.oldApplicationReleaseNumber = oldApplicationReleaseNumber;
-            serverReplacementBroadcastRequestBody.newApplicationReleaseNumber = newApplicationReleaseNumber;
-            serverReplacementBroadcastRequestBody.newApplicationAddress = newApplicationAddress;
-            serverReplacementBroadcastRequestBody.newApplicationPort = newApplicationPort;
+            serverReplacementBroadcastRequestBody.currentApplicationName = currentApplicationName;
+            serverReplacementBroadcastRequestBody.currentReleaseNumber = currentReleaseNumber;
+            serverReplacementBroadcastRequestBody.futureApplicationName = futureApplicationName;
+            serverReplacementBroadcastRequestBody.futureReleaseNumber = futureReleaseNumber;
+            serverReplacementBroadcastRequestBody.futureProtocol = futureProtocol;
+            serverReplacementBroadcastRequestBody.futureAddress = futureAddress;
+            serverReplacementBroadcastRequestBody.futurePort = futurePort;
             serverReplacementBroadcastRequestBody = onfFormatter.modifyJsonObjectKeysToKebabCase(serverReplacementBroadcastRequestBody);
             let forwardingAutomation = new forwardingConstructAutomationInput(
                 serverReplacementBroadcastForwardingName,
