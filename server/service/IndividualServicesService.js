@@ -526,7 +526,7 @@ exports.notifyDeregistrations = function (body, user, originator, xCorrelator, t
       let logicalTerminationPointconfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationAndReleaseInformationAsync(
         logicalTerminatinPointConfigurationInput
       );
-      
+
       /****************************************************************************************
        * Prepare attributes to configure forwarding-construct
        ****************************************************************************************/
@@ -864,35 +864,28 @@ exports.relayServerReplacement = function (body, user, originator, xCorrelator, 
       /****************************************************************************************
        * Setting up required local variables from the request body
        ****************************************************************************************/
-      let applicationName = body["application-name"];
-      let oldApplicationReleaseNumber = body["old-application-release-number"];
-      let newApplicationReleaseNumber = body["new-application-release-number"];
-      let newApplicationAddress = body["new-application-address"];
-      let newApplicationPort = body["new-application-port"];
+      let currentApplicationName = body["current-application-name"];
+      let currentReleaseNumber = body["current-release-number"];
+      let futureApplicationName = body["future-application-name"];
+      let futureReleaseNumber = body["future-release-number"];
+      let futureProtocol = body["future-protocol"];
+      let futureAddress = body["future-address"];
+      let futurePort = body["future-port"];
 
       /****************************************************************************************
        * decision making before proceeding with relay the server information
        ****************************************************************************************/
       let isRequestEligibleForRelaying = true;
-      let httpClientUuidOfNewApplication = await httpClientInterface.getHttpClientUuidAsync(applicationName, newApplicationReleaseNumber);
-      if (oldApplicationReleaseNumber == newApplicationReleaseNumber) {
-        isRequestEligibleForRelaying = false;
-      } else if (httpClientUuidOfNewApplication == undefined) {
+      let httpClientUuidOfNewApplication = await httpClientInterface.getHttpClientUuidAsync(futureApplicationName, futureReleaseNumber);
+      if (httpClientUuidOfNewApplication == undefined) {
         isRequestEligibleForRelaying = false;
       } else {
-        let updateClientOperationName = "/v1/update-client";
-        let operationClientUuidOfUpdateClientOperationName = await operationClientInterface.getOperationClientUuidAsync(
-          httpClientUuidOfNewApplication,
-          updateClientOperationName
-        );
-        let forwardingConstructUuidOfServerReplacementBroadcast = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(
-          "ServerReplacementBroadcast");
-        let forwardingConstructUuidOfServerReplacementBroadcastUuid = forwardingConstructUuidOfServerReplacementBroadcast[onfAttributes.GLOBAL_CLASS.UUID];
-        let isFcPortExistsForUpdateClientOperationName = await ForwardingConstruct.isFcPortExistsAsync(
-          forwardingConstructUuidOfServerReplacementBroadcastUuid,
-          operationClientUuidOfUpdateClientOperationName
-        );
-        if (!isFcPortExistsForUpdateClientOperationName) {
+        // check whether application is approved ??
+        const appNameAndUuidFromForwarding = await resolveApplicationNameAndHttpClientLtpUuidFromForwardingNameOfTypeSubscription(
+          'ServerReplacementBroadcast',
+          futureApplicationName,
+          futureReleaseNumber);
+        if (appNameAndUuidFromForwarding != httpClientUuidOfNewApplication) {
           isRequestEligibleForRelaying = false;
         }
       }
@@ -904,11 +897,13 @@ exports.relayServerReplacement = function (body, user, originator, xCorrelator, 
         let forwardingAutomationInputList;
 
         forwardingAutomationInputList = await prepareForwardingAutomation.relayServerReplacement(
-          applicationName,
-          oldApplicationReleaseNumber,
-          newApplicationReleaseNumber,
-          newApplicationAddress,
-          newApplicationPort
+          currentApplicationName,
+          currentReleaseNumber,
+          futureApplicationName,
+          futureReleaseNumber,
+          futureProtocol,
+          futureAddress,
+          futurePort
         );
 
         if (forwardingAutomationInputList) {
@@ -1428,4 +1423,38 @@ async function resolveApplicationNameAndHttpClientLtpUuidFromForwardingName(forw
     applicationName,
     httpClientLtpUuid
   };
+}
+
+
+async function resolveApplicationNameAndHttpClientLtpUuidFromForwardingNameOfTypeSubscription(forwardingName,applicationName,releaseNumber) {
+  let httpClientUuidOfTheSubscribedApplication = undefined;
+  const forwardingConstruct = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(forwardingName);
+  if (forwardingConstruct === undefined) {
+    return null;
+  }
+
+  let fcPortOutputDirectionLogicalTerminationPointList = [];
+  const fcPortList = forwardingConstruct[onfAttributes.FORWARDING_CONSTRUCT.FC_PORT];
+  for (const fcPort of fcPortList) {
+    const portDirection = fcPort[onfAttributes.FC_PORT.PORT_DIRECTION];
+    if (FcPort.portDirectionEnum.OUTPUT === portDirection) {
+      fcPortOutputDirectionLogicalTerminationPointList.push(fcPort[onfAttributes.FC_PORT.LOGICAL_TERMINATION_POINT]);
+    }
+  }
+
+  if (fcPortOutputDirectionLogicalTerminationPointList.length == 0) {
+    return null;
+  }
+
+  for(let i=0;i<fcPortOutputDirectionLogicalTerminationPointList.length;i++){
+    const opLtpUuid = fcPortOutputDirectionLogicalTerminationPointList[i];
+  const httpLtpUuidList = await LogicalTerminationPoint.getServerLtpListAsync(opLtpUuid);
+  const httpClientLtpUuid = httpLtpUuidList[0];
+  const _applicationName = await httpClientInterface.getApplicationNameAsync(httpClientLtpUuid);
+  const _releaseNumber = await httpClientInterface.getReleaseNumberAsync(httpClientLtpUuid);
+  if(_applicationName == applicationName && _releaseNumber == releaseNumber){
+    httpClientUuidOfTheSubscribedApplication = httpClientLtpUuid;
+  }
+  }
+  return httpClientUuidOfTheSubscribedApplication;
 }
