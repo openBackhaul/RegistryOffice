@@ -19,5 +19,11 @@ module.exports.individualServicesOperationsMapping =
           "api-segment": "im",
           "sequence": "003"
         }
+      },
+      "/v1/notify-deregistrations": {
+        "subscriber-operation": {
+          "api-segment": "im",
+          "sequence": "004"
+        }
       }
 }
