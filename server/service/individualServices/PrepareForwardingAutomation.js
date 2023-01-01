@@ -376,7 +376,7 @@ exports.relayOperationUpdate = function (applicationName, applicationReleaseNumb
             let operationUpdateBroadcastContext;
             let operationUpdateBroadcastRequestBody = {};
             operationUpdateBroadcastRequestBody.applicationName = applicationName;
-            operationUpdateBroadcastRequestBody.applicationReleaseNumber = applicationReleaseNumber;
+            operationUpdateBroadcastRequestBody.releaseNumber = applicationReleaseNumber;
             operationUpdateBroadcastRequestBody.oldOperationName = oldOperationName;
             operationUpdateBroadcastRequestBody.newOperationName = newOperationName;
             operationUpdateBroadcastRequestBody = onfFormatter.modifyJsonObjectKeysToKebabCase(operationUpdateBroadcastRequestBody);
