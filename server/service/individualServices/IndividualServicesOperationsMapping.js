@@ -25,5 +25,11 @@ module.exports.individualServicesOperationsMapping =
           "api-segment": "im",
           "sequence": "004"
         }
+      },
+      "/v1/notify-approvals": {
+        "subscriber-operation": {
+          "api-segment": "im",
+          "sequence": "003"
+        }
       }
 }
