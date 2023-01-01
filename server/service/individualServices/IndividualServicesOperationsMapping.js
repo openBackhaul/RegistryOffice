@@ -31,5 +31,11 @@ module.exports.individualServicesOperationsMapping =
           "api-segment": "im",
           "sequence": "003"
         }
+      },
+      "/v1/notify-withdrawn-approvals": {
+        "subscriber-operation": {
+          "api-segment": "im",
+          "sequence": "004"
+        }
       }
 }
