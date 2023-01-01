@@ -406,6 +406,7 @@ exports.notifyApprovals = function (body, user, originator, xCorrelator, traceIn
        ****************************************************************************************/
       let applicationName = body["subscriber-application"];
       let releaseNumber = body["subscriber-release-number"];
+      let applicationProtocol = body["subscriber-protocol"];
       let applicationAddress = body["subscriber-address"];
       let applicationPort = body["subscriber-port"];
       let subscriberOperation = body["subscriber-operation"];
@@ -415,17 +416,22 @@ exports.notifyApprovals = function (body, user, originator, xCorrelator, traceIn
        * configure logical-termination-point
        ****************************************************************************************/
 
-      let operationList = [
-        subscriberOperation
-      ];
+      let operationNamesByAttributes = new Map();
+      operationNamesByAttributes.set("subscriber-operation", subscriberOperation);
+
+      let tcpObjectList = [];
+      let tcpObject = formulateTcpObjectForApplication(applicationProtocol, applicationAddress, applicationPort);
+      tcpObjectList.push(tcpObject);
+
       let logicalTerminatinPointConfigurationInput = new LogicalTerminatinPointConfigurationInput(
         applicationName,
         releaseNumber,
-        applicationAddress,
-        applicationPort,
-        operationList
+        tcpObjectList,
+        operationServerName,
+        operationNamesByAttributes,
+        individualServicesOperationsMapping.individualServicesOperationsMapping
       );
-      let logicalTerminationPointconfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationInformationAsync(
+      let logicalTerminationPointconfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationAndReleaseInformationAsync(
         logicalTerminatinPointConfigurationInput
       );
 
