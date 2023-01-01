@@ -783,7 +783,7 @@ exports.relayOperationUpdate = function (body, user, originator, xCorrelator, tr
        * Setting up required local variables from the request body
        ****************************************************************************************/
       let applicationName = body["application-name"];
-      let applicationReleaseNumber = body["application-release-number"];
+      let releaseNumber = body["release-number"];
       let oldOperationName = body["old-operation-name"];
       let newOperationName = body["new-operation-name"];
 
@@ -791,25 +791,16 @@ exports.relayOperationUpdate = function (body, user, originator, xCorrelator, tr
        * decision making before proceeding with relay the server information
        ****************************************************************************************/
       let isRequestEligibleForRelaying = true;
-      let httpClientUuidOfNewApplication = await httpClientInterface.getHttpClientUuidAsync(applicationName, applicationReleaseNumber);
-      if (oldOperationName == newOperationName) {
-        isRequestEligibleForRelaying = false;
-      } else if (httpClientUuidOfNewApplication == undefined) {
+      let httpClientUuidOfNewApplication = await httpClientInterface.getHttpClientUuidAsync(applicationName, releaseNumber);
+      if (httpClientUuidOfNewApplication == undefined) {
         isRequestEligibleForRelaying = false;
       } else {
-        let updateClientOperationName = "/v1/update-operation-client";
-        let operationClientUuidOfUpdateClientOperationName = await operationClientInterface.getOperationClientUuidAsync(
-          httpClientUuidOfNewApplication,
-          updateClientOperationName
-        );
-        let forwardingConstructUuidOfOperationUpdateBroadcast = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(
-          "OperationUpdateBroadcast");
-        let forwardingConstructUuidOfOperationUpdateBroadcastUuid = forwardingConstructUuidOfOperationUpdateBroadcast[onfAttributes.GLOBAL_CLASS.UUID];
-        let isFcPortExistsForUpdateOperationClientOperationName = await ForwardingConstruct.isFcPortExistsAsync(
-          forwardingConstructUuidOfOperationUpdateBroadcastUuid,
-          operationClientUuidOfUpdateClientOperationName
-        );
-        if (!isFcPortExistsForUpdateOperationClientOperationName) {
+        // check whether application is approved ??
+        const appNameAndUuidFromForwarding = await resolveApplicationNameAndHttpClientLtpUuidFromForwardingNameOfTypeSubscription(
+          'ServerReplacementBroadcast',
+          applicationName,
+          releaseNumber);
+        if (appNameAndUuidFromForwarding != httpClientUuidOfNewApplication) {
           isRequestEligibleForRelaying = false;
         }
       }
@@ -822,7 +813,7 @@ exports.relayOperationUpdate = function (body, user, originator, xCorrelator, tr
 
         forwardingAutomationInputList = await prepareForwardingAutomation.relayOperationUpdate(
           applicationName,
-          applicationReleaseNumber,
+          releaseNumber,
           oldOperationName,
           newOperationName
         );
