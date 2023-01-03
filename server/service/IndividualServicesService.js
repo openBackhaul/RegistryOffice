@@ -1179,9 +1179,7 @@ function getAllRegisteredApplicationList(protocol) {
        * IpAddress and port information of the registered client applications
        */
       let clientApplicationInformation = class ClientApplicationInformation {
-        applicationName;
-        applicationReleaseNumber;
-
+        
         /**
          * @constructor 
          * @param {String} applicationName name of the client application.
