@@ -35,6 +35,7 @@ const TcpServerInterface = require('onf-core-model-ap/applicationPattern/onfMode
 const FcPort = require('onf-core-model-ap/applicationPattern/onfModel/models/FcPort');
 
 const MonitorTypeApprovalChannel = require('./individualServices/MonitorTypeApprovalChannel');
+const ApplicationPreceedingVersion = require('./individualServices/ApplicationPreceedingVersion');
 const HttpClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/HttpClientInterface');
 const ResponseProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/ResponseProfile');
 const ProfileCollection = require('onf-core-model-ap/applicationPattern/onfModel/models/ProfileCollection');
@@ -682,11 +683,14 @@ exports.registerApplication = function (body, user, originator, xCorrelator, tra
        * Setting up required local variables from the request body
        ****************************************************************************************/
       let applicationName = body["application-name"];
-      let releaseNumber = body["application-release-number"];
+      let releaseNumber = body["release-number"];
       let tcpServerList = body["tcp-server-list"];
       let embeddingOperation = body["embedding-operation"];
       let clientUpdateOperation = body["client-update-operation"];
       let clientOperationUpdateOperation = body["operation-client-update-operation"];
+
+      let preceedingApplicationName = body["preceding-application-name"];
+      let preceedingReleaseNumber = body["preceding-release-number"];
 
       /****************************************************************************************
        * Prepare logicalTerminatinPointConfigurationInput object to 
@@ -712,11 +716,16 @@ exports.registerApplication = function (body, user, originator, xCorrelator, tra
         individualServicesOperationsMapping.individualServicesOperationsMapping
       );
 
-      let logicalTerminationPointconfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationInformationAsync(
+      let logicalTerminationPointconfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationInformationWithMultipleTcpClientAsync(
         logicalTerminatinPointConfigurationInput
       );
 
-
+      let isPreceedingDetailsUpdated = await ApplicationPreceedingVersion.addEntryToPreceedingVersionList(
+        preceedingApplicationName,
+        preceedingReleaseNumber,
+        applicationName,
+        releaseNumber
+      );
       /****************************************************************************************
        * Prepare attributes to configure forwarding-construct
        ****************************************************************************************/
@@ -754,6 +763,7 @@ exports.registerApplication = function (body, user, originator, xCorrelator, tra
         traceIndicator,
         customerJourney
       );
+       
       MonitorTypeApprovalChannel.AddEntryToMonitorApprovalStatusChannel(applicationName, releaseNumber);
       includeGenericResponseProfile(applicationName, releaseNumber);
       resolve();
