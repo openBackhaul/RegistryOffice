@@ -69,3 +69,66 @@ exports.addEntryToPreceedingVersionList = async function (preceedingApplicationN
         }
     });
 }
+
+
+/**
+ * @description This method adds an entry to the preceeding-application-information list
+ * @param {string} applicationName name of the application
+ * @param {string} releaseNumber release number of the application  
+ */
+exports.getPreceedingApplicationInformation = async function (futureApplicationName, futureReleaseNumber) {
+    return new Promise(async function (resolve, reject) {
+        let preceedingApplication;
+        try {
+            if (futureApplicationName != undefined && futureReleaseNumber != undefined) {
+                let applicationData = JSON.parse(fs.readFileSync(applicationDataFile, 'utf8'));
+                let preceedingApplicationInformationList = applicationData["preceeding-application-information"];
+                for (let i = 0; i < preceedingApplicationInformationList.length; i++) {
+                    let preceedingApplicationInformation = preceedingApplicationInformationList[i];
+                    let _preceedingApplicationName = preceedingApplicationInformation["preceeding-application-name"];
+                    let _preceedingReleaseNumber = preceedingApplicationInformation["preceeding-release-number"];
+                    let _futureApplicationName = preceedingApplicationInformation["future-application-name"];
+                    let _futureReleaseNumber = preceedingApplicationInformation["future-release-number"];
+                    if (_futureApplicationName == futureApplicationName && _futureReleaseNumber == futureReleaseNumber) {
+                        preceedingApplication = {};
+                        preceedingApplication.preceedingApplicationName = _preceedingApplicationName;
+                        preceedingApplication.preceedingReleaseNumber = _preceedingReleaseNumber;
+                    }
+                }
+            }
+            resolve(preceedingApplication);
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
+/**
+ * @description This method removed an entry from the monitoring list
+ * @param {string} applicationName name of the application
+ * @param {string} releaseNumber release number of the application  
+ */
+exports.removePreceedingApplicationInformation = async function (preceedingApplicationName, preceedingReleaseNumber) {
+    return new Promise(async function (resolve, reject) {
+        let operationStatus = false;
+        try {
+            if (preceedingApplicationName != undefined && preceedingReleaseNumber != undefined) {
+                let applicationData = JSON.parse(fs.readFileSync(applicationDataFile, 'utf8'));
+                let preceedingApplicationInformationList = applicationData["preceeding-application-information"];
+                for (let i = 0; i < preceedingApplicationInformationList.length; i++) {
+                    let preceedingApplicationInformation = preceedingApplicationInformationList[i];
+                    let _preceedingApplicationName = preceedingApplicationInformation["preceeding-application-name"];
+                    let _preceedingReleaseNumber = preceedingApplicationInformation["preceeding-release-number"];
+                    if (_preceedingApplicationName == preceedingApplicationName && _preceedingReleaseNumber == preceedingReleaseNumber) {
+                        preceedingApplicationInformationList.splice(i, 1);
+                        fs.writeFileSync(applicationDataFile, JSON.stringify(applicationData));
+                        operationStatus = true;
+                    }
+                }
+            }
+            resolve(operationStatus);
+        } catch (error) {
+            reject(error);
+        }
+    });
+}

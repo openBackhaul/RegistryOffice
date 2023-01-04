@@ -1019,7 +1019,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
        * Setting up required local variables from the request body
        ****************************************************************************************/
       let applicationName = body["application-name"];
-      let releaseNumber = body["application-release-number"];
+      let releaseNumber = body["release-number"];
       let approvalStatus = body["approval-status"];
       let updateClientOperationName;
       let updateOperationClientOperationName;
@@ -1069,10 +1069,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
             } else if (operationName.includes(updateOperationClientOperationName)) {
               updateOperationClientOperationName = operationName;
               operationListForConfiguration.push(operationClientUuid);
-            } else if (operationName.includes(embeddingOperationName)) {
-              embeddingOperationName = operationName;
-              operationListForConfiguration.push(operationClientUuid);
-            }
+            } 
           }
 
           if (operationListForConfiguration.length > 0) {
