@@ -14,6 +14,9 @@ const httpClientInterface = require('onf-core-model-ap/applicationPattern/onfMod
 const tcpClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/TcpClientInterface');
 const ControlConstruct = require('onf-core-model-ap/applicationPattern/onfModel/models/ControlConstruct');
 
+const ApplicationPreceedingVersion = require('./ApplicationPreceedingVersion');
+const LogicalTerminationPoint = require('onf-core-model-ap/applicationPattern/onfModel/models/LogicalTerminationPoint');
+
 exports.registerApplication = function (logicalTerminationPointconfigurationStatus, forwardingConstructConfigurationStatus,
     applicationName, applicationReleaseNumber) {
     return new Promise(async function (resolve, reject) {
@@ -114,7 +117,7 @@ exports.updateApprovalStatusApproved = function (logicalTerminationPointconfigur
             let embedYourselfRequestBody = {};
             embedYourselfRequestBody.registryOfficeApplication = await httpServerInterface.getApplicationNameAsync();
             embedYourselfRequestBody.registryOfficeApplicationReleaseNumber = await httpServerInterface.getReleaseNumberAsync();
-            
+
             let controlConstructUuid = await ControlConstruct.getUuidAsync();
 
             let relayServerReplacementOperationUuid = controlConstructUuid + "-op-s-is-010";
@@ -128,6 +131,46 @@ exports.updateApprovalStatusApproved = function (logicalTerminationPointconfigur
 
             embedYourselfRequestBody.registryOfficeAddress = await tcpServerInterface.getLocalAddress();
             embedYourselfRequestBody.registryOfficePort = await tcpServerInterface.getLocalPort();
+
+            //What is the preceeding release number and application for the embedding one
+            let preceedingApplicationName = applicationName;
+            let preceedingApplicationReleaseNumber = releaseNumber;
+            let preceedingApplicationInformation = await ApplicationPreceedingVersion.getPreceedingApplicationInformation(
+                applicationName,
+                releaseNumber
+            );
+
+            let httpClientOfpreceedingApplication;
+            if (preceedingApplicationInformation != undefined) {
+                let _preceedingApplicationName = preceedingApplicationInformation.preceedingApplicationName;
+                let _preceedingApplicationReleaseNumber = preceedingApplicationInformation.preceedingReleaseNumber;
+                httpClientOfpreceedingApplication = await httpClientInterface.getHttpClientUuidAsync(
+                    _preceedingApplicationName,
+                    _preceedingApplicationReleaseNumber);
+                if (httpClientOfpreceedingApplication != undefined) {
+                    preceedingApplicationName = _preceedingApplicationName;
+                    preceedingApplicationReleaseNumber = _preceedingApplicationReleaseNumber;
+                }
+            }
+
+            if(httpClientOfpreceedingApplication == undefined){
+                httpClientOfpreceedingApplication = await httpClientInterface.getHttpClientUuidAsync(
+                    preceedingApplicationName,
+                    preceedingApplicationReleaseNumber);
+            }
+            
+            //get the oldRelease tcp client information
+
+            if(httpClientOfpreceedingApplication!=undefined){
+                let serverLtpsOfPreceedingApplication = await LogicalTerminationPoint.getServerLtpListAsync(httpClientOfpreceedingApplication);
+                let tcpClientUuidOfPreceedingApplication = serverLtpsOfPreceedingApplication[0];
+                if(tcpClientUuidOfPreceedingApplication != undefined){
+                    embedYourselfRequestBody.oldReleaseProtocol = await tcpClientInterface.getRemoteProtocolAsync(tcpClientUuidOfPreceedingApplication);
+                    embedYourselfRequestBody.oldReleaseAddress = await tcpClientInterface.getRemoteAddressAsync(tcpClientUuidOfPreceedingApplication);
+                    embedYourselfRequestBody.oldReleasePort = await tcpClientInterface.getRemotePortAsync(tcpClientUuidOfPreceedingApplication);
+                }
+            }
+
             embedYourselfRequestBody = onfFormatter.modifyJsonObjectKeysToKebabCase(embedYourselfRequestBody);
             forwardingAutomation = new forwardingConstructAutomationInput(
                 embedYourselfForwardingName,
@@ -330,8 +373,8 @@ exports.inquireApplicationTypeApprovals = function (logicalTerminationPointconfi
     });
 }
 
-exports.relayServerReplacement = function (currentApplicationName, currentReleaseNumber, futureApplicationName,futureReleaseNumber, 
-    futureProtocol,futureAddress, futurePort) {
+exports.relayServerReplacement = function (currentApplicationName, currentReleaseNumber, futureApplicationName, futureReleaseNumber,
+    futureProtocol, futureAddress, futurePort) {
     return new Promise(async function (resolve, reject) {
         let forwardingConstructAutomationList = [];
         try {
