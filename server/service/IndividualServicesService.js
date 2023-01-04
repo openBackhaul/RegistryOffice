@@ -66,6 +66,7 @@ exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, 
        ****************************************************************************************/
       let applicationName = body["new-application-name"];
       let releaseNumber = body["new-application-release"];
+      let applicationProtocol = body["new-application-protocol"];
       let applicationAddress = body["new-application-address"];
       let applicationPort = body["new-application-port"];
 
@@ -73,36 +74,50 @@ exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, 
        * Prepare logicalTerminatinPointConfigurationInput object to 
        * configure logical-termination-point
        ****************************************************************************************/
+
+      const appNameAndUuidFromForwarding = await resolveApplicationNameAndHttpClientLtpUuidFromForwardingName('PromptForBequeathingDataCausesNewApplicationBeingRequestedToInquireForApplicationTypeApprovals');
+      if (appNameAndUuidFromForwarding?.httpClientLtpUuid == undefined) {
+        reject(new Error(`The new-release ${applicationName} was not found.`));
+        return;
+      }
+
       let isdataTransferRequired = true;
-      let newReleaseUuid = await httpClientInterface.getHttpClientUuidAsync("NewRelease");
-      let currentApplicationName = await httpServerInterface.getApplicationNameAsync();
-      if (currentApplicationName == applicationName) {
-        let isUpdated = await httpClientInterface.setReleaseNumberAsync(newReleaseUuid, releaseNumber);
-        let currentApplicationRemoteAddress = await TcpServerInterface.getLocalAddress();
-        let currentApplicationRemotePort = await TcpServerInterface.getLocalPort();
-        if ((applicationAddress == currentApplicationRemoteAddress) &&
-          (applicationPort == currentApplicationRemotePort)) {
-          isdataTransferRequired = false;
+      let logicalTerminationPointConfigurationStatus = {};
+      let newReleaseHttpClientLtpUuid = appNameAndUuidFromForwarding.httpClientLtpUuid;
+      if (newReleaseHttpClientLtpUuid != undefined) {
+        let isReleaseUpdated = await httpClientInterface.setReleaseNumberAsync(newReleaseHttpClientLtpUuid, releaseNumber);
+        let isApplicationNameUpdated = await httpClientInterface.setApplicationNameAsync(newReleaseHttpClientLtpUuid, applicationName);
+
+        if (isReleaseUpdated || isApplicationNameUpdated) {
+          let configurationStatus = new ConfigurationStatus(
+            newReleaseHttpClientLtpUuid,
+            undefined,
+            true);
+          logicalTerminationPointConfigurationStatus.httpClientConfigurationStatus = configurationStatus;
         }
-        if (isUpdated) {
-          applicationName = await httpClientInterface.getApplicationNameAsync(newReleaseUuid);
-          let operationList = [];
-          let logicalTerminatinPointConfigurationInput = new LogicalTerminatinPointConfigurationInput(
-            applicationName,
-            releaseNumber,
-            applicationAddress,
-            applicationPort,
-            operationList
-          );
-          let logicalTerminationPointconfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationInformationAsync(
-            logicalTerminatinPointConfigurationInput
-          );
+        // ALT should know about this change
+
+        let newReleaseTcpClientUuidList = await logicalTerminationPoint.getServerLtpListAsync(newReleaseHttpClientLtpUuid);
+        let newReleaseTcpClientUuid = newReleaseTcpClientUuidList[0];
+
+        let isProtocolUpdated = await tcpClientInterface.setRemoteProtocolAsync(newReleaseTcpClientUuid, applicationProtocol);
+        let isAddressUpdated = await tcpClientInterface.setRemoteAddressAsync(newReleaseTcpClientUuid, applicationAddress);
+        let isPortUpdated = await tcpClientInterface.setRemotePortAsync(newReleaseTcpClientUuid, applicationPort);
+
+        if (isProtocolUpdated || isAddressUpdated || isPortUpdated) {
+          let configurationStatus = new ConfigurationStatus(
+            newReleaseTcpClientUuid,
+            undefined,
+            true);
+          logicalTerminationPointConfigurationStatus.tcpClientConfigurationStatusList = [configurationStatus];
+        }
+        if (logicalTerminationPointConfigurationStatus != undefined) {
 
           /****************************************************************************************
            * Prepare attributes to automate forwarding-construct
            ****************************************************************************************/
           let forwardingAutomationInputList = await prepareForwardingAutomation.bequeathYourDataAndDie(
-            logicalTerminationPointconfigurationStatus
+            logicalTerminationPointConfigurationStatus
           );
           ForwardingAutomationService.automateForwardingConstructAsync(
             operationServerName,
@@ -113,9 +128,9 @@ exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, 
             customerJourney
           );
         }
-      }
       softwareUpgrade.upgradeSoftwareVersion(isdataTransferRequired, user, xCorrelator, traceIndicator, customerJourney)
         .catch(err => console.log(`upgradeSoftwareVersion failed with error: ${err}`));
+      }
       resolve();
     } catch (error) {
       reject(error);
@@ -143,7 +158,7 @@ exports.deregisterApplication = function (body, user, originator, xCorrelator, t
        * Setting up required local variables from the request body
        ****************************************************************************************/
       let applicationName = body["application-name"];
-      let applicationReleaseNumber = body["application-release-number"];
+      let applicationReleaseNumber = body["release-number"];
 
       /****************************************************************************************
        * Prepare logicalTerminatinPointConfigurationInput object to 
@@ -254,7 +269,6 @@ exports.inquireApplicationTypeApprovals = function (body, user, originator, xCor
       let logicalTerminationPointconfigurationStatus = await LogicalTerminationPointService.findAndUpdateApplicationInformationAsync(
         logicalTerminatinPointConfigurationInput
       );
-
 
       /****************************************************************************************
        * Prepare attributes to configure forwarding-construct
@@ -763,7 +777,7 @@ exports.registerApplication = function (body, user, originator, xCorrelator, tra
         traceIndicator,
         customerJourney
       );
-       
+
       MonitorTypeApprovalChannel.AddEntryToMonitorApprovalStatusChannel(applicationName, releaseNumber);
       includeGenericResponseProfile(applicationName, releaseNumber);
       resolve();
@@ -1069,7 +1083,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
             } else if (operationName.includes(updateOperationClientOperationName)) {
               updateOperationClientOperationName = operationName;
               operationListForConfiguration.push(operationClientUuid);
-            } 
+            }
           }
 
           if (operationListForConfiguration.length > 0) {
@@ -1176,7 +1190,7 @@ function getAllRegisteredApplicationList(protocol) {
        * IpAddress and port information of the registered client applications
        */
       let clientApplicationInformation = class ClientApplicationInformation {
-        
+
         /**
          * @constructor 
          * @param {String} applicationName name of the client application.
@@ -1422,7 +1436,7 @@ async function resolveApplicationNameAndHttpClientLtpUuidFromForwardingName(forw
 }
 
 
-async function resolveApplicationNameAndHttpClientLtpUuidFromForwardingNameOfTypeSubscription(forwardingName,applicationName,releaseNumber) {
+async function resolveApplicationNameAndHttpClientLtpUuidFromForwardingNameOfTypeSubscription(forwardingName, applicationName, releaseNumber) {
   let httpClientUuidOfTheSubscribedApplication = undefined;
   const forwardingConstruct = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(forwardingName);
   if (forwardingConstruct === undefined) {
@@ -1442,15 +1456,15 @@ async function resolveApplicationNameAndHttpClientLtpUuidFromForwardingNameOfTyp
     return null;
   }
 
-  for(let i=0;i<fcPortOutputDirectionLogicalTerminationPointList.length;i++){
+  for (let i = 0; i < fcPortOutputDirectionLogicalTerminationPointList.length; i++) {
     const opLtpUuid = fcPortOutputDirectionLogicalTerminationPointList[i];
-  const httpLtpUuidList = await LogicalTerminationPoint.getServerLtpListAsync(opLtpUuid);
-  const httpClientLtpUuid = httpLtpUuidList[0];
-  const _applicationName = await httpClientInterface.getApplicationNameAsync(httpClientLtpUuid);
-  const _releaseNumber = await httpClientInterface.getReleaseNumberAsync(httpClientLtpUuid);
-  if(_applicationName == applicationName && _releaseNumber == releaseNumber){
-    httpClientUuidOfTheSubscribedApplication = httpClientLtpUuid;
-  }
+    const httpLtpUuidList = await LogicalTerminationPoint.getServerLtpListAsync(opLtpUuid);
+    const httpClientLtpUuid = httpLtpUuidList[0];
+    const _applicationName = await httpClientInterface.getApplicationNameAsync(httpClientLtpUuid);
+    const _releaseNumber = await httpClientInterface.getReleaseNumberAsync(httpClientLtpUuid);
+    if (_applicationName == applicationName && _releaseNumber == releaseNumber) {
+      httpClientUuidOfTheSubscribedApplication = httpClientLtpUuid;
+    }
   }
   return httpClientUuidOfTheSubscribedApplication;
 }
