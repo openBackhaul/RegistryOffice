@@ -1,19 +1,23 @@
 'use strict';
 var fileOperation = require('onf-core-model-ap/applicationPattern/databaseDriver/JSONDriver');
+var tcpClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/TcpClientInterface');
+
+const prepareForwardingAutomation = require('./individualServices/PrepareForwardingAutomation');
+const ForwardingAutomationService = require('onf-core-model-ap/applicationPattern/onfModel/services/ForwardingConstructAutomationServices');
 
 /**
- * Returns remote IPv4 address
+ * Returns remote address
  *
  * uuid String 
- * returns inline_response_200_28
+ * returns inline_response_200_49
  **/
-exports.getTcpClientRemoteIpv4Address = function (url) {
+exports.getTcpClientRemoteAddress = function (url) {
   return new Promise(async function (resolve, reject) {
     try {
       var value = await fileOperation.readFromDatabaseAsync(url);
       var response = {};
       response['application/json'] = {
-        "tcp-client-interface-1-0:ipv-4-address": value
+        "tcp-client-interface-1-0:remote-address": value
       };
       if (Object.keys(response).length > 0) {
         resolve(response[Object.keys(response)[0]]);
@@ -25,8 +29,6 @@ exports.getTcpClientRemoteIpv4Address = function (url) {
     }
   });
 }
-
-
 
 /**
  * Returns target TCP port at server
@@ -55,17 +57,59 @@ exports.getTcpClientRemotePort = function (url) {
 
 
 /**
- * Configures remote IPv4 address
+ * Returns protocol for addressing remote side
  *
- * body Ipaddress_ipv4address_body 
+ * uuid String 
+ * returns inline_response_200_48
+ **/
+exports.getTcpClientRemoteProtocol = function (url) {
+  return new Promise(async function (resolve, reject) {
+    try {
+      var value = await fileOperation.readFromDatabaseAsync(url);
+      if (value.toUpperCase() == "HTTP") {
+        value = "tcp-client-interface-1-0:PROTOCOL_TYPE_HTTP";
+      } else if (value.toUpperCase() == "HTTPS") {
+        value = "tcp-client-interface-1-0:PROTOCOL_TYPE_HTTPS";
+      } else {
+        value = "tcp-client-interface-1-0:PROTOCOL_TYPE_NOT_YET_DEFINED";
+      }
+      var response = {};
+      response['application/json'] = {
+        "tcp-client-interface-1-0:remote-protocol": value
+      };
+      if (Object.keys(response).length > 0) {
+        resolve(response[Object.keys(response)[0]]);
+      } else {
+        resolve();
+      }
+    } catch (error) {
+      reject();
+    }
+  });
+}
+
+/**
+ * Configures remote address
+ *
+ * body Tcpclientinterfaceconfiguration_remoteaddress_body 
  * uuid String 
  * no response value expected for this operation
  **/
-exports.putTcpClientRemoteIpv4Address = function (url, body) {
+exports.putTcpClientRemoteAddress = function (url, body, uuid) {
   return new Promise(async function (resolve, reject) {
     try {
-      console.log(body);
-      await fileOperation.writeToDatabaseAsync(url, body, false);
+      let isUpdated = await tcpClientInterface.setRemoteAddressAsync(uuid, body["tcp-client-interface-1-0:remote-address"]);
+      /****************************************************************************************
+       * Prepare attributes to automate forwarding-construct
+       ****************************************************************************************/
+      if(isUpdated){
+        let forwardingAutomationInputList = await prepareForwardingAutomation.OAMLayerRequest(
+          uuid
+        );
+        ForwardingAutomationService.automateForwardingConstructWithoutInputAsync(
+          forwardingAutomationInputList
+        );
+      }      
       resolve();
     } catch (error) {
       reject();
@@ -81,10 +125,60 @@ exports.putTcpClientRemoteIpv4Address = function (url, body) {
  * uuid String 
  * no response value expected for this operation
  **/
-exports.putTcpClientRemotePort = function (url, body) {
+exports.putTcpClientRemotePort = function (url, body, uuid) {
   return new Promise(async function (resolve, reject) {
     try {
-      await fileOperation.writeToDatabaseAsync(url, body, false);
+      let isUpdated = await fileOperation.writeToDatabaseAsync(url, body, false);
+      /****************************************************************************************
+       * Prepare attributes to automate forwarding-construct
+       ****************************************************************************************/
+      if(isUpdated){
+        let forwardingAutomationInputList = await prepareForwardingAutomation.OAMLayerRequest(
+          uuid
+        );
+        ForwardingAutomationService.automateForwardingConstructWithoutInputAsync(
+          forwardingAutomationInputList
+        );
+      }      
+      resolve();
+    } catch (error) {
+      reject();
+    }
+  });
+}
+
+
+/**
+ * Configures protocol for addressing remote side
+ *
+ * body Tcpclientinterfaceconfiguration_remoteprotocol_body 
+ * uuid String 
+ * no response value expected for this operation
+ **/
+exports.putTcpClientRemoteProtocol = function (url, body, uuid) {
+  return new Promise(async function (resolve, reject) {
+    try {
+      let value = body["tcp-client-interface-1-0:remote-protocol"];
+      if (value == "tcp-client-interface-1-0:PROTOCOL_TYPE_HTTP") {
+        body["tcp-client-interface-1-0:remote-protocol"] = "HTTP";
+      } else if (value == "tcp-client-interface-1-0:PROTOCOL_TYPE_HTTPS") {
+        body["tcp-client-interface-1-0:remote-protocol"] = "HTTPS";
+      } else {
+        body["tcp-client-interface-1-0:remote-protocol"] = "NOT_YET_DEFINED";
+      }
+      let isUpdated = await fileOperation.writeToDatabaseAsync(url, body, false);
+
+      /****************************************************************************************
+       * Prepare attributes to automate forwarding-construct
+       ****************************************************************************************/
+      if(isUpdated){
+        let forwardingAutomationInputList = await prepareForwardingAutomation.OAMLayerRequest(
+          uuid
+        );
+        ForwardingAutomationService.automateForwardingConstructWithoutInputAsync(
+          forwardingAutomationInputList
+        );
+      }      
       resolve();
     } catch (error) {
       reject();

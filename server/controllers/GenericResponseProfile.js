@@ -1,13 +1,14 @@
 'use strict';
 
-var OperationServer = require('../service/OperationServerService');
+var utils = require('../utils/writer.js');
+var GenericResponseProfile = require('../service/GenericResponseProfileService');
 var responseBuilder = require('onf-core-model-ap/applicationPattern/rest/server/ResponseBuilder');
 var responseCodeEnum = require('onf-core-model-ap/applicationPattern/rest/server/ResponseCode');
 var oamLogService = require('onf-core-model-ap/applicationPattern/services/OamLogService');
 
-module.exports.getOperationServerLifeCycleState = async function getOperationServerLifeCycleState(req, res, next, uuid) {
+module.exports.getGenericResponseProfileDatatype = async function getGenericResponseProfileDatatype (req, res, next, uuid) {
   let responseCode = responseCodeEnum.code.OK;
-  await OperationServer.getOperationServerLifeCycleState(req.url)
+  await GenericResponseProfile.getGenericResponseProfileDatatype(req.url)
     .then(function (response) {
       responseBuilder.buildResponse(res, responseCode, response);
     })
@@ -18,9 +19,9 @@ module.exports.getOperationServerLifeCycleState = async function getOperationSer
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };
 
-module.exports.getOperationServerOperationKey = async function getOperationServerOperationKey(req, res, next, uuid) {
+module.exports.getGenericResponseProfileDescription = async function getGenericResponseProfileDescription (req, res, next, uuid) {
   let responseCode = responseCodeEnum.code.OK;
-  await OperationServer.getOperationServerOperationKey(req.url)
+  await GenericResponseProfile.getGenericResponseProfileDescription(req.url)
     .then(function (response) {
       responseBuilder.buildResponse(res, responseCode, response);
     })
@@ -31,9 +32,9 @@ module.exports.getOperationServerOperationKey = async function getOperationServe
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };
 
-module.exports.getOperationServerOperationName = async function getOperationServerOperationName(req, res, next, uuid) {
+module.exports.getGenericResponseProfileFieldName = async function getGenericResponseProfileFieldName (req, res, next, uuid) {
   let responseCode = responseCodeEnum.code.OK;
-  await OperationServer.getOperationServerOperationName(req.url)
+  await GenericResponseProfile.getGenericResponseProfileFieldName(req.url)
     .then(function (response) {
       responseBuilder.buildResponse(res, responseCode, response);
     })
@@ -44,22 +45,35 @@ module.exports.getOperationServerOperationName = async function getOperationServ
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };
 
-module.exports.putOperationServerLifeCycleState = async function putOperationServerLifeCycleState(req, res, next, body, uuid) {
+module.exports.getGenericResponseProfileOperationName = async function getGenericResponseProfileOperationName (req, res, next, uuid) {
+  let responseCode = responseCodeEnum.code.OK;
+  await GenericResponseProfile.getGenericResponseProfileOperationName(req.url)
+    .then(function (response) {
+      responseBuilder.buildResponse(res, responseCode, response);
+    })
+    .catch(function (response) {
+      responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
+      responseBuilder.buildResponse(res, responseCode, response);
+    });
+  oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
+};
+
+module.exports.getGenericResponseProfileValue = async function getGenericResponseProfileValue (req, res, next, uuid) {
+  let responseCode = responseCodeEnum.code.OK;
+  await GenericResponseProfile.getGenericResponseProfileValue(req.url)
+    .then(function (response) {
+      responseBuilder.buildResponse(res, responseCode, response);
+    })
+    .catch(function (response) {
+      responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
+      responseBuilder.buildResponse(res, responseCode, response);
+    });
+  oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
+};
+
+module.exports.putGenericResponseProfileValue = async function putGenericResponseProfileValue (req, res, next, body, uuid) {
   let responseCode = responseCodeEnum.code.NO_CONTENT;
-  await OperationServer.putOperationServerLifeCycleState(req.url, body, uuid)
-    .then(function (response) {
-      responseBuilder.buildResponse(res, responseCode, response);
-    })
-    .catch(function (response) {
-      responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      responseBuilder.buildResponse(res, responseCode, response);
-    });
-  oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
-};
-
-module.exports.putOperationServerOperationKey = async function putOperationServerOperationKey(req, res, next, body, uuid) {
-  let responseCode = responseCodeEnum.code.NO_CONTENT;
-  await OperationServer.putOperationServerOperationKey(req.url, body, uuid)
+  await GenericResponseProfile.putGenericResponseProfileValue(body, req.url, uuid)
     .then(function (response) {
       responseBuilder.buildResponse(res, responseCode, response);
     })
