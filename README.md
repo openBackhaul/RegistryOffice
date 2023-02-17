@@ -10,7 +10,7 @@ After positive feedback from the TypeApprovalRegister, the RegistryOffice inform
 Its list of applications is always up-to-date, and it is made available to other applications.  
 The RegistryOffice offers services for completely dismantling an application from the application layer.  
 And it broadcasts information about changed TCP/IP addresses and new, backward compatible operations offered by other applications.  
-More detailed documentation can be found [here](./doc/main.md).
+More detailed information can be found [here](./doc/main.md).
 
 ### Relevance
 The RegistryOffice is core element of the application layer running in the live network at Telefonica Germany.
@@ -18,6 +18,7 @@ The RegistryOffice is core element of the application layer running in the live 
 ### Resources
 - [Specification](./spec/)
 - [TestSuite](./testing/)
+- [Documentation](./doc/main.md)
 - [Implementation](./server/)
 
 ### Comments
