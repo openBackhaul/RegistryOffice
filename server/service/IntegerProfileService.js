@@ -1,6 +1,6 @@
 'use strict';
 var fileOperation = require('onf-core-model-ap/applicationPattern/databaseDriver/JSONDriver');
-const IntegerProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/Profile/IntegerProfile');
+const IntegerProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/IntegerProfile');
 
 
 /**
