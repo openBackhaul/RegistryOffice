@@ -31,7 +31,6 @@ http.createServer(app).listen(serverPort, function () {
 
 //setting the path to the database 
 global.databasePath = './database/load.json'
-global.applicationDataFile = './database/AppData.json'
 
 setInterval( MonitorTypeApprovalChannel.MonitorApprovalStatusChannel, 5000);
     
