@@ -5,7 +5,7 @@
 
 
 const fs = require('fs');
-global.applicationDataFile;
+const jsonDriver = require('onf-core-model-ap/applicationPattern/databaseDriver/JSONDriver')
 
 /**
  * @description This method adds an entry to the preceeding-application-information list
@@ -18,6 +18,7 @@ exports.addEntryToPreceedingVersionList = async function (preceedingApplicationN
         let isUpdated = false;
         try {
             if (futureApplicationName != undefined && futureReleaseNumber != undefined) {
+                let applicationDataFile = await jsonDriver.getApplicationDataFile()
                 let applicationData = JSON.parse(fs.readFileSync(applicationDataFile, 'utf8'));
                 let preceedingApplicationInformationList = applicationData["preceeding-application-information"];
                 for (let i = 0; i < preceedingApplicationInformationList.length; i++) {
@@ -81,6 +82,7 @@ exports.getPreceedingApplicationInformation = async function (futureApplicationN
         let preceedingApplication;
         try {
             if (futureApplicationName != undefined && futureReleaseNumber != undefined) {
+                let applicationDataFile = await jsonDriver.getApplicationDataFile()
                 let applicationData = JSON.parse(fs.readFileSync(applicationDataFile, 'utf8'));
                 let preceedingApplicationInformationList = applicationData["preceeding-application-information"];
                 for (let i = 0; i < preceedingApplicationInformationList.length; i++) {
@@ -113,6 +115,7 @@ exports.removePreceedingApplicationInformation = async function (preceedingAppli
         let operationStatus = false;
         try {
             if (preceedingApplicationName != undefined && preceedingReleaseNumber != undefined) {
+                let applicationDataFile = await jsonDriver.getApplicationDataFile()
                 let applicationData = JSON.parse(fs.readFileSync(applicationDataFile, 'utf8'));
                 let preceedingApplicationInformationList = applicationData["preceeding-application-information"];
                 for (let i = 0; i < preceedingApplicationInformationList.length; i++) {
