@@ -89,30 +89,12 @@ exports.getTcpServerLocalPort = function (url) {
  * uuid String 
  * returns inline_response_200_38
  **/
-exports.getTcpServerLocalProtocol = function (url) {
-  return new Promise(async function (resolve, reject) {
-    try {
-      var value = await fileOperation.readFromDatabaseAsync(url);
-      if (value.toUpperCase() == "HTTP") {
-        value = "tcp-server-interface-1-0:PROTOCOL_TYPE_HTTP";
-      } else if (value.toUpperCase() == "HTTPS") {
-        value = "tcp-server-interface-1-0:PROTOCOL_TYPE_HTTPS";
-      } else {
-        value = "tcp-server-interface-1-0:PROTOCOL_TYPE_NOT_YET_DEFINED";
-      }
-      var response = {};
-      response['application/json'] = {
-        "tcp-server-interface-1-0:local-protocol": value
-      };
-      if (Object.keys(response).length > 0) {
-        resolve(response[Object.keys(response)[0]]);
-      } else {
-        resolve();
-      }
-    } catch (error) {
-      reject();
-    }
-  });
+exports.getTcpServerLocalProtocol = async function (url) {
+  var value = await fileOperation.readFromDatabaseAsync(url);
+  var response = {
+    "tcp-server-interface-1-0:local-protocol": value
+  };
+  return response;
 }
 
 
@@ -211,7 +193,6 @@ exports.putTcpServerLocalPort = function (url, body, uuid) {
   });
 }
 
-
 /**
  * Documents Protocol of TcpServer
  *
@@ -219,34 +200,14 @@ exports.putTcpServerLocalPort = function (url, body, uuid) {
  * uuid String 
  * no response value expected for this operation
  **/
-exports.putTcpServerLocalProtocol = function (url, body, uuid) {
-  return new Promise(async function (resolve, reject) {
-    try {
-      let value = body["tcp-server-interface-1-0:local-protocol"];
-      if (value == "tcp-server-interface-1-0:PROTOCOL_TYPE_HTTP") {
-        body["tcp-server-interface-1-0:local-protocol"] = "HTTP";
-      } else if (value == "tcp-server-interface-1-0:PROTOCOL_TYPE_HTTPS") {
-        body["tcp-server-interface-1-0:local-protocol"] = "HTTPS";
-      } else {
-        body["tcp-server-interface-1-0:local-protocol"] = "NOT_YET_DEFINED";
-      }
-      let isUpdated = await fileOperation.writeToDatabaseAsync(url, body, false);
-
-      /****************************************************************************************
-       * Prepare attributes to automate forwarding-construct
-       ****************************************************************************************/
-      if (isUpdated) {
-        let forwardingAutomationInputList = await prepareForwardingAutomation.OAMLayerRequest(
-          uuid
-        );
-        ForwardingAutomationService.automateForwardingConstructWithoutInputAsync(
-          forwardingAutomationInputList
-        );
-      }
-
-      resolve();
-    } catch (error) {
-      reject();
-    }
-  });
+exports.putTcpServerLocalProtocol = async function (url, body, uuid) {
+  let isUpdated = await fileOperation.writeToDatabaseAsync(url, body, false);
+  if (isUpdated) {
+    let forwardingAutomationInputList = await prepareForwardingAutomation.OAMLayerRequest(
+      uuid
+    );
+    ForwardingAutomationService.automateForwardingConstructWithoutInputAsync(
+      forwardingAutomationInputList
+    );
+  }
 }
