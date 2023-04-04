@@ -93,15 +93,20 @@ exports.removeEntryFromMonitorApprovalStatusChannel = async function (applicatio
  */
 exports.MonitorApprovalStatusChannel = async function () {
     try {
-                    let applicationDataFile = await jsonDriver.getApplicationDataFile()
-                    let applicationData = JSON.parse(fs.readFileSync(applicationDataFile, 'utf8'));
-                    let registeredApplicationList = applicationData["application-registration-time"];
-                    for (let i = 0; i < registeredApplicationList.length; i++) {
-                        await CyclicMonitoringProcess(registeredApplicationList[i]);
-                    }
-                } catch (error) {
-                    console.log(error);
-                }
+        let applicationDataFile = await jsonDriver.getApplicationDataFile()
+        if (applicationDataFile !== undefined) {
+            let applicationData = JSON.parse(fs.readFileSync(applicationDataFile, 'utf8'));
+            let registeredApplicationList = applicationData["application-registration-time"];
+            for (let i = 0; i < registeredApplicationList.length; i++) {
+                await CyclicMonitoringProcess(registeredApplicationList[i]);
+            }
+        }
+        else {
+            throw new Error("File Path Does not Exist");
+        }
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 /**
@@ -164,9 +169,9 @@ async function triggerDeregistration(applicationName, releaseNumber) {
              ************************************************************************************/
             let response = await eventDispatcher.dispatchEvent(
                 "ro-2-0-0-op-c-bm-ro-1-0-0-002", {
-                    "application-name": applicationName,
-                    "application-release-number": releaseNumber
-                }
+                "application-name": applicationName,
+                "application-release-number": releaseNumber
+            }
             );
             resolve(response);
         } catch (error) {
