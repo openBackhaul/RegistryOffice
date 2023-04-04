@@ -84,9 +84,9 @@ module.exports.getFileProfileUserName = async function getFileProfileUserName (r
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };
 
-module.exports.putFileProfileFilePath = async function putFileProfileFilePath (req, res, next, body, uuid) {
+module.exports.putFileProfileFilePath = function putFileProfileFilePath (req, res, next, body, uuid) {
   let responseCode = responseCodeEnum.code.NO_CONTENT;
-  await FileProfile.putFileProfileFilePath(body, req.url)
+  FileProfile.putFileProfileFilePath(body, req.url)
     .then(function (response) {
       responseBuilder.buildResponse(res, responseCode, response);
     })

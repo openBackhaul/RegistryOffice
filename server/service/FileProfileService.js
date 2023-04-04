@@ -1,6 +1,6 @@
 'use strict';
 var fileOperation = require('onf-core-model-ap/applicationPattern/databaseDriver/JSONDriver');
-
+var fs = require('fs');
 
 /**
  * Returns the description of the file
@@ -153,20 +153,25 @@ exports.getFileProfileUserName = function(url) {
 
 
 /**
- * Configures path of the file
+ * Configures path of the file, copies the contents of previous file
+ * to the new file (it creates it, when it doesn't exist).
  *
  * body Fileprofileconfiguration_filepath_body 
- * uuid String 
+ * url String
  * no response value expected for this operation
  **/
-exports.putFileProfileFilePath = function(body, url) {
-  return new Promise(async function (resolve, reject) {
-    try {
-      await fileOperation.writeToDatabaseAsync(url, body, false);
-      resolve();
-    } catch (error) {}
-    reject();
-  });
+exports.putFileProfileFilePath = async function(body, url) {
+  let oldPath = await fileOperation.readFromDatabaseAsync(url);
+  let newPath = body["file-profile-1-0:file-path"];
+  if (oldPath !== newPath) {
+    fs.copyFile(oldPath, newPath, (err) => {
+      if (err) throw err;
+    });
+    await fileOperation.writeToDatabaseAsync(url, newPath, false);
+    fs.unlink(oldPath, function (err) {
+      if (err) throw err;
+    });
+  }
 }
 
 
