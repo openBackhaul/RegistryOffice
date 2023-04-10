@@ -104,6 +104,11 @@ exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, 
         let isAddressUpdated = await tcpClientInterface.setRemoteAddressAsync(newReleaseTcpClientUuid, applicationAddress);
         let isPortUpdated = await tcpClientInterface.setRemotePortAsync(newReleaseTcpClientUuid, applicationPort);
 
+        let serverAddress = await tcpServerInterface.getLocalAddressOfTheProtocol(applicationProtocol);
+        let serverPort = await tcpServerInterface.getLocalPortOfTheProtocol(applicationProtocol);
+        if (applicationAddress === serverAddress || applicationPort === serverPort) {
+          isdataTransferRequired = false;
+        }
         if (isProtocolUpdated || isAddressUpdated || isPortUpdated) {
           let configurationStatus = new ConfigurationStatus(
             newReleaseTcpClientUuid,

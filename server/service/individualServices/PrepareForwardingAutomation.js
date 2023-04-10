@@ -131,6 +131,7 @@ exports.updateApprovalStatusApproved = function (logicalTerminationPointconfigur
 
             embedYourselfRequestBody.registryOfficeAddress = await tcpServerInterface.getLocalAddress();
             embedYourselfRequestBody.registryOfficePort = await tcpServerInterface.getLocalPort();
+            embedYourselfRequestBody.registryOfficeProtocol = await tcpServerInterface.getLocalProtocol()
 
             //What is the preceeding release number and application for the embedding one
             let preceedingApplicationName = applicationName;
