@@ -106,7 +106,7 @@ exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, 
 
         let serverAddress = await tcpServerInterface.getLocalAddressOfTheProtocol(applicationProtocol);
         let serverPort = await tcpServerInterface.getLocalPortOfTheProtocol(applicationProtocol);
-        if (applicationAddress === serverAddress || applicationPort === serverPort) {
+        if (JSON.stringify(applicationAddress) == JSON.stringify(serverAddress) && applicationPort === serverPort) {
           isdataTransferRequired = false;
         }
         if (isProtocolUpdated || isAddressUpdated || isPortUpdated) {
