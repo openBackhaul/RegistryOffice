@@ -31,8 +31,12 @@ http.createServer(app).listen(serverPort, function () {
 
 //setting the path to the database 
 global.databasePath = './database/load.json'
-
-setInterval( MonitorTypeApprovalChannel.MonitorApprovalStatusChannel, 5000);
+let getWaitTimeApproveValue = MonitorTypeApprovalChannel.getWaitTimeApproveValue()
+getWaitTimeApproveValue.then((waitTimeApproveValue)=>{
+    setInterval( MonitorTypeApprovalChannel.MonitorApprovalStatusChannel, waitTimeApproveValue);
+}).catch((error)=>{
+    console.error(error)
+})
     
 
 

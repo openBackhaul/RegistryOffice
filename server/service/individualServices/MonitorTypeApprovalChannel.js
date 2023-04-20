@@ -13,6 +13,8 @@ const eventDispatcher = require('onf-core-model-ap/applicationPattern/rest/clien
 const profile = require('onf-core-model-ap/applicationPattern/onfModel/models/Profile');
 const fileProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/FileProfile')
 const jsonDriver = require('onf-core-model-ap/applicationPattern/databaseDriver/JSONDriver')
+const applicationProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/ApplicationProfile');
+
 
 /**
  * @description This method adds an entry to the monitoring list
@@ -179,3 +181,24 @@ async function triggerDeregistration(applicationName, releaseNumber) {
         }
     });
 }
+
+exports.getWaitTimeApproveValue = async function(){
+    return new Promise(async function (resolve, reject) {
+        try{
+            let responseProfileUuid = await profile.getUuidListAsync(applicationProfile.profileNameEnum.INTEGER_PROFILE);
+            for (let responseProfileUuidIndex = 0; responseProfileUuidIndex < responseProfileUuid.length; responseProfileUuidIndex++) {
+                let uuid = responseProfileUuid[responseProfileUuidIndex];
+                let getMinimumAsync = await IntegerProfile.getMinimumAsync(uuid)
+                let getMaximumAsync = await IntegerProfile.getMaximumAsync(uuid)
+                let getOperation = await IntegerProfile.getIntegerValueAsync(uuid)
+                if(getOperation >= getMinimumAsync && getOperation <= getMaximumAsync){
+                    resolve(getOperation)
+                }else{
+                    throw "waitTimeToApprove not found"
+                }
+            }
+        } catch (error) {
+            reject(error);
+        }
+    })
+ }
