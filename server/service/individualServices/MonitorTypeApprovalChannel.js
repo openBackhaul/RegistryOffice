@@ -11,9 +11,7 @@ const ForwardingDomain = require('onf-core-model-ap/applicationPattern/onfModel/
 const IntegerProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/IntegerProfile');
 const eventDispatcher = require('onf-core-model-ap/applicationPattern/rest/client/eventDispatcher');
 const profile = require('onf-core-model-ap/applicationPattern/onfModel/models/Profile');
-const fileProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/FileProfile')
-const jsonDriver = require('onf-core-model-ap/applicationPattern/databaseDriver/JSONDriver')
-
+const fileProfileOperation = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/FileProfile')
 /**
  * @description This method adds an entry to the monitoring list
  * @param {string} applicationName name of the application
@@ -24,7 +22,7 @@ exports.AddEntryToMonitorApprovalStatusChannel = async function (applicationName
         let operationStatus = false;
         try {
             if (applicationName != undefined && releaseNumber != undefined) {
-                let applicationDataFile = await jsonDriver.getApplicationDataFile()
+                let applicationDataFile = await fileProfileOperation.getApplicationDataFileContent()
                 let applicationData = JSON.parse(fs.readFileSync(applicationDataFile, 'utf8'));
                 let registeredApplicationList = applicationData["application-registration-time"];
                 for (let i = 0; i < registeredApplicationList.length; i++) {
@@ -65,7 +63,7 @@ exports.removeEntryFromMonitorApprovalStatusChannel = async function (applicatio
         let operationStatus = false;
         try {
             if (applicationName != undefined && releaseNumber != undefined) {
-                let applicationDataFile = await jsonDriver.getApplicationDataFile()
+                let applicationDataFile = await fileProfileOperation.getApplicationDataFileContent()
                 let applicationData = JSON.parse(fs.readFileSync(applicationDataFile, 'utf8'));
                 let registeredApplicationList = applicationData["application-registration-time"];
                 for (let i = 0; i < registeredApplicationList.length; i++) {
@@ -93,7 +91,7 @@ exports.removeEntryFromMonitorApprovalStatusChannel = async function (applicatio
  */
 exports.MonitorApprovalStatusChannel = async function () {
     try {
-        let applicationDataFile = await jsonDriver.getApplicationDataFile()
+        let applicationDataFile = await fileProfileOperation.getApplicationDataFileContent()
         if (applicationDataFile !== undefined) {
             let applicationData = JSON.parse(fs.readFileSync(applicationDataFile, 'utf8'));
             let registeredApplicationList = applicationData["application-registration-time"];
