@@ -3032,7 +3032,7 @@
               "ro-2-0-1-op-c-im-cc-1-0-0-002"
             ],
             "server-ltp": [
-              "ro-2-0-1-tcp-c-im-cc-1-0-0-000"
+              "ro-2-0-1-tcp-c-cc-1-0-0-000"
             ],
             "layer-protocol": [
               {
@@ -3048,7 +3048,7 @@
             ]
           },
           {
-            "uuid": "ro-2-0-1-tcp-c-im-cc-1-0-0-000",
+            "uuid": "ro-2-0-1-tcp-c-cc-1-0-0-000",
             "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
             "client-ltp": [
               "ro-2-0-1-http-c-cc-1-0-0-000"
