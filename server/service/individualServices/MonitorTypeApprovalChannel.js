@@ -25,9 +25,6 @@ exports.AddEntryToMonitorApprovalStatusChannel = async function (applicationName
         try {
             if (applicationName != undefined && releaseNumber != undefined) {
                 let applicationDataFile = await jsonDriver.getApplicationDataFile()
-                if(applicationDataFile == undefined){
-                    throw new Error("file does not exist ")
-                 }
                 let applicationData = JSON.parse(fs.readFileSync(applicationDataFile, 'utf8'));
                 let registeredApplicationList = applicationData["application-registration-time"];
                 for (let i = 0; i < registeredApplicationList.length; i++) {
@@ -70,9 +67,6 @@ exports.removeEntryFromMonitorApprovalStatusChannel = async function (applicatio
         try {
             if (applicationName != undefined && releaseNumber != undefined) {
                 let applicationDataFile = await jsonDriver.getApplicationDataFile()
-                if(applicationDataFile == undefined){
-                    throw new Error("file does not exist ")
-                 }
                 let applicationData = JSON.parse(fs.readFileSync(applicationDataFile, 'utf8'));
                 let registeredApplicationList = applicationData["application-registration-time"];
                 for (let i = 0; i < registeredApplicationList.length; i++) {
@@ -102,16 +96,12 @@ exports.removeEntryFromMonitorApprovalStatusChannel = async function (applicatio
 exports.MonitorApprovalStatusChannel = async function () {
     try {
         let applicationDataFile = await jsonDriver.getApplicationDataFile()
-        if (applicationDataFile !== undefined) {
             let applicationData = JSON.parse(fs.readFileSync(applicationDataFile, 'utf8'));
             let registeredApplicationList = applicationData["application-registration-time"];
             for (let i = 0; i < registeredApplicationList.length; i++) {
                 await CyclicMonitoringProcess(registeredApplicationList[i]);
             }
-        }
-        else {
-            throw new Error("File Path Does not Exist");
-        }
+        
     } catch (error) {
         console.log(error);
     }

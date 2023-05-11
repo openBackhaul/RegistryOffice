@@ -19,9 +19,6 @@ exports.addEntryToPreceedingVersionList = async function (preceedingApplicationN
         try {
             if (futureApplicationName != undefined && futureReleaseNumber != undefined) {
                 let applicationDataFile = await jsonDriver.getApplicationDataFile()
-               if(applicationDataFile == undefined){
-                throw new Error("file does not exist ")
-               }
                 let applicationData = JSON.parse(fs.readFileSync(applicationDataFile, 'utf8'));
                 let preceedingApplicationInformationList = applicationData["preceeding-application-information"];
                 for (let i = 0; i < preceedingApplicationInformationList.length; i++) {
@@ -87,9 +84,6 @@ exports.getPreceedingApplicationInformation = async function (futureApplicationN
         try {
             if (futureApplicationName != undefined && futureReleaseNumber != undefined) {
                 let applicationDataFile = await jsonDriver.getApplicationDataFile()
-                 if(applicationDataFile == undefined){
-                    throw new Error("file does not exist ")
-                 }
                 let applicationData = JSON.parse(fs.readFileSync(applicationDataFile, 'utf8'));
                 let preceedingApplicationInformationList = applicationData["preceeding-application-information"];
                 for (let i = 0; i < preceedingApplicationInformationList.length; i++) {
@@ -124,9 +118,6 @@ exports.removePreceedingApplicationInformation = async function (preceedingAppli
         try {
             if (preceedingApplicationName != undefined && preceedingReleaseNumber != undefined) {
                 let applicationDataFile = await jsonDriver.getApplicationDataFile()
-                if(applicationDataFile == undefined){
-                    throw new Error("file does not exist ")
-                 }
                 let applicationData = JSON.parse(fs.readFileSync(applicationDataFile, 'utf8'));
                 let preceedingApplicationInformationList = applicationData["preceeding-application-information"];
                 for (let i = 0; i < preceedingApplicationInformationList.length; i++) {
