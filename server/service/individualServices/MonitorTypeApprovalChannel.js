@@ -11,11 +11,8 @@ const ForwardingDomain = require('onf-core-model-ap/applicationPattern/onfModel/
 const IntegerProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/IntegerProfile');
 const eventDispatcher = require('onf-core-model-ap/applicationPattern/rest/client/eventDispatcher');
 const profile = require('onf-core-model-ap/applicationPattern/onfModel/models/Profile');
-const fileProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/FileProfile')
-const jsonDriver = require('onf-core-model-ap/applicationPattern/databaseDriver/JSONDriver')
 const applicationProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/ApplicationProfile');
-
-
+const fileProfileOperation = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/FileProfile')
 /**
  * @description This method adds an entry to the monitoring list
  * @param {string} applicationName name of the application
@@ -26,7 +23,7 @@ exports.AddEntryToMonitorApprovalStatusChannel = async function (applicationName
         let operationStatus = false;
         try {
             if (applicationName != undefined && releaseNumber != undefined) {
-                let applicationDataFile = await jsonDriver.getApplicationDataFile()
+                let applicationDataFile = await fileProfileOperation.getApplicationDataFileContent()
                 let applicationData = JSON.parse(fs.readFileSync(applicationDataFile, 'utf8'));
                 let registeredApplicationList = applicationData["application-registration-time"];
                 for (let i = 0; i < registeredApplicationList.length; i++) {
@@ -67,7 +64,7 @@ exports.removeEntryFromMonitorApprovalStatusChannel = async function (applicatio
         let operationStatus = false;
         try {
             if (applicationName != undefined && releaseNumber != undefined) {
-                let applicationDataFile = await jsonDriver.getApplicationDataFile()
+                let applicationDataFile = await fileProfileOperation.getApplicationDataFileContent()
                 let applicationData = JSON.parse(fs.readFileSync(applicationDataFile, 'utf8'));
                 let registeredApplicationList = applicationData["application-registration-time"];
                 for (let i = 0; i < registeredApplicationList.length; i++) {
@@ -95,7 +92,7 @@ exports.removeEntryFromMonitorApprovalStatusChannel = async function (applicatio
  */
 exports.MonitorApprovalStatusChannel = async function () {
     try {
-        let applicationDataFile = await jsonDriver.getApplicationDataFile()
+        let applicationDataFile = await fileProfileOperation.getApplicationDataFileContent()
         if (applicationDataFile !== undefined) {
             let applicationData = JSON.parse(fs.readFileSync(applicationDataFile, 'utf8'));
             let registeredApplicationList = applicationData["application-registration-time"];
@@ -188,14 +185,8 @@ exports.getWaitTimeApproveValue = async function(){
             let responseProfileUuid = await profile.getUuidListAsync(applicationProfile.profileNameEnum.INTEGER_PROFILE);
             for (let responseProfileUuidIndex = 0; responseProfileUuidIndex < responseProfileUuid.length; responseProfileUuidIndex++) {
                 let uuid = responseProfileUuid[responseProfileUuidIndex];
-                let getMinimumAsync = await IntegerProfile.getMinimumAsync(uuid)
-                let getMaximumAsync = await IntegerProfile.getMaximumAsync(uuid)
-                let getOperation = await IntegerProfile.getIntegerValueAsync(uuid)
-                if(getOperation >= getMinimumAsync && getOperation <= getMaximumAsync){
-                    resolve(getOperation)
-                }else{
-                    throw "waitTimeToApprove not found"
-                }
+                let integerValue = await IntegerProfile.getIntegerValueAsync(uuid)
+                resolve(integerValue)
             }
         } catch (error) {
             reject(error);
