@@ -74,11 +74,13 @@ exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, 
        * Prepare logicalTerminatinPointConfigurationInput object to 
        * configure logical-termination-point
        ****************************************************************************************/
-
+      const oldReleaseAppNameAndUuidFromForwarding = await resolveApplicationNameAndHttpClientLtpUuidFromForwardingName('PromptForEmbeddingCausesRequestForBequeathingData');
+      if(oldReleaseAppNameAndUuidFromForwarding.applicationName === "OldRelease"){
+        throw new Error(`/v1/bequeath-your-data-and-die could not be addressed as the client application name is still OldRelease`)
+      }
       const appNameAndUuidFromForwarding = await resolveApplicationNameAndHttpClientLtpUuidFromForwardingName('PromptForBequeathingDataCausesNewApplicationBeingRequestedToInquireForApplicationTypeApprovals');
       if (appNameAndUuidFromForwarding?.httpClientLtpUuid == undefined) {
-        reject(new Error(`The new-release ${applicationName} was not found.`));
-        return;
+        throw new Error(`The new-release ${applicationName} was not found.`)
       }
 
       let isdataTransferRequired = true;
