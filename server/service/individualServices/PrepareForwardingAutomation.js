@@ -193,8 +193,9 @@ exports.updateApprovalStatusApproved = function (logicalTerminationPointconfigur
             let tcpClientUuid = (await logicalTerminationPoint.getServerLtpListAsync(httpClientUuid))[0];
             approvalNotificationRequestBody.applicationName = applicationName;
             approvalNotificationRequestBody.releaseNumber = releaseNumber;
-            approvalNotificationRequestBody.applicationAddress = await tcpClientInterface.getRemoteAddressAsync(tcpClientUuid);
-            approvalNotificationRequestBody.applicationPort = await tcpClientInterface.getRemotePortAsync(tcpClientUuid);
+            approvalNotificationRequestBody.protocol = await tcpClientInterface.getRemoteProtocolAsync(tcpClientUuid);
+            approvalNotificationRequestBody.address = await tcpClientInterface.getRemoteAddressAsync(tcpClientUuid);
+            approvalNotificationRequestBody.port = await tcpClientInterface.getRemotePortAsync(tcpClientUuid);
             approvalNotificationRequestBody = onfFormatter.modifyJsonObjectKeysToKebabCase(approvalNotificationRequestBody);
             forwardingAutomation = new forwardingConstructAutomationInput(
                 approvalNotificationForwardingName,
