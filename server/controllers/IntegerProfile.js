@@ -78,7 +78,7 @@ module.exports.putIntegerProfileIntegerValue = async function putIntegerProfileI
       responseBuilder.buildResponse(res, responseCode, response);
     })
     .catch(function (response) {
-       if(response == "Integer value must between maximum and minimun value"){
+       if(response == "RangeError"){
         responseCode = responseCodeEnum.code.BAD_REQUEST;
       }
       else{
