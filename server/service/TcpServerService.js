@@ -140,7 +140,8 @@ exports.putTcpServerDescription = function (url, body, uuid) {
 exports.putTcpServerLocalAddress = function (url, body, uuid) {
   return new Promise(async function (resolve, reject) {
     try {
-      let isUpdated = await tcpServerInterface.setLocalAddressAsync(uuid, body["tcp-server-interface-1-0:local-address"]);
+      let localAddress = {"local-address" : body["tcp-server-interface-1-0:local-address"]}
+      let isUpdated = await tcpServerInterface.setLocalAddressAsync(uuid, localAddress);
       /****************************************************************************************
        * Prepare attributes to automate forwarding-construct
        ****************************************************************************************/
