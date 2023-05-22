@@ -143,9 +143,13 @@ exports.putIntegerProfileIntegerValue = function(body, url, uuid) {
       let value = body["integer-profile-1-0:integer-value"];
       if(value <= maximumIntegerValue && value >= minimumIntegerValue){
         await fileOperation.writeToDatabaseAsync(url, body, false);
-      }      
+      } 
+      else{
+        throw new Error("RangeError")
+      }     
       resolve();
-    } catch (error) {}
-    reject();
+    } catch (error) {
+      reject(error.message);
+    }
   });
 }
