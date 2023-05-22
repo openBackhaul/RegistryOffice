@@ -145,7 +145,7 @@ exports.putIntegerProfileIntegerValue = function(body, url, uuid) {
         await fileOperation.writeToDatabaseAsync(url, body, false);
       } 
       else{
-        throw new Error("Integer value must between maximum and minimun value")
+        throw new Error("RangeError")
       }     
       resolve();
     } catch (error) {
