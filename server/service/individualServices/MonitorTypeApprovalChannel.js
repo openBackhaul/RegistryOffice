@@ -11,6 +11,7 @@ const ForwardingDomain = require('onf-core-model-ap/applicationPattern/onfModel/
 const IntegerProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/IntegerProfile');
 const eventDispatcher = require('onf-core-model-ap/applicationPattern/rest/client/eventDispatcher');
 const profile = require('onf-core-model-ap/applicationPattern/onfModel/models/Profile');
+const applicationProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/ApplicationProfile');
 const fileProfileOperation = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/FileProfile')
 /**
  * @description This method adds an entry to the monitoring list
@@ -177,3 +178,18 @@ async function triggerDeregistration(applicationName, releaseNumber) {
         }
     });
 }
+
+exports.getWaitTimeApproveValue = async function(){
+    return new Promise(async function (resolve, reject) {
+        try{
+            let responseProfileUuid = await profile.getUuidListAsync(applicationProfile.profileNameEnum.INTEGER_PROFILE);
+            for (let responseProfileUuidIndex = 0; responseProfileUuidIndex < responseProfileUuid.length; responseProfileUuidIndex++) {
+                let uuid = responseProfileUuid[responseProfileUuidIndex];
+                let integerValue = await IntegerProfile.getIntegerValueAsync(uuid)
+                resolve(integerValue)
+            }
+        } catch (error) {
+            reject(error);
+        }
+    })
+ }
