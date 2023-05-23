@@ -78,7 +78,13 @@ module.exports.putIntegerProfileIntegerValue = async function putIntegerProfileI
       responseBuilder.buildResponse(res, responseCode, response);
     })
     .catch(function (response) {
-      responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
+       if(response == "RangeError"){
+        responseCode = responseCodeEnum.code.BAD_REQUEST;
+      }
+      else{
+        responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
+      }
+
       responseBuilder.buildResponse(res, responseCode, response);
     });
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);

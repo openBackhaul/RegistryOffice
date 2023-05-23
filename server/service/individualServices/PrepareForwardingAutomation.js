@@ -29,7 +29,7 @@ exports.registerApplication = function (logicalTerminationPointconfigurationStat
             let InquiryForApprovalContext;
             let InquiryForApprovalRequestBody = {};
             InquiryForApprovalRequestBody.applicationName = applicationName;
-            InquiryForApprovalRequestBody.applicationReleaseNumber = applicationReleaseNumber;
+            InquiryForApprovalRequestBody.releaseNumber = applicationReleaseNumber;
             InquiryForApprovalRequestBody = onfFormatter.modifyJsonObjectKeysToKebabCase(InquiryForApprovalRequestBody);
             let forwardingAutomation = new forwardingConstructAutomationInput(
                 InquiryForApprovalForwardingName,
@@ -72,7 +72,7 @@ exports.deregisterApplication = function (logicalTerminationPointconfigurationSt
             let deregistrationNotificationContext;
             let deregistrationNotificationRequestBody = {};
             deregistrationNotificationRequestBody.applicationName = applicationName;
-            deregistrationNotificationRequestBody.applicationReleaseNumber = applicationReleaseNumber;
+            deregistrationNotificationRequestBody.releaseNumber = applicationReleaseNumber;
             deregistrationNotificationRequestBody = onfFormatter.modifyJsonObjectKeysToKebabCase(deregistrationNotificationRequestBody);
             let forwardingAutomation = new forwardingConstructAutomationInput(
                 deregistrationNotificationForwardingName,
@@ -128,9 +128,13 @@ exports.updateApprovalStatusApproved = function (logicalTerminationPointconfigur
 
             let deregistrationOperationUuid = controlConstructUuid + "-op-s-is-002";
             embedYourselfRequestBody.deregistrationOperation = await operationServerInterface.getOperationNameAsync(deregistrationOperationUuid);
-
-            embedYourselfRequestBody.registryOfficeAddress = await tcpServerInterface.getLocalAddress();
+            
+            let registryOfficeAddress = await tcpServerInterface.getLocalAddress();
+            embedYourselfRequestBody.registryOfficeAddress = {
+                "ip-address" : registryOfficeAddress
+            }
             embedYourselfRequestBody.registryOfficePort = await tcpServerInterface.getLocalPort();
+            embedYourselfRequestBody.registryOfficeProtocol = await tcpServerInterface.getLocalProtocol()
 
             //What is the preceeding release number and application for the embedding one
             let preceedingApplicationName = applicationName;
@@ -188,7 +192,7 @@ exports.updateApprovalStatusApproved = function (logicalTerminationPointconfigur
             let httpClientUuid = await httpClientInterface.getHttpClientUuidAsync(applicationName, releaseNumber)
             let tcpClientUuid = (await logicalTerminationPoint.getServerLtpListAsync(httpClientUuid))[0];
             approvalNotificationRequestBody.applicationName = applicationName;
-            approvalNotificationRequestBody.applicationReleaseNumber = releaseNumber;
+            approvalNotificationRequestBody.releaseNumber = releaseNumber;
             approvalNotificationRequestBody.applicationAddress = await tcpClientInterface.getRemoteAddressAsync(tcpClientUuid);
             approvalNotificationRequestBody.applicationPort = await tcpClientInterface.getRemotePortAsync(tcpClientUuid);
             approvalNotificationRequestBody = onfFormatter.modifyJsonObjectKeysToKebabCase(approvalNotificationRequestBody);
@@ -234,7 +238,7 @@ exports.updateApprovalStatusBarred = function (logicalTerminationPointconfigurat
             let withdrawnApprovalNotificationContext;
             let withdrawnApprovalNotificationRequestBody = {};
             withdrawnApprovalNotificationRequestBody.applicationName = applicationName;
-            withdrawnApprovalNotificationRequestBody.applicationReleaseNumber = releaseNumber;
+            withdrawnApprovalNotificationRequestBody.releaseNumber = releaseNumber;
             withdrawnApprovalNotificationRequestBody = onfFormatter.modifyJsonObjectKeysToKebabCase(withdrawnApprovalNotificationRequestBody);
             let forwardingAutomation = new forwardingConstructAutomationInput(
                 withdrawnApprovalNotificationForwardingName,
