@@ -47,6 +47,7 @@ exports.AddEntryToMonitorApprovalStatusChannel = async function (applicationName
                     operationStatus = true;
                 }
             }
+        
             resolve(operationStatus);
         } catch (error) {
             reject(error);
@@ -78,6 +79,7 @@ exports.removeEntryFromMonitorApprovalStatusChannel = async function (applicatio
                     }
                 }
             }
+        
             resolve(operationStatus);
         } catch (error) {
             reject(error);
@@ -92,17 +94,14 @@ exports.removeEntryFromMonitorApprovalStatusChannel = async function (applicatio
  */
 exports.MonitorApprovalStatusChannel = async function () {
     try {
+
         let applicationDataFile = await fileProfileOperation.getApplicationDataFileContent()
-        if (applicationDataFile !== undefined) {
             let applicationData = JSON.parse(fs.readFileSync(applicationDataFile, 'utf8'));
             let registeredApplicationList = applicationData["application-registration-time"];
             for (let i = 0; i < registeredApplicationList.length; i++) {
                 await CyclicMonitoringProcess(registeredApplicationList[i]);
             }
-        }
-        else {
-            throw new Error("File Path Does not Exist");
-        }
+        
     } catch (error) {
         console.log(error);
     }

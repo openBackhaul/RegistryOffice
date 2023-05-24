@@ -63,6 +63,7 @@ exports.addEntryToPreceedingVersionList = async function (preceedingApplicationN
                     isUpdated = true;
                 }
             }
+        
             resolve(isUpdated);
         } catch (error) {
             reject(error);
@@ -97,6 +98,7 @@ exports.getPreceedingApplicationInformation = async function (futureApplicationN
                     }
                 }
             }
+        
             resolve(preceedingApplication);
         } catch (error) {
             reject(error);
@@ -128,6 +130,7 @@ exports.removePreceedingApplicationInformation = async function (preceedingAppli
                     }
                 }
             }
+        
             resolve(operationStatus);
         } catch (error) {
             reject(error);
