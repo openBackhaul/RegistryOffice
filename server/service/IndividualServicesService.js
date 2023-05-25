@@ -1045,35 +1045,34 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
       let embeddingOperationName;
       let httpClientUuid = await httpClientInterface.getHttpClientUuidAsync(applicationName,
         releaseNumber);
-
-      /****************************************************************************************
-       * find the operation client uuid for the operations "update-client" and 'update-operation-client'
-       * configure logical-termination-point
-       ****************************************************************************************/
-      let operationClientUuidList = await LogicalTerminationPoint.getClientLtpListAsync(httpClientUuid);
-      for (let i = 0; i < operationClientUuidList.length; i++) {
-        let operationClientUuid = operationClientUuidList[i];
-        let apiSegment = getApiSegmentOfOperationClient(operationClientUuid);
-        if (apiSegment == "im") {
-          if (operationClientUuid.endsWith("001")) {
-            updateClientOperationName = await OperationClientInterface.getOperationNameAsync(operationClientUuid);
-          } else if (operationClientUuid.endsWith("002")) {
-            updateOperationClientOperationName = await OperationClientInterface.getOperationNameAsync(operationClientUuid);
-          } else if (operationClientUuid.endsWith("000")) {
-            embeddingOperationName = await OperationClientInterface.getOperationNameAsync(operationClientUuid);
+      if (httpClientUuid) {
+        /****************************************************************************************
+         * find the operation client uuid for the operations "update-client" and 'update-operation-client'
+         * configure logical-termination-point
+         ****************************************************************************************/
+        let operationClientUuidList = await LogicalTerminationPoint.getClientLtpListAsync(httpClientUuid);
+        for (let i = 0; i < operationClientUuidList.length; i++) {
+          let operationClientUuid = operationClientUuidList[i];
+          let apiSegment = getApiSegmentOfOperationClient(operationClientUuid);
+          if (apiSegment == "im") {
+            if (operationClientUuid.endsWith("001")) {
+              updateClientOperationName = await OperationClientInterface.getOperationNameAsync(operationClientUuid);
+            } else if (operationClientUuid.endsWith("002")) {
+              updateOperationClientOperationName = await OperationClientInterface.getOperationNameAsync(operationClientUuid);
+            } else if (operationClientUuid.endsWith("000")) {
+              embeddingOperationName = await OperationClientInterface.getOperationNameAsync(operationClientUuid);
+            }
           }
         }
-      }
 
-      /****************************************************************************************
-       * Prepare attributes to configure forwarding-construct
-       * If the approval status is approved , then create forwarding construct for update-operation-client and update-client
-       * If the approval status is not barred , check if any fc-port created, if so delete them 
-       ****************************************************************************************/
-      let forwardingConstructConfigurationStatus;
+        /****************************************************************************************
+         * Prepare attributes to configure forwarding-construct
+         * If the approval status is approved , then create forwarding construct for update-operation-client and update-client
+         * If the approval status is not barred , check if any fc-port created, if so delete them 
+         ****************************************************************************************/
+        let forwardingConstructConfigurationStatus;
 
-      if (httpClientUuid) {
-        let operationClientUuidList = await logicalTerminationPoint.getClientLtpListAsync(httpClientUuid);
+        operationClientUuidList = await logicalTerminationPoint.getClientLtpListAsync(httpClientUuid);
         let operationListForConfiguration = [];
         let forwardingConfigurationInputList;
         if (operationClientUuidList) {
