@@ -129,10 +129,7 @@ exports.updateApprovalStatusApproved = function (logicalTerminationPointconfigur
             let deregistrationOperationUuid = controlConstructUuid + "-op-s-is-002";
             embedYourselfRequestBody.deregistrationOperation = await operationServerInterface.getOperationNameAsync(deregistrationOperationUuid);
             
-            let registryOfficeAddress = await tcpServerInterface.getLocalAddress();
-            embedYourselfRequestBody.registryOfficeAddress = {
-                "ip-address" : registryOfficeAddress
-            }
+            embedYourselfRequestBody.registryOfficeAddress =  await tcpServerInterface.getLocalAddressForForwarding();
             embedYourselfRequestBody.registryOfficePort = await tcpServerInterface.getLocalPort();
             embedYourselfRequestBody.registryOfficeProtocol = await tcpServerInterface.getLocalProtocol()
 
