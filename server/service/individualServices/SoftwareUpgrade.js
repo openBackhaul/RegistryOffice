@@ -232,7 +232,7 @@ async function promptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredAp
                             httpClientUuid
                         );
                         if (clientUpdateOperationName == undefined) {
-                            embeddingOperationName = "/v1/update-client"
+                            clientUpdateOperationName = "/v1/update-client"
                         }
 
                         operationClientUpdateOperation = await resolveOperationNameForAHttpClientFromForwardingName(
@@ -240,7 +240,7 @@ async function promptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredAp
                             httpClientUuid
                         );
                         if (operationClientUpdateOperation == undefined) {
-                            embeddingOperationName = "/v1/update-operation-client"
+                            operationClientUpdateOperation = "/v1/update-operation-client"
                         }
 
                         /******************************************************************************************
