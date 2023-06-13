@@ -1112,6 +1112,8 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
                 operationServerName,
                 forwardingConfigurationInputList
               );
+              await MonitorTypeApprovalChannel.removeEntryFromMonitorApprovalStatusChannel(applicationName, releaseNumber);
+              await ApplicationPreceedingVersion.removeEntryFromPrecedingVersionList(applicationName, releaseNumber);
             }
 
           }
