@@ -46,6 +46,7 @@ const LogicalTerminationPoint = require('onf-core-model-ap/applicationPattern/on
 const OperationClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/OperationClientInterface');
 
 const genericRepresentation = require('onf-core-model-ap-bs/basicServices/GenericRepresentation');
+const BadRequestHttpException = require('onf-core-model-ap/applicationPattern/rest/server/HttpException');
 /**
  * Initiates process of embedding a new release
  *
@@ -247,7 +248,7 @@ exports.inquireApplicationTypeApprovals = function (body, user, originator, xCor
 
       const appNameAndUuidFromForwarding = await resolveApplicationNameAndHttpClientLtpUuidFromForwardingName('RegistrationCausesInquiryForApplicationTypeApproval');
       if (appNameAndUuidFromForwarding?.applicationName !== applicationName) {
-        reject(new Error(`The approval-application ${applicationName} was not found.`));
+        reject(new BadRequestHttpException(`The approval-application ${applicationName} was not found.`));
         return;
       }
 
