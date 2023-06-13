@@ -25,7 +25,7 @@ module.exports.bequeathYourDataAndDie = async function bequeathYourDataAndDie(re
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
-  } catch (error) {}
+  } catch (error) { }
 };
 
 module.exports.deregisterApplication = async function deregisterApplication(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
@@ -46,7 +46,7 @@ module.exports.deregisterApplication = async function deregisterApplication(req,
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
-  } catch (error) {}
+  } catch (error) { }
 };
 
 module.exports.inquireApplicationTypeApprovals = async function inquireApplicationTypeApprovals(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
@@ -67,7 +67,7 @@ module.exports.inquireApplicationTypeApprovals = async function inquireApplicati
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
-  } catch (error) {}
+  } catch (error) { }
 };
 
 
@@ -89,7 +89,7 @@ module.exports.listApplications = async function listApplications(req, res, next
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
-  } catch (error) {}
+  } catch (error) { }
 };
 
 module.exports.listApplicationsInGenericRepresentation = async function listApplicationsInGenericRepresentation(req, res, next, user, originator, xCorrelator, traceIndicator, customerJourney) {
@@ -110,7 +110,7 @@ module.exports.listApplicationsInGenericRepresentation = async function listAppl
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
-  } catch (error) {}
+  } catch (error) { }
 };
 
 module.exports.notifyApprovals = async function notifyApprovals(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
@@ -131,7 +131,7 @@ module.exports.notifyApprovals = async function notifyApprovals(req, res, next, 
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
-  } catch (error) {}
+  } catch (error) { }
 };
 
 module.exports.notifyDeregistrations = async function notifyDeregistrations(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
@@ -152,7 +152,7 @@ module.exports.notifyDeregistrations = async function notifyDeregistrations(req,
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
-  } catch (error) {}
+  } catch (error) { }
 };
 
 module.exports.notifyWithdrawnApprovals = async function notifyWithdrawnApprovals(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
@@ -173,7 +173,7 @@ module.exports.notifyWithdrawnApprovals = async function notifyWithdrawnApproval
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
-  } catch (error) {}
+  } catch (error) { }
 };
 
 module.exports.registerApplication = async function registerApplication(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
@@ -194,7 +194,7 @@ module.exports.registerApplication = async function registerApplication(req, res
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
-  } catch (error) {}
+  } catch (error) { }
 };
 
 module.exports.relayOperationUpdate = async function relayOperationUpdate(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
@@ -215,7 +215,7 @@ module.exports.relayOperationUpdate = async function relayOperationUpdate(req, r
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
-  } catch (error) {}
+  } catch (error) { }
 };
 
 module.exports.relayServerReplacement = async function relayServerReplacement(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
@@ -236,7 +236,7 @@ module.exports.relayServerReplacement = async function relayServerReplacement(re
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
-  } catch (error) {}
+  } catch (error) { }
 };
 
 module.exports.updateApprovalStatus = async function updateApprovalStatus(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
@@ -252,10 +252,15 @@ module.exports.updateApprovalStatus = async function updateApprovalStatus(req, r
       })
       .catch(async function (responseBody) {
         responseBodyToDocument = responseBody;
-        responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
+        if (responseBody == "ApplicationNotFoundError") {
+          responseCode = responseCodeEnum.code.BAD_REQUEST;
+        }
+        else {
+          responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
+        }
         let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
-  } catch (error) {}
+  } catch (error) { }
 };

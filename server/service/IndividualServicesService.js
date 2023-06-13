@@ -1046,11 +1046,29 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
       let httpClientUuid = await httpClientInterface.getHttpClientUuidAsync(applicationName,
         releaseNumber);
 
+      if (approvalStatus == "APPROVED" || approvalStatus == "REGISTERED") {
+        let forwardingName = "ServerReplacementBroadcast"
+        let applicationList = (await LogicalTerminationPointService.getAllApplicationList(forwardingName))
+        let applicationExit = false;
+        for (let k = 0; k < applicationList.length; k++) {
+          if (applicationName === applicationList[k].applicationName) {
+            applicationExit = true
+            break;
+          }
+        }
+        if (!applicationExit) {
+          throw new Error("ApplicationNotFoundError")
+        }
+      }
+
+
+
       /****************************************************************************************
        * find the operation client uuid for the operations "update-client" and 'update-operation-client'
        * configure logical-termination-point
        ****************************************************************************************/
       let operationClientUuidList = await LogicalTerminationPoint.getClientLtpListAsync(httpClientUuid);
+     if(operationClientUuidList){
       for (let i = 0; i < operationClientUuidList.length; i++) {
         let operationClientUuid = operationClientUuidList[i];
         let apiSegment = getApiSegmentOfOperationClient(operationClientUuid);
@@ -1064,7 +1082,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
           }
         }
       }
-
+    }
       /****************************************************************************************
        * Prepare attributes to configure forwarding-construct
        * If the approval status is approved , then create forwarding construct for update-operation-client and update-client
@@ -1164,7 +1182,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
       }
       resolve();
     } catch (error) {
-      reject(error);
+      reject(error.message);
     }
   });
 }
