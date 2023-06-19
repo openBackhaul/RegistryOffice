@@ -4,7 +4,7 @@ const LogicalTerminatinPointConfigurationInput = require('onf-core-model-ap/appl
 const LogicalTerminationPointService = require('onf-core-model-ap/applicationPattern/onfModel/services/LogicalTerminationPointWithMappingServices');
 const LogicalTerminationPointConfigurationStatus = require('onf-core-model-ap/applicationPattern/onfModel/services/models/logicalTerminationPoint/ConfigurationStatus');
 const layerProtocol = require('onf-core-model-ap/applicationPattern/onfModel/models/LayerProtocol');
-
+const LogicalTerminationPointServiceOfUtility = require("onf-core-model-ap-bs/basicServices/basicServices/utility/LogicalTerminationPoint")
 const ForwardingConfigurationService = require('onf-core-model-ap/applicationPattern/onfModel/services/ForwardingConstructConfigurationServices');
 const ForwardingAutomationService = require('onf-core-model-ap/applicationPattern/onfModel/services/ForwardingConstructAutomationServices');
 const prepareForwardingConfiguration = require('./individualServices/PrepareForwardingConfiguration');
@@ -1048,7 +1048,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
 
       if (approvalStatus == "APPROVED" || approvalStatus == "REGISTERED") {
         let forwardingName = "ServerReplacementBroadcast"
-        let applicationList = (await LogicalTerminationPointService.getAllApplicationList(forwardingName))
+        let applicationList = (await LogicalTerminationPointServiceOfUtility.getAllApplicationList(forwardingName))
         let applicationExit = false;
         for (let k = 0; k < applicationList.length; k++) {
           if (applicationName === applicationList[k].applicationName) {
