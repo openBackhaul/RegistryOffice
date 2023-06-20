@@ -196,6 +196,7 @@ exports.deregisterApplication = function (body, user, originator, xCorrelator, t
         );
       }
       await MonitorTypeApprovalChannel.removeEntryFromMonitorApprovalStatusChannel(applicationName, applicationReleaseNumber);
+      await ApplicationPreceedingVersion.removeEntryFromPrecedingVersionList(applicationName, releaseNumber);
       /****************************************************************************************
        * Prepare attributes to automate forwarding-construct
        ****************************************************************************************/
