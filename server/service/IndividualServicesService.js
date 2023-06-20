@@ -1188,7 +1188,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
 function getAllRegisteredApplicationList(protocol) {
   return new Promise(async function (resolve, reject) {
     let clientApplicationList = [];
-    const forwardingName = "ServerReplacementBroadcast";
+    const forwardingName = "TypeApprovalCausesRequestForEmbedding";
     try {
 
       /** 
