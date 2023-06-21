@@ -137,3 +137,35 @@ exports.removePreceedingApplicationInformation = async function (preceedingAppli
         }
     });
 }
+
+/**
+ * @description This method removed an entry from the preceeding application list
+ * @param {string} applicationName name of the application
+ * @param {string} releaseNumber release number of the application  
+ */
+exports.removeEntryFromPrecedingVersionList = async function (applicationName, releaseNumber) {
+    return new Promise(async function (resolve, reject) {
+        let operationStatus = false;
+        try {
+            if (applicationName != undefined && releaseNumber != undefined) {
+                let applicationDataFile = await fileProfileOperation.getApplicationDataFileContent()
+                let applicationData = JSON.parse(fs.readFileSync(applicationDataFile, 'utf8'));
+                let preceedingApplicationInformationList = applicationData["preceeding-application-information"];
+                for (let i = 0; i < preceedingApplicationInformationList.length; i++) {
+                    let preceedingApplicationInformation = preceedingApplicationInformationList[i];
+                    let preceedingApplicationName = preceedingApplicationInformation["future-application-name"];
+                    let preceedingReleaseNumber = preceedingApplicationInformation["future-release-number"];
+                    if (preceedingApplicationName == applicationName && preceedingReleaseNumber == releaseNumber) {
+                        preceedingApplicationInformationList.splice(i, 1);
+                        fs.writeFileSync(applicationDataFile, JSON.stringify(applicationData));
+                        operationStatus = true;
+                    }
+                }
+            }
+        
+            resolve(operationStatus);
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
