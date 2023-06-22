@@ -1071,7 +1071,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
        * If the approval status is not barred , check if any fc-port created, if so delete them 
        ****************************************************************************************/
       let forwardingConstructConfigurationStatus;
-      let isApplicationApproved
+      let isApplicationAlreadyApproved
 
       if (httpClientUuid) {
         let operationClientUuidList = await logicalTerminationPoint.getClientLtpListAsync(httpClientUuid);
@@ -1100,7 +1100,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
               embeddingOperationName
             );
 
-            isApplicationApproved = await checkApplicationApprovalStatus(operationClientUuidList)
+            isApplicationAlreadyApproved = await checkApplicationApprovalStatus(operationClientUuidList)
 
             if (approvalStatus == 'APPROVED') {
               forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
@@ -1109,7 +1109,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
                 forwardingConfigurationInputList
               );
               await MonitorTypeApprovalChannel.removeEntryFromMonitorApprovalStatusChannel(applicationName, releaseNumber);
-            } else if (approvalStatus == 'BARRED' || (approvalStatus == 'REGISTERED' && isApplicationApproved )) {
+            } else if (approvalStatus == 'BARRED' || (approvalStatus == 'REGISTERED' && isApplicationAlreadyApproved )) {
               forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
               unConfigureForwardingConstructAsync(
                 operationServerName,
@@ -1147,7 +1147,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
           applicationName,
           releaseNumber
         );
-      } else if (approvalStatus == 'BARRED' || (approvalStatus == 'REGISTERED' && isApplicationApproved )) {
+      } else if (approvalStatus == 'BARRED' || (approvalStatus == 'REGISTERED' && isApplicationAlreadyApproved )) {
         forwardingAutomationInputList = await prepareForwardingAutomation.updateApprovalStatusBarred(
           logicalTerminationPointconfigurationStatus,
           forwardingConstructConfigurationStatus,
