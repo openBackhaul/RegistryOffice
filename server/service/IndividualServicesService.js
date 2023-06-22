@@ -1073,6 +1073,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
        * If the approval status is not barred , check if any fc-port created, if so delete them 
        ****************************************************************************************/
       let forwardingConstructConfigurationStatus;
+      let isApplicationAlreadyApproved
 
       if (httpClientUuid) {
         let operationClientUuidList = await logicalTerminationPoint.getClientLtpListAsync(httpClientUuid);
@@ -1101,6 +1102,8 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
               embeddingOperationName
             );
 
+            isApplicationAlreadyApproved = await checkApplicationApprovalStatus(operationClientUuidList)
+
             if (approvalStatus == 'APPROVED') {
               forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
               configureForwardingConstructAsync(
@@ -1108,7 +1111,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
                 forwardingConfigurationInputList
               );
               await MonitorTypeApprovalChannel.removeEntryFromMonitorApprovalStatusChannel(applicationName, releaseNumber);
-            } else if (approvalStatus == 'BARRED') {
+            } else if (approvalStatus == 'BARRED' || (approvalStatus == 'REGISTERED' && isApplicationAlreadyApproved )) {
               forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
               unConfigureForwardingConstructAsync(
                 operationServerName,
@@ -1148,7 +1151,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
           applicationName,
           releaseNumber
         );
-      } else if (approvalStatus == 'BARRED') {
+      } else if (approvalStatus == 'BARRED' || (approvalStatus == 'REGISTERED' && isApplicationAlreadyApproved )) {
         forwardingAutomationInputList = await prepareForwardingAutomation.updateApprovalStatusBarred(
           logicalTerminationPointconfigurationStatus,
           forwardingConstructConfigurationStatus,
@@ -1171,6 +1174,29 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
       reject(error);
     }
   });
+}
+
+/*
+* This method is to check if application is APPROVED
+*/
+async function checkApplicationApprovalStatus(clientLTPs) {
+  return new Promise(async function (resolve, reject) {
+    try {
+      if (clientLTPs.length > 0) {
+        let applicationApproved = false
+        let fcPortList
+        let forwardingConstruct = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync("ServerReplacementBroadcast");
+        fcPortList = forwardingConstruct["fc-port"]
+        let fcPort = fcPortList.filter(fcport => clientLTPs.includes(fcport["logical-termination-point"]));
+        if (fcPort != undefined && fcPort.length > 0) {
+          applicationApproved = true
+        }
+        resolve(applicationApproved)
+      }
+    } catch (error) {
+      reject(error);
+    }
+  })
 }
 
 /****************************************************************************************
