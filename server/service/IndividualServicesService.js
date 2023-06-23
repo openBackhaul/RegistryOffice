@@ -115,12 +115,13 @@ exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, 
             true);
           logicalTerminationPointConfigurationStatus.tcpClientConfigurationStatusList = [configurationStatus];
         }
+        let forwardingAutomationInputList;
         if (logicalTerminationPointConfigurationStatus != undefined) {
 
           /****************************************************************************************
            * Prepare attributes to automate forwarding-construct
            ****************************************************************************************/
-          let forwardingAutomationInputList = await prepareForwardingAutomation.bequeathYourDataAndDie(
+          forwardingAutomationInputList = await prepareForwardingAutomation.bequeathYourDataAndDie(
             logicalTerminationPointConfigurationStatus
           );
           ForwardingAutomationService.automateForwardingConstructAsync(
@@ -132,8 +133,9 @@ exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, 
             customerJourney
           );
         }
-        softwareUpgrade.upgradeSoftwareVersion(isdataTransferRequired, user, xCorrelator, traceIndicator, customerJourney)
-          .catch(err => console.log(`upgradeSoftwareVersion failed with error: ${err}`));
+      softwareUpgrade.upgradeSoftwareVersion(isdataTransferRequired, user, xCorrelator, traceIndicator, customerJourney,forwardingAutomationInputList.length)
+        .catch(err => console.log(`upgradeSoftwareVersion failed with error: ${err}`));
+
       }
       resolve();
     } catch (error) {
@@ -194,6 +196,7 @@ exports.deregisterApplication = function (body, user, originator, xCorrelator, t
           );
       }
       await MonitorTypeApprovalChannel.removeEntryFromMonitorApprovalStatusChannel(applicationName, applicationReleaseNumber);
+      await ApplicationPreceedingVersion.removeEntryFromPrecedingVersionList(applicationName, applicationReleaseNumber);
       /****************************************************************************************
        * Prepare attributes to automate forwarding-construct
        ****************************************************************************************/
@@ -1083,6 +1086,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
        * If the approval status is not barred , check if any fc-port created, if so delete them 
        ****************************************************************************************/
       let forwardingConstructConfigurationStatus;
+      let isApplicationAlreadyApproved
 
       if (httpClientUuid) {
         let operationClientUuidList = await logicalTerminationPoint.getClientLtpListAsync(httpClientUuid);
@@ -1111,6 +1115,8 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
               embeddingOperationName
             );
 
+            isApplicationAlreadyApproved = await checkApplicationApprovalStatus(operationClientUuidList)
+
             if (approvalStatus == 'APPROVED') {
               forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
                 configureForwardingConstructAsync(
@@ -1118,12 +1124,14 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
                   forwardingConfigurationInputList
                 );
               await MonitorTypeApprovalChannel.removeEntryFromMonitorApprovalStatusChannel(applicationName, releaseNumber);
-            } else if (approvalStatus == 'BARRED') {
+            } else if (approvalStatus == 'BARRED' || (approvalStatus == 'REGISTERED' && isApplicationAlreadyApproved )) {
               forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
-                unConfigureForwardingConstructAsync(
-                  operationServerName,
-                  forwardingConfigurationInputList
-                );
+              unConfigureForwardingConstructAsync(
+                operationServerName,
+                forwardingConfigurationInputList
+              );
+              await MonitorTypeApprovalChannel.removeEntryFromMonitorApprovalStatusChannel(applicationName, releaseNumber);
+              await ApplicationPreceedingVersion.removeEntryFromPrecedingVersionList(applicationName, releaseNumber);
             }
 
           }
@@ -1156,7 +1164,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
           applicationName,
           releaseNumber
         );
-      } else if (approvalStatus == 'BARRED') {
+      } else if (approvalStatus == 'BARRED' || (approvalStatus == 'REGISTERED' && isApplicationAlreadyApproved )) {
         forwardingAutomationInputList = await prepareForwardingAutomation.updateApprovalStatusBarred(
           logicalTerminationPointconfigurationStatus,
           forwardingConstructConfigurationStatus,
@@ -1181,6 +1189,29 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
   });
 }
 
+/*
+* This method is to check if application is APPROVED
+*/
+async function checkApplicationApprovalStatus(clientLTPs) {
+  return new Promise(async function (resolve, reject) {
+    try {
+      if (clientLTPs.length > 0) {
+        let applicationApproved = false
+        let fcPortList
+        let forwardingConstruct = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync("ServerReplacementBroadcast");
+        fcPortList = forwardingConstruct["fc-port"]
+        let fcPort = fcPortList.filter(fcport => clientLTPs.includes(fcport["logical-termination-point"]));
+        if (fcPort != undefined && fcPort.length > 0) {
+          applicationApproved = true
+        }
+        resolve(applicationApproved)
+      }
+    } catch (error) {
+      reject(error);
+    }
+  })
+}
+
 /****************************************************************************************
  * Functions utilized by individual services
  ****************************************************************************************/
@@ -1199,7 +1230,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
 function getAllRegisteredApplicationList(protocol) {
   return new Promise(async function (resolve, reject) {
     let clientApplicationList = [];
-    const forwardingName = "ServerReplacementBroadcast";
+    const forwardingName = "TypeApprovalCausesRequestForEmbedding";
     try {
 
       /** 

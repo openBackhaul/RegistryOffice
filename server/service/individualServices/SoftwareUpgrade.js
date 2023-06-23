@@ -21,6 +21,7 @@ const OperationServerInterface = require('onf-core-model-ap/applicationPattern/o
 
 const ApplicationPreceedingVersion = require('./ApplicationPreceedingVersion');
 const ControlConstruct = require('onf-core-model-ap/applicationPattern/onfModel/models/ControlConstruct');
+var traceIndicatorIncrementer = 1;
 /**
  * This method performs the set of procedure to transfer the data from this version to next version of the application<br>
  * @param {String} user String User identifier from the system starting the service call
@@ -38,9 +39,10 @@ const ControlConstruct = require('onf-core-model-ap/applicationPattern/onfModel/
  * 7. PromptForBequeathingDataCausesRequestForBroadcastingInfoAboutServerReplacement
  * 8. PromptForBequeathingDataCausesRequestForDeregisteringOfOldRelease
  */
-exports.upgradeSoftwareVersion = async function (isdataTransferRequired, user, xCorrelator, traceIndicator, customerJourney) {
+exports.upgradeSoftwareVersion = async function (isdataTransferRequired, user, xCorrelator, traceIndicator, customerJourney,_traceIndicatorIncrementer) {
     return new Promise(async function (resolve, reject) {
         try {
+            traceIndicatorIncrementer = _traceIndicatorIncrementer;
             if (isdataTransferRequired) {
                 await transferDataToTheNewRelease(user, xCorrelator, traceIndicator, customerJourney);
             }
@@ -147,7 +149,7 @@ async function promptForBequeathingDataCausesNewApplicationBeingRequestedToInqui
                         requestBody,
                         user,
                         xCorrelator,
-                        traceIndicator,
+                        traceIndicator + "." + traceIndicatorIncrementer++,
                         customerJourney
                     );
                     if (!result) {
@@ -297,7 +299,7 @@ async function promptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredAp
                             requestBody,
                             user,
                             xCorrelator,
-                            traceIndicator,
+                            traceIndicator + "." + traceIndicatorIncrementer++,
                             customerJourney
                         );
                         if (!result) {
@@ -373,7 +375,7 @@ async function promptForBequeathingDataCausesNewApplicationBeingRequestedToDocum
                         requestBody,
                         user,
                         xCorrelator,
-                        traceIndicator,
+                        traceIndicator + "." + traceIndicatorIncrementer++,
                         customerJourney
                     );
                     if (!result) {
@@ -449,7 +451,7 @@ async function promptForBequeathingDataCausesNewApplicationBeingRequestedToDocum
                         requestBody,
                         user,
                         xCorrelator,
-                        traceIndicator,
+                        traceIndicator + "." + traceIndicatorIncrementer++,
                         customerJourney
                     );
                     if (!result) {
@@ -525,7 +527,7 @@ async function promptForBequeathingDataCausesNewApplicationBeingRequestedToDocum
                         requestBody,
                         user,
                         xCorrelator,
-                        traceIndicator,
+                        traceIndicator + "." + traceIndicatorIncrementer++,
                         customerJourney
                     );
                     if (!result) {
@@ -599,7 +601,7 @@ async function promptForBequeathingDataCausesTARbeingRequestedToRedirectInfoAbou
                     requestBody,
                     user,
                     xCorrelator,
-                    traceIndicator,
+                    traceIndicator + "." + traceIndicatorIncrementer++,
                     customerJourney
                 );
                 if (!result) {
@@ -673,7 +675,7 @@ async function promptForBequeathingDataCausesRequestForBroadcastingInfoAboutServ
                     requestBody,
                     user,
                     xCorrelator,
-                    traceIndicator,
+                    traceIndicator + "." + traceIndicatorIncrementer++,
                     customerJourney
                 );
                 if (!result) {
@@ -735,7 +737,7 @@ async function promptForBequeathingDataCausesRequestForDeregisteringOfOldRelease
                         requestBody,
                         user,
                         xCorrelator,
-                        traceIndicator,
+                        traceIndicator + "." + traceIndicatorIncrementer++,
                         customerJourney
                     );
                     if (!result) {
