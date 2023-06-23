@@ -81,7 +81,7 @@ exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, 
         return;
       }
 
-      let isdataTransferRequired = true;
+      
       let logicalTerminationPointConfigurationStatus = {};
       let newReleaseHttpClientLtpUuid = appNameAndUuidFromForwarding.httpClientLtpUuid;
       if (newReleaseHttpClientLtpUuid != undefined) {
@@ -129,7 +129,7 @@ exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, 
             customerJourney
           );
         }
-      softwareUpgrade.upgradeSoftwareVersion(isdataTransferRequired, user, xCorrelator, traceIndicator, customerJourney,forwardingAutomationInputList.length)
+      softwareUpgrade.upgradeSoftwareVersion(user, xCorrelator, traceIndicator, customerJourney,forwardingAutomationInputList.length)
         .catch(err => console.log(`upgradeSoftwareVersion failed with error: ${err}`));
       }
       resolve();
