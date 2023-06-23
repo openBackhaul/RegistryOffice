@@ -6,7 +6,7 @@ var restResponseHeader = require('onf-core-model-ap/applicationPattern/rest/serv
 var restResponseBuilder = require('onf-core-model-ap/applicationPattern/rest/server/ResponseBuilder');
 var executionAndTraceService = require('onf-core-model-ap/applicationPattern/services/ExecutionAndTraceService');
 var IndividualServices = require('../service/IndividualServicesService');
-
+const BadRequestHttpException = require('onf-core-model-ap/applicationPattern/rest/server/HttpException');
 module.exports.bequeathYourDataAndDie = async function bequeathYourDataAndDie(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
   try {
     let startTime = process.hrtime();
@@ -252,7 +252,7 @@ module.exports.updateApprovalStatus = async function updateApprovalStatus(req, r
       })
       .catch(async function (responseBody) {
         responseBodyToDocument = responseBody;
-        if (responseBody == "ApplicationNotFoundError") {
+        if (responseBody instanceof BadRequestHttpException) {
           responseCode = responseCodeEnum.code.BAD_REQUEST;
         }
         else {

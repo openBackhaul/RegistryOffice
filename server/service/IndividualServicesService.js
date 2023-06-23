@@ -4,7 +4,6 @@ const LogicalTerminatinPointConfigurationInput = require('onf-core-model-ap/appl
 const LogicalTerminationPointService = require('onf-core-model-ap/applicationPattern/onfModel/services/LogicalTerminationPointWithMappingServices');
 const LogicalTerminationPointConfigurationStatus = require('onf-core-model-ap/applicationPattern/onfModel/services/models/logicalTerminationPoint/ConfigurationStatus');
 const layerProtocol = require('onf-core-model-ap/applicationPattern/onfModel/models/LayerProtocol');
-const LogicalTerminationPointServiceOfUtility = require("onf-core-model-ap-bs/basicServices/utility/LogicalTerminationPoint")
 const ForwardingConfigurationService = require('onf-core-model-ap/applicationPattern/onfModel/services/ForwardingConstructConfigurationServices');
 const ForwardingAutomationService = require('onf-core-model-ap/applicationPattern/onfModel/services/ForwardingConstructAutomationServices');
 const prepareForwardingConfiguration = require('./individualServices/PrepareForwardingConfiguration');
@@ -40,7 +39,7 @@ const HttpClientInterface = require('onf-core-model-ap/applicationPattern/onfMod
 const ResponseProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/ResponseProfile');
 const ProfileCollection = require('onf-core-model-ap/applicationPattern/onfModel/models/ProfileCollection');
 
-
+const BadRequestHttpException = require('onf-core-model-ap/applicationPattern/rest/server/HttpException');
 const individualServicesOperationsMapping = require('./individualServices/IndividualServicesOperationsMapping');
 const LogicalTerminationPoint = require('onf-core-model-ap/applicationPattern/onfModel/models/LogicalTerminationPoint');
 const OperationClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/OperationClientInterface');
@@ -133,8 +132,8 @@ exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, 
             customerJourney
           );
         }
-      softwareUpgrade.upgradeSoftwareVersion(isdataTransferRequired, user, xCorrelator, traceIndicator, customerJourney)
-        .catch(err => console.log(`upgradeSoftwareVersion failed with error: ${err}`));
+        softwareUpgrade.upgradeSoftwareVersion(isdataTransferRequired, user, xCorrelator, traceIndicator, customerJourney)
+          .catch(err => console.log(`upgradeSoftwareVersion failed with error: ${err}`));
       }
       resolve();
     } catch (error) {
@@ -189,10 +188,10 @@ exports.deregisterApplication = function (body, user, originator, xCorrelator, t
           operationClientConfigurationStatusList
         );
         forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
-        unConfigureForwardingConstructAsync(
-          operationServerName,
-          forwardingConfigurationInputList
-        );
+          unConfigureForwardingConstructAsync(
+            operationServerName,
+            forwardingConfigurationInputList
+          );
       }
       await MonitorTypeApprovalChannel.removeEntryFromMonitorApprovalStatusChannel(applicationName, applicationReleaseNumber);
       /****************************************************************************************
@@ -289,10 +288,10 @@ exports.inquireApplicationTypeApprovals = function (body, user, originator, xCor
           approvalOperation
         );
         forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
-        configureForwardingConstructAsync(
-          operationServerName,
-          forwardingConfigurationInputList
-        );
+          configureForwardingConstructAsync(
+            operationServerName,
+            forwardingConfigurationInputList
+          );
       }
 
       /****************************************************************************************
@@ -470,10 +469,10 @@ exports.notifyApprovals = function (body, user, originator, xCorrelator, traceIn
           subscriberOperation
         );
         forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
-        configureForwardingConstructAsync(
-          operationServerName,
-          forwardingConfigurationInputList
-        );
+          configureForwardingConstructAsync(
+            operationServerName,
+            forwardingConfigurationInputList
+          );
       }
 
       /****************************************************************************************
@@ -561,10 +560,10 @@ exports.notifyDeregistrations = function (body, user, originator, xCorrelator, t
           subscriberOperation
         );
         forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
-        configureForwardingConstructAsync(
-          operationServerName,
-          forwardingConfigurationInputList
-        );
+          configureForwardingConstructAsync(
+            operationServerName,
+            forwardingConfigurationInputList
+          );
       }
 
       /****************************************************************************************
@@ -654,10 +653,10 @@ exports.notifyWithdrawnApprovals = function (body, user, originator, xCorrelator
           subscriberOperation
         );
         forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
-        configureForwardingConstructAsync(
-          operationServerName,
-          forwardingConfigurationInputList
-        );
+          configureForwardingConstructAsync(
+            operationServerName,
+            forwardingConfigurationInputList
+          );
       }
 
       /****************************************************************************************
@@ -759,10 +758,10 @@ exports.registerApplication = function (body, user, originator, xCorrelator, tra
           embeddingOperation
         );
         forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
-        configureForwardingConstructAsync(
-          operationServerName,
-          forwardingConfigurationInputList
-        );
+          configureForwardingConstructAsync(
+            operationServerName,
+            forwardingConfigurationInputList
+          );
       }
 
       /****************************************************************************************
@@ -1047,20 +1046,15 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
         releaseNumber);
 
       if (approvalStatus == "APPROVED" || approvalStatus == "REGISTERED") {
-        let forwardingName = "ServerReplacementBroadcast"
-        let applicationList = (await LogicalTerminationPointServiceOfUtility.getAllApplicationList(forwardingName))
-        let applicationExit = false;
-        for (let k = 0; k < applicationList.length; k++) {
-          if (applicationName === applicationList[k].applicationName) {
-            applicationExit = true
-            break;
-          }
+        let isApplicationExists = await httpClientInterface.isApplicationExists(
+          applicationName,
+          releaseNumber
+        );
+        if (!isApplicationExists) {
+          reject(new BadRequestHttpException(`The application-name ${applicationName} was not found.`));
         }
-        if (!applicationExit) {
-          throw new Error("ApplicationNotFoundError")
-        }
-      }
 
+      }
 
 
       /****************************************************************************************
@@ -1068,21 +1062,21 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
        * configure logical-termination-point
        ****************************************************************************************/
       let operationClientUuidList = await LogicalTerminationPoint.getClientLtpListAsync(httpClientUuid);
-     if(operationClientUuidList){
-      for (let i = 0; i < operationClientUuidList.length; i++) {
-        let operationClientUuid = operationClientUuidList[i];
-        let apiSegment = getApiSegmentOfOperationClient(operationClientUuid);
-        if (apiSegment == "im") {
-          if (operationClientUuid.endsWith("001")) {
-            updateClientOperationName = await OperationClientInterface.getOperationNameAsync(operationClientUuid);
-          } else if (operationClientUuid.endsWith("002")) {
-            updateOperationClientOperationName = await OperationClientInterface.getOperationNameAsync(operationClientUuid);
-          } else if (operationClientUuid.endsWith("000")) {
-            embeddingOperationName = await OperationClientInterface.getOperationNameAsync(operationClientUuid);
+      if (operationClientUuidList) {
+        for (let i = 0; i < operationClientUuidList.length; i++) {
+          let operationClientUuid = operationClientUuidList[i];
+          let apiSegment = getApiSegmentOfOperationClient(operationClientUuid);
+          if (apiSegment == "im") {
+            if (operationClientUuid.endsWith("001")) {
+              updateClientOperationName = await OperationClientInterface.getOperationNameAsync(operationClientUuid);
+            } else if (operationClientUuid.endsWith("002")) {
+              updateOperationClientOperationName = await OperationClientInterface.getOperationNameAsync(operationClientUuid);
+            } else if (operationClientUuid.endsWith("000")) {
+              embeddingOperationName = await OperationClientInterface.getOperationNameAsync(operationClientUuid);
+            }
           }
         }
       }
-    }
       /****************************************************************************************
        * Prepare attributes to configure forwarding-construct
        * If the approval status is approved , then create forwarding construct for update-operation-client and update-client
@@ -1119,17 +1113,17 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
 
             if (approvalStatus == 'APPROVED') {
               forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
-              configureForwardingConstructAsync(
-                operationServerName,
-                forwardingConfigurationInputList
-              );
+                configureForwardingConstructAsync(
+                  operationServerName,
+                  forwardingConfigurationInputList
+                );
               await MonitorTypeApprovalChannel.removeEntryFromMonitorApprovalStatusChannel(applicationName, releaseNumber);
             } else if (approvalStatus == 'BARRED') {
               forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
-              unConfigureForwardingConstructAsync(
-                operationServerName,
-                forwardingConfigurationInputList
-              );
+                unConfigureForwardingConstructAsync(
+                  operationServerName,
+                  forwardingConfigurationInputList
+                );
             }
 
           }
@@ -1182,7 +1176,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
       }
       resolve();
     } catch (error) {
-      reject(error.message);
+      reject();
     }
   });
 }
