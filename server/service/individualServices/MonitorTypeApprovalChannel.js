@@ -10,9 +10,11 @@ const LogicalTerminationPoint = require('onf-core-model-ap/applicationPattern/on
 const ForwardingDomain = require('onf-core-model-ap/applicationPattern/onfModel/models/ForwardingDomain');
 const IntegerProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/IntegerProfile');
 const eventDispatcher = require('onf-core-model-ap/applicationPattern/rest/client/eventDispatcher');
-const profile = require('onf-core-model-ap/applicationPattern/onfModel/models/Profile');
 const applicationProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/ApplicationProfile');
 const fileProfileOperation = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/FileProfile')
+const ProfileCollection = require('onf-core-model-ap/applicationPattern/onfModel/models/ProfileCollection');
+const onfAttributes = require('onf-core-model-ap/applicationPattern/onfModel/constants/OnfAttributes');
+
 /**
  * @description This method adds an entry to the monitoring list
  * @param {string} applicationName name of the application
@@ -178,17 +180,8 @@ async function triggerDeregistration(applicationName, releaseNumber) {
     });
 }
 
-exports.getWaitTimeApproveValue = async function(){
-    return new Promise(async function (resolve, reject) {
-        try{
-            let responseProfileUuid = await profile.getUuidListAsync(applicationProfile.profileNameEnum.INTEGER_PROFILE);
-            for (let responseProfileUuidIndex = 0; responseProfileUuidIndex < responseProfileUuid.length; responseProfileUuidIndex++) {
-                let uuid = responseProfileUuid[responseProfileUuidIndex];
-                let integerValue = await IntegerProfile.getIntegerValueAsync(uuid)
-                resolve(integerValue)
-            }
-        } catch (error) {
-            reject(error);
-        }
-    })
+exports.getWaitTimeApproveValue = async function() {
+    let integerProfiles = await ProfileCollection.getProfileListForProfileNameAsync(applicationProfile.profileNameEnum.INTEGER_PROFILE);
+    let config = integerProfiles[0][onfAttributes.INTEGER_PROFILE.PAC][onfAttributes.INTEGER_PROFILE.CONFIGURATION];
+    return config[onfAttributes.INTEGER_PROFILE.INTEGER_VALUE];
  }
