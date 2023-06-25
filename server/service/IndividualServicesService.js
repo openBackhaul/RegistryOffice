@@ -81,7 +81,7 @@ exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, 
         return;
       }
 
-      let isdataTransferRequired = true;
+      
       let logicalTerminationPointConfigurationStatus = {};
       let newReleaseHttpClientLtpUuid = appNameAndUuidFromForwarding.httpClientLtpUuid;
       if (newReleaseHttpClientLtpUuid != undefined) {
@@ -104,11 +104,6 @@ exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, 
         let isAddressUpdated = await tcpClientInterface.setRemoteAddressAsync(newReleaseTcpClientUuid, applicationAddress);
         let isPortUpdated = await tcpClientInterface.setRemotePortAsync(newReleaseTcpClientUuid, applicationPort);
 
-        let serverAddress = await tcpServerInterface.getLocalAddressOfTheProtocol(applicationProtocol);
-        let serverPort = await tcpServerInterface.getLocalPortOfTheProtocol(applicationProtocol);
-        if (JSON.stringify(applicationAddress) == JSON.stringify(serverAddress) && applicationPort === serverPort) {
-          isdataTransferRequired = false;
-        }
         if (isProtocolUpdated || isAddressUpdated || isPortUpdated) {
           let configurationStatus = new ConfigurationStatus(
             newReleaseTcpClientUuid,
@@ -134,7 +129,7 @@ exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, 
             customerJourney
           );
         }
-      softwareUpgrade.upgradeSoftwareVersion(isdataTransferRequired, user, xCorrelator, traceIndicator, customerJourney,forwardingAutomationInputList.length)
+      softwareUpgrade.upgradeSoftwareVersion(user, xCorrelator, traceIndicator, customerJourney,forwardingAutomationInputList.length)
         .catch(err => console.log(`upgradeSoftwareVersion failed with error: ${err}`));
       }
       resolve();

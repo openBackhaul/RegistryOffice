@@ -39,13 +39,12 @@ var traceIndicatorIncrementer = 1;
  * 7. PromptForBequeathingDataCausesRequestForBroadcastingInfoAboutServerReplacement
  * 8. PromptForBequeathingDataCausesRequestForDeregisteringOfOldRelease
  */
-exports.upgradeSoftwareVersion = async function (isdataTransferRequired, user, xCorrelator, traceIndicator, customerJourney,_traceIndicatorIncrementer) {
+exports.upgradeSoftwareVersion = async function (user, xCorrelator, traceIndicator, customerJourney,_traceIndicatorIncrementer) {
     return new Promise(async function (resolve, reject) {
         try {
             traceIndicatorIncrementer = _traceIndicatorIncrementer;
-            if (isdataTransferRequired) {
-                await transferDataToTheNewRelease(user, xCorrelator, traceIndicator, customerJourney);
-            }
+            
+            await transferDataToTheNewRelease(user, xCorrelator, traceIndicator, customerJourney);
             await redirectNotificationNewRelease(user, xCorrelator, traceIndicator, customerJourney);
             await replaceOldReleaseWithNewRelease(user, xCorrelator, traceIndicator, customerJourney);
             resolve();
