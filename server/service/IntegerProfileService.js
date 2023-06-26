@@ -1,4 +1,5 @@
 'use strict';
+const createHttpError = require('http-errors');
 var fileOperation = require('onf-core-model-ap/applicationPattern/databaseDriver/JSONDriver');
 const IntegerProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/IntegerProfile');
 
@@ -135,18 +136,16 @@ exports.getIntegerProfileUnit = function(url) {
  * uuid String 
  * no response value expected for this operation
  **/
-exports.putIntegerProfileIntegerValue = function(body, url, uuid) {
+exports.putIntegerProfileIntegerValue = function (body, url, uuid) {
   return new Promise(async function (resolve, reject) {
     try {
       let maximumIntegerValue = await IntegerProfile.getMaximumAsync(uuid);
       let minimumIntegerValue = await IntegerProfile.getMinimumAsync(uuid);
       let value = body["integer-profile-1-0:integer-value"];
-      if(value <= maximumIntegerValue && value >= minimumIntegerValue){
-        await fileOperation.writeToDatabaseAsync(url, body, false);
-      } 
-      else{
-        throw new Error("RangeError")
-      }     
+      if (value > maximumIntegerValue && value < minimumIntegerValue) {
+        return reject(new createHttpError.BadRequest(`integer-profile-1-0:integer-value must be in range between ${minimumIntegerValue} and ${maximumIntegerValue}`))
+      }
+      await fileOperation.writeToDatabaseAsync(url, body, false);
       resolve();
     } catch (error) {
       reject(error.message);

@@ -6,7 +6,6 @@ var restResponseHeader = require('onf-core-model-ap/applicationPattern/rest/serv
 var restResponseBuilder = require('onf-core-model-ap/applicationPattern/rest/server/ResponseBuilder');
 var executionAndTraceService = require('onf-core-model-ap/applicationPattern/services/ExecutionAndTraceService');
 var IndividualServices = require('../service/IndividualServicesService');
-const BadRequestHttpException = require('onf-core-model-ap/applicationPattern/rest/server/HttpException');
 module.exports.bequeathYourDataAndDie = async function bequeathYourDataAndDie(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
   try {
     let startTime = process.hrtime();
@@ -19,10 +18,10 @@ module.exports.bequeathYourDataAndDie = async function bequeathYourDataAndDie(re
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       })
       .catch(async function (responseBody) {
-        responseBodyToDocument = responseBody;
-        responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
         let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
-        restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
+        let sentResp = restResponseBuilder.buildResponse(res, undefined, responseBody, responseHeader);
+        responseCode = sentResp.code;
+        responseBodyToDocument = sentResp.body;
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
   } catch (error) { }
@@ -40,10 +39,10 @@ module.exports.deregisterApplication = async function deregisterApplication(req,
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       })
       .catch(async function (responseBody) {
-        responseBodyToDocument = responseBody;
-        responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
         let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
-        restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
+        let sentResp = restResponseBuilder.buildResponse(res, undefined, responseBody, responseHeader);
+        responseCode = sentResp.code;
+        responseBodyToDocument = sentResp.body;
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
   } catch (error) { }
@@ -83,10 +82,10 @@ module.exports.listApplications = async function listApplications(req, res, next
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       })
       .catch(async function (responseBody) {
-        responseBodyToDocument = responseBody;
-        responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
         let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
-        restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
+        let sentResp = restResponseBuilder.buildResponse(res, undefined, responseBody, responseHeader);
+        responseCode = sentResp.code;
+        responseBodyToDocument = sentResp.body;
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
   } catch (error) { }
@@ -104,10 +103,10 @@ module.exports.listApplicationsInGenericRepresentation = async function listAppl
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       })
       .catch(async function (responseBody) {
-        responseBodyToDocument = responseBody;
-        responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
         let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
-        restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
+        let sentResp = restResponseBuilder.buildResponse(res, undefined, responseBody, responseHeader);
+        responseCode = sentResp.code;
+        responseBodyToDocument = sentResp.body;
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
   } catch (error) { }
@@ -125,10 +124,10 @@ module.exports.notifyApprovals = async function notifyApprovals(req, res, next, 
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       })
       .catch(async function (responseBody) {
-        responseBodyToDocument = responseBody;
-        responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
         let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
-        restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
+        let sentResp = restResponseBuilder.buildResponse(res, undefined, responseBody, responseHeader);
+        responseCode = sentResp.code;
+        responseBodyToDocument = sentResp.body;
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
   } catch (error) { }
@@ -146,10 +145,10 @@ module.exports.notifyDeregistrations = async function notifyDeregistrations(req,
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       })
       .catch(async function (responseBody) {
-        responseBodyToDocument = responseBody;
-        responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
         let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
-        restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
+        let sentResp = restResponseBuilder.buildResponse(res, undefined, responseBody, responseHeader);
+        responseCode = sentResp.code;
+        responseBodyToDocument = sentResp.body;
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
   } catch (error) { }
@@ -167,10 +166,10 @@ module.exports.notifyWithdrawnApprovals = async function notifyWithdrawnApproval
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       })
       .catch(async function (responseBody) {
-        responseBodyToDocument = responseBody;
-        responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
         let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
-        restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
+        let sentResp = restResponseBuilder.buildResponse(res, undefined, responseBody, responseHeader);
+        responseCode = sentResp.code;
+        responseBodyToDocument = sentResp.body;
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
   } catch (error) { }
@@ -188,10 +187,10 @@ module.exports.registerApplication = async function registerApplication(req, res
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       })
       .catch(async function (responseBody) {
-        responseBodyToDocument = responseBody;
-        responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
         let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
-        restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
+        let sentResp = restResponseBuilder.buildResponse(res, undefined, responseBody, responseHeader);
+        responseCode = sentResp.code;
+        responseBodyToDocument = sentResp.body;
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
   } catch (error) { }
@@ -209,10 +208,10 @@ module.exports.relayOperationUpdate = async function relayOperationUpdate(req, r
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       })
       .catch(async function (responseBody) {
-        responseBodyToDocument = responseBody;
-        responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
         let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
-        restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
+        let sentResp = restResponseBuilder.buildResponse(res, undefined, responseBody, responseHeader);
+        responseCode = sentResp.code;
+        responseBodyToDocument = sentResp.body;
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
   } catch (error) { }
@@ -230,10 +229,10 @@ module.exports.relayServerReplacement = async function relayServerReplacement(re
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       })
       .catch(async function (responseBody) {
-        responseBodyToDocument = responseBody;
-        responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
         let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
-        restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
+        let sentResp = restResponseBuilder.buildResponse(res, undefined, responseBody, responseHeader);
+        responseCode = sentResp.code;
+        responseBodyToDocument = sentResp.body;
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
   } catch (error) { }
@@ -251,15 +250,10 @@ module.exports.updateApprovalStatus = async function updateApprovalStatus(req, r
         restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
       })
       .catch(async function (responseBody) {
-        responseBodyToDocument = responseBody;
-        if (responseBody instanceof BadRequestHttpException) {
-          responseCode = responseCodeEnum.code.BAD_REQUEST;
-        }
-        else {
-          responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-        }
         let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
-        restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
+        let sentResp = restResponseBuilder.buildResponse(res, undefined, responseBody, responseHeader);
+        responseCode = sentResp.code;
+        responseBodyToDocument = sentResp.body;
       });
     executionAndTraceService.recordServiceRequest(xCorrelator, traceIndicator, user, originator, req.url, responseCode, req.body, responseBodyToDocument);
   } catch (error) { }
