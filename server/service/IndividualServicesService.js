@@ -1106,6 +1106,13 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
                 forwardingConfigurationInputList
               );
               await MonitorTypeApprovalChannel.removeEntryFromMonitorApprovalStatusChannel(applicationName, releaseNumber);
+            }else if (isApplicationAlreadyApproved && approvalStatus == 'REGISTERED') {
+             forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
+              unConfigureForwardingConstructAsync(
+                operationServerName,
+                forwardingConfigurationInputList
+              );
+              await MonitorTypeApprovalChannel.AddEntryToMonitorApprovalStatusChannel(applicationName, releaseNumber);
             } else if (approvalStatus == 'BARRED') {
               let forwardingConfigurationListForBarredApplication = 
                   await prepareForwardingConfiguration.updateApprovalStatusBarred(operationClientUuidList);
