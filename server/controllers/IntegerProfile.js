@@ -13,8 +13,8 @@ module.exports.getIntegerProfileIntegerName = async function getIntegerProfileIn
       responseBuilder.buildResponse(res, responseCode, response);
     })
     .catch(function (response) {
-      responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      responseBuilder.buildResponse(res, responseCode, response);
+      let sentResp = responseBuilder.buildResponse(res, undefined, response);
+      responseCode = sentResp.code;
     });
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };
@@ -26,8 +26,8 @@ module.exports.getIntegerProfileIntegerValue = async function getIntegerProfileI
       responseBuilder.buildResponse(res, responseCode, response);
     })
     .catch(function (response) {
-      responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      responseBuilder.buildResponse(res, responseCode, response);
+      let sentResp = responseBuilder.buildResponse(res, undefined, response);
+      responseCode = sentResp.code;
     });
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };
@@ -39,8 +39,8 @@ module.exports.getIntegerProfileMaximum = async function getIntegerProfileMaximu
       responseBuilder.buildResponse(res, responseCode, response);
     })
     .catch(function (response) {
-      responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      responseBuilder.buildResponse(res, responseCode, response);
+      let sentResp = responseBuilder.buildResponse(res, undefined, response);
+      responseCode = sentResp.code;
     });
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };
@@ -52,8 +52,8 @@ module.exports.getIntegerProfileMinimum = async function getIntegerProfileMinimu
       responseBuilder.buildResponse(res, responseCode, response);
     })
     .catch(function (response) {
-      responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      responseBuilder.buildResponse(res, responseCode, response);
+      let sentResp = responseBuilder.buildResponse(res, undefined, response);
+      responseCode = sentResp.code;
     });
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };
@@ -65,8 +65,8 @@ module.exports.getIntegerProfileUnit = async function getIntegerProfileUnit (req
       responseBuilder.buildResponse(res, responseCode, response);
     })
     .catch(function (response) {
-      responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      responseBuilder.buildResponse(res, responseCode, response);
+      let sentResp = responseBuilder.buildResponse(res, undefined, response);
+      responseCode = sentResp.code;
     });
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };
@@ -78,14 +78,8 @@ module.exports.putIntegerProfileIntegerValue = async function putIntegerProfileI
       responseBuilder.buildResponse(res, responseCode, response);
     })
     .catch(function (response) {
-       if(response == "RangeError"){
-        responseCode = responseCodeEnum.code.BAD_REQUEST;
-      }
-      else{
-        responseCode = responseCodeEnum.code.INTERNAL_SERVER_ERROR;
-      }
-
-      responseBuilder.buildResponse(res, responseCode, response);
+      let sentResp = responseBuilder.buildResponse(res, undefined, response);
+      responseCode = sentResp.code;
     });
   oamLogService.recordOamRequest(req.url, req.body, responseCode, req.headers.authorization, req.method);
 };

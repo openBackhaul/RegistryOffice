@@ -39,12 +39,12 @@ const HttpClientInterface = require('onf-core-model-ap/applicationPattern/onfMod
 const ResponseProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/ResponseProfile');
 const ProfileCollection = require('onf-core-model-ap/applicationPattern/onfModel/models/ProfileCollection');
 
-const BadRequestHttpException = require('onf-core-model-ap/applicationPattern/rest/server/HttpException');
 const individualServicesOperationsMapping = require('./individualServices/IndividualServicesOperationsMapping');
 const LogicalTerminationPoint = require('onf-core-model-ap/applicationPattern/onfModel/models/LogicalTerminationPoint');
 const OperationClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/OperationClientInterface');
 
 const genericRepresentation = require('onf-core-model-ap-bs/basicServices/GenericRepresentation');
+const createHttpError = require('http-errors');
 /**
  * Initiates process of embedding a new release
  *
@@ -244,7 +244,7 @@ exports.inquireApplicationTypeApprovals = function (body, user, originator, xCor
 
       const appNameAndUuidFromForwarding = await resolveApplicationNameAndHttpClientLtpUuidFromForwardingName('RegistrationCausesInquiryForApplicationTypeApproval');
       if (appNameAndUuidFromForwarding?.applicationName !== applicationName) {
-        reject(new Error(`The approval-application ${applicationName} was not found.`));
+        reject(new createHttpError.BadRequest(`The approval-application ${applicationName} was not found.`));
         return;
       }
 
@@ -1049,7 +1049,7 @@ exports.updateApprovalStatus = function (body, user, originator, xCorrelator, tr
           releaseNumber
         );
         if (!isApplicationExists) {
-          reject(new BadRequestHttpException(`The application-name ${applicationName} was not found.`));
+          reject(new createHttpError.BadRequest(`The application-name ${applicationName} was not found.`));
         }
 
       }
