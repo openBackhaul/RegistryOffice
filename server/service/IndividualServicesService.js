@@ -76,7 +76,7 @@ exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, 
 
       const appNameAndUuidFromForwarding = await resolveApplicationNameAndHttpClientLtpUuidFromForwardingName('PromptForBequeathingDataCausesNewApplicationBeingRequestedToInquireForApplicationTypeApprovals');
       if (appNameAndUuidFromForwarding?.httpClientLtpUuid == undefined) {
-        reject(new Error(`The new-release ${applicationName} was not found.`));
+        reject(new createHttpError.BadRequest(`The new-release ${applicationName} was not found.`));
         return;
       }
 
