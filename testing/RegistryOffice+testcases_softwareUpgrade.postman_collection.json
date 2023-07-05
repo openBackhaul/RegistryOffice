@@ -115,89 +115,6 @@
 			"item": []
 		},
 		{
-			"name": "=====> JustJumpToTarget =====>",
-			"item": [
-				{
-					"name": "=====> JustJumpToTarget =====>",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"console.log(\"\\n----- JustJumpToTarget --------------------------------------------------\");",
-									"/****************************************************************************************",
-									"* ",
-									"* This is a request for daily working with the Validator.",
-									"* It just makes the program flow jumping to the Request named \"=====> Target =====>\".",
-									"* ",
-									"****************************************************************************************/",
-									" ",
-									" ",
-									"/****************************************************************************************",
-									"* Loading Input Data",
-									"****************************************************************************************/",
-									"try {",
-									"    var URI;",
-									"    URI = pm.environment.get(\"dummyUri\");",
-									"",
-									"} catch (error) {",
-									"    console.log(\"! Environment variables could not be loaded.\");",
-									"}",
-									"",
-									"",
-									"/****************************************************************************************",
-									"* Setting up Local Variables and Preparing the Request",
-									"****************************************************************************************/",
-									"try {",
-									"    pm.variables.clear();",
-									"",
-									"    postman.setNextRequest(\"=====> Target =====>\");",
-									"",
-									"    pm.variables.set(\"uri\", URI);",
-									"    pm.request.headers.upsert({key:\"Accept\", value:\"application/json\"});",
-									"",
-									"} catch (error) {",
-									"    console.log(\"! Local variables could not be set.\");",
-									"}",
-									"",
-									"",
-									"/****************************************************************************************",
-									"* Functions",
-									"****************************************************************************************/",
-									"",
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{uri}}",
-							"host": [
-								"{{uri}}"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
 			"name": "/v1/bequeath-your-data-and-die",
 			"item": [
 				{
@@ -27128,77 +27045,6 @@
 							"name": "Forwardings triggered?",
 							"item": [
 								{
-									"name": "=====> Target =====>",
-									"item": [
-										{
-											"name": "=====> Target =====>",
-											"event": [
-												{
-													"listen": "prerequest",
-													"script": {
-														"exec": [
-															"console.log(\"\\n----- Target --------------------------------------------------\");",
-															"/****************************************************************************************",
-															"* ",
-															"* Here starts the execution of specific validation tests",
-															"* ",
-															"****************************************************************************************/",
-															"",
-															"",
-															"/****************************************************************************************",
-															"* Loading Input Data",
-															"****************************************************************************************/",
-															"try {",
-															"    var URI;",
-															"    URI = pm.environment.get(\"dummyUri\");",
-															"",
-															"} catch (error) {",
-															"    console.log(\"! Environment variables could not be loaded.\");",
-															"}",
-															"",
-															"",
-															"/****************************************************************************************",
-															"* Setting up Local Variables and Preparing the Request",
-															"****************************************************************************************/",
-															"try {",
-															"    pm.variables.clear();",
-															"",
-															"    pm.variables.set(\"uri\", URI);",
-															"    pm.request.headers.upsert({key:\"Accept\", value:\"application/json\"});",
-															"",
-															"} catch (error) {",
-															"    console.log(\"! Local variables could not be set.\");",
-															"}",
-															"",
-															"",
-															"/****************************************************************************************",
-															"* Functions",
-															"****************************************************************************************/",
-															"",
-															""
-														],
-														"type": "text/javascript"
-													}
-												}
-											],
-											"request": {
-												"auth": {
-													"type": "noauth"
-												},
-												"method": "GET",
-												"header": [],
-												"url": {
-													"raw": "{{uri}}",
-													"host": [
-														"{{uri}}"
-													]
-												}
-											},
-											"response": []
-										}
-									]
-								},
-								{
 									"name": "BequeathingDataAndDieCausesForwardings",
 									"item": [
 										{
@@ -28741,89 +28587,6 @@
 										}
 									],
 									"description": "## Gets the forwarding happened for the incoming request?\n\nBequeathingDataAndDieCausesForwardings\n\n#### Requires:\n\n- ExecutionAndTraceLog server to operate\n    \n    #### Preparation:\n    \n- GETing CC (/core-model-1-4:control-construct)\n- searching CC for op-s of /v1/bequeath-your-data-and-die, storing operation-key\n    - searching CC for http-s and tcp-s list , store them\n- from fc PromptForEmbeddingCausesRequestForBequeathingData, find random output fc-port, its op-c, corresponding http-c and tcp-c of OldRelease, store them\n    - from fc ServiceRequestCausesLoggingRequest, find output op-c, corresponding http-c and tcp-c, store them\n- GETting EaTL/CC (while using IP and port from above)\n    - searching CC for op-c of /v1/list-records-of-flow, storing operation-key\n- POST OldRelease/CC\n    - find op-s of bequeath-your-data-and-die, store it\n    - from all fc(s) of callbacks of bequeathing service, get corresponding output fc-port op-c, their http-c and tcp-c and for subscriptions, collect the total number of output fc-port in list.\n- POST OldRelease//v1/bequeath-your-data-and-die with\n    - all attributes according to chosen http-s and tcp-s data\n    - operation-key from above\n        - all parameters with realistic values (incl. DummyXCorrelator)\n            \n #### Testing:\n            \n- POST ExecutionAndTraceLog/v1/list-records-of-flow with\n    - IP and port from above\n    - operation-key from above\n    - DummyValue of x-correlator\n    - checking response\n    - checking same record for containing DummyXCorrelator and  \n        each callback is present .  \n        POST - 3 min - eatl log -x-core - check entries  \n        timer 10 min - loop for every 1 min, to check if last forwarding is executed/not\n        \n#### Clearing:\n        \n- PUT initial newRelease/application-name\n- PUT initial newRelease/release-number\n- PUT initial newRelease/protocol\n- PUT initial newRelease/address\n- PUT initial newRelease/port"
-								}
-							]
-						},
-						{
-							"name": "=====> JustJumpToTheEnd =====>",
-							"item": [
-								{
-									"name": "=====> JustJumpToTheEnd =====>",
-									"event": [
-										{
-											"listen": "prerequest",
-											"script": {
-												"exec": [
-													"console.log(\"\\n----- JustJumpToEnd --------------------------------------------------\");",
-													"/****************************************************************************************",
-													"* ",
-													"* This is a request for daily working with the Validator.",
-													"* It just makes the program flow jumping to the Request named \"=====> End\".",
-													"* ",
-													"****************************************************************************************/",
-													" ",
-													" ",
-													"/****************************************************************************************",
-													"* Loading Input Data",
-													"****************************************************************************************/",
-													"try {",
-													"    var URI;",
-													"    URI = pm.environment.get(\"dummyUri\");",
-													"",
-													"} catch (error) {",
-													"    console.log(\"! Environment variables could not be loaded.\");",
-													"}",
-													"",
-													"",
-													"/****************************************************************************************",
-													"* Setting up Local Variables and Preparing the Request",
-													"****************************************************************************************/",
-													"try {",
-													"    pm.variables.clear();",
-													"",
-													"    postman.setNextRequest(\"=====> End\");",
-													"",
-													"    pm.variables.set(\"uri\", URI);",
-													"    pm.request.headers.upsert({key:\"Accept\", value:\"application/json\"});",
-													"",
-													"} catch (error) {",
-													"    console.log(\"! Local variables could not be set.\");",
-													"}",
-													"",
-													"",
-													"/****************************************************************************************",
-													"* Functions",
-													"****************************************************************************************/",
-													"",
-													""
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "test",
-											"script": {
-												"exec": [
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"auth": {
-											"type": "noauth"
-										},
-										"method": "GET",
-										"header": [],
-										"url": {
-											"raw": "{{uri}}",
-											"host": [
-												"{{uri}}"
-											]
-										}
-									},
-									"response": []
 								}
 							]
 						},
@@ -37638,6 +37401,243 @@
 		{
 			"name": "Termination",
 			"item": [
+				{
+					"name": "=====> JustJumpToTarget =====>",
+					"item": [
+						{
+							"name": "=====> JustJumpToTarget =====>",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"console.log(\"\\n----- JustJumpToTarget --------------------------------------------------\");",
+											"/****************************************************************************************",
+											"* ",
+											"* This is a request for daily working with the Validator.",
+											"* It just makes the program flow jumping to the Request named \"=====> Target =====>\".",
+											"* ",
+											"****************************************************************************************/",
+											" ",
+											" ",
+											"/****************************************************************************************",
+											"* Loading Input Data",
+											"****************************************************************************************/",
+											"try {",
+											"    var URI;",
+											"    URI = pm.environment.get(\"dummyUri\");",
+											"",
+											"} catch (error) {",
+											"    console.log(\"! Environment variables could not be loaded.\");",
+											"}",
+											"",
+											"",
+											"/****************************************************************************************",
+											"* Setting up Local Variables and Preparing the Request",
+											"****************************************************************************************/",
+											"try {",
+											"    pm.variables.clear();",
+											"",
+											"    postman.setNextRequest(\"=====> Target =====>\");",
+											"",
+											"    pm.variables.set(\"uri\", URI);",
+											"    pm.request.headers.upsert({key:\"Accept\", value:\"application/json\"});",
+											"",
+											"} catch (error) {",
+											"    console.log(\"! Local variables could not be set.\");",
+											"}",
+											"",
+											"",
+											"/****************************************************************************************",
+											"* Functions",
+											"****************************************************************************************/",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{uri}}",
+									"host": [
+										"{{uri}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "=====> Target =====>",
+					"item": [
+						{
+							"name": "=====> Target =====>",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"console.log(\"\\n----- Target --------------------------------------------------\");",
+											"/****************************************************************************************",
+											"* ",
+											"* Here starts the execution of specific validation tests",
+											"* ",
+											"****************************************************************************************/",
+											"",
+											"",
+											"/****************************************************************************************",
+											"* Loading Input Data",
+											"****************************************************************************************/",
+											"try {",
+											"    var URI;",
+											"    URI = pm.environment.get(\"dummyUri\");",
+											"",
+											"} catch (error) {",
+											"    console.log(\"! Environment variables could not be loaded.\");",
+											"}",
+											"",
+											"",
+											"/****************************************************************************************",
+											"* Setting up Local Variables and Preparing the Request",
+											"****************************************************************************************/",
+											"try {",
+											"    pm.variables.clear();",
+											"",
+											"    pm.variables.set(\"uri\", URI);",
+											"    pm.request.headers.upsert({key:\"Accept\", value:\"application/json\"});",
+											"",
+											"} catch (error) {",
+											"    console.log(\"! Local variables could not be set.\");",
+											"}",
+											"",
+											"",
+											"/****************************************************************************************",
+											"* Functions",
+											"****************************************************************************************/",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{uri}}",
+									"host": [
+										"{{uri}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "=====> JustJumpToTheEnd =====>",
+					"item": [
+						{
+							"name": "=====> JustJumpToTheEnd =====>",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"console.log(\"\\n----- JustJumpToEnd --------------------------------------------------\");",
+											"/****************************************************************************************",
+											"* ",
+											"* This is a request for daily working with the Validator.",
+											"* It just makes the program flow jumping to the Request named \"=====> End\".",
+											"* ",
+											"****************************************************************************************/",
+											" ",
+											" ",
+											"/****************************************************************************************",
+											"* Loading Input Data",
+											"****************************************************************************************/",
+											"try {",
+											"    var URI;",
+											"    URI = pm.environment.get(\"dummyUri\");",
+											"",
+											"} catch (error) {",
+											"    console.log(\"! Environment variables could not be loaded.\");",
+											"}",
+											"",
+											"",
+											"/****************************************************************************************",
+											"* Setting up Local Variables and Preparing the Request",
+											"****************************************************************************************/",
+											"try {",
+											"    pm.variables.clear();",
+											"",
+											"    postman.setNextRequest(\"=====> End\");",
+											"",
+											"    pm.variables.set(\"uri\", URI);",
+											"    pm.request.headers.upsert({key:\"Accept\", value:\"application/json\"});",
+											"",
+											"} catch (error) {",
+											"    console.log(\"! Local variables could not be set.\");",
+											"}",
+											"",
+											"",
+											"/****************************************************************************************",
+											"* Functions",
+											"****************************************************************************************/",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{uri}}",
+									"host": [
+										"{{uri}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
 				{
 					"name": "=====> End",
 					"item": [
