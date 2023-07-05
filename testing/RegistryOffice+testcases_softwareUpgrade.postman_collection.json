@@ -115,6 +115,89 @@
 			"item": []
 		},
 		{
+			"name": "=====> JustJumpToTarget =====>",
+			"item": [
+				{
+					"name": "=====> JustJumpToTarget =====>",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"console.log(\"\\n----- JustJumpToTarget --------------------------------------------------\");",
+									"/****************************************************************************************",
+									"* ",
+									"* This is a request for daily working with the Validator.",
+									"* It just makes the program flow jumping to the Request named \"=====> Target =====>\".",
+									"* ",
+									"****************************************************************************************/",
+									" ",
+									" ",
+									"/****************************************************************************************",
+									"* Loading Input Data",
+									"****************************************************************************************/",
+									"try {",
+									"    var URI;",
+									"    URI = pm.environment.get(\"dummyUri\");",
+									"",
+									"} catch (error) {",
+									"    console.log(\"! Environment variables could not be loaded.\");",
+									"}",
+									"",
+									"",
+									"/****************************************************************************************",
+									"* Setting up Local Variables and Preparing the Request",
+									"****************************************************************************************/",
+									"try {",
+									"    pm.variables.clear();",
+									"",
+									"    postman.setNextRequest(\"=====> Target =====>\");",
+									"",
+									"    pm.variables.set(\"uri\", URI);",
+									"    pm.request.headers.upsert({key:\"Accept\", value:\"application/json\"});",
+									"",
+									"} catch (error) {",
+									"    console.log(\"! Local variables could not be set.\");",
+									"}",
+									"",
+									"",
+									"/****************************************************************************************",
+									"* Functions",
+									"****************************************************************************************/",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{uri}}",
+							"host": [
+								"{{uri}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "/v1/bequeath-your-data-and-die",
 			"item": [
 				{
@@ -27045,6 +27128,77 @@
 							"name": "Forwardings triggered?",
 							"item": [
 								{
+									"name": "=====> Target =====>",
+									"item": [
+										{
+											"name": "=====> Target =====>",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"console.log(\"\\n----- Target --------------------------------------------------\");",
+															"/****************************************************************************************",
+															"* ",
+															"* Here starts the execution of specific validation tests",
+															"* ",
+															"****************************************************************************************/",
+															"",
+															"",
+															"/****************************************************************************************",
+															"* Loading Input Data",
+															"****************************************************************************************/",
+															"try {",
+															"    var URI;",
+															"    URI = pm.environment.get(\"dummyUri\");",
+															"",
+															"} catch (error) {",
+															"    console.log(\"! Environment variables could not be loaded.\");",
+															"}",
+															"",
+															"",
+															"/****************************************************************************************",
+															"* Setting up Local Variables and Preparing the Request",
+															"****************************************************************************************/",
+															"try {",
+															"    pm.variables.clear();",
+															"",
+															"    pm.variables.set(\"uri\", URI);",
+															"    pm.request.headers.upsert({key:\"Accept\", value:\"application/json\"});",
+															"",
+															"} catch (error) {",
+															"    console.log(\"! Local variables could not be set.\");",
+															"}",
+															"",
+															"",
+															"/****************************************************************************************",
+															"* Functions",
+															"****************************************************************************************/",
+															"",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "noauth"
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{uri}}",
+													"host": [
+														"{{uri}}"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
 									"name": "BequeathingDataAndDieCausesForwardings",
 									"item": [
 										{
@@ -27152,8 +27306,27 @@
 															"var executionAndTraceLogTcpClientLtp;\r",
 															"var httpServerLtp;\r",
 															"var tcpServerLtpList;\r",
+															"var oldReleaseOperationClientLtp;\r",
 															"var oldReleaseHttpClientLtp;\r",
 															"var oldReleaseTcpClientLtp;\r",
+															"\r",
+															"var inquireApplicationTypeApprovalsOperationClientLtp;\r",
+															"var notifyDeregistrationsOperationClientLtp;\r",
+															"var notifyApprovalsOperationClientLtp;\r",
+															"var notifyWithdrawnApprovalsOperationClientLtp;\r",
+															"var registerApplicationOperationClientLtp;\r",
+															"var typeApprovalRegisterHttpClientLtp;\r",
+															"var redirectInfoAboutApprovalStatusChangesOperationClientLtp;\r",
+															"var registryOfficeHttpClientLtp;\r",
+															"var relayServerReplacementOperationClientLtp;\r",
+															"var deregisterApplicationOperationClientLtp;\r",
+															"var relayOperationUpdateOperationClientLtp;\r",
+															"\r",
+															"var outputFcPortListUnderNotifyDeregistrations;\r",
+															"var outputFcPortListUnderNotifyApprovals;\r",
+															"var outputFcPortListUnderNotifyWithdrawnApprovals;\r",
+															"var outputFcPortListUnderEmbedYourself;\r",
+															"\r",
 															"try {\r",
 															"    currentOperationServer = FindOperationServer(\"/v1/bequeath-your-data-and-die\", ltpList);\r",
 															"    httpServerLtp = FindHttpServerLtp(ltpList);\r",
@@ -27165,9 +27338,35 @@
 															"    executionAndTraceLogTcpClientLtp = FindServingLtp(executionAndTraceLogHttpClientLtp, ltpList);\r",
 															"\r",
 															"    //OldRelease: callback - PromptForEmbeddingCausesRequestForBequeathingData\r",
-															"    let oldReleaseOperationClientLtp = FindOperationClientUsingCallback(\"PromptForEmbeddingCausesRequestForBequeathingData\", fcList, ltpList)\r",
+															"    oldReleaseOperationClientLtp = FindOperationClientUsingCallback(\"PromptForEmbeddingCausesRequestForBequeathingData\", fcList, ltpList)\r",
 															"    oldReleaseHttpClientLtp = FindServingLtp(oldReleaseOperationClientLtp, ltpList);\r",
 															"    oldReleaseTcpClientLtp = FindServingLtp(oldReleaseHttpClientLtp, ltpList);\r",
+															"\r",
+															"    //Data transfer to new release application\r",
+															"    inquireApplicationTypeApprovalsOperationClientLtp = FindOperationClientUsingCallback(\"PromptForBequeathingDataCausesNewApplicationBeingRequestedToInquireForApplicationTypeApprovals\", fcList, ltpList);\r",
+															"    newReleaseHttpClientLtp = FindServingLtp(inquireApplicationTypeApprovalsOperationClientLtp, ltpList);\r",
+															"    newReleaseTcpClientLtp = FindServingLtp(newReleaseHttpClientLtp, ltpList);\r",
+															"\r",
+															"    notifyDeregistrationsOperationClientLtp = FindOperationClientUsingCallback(\"PromptForBequeathingDataCausesNewApplicationBeingRequestedToDocumentSubscriptionsForDeregistrationNotifications\", fcList, ltpList);\r",
+															"    notifyApprovalsOperationClientLtp = FindOperationClientUsingCallback(\"PromptForBequeathingDataCausesNewApplicationBeingRequestedToDocumentSubscriptionsForApprovalNotifications\", fcList, ltpList);\r",
+															"    notifyWithdrawnApprovalsOperationClientLtp = FindOperationClientUsingCallback(\"PromptForBequeathingDataCausesNewApplicationBeingRequestedToDocumentSubscriptionsForWithdrawnApprovalNotifications\", fcList, ltpList);\r",
+															"    registerApplicationOperationClientLtp = FindOperationClientUsingCallback(\"PromptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredApplications\", fcList, ltpList);\r",
+															"\r",
+															"    //subscription to TAR\r",
+															"    redirectInfoAboutApprovalStatusChangesOperationClientLtp = FindOperationClientUsingCallback(\"PromptForBequeathingDataCausesTARbeingRequestedToRedirectInfoAboutApprovalsToNewApplication\", fcList, ltpList);\r",
+															"    typeApprovalRegisterHttpClientLtp = FindServingLtp(redirectInfoAboutApprovalStatusChangesOperationClientLtp, ltpList);\r",
+															"\r",
+															"    relayServerReplacementOperationClientLtp = FindOperationClientUsingCallback(\"PromptForBequeathingDataCausesRequestForBroadcastingInfoAboutServerReplacement\", fcList, ltpList);\r",
+															"    registryOfficeHttpClientLtp = FindServingLtp(relayServerReplacementOperationClientLtp, ltpList);\r",
+															"\r",
+															"    deregisterApplicationOperationClientLtp = FindOperationClientUsingCallback(\"PromptForBequeathingDataCausesRequestForDeregisteringOfOldRelease\", fcList, ltpList);\r",
+															"    relayOperationUpdateOperationClientLtp = FindOperationClientUsingCallback(\"PromptingNewReleaseForUpdatingServerCausesRequestForBroadcastingInfoAboutBackwardCompatibleUpdateOfOperation\", fcList, ltpList);\r",
+															"\r",
+															"    //number of subscriptions to transfer\r",
+															"    outputFcPortListUnderNotifyDeregistrations = FindOutputFcPortList(\"DeregistrationNotification\", fcList);\r",
+															"    outputFcPortListUnderNotifyApprovals = FindOutputFcPortList(\"ApprovalNotification\", fcList);\r",
+															"    outputFcPortListUnderNotifyWithdrawnApprovals = FindOutputFcPortList(\"WithdrawnApprovalNotification\", fcList);\r",
+															"    outputFcPortListUnderEmbedYourself = FindOutputFcPortList(\"TypeApprovalCausesRequestForEmbedding\", fcList);\r",
 															"        \r",
 															"} catch (error) {\r",
 															"    console.log(error);\r",
@@ -27186,13 +27385,32 @@
 															"    pm.collectionVariables.set(\"executionAndTraceLogTcpClientLtp\", executionAndTraceLogTcpClientLtp);\r",
 															"    pm.collectionVariables.set(\"httpServerLtp\", httpServerLtp);\r",
 															"    pm.collectionVariables.set(\"tcpServerLtpList\", tcpServerLtpList);\r",
+															"    pm.collectionVariables.set(\"oldReleaseOperationClientLtp\", oldReleaseOperationClientLtp);\r",
 															"    pm.collectionVariables.set(\"oldReleaseHttpClientLtp\", oldReleaseHttpClientLtp);\r",
 															"    pm.collectionVariables.set(\"oldReleaseTcpClientLtp\", oldReleaseTcpClientLtp);\r",
+															"    pm.collectionVariables.set(\"inquireApplicationTypeApprovalsOperationClientLtp\", inquireApplicationTypeApprovalsOperationClientLtp);\r",
+															"    pm.collectionVariables.set(\"newReleaseHttpClientLtp\", newReleaseHttpClientLtp);\r",
+															"    pm.collectionVariables.set(\"newReleaseTcpClientLtp\", newReleaseTcpClientLtp);\r",
+															"    pm.collectionVariables.set(\"notifyDeregistrationsOperationClientLtp\", notifyDeregistrationsOperationClientLtp);\r",
+															"    pm.collectionVariables.set(\"notifyApprovalsOperationClientLtp\", notifyApprovalsOperationClientLtp);\r",
+															"    pm.collectionVariables.set(\"notifyWithdrawnApprovalsOperationClientLtp\", notifyWithdrawnApprovalsOperationClientLtp);\r",
+															"    pm.collectionVariables.set(\"registerApplicationOperationClientLtp\", registerApplicationOperationClientLtp);\r",
+															"    pm.collectionVariables.set(\"typeApprovalRegisterHttpClientLtp\", typeApprovalRegisterHttpClientLtp);\r",
+															"    pm.collectionVariables.set(\"redirectInfoAboutApprovalStatusChangesOperationClientLtp\", redirectInfoAboutApprovalStatusChangesOperationClientLtp);\r",
+															"    pm.collectionVariables.set(\"registryOfficeHttpClientLtp\", registryOfficeHttpClientLtp);\r",
+															"    pm.collectionVariables.set(\"relayServerReplacementOperationClientLtp\", relayServerReplacementOperationClientLtp);\r",
+															"    pm.collectionVariables.set(\"deregisterApplicationOperationClientLtp\", deregisterApplicationOperationClientLtp);\r",
+															"    pm.collectionVariables.set(\"relayOperationUpdateOperationClientLtp\", relayOperationUpdateOperationClientLtp);\r",
+															"\r",
+															"    pm.collectionVariables.set(\"outputFcPortListUnderNotifyDeregistrations\", outputFcPortListUnderNotifyDeregistrations);\r",
+															"    pm.collectionVariables.set(\"outputFcPortListUnderNotifyApprovals\", outputFcPortListUnderNotifyApprovals);\r",
+															"    pm.collectionVariables.set(\"outputFcPortListUnderNotifyWithdrawnApprovals\", outputFcPortListUnderNotifyWithdrawnApprovals);\r",
+															"    pm.collectionVariables.set(\"outputFcPortListUnderEmbedYourself\", outputFcPortListUnderEmbedYourself);\r",
 															"    \r",
 															"} catch (error) {\r",
 															"    console.log(\"! Collection variables could not be set.\");\r",
 															"}\r",
-															"\r",
+															"console.log(pm.collectionVariables)\r",
 															"\r",
 															"/****************************************************************************************\r",
 															"* Functions\r",
@@ -27653,379 +27871,6 @@
 											"response": []
 										},
 										{
-											"name": "reference OldRelease/core-model-1-4:control-construct",
-											"event": [
-												{
-													"listen": "prerequest",
-													"script": {
-														"exec": [
-															"/****************************************************************************************\r",
-															"* Loading Input Data\r",
-															"****************************************************************************************/\r",
-															"var APPLICATION;\r",
-															"var oldReleaseProtocol;\r",
-															"var oldReleaseAddress;\r",
-															"var oldReleasePort;\r",
-															"try {\r",
-															"    APPLICATION = pm.environment.get(\"application\");\r",
-															"\r",
-															"    let oldReleaseTcpClientLtp;\r",
-															"    oldReleaseTcpClientLtp = pm.collectionVariables.get(\"oldReleaseTcpClientLtp\");\r",
-															"\r",
-															"    oldReleaseProtocol = oldReleaseTcpClientLtp[\"layer-protocol\"][0][\"tcp-client-interface-1-0:tcp-client-interface-pac\"][\"tcp-client-interface-configuration\"][\"remote-protocol\"];\r",
-															"    oldReleaseProtocol = oldReleaseProtocol.substring(('tcp-client-interface-1-0:PROTOCOL_TYPE_').length);\r",
-															"    \r",
-															"    oldReleaseAddress = oldReleaseTcpClientLtp[\"layer-protocol\"][0][\"tcp-client-interface-1-0:tcp-client-interface-pac\"][\"tcp-client-interface-configuration\"][\"remote-address\"];\r",
-															"    if(oldReleaseAddress.hasOwnProperty(\"ip-address\")) {\r",
-															"        oldReleaseAddress = oldReleaseAddress[\"ip-address\"][\"ipv-4-address\"];\r",
-															"    } else {\r",
-															"        oldReleaseAddress = oldReleaseAddress[\"domain-name\"];\r",
-															"    }\r",
-															"    \r",
-															"    oldReleasePort = oldReleaseTcpClientLtp[\"layer-protocol\"][0][\"tcp-client-interface-1-0:tcp-client-interface-pac\"][\"tcp-client-interface-configuration\"][\"remote-port\"];\r",
-															"\r",
-															"} catch (error) {\r",
-															"    console.log(\"! Environment variables could not be loaded.\");\r",
-															"}\r",
-															"\r",
-															"\r",
-															"/****************************************************************************************\r",
-															"* Setting Local Variables and Preparing the Request\r",
-															"****************************************************************************************/\r",
-															"try {\r",
-															"    let URI;\r",
-															"    //URI = APPLICATION.serverUrl + \"/core-model-1-4:control-construct\";\r",
-															"    URI = oldReleaseProtocol + \"://\" + oldReleaseAddress + \":\" + oldReleasePort + \"/core-model-1-4:control-construct\";\r",
-															"\r",
-															"    let REQUEST_BODY;\r",
-															"    REQUEST_BODY = \"\";\r",
-															"\r",
-															"    let AUTHORIZATION;\r",
-															"    AUTHORIZATION = APPLICATION.authorizationCode;\r",
-															"\r",
-															"    let ACCEPT;\r",
-															"    ACCEPT = \"application/json\";\r",
-															"\r",
-															"    let CONTENT_TYPE;\r",
-															"    CONTENT_TYPE = \"application/json\";\r",
-															"\r",
-															"\r",
-															"    pm.variables.clear();\r",
-															"\r",
-															"    pm.variables.set(\"uri\", URI);\r",
-															"    pm.variables.set(\"requestBody\", REQUEST_BODY);\r",
-															"\r",
-															"    pm.request.headers.upsert({key:\"Authorization\", value:AUTHORIZATION});\r",
-															"\r",
-															"    pm.request.headers.upsert({key:\"Accept\", value:ACCEPT});\r",
-															"    pm.request.headers.upsert({key:\"Content-Type\", value:CONTENT_TYPE});\r",
-															"\r",
-															"} catch (error) {\r",
-															"    console.log(\"! Local variables could not be set.\");\r",
-															"}\r",
-															"\r",
-															"\r",
-															"/****************************************************************************************\r",
-															"* Functions\r",
-															"****************************************************************************************/\r",
-															"\r",
-															""
-														],
-														"type": "text/javascript"
-													}
-												},
-												{
-													"listen": "test",
-													"script": {
-														"exec": [
-															"/****************************************************************************************\r",
-															"* Loading Input Data\r",
-															"****************************************************************************************/\r",
-															"\r",
-															"\r",
-															"/****************************************************************************************\r",
-															"* Extracting Result\r",
-															"****************************************************************************************/\r",
-															"var ltpList;\r",
-															"var fcList;\r",
-															"try {\r",
-															"    let response;\r",
-															"    response = pm.response;\r",
-															"    \r",
-															"    let responseCode;\r",
-															"    responseCode = parseInt(response.code);\r",
-															"    \r",
-															"    if ( Math.floor(responseCode/100) === 2 ) {\r",
-															"        let responseObject;\r",
-															"        responseObject = JSON.parse(response.stream);\r",
-															"        ltpList = responseObject[\"core-model-1-4:control-construct\"][\"logical-termination-point\"];\r",
-															"        fcList = responseObject[\"core-model-1-4:control-construct\"][\"forwarding-domain\"][0][\"forwarding-construct\"];\r",
-															"\r",
-															"    } else {\r",
-															"        ltpList = [];\r",
-															"        fcList = [];\r",
-															"    }\r",
-															"\r",
-															"} catch (error) {\r",
-															"    console.log(\"! Reference object could not be extracted.\");\r",
-															"}\r",
-															"\r",
-															"var oldReleaseBequeathYourDataAndDieOperationServer;\r",
-															"var newReleaseHttpClientLtp;\r",
-															"var newReleaseTcpClientLtp;\r",
-															"var inquireApplicationTypeApprovalsOperationClientLtp;\r",
-															"var notifyDeregistrationsOperationClientLtp;\r",
-															"var notifyApprovalsOperationClientLtp;\r",
-															"var notifyWithdrawnApprovalsOperationClientLtp;\r",
-															"var registerApplicationOperationClientLtp;\r",
-															"var typeApprovalRegisterHttpClientLtp;\r",
-															"var redirectInfoAboutApprovalStatusChangesOperationClientLtp;\r",
-															"var registryOfficeHttpClientLtp;\r",
-															"var relayServerReplacementOperationClientLtp;\r",
-															"var deregisterApplicationOperationClientLtp;\r",
-															"var relayOperationUpdateOperationClientLtp;\r",
-															"\r",
-															"var outputFcPortListUnderNotifyDeregistrations;\r",
-															"var outputFcPortListUnderNotifyApprovals;\r",
-															"var outputFcPortListUnderNotifyWithdrawnApprovals;\r",
-															"var outputFcPortListUnderEmbedYourself;\r",
-															"try {\r",
-															"    oldReleaseBequeathYourDataAndDieOperationServer = FindOperationServer(\"/v1/bequeath-your-data-and-die\", ltpList);\r",
-															"\r",
-															"    inquireApplicationTypeApprovalsOperationClientLtp = FindOperationClientUsingCallback(\"PromptForBequeathingDataCausesNewApplicationBeingRequestedToInquireForApplicationTypeApprovals\", fcList, ltpList);\r",
-															"    newReleaseHttpClientLtp = FindServingLtp(inquireApplicationTypeApprovalsOperationClientLtp, ltpList);\r",
-															"    newReleaseTcpClientLtp = FindServingLtp(newReleaseHttpClientLtp, ltpList);\r",
-															"\r",
-															"    notifyDeregistrationsOperationClientLtp = FindOperationClientUsingCallback(\"PromptForBequeathingDataCausesNewApplicationBeingRequestedToDocumentSubscriptionsForDeregistrationNotifications\", fcList, ltpList);\r",
-															"    notifyApprovalsOperationClientLtp = FindOperationClientUsingCallback(\"PromptForBequeathingDataCausesNewApplicationBeingRequestedToDocumentSubscriptionsForApprovalNotifications\", fcList, ltpList);\r",
-															"    notifyWithdrawnApprovalsOperationClientLtp = FindOperationClientUsingCallback(\"PromptForBequeathingDataCausesNewApplicationBeingRequestedToDocumentSubscriptionsForWithdrawnApprovalNotifications\", fcList, ltpList);\r",
-															"    registerApplicationOperationClientLtp = FindOperationClientUsingCallback(\"PromptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredApplications\", fcList, ltpList);\r",
-															"    \r",
-															"    redirectInfoAboutApprovalStatusChangesOperationClientLtp = FindOperationClientUsingCallback(\"PromptForBequeathingDataCausesTARbeingRequestedToRedirectInfoAboutApprovalsToNewApplication\", fcList, ltpList);\r",
-															"    typeApprovalRegisterHttpClientLtp = FindServingLtp(redirectInfoAboutApprovalStatusChangesOperationClientLtp, ltpList);\r",
-															"\r",
-															"    relayServerReplacementOperationClientLtp = FindOperationClientUsingCallback(\"PromptForBequeathingDataCausesRequestForBroadcastingInfoAboutServerReplacement\", fcList, ltpList);\r",
-															"    registryOfficeHttpClientLtp = FindServingLtp(relayServerReplacementOperationClientLtp, ltpList);\r",
-															"\r",
-															"    deregisterApplicationOperationClientLtp = FindOperationClientUsingCallback(\"PromptForBequeathingDataCausesRequestForDeregisteringOfOldRelease\", fcList, ltpList);\r",
-															"    relayOperationUpdateOperationClientLtp = FindOperationClientUsingCallback(\"PromptingNewReleaseForUpdatingServerCausesRequestForBroadcastingInfoAboutBackwardCompatibleUpdateOfOperation\", fcList, ltpList);\r",
-															"\r",
-															"    outputFcPortListUnderNotifyDeregistrations = FindOutputFcPortList(\"DeregistrationNotification\", fcList);\r",
-															"    outputFcPortListUnderNotifyApprovals = FindOutputFcPortList(\"ApprovalNotification\", fcList);\r",
-															"    outputFcPortListUnderNotifyWithdrawnApprovals = FindOutputFcPortList(\"WithdrawnApprovalNotification\", fcList);\r",
-															"    outputFcPortListUnderEmbedYourself = FindOutputFcPortList(\"TypeApprovalCausesRequestForEmbedding\", fcList);\r",
-															"\r",
-															"} catch (error) {\r",
-															"    console.log(error);\r",
-															"    console.log(\"! Reference objects could not be extracted.\");\r",
-															"} \r",
-															"\r",
-															"\r",
-															"/****************************************************************************************\r",
-															"* Setting Collection Variables\r",
-															"****************************************************************************************/\r",
-															"try {\r",
-															"    pm.collectionVariables.set(\"oldReleaseBequeathYourDataAndDieOperationServer\", oldReleaseBequeathYourDataAndDieOperationServer);\r",
-															"\r",
-															"    pm.collectionVariables.set(\"inquireApplicationTypeApprovalsOperationClientLtp\", inquireApplicationTypeApprovalsOperationClientLtp);\r",
-															"    pm.collectionVariables.set(\"newReleaseHttpClientLtp\", newReleaseHttpClientLtp);\r",
-															"    pm.collectionVariables.set(\"newReleaseTcpClientLtp\", newReleaseTcpClientLtp);\r",
-															"    pm.collectionVariables.set(\"notifyDeregistrationsOperationClientLtp\", notifyDeregistrationsOperationClientLtp);\r",
-															"    pm.collectionVariables.set(\"notifyApprovalsOperationClientLtp\", notifyApprovalsOperationClientLtp);\r",
-															"    pm.collectionVariables.set(\"notifyWithdrawnApprovalsOperationClientLtp\", notifyWithdrawnApprovalsOperationClientLtp);\r",
-															"    pm.collectionVariables.set(\"registerApplicationOperationClientLtp\", registerApplicationOperationClientLtp);\r",
-															"    pm.collectionVariables.set(\"typeApprovalRegisterHttpClientLtp\", typeApprovalRegisterHttpClientLtp);\r",
-															"    pm.collectionVariables.set(\"redirectInfoAboutApprovalStatusChangesOperationClientLtp\", redirectInfoAboutApprovalStatusChangesOperationClientLtp);\r",
-															"    pm.collectionVariables.set(\"registryOfficeHttpClientLtp\", registryOfficeHttpClientLtp);\r",
-															"    pm.collectionVariables.set(\"relayServerReplacementOperationClientLtp\", relayServerReplacementOperationClientLtp);\r",
-															"    pm.collectionVariables.set(\"deregisterApplicationOperationClientLtp\", deregisterApplicationOperationClientLtp);\r",
-															"    pm.collectionVariables.set(\"relayOperationUpdateOperationClientLtp\", relayOperationUpdateOperationClientLtp);\r",
-															"\r",
-															"    pm.collectionVariables.set(\"outputFcPortListUnderNotifyDeregistrations\", outputFcPortListUnderNotifyDeregistrations);\r",
-															"    pm.collectionVariables.set(\"outputFcPortListUnderNotifyApprovals\", outputFcPortListUnderNotifyApprovals);\r",
-															"    pm.collectionVariables.set(\"outputFcPortListUnderNotifyWithdrawnApprovals\", outputFcPortListUnderNotifyWithdrawnApprovals);\r",
-															"    pm.collectionVariables.set(\"outputFcPortListUnderEmbedYourself\", outputFcPortListUnderEmbedYourself);\r",
-															"\r",
-															"} catch (error) {\r",
-															"    console.log(\"! Collection variables could not be set.\");\r",
-															"}\r",
-															"\r",
-															"\r",
-															"/****************************************************************************************\r",
-															"* Functions\r",
-															"****************************************************************************************/\r",
-															"function FindOperationServer(operationName, ltpList) {\r",
-															"    let operationServer;\r",
-															"    operationServer = \"\";\r",
-															"    try {\r",
-															"        let sampleUuid;\r",
-															"        for(let i=0; i<ltpList.length; i++) {\r",
-															"            sampleUuid = ltpList[i][\"uuid\"];\r",
-															"            if(sampleUuid.includes(\"op-s-\")) {\r",
-															"                let sampleOperationName;\r",
-															"                sampleOperationName = ltpList[i][\"layer-protocol\"][0][\"operation-server-interface-1-0:operation-server-interface-pac\"][\"operation-server-interface-capability\"][\"operation-name\"];\r",
-															"                if(sampleOperationName == operationName) {\r",
-															"                    operationServer = ltpList[i];\r",
-															"                    return operationServer;\r",
-															"                }\r",
-															"            }\r",
-															"        }\r",
-															"    } catch (error) {\r",
-															"        console.log(\"! Exception in function : FindOperationServer. \");\r",
-															"    }\r",
-															"    return operationServer;\r",
-															"}\r",
-															"\r",
-															"function FindServingLtp(clientLtp, ltpList) {\r",
-															"    let servingLtp;\r",
-															"    servingLtp = {};\r",
-															"    try{\r",
-															"        let serverLtpUuid;\r",
-															"        serverLtpUuid = clientLtp[\"server-ltp\"][0];\r",
-															"        for( let i=0; i<ltpList.length; i++ ) {\r",
-															"            let sampleUuid;\r",
-															"            sampleUuid = ltpList[i][\"uuid\"];\r",
-															"            if( sampleUuid == serverLtpUuid ) {\r",
-															"                servingLtp = ltpList[i];\r",
-															"                return servingLtp;\r",
-															"            }\r",
-															"        }\r",
-															"    } catch(error) {\r",
-															"        console.log(error);\r",
-															"        console.log(\"! Exception in function : FindServingLtp. \")\r",
-															"    }\r",
-															"    return servingLtp;\r",
-															"}\r",
-															"\r",
-															"function FindOperationClientLtp(serverLtp, ltpList, operationName) {\r",
-															"    let operationClientLtp;\r",
-															"    operationClientLtp = {};\r",
-															"    try {\r",
-															"        let clientLtpList;\r",
-															"        clientLtpList = serverLtp[\"client-ltp\"];\r",
-															"        let operationClientInstances;\r",
-															"        operationClientInstances = [];\r",
-															"        for ( let i=0; i<clientLtpList.length; i++ ) {\r",
-															"            for ( let j=0; j<ltpList.length; j++ ) {\r",
-															"                if( ltpList[j][\"uuid\"].includes(\"-op-c-\") ) {\r",
-															"                    if( ltpList[j][\"uuid\"] == clientLtpList[i] ) {\r",
-															"                        operationClientInstances.push(ltpList[j]);\r",
-															"                        break;\r",
-															"                    }\r",
-															"                }\r",
-															"            }\r",
-															"        }\r",
-															"        for( let i=0; i<operationClientInstances.length; i++ ) {\r",
-															"            let sampleOperationName;\r",
-															"            sampleOperationName = operationClientInstances[i][\"layer-protocol\"][0][\"operation-client-interface-1-0:operation-client-interface-pac\"][\"operation-client-interface-configuration\"][\"operation-name\"];\r",
-															"            if(sampleOperationName.includes(operationName)) {\r",
-															"                operationClientLtp = operationClientInstances[i];\r",
-															"                return operationClientLtp;\r",
-															"            }\r",
-															"        }\r",
-															"    } catch(error) {\r",
-															"        console.log(error);\r",
-															"        console.log(\"! Exception in function : FindOperationClientLtp. \")\r",
-															"    }\r",
-															"    return operationClientLtp;\r",
-															"}\r",
-															"\r",
-															"function FindOutputFcPortList(forwardingName, fcList) {\r",
-															"    let outputFcPortList;\r",
-															"    outputFcPortList = [];\r",
-															"    try {\r",
-															"        for( let i=0; i<fcList.length; i++ ) {\r",
-															"            for(let j=0; j<fcList[i][\"name\"].length; j++) {               \r",
-															"                if(fcList[i][\"name\"][j][\"value\"] == forwardingName) {\r",
-															"                    fcPortList = fcList[i][\"fc-port\"];\r",
-															"                    for(let k=0;k<fcPortList.length;k++) {\r",
-															"                        if(fcPortList[k][\"port-direction\"] == \"core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT\") {\r",
-															"                            outputFcPortList.push(fcPortList[k]);\r",
-															"                        }\r",
-															"                    }\r",
-															"                    return outputFcPortList;\r",
-															"                }\r",
-															"            }\r",
-															"        }\r",
-															"    } catch (error) {\r",
-															"        console.log(\"! Exception in function FindActualInstanceByUuid. \");\r",
-															"    }\r",
-															"    return outputFcPortList;\r",
-															"}\r",
-															"\r",
-															"\r",
-															"function FindActualInstanceByUuid(expectedUuid, actualLtpList) {\r",
-															"    let actualInstance;\r",
-															"    actualInstance = {};\r",
-															"    try {\r",
-															"        for ( let i=0; i<actualLtpList.length; i++ ) {\r",
-															"            let sampleUuid;\r",
-															"            sampleUuid = actualLtpList[i][\"uuid\"];\r",
-															"            if( sampleUuid == expectedUuid ) {\r",
-															"                actualInstance = actualLtpList[i];\r",
-															"                return actualInstance;\r",
-															"            }\r",
-															"        }\r",
-															"\r",
-															"    } catch (error) {\r",
-															"        console.log(\"! Exception in function FindActualInstanceByUuid. \");\r",
-															"    }\r",
-															"    return undefined;\r",
-															"}\r",
-															"\r",
-															"\r",
-															"function FindOperationClientUsingCallback(callback, fcList, ltpList) {\r",
-															"    let operationClientLtp\r",
-															"    try {\r",
-															"        let outputFcPortList = FindOutputFcPortList(callback, fcList);\r",
-															"        let randomOutputFcPort = outputFcPortList[Math.floor(Math.random() * outputFcPortList.length)];\r",
-															"        let outputLtpUuid = randomOutputFcPort[\"logical-termination-point\"];\r",
-															"        operationClientLtp = FindActualInstanceByUuid(outputLtpUuid, ltpList);\r",
-															"    } catch (error) {\r",
-															"        console.log(error);\r",
-															"        console.log(\"! Exception in function FindOperationClientUsingCallback. \");\r",
-															"    }\r",
-															"    return  operationClientLtp\r",
-															"}"
-														],
-														"type": "text/javascript"
-													}
-												}
-											],
-											"protocolProfileBehavior": {
-												"disableBodyPruning": true
-											},
-											"request": {
-												"auth": {
-													"type": "noauth"
-												},
-												"method": "GET",
-												"header": [
-													{
-														"key": "x-mock-response-code",
-														"value": "200",
-														"type": "text"
-													}
-												],
-												"body": {
-													"mode": "raw",
-													"raw": "{{requestBody}}",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "{{uri}}",
-													"host": [
-														"{{uri}}"
-													]
-												}
-											},
-											"response": []
-										},
-										{
 											"name": "sampling OldRelease/v1/bequeath-your-data-and-die",
 											"event": [
 												{
@@ -28055,9 +27900,9 @@
 															"    CURRENT_ORIGINATOR = FindHttpServerApplicationName(ltpList);\r",
 															"\r",
 															"    let currentOperationServer;\r",
-															"    currentOperationServer = pm.collectionVariables.get(\"oldReleaseBequeathYourDataAndDieOperationServer\");\r",
+															"    currentOperationServer = pm.collectionVariables.get(\"oldReleaseOperationClientLtp\");\r",
 															"    \r",
-															"    OPERATION_KEY = currentOperationServer[\"layer-protocol\"][0][\"operation-server-interface-1-0:operation-server-interface-pac\"][\"operation-server-interface-configuration\"][\"operation-key\"];\r",
+															"    OPERATION_KEY = currentOperationServer[\"layer-protocol\"][0][\"operation-client-interface-1-0:operation-client-interface-pac\"][\"operation-client-interface-configuration\"][\"operation-key\"];\r",
 															"\r",
 															"    let newReleaseHttpServerLtp;\r",
 															"    newReleaseHttpServerLtp = pm.collectionVariables.get(\"httpServerLtp\");\r",
@@ -28067,10 +27912,10 @@
 															"    let newReleaseTcpServerLtpList;\r",
 															"    newReleaseTcpServerLtpList = pm.collectionVariables.get(\"tcpServerLtpList\");\r",
 															"\r",
-															"    let newReleaseTcpServerLtp = {};\r",
-															"    if(Object.keys(newReleaseTcpServerLtpList).length != 0) {\r",
-															"        newReleaseTcpServerLtp = newReleaseTcpServerLtpList[Math.floor(Math.random() * newReleaseTcpServerLtpList.length)];\r",
-															"    }\r",
+															"    let newReleaseTcpServerLtp = newReleaseTcpServerLtpList[0];\r",
+															"    // if(Object.keys(newReleaseTcpServerLtpList).length != 0) {\r",
+															"    //     newReleaseTcpServerLtp = newReleaseTcpServerLtpList[Math.floor(Math.random() * newReleaseTcpServerLtpList.length)];\r",
+															"    // }\r",
 															"\r",
 															"    newApplicationProtocol = newReleaseTcpServerLtp[\"layer-protocol\"][0][\"tcp-server-interface-1-0:tcp-server-interface-pac\"][\"tcp-server-interface-configuration\"][\"local-protocol\"];\r",
 															"    newApplicationProtocol = newApplicationProtocol.substring(('tcp-server-interface-1-0:PROTOCOL_TYPE_').length);\r",
@@ -28637,10 +28482,10 @@
 															"    let currentTime;\r",
 															"    currentTime = new Date().getTime();\r",
 															"\r",
-															"    if((currentTime < startTimeForCallBacks+(1*60*1000)) && (!foundAnEntryWithTheExpectedFinalCallbackHeaderValuesInEatl) ) {\r",
+															"    if((currentTime < startTimeForCallBacks+(10*60*1000)) && (!foundAnEntryWithTheExpectedFinalCallbackHeaderValuesInEatl) ) {\r",
 															"        setTimeout(()=>{\r",
 															"            postman.setNextRequest(\"Expected ExecutionAndTraceLog/v1/list-records-of-flow for /v1/bequeath-your-data-and-die\");\r",
-															"        }, 20*1000);\r",
+															"        }, 100*1000);\r",
 															"    } else {\r",
 															"        let foundAnEntryWithTheExpectedHeaderValuesInEaTLForInquireApplicationTypeApprovalsInNewApplication;\r",
 															"        foundAnEntryWithTheExpectedHeaderValuesInEaTLForInquireApplicationTypeApprovalsInNewApplication = false;\r",
@@ -28672,7 +28517,7 @@
 															"\r",
 															"        for(let i=0; i<serviceRecordList.length; i++)  {\r",
 															"            if( serviceRecordList[i][\"application-name\"] == expectedNewReleaseApplicationName\r",
-															"                    && serviceRecordList[i][\"application-release-number\"] == expectedNewReleaseApplicationReleaseNumber\r",
+															"                    && serviceRecordList[i][\"release-number\"] == expectedNewReleaseApplicationReleaseNumber\r",
 															"                    && serviceRecordList[i][\"operation-name\"] == expectedInquireApplicationTypeApprovalsOperationName\r",
 															"                    && serviceRecordList[i][\"x-correlator\"] == expectedXCorrelator\r",
 															"                    && serviceRecordList[i][\"user\"] == expectedUser\r",
@@ -28681,7 +28526,7 @@
 															"                foundAnEntryWithTheExpectedHeaderValuesInEaTLForInquireApplicationTypeApprovalsInNewApplication = true;\r",
 															"            }\r",
 															"            if( serviceRecordList[i][\"application-name\"] == expectedNewReleaseApplicationName\r",
-															"                    && serviceRecordList[i][\"application-release-number\"] == expectedNewReleaseApplicationReleaseNumber\r",
+															"                    && serviceRecordList[i][\"release-number\"] == expectedNewReleaseApplicationReleaseNumber\r",
 															"                    && serviceRecordList[i][\"operation-name\"] == expectedNotifyDeregistrationsOperationName\r",
 															"                    && serviceRecordList[i][\"x-correlator\"] == expectedXCorrelator\r",
 															"                    && serviceRecordList[i][\"user\"] == expectedUser\r",
@@ -28691,7 +28536,7 @@
 															"                actualNumberOfRequestPassedForNotifyDeregistrations = actualNumberOfRequestPassedForNotifyDeregistrations + 1;\r",
 															"            }\r",
 															"            if( serviceRecordList[i][\"application-name\"] == expectedNewReleaseApplicationName\r",
-															"                    && serviceRecordList[i][\"application-release-number\"] == expectedNewReleaseApplicationReleaseNumber\r",
+															"                    && serviceRecordList[i][\"release-number\"] == expectedNewReleaseApplicationReleaseNumber\r",
 															"                    && serviceRecordList[i][\"operation-name\"] == expectedNotifyApprovalsOperationName\r",
 															"                    && serviceRecordList[i][\"x-correlator\"] == expectedXCorrelator\r",
 															"                    && serviceRecordList[i][\"user\"] == expectedUser\r",
@@ -28701,7 +28546,7 @@
 															"                actualNumberOfRequestPassedForNotifyApprovals = actualNumberOfRequestPassedForNotifyApprovals + 1;\r",
 															"            }\r",
 															"            if( serviceRecordList[i][\"application-name\"] == expectedNewReleaseApplicationName\r",
-															"                    && serviceRecordList[i][\"application-release-number\"] == expectedNewReleaseApplicationReleaseNumber\r",
+															"                    && serviceRecordList[i][\"release-number\"] == expectedNewReleaseApplicationReleaseNumber\r",
 															"                    && serviceRecordList[i][\"operation-name\"] == expectedNotifyWithdrawnApprovalsOperationName\r",
 															"                    && serviceRecordList[i][\"x-correlator\"] == expectedXCorrelator\r",
 															"                    && serviceRecordList[i][\"user\"] == expectedUser\r",
@@ -28711,7 +28556,7 @@
 															"                actualNumberOfRequestPassedForNotifyWithdrawnApprovals = actualNumberOfRequestPassedForNotifyWithdrawnApprovals + 1;\r",
 															"            }\r",
 															"            if( serviceRecordList[i][\"application-name\"] == expectedNewReleaseApplicationName\r",
-															"                    && serviceRecordList[i][\"application-release-number\"] == expectedNewReleaseApplicationReleaseNumber\r",
+															"                    && serviceRecordList[i][\"release-number\"] == expectedNewReleaseApplicationReleaseNumber\r",
 															"                    && serviceRecordList[i][\"operation-name\"] == expectedRegisterApplicationOperationName\r",
 															"                    && serviceRecordList[i][\"x-correlator\"] == expectedXCorrelator\r",
 															"                    && serviceRecordList[i][\"user\"] == expectedUser\r",
@@ -28721,7 +28566,7 @@
 															"                actualNumberOfRequestPassedForRegisterApplication = actualNumberOfRequestPassedForRegisterApplication + 1;\r",
 															"            }\r",
 															"            if( serviceRecordList[i][\"application-name\"] == expectedApprovalApplicationName\r",
-															"                    && serviceRecordList[i][\"application-release-number\"] == expectedTypeApprovalRegisterReleaseNumber\r",
+															"                    && serviceRecordList[i][\"release-number\"] == expectedTypeApprovalRegisterReleaseNumber\r",
 															"                    && serviceRecordList[i][\"operation-name\"] == expectedRedirectInfoAboutUpdatedApprovalStatusOperationName\r",
 															"                    && serviceRecordList[i][\"x-correlator\"] == expectedXCorrelator\r",
 															"                    && serviceRecordList[i][\"user\"] == expectedUser\r",
@@ -28730,7 +28575,7 @@
 															"                foundAnEntryWithTheExpectedHeaderValuesInEaTLForRedirectInfoAboutApprovalStatusInTAR = true;\r",
 															"            }\r",
 															"            if( serviceRecordList[i][\"application-name\"] == expectedRegistryApplicationName\r",
-															"                    && serviceRecordList[i][\"application-release-number\"] == expectedRegistryOfficeApplicationReleaseNumber\r",
+															"                    && serviceRecordList[i][\"release-number\"] == expectedRegistryOfficeApplicationReleaseNumber\r",
 															"                    && serviceRecordList[i][\"operation-name\"] == expectedRelayServerReplacementOperationName\r",
 															"                    && serviceRecordList[i][\"user\"] == expectedUser\r",
 															"                    && serviceRecordList[i][\"originator\"] == expectedOriginator\r",
@@ -28738,7 +28583,7 @@
 															"                foundAnEntryWithTheExpectedHeaderValuesInEaTLForBroadcastingInfoAboutServerReplacementInRO = true;\r",
 															"            }\r",
 															"            if( serviceRecordList[i][\"application-name\"] == expectedRegistryApplicationName\r",
-															"                    && serviceRecordList[i][\"application-release-number\"] == expectedRegistryOfficeApplicationReleaseNumber\r",
+															"                    && serviceRecordList[i][\"release-number\"] == expectedRegistryOfficeApplicationReleaseNumber\r",
 															"                    && serviceRecordList[i][\"operation-name\"] == expectedDeregisterApplicationOperationName\r",
 															"                    && serviceRecordList[i][\"user\"] == expectedUser\r",
 															"                    && serviceRecordList[i][\"originator\"] == expectedOriginator\r",
@@ -28746,7 +28591,7 @@
 															"                foundAnEntryWithTheExpectedHeaderValuesInEaTLForDeregisterOldReleaseInRO = true;\r",
 															"            }\r",
 															"            if( serviceRecordList[i][\"application-name\"] == expectedRegistryApplicationName\r",
-															"                    && serviceRecordList[i][\"application-release-number\"] == expectedRegistryOfficeApplicationReleaseNumber\r",
+															"                    && serviceRecordList[i][\"release-number\"] == expectedRegistryOfficeApplicationReleaseNumber\r",
 															"                    && serviceRecordList[i][\"operation-name\"] == expectedRelayOperationUpdateOperationName\r",
 															"                    && serviceRecordList[i][\"user\"] == expectedUser\r",
 															"                    && serviceRecordList[i][\"originator\"] == expectedOriginator\r",
@@ -28893,630 +28738,92 @@
 												}
 											},
 											"response": []
-										},
-										{
-											"name": "initial newRelease/application-name",
-											"event": [
-												{
-													"listen": "prerequest",
-													"script": {
-														"exec": [
-															"/****************************************************************************************\r",
-															"* Loading Input Data\r",
-															"****************************************************************************************/\r",
-															"var APPLICATION;\r",
-															"var newReleaseHttpClientLtpUuid;\r",
-															"var initialApplicationName;\r",
-															"var oldReleaseProtocol;\r",
-															"var oldReleaseAddress;\r",
-															"var oldReleasePort;\r",
-															"try {\r",
-															"    APPLICATION = pm.environment.get(\"application\");\r",
-															"    \r",
-															"    let newReleaseHttpClientLtp;\r",
-															"    newReleaseHttpClientLtp = pm.collectionVariables.get(\"newReleaseHttpClientLtp\");\r",
-															"\r",
-															"    newReleaseHttpClientLtpUuid = newReleaseHttpClientLtp[\"uuid\"];\r",
-															"\r",
-															"    initialApplicationName = newReleaseHttpClientLtp[\"layer-protocol\"][0][\"http-client-interface-1-0:http-client-interface-pac\"][\"http-client-interface-configuration\"][\"application-name\"];\r",
-															"\r",
-															"    let oldReleaseTcpClientLtp;\r",
-															"    oldReleaseTcpClientLtp = pm.collectionVariables.get(\"oldReleaseTcpClientLtp\");\r",
-															"\r",
-															"    oldReleaseProtocol = oldReleaseTcpClientLtp[\"layer-protocol\"][0][\"tcp-client-interface-1-0:tcp-client-interface-pac\"][\"tcp-client-interface-configuration\"][\"remote-protocol\"];\r",
-															"    oldReleaseProtocol = oldReleaseProtocol.substring(('tcp-client-interface-1-0:PROTOCOL_TYPE_').length);\r",
-															"    \r",
-															"    oldReleaseAddress = oldReleaseTcpClientLtp[\"layer-protocol\"][0][\"tcp-client-interface-1-0:tcp-client-interface-pac\"][\"tcp-client-interface-configuration\"][\"remote-address\"];\r",
-															"    if(oldReleaseAddress.hasOwnProperty(\"ip-address\")) {\r",
-															"        oldReleaseAddress = oldReleaseAddress[\"ip-address\"][\"ipv-4-address\"];\r",
-															"    } else {\r",
-															"        oldReleaseAddress = oldReleaseAddress[\"domain-name\"];\r",
-															"    }\r",
-															"    oldReleasePort = oldReleaseTcpClientLtp[\"layer-protocol\"][0][\"tcp-client-interface-1-0:tcp-client-interface-pac\"][\"tcp-client-interface-configuration\"][\"remote-port\"];\r",
-															"\r",
-															"} catch (error) {\r",
-															"    console.log(\"! Variables could not be loaded.\");\r",
-															"}\r",
-															"\r",
-															"/****************************************************************************************\r",
-															"* Setting Collection Variables\r",
-															"****************************************************************************************/\r",
-															"\r",
-															"/****************************************************************************************\r",
-															"* Setting Local Variables and Preparing the Request\r",
-															"****************************************************************************************/\r",
-															"try {\r",
-															"    let URI;\r",
-															"    URI = oldReleaseProtocol + \"://\" + oldReleaseAddress + \":\" + oldReleasePort \r",
-															"            + \"/core-model-1-4:control-construct/logical-termination-point=\"\r",
-															"            + newReleaseHttpClientLtpUuid\r",
-															"            + \"/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name\";\r",
-															"\r",
-															"    let REQUEST_BODY;\r",
-															"    REQUEST_BODY = '{ '\r",
-															"                    +   '\"http-client-interface-1-0:application-name\": \"' + initialApplicationName + '\"'\r",
-															"                    + ' }';\r",
-															"\r",
-															"    let AUTHORIZATION;\r",
-															"    AUTHORIZATION = APPLICATION.authorizationCode;\r",
-															"\r",
-															"    let ACCEPT;\r",
-															"    ACCEPT = \"application/json\";\r",
-															"\r",
-															"    let CONTENT_TYPE;\r",
-															"    CONTENT_TYPE = \"application/json\";\r",
-															"\r",
-															"\r",
-															"    pm.variables.clear();\r",
-															"\r",
-															"    pm.variables.set(\"uri\", URI);\r",
-															"    pm.variables.set(\"requestBody\", REQUEST_BODY);\r",
-															"\r",
-															"    pm.request.headers.upsert({key:\"Authorization\", value:AUTHORIZATION});\r",
-															"\r",
-															"    pm.request.headers.upsert({key:\"Accept\", value:ACCEPT});\r",
-															"    pm.request.headers.upsert({key:\"Content-Type\", value:CONTENT_TYPE});\r",
-															"\r",
-															"} catch (error) {\r",
-															"    console.log(error)\r",
-															"    console.log(\"! Local variables could not be set.\");\r",
-															"}\r",
-															"\r",
-															"\r",
-															"/****************************************************************************************\r",
-															"* Functions\r",
-															"****************************************************************************************/\r",
-															"\r",
-															""
-														],
-														"type": "text/javascript"
-													}
-												}
-											],
-											"request": {
-												"method": "PUT",
-												"header": [
-													{
-														"key": "x-mock-response-code",
-														"value": "204",
-														"type": "text"
-													}
-												],
-												"body": {
-													"mode": "raw",
-													"raw": "{{requestBody}}",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "{{uri}}",
-													"host": [
-														"{{uri}}"
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "initial newRelease/release-number",
-											"event": [
-												{
-													"listen": "prerequest",
-													"script": {
-														"exec": [
-															"/****************************************************************************************\r",
-															"* Loading Input Data\r",
-															"****************************************************************************************/\r",
-															"var APPLICATION;\r",
-															"var newReleaseHttpClientLtpUuid;\r",
-															"var initialReleaseNumber;\r",
-															"var oldReleaseProtocol;\r",
-															"var oldReleaseAddress;\r",
-															"var oldReleasePort;\r",
-															"try {\r",
-															"    APPLICATION = pm.environment.get(\"application\");\r",
-															"    \r",
-															"    let newReleaseHttpClientLtp;\r",
-															"    newReleaseHttpClientLtp = pm.collectionVariables.get(\"newReleaseHttpClientLtp\");\r",
-															"\r",
-															"    newReleaseHttpClientLtpUuid = newReleaseHttpClientLtp[\"uuid\"];\r",
-															"\r",
-															"    initialReleaseNumber = newReleaseHttpClientLtp[\"layer-protocol\"][0][\"http-client-interface-1-0:http-client-interface-pac\"][\"http-client-interface-configuration\"][\"release-number\"];\r",
-															"\r",
-															"    let oldReleaseTcpClientLtp;\r",
-															"    oldReleaseTcpClientLtp = pm.collectionVariables.get(\"oldReleaseTcpClientLtp\");\r",
-															"\r",
-															"    oldReleaseProtocol = oldReleaseTcpClientLtp[\"layer-protocol\"][0][\"tcp-client-interface-1-0:tcp-client-interface-pac\"][\"tcp-client-interface-configuration\"][\"remote-protocol\"];\r",
-															"    oldReleaseProtocol = oldReleaseProtocol.substring(('tcp-client-interface-1-0:PROTOCOL_TYPE_').length);\r",
-															"    \r",
-															"    oldReleaseAddress = oldReleaseTcpClientLtp[\"layer-protocol\"][0][\"tcp-client-interface-1-0:tcp-client-interface-pac\"][\"tcp-client-interface-configuration\"][\"remote-address\"];\r",
-															"    if(oldReleaseAddress.hasOwnProperty(\"ip-address\")) {\r",
-															"        oldReleaseAddress = oldReleaseAddress[\"ip-address\"][\"ipv-4-address\"];\r",
-															"    } else {\r",
-															"        oldReleaseAddress = oldReleaseAddress[\"domain-name\"];\r",
-															"    }\r",
-															"    oldReleasePort = oldReleaseTcpClientLtp[\"layer-protocol\"][0][\"tcp-client-interface-1-0:tcp-client-interface-pac\"][\"tcp-client-interface-configuration\"][\"remote-port\"];\r",
-															"\r",
-															"} catch (error) {\r",
-															"    console.log(\"! Variables could not be loaded.\");\r",
-															"}\r",
-															"\r",
-															"/****************************************************************************************\r",
-															"* Setting Collection Variables\r",
-															"****************************************************************************************/\r",
-															"\r",
-															"/****************************************************************************************\r",
-															"* Setting Local Variables and Preparing the Request\r",
-															"****************************************************************************************/\r",
-															"try {\r",
-															"    let URI;\r",
-															"    URI = oldReleaseProtocol + \"://\" + oldReleaseAddress + \":\" + oldReleasePort \r",
-															"            + \"/core-model-1-4:control-construct/logical-termination-point=\"\r",
-															"            + newReleaseHttpClientLtpUuid\r",
-															"            + \"/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number\";\r",
-															"\r",
-															"    let REQUEST_BODY;\r",
-															"    REQUEST_BODY = '{ '\r",
-															"                    +   '\"http-client-interface-1-0:release-number\": \"' + initialReleaseNumber + '\"'\r",
-															"                    + ' }';\r",
-															"\r",
-															"    let AUTHORIZATION;\r",
-															"    AUTHORIZATION = APPLICATION.authorizationCode;\r",
-															"\r",
-															"    let ACCEPT;\r",
-															"    ACCEPT = \"application/json\";\r",
-															"\r",
-															"    let CONTENT_TYPE;\r",
-															"    CONTENT_TYPE = \"application/json\";\r",
-															"\r",
-															"\r",
-															"    pm.variables.clear();\r",
-															"\r",
-															"    pm.variables.set(\"uri\", URI);\r",
-															"    pm.variables.set(\"requestBody\", REQUEST_BODY);\r",
-															"\r",
-															"    pm.request.headers.upsert({key:\"Authorization\", value:AUTHORIZATION});\r",
-															"\r",
-															"    pm.request.headers.upsert({key:\"Accept\", value:ACCEPT});\r",
-															"    pm.request.headers.upsert({key:\"Content-Type\", value:CONTENT_TYPE});\r",
-															"\r",
-															"} catch (error) {\r",
-															"    console.log(error)\r",
-															"    console.log(\"! Local variables could not be set.\");\r",
-															"}\r",
-															"\r",
-															"\r",
-															"/****************************************************************************************\r",
-															"* Functions\r",
-															"****************************************************************************************/\r",
-															"\r",
-															""
-														],
-														"type": "text/javascript"
-													}
-												}
-											],
-											"request": {
-												"method": "PUT",
-												"header": [
-													{
-														"key": "x-mock-response-code",
-														"value": "204",
-														"type": "text"
-													}
-												],
-												"body": {
-													"mode": "raw",
-													"raw": "{{requestBody}}",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "{{uri}}",
-													"host": [
-														"{{uri}}"
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "initial newRelease/remote-protocol",
-											"event": [
-												{
-													"listen": "prerequest",
-													"script": {
-														"exec": [
-															"/****************************************************************************************\r",
-															"* Loading Input Data\r",
-															"****************************************************************************************/\r",
-															"var APPLICATION;\r",
-															"var newReleaseTcpClientUuid;\r",
-															"var initialReleaseRemoteProtocol;\r",
-															"var oldReleaseProtocol;\r",
-															"var oldReleaseAddress;\r",
-															"var oldReleasePort;\r",
-															"try {\r",
-															"    APPLICATION = pm.environment.get(\"application\");\r",
-															"    \r",
-															"    let newReleaseTcpClientLtp;\r",
-															"    newReleaseTcpClientLtp = pm.collectionVariables.get(\"newReleaseTcpClientLtp\");\r",
-															"\r",
-															"    newReleaseTcpClientUuid = newReleaseTcpClientLtp[\"uuid\"];\r",
-															"\r",
-															"    initialReleaseRemoteProtocol = newReleaseTcpClientLtp[\"layer-protocol\"][0][\"tcp-client-interface-1-0:tcp-client-interface-pac\"][\"tcp-client-interface-configuration\"][\"remote-protocol\"];\r",
-															"\r",
-															"    let oldReleaseTcpClientLtp;\r",
-															"    oldReleaseTcpClientLtp = pm.collectionVariables.get(\"oldReleaseTcpClientLtp\");\r",
-															"\r",
-															"    oldReleaseProtocol = oldReleaseTcpClientLtp[\"layer-protocol\"][0][\"tcp-client-interface-1-0:tcp-client-interface-pac\"][\"tcp-client-interface-configuration\"][\"remote-protocol\"];\r",
-															"    oldReleaseProtocol = oldReleaseProtocol.substring(('tcp-client-interface-1-0:PROTOCOL_TYPE_').length);\r",
-															"    \r",
-															"    oldReleaseAddress = oldReleaseTcpClientLtp[\"layer-protocol\"][0][\"tcp-client-interface-1-0:tcp-client-interface-pac\"][\"tcp-client-interface-configuration\"][\"remote-address\"];\r",
-															"    if(oldReleaseAddress.hasOwnProperty(\"ip-address\")) {\r",
-															"        oldReleaseAddress = oldReleaseAddress[\"ip-address\"][\"ipv-4-address\"];\r",
-															"    } else {\r",
-															"        oldReleaseAddress = oldReleaseAddress[\"domain-name\"];\r",
-															"    }\r",
-															"    oldReleasePort = oldReleaseTcpClientLtp[\"layer-protocol\"][0][\"tcp-client-interface-1-0:tcp-client-interface-pac\"][\"tcp-client-interface-configuration\"][\"remote-port\"];\r",
-															"\r",
-															"} catch (error) {\r",
-															"    console.log(\"! Variables could not be loaded.\");\r",
-															"}\r",
-															"\r",
-															"\r",
-															"/****************************************************************************************\r",
-															"* Setting Local Variables and Preparing the Request\r",
-															"****************************************************************************************/\r",
-															"try {\r",
-															"    let URI;\r",
-															"    URI = oldReleaseProtocol + \"://\" + oldReleaseAddress + \":\" + oldReleasePort \r",
-															"            + \"/core-model-1-4:control-construct/logical-termination-point=\" \r",
-															"            + newReleaseTcpClientUuid\r",
-															"            + \"/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol\";\r",
-															"\r",
-															"    let REQUEST_BODY;\r",
-															"    REQUEST_BODY = '{ '\r",
-															"                    +   '\"tcp-client-interface-1-0:remote-protocol\": \"' + initialReleaseRemoteProtocol + '\"'\r",
-															"                    + ' }';\r",
-															"\r",
-															"    let AUTHORIZATION;\r",
-															"    AUTHORIZATION = APPLICATION.authorizationCode;\r",
-															"\r",
-															"    let ACCEPT;\r",
-															"    ACCEPT = \"application/json\";\r",
-															"\r",
-															"    let CONTENT_TYPE;\r",
-															"    CONTENT_TYPE = \"application/json\";\r",
-															"\r",
-															"\r",
-															"    pm.variables.clear();\r",
-															"\r",
-															"    pm.variables.set(\"uri\", URI);\r",
-															"    pm.variables.set(\"requestBody\", REQUEST_BODY);\r",
-															"\r",
-															"    pm.request.headers.upsert({key:\"Authorization\", value:AUTHORIZATION});\r",
-															"\r",
-															"    pm.request.headers.upsert({key:\"Accept\", value:ACCEPT});\r",
-															"    pm.request.headers.upsert({key:\"Content-Type\", value:CONTENT_TYPE});\r",
-															"\r",
-															"} catch (error) {\r",
-															"    console.log(error)\r",
-															"    console.log(\"! Local variables could not be set.\");\r",
-															"}\r",
-															"\r",
-															"\r",
-															"/****************************************************************************************\r",
-															"* Functions\r",
-															"****************************************************************************************/\r",
-															"\r",
-															""
-														],
-														"type": "text/javascript"
-													}
-												}
-											],
-											"request": {
-												"method": "PUT",
-												"header": [
-													{
-														"key": "x-mock-response-code",
-														"value": "204",
-														"type": "text"
-													}
-												],
-												"body": {
-													"mode": "raw",
-													"raw": "{{requestBody}}",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "{{uri}}",
-													"host": [
-														"{{uri}}"
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "initial newRelease/remote-address",
-											"event": [
-												{
-													"listen": "prerequest",
-													"script": {
-														"exec": [
-															"/****************************************************************************************\r",
-															"* Loading Input Data\r",
-															"****************************************************************************************/\r",
-															"var APPLICATION;\r",
-															"var newReleaseTcpClientUuid;\r",
-															"var newReleaseRemoteAddress;\r",
-															"var oldReleaseProtocol;\r",
-															"var oldReleaseAddress;\r",
-															"var oldReleasePort;\r",
-															"try {\r",
-															"    APPLICATION = pm.environment.get(\"application\");\r",
-															"    \r",
-															"    let newReleaseTcpClientLtp;\r",
-															"    newReleaseTcpClientLtp = pm.collectionVariables.get(\"newReleaseTcpClientLtp\");\r",
-															"\r",
-															"    newReleaseTcpClientUuid = newReleaseTcpClientLtp[\"uuid\"];\r",
-															"\r",
-															"    newReleaseRemoteAddress = newReleaseTcpClientLtp[\"layer-protocol\"][0][\"tcp-client-interface-1-0:tcp-client-interface-pac\"][\"tcp-client-interface-configuration\"][\"remote-address\"];\r",
-															"\r",
-															"    let oldReleaseTcpClientLtp;\r",
-															"    oldReleaseTcpClientLtp = pm.collectionVariables.get(\"oldReleaseTcpClientLtp\");\r",
-															"\r",
-															"    oldReleaseProtocol = oldReleaseTcpClientLtp[\"layer-protocol\"][0][\"tcp-client-interface-1-0:tcp-client-interface-pac\"][\"tcp-client-interface-configuration\"][\"remote-protocol\"];\r",
-															"    oldReleaseProtocol = oldReleaseProtocol.substring(('tcp-client-interface-1-0:PROTOCOL_TYPE_').length);\r",
-															"    \r",
-															"    oldReleaseAddress = oldReleaseTcpClientLtp[\"layer-protocol\"][0][\"tcp-client-interface-1-0:tcp-client-interface-pac\"][\"tcp-client-interface-configuration\"][\"remote-address\"];\r",
-															"    if(oldReleaseAddress.hasOwnProperty(\"ip-address\")) {\r",
-															"        oldReleaseAddress = oldReleaseAddress[\"ip-address\"][\"ipv-4-address\"];\r",
-															"    } else {\r",
-															"        oldReleaseAddress = oldReleaseAddress[\"domain-name\"];\r",
-															"    }\r",
-															"    oldReleasePort = oldReleaseTcpClientLtp[\"layer-protocol\"][0][\"tcp-client-interface-1-0:tcp-client-interface-pac\"][\"tcp-client-interface-configuration\"][\"remote-port\"];\r",
-															"\r",
-															"} catch (error) {\r",
-															"    console.log(\"! Variables could not be loaded.\");\r",
-															"}\r",
-															"\r",
-															"\r",
-															"/****************************************************************************************\r",
-															"* Setting Local Variables and Preparing the Request\r",
-															"****************************************************************************************/\r",
-															"try {\r",
-															"    let URI;\r",
-															"    URI = oldReleaseProtocol + \"://\" + oldReleaseAddress + \":\" + oldReleasePort \r",
-															"            + \"/core-model-1-4:control-construct/logical-termination-point=\" \r",
-															"            + newReleaseTcpClientUuid\r",
-															"            + \"/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address\";\r",
-															"\r",
-															"    let REQUEST_BODY;\r",
-															"    REQUEST_BODY = '{ '\r",
-															"                    +   '\"tcp-client-interface-1-0:remote-address\": '+ JSON.stringify(newReleaseRemoteAddress)\r",
-															"                    + ' }';\r",
-															"\r",
-															"    let AUTHORIZATION;\r",
-															"    AUTHORIZATION = APPLICATION.authorizationCode;\r",
-															"\r",
-															"    let ACCEPT;\r",
-															"    ACCEPT = \"application/json\";\r",
-															"\r",
-															"    let CONTENT_TYPE;\r",
-															"    CONTENT_TYPE = \"application/json\";\r",
-															"\r",
-															"\r",
-															"    pm.variables.clear();\r",
-															"\r",
-															"    pm.variables.set(\"uri\", URI);\r",
-															"    pm.variables.set(\"requestBody\", REQUEST_BODY);\r",
-															"\r",
-															"    pm.request.headers.upsert({key:\"Authorization\", value:AUTHORIZATION});\r",
-															"\r",
-															"    pm.request.headers.upsert({key:\"Accept\", value:ACCEPT});\r",
-															"    pm.request.headers.upsert({key:\"Content-Type\", value:CONTENT_TYPE});\r",
-															"\r",
-															"} catch (error) {\r",
-															"    console.log(error)\r",
-															"    console.log(\"! Local variables could not be set.\");\r",
-															"}\r",
-															"\r",
-															"\r",
-															"/****************************************************************************************\r",
-															"* Functions\r",
-															"****************************************************************************************/\r",
-															"\r",
-															""
-														],
-														"type": "text/javascript"
-													}
-												}
-											],
-											"request": {
-												"method": "PUT",
-												"header": [
-													{
-														"key": "x-mock-response-code",
-														"value": "204",
-														"type": "text"
-													}
-												],
-												"body": {
-													"mode": "raw",
-													"raw": "{{requestBody}}",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "{{uri}}",
-													"host": [
-														"{{uri}}"
-													]
-												}
-											},
-											"response": []
-										},
-										{
-											"name": "initial newRelease/remote-port",
-											"event": [
-												{
-													"listen": "prerequest",
-													"script": {
-														"exec": [
-															"/****************************************************************************************\r",
-															"* Loading Input Data\r",
-															"****************************************************************************************/\r",
-															"var APPLICATION;\r",
-															"var newReleaseTcpClientUuid;\r",
-															"var newReleaseRemoteAddress;\r",
-															"var oldReleaseProtocol;\r",
-															"var oldReleaseAddress;\r",
-															"var oldReleasePort;\r",
-															"try {\r",
-															"    APPLICATION = pm.environment.get(\"application\");\r",
-															"    \r",
-															"    let newReleaseTcpClientLtp;\r",
-															"    newReleaseTcpClientLtp = pm.collectionVariables.get(\"newReleaseTcpClientLtp\");\r",
-															"\r",
-															"    newReleaseTcpClientUuid = newReleaseTcpClientLtp[\"uuid\"];\r",
-															"\r",
-															"    newReleaseRemotePort = newReleaseTcpClientLtp[\"layer-protocol\"][0][\"tcp-client-interface-1-0:tcp-client-interface-pac\"][\"tcp-client-interface-configuration\"][\"remote-port\"];\r",
-															"\r",
-															"    let oldReleaseTcpClientLtp;\r",
-															"    oldReleaseTcpClientLtp = pm.collectionVariables.get(\"oldReleaseTcpClientLtp\");\r",
-															"\r",
-															"    oldReleaseProtocol = oldReleaseTcpClientLtp[\"layer-protocol\"][0][\"tcp-client-interface-1-0:tcp-client-interface-pac\"][\"tcp-client-interface-configuration\"][\"remote-protocol\"];\r",
-															"    oldReleaseProtocol = oldReleaseProtocol.substring(('tcp-client-interface-1-0:PROTOCOL_TYPE_').length);\r",
-															"    \r",
-															"    oldReleaseAddress = oldReleaseTcpClientLtp[\"layer-protocol\"][0][\"tcp-client-interface-1-0:tcp-client-interface-pac\"][\"tcp-client-interface-configuration\"][\"remote-address\"];\r",
-															"    if(oldReleaseAddress.hasOwnProperty(\"ip-address\")) {\r",
-															"        oldReleaseAddress = oldReleaseAddress[\"ip-address\"][\"ipv-4-address\"];\r",
-															"    } else {\r",
-															"        oldReleaseAddress = oldReleaseAddress[\"domain-name\"];\r",
-															"    }\r",
-															"    oldReleasePort = oldReleaseTcpClientLtp[\"layer-protocol\"][0][\"tcp-client-interface-1-0:tcp-client-interface-pac\"][\"tcp-client-interface-configuration\"][\"remote-port\"];\r",
-															"\r",
-															"} catch (error) {\r",
-															"    console.log(\"! Variables could not be loaded.\");\r",
-															"}\r",
-															"\r",
-															"\r",
-															"/****************************************************************************************\r",
-															"* Setting Local Variables and Preparing the Request\r",
-															"****************************************************************************************/\r",
-															"try {\r",
-															"    let URI;\r",
-															"    URI = oldReleaseProtocol + \"://\" + oldReleaseAddress + \":\" + oldReleasePort \r",
-															"            + \"/core-model-1-4:control-construct/logical-termination-point=\" \r",
-															"            + newReleaseTcpClientUuid\r",
-															"            + \"/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port\";\r",
-															"\r",
-															"    let REQUEST_BODY;\r",
-															"    REQUEST_BODY = '{ '\r",
-															"                    +   '\"tcp-client-interface-1-0:remote-port\": ' + newReleaseRemotePort\r",
-															"                    + ' }';\r",
-															"\r",
-															"    let AUTHORIZATION;\r",
-															"    AUTHORIZATION = APPLICATION.authorizationCode;\r",
-															"\r",
-															"    let ACCEPT;\r",
-															"    ACCEPT = \"application/json\";\r",
-															"\r",
-															"    let CONTENT_TYPE;\r",
-															"    CONTENT_TYPE = \"application/json\";\r",
-															"\r",
-															"\r",
-															"    pm.variables.clear();\r",
-															"\r",
-															"    pm.variables.set(\"uri\", URI);\r",
-															"    pm.variables.set(\"requestBody\", REQUEST_BODY);\r",
-															"\r",
-															"    pm.request.headers.upsert({key:\"Authorization\", value:AUTHORIZATION});\r",
-															"\r",
-															"    pm.request.headers.upsert({key:\"Accept\", value:ACCEPT});\r",
-															"    pm.request.headers.upsert({key:\"Content-Type\", value:CONTENT_TYPE});\r",
-															"\r",
-															"} catch (error) {\r",
-															"    console.log(error)\r",
-															"    console.log(\"! Local variables could not be set.\");\r",
-															"}\r",
-															"\r",
-															"\r",
-															"/****************************************************************************************\r",
-															"* Functions\r",
-															"****************************************************************************************/\r",
-															"\r",
-															""
-														],
-														"type": "text/javascript"
-													}
-												}
-											],
-											"request": {
-												"method": "PUT",
-												"header": [
-													{
-														"key": "x-mock-response-code",
-														"value": "204",
-														"type": "text"
-													}
-												],
-												"body": {
-													"mode": "raw",
-													"raw": "{{requestBody}}",
-													"options": {
-														"raw": {
-															"language": "json"
-														}
-													}
-												},
-												"url": {
-													"raw": "{{uri}}",
-													"host": [
-														"{{uri}}"
-													]
-												}
-											},
-											"response": []
 										}
 									],
 									"description": "## Gets the forwarding happened for the incoming request?\n\nBequeathingDataAndDieCausesForwardings\n\n#### Requires:\n\n- ExecutionAndTraceLog server to operate\n    \n    #### Preparation:\n    \n- GETing CC (/core-model-1-4:control-construct)\n- searching CC for op-s of /v1/bequeath-your-data-and-die, storing operation-key\n    - searching CC for http-s and tcp-s list , store them\n- from fc PromptForEmbeddingCausesRequestForBequeathingData, find random output fc-port, its op-c, corresponding http-c and tcp-c of OldRelease, store them\n    - from fc ServiceRequestCausesLoggingRequest, find output op-c, corresponding http-c and tcp-c, store them\n- GETting EaTL/CC (while using IP and port from above)\n    - searching CC for op-c of /v1/list-records-of-flow, storing operation-key\n- POST OldRelease/CC\n    - find op-s of bequeath-your-data-and-die, store it\n    - from all fc(s) of callbacks of bequeathing service, get corresponding output fc-port op-c, their http-c and tcp-c and for subscriptions, collect the total number of output fc-port in list.\n- POST OldRelease//v1/bequeath-your-data-and-die with\n    - all attributes according to chosen http-s and tcp-s data\n    - operation-key from above\n        - all parameters with realistic values (incl. DummyXCorrelator)\n            \n #### Testing:\n            \n- POST ExecutionAndTraceLog/v1/list-records-of-flow with\n    - IP and port from above\n    - operation-key from above\n    - DummyValue of x-correlator\n    - checking response\n    - checking same record for containing DummyXCorrelator and  \n        each callback is present .  \n        POST - 3 min - eatl log -x-core - check entries  \n        timer 10 min - loop for every 1 min, to check if last forwarding is executed/not\n        \n#### Clearing:\n        \n- PUT initial newRelease/application-name\n- PUT initial newRelease/release-number\n- PUT initial newRelease/protocol\n- PUT initial newRelease/address\n- PUT initial newRelease/port"
+								}
+							]
+						},
+						{
+							"name": "=====> JustJumpToTheEnd =====>",
+							"item": [
+								{
+									"name": "=====> JustJumpToTheEnd =====>",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"console.log(\"\\n----- JustJumpToEnd --------------------------------------------------\");",
+													"/****************************************************************************************",
+													"* ",
+													"* This is a request for daily working with the Validator.",
+													"* It just makes the program flow jumping to the Request named \"=====> End\".",
+													"* ",
+													"****************************************************************************************/",
+													" ",
+													" ",
+													"/****************************************************************************************",
+													"* Loading Input Data",
+													"****************************************************************************************/",
+													"try {",
+													"    var URI;",
+													"    URI = pm.environment.get(\"dummyUri\");",
+													"",
+													"} catch (error) {",
+													"    console.log(\"! Environment variables could not be loaded.\");",
+													"}",
+													"",
+													"",
+													"/****************************************************************************************",
+													"* Setting up Local Variables and Preparing the Request",
+													"****************************************************************************************/",
+													"try {",
+													"    pm.variables.clear();",
+													"",
+													"    postman.setNextRequest(\"=====> End\");",
+													"",
+													"    pm.variables.set(\"uri\", URI);",
+													"    pm.request.headers.upsert({key:\"Accept\", value:\"application/json\"});",
+													"",
+													"} catch (error) {",
+													"    console.log(\"! Local variables could not be set.\");",
+													"}",
+													"",
+													"",
+													"/****************************************************************************************",
+													"* Functions",
+													"****************************************************************************************/",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{uri}}",
+											"host": [
+												"{{uri}}"
+											]
+										}
+									},
+									"response": []
 								}
 							]
 						},
@@ -38331,243 +37638,6 @@
 		{
 			"name": "Termination",
 			"item": [
-				{
-					"name": "=====> JustJumpToTarget =====>",
-					"item": [
-						{
-							"name": "=====> JustJumpToTarget =====>",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"console.log(\"\\n----- JustJumpToTarget --------------------------------------------------\");",
-											"/****************************************************************************************",
-											"* ",
-											"* This is a request for daily working with the Validator.",
-											"* It just makes the program flow jumping to the Request named \"=====> Target =====>\".",
-											"* ",
-											"****************************************************************************************/",
-											" ",
-											" ",
-											"/****************************************************************************************",
-											"* Loading Input Data",
-											"****************************************************************************************/",
-											"try {",
-											"    var URI;",
-											"    URI = pm.environment.get(\"dummyUri\");",
-											"",
-											"} catch (error) {",
-											"    console.log(\"! Environment variables could not be loaded.\");",
-											"}",
-											"",
-											"",
-											"/****************************************************************************************",
-											"* Setting up Local Variables and Preparing the Request",
-											"****************************************************************************************/",
-											"try {",
-											"    pm.variables.clear();",
-											"",
-											"    postman.setNextRequest(\"=====> Target =====>\");",
-											"",
-											"    pm.variables.set(\"uri\", URI);",
-											"    pm.request.headers.upsert({key:\"Accept\", value:\"application/json\"});",
-											"",
-											"} catch (error) {",
-											"    console.log(\"! Local variables could not be set.\");",
-											"}",
-											"",
-											"",
-											"/****************************************************************************************",
-											"* Functions",
-											"****************************************************************************************/",
-											"",
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{uri}}",
-									"host": [
-										"{{uri}}"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "=====> Target =====>",
-					"item": [
-						{
-							"name": "=====> Target =====>",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"console.log(\"\\n----- Target --------------------------------------------------\");",
-											"/****************************************************************************************",
-											"* ",
-											"* Here starts the execution of specific validation tests",
-											"* ",
-											"****************************************************************************************/",
-											"",
-											"",
-											"/****************************************************************************************",
-											"* Loading Input Data",
-											"****************************************************************************************/",
-											"try {",
-											"    var URI;",
-											"    URI = pm.environment.get(\"dummyUri\");",
-											"",
-											"} catch (error) {",
-											"    console.log(\"! Environment variables could not be loaded.\");",
-											"}",
-											"",
-											"",
-											"/****************************************************************************************",
-											"* Setting up Local Variables and Preparing the Request",
-											"****************************************************************************************/",
-											"try {",
-											"    pm.variables.clear();",
-											"",
-											"    pm.variables.set(\"uri\", URI);",
-											"    pm.request.headers.upsert({key:\"Accept\", value:\"application/json\"});",
-											"",
-											"} catch (error) {",
-											"    console.log(\"! Local variables could not be set.\");",
-											"}",
-											"",
-											"",
-											"/****************************************************************************************",
-											"* Functions",
-											"****************************************************************************************/",
-											"",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{uri}}",
-									"host": [
-										"{{uri}}"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "=====> JustJumpToTheEnd =====>",
-					"item": [
-						{
-							"name": "=====> JustJumpToTheEnd =====>",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"console.log(\"\\n----- JustJumpToEnd --------------------------------------------------\");",
-											"/****************************************************************************************",
-											"* ",
-											"* This is a request for daily working with the Validator.",
-											"* It just makes the program flow jumping to the Request named \"=====> End\".",
-											"* ",
-											"****************************************************************************************/",
-											" ",
-											" ",
-											"/****************************************************************************************",
-											"* Loading Input Data",
-											"****************************************************************************************/",
-											"try {",
-											"    var URI;",
-											"    URI = pm.environment.get(\"dummyUri\");",
-											"",
-											"} catch (error) {",
-											"    console.log(\"! Environment variables could not be loaded.\");",
-											"}",
-											"",
-											"",
-											"/****************************************************************************************",
-											"* Setting up Local Variables and Preparing the Request",
-											"****************************************************************************************/",
-											"try {",
-											"    pm.variables.clear();",
-											"",
-											"    postman.setNextRequest(\"=====> End\");",
-											"",
-											"    pm.variables.set(\"uri\", URI);",
-											"    pm.request.headers.upsert({key:\"Accept\", value:\"application/json\"});",
-											"",
-											"} catch (error) {",
-											"    console.log(\"! Local variables could not be set.\");",
-											"}",
-											"",
-											"",
-											"/****************************************************************************************",
-											"* Functions",
-											"****************************************************************************************/",
-											"",
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{uri}}",
-									"host": [
-										"{{uri}}"
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
 				{
 					"name": "=====> End",
 					"item": [
