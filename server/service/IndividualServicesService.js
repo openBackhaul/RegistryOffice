@@ -45,6 +45,9 @@ const OperationClientInterface = require('onf-core-model-ap/applicationPattern/o
 
 const genericRepresentation = require('onf-core-model-ap-bs/basicServices/GenericRepresentation');
 const createHttpError = require('http-errors');
+
+const newReleaseForwardingName = 'PromptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredApplications'
+
 /**
  * Initiates process of embedding a new release
  *
@@ -169,7 +172,8 @@ exports.deregisterApplication = function (body, user, originator, xCorrelator, t
       await excludeGenericResponseProfile(applicationName, applicationReleaseNumber);
       let logicalTerminationPointconfigurationStatus = await LogicalTerminationPointService.deleteApplicationInformationAsync(
         applicationName,
-        applicationReleaseNumber
+        applicationReleaseNumber,
+        newReleaseForwardingName
       );
 
       /****************************************************************************************
@@ -733,7 +737,8 @@ exports.registerApplication = function (body, user, originator, xCorrelator, tra
       );
 
       let logicalTerminationPointconfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationInformationWithMultipleTcpClientAsync(
-        logicalTerminatinPointConfigurationInput
+        logicalTerminatinPointConfigurationInput,
+        newReleaseForwardingName
       );
 
       let isPreceedingDetailsUpdated = await ApplicationPreceedingVersion.addEntryToPreceedingVersionList(
