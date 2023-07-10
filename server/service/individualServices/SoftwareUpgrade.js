@@ -39,11 +39,11 @@ var traceIndicatorIncrementer = 1;
  * 7. PromptForBequeathingDataCausesRequestForBroadcastingInfoAboutServerReplacement
  * 8. PromptForBequeathingDataCausesRequestForDeregisteringOfOldRelease
  */
-exports.upgradeSoftwareVersion = async function (user, xCorrelator, traceIndicator, customerJourney,_traceIndicatorIncrementer) {
+exports.upgradeSoftwareVersion = async function (user, xCorrelator, traceIndicator, customerJourney, _traceIndicatorIncrementer) {
     return new Promise(async function (resolve, reject) {
         try {
             traceIndicatorIncrementer = _traceIndicatorIncrementer;
-            
+
             await transferDataToTheNewRelease(user, xCorrelator, traceIndicator, customerJourney);
             await redirectNotificationNewRelease(user, xCorrelator, traceIndicator, customerJourney);
             await replaceOldReleaseWithNewRelease(user, xCorrelator, traceIndicator, customerJourney);
@@ -175,7 +175,7 @@ async function promptForBequeathingDataCausesNewApplicationBeingRequestedToInqui
  * @param {String} customerJourney String Holds information supporting customer’s journey to which the execution applies
  * @returns {boolean} return true if the operation is success or else return false<br> 
  * steps :
- * 1. Get all http-client-interface apart from OldRelease and NewRelease
+ * 1. Get information about the application that provides approval for the registered application by using the fc-name "TypeApprovalCausesRequestForEmbedding"
  * 2. Collect the application-name, release-number, remote-address, embed-yourself operation,update-client operation information to formulate the request body
  * 3. push the collected attribute for each registered application and send it to the method automateForwardingConstructForNIteration 
  *    to automate the forwarding.
@@ -187,21 +187,17 @@ async function promptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredAp
             let forwardingKindNameOfTheBequeathOperation = "PromptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredApplications";
 
             /***********************************************************************************
-             * Figureout the httpClientUuid of OldRelease and NewRelease
-             ************************************************************************************/
-
-            let httpClientUuidOfOldRelease = await resolveApplicationNameAndHttpClientLtpUuidFromForwardingName("PromptForEmbeddingCausesRequestForBequeathingData");
-            let httpClientUuidOfNewRelease = await resolveApplicationNameAndHttpClientLtpUuidFromForwardingName("PromptForBequeathingDataCausesNewApplicationBeingRequestedToInquireForApplicationTypeApprovals");
-
-            /***********************************************************************************
              * Preparing requestBody and transfering the data one by one
              ************************************************************************************/
 
-            let httpClientUuidList = await logicalTerminationPoint.getUuidListForTheProtocolAsync(LayerProtocol.layerProtocolNameEnum.HTTP_CLIENT);
+            let typeApprovalCausesRequestForEmbeddingFCName = "TypeApprovalCausesRequestForEmbedding";
+            let forwardingConstructInstance = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(typeApprovalCausesRequestForEmbeddingFCName);
+            let operationClientUuidList = getFcPortOutputLogicalTerminationPointList(forwardingConstructInstance);
 
-            for (let i = 0; i < httpClientUuidList.length; i++) {
+            for (let i = 0; i < operationClientUuidList.length; i++) {
                 try {
-                    let httpClientUuid = httpClientUuidList[i];
+                    let operationClientUuid = operationClientUuidList[i];
+                    let httpClientUuid = (await logicalTerminationPoint.getServerLtpListAsync(operationClientUuid))[0];
                     let applicationName;
                     let releaseNumber;
                     let embeddingOperationName;
@@ -211,99 +207,96 @@ async function promptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredAp
                     let preceedingApplicationName;
                     let preceedingApplicationReleaseNumber;
 
-                    if (httpClientUuid != httpClientUuidOfOldRelease.httpClientLtpUuid && httpClientUuid != httpClientUuidOfNewRelease.httpClientLtpUuid) {
+                    applicationName = await httpClientInterface.getApplicationNameAsync(httpClientUuid);
+                    releaseNumber = await httpClientInterface.getReleaseNumberAsync(httpClientUuid);
 
-                        applicationName = await httpClientInterface.getApplicationNameAsync(httpClientUuid);
-                        releaseNumber = await httpClientInterface.getReleaseNumberAsync(httpClientUuid);
+                    /******************************************************************************************
+                     * formulate the operation attributes for the callback. The logic needs to be tuned
+                     * in version 3.0.0 after deciding https://github.com/openBackhaul/RegistryOffice/issues/98
+                     ********************************************************************************************/
+                    embeddingOperationName = await resolveOperationNameForAHttpClientFromForwardingName(
+                        "TypeApprovalCausesRequestForEmbedding",
+                        httpClientUuid
+                    );
+                    if (embeddingOperationName == undefined) {
+                        embeddingOperationName = "/v1/embed-yourself"
+                    }
 
-                        /******************************************************************************************
-                         * formulate the operation attributes for the callback. The logic needs to be tuned
-                         * in version 3.0.0 after deciding https://github.com/openBackhaul/RegistryOffice/issues/98
-                         ********************************************************************************************/
-                        embeddingOperationName = await resolveOperationNameForAHttpClientFromForwardingName(
-                            "TypeApprovalCausesRequestForEmbedding",
-                            httpClientUuid
-                        );
-                        if (embeddingOperationName == undefined) {
-                            embeddingOperationName = "/v1/embed-yourself"
+                    clientUpdateOperationName = await resolveOperationNameForAHttpClientFromForwardingName(
+                        "ServerReplacementBroadcast",
+                        httpClientUuid
+                    );
+                    if (clientUpdateOperationName == undefined) {
+                        clientUpdateOperationName = "/v1/update-client"
+                    }
+
+                    operationClientUpdateOperation = await resolveOperationNameForAHttpClientFromForwardingName(
+                        "OperationUpdateBroadcast",
+                        httpClientUuid
+                    );
+                    if (operationClientUpdateOperation == undefined) {
+                        operationClientUpdateOperation = "/v1/update-operation-client"
+                    }
+
+                    /******************************************************************************************
+                     * formulate tcp-server-list attribute
+                     ********************************************************************************************/
+
+                    let tcpClientUuidList = await logicalTerminationPoint.getServerLtpListAsync(httpClientUuid);
+                    for (let i = 0; i < tcpClientUuidList.length; i++) {
+                        let tcpClientUuid = tcpClientUuidList[i];
+                        let protocol = await tcpClientInterface.getRemoteProtocolAsync(tcpClientUuid);
+                        let address = await tcpClientInterface.getRemoteAddressAsync(tcpClientUuid);
+                        let port = await tcpClientInterface.getRemotePortAsync(tcpClientUuid);
+                        let tcpServer = {
+                            protocol: protocol,
+                            address: address,
+                            port: port
                         }
+                        tcpServerList.push(tcpServer);
+                    }
 
-                        clientUpdateOperationName = await resolveOperationNameForAHttpClientFromForwardingName(
-                            "ServerReplacementBroadcast",
-                            httpClientUuid
-                        );
-                        if (clientUpdateOperationName == undefined) {
-                            clientUpdateOperationName = "/v1/update-client"
-                        }
+                    /******************************************************************************************
+                     * formulate preceeding application infomration
+                     ********************************************************************************************/
 
-                        operationClientUpdateOperation = await resolveOperationNameForAHttpClientFromForwardingName(
-                            "OperationUpdateBroadcast",
-                            httpClientUuid
-                        );
-                        if (operationClientUpdateOperation == undefined) {
-                            operationClientUpdateOperation = "/v1/update-operation-client"
-                        }
+                    let preceedingApplicationInformation = await ApplicationPreceedingVersion.getPreceedingApplicationInformation(
+                        applicationName,
+                        releaseNumber
+                    );
+                    if (preceedingApplicationInformation != undefined) {
+                        preceedingApplicationName = preceedingApplicationInformation.preceedingApplicationName;
+                        preceedingApplicationReleaseNumber = preceedingApplicationInformation.preceedingReleaseNumber;
+                    }
 
-                        /******************************************************************************************
-                         * formulate tcp-server-list attribute
-                         ********************************************************************************************/
-
-                        let tcpClientUuidList = await logicalTerminationPoint.getServerLtpListAsync(httpClientUuid);
-                        for (let i = 0; i < tcpClientUuidList.length; i++) {
-                            let tcpClientUuid = tcpClientUuidList[i];
-                            let protocol = await tcpClientInterface.getRemoteProtocolAsync(tcpClientUuid);
-                            let address = await tcpClientInterface.getRemoteAddressAsync(tcpClientUuid);
-                            let port = await tcpClientInterface.getRemotePortAsync(tcpClientUuid);
-                            let tcpServer = {
-                                protocol: protocol,
-                                address: address,
-                                port: port
-                            }
-                            tcpServerList.push(tcpServer);
-                        }
-
-                        /******************************************************************************************
-                         * formulate preceeding application infomration
-                         ********************************************************************************************/
-
-                        let preceedingApplicationInformation = await ApplicationPreceedingVersion.getPreceedingApplicationInformation(
-                            applicationName,
-                            releaseNumber
-                        );
-                        if (preceedingApplicationInformation != undefined) {
-                            preceedingApplicationName = preceedingApplicationInformation.preceedingApplicationName;
-                            preceedingApplicationReleaseNumber = preceedingApplicationInformation.preceedingReleaseNumber;
-                        }
-
-                        /***********************************************************************************
-                         * PromptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredApplications
-                         *   /v1/register-application
-                         ************************************************************************************/
-                        let requestBody = {};
-                        requestBody.applicationName = applicationName;
-                        requestBody.releaseNumber = releaseNumber;
-                        requestBody.embeddingOperation = embeddingOperationName;
-                        requestBody.clientUpdateOperation = clientUpdateOperationName;
-                        requestBody.operationClientUpdateOperation = operationClientUpdateOperation;
-                        requestBody.tcpServerList = tcpServerList;
-                        if (preceedingApplicationName != undefined) {
-                            requestBody.precedingApplicationName = preceedingApplicationName;
-                        }
-                        if (preceedingApplicationReleaseNumber != undefined) {
-                            requestBody.precedingReleaseNumber = preceedingApplicationReleaseNumber;
-                        }
-                        requestBody = onfAttributeFormatter.modifyJsonObjectKeysToKebabCase(requestBody);
-                        result = await forwardRequest(
-                            forwardingKindNameOfTheBequeathOperation,
-                            requestBody,
-                            user,
-                            xCorrelator,
-                            traceIndicator + "." + traceIndicatorIncrementer++,
-                            customerJourney
-                        );
-                        if (!result) {
-                            throw forwardingKindNameOfTheBequeathOperation + "forwarding is not success for the input" + requestBody;
-                        }
+                    /***********************************************************************************
+                     * PromptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredApplications
+                     *   /v1/register-application
+                     ************************************************************************************/
+                    let requestBody = {};
+                    requestBody.applicationName = applicationName;
+                    requestBody.releaseNumber = releaseNumber;
+                    requestBody.embeddingOperation = embeddingOperationName;
+                    requestBody.clientUpdateOperation = clientUpdateOperationName;
+                    requestBody.operationClientUpdateOperation = operationClientUpdateOperation;
+                    requestBody.tcpServerList = tcpServerList;
+                    if (preceedingApplicationName != undefined) {
+                        requestBody.precedingApplicationName = preceedingApplicationName;
+                    }
+                    if (preceedingApplicationReleaseNumber != undefined) {
+                        requestBody.precedingReleaseNumber = preceedingApplicationReleaseNumber;
+                    }
+                    requestBody = onfAttributeFormatter.modifyJsonObjectKeysToKebabCase(requestBody);
+                    result = await forwardRequest(
+                        forwardingKindNameOfTheBequeathOperation,
+                        requestBody,
+                        user,
+                        xCorrelator,
+                        traceIndicator + "." + traceIndicatorIncrementer++,
+                        customerJourney
+                    );
+                    if (!result) {
+                        throw forwardingKindNameOfTheBequeathOperation + "forwarding is not success for the input" + requestBody;
                     }
                 } catch (error) {
                     console.log(error);
