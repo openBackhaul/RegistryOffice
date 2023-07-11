@@ -37,6 +37,6 @@ getWaitTimeApproveValue.then((waitTimeApproveValue)=>{
 }).catch((error)=>{
     console.error(error)
 })
-    
+appCommons.performApplicationRegistration();    
 
 
