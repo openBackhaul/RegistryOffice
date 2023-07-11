@@ -68,6 +68,37 @@ exports.deregisterApplication = function (operationClientConfigurationStatusList
     });
 }
 
+exports.updateApprovalStatusBarred = function (operationClientList) {
+    return new Promise(async function (resolve, reject) {
+        let forwardingConfigurationInputList = [];
+        try {
+            for (let i = 0; i < operationClientList.length; i++) {
+
+                let operationClientUuid = operationClientList[i];
+
+                let forwardingConstructList = await forwardingDomain.getForwardingConstructListForTheFcPortAsync(
+                    operationClientUuid,
+                    FcPort.portDirectionEnum.OUTPUT);
+
+                for (let j = 0; j < forwardingConstructList.length; j++) {
+                    let fcNameList = forwardingConstructList[j]["name"];
+                    let forwardingName = getValueFromKey(fcNameList, "ForwardingName");
+                    let forwardingConfigurationInput = new forwardingConstructConfigurationInput(
+                        forwardingName,
+                        operationClientUuid
+                    );
+                    forwardingConfigurationInputList.push(
+                        forwardingConfigurationInput
+                    );
+                }                
+            }
+            resolve(forwardingConfigurationInputList);
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
 exports.updateApprovalStatus = function (operationClientList, updateClientOperationName, updateOperationClientOperationName, embeddingOperation) {
     return new Promise(async function (resolve, reject) {
         let forwardingConfigurationInputList = [];

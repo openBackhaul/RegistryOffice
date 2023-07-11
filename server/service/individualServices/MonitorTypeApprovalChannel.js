@@ -8,9 +8,12 @@ const fs = require('fs');
 const HttpClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/HttpClientInterface');
 const LogicalTerminationPoint = require('onf-core-model-ap/applicationPattern/onfModel/models/LogicalTerminationPoint');
 const ForwardingDomain = require('onf-core-model-ap/applicationPattern/onfModel/models/ForwardingDomain');
-const IntegerProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/Profile/IntegerProfile');
+const IntegerProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/IntegerProfile');
 const eventDispatcher = require('onf-core-model-ap/applicationPattern/rest/client/eventDispatcher');
-global.applicationDataFile;
+const applicationProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/ApplicationProfile');
+const fileProfileOperation = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/FileProfile')
+const ProfileCollection = require('onf-core-model-ap/applicationPattern/onfModel/models/ProfileCollection');
+const onfAttributes = require('onf-core-model-ap/applicationPattern/onfModel/constants/OnfAttributes');
 
 /**
  * @description This method adds an entry to the monitoring list
@@ -22,8 +25,9 @@ exports.AddEntryToMonitorApprovalStatusChannel = async function (applicationName
         let operationStatus = false;
         try {
             if (applicationName != undefined && releaseNumber != undefined) {
+                let applicationDataFile = await fileProfileOperation.getApplicationDataFileContent()
                 let applicationData = JSON.parse(fs.readFileSync(applicationDataFile, 'utf8'));
-                let registeredApplicationList = applicationData["registered-application-list"];
+                let registeredApplicationList = applicationData["application-registration-time"];
                 for (let i = 0; i < registeredApplicationList.length; i++) {
                     let registeredApplication = registeredApplicationList[i];
                     let registeredApplicationName = registeredApplication["application-name"];
@@ -45,6 +49,7 @@ exports.AddEntryToMonitorApprovalStatusChannel = async function (applicationName
                     operationStatus = true;
                 }
             }
+        
             resolve(operationStatus);
         } catch (error) {
             reject(error);
@@ -62,8 +67,9 @@ exports.removeEntryFromMonitorApprovalStatusChannel = async function (applicatio
         let operationStatus = false;
         try {
             if (applicationName != undefined && releaseNumber != undefined) {
+                let applicationDataFile = await fileProfileOperation.getApplicationDataFileContent()
                 let applicationData = JSON.parse(fs.readFileSync(applicationDataFile, 'utf8'));
-                let registeredApplicationList = applicationData["registered-application-list"];
+                let registeredApplicationList = applicationData["application-registration-time"];
                 for (let i = 0; i < registeredApplicationList.length; i++) {
                     let registeredApplication = registeredApplicationList[i];
                     let registeredApplicationName = registeredApplication["application-name"];
@@ -75,6 +81,7 @@ exports.removeEntryFromMonitorApprovalStatusChannel = async function (applicatio
                     }
                 }
             }
+        
             resolve(operationStatus);
         } catch (error) {
             reject(error);
@@ -89,14 +96,17 @@ exports.removeEntryFromMonitorApprovalStatusChannel = async function (applicatio
  */
 exports.MonitorApprovalStatusChannel = async function () {
     try {
-                    let applicationData = JSON.parse(fs.readFileSync(applicationDataFile, 'utf8'));
-                    let registeredApplicationList = applicationData["registered-application-list"];
-                    for (let i = 0; i < registeredApplicationList.length; i++) {
-                        await CyclicMonitoringProcess(registeredApplicationList[i]);
-                    }
-                } catch (error) {
-                    console.log(error);
-                }
+
+        let applicationDataFile = await fileProfileOperation.getApplicationDataFileContent()
+            let applicationData = JSON.parse(fs.readFileSync(applicationDataFile, 'utf8'));
+            let registeredApplicationList = applicationData["application-registration-time"];
+            for (let i = 0; i < registeredApplicationList.length; i++) {
+                await CyclicMonitoringProcess(registeredApplicationList[i]);
+            }
+        
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 /**
@@ -159,9 +169,9 @@ async function triggerDeregistration(applicationName, releaseNumber) {
              ************************************************************************************/
             let response = await eventDispatcher.dispatchEvent(
                 "ro-2-0-0-op-c-bm-ro-1-0-0-002", {
-                    "application-name": applicationName,
-                    "application-release-number": releaseNumber
-                }
+                "application-name": applicationName,
+                "application-release-number": releaseNumber
+            }
             );
             resolve(response);
         } catch (error) {
@@ -169,3 +179,9 @@ async function triggerDeregistration(applicationName, releaseNumber) {
         }
     });
 }
+
+exports.getWaitTimeApproveValue = async function() {
+    let integerProfiles = await ProfileCollection.getProfileListForProfileNameAsync(applicationProfile.profileNameEnum.INTEGER_PROFILE);
+    let config = integerProfiles[0][onfAttributes.INTEGER_PROFILE.PAC][onfAttributes.INTEGER_PROFILE.CONFIGURATION];
+    return config[onfAttributes.INTEGER_PROFILE.INTEGER_VALUE];
+ }

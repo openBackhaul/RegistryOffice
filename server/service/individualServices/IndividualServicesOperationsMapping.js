@@ -13,5 +13,29 @@ module.exports.individualServicesOperationsMapping =
           "api-segment": "im",
           "sequence": "002"
         }
+      },
+      "/v1/inquire-application-type-approvals": {
+        "approval-operation": {
+          "api-segment": "im",
+          "sequence": "003"
+        }
+      },
+      "/v1/notify-deregistrations": {
+        "subscriber-operation": {
+          "api-segment": "im",
+          "sequence": "004"
+        }
+      },
+      "/v1/notify-approvals": {
+        "subscriber-operation": {
+          "api-segment": "im",
+          "sequence": "003"
+        }
+      },
+      "/v1/notify-withdrawn-approvals": {
+        "subscriber-operation": {
+          "api-segment": "im",
+          "sequence": "004"
+        }
       }
 }

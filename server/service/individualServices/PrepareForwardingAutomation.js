@@ -14,6 +14,9 @@ const httpClientInterface = require('onf-core-model-ap/applicationPattern/onfMod
 const tcpClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/TcpClientInterface');
 const ControlConstruct = require('onf-core-model-ap/applicationPattern/onfModel/models/ControlConstruct');
 
+const ApplicationPreceedingVersion = require('./ApplicationPreceedingVersion');
+const LogicalTerminationPoint = require('onf-core-model-ap/applicationPattern/onfModel/models/LogicalTerminationPoint');
+
 exports.registerApplication = function (logicalTerminationPointconfigurationStatus, forwardingConstructConfigurationStatus,
     applicationName, applicationReleaseNumber) {
     return new Promise(async function (resolve, reject) {
@@ -26,7 +29,7 @@ exports.registerApplication = function (logicalTerminationPointconfigurationStat
             let InquiryForApprovalContext;
             let InquiryForApprovalRequestBody = {};
             InquiryForApprovalRequestBody.applicationName = applicationName;
-            InquiryForApprovalRequestBody.applicationReleaseNumber = applicationReleaseNumber;
+            InquiryForApprovalRequestBody.releaseNumber = applicationReleaseNumber;
             InquiryForApprovalRequestBody = onfFormatter.modifyJsonObjectKeysToKebabCase(InquiryForApprovalRequestBody);
             let forwardingAutomation = new forwardingConstructAutomationInput(
                 InquiryForApprovalForwardingName,
@@ -69,7 +72,7 @@ exports.deregisterApplication = function (logicalTerminationPointconfigurationSt
             let deregistrationNotificationContext;
             let deregistrationNotificationRequestBody = {};
             deregistrationNotificationRequestBody.applicationName = applicationName;
-            deregistrationNotificationRequestBody.applicationReleaseNumber = applicationReleaseNumber;
+            deregistrationNotificationRequestBody.releaseNumber = applicationReleaseNumber;
             deregistrationNotificationRequestBody = onfFormatter.modifyJsonObjectKeysToKebabCase(deregistrationNotificationRequestBody);
             let forwardingAutomation = new forwardingConstructAutomationInput(
                 deregistrationNotificationForwardingName,
@@ -114,7 +117,7 @@ exports.updateApprovalStatusApproved = function (logicalTerminationPointconfigur
             let embedYourselfRequestBody = {};
             embedYourselfRequestBody.registryOfficeApplication = await httpServerInterface.getApplicationNameAsync();
             embedYourselfRequestBody.registryOfficeApplicationReleaseNumber = await httpServerInterface.getReleaseNumberAsync();
-            
+
             let controlConstructUuid = await ControlConstruct.getUuidAsync();
 
             let relayServerReplacementOperationUuid = controlConstructUuid + "-op-s-is-010";
@@ -125,9 +128,50 @@ exports.updateApprovalStatusApproved = function (logicalTerminationPointconfigur
 
             let deregistrationOperationUuid = controlConstructUuid + "-op-s-is-002";
             embedYourselfRequestBody.deregistrationOperation = await operationServerInterface.getOperationNameAsync(deregistrationOperationUuid);
-
-            embedYourselfRequestBody.registryOfficeAddress = await tcpServerInterface.getLocalAddress();
+            
+            embedYourselfRequestBody.registryOfficeAddress =  await tcpServerInterface.getLocalAddressForForwarding();
             embedYourselfRequestBody.registryOfficePort = await tcpServerInterface.getLocalPort();
+            embedYourselfRequestBody.registryOfficeProtocol = await tcpServerInterface.getLocalProtocol()
+
+            //What is the preceeding release number and application for the embedding one
+            let preceedingApplicationName = applicationName;
+            let preceedingApplicationReleaseNumber = releaseNumber;
+            let preceedingApplicationInformation = await ApplicationPreceedingVersion.getPreceedingApplicationInformation(
+                applicationName,
+                releaseNumber
+            );
+
+            let httpClientOfpreceedingApplication;
+            if (preceedingApplicationInformation != undefined) {
+                let _preceedingApplicationName = preceedingApplicationInformation.preceedingApplicationName;
+                let _preceedingApplicationReleaseNumber = preceedingApplicationInformation.preceedingReleaseNumber;
+                httpClientOfpreceedingApplication = await httpClientInterface.getHttpClientUuidAsync(
+                    _preceedingApplicationName,
+                    _preceedingApplicationReleaseNumber);
+                if (httpClientOfpreceedingApplication != undefined) {
+                    preceedingApplicationName = _preceedingApplicationName;
+                    preceedingApplicationReleaseNumber = _preceedingApplicationReleaseNumber;
+                }
+            }
+
+            if(httpClientOfpreceedingApplication == undefined){
+                httpClientOfpreceedingApplication = await httpClientInterface.getHttpClientUuidAsync(
+                    preceedingApplicationName,
+                    preceedingApplicationReleaseNumber);
+            }
+            
+            //get the oldRelease tcp client information
+
+            if(httpClientOfpreceedingApplication!=undefined){
+                let serverLtpsOfPreceedingApplication = await LogicalTerminationPoint.getServerLtpListAsync(httpClientOfpreceedingApplication);
+                let tcpClientUuidOfPreceedingApplication = serverLtpsOfPreceedingApplication[0];
+                if(tcpClientUuidOfPreceedingApplication != undefined){
+                    embedYourselfRequestBody.oldReleaseProtocol = await tcpClientInterface.getRemoteProtocolAsync(tcpClientUuidOfPreceedingApplication);
+                    embedYourselfRequestBody.oldReleaseAddress = await tcpClientInterface.getRemoteAddressAsync(tcpClientUuidOfPreceedingApplication);
+                    embedYourselfRequestBody.oldReleasePort = await tcpClientInterface.getRemotePortAsync(tcpClientUuidOfPreceedingApplication);
+                }
+            }
+
             embedYourselfRequestBody = onfFormatter.modifyJsonObjectKeysToKebabCase(embedYourselfRequestBody);
             forwardingAutomation = new forwardingConstructAutomationInput(
                 embedYourselfForwardingName,
@@ -145,9 +189,10 @@ exports.updateApprovalStatusApproved = function (logicalTerminationPointconfigur
             let httpClientUuid = await httpClientInterface.getHttpClientUuidAsync(applicationName, releaseNumber)
             let tcpClientUuid = (await logicalTerminationPoint.getServerLtpListAsync(httpClientUuid))[0];
             approvalNotificationRequestBody.applicationName = applicationName;
-            approvalNotificationRequestBody.applicationReleaseNumber = releaseNumber;
-            approvalNotificationRequestBody.applicationAddress = await tcpClientInterface.getRemoteAddressAsync(tcpClientUuid);
-            approvalNotificationRequestBody.applicationPort = await tcpClientInterface.getRemotePortAsync(tcpClientUuid);
+            approvalNotificationRequestBody.releaseNumber = releaseNumber;
+            approvalNotificationRequestBody.protocol = await tcpClientInterface.getRemoteProtocolAsync(tcpClientUuid);
+            approvalNotificationRequestBody.address = await tcpClientInterface.getRemoteAddressAsync(tcpClientUuid);
+            approvalNotificationRequestBody.port = await tcpClientInterface.getRemotePortAsync(tcpClientUuid);
             approvalNotificationRequestBody = onfFormatter.modifyJsonObjectKeysToKebabCase(approvalNotificationRequestBody);
             forwardingAutomation = new forwardingConstructAutomationInput(
                 approvalNotificationForwardingName,
@@ -191,7 +236,7 @@ exports.updateApprovalStatusBarred = function (logicalTerminationPointconfigurat
             let withdrawnApprovalNotificationContext;
             let withdrawnApprovalNotificationRequestBody = {};
             withdrawnApprovalNotificationRequestBody.applicationName = applicationName;
-            withdrawnApprovalNotificationRequestBody.applicationReleaseNumber = releaseNumber;
+            withdrawnApprovalNotificationRequestBody.releaseNumber = releaseNumber;
             withdrawnApprovalNotificationRequestBody = onfFormatter.modifyJsonObjectKeysToKebabCase(withdrawnApprovalNotificationRequestBody);
             let forwardingAutomation = new forwardingConstructAutomationInput(
                 withdrawnApprovalNotificationForwardingName,
@@ -330,7 +375,8 @@ exports.inquireApplicationTypeApprovals = function (logicalTerminationPointconfi
     });
 }
 
-exports.relayServerReplacement = function (applicationName, oldApplicationReleaseNumber, newApplicationReleaseNumber, newApplicationAddress, newApplicationPort) {
+exports.relayServerReplacement = function (currentApplicationName, currentReleaseNumber, futureApplicationName, futureReleaseNumber,
+    futureProtocol, futureAddress, futurePort) {
     return new Promise(async function (resolve, reject) {
         let forwardingConstructAutomationList = [];
         try {
@@ -341,11 +387,13 @@ exports.relayServerReplacement = function (applicationName, oldApplicationReleas
             let serverReplacementBroadcastForwardingName = "ServerReplacementBroadcast";
             let serverReplacementBroadcastContext;
             let serverReplacementBroadcastRequestBody = {};
-            serverReplacementBroadcastRequestBody.applicationName = applicationName;
-            serverReplacementBroadcastRequestBody.oldApplicationReleaseNumber = oldApplicationReleaseNumber;
-            serverReplacementBroadcastRequestBody.newApplicationReleaseNumber = newApplicationReleaseNumber;
-            serverReplacementBroadcastRequestBody.newApplicationAddress = newApplicationAddress;
-            serverReplacementBroadcastRequestBody.newApplicationPort = newApplicationPort;
+            serverReplacementBroadcastRequestBody.currentApplicationName = currentApplicationName;
+            serverReplacementBroadcastRequestBody.currentReleaseNumber = currentReleaseNumber;
+            serverReplacementBroadcastRequestBody.futureApplicationName = futureApplicationName;
+            serverReplacementBroadcastRequestBody.futureReleaseNumber = futureReleaseNumber;
+            serverReplacementBroadcastRequestBody.futureProtocol = futureProtocol;
+            serverReplacementBroadcastRequestBody.futureAddress = futureAddress;
+            serverReplacementBroadcastRequestBody.futurePort = futurePort;
             serverReplacementBroadcastRequestBody = onfFormatter.modifyJsonObjectKeysToKebabCase(serverReplacementBroadcastRequestBody);
             let forwardingAutomation = new forwardingConstructAutomationInput(
                 serverReplacementBroadcastForwardingName,
@@ -373,7 +421,7 @@ exports.relayOperationUpdate = function (applicationName, applicationReleaseNumb
             let operationUpdateBroadcastContext;
             let operationUpdateBroadcastRequestBody = {};
             operationUpdateBroadcastRequestBody.applicationName = applicationName;
-            operationUpdateBroadcastRequestBody.applicationReleaseNumber = applicationReleaseNumber;
+            operationUpdateBroadcastRequestBody.releaseNumber = applicationReleaseNumber;
             operationUpdateBroadcastRequestBody.oldOperationName = oldOperationName;
             operationUpdateBroadcastRequestBody.newOperationName = newOperationName;
             operationUpdateBroadcastRequestBody = onfFormatter.modifyJsonObjectKeysToKebabCase(operationUpdateBroadcastRequestBody);
@@ -402,6 +450,32 @@ exports.bequeathYourDataAndDie = function (logicalTerminationPointconfigurationS
             let applicationLayerTopologyForwardingInputList = await prepareALTForwardingAutomation.getALTForwardingAutomationInputAsync(
                 logicalTerminationPointconfigurationStatus,
                 undefined
+            );
+
+            if (applicationLayerTopologyForwardingInputList) {
+                for (let i = 0; i < applicationLayerTopologyForwardingInputList.length; i++) {
+                    let applicationLayerTopologyForwardingInput = applicationLayerTopologyForwardingInputList[i];
+                    forwardingConstructAutomationList.push(applicationLayerTopologyForwardingInput);
+                }
+            }
+
+            resolve(forwardingConstructAutomationList);
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
+exports.OAMLayerRequest = function (uuid) {
+    return new Promise(async function (resolve, reject) {
+        let forwardingConstructAutomationList = [];
+        try {
+
+            /***********************************************************************************
+             * forwardings for application layer topology
+             ************************************************************************************/
+            let applicationLayerTopologyForwardingInputList = await prepareALTForwardingAutomation.getALTForwardingAutomationInputForOamRequestAsync(
+                uuid
             );
 
             if (applicationLayerTopologyForwardingInputList) {
