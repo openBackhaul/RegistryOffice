@@ -142,7 +142,7 @@ exports.putIntegerProfileIntegerValue = function (body, url, uuid) {
       let maximumIntegerValue = await IntegerProfile.getMaximumAsync(uuid);
       let minimumIntegerValue = await IntegerProfile.getMinimumAsync(uuid);
       let value = body["integer-profile-1-0:integer-value"];
-      if (value > maximumIntegerValue && value < minimumIntegerValue) {
+      if (value >= maximumIntegerValue || value <= minimumIntegerValue){
         return reject(new createHttpError.BadRequest(`integer-profile-1-0:integer-value must be in range between ${minimumIntegerValue} and ${maximumIntegerValue}`))
       }
       await fileOperation.writeToDatabaseAsync(url, body, false);
