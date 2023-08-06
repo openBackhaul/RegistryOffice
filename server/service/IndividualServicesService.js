@@ -2,47 +2,35 @@
 
 const LogicalTerminatinPointConfigurationInput = require('onf-core-model-ap/applicationPattern/onfModel/services/models/logicalTerminationPoint/ConfigurationInputWithMapping');
 const LogicalTerminationPointService = require('onf-core-model-ap/applicationPattern/onfModel/services/LogicalTerminationPointWithMappingServices');
-const LogicalTerminationPointConfigurationStatus = require('onf-core-model-ap/applicationPattern/onfModel/services/models/logicalTerminationPoint/ConfigurationStatus');
-const layerProtocol = require('onf-core-model-ap/applicationPattern/onfModel/models/LayerProtocol');
 const ForwardingConfigurationService = require('onf-core-model-ap/applicationPattern/onfModel/services/ForwardingConstructConfigurationServices');
 const ForwardingAutomationService = require('onf-core-model-ap/applicationPattern/onfModel/services/ForwardingConstructAutomationServices');
 const prepareForwardingConfiguration = require('./individualServices/PrepareForwardingConfiguration');
 const prepareForwardingAutomation = require('./individualServices/PrepareForwardingAutomation');
 const softwareUpgrade = require('./individualServices/SoftwareUpgrade');
 const ConfigurationStatus = require('onf-core-model-ap/applicationPattern/onfModel/services/models/ConfigurationStatus');
-
 const httpServerInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/HttpServerInterface');
 const tcpServerInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/TcpServerInterface');
 const operationServerInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/OperationServerInterface');
 const operationClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/OperationClientInterface');
 const httpClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/HttpClientInterface');
-
 const onfAttributeFormatter = require('onf-core-model-ap/applicationPattern/onfModel/utility/OnfAttributeFormatter');
 const consequentAction = require('onf-core-model-ap/applicationPattern/rest/server/responseBody/ConsequentAction');
 const responseValue = require('onf-core-model-ap/applicationPattern/rest/server/responseBody/ResponseValue');
-
 const onfPaths = require('onf-core-model-ap/applicationPattern/onfModel/constants/OnfPaths');
 const onfAttributes = require('onf-core-model-ap/applicationPattern/onfModel/constants/OnfAttributes');
-
-
-const fileOperation = require('onf-core-model-ap/applicationPattern/databaseDriver/JSONDriver');
 const logicalTerminationPoint = require('onf-core-model-ap/applicationPattern/onfModel/models/LogicalTerminationPoint');
 const tcpClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/TcpClientInterface');
 const ForwardingDomain = require('onf-core-model-ap/applicationPattern/onfModel/models/ForwardingDomain');
 const ForwardingConstruct = require('onf-core-model-ap/applicationPattern/onfModel/models/ForwardingConstruct');
-const TcpServerInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/TcpServerInterface');
 const FcPort = require('onf-core-model-ap/applicationPattern/onfModel/models/FcPort');
-
 const MonitorTypeApprovalChannel = require('./individualServices/MonitorTypeApprovalChannel');
 const ApplicationPreceedingVersion = require('./individualServices/ApplicationPreceedingVersion');
 const HttpClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/HttpClientInterface');
 const ResponseProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/ResponseProfile');
 const ProfileCollection = require('onf-core-model-ap/applicationPattern/onfModel/models/ProfileCollection');
-
 const individualServicesOperationsMapping = require('./individualServices/IndividualServicesOperationsMapping');
 const LogicalTerminationPoint = require('onf-core-model-ap/applicationPattern/onfModel/models/LogicalTerminationPoint');
 const OperationClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/OperationClientInterface');
-
 const genericRepresentation = require('onf-core-model-ap-bs/basicServices/GenericRepresentation');
 const createHttpError = require('http-errors');
 
@@ -319,93 +307,28 @@ exports.inquireApplicationTypeApprovals = function (body, user, originator, xCor
   });
 }
 
-
 /**
  * Provides list of applications
  *
- * user String User identifier from the system starting the service call
- * originator String 'Identification for the system consuming the API, as defined in  [/core-model-1-4:control-construct/logical-termination-point={uuid}/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]' 
- * xCorrelator String UUID for the service execution flow that allows to correlate requests and responses
- * traceIndicator String Sequence of request numbers along the flow
- * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * returns List
  **/
-exports.listApplications = function (body, user, originator, xCorrelator, traceIndicator, customerJourney) {
-  return new Promise(async function (resolve, reject) {
-    let response = {};
-    try {
-
-      /****************************************************************************************
-       * Setting up required local variables from the request body
-       ****************************************************************************************/
-      let protocol = body["required-protocol"];
-
-      /****************************************************************************************
-       * Preparing response body
-       ****************************************************************************************/
-      let applicationList = await getAllRegisteredApplicationList(protocol);
-
-      /****************************************************************************************
-       * Setting 'application/json' response body
-       ****************************************************************************************/
-      response['application/json'] = onfAttributeFormatter.modifyJsonObjectKeysToKebabCase(applicationList);
-    } catch (error) {
-      console.log(error);
-    }
-    if (Object.keys(response).length > 0) {
-      resolve(response[Object.keys(response)[0]]);
-    } else {
-      resolve();
-    }
-  });
-
+exports.listApplications = async function (body) {
+  let applicationList = await getAllRegisteredApplicationList(body["required-protocol"]);
+  return onfAttributeFormatter.modifyJsonObjectKeysToKebabCase(applicationList);
 }
-
 
 /**
  * Provides list of applications in generic representation
- *
- * user String User identifier from the system starting the service call
- * originator String 'Identification for the system consuming the API, as defined in  [/core-model-1-4:control-construct/logical-termination-point={uuid}/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]' 
- * xCorrelator String UUID for the service execution flow that allows to correlate requests and responses
- * traceIndicator String Sequence of request numbers along the flow
- * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * returns inline_response_200_2
  **/
-exports.listApplicationsInGenericRepresentation = function (user, originator, xCorrelator, traceIndicator, customerJourney) {
-  return new Promise(async function (resolve, reject) {
-    let response = {};
-    try {
-      /****************************************************************************************
-       * Preparing consequent-action-list for response body
-       ****************************************************************************************/
-      let consequentActionList = await genericRepresentation.getConsequentActionList("/v1/list-applications-in-generic-representation");
-
-      /****************************************************************************************
-       * Preparing response-value-list for response body
-       ****************************************************************************************/
-      let responseValueList = await genericRepresentation.getResponseValueList("/v1/list-applications-in-generic-representation");
-
-      /****************************************************************************************
-       * Setting 'application/json' response body
-       ****************************************************************************************/
-      response['application/json'] = onfAttributeFormatter.modifyJsonObjectKeysToKebabCase({
-        consequentActionList,
-        responseValueList
-      });
-    } catch (error) {
-      console.log(error);
-    }
-
-    if (Object.keys(response).length > 0) {
-      resolve(response[Object.keys(response)[0]]);
-    } else {
-      resolve();
-    }
+exports.listApplicationsInGenericRepresentation = async function () {
+  let consequentActionList = await genericRepresentation.getConsequentActionList("/v1/list-applications-in-generic-representation");
+  let responseValueList = await genericRepresentation.getResponseValueList("/v1/list-applications-in-generic-representation");
+  return onfAttributeFormatter.modifyJsonObjectKeysToKebabCase({
+    consequentActionList,
+    responseValueList
   });
 }
-
-
 
 /**
  * Offers subscribing to notifications about new approvals
@@ -741,7 +664,7 @@ exports.registerApplication = function (body, user, originator, xCorrelator, tra
         NEW_RELEASE_FORWARDING_NAME
       );
 
-      let isPreceedingDetailsUpdated = await ApplicationPreceedingVersion.addEntryToPreceedingVersionList(
+      await ApplicationPreceedingVersion.addEntryToPreceedingVersionList(
         preceedingApplicationName,
         preceedingReleaseNumber,
         applicationName,
@@ -946,80 +869,50 @@ exports.relayServerReplacement = function (body, user, originator, xCorrelator, 
   });
 }
 
-
 /**
  * Starts application in generic representation
  *
- * user String User identifier from the system starting the service call
- * originator String 'Identification for the system consuming the API, as defined in  [/core-model-1-4:control-construct/logical-termination-point={uuid}/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-capability/application-name]' 
- * xCorrelator String UUID for the service execution flow that allows to correlate requests and responses
- * traceIndicator String Sequence of request numbers along the flow
- * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * returns inline_response_200
  **/
-exports.startApplicationInGenericRepresentation = function (user, originator, xCorrelator, traceIndicator, customerJourney) {
-  return new Promise(async function (resolve, reject) {
-    let response = {};
-    try {
-      /****************************************************************************************
-       * Preparing consequent-action-list for response body
-       ****************************************************************************************/
-      let consequentActionList = [];
+exports.startApplicationInGenericRepresentation = async function () {
+  let consequentActionList = [];
 
-      let protocol = "http";
-      let applicationAddress = await tcpServerInterface.getLocalAddress();
-      let applicationPort = await tcpServerInterface.getLocalPort();
-      let baseUrl = protocol + "://" + applicationAddress + ":" + applicationPort;
+  let protocol = "http";
+  let applicationAddress = await tcpServerInterface.getLocalAddress();
+  let applicationPort = await tcpServerInterface.getLocalPort();
+  let baseUrl = protocol + "://" + applicationAddress + ":" + applicationPort;
 
-      let LabelForListRegisteredApplication = "List Registered Applications";
-      let requestForListRegisteredApplication = baseUrl + await operationServerInterface.getOperationNameAsync("ro-0-0-1-op-s-3005");
-      let consequentActionForListRegisteredApplication = new consequentAction(
-        LabelForListRegisteredApplication,
-        requestForListRegisteredApplication,
-        false
-      );
-      consequentActionList.push(consequentActionForListRegisteredApplication);
+  let LabelForListRegisteredApplication = "List Registered Applications";
+  let requestForListRegisteredApplication = baseUrl + await operationServerInterface.getOperationNameAsync("ro-0-0-1-op-s-3005");
+  let consequentActionForListRegisteredApplication = new consequentAction(
+    LabelForListRegisteredApplication,
+    requestForListRegisteredApplication,
+    false
+  );
+  consequentActionList.push(consequentActionForListRegisteredApplication);
 
-      let LabelForInformAboutApplication = "Inform about Application";
-      let requestForInformAboutApplication = baseUrl + await operationServerInterface.getOperationNameAsync("ro-0-0-1-op-s-2002");
-      let consequentActionForInformAboutApplication = new consequentAction(
-        LabelForInformAboutApplication,
-        requestForInformAboutApplication,
-        false
-      );
-      consequentActionList.push(consequentActionForInformAboutApplication);
+  let LabelForInformAboutApplication = "Inform about Application";
+  let requestForInformAboutApplication = baseUrl + await operationServerInterface.getOperationNameAsync("ro-0-0-1-op-s-2002");
+  let consequentActionForInformAboutApplication = new consequentAction(
+    LabelForInformAboutApplication,
+    requestForInformAboutApplication,
+    false
+  );
+  consequentActionList.push(consequentActionForInformAboutApplication);
 
-      /****************************************************************************************
-       * Preparing response-value-list for response body
-       ****************************************************************************************/
-      let responseValueList = [];
-      let applicationName = await httpServerInterface.getApplicationNameAsync();
-      let reponseValue = new responseValue(
-        "applicationName",
-        applicationName,
-        typeof applicationName
-      );
-      responseValueList.push(reponseValue);
-
-      /****************************************************************************************
-       * Setting 'application/json' response body
-       ****************************************************************************************/
-      response['application/json'] = onfAttributeFormatter.modifyJsonObjectKeysToKebabCase({
-        consequentActionList,
-        responseValueList
-      });
-    } catch (error) {
-      console.log(error);
-    }
-    if (Object.keys(response).length > 0) {
-      resolve(response[Object.keys(response)[0]]);
-    } else {
-      resolve();
-    }
+  let responseValueList = [];
+  let applicationName = await httpServerInterface.getApplicationNameAsync();
+  let reponseValue = new responseValue(
+    "applicationName",
+    applicationName,
+    typeof applicationName
+  );
+  responseValueList.push(reponseValue);
+  return onfAttributeFormatter.modifyJsonObjectKeysToKebabCase({
+    consequentActionList,
+    responseValueList
   });
-
 }
-
 
 /**
  * Updates the approval status of an already registered application
@@ -1308,51 +1201,6 @@ function getAllRegisteredApplicationList(protocol) {
     }
   });
 }
-
-/**
- * @description This function returns list of registered application information application-name , release-number.
- * @return {Promise} return the list of application information
- * <b><u>Procedure :</u></b><br>
- * <b>step 1 :</b> Get forwarding-construct based on ForwardingName
- * <b>step 2 :</b> Get forwarding-construct UUID
- * <b>step 3 :</b> Get fc-port list using forwarding-construct UUID
- * <b>step 4 :</b> Fetch http-client-list using logical-termination-point uuid from fc-port
- * <b>step 5 :</b> get the application name, release number and server-ltp<br>
- * <b>step 6 :</b> get the ipaddress and port name of each associated tcp-client <br>
- **/
-function getAllRegisteredApplicationNameAndReleaseList() {
-  return new Promise(async function (resolve, reject) {
-    let clientApplicationList = [];
-    const forwardingName = "ServerReplacementBroadcast";
-    try {
-      let forwardingConstructForTheForwardingName = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(forwardingName);
-      let forwardingConstructUuid = forwardingConstructForTheForwardingName[onfAttributes.GLOBAL_CLASS.UUID];
-      let fcPortList = await ForwardingConstruct.getFcPortListAsync(forwardingConstructUuid);
-      let httpClientUuidList = []
-
-      for (let fcPortIndex = 0; fcPortIndex < fcPortList.length; fcPortIndex++) {
-        if (fcPortList[fcPortIndex][onfAttributes.FC_PORT.PORT_DIRECTION] === FcPort.portDirectionEnum.OUTPUT) {
-          let serverLtpList = await logicalTerminationPoint.getServerLtpListAsync(fcPortList[fcPortIndex][onfAttributes.FC_PORT.LOGICAL_TERMINATION_POINT])
-          httpClientUuidList = httpClientUuidList.concat(serverLtpList)
-        }
-      }
-
-      for (let i = 0; i < httpClientUuidList.length; i++) {
-        let clientApplication = {};
-        let httpClientUuid = httpClientUuidList[i];
-        let applicationName = await httpClientInterface.getApplicationNameAsync(httpClientUuid);
-        let applicationReleaseNumber = await httpClientInterface.getReleaseNumberAsync(httpClientUuid);
-        clientApplication["application-name"] = applicationName;
-        clientApplication["release-number"] = applicationReleaseNumber;
-        clientApplicationList.push(clientApplication);
-      }
-      resolve(clientApplicationList);
-    } catch (error) {
-      reject();
-    }
-  });
-}
-
 
 /**
  * @description This function includes a new response profile if not exists for a registered application
