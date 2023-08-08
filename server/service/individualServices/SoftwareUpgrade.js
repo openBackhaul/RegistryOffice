@@ -13,12 +13,8 @@ const ForwardingDomain = require('onf-core-model-ap/applicationPattern/onfModel/
 const onfAttributes = require('onf-core-model-ap/applicationPattern/onfModel/constants/OnfAttributes');
 const FcPort = require('onf-core-model-ap/applicationPattern/onfModel/models/FcPort');
 const onfAttributeFormatter = require('onf-core-model-ap/applicationPattern/onfModel/utility/OnfAttributeFormatter');
-
 const eventDispatcher = require('onf-core-model-ap/applicationPattern/rest/client/eventDispatcher');
-const OperationClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/OperationClientInterface');
-const LayerProtocol = require('onf-core-model-ap/applicationPattern/onfModel/models/LayerProtocol');
 const OperationServerInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/OperationServerInterface');
-
 const ApplicationPreceedingVersion = require('./ApplicationPreceedingVersion');
 const ControlConstruct = require('onf-core-model-ap/applicationPattern/onfModel/models/ControlConstruct');
 var traceIndicatorIncrementer = 1;
@@ -751,42 +747,20 @@ async function promptForBequeathingDataCausesRequestForDeregisteringOfOldRelease
 /****************************************************************************************
  * Functions utilized by individual services
  ****************************************************************************************/
-
-function getOperationClientUuidThatContainsTheOperationNameAsync(httpClientUuid, operationName) {
-    return new Promise(async function (resolve, reject) {
-        let operationClientUuid;
-        try {
-            let existingOperationClientUuidList = await logicalTerminationPoint.getClientLtpListAsync(httpClientUuid);
-            for (let i = 0; i < existingOperationClientUuidList.length; i++) {
-                let existingOperationName = await OperationClientInterface.getOperationNameAsync(existingOperationClientUuidList[i]);
-                if (existingOperationName.includes(operationName)) {
-                    operationClientUuid = existingOperationClientUuidList[i];
-                }
-            }
-            resolve(operationClientUuid);
-        } catch (error) {
-            reject(error);
-        }
-    });
-}
-
 function getFcPortOutputLogicalTerminationPointList(forwardingConstructInstance) {
-    try {
-        let fcPortOutputLogicalTerminationPointList = [];
-        let fcPortList = forwardingConstructInstance[
-            onfAttributes.FORWARDING_CONSTRUCT.FC_PORT];
-        for (let i = 0; i < fcPortList.length; i++) {
-            let fcPort = fcPortList[i];
-            let fcPortPortDirection = fcPort[onfAttributes.FC_PORT.PORT_DIRECTION];
-            if (fcPortPortDirection == FcPort.portDirectionEnum.OUTPUT) {
-                let fclogicalTerminationPoint = fcPort[onfAttributes.FC_PORT.LOGICAL_TERMINATION_POINT];
-                fcPortOutputLogicalTerminationPointList.push(fclogicalTerminationPoint);
-            }
+    let fcPortOutputLogicalTerminationPointList = [];
+    let fcPortList = forwardingConstructInstance[
+        onfAttributes.FORWARDING_CONSTRUCT.FC_PORT];
+    for (let i = 0; i < fcPortList.length; i++) {
+        let fcPort = fcPortList[i];
+        let fcPortPortDirection = fcPort[onfAttributes.FC_PORT.PORT_DIRECTION];
+        if (fcPortPortDirection == FcPort.portDirectionEnum.OUTPUT) {
+            let fclogicalTerminationPoint = fcPort[onfAttributes.FC_PORT.LOGICAL_TERMINATION_POINT];
+            fcPortOutputLogicalTerminationPointList.push(fclogicalTerminationPoint);
         }
-        return fcPortOutputLogicalTerminationPointList;
-    } catch (error) {
-        throw error;
     }
+    return fcPortOutputLogicalTerminationPointList;
+
 }
 
 /**

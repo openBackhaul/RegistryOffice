@@ -1,8 +1,7 @@
 'use strict';
 const createHttpError = require('http-errors');
-var fileOperation = require('onf-core-model-ap/applicationPattern/databaseDriver/JSONDriver');
+const fileOperation = require('onf-core-model-ap/applicationPattern/databaseDriver/JSONDriver');
 const IntegerProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/IntegerProfile');
-
 
 /**
  * Returns the name of the Integer
@@ -10,24 +9,12 @@ const IntegerProfile = require('onf-core-model-ap/applicationPattern/onfModel/mo
  * uuid String 
  * returns inline_response_200_22
  **/
-exports.getIntegerProfileIntegerName = function(url) {
-  return new Promise(async function (resolve, reject) {
-    try {
-      var value = await fileOperation.readFromDatabaseAsync(url);
-      var response = {};
-      response['application/json'] = {
-        "integer-profile-1-0:integer-name": value
-      };
-      if (Object.keys(response).length > 0) {
-        resolve(response[Object.keys(response)[0]]);
-      } else {
-        resolve();
-      }
-    } catch (error) {}
-    reject();
-  });
+exports.getIntegerProfileIntegerName = async function(url) {
+  const value = await fileOperation.readFromDatabaseAsync(url);
+  return {
+    "integer-profile-1-0:integer-name": value
+  };
 }
-
 
 /**
  * Returns the configured value of the Integer
@@ -35,24 +22,12 @@ exports.getIntegerProfileIntegerName = function(url) {
  * uuid String 
  * returns inline_response_200_26
  **/
-exports.getIntegerProfileIntegerValue = function(url) {
-  return new Promise(async function (resolve, reject) {
-    try {
-      var value = await fileOperation.readFromDatabaseAsync(url);
-      var response = {};
-      response['application/json'] = {
-        "integer-profile-1-0:integer-value": value
-      };
-      if (Object.keys(response).length > 0) {
-        resolve(response[Object.keys(response)[0]]);
-      } else {
-        resolve();
-      }
-    } catch (error) {}
-    reject();
-  });
+exports.getIntegerProfileIntegerValue = async function(url) {
+  const value = await fileOperation.readFromDatabaseAsync(url);
+  return {
+    "integer-profile-1-0:integer-value": value
+  };
 }
-
 
 /**
  * Returns the maximum value of the Integer
@@ -60,24 +35,12 @@ exports.getIntegerProfileIntegerValue = function(url) {
  * uuid String 
  * returns inline_response_200_25
  **/
-exports.getIntegerProfileMaximum = function(url) {
-  return new Promise(async function (resolve, reject) {
-    try {
-      var value = await fileOperation.readFromDatabaseAsync(url);
-      var response = {};
-      response['application/json'] = {
-        "integer-profile-1-0:maximum": value
-      };
-      if (Object.keys(response).length > 0) {
-        resolve(response[Object.keys(response)[0]]);
-      } else {
-        resolve();
-      }
-    } catch (error) {}
-    reject();
-  });
+exports.getIntegerProfileMaximum = async function(url) {
+  const value = await fileOperation.readFromDatabaseAsync(url);
+  return {
+    "integer-profile-1-0:maximum": value
+  };
 }
-
 
 /**
  * Returns the minimum value of the Integer
@@ -85,24 +48,12 @@ exports.getIntegerProfileMaximum = function(url) {
  * uuid String 
  * returns inline_response_200_24
  **/
-exports.getIntegerProfileMinimum = function(url) {
-  return new Promise(async function (resolve, reject) {
-    try {
-      var value = await fileOperation.readFromDatabaseAsync(url);
-      var response = {};
-      response['application/json'] = {
-        "integer-profile-1-0:minimum": value
-      };
-      if (Object.keys(response).length > 0) {
-        resolve(response[Object.keys(response)[0]]);
-      } else {
-        resolve();
-      }
-    } catch (error) {}
-    reject();
-  });
+exports.getIntegerProfileMinimum = async function(url) {
+  const value = await fileOperation.readFromDatabaseAsync(url);
+  return {
+    "integer-profile-1-0:minimum": value
+  };
 }
-
 
 /**
  * Returns the unit of the Integer
@@ -110,24 +61,12 @@ exports.getIntegerProfileMinimum = function(url) {
  * uuid String 
  * returns inline_response_200_23
  **/
-exports.getIntegerProfileUnit = function(url) {
-  return new Promise(async function (resolve, reject) {
-    try {
-      var value = await fileOperation.readFromDatabaseAsync(url);
-      var response = {};
-      response['application/json'] = {
-        "integer-profile-1-0:unit": value
-      };
-      if (Object.keys(response).length > 0) {
-        resolve(response[Object.keys(response)[0]]);
-      } else {
-        resolve();
-      }
-    } catch (error) {}
-    reject();
-  });
+exports.getIntegerProfileUnit = async function(url) {
+  const value = await fileOperation.readFromDatabaseAsync(url);
+  return {
+    "integer-profile-1-0:unit": value
+  };
 }
-
 
 /**
  * Configures value of the Integer
@@ -136,19 +75,13 @@ exports.getIntegerProfileUnit = function(url) {
  * uuid String 
  * no response value expected for this operation
  **/
-exports.putIntegerProfileIntegerValue = function (body, url, uuid) {
-  return new Promise(async function (resolve, reject) {
-    try {
-      let maximumIntegerValue = await IntegerProfile.getMaximumAsync(uuid);
-      let minimumIntegerValue = await IntegerProfile.getMinimumAsync(uuid);
-      let value = body["integer-profile-1-0:integer-value"];
-      if (value > maximumIntegerValue && value < minimumIntegerValue) {
-        return reject(new createHttpError.BadRequest(`integer-profile-1-0:integer-value must be in range between ${minimumIntegerValue} and ${maximumIntegerValue}`))
-      }
-      await fileOperation.writeToDatabaseAsync(url, body, false);
-      resolve();
-    } catch (error) {
-      reject(error.message);
-    }
-  });
+exports.putIntegerProfileIntegerValue = async function (body, url, uuid) {
+  let profile = await IntegerProfile.getIntegerProfile(uuid);
+  let maximumIntegerValue = profile.integerProfilePac.integerProfileCapability.maximum;
+  let minimumIntegerValue = profile.integerProfilePac.integerProfileCapability.minimum;
+  let value = body["integer-profile-1-0:integer-value"];
+  if (value >= maximumIntegerValue || value <= minimumIntegerValue){
+    throw new createHttpError.BadRequest(`integer-profile-1-0:integer-value must be in range between ${minimumIntegerValue} and ${maximumIntegerValue}`)
+  }
+  await fileOperation.writeToDatabaseAsync(url, body, false);
 }
