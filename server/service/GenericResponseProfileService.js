@@ -84,10 +84,7 @@ exports.putGenericResponseProfileValue = async function (body, url, uuid) {
     } else {
       let isDeleted = await fileOperation.deletefromDatabaseAsync(
         onfPaths.RESPONSE_PROFILE_STATIC_VALUE.replace(
-          "{profileUuid}", uuid),
-        "",
-        false
-      );
+          "{profileUuid}", uuid));
       if (isDeleted) {
         await fileOperation.writeToDatabaseAsync(url, body, false);
       }
@@ -96,10 +93,7 @@ exports.putGenericResponseProfileValue = async function (body, url, uuid) {
     if (isValueReferenceExist != undefined) {
       let isDeleted = await fileOperation.deletefromDatabaseAsync(
         onfPaths.RESPONSE_PROFILE_VALUE_REFERENCE.replace(
-          "{profileUuid}", uuid),
-        "",
-        false
-      );
+          "{profileUuid}", uuid));
       if (isDeleted) {
         await fileOperation.writeToDatabaseAsync(url, body, false);
       }
