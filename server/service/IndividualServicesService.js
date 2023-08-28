@@ -1100,14 +1100,12 @@ function getAllRegisteredApplicationList(protocol) {
       };
       let forwardingConstructForTheForwardingName = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(forwardingName);
       let forwardingConstructUuid = forwardingConstructForTheForwardingName[onfAttributes.GLOBAL_CLASS.UUID];
-      let fcPortList = await ForwardingConstruct.getFcPortListAsync(forwardingConstructUuid);
+      let fcPortList = await ForwardingConstruct.getOutputFcPortsAsync(forwardingConstructUuid);
       let httpClientUuidList = []
 
-      for (let fcPortIndex = 0; fcPortIndex < fcPortList.length; fcPortIndex++) {
-        if (fcPortList[fcPortIndex][onfAttributes.FC_PORT.PORT_DIRECTION] === FcPort.portDirectionEnum.OUTPUT) {
-          let serverLtpList = await logicalTerminationPoint.getServerLtpListAsync(fcPortList[fcPortIndex][onfAttributes.FC_PORT.LOGICAL_TERMINATION_POINT])
-          httpClientUuidList = httpClientUuidList.concat(serverLtpList)
-        }
+      for (let fcPort of fcPortList) {
+        let serverLtpList = await logicalTerminationPoint.getServerLtpListAsync(fcPort[onfAttributes.FC_PORT.LOGICAL_TERMINATION_POINT])
+        httpClientUuidList = httpClientUuidList.concat(serverLtpList)
       }
 
       for (let i = 0; i < httpClientUuidList.length; i++) {
