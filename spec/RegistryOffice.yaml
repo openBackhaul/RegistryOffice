@@ -2164,7 +2164,7 @@ paths:
                   pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
                   description: >
                     'Release of application that wants to receive information about new registrations
-                    update [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-http-c-tar-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
+                    find or update [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-http-c-tar-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
                 approval-operation:
                   type: string
                   minLength: 6
