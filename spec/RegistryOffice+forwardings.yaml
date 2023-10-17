@@ -81,27 +81,27 @@ forwardings:
         uuid: ro-2-0-1-op-s-bs-003
       - server-name: /v1/inform-about-release-history-in-generic-representation
         uuid: ro-2-0-1-op-s-bs-004
-      - service-name: /v1/register-application
+      - server-name: /v1/register-application
         uuid: ro-2-0-1-op-s-is-001
-      - service-name: /v1/deregister-application
+      - server-name: /v1/deregister-application
         uuid: ro-2-0-1-op-s-is-002
-      - service-name: /v1/regard-updated-approval-status
+      - server-name: /v1/regard-updated-approval-status
         uuid: ro-2-0-1-op-s-is-003
-      - service-name: /v1/list-applications
+      - server-name: /v1/list-applications
         uuid: ro-2-0-1-op-s-is-004
-      - service-name: /v1/list-applications-in-generic-representation
+      - server-name: /v1/list-applications-in-generic-representation
         uuid: ro-2-0-1-op-s-is-005
-      - service-name: /v1/inquire-application-type-approvals
+      - server-name: /v1/inquire-application-type-approvals
         uuid: ro-2-0-1-op-s-is-006
-      - service-name: /v1/notify-deregistrations
+      - server-name: /v1/notify-deregistrations
         uuid: ro-2-0-1-op-s-is-007
-      - service-name: /v1/notify-approvals
+      - server-name: /v1/notify-approvals
         uuid: ro-2-0-1-op-s-is-008
-      - service-name: /v1/notify-withdrawn-approvals
+      - server-name: /v1/notify-withdrawn-approvals
         uuid: ro-2-0-1-op-s-is-009
-      - service-name: /v1/relay-server-replacement
+      - server-name: /v1/relay-server-replacement
         uuid: ro-2-0-1-op-s-is-010
-      - service-name: /v1/relay-operation-update
+      - server-name: /v1/relay-operation-update
         uuid: ro-2-0-1-op-s-is-011
     consequent-requests:
       - client-name: ExecutionAndTraceLog://v1/record-service-request
@@ -319,17 +319,17 @@ forwardings:
         uuid: ro-2-0-1-op-s-bm-011
       - server-name: /v1/bequeath-your-data-and-die
         uuid: ro-2-0-1-op-s-im-000
-      - service-name: /v1/register-application
+      - server-name: /v1/register-application
         uuid: ro-2-0-1-op-s-is-001
-      - service-name: /v1/inquire-application-type-approvals
+      - server-name: /v1/inquire-application-type-approvals
         uuid: ro-2-0-1-op-s-is-006
-      - service-name: /v1/notify-deregistrations
+      - server-name: /v1/notify-deregistrations
         uuid: ro-2-0-1-op-s-is-007
-      - service-name: /v1/notify-approvals
+      - server-name: /v1/notify-approvals
         uuid: ro-2-0-1-op-s-is-008
-      - service-name: /v1/notify-withdrawn-approvals
+      - server-name: /v1/notify-withdrawn-approvals
         uuid: ro-2-0-1-op-s-is-009
-      - service-name: /v1/relay-server-replacement
+      - server-name: /v1/relay-server-replacement
         uuid: ro-2-0-1-op-s-is-010
     consequent-requests:
       - client-name: ApplicationLayerTopology://v1/update-ltp
@@ -348,7 +348,7 @@ forwardings:
       fc-port-deletion:
       operation-client-deletion:
     initiating-requests:
-      - service-name: /v1/deregister-application
+      - server-name: /v1/deregister-application
         uuid: ro-2-0-1-op-s-is-002
     consequent-requests:
       - client-name: ApplicationLayerTopology://v1/delete-ltp-and-dependents
@@ -367,15 +367,15 @@ forwardings:
       fc-port-deletion:
       operation-client-deletion:
     initiating-requests:
-      - service-name: /v1/register-application
+      - server-name: /v1/register-application
         uuid: ro-2-0-1-op-s-is-001
-      - service-name: /v1/regard-updated-approval-status
+      - server-name: /v1/regard-updated-approval-status
         uuid: ro-2-0-1-op-s-is-003
-      - service-name: /v1/notify-deregistrations
+      - server-name: /v1/notify-deregistrations
         uuid: ro-2-0-1-op-s-is-007
-      - service-name: /v1/notify-approvals
+      - server-name: /v1/notify-approvals
         uuid: ro-2-0-1-op-s-is-008
-      - service-name: /v1/notify-withdrawn-approvals
+      - server-name: /v1/notify-withdrawn-approvals
         uuid: ro-2-0-1-op-s-is-009
     consequent-requests:
       - client-name: ApplicationLayerTopology://v1/update-fc
@@ -413,7 +413,7 @@ forwardings:
     initiating-requests:
       - server-name: /v1/end-subscription
         uuid: ro-2-0-1-op-s-bm-004
-      - service-name: /v1/regard-updated-approval-status
+      - server-name: /v1/regard-updated-approval-status
         uuid: ro-2-0-1-op-s-is-003
     consequent-requests:
       - client-name: ApplicationLayerTopology://v1/delete-fc-port
@@ -517,7 +517,7 @@ forwardings:
       fc-port-deletion:
       operation-client-deletion:
     initiating-requests:
-      - service-name: /v1/register-application
+      - server-name: /v1/register-application
         uuid: ro-2-0-1-op-s-is-001
     consequent-requests:
       - client-name: TypeApprovalRegister:://v1/regard-application
@@ -538,7 +538,7 @@ forwardings:
           uuid: ro-2-0-1-op-s-bm-004
       operation-client-deletion:
     initiating-requests:
-      - service-name: /v1/deregister-application
+      - server-name: /v1/deregister-application
         uuid: ro-2-0-1-op-s-is-002
     consequent-requests:
       - client-name: TypeApprovalRegister:://v1/disregard-application
@@ -571,7 +571,7 @@ forwardings:
         - server-name: /v1/deregister-application
           uuid: ro-2-0-1-op-s-is-002
     initiating-requests:
-      - service-name: /v1/regard-updated-approval-status
+      - server-name: /v1/regard-updated-approval-status
         uuid: ro-2-0-1-op-s-is-003
     consequent-requests:
       - client-name: NewRelease:://v1/embed-yourself
@@ -606,7 +606,7 @@ forwardings:
           uuid: ro-2-0-1-op-s-bm-004
       operation-client-deletion:
     initiating-requests:
-      - service-name: /v1/regard-updated-approval-status
+      - server-name: /v1/regard-updated-approval-status
         uuid: ro-2-0-1-op-s-is-003
     consequent-requests:
       - client-name: ExecutionAndTraceLog:://v1/regard-application
@@ -635,7 +635,7 @@ forwardings:
           uuid: ro-2-0-1-op-s-bm-004
       operation-client-deletion:
     initiating-requests:
-      - service-name: /v1/regard-updated-approval-status
+      - server-name: /v1/regard-updated-approval-status
         uuid: ro-2-0-1-op-s-is-003
     consequent-requests:
       - client-name: ExecutionAndTraceLog:://v1/disregard-application
@@ -666,7 +666,7 @@ forwardings:
         - server-name: /v1/deregister-application
           uuid: ro-2-0-1-op-s-is-002
     initiating-requests:
-      - service-name: /v1/relay-server-replacement
+      - server-name: /v1/relay-server-replacement
         uuid: ro-2-0-1-op-s-is-010
     consequent-requests:
       - client-name: RegistryOffice:://v1/update-client
@@ -703,7 +703,7 @@ forwardings:
         - server-name: /v1/deregister-application
           uuid: ro-2-0-1-op-s-is-002
     initiating-requests:
-      - service-name: /v1/relay-operation-update
+      - server-name: /v1/relay-operation-update
         uuid: ro-2-0-1-op-s-is-011
     consequent-requests:
       - client-name: RegistryOffice:://v1/update-operation-client
