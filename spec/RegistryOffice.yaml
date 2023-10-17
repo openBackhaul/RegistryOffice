@@ -1196,13 +1196,13 @@ paths:
                   pattern: '^([A-Z][a-z0-9]+){2,}$'
                   description: >
                     'Name of application that wants to register
-                    find or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
+                    find, but not at OldRelease or NewRelease, or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
                 release-number:
                   type: string
                   pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
                   description: >
                     'Release of application that wants to register
-                    find or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
+                    find, but not at OldRelease or NewRelease, or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
                 preceding-application-name:
                   type: string
                   minLength: 3
@@ -1540,13 +1540,13 @@ paths:
                   type: string
                   description: >
                     'Name of application that shall be removed from the register
-                    find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
+                    find, but not at OldRelease or NewRelease, in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
                 release-number:
                   type: string
                   pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
                   description: >
                     'Release of application that shall be removed from the register
-                    find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
+                    find, but not at OldRelease or NewRelease, in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
               example:
                 application-name: 'BadApplication'
                 release-number: '1.0.0'
