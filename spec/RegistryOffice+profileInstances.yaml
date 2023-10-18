@@ -131,61 +131,61 @@ profile-instances:
     uuid: 'ro-2-0-2-response-p-009'
     capability:
       operation-name: '/v1/list-applications-in-generic-representation'
-      field-name-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-tar-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name'
+      field-name-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-tar-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name'
       description: 'List of registered application names and release numbers'
       datatype: 'string'
     configuration:
-      value-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-tar-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number'
+      value-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-tar-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number'
 
   - profile-name: 'GenericResponseProfile'
     uuid: 'ro-2-0-2-response-p-010'
     capability:
       operation-name: '/v1/list-applications-in-generic-representation'
-      field-name-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-eatl-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name'
+      field-name-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-eatl-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name'
       description: 'List of registered application names and release numbers'
       datatype: 'string'
     configuration:
-      value-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-eatl-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number'
+      value-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-eatl-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number'
 
   - profile-name: 'GenericResponseProfile'
     uuid: 'ro-2-0-2-response-p-011'
     capability:
       operation-name: '/v1/list-applications-in-generic-representation'
-      field-name-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-ol-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name'
+      field-name-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-ol-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name'
       description: 'List of registered application names and release numbers'
       datatype: 'string'
     configuration:
-      value-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-ol-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number'
+      value-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-ol-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number'
 
   - profile-name: 'GenericResponseProfile'
     uuid: 'ro-2-0-2-response-p-012'
     capability:
       operation-name: '/v1/list-applications-in-generic-representation'
-      field-name-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-aa-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name'
+      field-name-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-aa-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name'
       description: 'List of registered application names and release numbers'
       datatype: 'string'
     configuration:
-      value-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-aa-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number'
+      value-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-aa-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number'
 
   - profile-name: 'GenericResponseProfile'
     uuid: 'ro-2-0-2-response-p-013'
     capability:
       operation-name: '/v1/list-applications-in-generic-representation'
-      field-name-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-alt-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name'
+      field-name-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-alt-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name'
       description: 'List of registered application names and release numbers'
       datatype: 'string'
     configuration:
-      value-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-alt-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number'
+      value-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-alt-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number'
 
   - profile-name: 'GenericResponseProfile'
     uuid: 'ro-2-0-2-response-p-014'
     capability:
       operation-name: '/v1/list-applications-in-generic-representation'
-      field-name-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-okm-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name'
+      field-name-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-okm-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name'
       description: 'List of registered application names and release numbers'
       datatype: 'string'
     configuration:
-      value-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-okm-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number'
+      value-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-okm-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number'
 
   - profile-name: 'GenericResponseProfile'
     uuid: 'ro-2-0-2-response-p-015'
