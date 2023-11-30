@@ -122,8 +122,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-im-000/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-im-000/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '401':
@@ -602,7 +602,7 @@ paths:
                 default:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
         PromptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredApplications:
-          url: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-nr-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-nr-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-nr-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-nr-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-c-im-nr-2-0-1-004/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
+          url: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-nr-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-nr-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-nr-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-nr-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-c-im-nr-2-0-1-005/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
             post:
               parameters:
                 - $ref: '#/components/parameters/user'
@@ -616,13 +616,6 @@ paths:
                   application/json:
                     schema:
                       type: object
-                      required:
-                        - application-name
-                        - release-number
-                        - embedding-operation
-                        - client-update-operation
-                        - operation-client-update-operation
-                        - tcp-server-list
                       properties:
                         application-name:
                           type: string
@@ -649,6 +642,11 @@ paths:
                           description: >
                             'Name of service for initiating embedding process
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-c-im-*-*-*-*-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                        dispose-remainders-operation:
+                          type: string
+                          description: >
+                            'Name of service for broadcasting de-registrations of applications
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-c-im-*-*-*-*-006/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
                         client-update-operation:
                           type: string
                           description: >
@@ -659,53 +657,35 @@ paths:
                           description: >
                             'Name of service for broadcasting replacements of operations by backward compatible substitutes
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-c-im-*-*-*-*-002/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
-                        tcp-server-list:
-                          type: array
-                          items:
-                            type: object
-                            required:
-                              - protocol
-                              - address
-                              - port
-                            properties:
-                              protocol:
-                                type: string
-                                description: >
-                                  'Protocol to be used for addressing the application that wants to register
-                                  from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
-                              address:
-                                type: object
-                                properties:
-                                  ip-address:
-                                    type: object
-                                    properties:
-                                      ipv-4-address:
-                                        type: string
-                                        description: >
-                                          'IPv4 address of application that wants to register
-                                          from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
-                                  domain-name:
-                                    type: string
-                                    description: >
-                                      'Domain name of application that wants to register
-                                      from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
-                              port:
-                                type: integer
-                                description: >
-                                  'TCP port of application that wants to register
-                                  from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
-                      example:
-                        application-name: 'TypeApprovalRegister'
-                        release-number: '1.0.0'
-                        embedding-operation: '/v1/embed-yourself'
-                        client-update-operation: '/v1/update-client'
-                        operation-client-update-operation: '/v1/update-operation-client'
-                        tcp-server-list:
-                          - protocol: 'HTTP'
+                        tcp-server:
+                          type: object
+                          properties:
+                            protocol:
+                              type: string
+                              description: >
+                                'Protocol to be used for addressing the application that wants to register
+                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
                             address:
-                              ip-address:
-                                ipv-4-address: '1.1.3.2'
-                            port: 3002
+                              type: object
+                              properties:
+                                ip-address:
+                                  type: object
+                                  properties:
+                                    ipv-4-address:
+                                      type: string
+                                      description: >
+                                        'IPv4 address of application that wants to register
+                                        from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
+                                domain-name:
+                                  type: string
+                                  description: >
+                                    'Domain name of application that wants to register
+                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
+                            port:
+                              type: integer
+                              description: >
+                                'TCP port of application that wants to register
+                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
               responses:
                 '204':
                   description: 'Application registered'
@@ -1157,6 +1137,10 @@ paths:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
 
   /v1/register-application:
+    description: >
+      'DEPRECATED
+      Service shall be deleted with RO v3.0.0
+      Starting from AP v2.1.0, /v2/register-application shall be applied as a backward compatible update'
     parameters:
       - $ref: '#/components/parameters/user'
       - $ref: '#/components/parameters/originator'
@@ -1171,7 +1155,7 @@ paths:
       description: >
         'Registration service is not protected by operationKey.
         Receiving a de-registration request shall be assumed after passing wait time to approve
-        from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-2-integer-p-000/integer-profile-1-0:integer-profile-pac/integer-profile-configuration/integer-value]'
+        from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-1-integer-p-000/integer-profile-1-0:integer-profile-pac/integer-profile-configuration/integer-value]'
       requestBody:
         required: true
         content:
@@ -1191,13 +1175,13 @@ paths:
                   pattern: '^([A-Z][a-z0-9]+){2,}$'
                   description: >
                     'Name of application that wants to register
-                    find, but not at OldRelease or NewRelease, or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
+                    find or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
                 release-number:
                   type: string
                   pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
                   description: >
                     'Release of application that wants to register
-                    find, but not at OldRelease or NewRelease, or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
+                    find or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
                 preceding-application-name:
                   type: string
                   minLength: 3
@@ -1215,19 +1199,19 @@ paths:
                   minLength: 6
                   description: >
                     'Name of service for initiating embedding process
-                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-c-im-*-*-*-*-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-op-c-im-*-*-*-*-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
                 client-update-operation:
                   type: string
                   minLength: 6
                   description: >
                     'Name of service for broadcasting server changes
-                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-c-im-*-*-*-*-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-op-c-im-*-*-*-*-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
                 operation-client-update-operation:
                   type: string
                   minLength: 6
                   description: >
                     'Name of service for broadcasting replacements of operations by backward compatible substitutes
-                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-c-im-*-*-*-*-002/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-op-c-im-*-*-*-*-002/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
                 tcp-server-list:
                   type: array
                   minItems: 1
@@ -1245,7 +1229,7 @@ paths:
                           - 'HTTPS'
                         description: >
                           'Protocol to be used for addressing the application that wants to register
-                          find or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
+                          find or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
                       address:
                         type: object
                         minProperties: 1
@@ -1262,20 +1246,20 @@ paths:
                                 pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
                                 description: >
                                   'IPv4 address of application that wants to register
-                                  update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
+                                  update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
                           domain-name:
                             type: string
                             pattern: '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$'
                             description: >
                               'Domain name of application that wants to register
-                              update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
+                              update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
                       port:
                         type: integer
                         minimum: 0
                         maximum: 65535
                         description: >
                           'TCP port of application that wants to register
-                          update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
+                          update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
               example:
                 application-name: 'TypeApprovalRegister'
                 release-number: '2.0.1'
@@ -1286,6 +1270,481 @@ paths:
                 operation-client-update-operation: '/v1/update-operation-client'
                 tcp-server-list:
                   - protocol: 'HTTP'
+                    address:
+                      ip-address:
+                        ipv-4-address: '1.1.3.9'
+                    port: 3009
+                  - protocol: 'HTTPS'
+                    address:
+                      ip-address:
+                        ipv-4-address: '1.2.3.9'
+                    port: 3209
+      responses:
+        '204':
+          description: 'Application registered'
+          headers:
+            x-correlator:
+              schema:
+                type: string
+                example: '550e8400-e29b-11d4-a716-446655440000'
+              description: 'UUID for the service execution flow that allows to correlate requests and responses. Its value must be identical at the response compared with its corresponding request'
+            exec-time:
+              schema:
+                type: integer
+                example: 1100
+              description: 'Value written by the service provider, reporting the total elapsed time for the execution, including all the additional processing needed to retrieve the data from the backend service. Expressed in milliseconds'
+            backend-time:
+              schema:
+                type: integer
+                example: 850
+              description: 'Value written by the service provider, reporting the elapsed time for data retrieval from the backend (service invocation, database access…). Expressed in milliseconds'
+            life-cycle-state:
+              schema:
+                type: string
+                enum:
+                  - 'EXPERIMENTAL'
+                  - 'OPERATIONAL'
+                  - 'DEPRECATED'
+                  - 'OBSOLETE'
+                  - 'UNKNOWN'
+                  - 'NOT_YET_DEFINED'
+                example: 'EXPERIMENTAL'
+              description: >
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-op-s-is-001/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+        '400':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '403':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '404':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '500':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        default:
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+      callbacks:
+        TypeApprovalCausesRequestForEmbedding:
+          url: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-op-c-im-*-*-*-*-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
+            post:
+              parameters:
+                - $ref: '#/components/parameters/user'
+                - $ref: '#/components/parameters/originator'
+                - $ref: '#/components/parameters/x-correlator'
+                - $ref: '#/components/parameters/trace-indicator'
+                - $ref: '#/components/parameters/customer-journey'
+              requestBody:
+                required: true
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      required:
+                        - registry-office-application
+                        - registry-office-application-release-number
+                        - relay-server-replacement-operation
+                        - relay-operation-update-operation
+                        - deregistration-operation
+                        - registry-office-protocol
+                        - registry-office-address
+                        - registry-office-port
+                        - old-release-protocol
+                        - old-release-address
+                        - old-release-port
+                      properties:
+                        registry-office-application:
+                          type: string
+                          description: >
+                            'Own application name
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-name]'
+                        registry-office-application-release-number:
+                          type: string
+                          description: >
+                            'Own release number
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-number]'
+                        relay-server-replacement-operation:
+                          type: string
+                          description: >
+                            'Operation for requesting for broadcasting a new server address
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-op-s-is-010/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name]'
+                        relay-operation-update-operation:
+                          type: string
+                          description: >
+                            'Operation for requesting for broadcasting a backward compatible replacement of an operation
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-op-s-is-011/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name]'
+                        deregistration-operation:
+                          type: string
+                          description: >
+                            'Operation for deregistering from the application layer
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-op-s-is-002/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name]'
+                        registry-office-protocol:
+                          type: string
+                          description: >
+                            'Protocol for addressing the RegistryOffice application
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-tcp-s-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-protocol]'
+                        registry-office-address:
+                          type: object
+                          properties:
+                            ip-address:
+                              type: object
+                              properties:
+                                ipv-4-address:
+                                  type: string
+                                  description: >
+                                    'Own IP address
+                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-tcp-s-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address]'
+                            domain-name:
+                              type: string
+                              description: >
+                                  'Own domain name
+                                  from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-tcp-s-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/domain-name]'
+                        registry-office-port:
+                          type: integer
+                          description: >
+                            'Own TCP port
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-tcp-s-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-port]'
+                        old-release-protocol:
+                          type: string
+                          description: >
+                            'If application of the same name (but lower release number is already registered), Protocol for addressing the old release of the same application
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-tcp-c-*-*-*-*-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]
+                            otherwise protocol for addressing the newly approved application.'
+                        old-release-address:
+                          type: object
+                          properties:
+                            ip-address:
+                              type: object
+                              properties:
+                                ipv-4-address:
+                                  type: string
+                                  description: >
+                                    'If application of the same name (but lower release number is already registered), IPv4 address of the OldRelease
+                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-tcp-c-*-*-*-*-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]
+                                    otherwise IPv4 address of the newly approved application.'
+                            domain-name:
+                              type: string
+                              description: >
+                                'If application of the same name (but lower release number is already registered), domain name of the OldRelease
+                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-tcp-c-*-*-*-*-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]
+                                otherwise domain-name of the newly approved application.'
+                        old-release-port:
+                          type: integer
+                          description: >
+                            'If application of the same name (but lower release number is already registered), TCP port of the OldRelease
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-tcp-c-*-*-*-*-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]
+                            otherwise TCP port of the newly approved application.'
+                      example:
+                        registry-office-application: 'RegistryOffice'
+                        registry-office-application-release-number: '2.0.1'
+                        relay-server-replacement-operation: '/v1/relay-server-replacement'
+                        relay-operation-update-operation: '/v1/relay-operation-update'
+                        deregistration-operation: '/v1/deregister-application'
+                        registry-office-protocol: 'HTTP'
+                        registry-office-address:
+                          ip-address:
+                            ipv-4-address: '1.1.3.8'
+                        registry-office-port: 3008
+                        old-release-protocol: 'HTTP'
+                        old-release-address:
+                          ip-address:
+                            ipv-4-address: '1.1.3.1'
+                        old-release-port: 3001
+              responses:
+                '204':
+                  description: 'Will embed into the MBH SDN application layer'
+                  headers:
+                    x-correlator:
+                      schema:
+                        type: string
+                        example: '550e8400-e29b-11d4-a716-446655440000'
+                      description: 'UUID for the service execution flow that allows to correlate requests and responses. Its value must be identical at the response compared with its corresponding request'
+                    exec-time:
+                      schema:
+                        type: integer
+                        example: 1100
+                      description: 'Value written by the service provider, reporting the total elapsed time for the execution, including all the additional processing needed to retrieve the data from the backend service. Expressed in milliseconds'
+                    backend-time:
+                      schema:
+                        type: integer
+                        example: 850
+                      description: 'Value written by the service provider, reporting the elapsed time for data retrieval from the backend (service invocation, database access…). Expressed in milliseconds'
+                    life-cycle-state:
+                      schema:
+                        type: string
+                        enum:
+                          - 'EXPERIMENTAL'
+                          - 'OPERATIONAL'
+                          - 'DEPRECATED'
+                          - 'OBSOLETE'
+                          - 'UNKNOWN'
+                          - 'NOT_YET_DEFINED'
+                        example: 'EXPERIMENTAL'
+                      description: 'Life cycle state of the consumed service'
+                '400':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '401':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '403':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '404':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '500':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                default:
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+  /v2/register-application:
+    parameters:
+      - $ref: '#/components/parameters/user'
+      - $ref: '#/components/parameters/originator'
+      - $ref: '#/components/parameters/x-correlator'
+      - $ref: '#/components/parameters/trace-indicator'
+      - $ref: '#/components/parameters/customer-journey'
+    post:
+      operationId: registerApplication2
+      summary: 'Adds to the list of known applications'
+      tags:
+        - IndividualServices
+      description: >
+        'Registration service is not protected by operationKey.
+        Receiving a de-registration request shall be assumed after passing wait time to approve
+        from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-0-2-integer-p-000/integer-profile-1-0:integer-profile-pac/integer-profile-configuration/integer-value]'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - description: 'old-multiple-TcpClients-format, to be deleted with RO v3.0.0'
+                  type: object
+                  required:
+                    - application-name
+                    - release-number
+                    - embedding-operation
+                    - client-update-operation
+                    - operation-client-update-operation
+                    - tcp-server-list
+                  properties:
+                    application-name:
+                      type: string
+                      pattern: '^([A-Z][a-z0-9]+){2,}$'
+                      description: >
+                        'Name of application that wants to register
+                        find, but not at OldRelease or NewRelease, or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
+                    release-number:
+                      type: string
+                      pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
+                      description: >
+                        'Release of application that wants to register
+                        find, but not at OldRelease or NewRelease, or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
+                    preceding-application-name:
+                      type: string
+                      minLength: 3
+                      description: >
+                        'If provided, the new application will address /v1/bequeath-your-data-and-die at the preceding application after receiving /v1/embed-yourself
+                        update or create in LOADfile'
+                    preceding-release-number:
+                      type: string
+                      pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
+                      description: >
+                        'If provided, the new application will address /v1/bequeath-your-data-and-die at the preceding release after receiving /v1/embed-yourself
+                        update or create in LOADfile'
+                    embedding-operation:
+                      type: string
+                      minLength: 6
+                      description: >
+                        'Name of service for initiating embedding process
+                        update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-c-im-*-*-*-*-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                    client-update-operation:
+                      type: string
+                      minLength: 6
+                      description: >
+                        'Name of service for broadcasting server changes
+                        update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-c-im-*-*-*-*-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                    operation-client-update-operation:
+                      type: string
+                      minLength: 6
+                      description: >
+                        'Name of service for broadcasting replacements of operations by backward compatible substitutes
+                        update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-c-im-*-*-*-*-002/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                    tcp-server-list:
+                      type: array
+                      minItems: 1
+                      items:
+                        type: object
+                        required:
+                          - protocol
+                          - address
+                          - port
+                        properties:
+                          protocol:
+                            type: string
+                            enum:
+                              - 'HTTP'
+                              - 'HTTPS'
+                            description: >
+                              'Protocol to be used for addressing the application that wants to register
+                              find or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
+                          address:
+                            type: object
+                            minProperties: 1
+                            maxProperties: 1
+                            additionalProperties: false
+                            properties:
+                              ip-address:
+                                type: object
+                                minProperties: 1
+                                additionalProperties: false
+                                properties:
+                                  ipv-4-address:
+                                    type: string
+                                    pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+                                    description: >
+                                      'IPv4 address of application that wants to register
+                                      update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
+                              domain-name:
+                                type: string
+                                pattern: '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$'
+                                description: >
+                                  'Domain name of application that wants to register
+                                  update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
+                          port:
+                            type: integer
+                            minimum: 0
+                            maximum: 65535
+                            description: >
+                              'TCP port of application that wants to register
+                              update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
+                - description: 'new-single-TcpClient-format'
+                  type: object
+                  required:
+                    - application-name
+                    - release-number
+                    - embedding-operation
+                    - dispose-remainders-operation
+                    - client-update-operation
+                    - operation-client-update-operation
+                    - tcp-server
+                  properties:
+                    application-name:
+                      type: string
+                      pattern: '^([A-Z][a-z0-9]+){2,}$'
+                      description: >
+                        'Name of application that wants to register
+                        find, but not at OldRelease or NewRelease, or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
+                    release-number:
+                      type: string
+                      pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
+                      description: >
+                        'Release of application that wants to register
+                        find, but not at OldRelease or NewRelease, or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
+                    preceding-application-name:
+                      type: string
+                      minLength: 3
+                      description: >
+                        'If provided, the new application will address /v1/bequeath-your-data-and-die at the preceding application after receiving /v1/embed-yourself
+                        update or create in LOADfile'
+                    preceding-release-number:
+                      type: string
+                      pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
+                      description: >
+                        'If provided, the new application will address /v1/bequeath-your-data-and-die at the preceding release after receiving /v1/embed-yourself
+                        update or create in LOADfile'
+                    embedding-operation:
+                      type: string
+                      minLength: 6
+                      description: >
+                        'Name of service for initiating embedding process
+                        update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-c-im-*-*-*-*-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                    dispose-remainders-operation:
+                      type: string
+                      minLength: 6
+                      description: >
+                        'Name of service for broadcasting de-registrations of applications
+                        update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-c-im-*-*-*-*-006/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                    client-update-operation:
+                      type: string
+                      minLength: 6
+                      description: >
+                        'Name of service for broadcasting server changes
+                        update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-c-im-*-*-*-*-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                    operation-client-update-operation:
+                      type: string
+                      minLength: 6
+                      description: >
+                        'Name of service for broadcasting replacements of operations by backward compatible substitutes
+                        update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-c-im-*-*-*-*-002/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                    tcp-server:
+                      type: object
+                      required:
+                        - protocol
+                        - address
+                        - port
+                      properties:
+                        protocol:
+                          type: string
+                          enum:
+                            - 'HTTP'
+                            - 'HTTPS'
+                          description: >
+                            'Protocol to be used for addressing the application that wants to register
+                            find or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
+                        address:
+                          type: object
+                          minProperties: 1
+                          maxProperties: 1
+                          additionalProperties: false
+                          properties:
+                            ip-address:
+                              type: object
+                              minProperties: 1
+                              additionalProperties: false
+                              properties:
+                                ipv-4-address:
+                                  type: string
+                                  pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+                                  description: >
+                                    'IPv4 address of application that wants to register
+                                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
+                            domain-name:
+                              type: string
+                              pattern: '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$'
+                              description: >
+                                'Domain name of application that wants to register
+                                update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
+                        port:
+                          type: integer
+                          minimum: 0
+                          maximum: 65535
+                          description: >
+                            'TCP port of application that wants to register
+                            update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
+            examples:
+              old-multiple-TcpClients-format:
+                value:
+                  application-name: 'TypeApprovalRegister'
+                  release-number: '2.0.1'
+                  preceding-application-name: 'TypeApprovalRegister'
+                  preceding-release-number: '1.0.0'
+                  embedding-operation: '/v1/embed-yourself'
+                  client-update-operation: '/v1/update-client'
+                  operation-client-update-operation: '/v1/update-operation-client'
+                  tcp-server-list:
+                    - protocol: 'HTTP'
+                      address:
+                        ip-address:
+                          ipv-4-address: '1.1.3.9'
+                      port: 3009
+              new-single-TcpClient-format:
+                value:
+                  application-name: 'TypeApprovalRegister'
+                  release-number: '2.0.1'
+                  preceding-application-name: 'TypeApprovalRegister'
+                  preceding-release-number: '1.0.0'
+                  embedding-operation: '/v1/embed-yourself'
+                  dispose-remainders-operation: '/v1/dispose-remainders-of-deregistered-application'
+                  client-update-operation: '/v1/update-client'
+                  operation-client-update-operation: '/v1/update-operation-client'
+                  tcp-server:
+                    protocol: 'HTTP'
                     address:
                       ip-address:
                         ipv-4-address: '1.1.3.9'
@@ -1321,8 +1780,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-is-001/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-is-001/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '403':
@@ -1533,8 +1992,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-is-002/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-is-002/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '401':
@@ -1629,8 +2088,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-is-003/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-is-003/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '401':
@@ -1644,6 +2103,76 @@ paths:
         default:
           $ref: '#/components/responses/responseForErroredServiceRequests'
       callbacks:
+        DeRegistrationBroadcast:
+          url: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-c-im-*-*-*-*-006/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
+            description: 'Exclusively approved applications shall get information about de-registered applications.'
+            post:
+              parameters:
+                - $ref: '#/components/parameters/user'
+                - $ref: '#/components/parameters/originator'
+                - $ref: '#/components/parameters/x-correlator'
+                - $ref: '#/components/parameters/trace-indicator'
+                - $ref: '#/components/parameters/customer-journey'
+              requestBody:
+                required: true
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        application-name:
+                          type: string
+                          description: >
+                            'Name of application that shall be removed from configuration and application data
+                            from [$/v1/deregister-application.body#application-name]'
+                        release-number:
+                          type: string
+                          description: >
+                            'Release of application that shall be removed from configuration and application data
+                            from [$/v1/deregister-application.body#release-number]'
+              responses:
+                '204':
+                  description: 'Application removed from configuration and application data'
+                  headers:
+                    x-correlator:
+                      schema:
+                        type: string
+                        example: '550e8400-e29b-11d4-a716-446655440000'
+                      description: 'UUID for the service execution flow that allows to correlate requests and responses. Its value must be identical at the response compared with its corresponding request'
+                    exec-time:
+                      schema:
+                        type: integer
+                        example: 1100
+                      description: 'Value written by the service provider, reporting the total elapsed time for the execution, including all the additional processing needed to retrieve the data from the backend service. Expressed in milliseconds'
+                    backend-time:
+                      schema:
+                        type: integer
+                        example: 850
+                      description: 'Value written by the service provider, reporting the elapsed time for data retrieval from the backend (service invocation, database access…). Expressed in milliseconds'
+                    life-cycle-state:
+                      schema:
+                        type: string
+                        enum:
+                          - 'EXPERIMENTAL'
+                          - 'OPERATIONAL'
+                          - 'DEPRECATED'
+                          - 'OBSOLETE'
+                          - 'UNKNOWN'
+                          - 'NOT_YET_DEFINED'
+                        example: 'EXPERIMENTAL'
+                      description: 'Life cycle state of the consumed service'
+                '400':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '401':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '403':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '404':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '500':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                default:
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
         ServerReplacementBroadcast:
           url: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-c-im-*-*-*-*-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
             description: 'Exclusively approved applications shall get information about updated serving applications.'
@@ -1978,8 +2507,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-is-004/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-is-004/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '401':
@@ -2062,8 +2591,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-is-005/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-is-005/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '403':
@@ -2289,6 +2818,10 @@ paths:
                 default:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
   /v1/notify-deregistrations:
+    description: >
+      'DEPRECATED
+      Service shall be deleted with RO v3.0.0
+      Starting from RO v2.1.0, de-registration get notified to Basic service /v1/dispose-remainders-of-deregistered-application'
     parameters:
       - $ref: '#/components/parameters/user'
       - $ref: '#/components/parameters/originator'
@@ -2411,8 +2944,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-is-007/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-is-007/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '401':
@@ -2624,8 +3157,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-is-008/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-is-008/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '401':
@@ -2872,8 +3405,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-is-009/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-is-009/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '401':
@@ -3097,8 +3630,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-is-010/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-is-010/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '401':
@@ -3198,8 +3731,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-is-011/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-is-011/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '401':
@@ -3431,8 +3964,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bm-000/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bm-000/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '401':
@@ -3781,8 +4314,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bm-001/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bm-001/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '401':
@@ -4029,8 +4562,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bm-002/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bm-002/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '401':
@@ -4280,8 +4813,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bm-003/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bm-003/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '401':
@@ -4477,8 +5010,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bm-004/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bm-004/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '401':
@@ -4614,8 +5147,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bm-005/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bm-005/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '401':
@@ -4879,8 +5412,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bm-007/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bm-007/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '401':
@@ -5019,8 +5552,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bm-008/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bm-008/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '401':
@@ -5272,8 +5805,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bm-009/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bm-009/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '401':
@@ -6159,8 +6692,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bm-010/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bm-010/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '401':
@@ -6258,8 +6791,326 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bm-011/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bm-011/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+        '400':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '401':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '403':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '404':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '500':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        default:
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+  /v1/inquire-basic-auth-approvals:
+    parameters:
+      - $ref: '#/components/parameters/user'
+      - $ref: '#/components/parameters/originator'
+      - $ref: '#/components/parameters/x-correlator'
+      - $ref: '#/components/parameters/trace-indicator'
+      - $ref: '#/components/parameters/customer-journey'
+    post:
+      operationId: inquireBasicAuthRequestApprovals
+      summary: 'Receives information about where to ask for approval of BasicAuth requests'
+      tags:
+        - BasicServices
+      security:
+        - apiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - application-name
+                - release-number
+                - operation-name
+                - protocol
+                - address
+                - port
+              properties:
+                application-name:
+                  type: string
+                  description: >
+                    'Name of the application that approves the BasicAuth requests
+                    find [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-aa-2-1-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
+                release-number:
+                  type: string
+                  pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
+                  description: >
+                    'Release of the application that approves the BasicAuth requests
+                    update [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-c-aa-2-1-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
+                operation-name:
+                  type: string
+                  minLength: 6
+                  description: >
+                    'Operation for approving the BasicAuth requests
+                    update [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-c-bs-aa-2-1-0-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                protocol:
+                  type: string
+                  enum:
+                    - 'HTTP'
+                    - 'HTTPS'
+                  description: >
+                    'Protocol to be used for addressing the application that approves the BasicAuth requests
+                    update [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-aa-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
+                address:
+                  type: object
+                  minProperties: 1
+                  maxProperties: 1
+                  additionalProperties: false
+                  properties:
+                    ip-address:
+                      type: object
+                      minProperties: 1
+                      additionalProperties: false
+                      properties:
+                        ipv-4-address:
+                          type: string
+                          pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+                          description: >
+                            'IPv4 address of the application that approves the BasicAuth requests
+                            update [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-aa-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
+                    domain-name:
+                      type: string
+                      pattern: '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$'
+                      description: >
+                        'Domain name of the application that approves the BasicAuth requests
+                        update [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-aa-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
+                port:
+                  type: integer
+                  minimum: 0
+                  maximum: 65535
+                  description: >
+                    'Port of the application that approves the BasicAuth requests
+                    update [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-aa-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
+              example:
+                application-name: 'AccessAdministration'
+                release-number: '2.1.0'
+                operation-name: '/v1/approve-basic-auth-request'
+                protocol: 'HTTP'
+                address:
+                  ip-address:
+                    ipv-4-address: '127.0.0.1'
+                port: 3028
+      responses:
+        '204':
+          description: 'Informed about where to inquire for approval of BasicAuth requests'
+          headers:
+            x-correlator:
+              schema:
+                type: string
+                example: '550e8400-e29b-11d4-a716-446655440000'
+              description: 'UUID for the service execution flow that allows to correlate requests and responses. Its value must be identical at the response compared with its corresponding request'
+            exec-time:
+              schema:
+                type: integer
+                example: 1100
+              description: 'Value written by the service provider, reporting the total elapsed time for the execution, including all the additional processing needed to retrieve the data from the backend service. Expressed in milliseconds'
+            backend-time:
+              schema:
+                type: integer
+                example: 850
+              description: 'Value written by the service provider, reporting the elapsed time for data retrieval from the backend (service invocation, database access…). Expressed in milliseconds'
+            life-cycle-state:
+              schema:
+                type: string
+                enum:
+                  - 'EXPERIMENTAL'
+                  - 'OPERATIONAL'
+                  - 'DEPRECATED'
+                  - 'OBSOLETE'
+                  - 'UNKNOWN'
+                  - 'NOT_YET_DEFINED'
+                example: 'EXPERIMENTAL'
+              description: >
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bm-005/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+        '400':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '401':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '403':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '404':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '500':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        default:
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+      callbacks:
+        BasicAuthRequestCausesInquiryForAuthentication:
+          url: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-aa-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-aa-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address or /core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-aa-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-tcp-c-aa-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-c-bs-aa-2-1-0-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
+            post:
+              parameters:
+                - $ref: '#/components/parameters/user'
+                - $ref: '#/components/parameters/originator'
+                - $ref: '#/components/parameters/x-correlator'
+                - $ref: '#/components/parameters/trace-indicator'
+                - $ref: '#/components/parameters/customer-journey'
+              requestBody:
+                required: true
+                content:
+                  application/json:
+                    schema:
+                      type: object
+                      properties:
+                        Authorization:
+                          type: string
+                          description: >
+                            'Authorization code
+                            from {$request.parameters#Authorization} of the BasicAuth request that initiates the inquiry for approval'
+                        application-name:
+                          type: string
+                          description: >
+                            'Own application name
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-name]'
+                        release-number:
+                          type: string
+                          description: >
+                            'Own application release number
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-number]'
+                        operation-name:
+                          type: string
+                          description: >
+                            'Path (could be service, could be OaM path) that has been addressed by the BasicAuth request
+                            in path parameter values to be replaced by original parameter names in curly brackets
+                            filters to be removed
+                            from {$request.path} of the BasicAuth request that initiates the inquiry for approval'
+                        method:
+                          type: string
+                          description: >
+                            'Method applied in the BasicAuth request
+                            from {$request.method} of the BasicAuth request that initiates the inquiry for approval'
+              responses:
+                '200':
+                  description: 'Response on inquiry for approval of a BasicAuth request provided'
+                  content:
+                    application/json:
+                      schema:
+                        type: object
+                        properties:
+                          basic-auth-request-is-approved:
+                            type: boolean
+                            description: 'If true, BasicAuth request can be executed'
+                          reason-of-objection:
+                            type: string
+                            description: >
+                              'if AUTHORIZATION_CODE_UNKNOWN BasicAuth request to be aborted and 401 to be sent
+                              else BasicAuth request to be aborted and 403 to be sent'
+                        example:
+                          basic-auth-request-is-approved: false
+                          reason-of-objection: 'AUTHORIZATION_CODE_UNKNOWN'
+                  headers:
+                    x-correlator:
+                      schema:
+                        type: string
+                        example: '550e8400-e29b-11d4-a716-446655440000'
+                      description: 'UUID for the service execution flow that allows to correlate requests and responses. Its value must be identical at the response compared with its corresponding request'
+                    exec-time:
+                      schema:
+                        type: integer
+                        example: 1100
+                      description: 'Value written by the service provider, reporting the total elapsed time for the execution, including all the additional processing needed to retrieve the data from the backend service. Expressed in milliseconds'
+                    backend-time:
+                      schema:
+                        type: integer
+                        example: 850
+                      description: 'Value written by the service provider, reporting the elapsed time for data retrieval from the backend (service invocation, database access…). Expressed in milliseconds'
+                    life-cycle-state:
+                      schema:
+                        type: string
+                        enum:
+                          - 'EXPERIMENTAL'
+                          - 'OPERATIONAL'
+                          - 'DEPRECATED'
+                          - 'OBSOLETE'
+                          - 'UNKNOWN'
+                          - 'NOT_YET_DEFINED'
+                        example: 'EXPERIMENTAL'
+                      description: 'Life cycle state of the consumed service'
+                '400':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '401':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '403':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '404':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                '500':
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+                default:
+                  $ref: '#/components/responses/responseForErroredServiceRequests'
+  /v1/dispose-remainders-of-deregistered-application:
+    parameters:
+      - $ref: '#/components/parameters/user'
+      - $ref: '#/components/parameters/originator'
+      - $ref: '#/components/parameters/x-correlator'
+      - $ref: '#/components/parameters/trace-indicator'
+      - $ref: '#/components/parameters/customer-journey'
+    post:
+      operationId: disposeRemaindersOfDeregisteredApplication
+      summary: 'Removes application from configuration and application data'
+      tags:
+        - IndividualServices
+      security:
+        - apiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - application-name
+                - release-number
+              properties:
+                application-name:
+                  type: string
+                  description: 'Name of application that shall be removed from configuration and application data'
+                release-number:
+                  type: string
+                  description: 'Release of application that shall be removed from configuration and application data'
+              example:
+                application-name: 'BadApplication'
+                release-number: '1.0.0'
+      responses:
+        '204':
+          description: 'Application removed from configuration and application data'
+          headers:
+            x-correlator:
+              schema:
+                type: string
+                example: '550e8400-e29b-11d4-a716-446655440000'
+              description: 'UUID for the service execution flow that allows to correlate requests and responses. Its value must be identical at the response compared with its corresponding request'
+            exec-time:
+              schema:
+                type: integer
+                example: 1100
+              description: 'Value written by the service provider, reporting the total elapsed time for the execution, including all the additional processing needed to retrieve the data from the backend service. Expressed in milliseconds'
+            backend-time:
+              schema:
+                type: integer
+                example: 850
+              description: 'Value written by the service provider, reporting the elapsed time for data retrieval from the backend (service invocation, database access…). Expressed in milliseconds'
+            life-cycle-state:
+              schema:
+                type: string
+                enum:
+                  - 'EXPERIMENTAL'
+                  - 'OPERATIONAL'
+                  - 'DEPRECATED'
+                  - 'OBSOLETE'
+                  - 'UNKNOWN'
+                  - 'NOT_YET_DEFINED'
+                example: 'EXPERIMENTAL'
+              description: >
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=xx-1-0-0-op-s-bm-013/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '401':
@@ -6329,8 +7180,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bs-000/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bs-000/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '403':
@@ -6432,8 +7283,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bs-001/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bs-001/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '404':
@@ -6516,8 +7367,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bs-002/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bs-002/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '404':
@@ -6594,8 +7445,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bs-003/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bs-003/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '404':
@@ -6657,8 +7508,8 @@ paths:
                   - 'NOT_YET_DEFINED'
                 example: 'EXPERIMENTAL'
               description: >
-                  'Life cycle state of the consumed service
-                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bs-004/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-2-op-s-bs-004/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '404':
