@@ -25,6 +25,10 @@ servers:
           uuid: ro-2-0-2-op-s-bm-010
         - operation-name: /v1/update-operation-client
           uuid: ro-2-0-2-op-s-bm-011
+        - operation-name: /v1/inquire-basic-auth-approvals
+          uuid: ro-2-0-2-op-s-bm-012
+        - operation-name: /v1/dispose-remainders-of-deregistered-application
+          uuid: ro-2-0-2-op-s-bm-013
       individual:
         - operation-name: /v1/bequeath-your-data-and-die
           uuid: ro-2-0-2-op-s-im-000
@@ -65,6 +69,8 @@ servers:
           uuid: ro-2-0-2-op-s-is-010
         - operation-name: /v1/relay-operation-update
           uuid: ro-2-0-2-op-s-is-011
+        - operation-name: /v2/register-application
+          uuid: ro-2-0-2-op-s-is-012
   http-server:
     own-application-name: RegistryOffice
     own-release-number: 2.0.2
@@ -124,8 +130,8 @@ clients:
             uuid: ro-2-0-2-op-c-im-nr-2-0-1-002
           - operation-name: /v1/notify-withdrawn-approvals
             uuid: ro-2-0-2-op-c-im-nr-2-0-1-003
-          - operation-name: /v1/register-application
-            uuid: ro-2-0-2-op-c-im-nr-2-0-1-004
+          - operation-name: /v2/register-application
+            uuid: ro-2-0-2-op-c-im-nr-2-0-1-005
       service:
         basic:
         individual:
@@ -157,6 +163,8 @@ clients:
             uuid: ro-2-0-2-op-c-im-ro-2-0-1-001
           - operation-name: /v1/update-operation-client
             uuid: ro-2-0-2-op-c-im-ro-2-0-1-002
+          - operation-name: /v1/dispose-remainders-of-deregistered-application
+            uuid: ro-2-0-2-op-c-im-ro-2-0-1-006
       service:
         basic:
         individual:
@@ -186,6 +194,8 @@ clients:
             uuid: ro-2-0-2-op-c-im-tar-2-0-1-004
           - operation-name: /v1/redirect-info-about-approval-status-changes
             uuid: ro-2-0-2-op-c-im-tar-2-0-1-005
+          - operation-name: /v1/dispose-remainders-of-deregistered-application
+            uuid: ro-2-0-2-op-c-im-tar-2-0-1-006
       service:
         basic:
         individual:
@@ -213,6 +223,8 @@ clients:
             uuid: ro-2-0-2-op-c-im-eatl-2-0-1-003
           - operation-name: /v1/disregard-application
             uuid: ro-2-0-2-op-c-im-eatl-2-0-1-004
+          - operation-name: /v1/dispose-remainders-of-deregistered-application
+            uuid: ro-2-0-2-op-c-im-eatl-2-0-1-006
       service:
         basic:
           - operation-name: /v1/record-service-request
@@ -242,6 +254,8 @@ clients:
             uuid: ro-2-0-2-op-c-im-ol-2-0-1-003
           - operation-name: /v1/disregard-application
             uuid: ro-2-0-2-op-c-im-ol-2-0-1-004
+          - operation-name: /v1/dispose-remainders-of-deregistered-application
+            uuid: ro-2-0-2-op-c-im-ol-2-0-1-006
       service:
         basic:
           - operation-name: /v1/record-oam-request
@@ -271,6 +285,8 @@ clients:
             uuid: ro-2-0-2-op-c-im-aa-2-0-1-003
           - operation-name: /v1/disregard-application
             uuid: ro-2-0-2-op-c-im-aa-2-0-1-004
+          - operation-name: /v1/dispose-remainders-of-deregistered-application
+            uuid: ro-2-0-2-op-c-im-aa-2-0-1-006
       service:
         basic:
           - operation-name: /v1/approve-oam-request
@@ -312,6 +328,8 @@ clients:
             uuid: ro-2-0-2-op-c-im-alt-2-0-1-003
           - operation-name: /v1/disregard-application
             uuid: ro-2-0-2-op-c-im-alt-2-0-1-004
+          - operation-name: /v1/dispose-remainders-of-deregistered-application
+            uuid: ro-2-0-2-op-c-im-alt-2-0-1-006
       service:
         basic:
         individual:
@@ -339,6 +357,8 @@ clients:
             uuid: ro-2-0-2-op-c-im-okm-2-0-1-003
           - operation-name: /v1/disregard-application
             uuid: ro-2-0-2-op-c-im-okm-2-0-1-004
+          - operation-name: /v1/dispose-remainders-of-deregistered-application
+            uuid: ro-2-0-2-op-c-im-okm-2-0-1-006
       service:
         basic:
         individual:
