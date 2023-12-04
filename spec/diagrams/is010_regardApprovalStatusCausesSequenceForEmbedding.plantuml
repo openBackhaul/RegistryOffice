@@ -1,0 +1,276 @@
+@startuml is010_regardApprovalStatusCausesSequence
+skinparam responseMessageBelowArrow true
+
+title
+RegardUpdatedApprovalStatusCausesSequence
+end title
+
+participant "TAR" as tar
+participant "RO://v1/regard-updated-approval-status" as ro
+
+participant "RO://v1/deregister-application" as roDeRegister
+
+participant "ALT://v1/regard-application" as altRegardApplication
+participant "OKM://v1/regard-application" as okmRegardApplication
+participant "AA://v1/regard-application" as aaRegardApplication
+participant "EaTL://v1/regard-application" as eatlRegardApplication
+participant "OL://v1/regard-application" as olRegardApplication
+
+participant "ALT://v1/add-operation-client-to-link" as altAddClientToLink
+participant "NA://v1/inform-about-preceding-release" as naInformAboutOR
+participant "NA://v1/embed-yourself" as newApplication
+
+tar -> ro : {newApplicationName, releaseNumber, approvalStatus}
+activate ro
+
+' schon erledigt
+note right ro
+IF approvalStatus == BARRED
+<u>DeRegisteringBarredApplication</u>
+end note
+ro -> roDeRegister : {newApplicationName, releaseNumber)
+ro <-- roDeRegister : 204
+
+note over roDeRegister #WhiteSmoke
+New application will be totally removed
+from the entire MW SDN application layer
+end note
+
+tar <-- ro : ???
+
+note over ro
+ELSE
+end note
+ro -> altRegardApplication : {newApplicationName, releaseNumber, TCP/IP address}
+ro <-- altRegardApplication : {successfully-connected,  reason-of-failure}
+
+note left ro
+IF (NOT 200) OR (successfully-connected==false)
+terminate process with response
+end note
+tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+
+note over ro
+ELSE
+end note
+ro -> okmRegardApplication : {newApplicationName, releaseNumber, TCP/IP address}
+ro <-- okmRegardApplication : {successfully-connected,  reason-of-failure}
+
+note left ro
+IF (NOT 200) OR (successfully-connected==false)
+terminate process with response
+end note
+tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+
+note over ro
+ELSE
+end note
+ro -> aaRegardApplication : {newApplicationName, releaseNumber, TCP/IP address}
+ro <-- aaRegardApplication : {successfully-connected,  reason-of-failure}
+
+note left ro
+IF (NOT 200) OR (successfully-connected==false)
+terminate process with response
+end note
+tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+
+note over ro
+ELSE
+end note
+ro -> eatlRegardApplication : {newApplicationName, releaseNumber, TCP/IP address}
+ro <-- eatlRegardApplication : {successfully-connected,  reason-of-failure}
+
+note left ro
+IF (NOT 200) OR (successfully-connected==false)
+terminate process with response
+end note
+tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+
+note over ro
+ELSE
+end note
+ro -> olRegardApplication : {newApplicationName, releaseNumber, TCP/IP address}
+ro <-- olRegardApplication : {successfully-connected,  reason-of-failure}
+
+note left ro
+IF (NOT 200) OR (successfully-connected==false)
+terminate process with response
+end note
+tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+
+note over ro
+ELSE
+end note
+
+note over ro
+<u>CreateLinkToGetOldRelease</u>
+Request for automatically creating the Link:
+RO => NA://v1/inform-about-preceding-release
+end note
+ro -> altAddClientToLink : { servingApplicationName == requestBody.newApplicationName,\n servingApplicationReleaseNumber == requestBody.releaseNumber,\n operationName == /v1/inform-about-preceding-release,\n consumingApplicationName == RegistryOffice,\n consumingApplicationReleaseNumber == 2.1.0 } (apiKey)
+ro <-- altAddClientToLink : {client-successfully-added, reason-of-failure}
+
+note left ro
+IF (NOT 200) OR (client-successfully-added==false)
+terminate process with response
+end note
+tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+
+note over ro
+ELSE
+end note
+
+note over ro
+<u>RequestForOldRelease</u>
+end note
+ro -> naInformAboutOR
+ro <-- naInformAboutOR : {oldReleaseApplicationName, releaseNumber, dataTransferOperationsList}
+
+note left ro
+IF (NOT 200)
+terminate process with response
+end note
+tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+
+note over ro
+ELSE
+end note
+
+note over ro
+<u>CreateLinkForPromptingEmbedding</u>
+Request for automatically creating the Link:
+RO => NA://v1/embed-yourself
+end note
+ro -> altAddClientToLink : { servingApplicationName == requestBody.newApplicationName,\n servingApplicationReleaseNumber == requestBody.releaseNumber,\n operationName == /v1/embed-yourself,\n consumingApplicationName == RegistryOffice,\n consumingApplicationReleaseNumber == 2.1.0 } (apiKey)
+ro <-- altAddClientToLink : {client-successfully-added, reason-of-failure}
+
+note left ro
+IF (NOT 200) OR (client-successfully-added==false)
+terminate process with response
+end note
+tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+
+note over ro
+ELSE
+end note
+
+note over ro
+<u>CreateLinkForBequeathYourData</u>
+Request for automatically creating the Link:
+NA => OR://v1/bequeath-your-data-and-die
+end note
+ro -> altAddClientToLink : { servingApplicationName == oldReleaseApplicationName,\n servingApplicationReleaseNumber == releaseNumber,\n operationName == /v1/bequeath-your-data-and-die,\n consumingApplicationName == requestBody.newApplicationName,\n consumingApplicationReleaseNumber == requestBody.releaseNumber } (apiKey)
+ro <-- altAddClientToLink : {client-successfully-added, reason-of-failure}
+
+note left ro
+IF (NOT 200) OR (client-successfully-added==false)
+terminate process with response
+end note
+tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+
+note over ro
+ELSE
+end note
+
+note over ro
+<u>CreateFurtherLinksForTransferringData</u>
+Potentially several requests for automatically creating Links:
+OR => NA:// ... according to RequestForOldRelease.responseBody#dataTransferOperationsList
+end note
+ro -> altAddClientToLink : { servingApplicationName == requestBody.newApplicationName,\n servingApplicationReleaseNumber == requestBody.releaseNumber,\n operationName == [RequestForOldRelease.responseBody#dataTransferOperationsList],\n consumingApplicationName == oldReleaseApplicationName,\n consumingApplicationReleaseNumber == releaseNumber } (apiKey)
+ro <-- altAddClientToLink : {client-successfully-added, reason-of-failure}
+
+note left ro
+IF (NOT 200) OR (client-successfully-added==false)
+terminate process with response
+end note
+tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+
+note over ro
+ELSE
+end note
+
+note over ro
+<u>RequestForEmbedding</u>
+end note
+ro -> newApplication : {..., oldReleaseProtocol, oldReleaseAddress, oldReleasePort, ...}
+ro <-- newApplication : 204
+
+note right ro #WhiteSmoke
+This will start an embedding process, which is individual to the respective application.
+A Link between the new application and the /v1/bequeath-your-data-and-die service at the preceding release got created,
+but further Links might be required for the individual embedding process.
+The Links required for the bequeath-your-data-and-die process should be covered mostly, either by former operations or by 
+the by dataTransferOperationsList.
+end note
+
+note left ro
+IF (NOT 200)
+terminate process with response
+end note
+tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+
+note over ro
+ELSE
+end note
+
+
+
+note over ro
+<u>CreateLinkForUpdatingClient</u>
+Request for automatically creating the Link:
+RO => NA://v1/update-client
+end note
+ro -> altAddClientToLink : { servingApplicationName == requestBody.newApplicationName,\n servingApplicationReleaseNumber == requestBody.releaseNumber,\n operationName == /v1/update-client,\n consumingApplicationName == RegistryOffice,\n consumingApplicationReleaseNumber == 2.1.0 } (apiKey)
+ro <-- altAddClientToLink : {client-successfully-added, reason-of-failure}
+
+note left ro
+IF (NOT 200) OR (client-successfully-added==false)
+terminate process with response
+end note
+tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+
+note over ro
+ELSE
+end note
+
+note over ro
+<u>CreateLinkForUpdatingOperationClient</u>
+Request for automatically creating the Link:
+RO => NA://v1/update-operation-client
+end note
+ro -> altAddClientToLink : { servingApplicationName == requestBody.newApplicationName,\n servingApplicationReleaseNumber == requestBody.releaseNumber,\n operationName == /v1/update-operation-client,\n consumingApplicationName == RegistryOffice,\n consumingApplicationReleaseNumber == 2.1.0 } (apiKey)
+ro <-- altAddClientToLink : {client-successfully-added, reason-of-failure}
+
+note left ro
+IF (NOT 200) OR (client-successfully-added==false)
+terminate process with response
+end note
+tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+
+note over ro
+ELSE
+end note
+
+note over ro
+<u>CreateLinkForDisposingRemainders</u>
+Request for automatically creating the Link:
+RO => NA://v1/dispose-remainders-of-deregistered-application
+end note
+ro -> altAddClientToLink : { servingApplicationName == requestBody.newApplicationName,\n servingApplicationReleaseNumber == requestBody.releaseNumber,\n operationName == /v1/dispose-remainders-of-deregistered-application,\n consumingApplicationName == RegistryOffice,\n consumingApplicationReleaseNumber == 2.1.0 } (apiKey)
+ro <-- altAddClientToLink : {client-successfully-added, reason-of-failure}
+
+note left ro
+IF (NOT 200) OR (client-successfully-added==false)
+terminate process with response
+end note
+tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+
+note over ro
+ELSE
+end note
+tar <-- ro : {successfully-embedded==true }
+
+deactivate ro
+
+@enduml

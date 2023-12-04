@@ -562,43 +562,6 @@ forwardings:
       - client-name: OperationKeyManagement://v1/disregard-application
         uuid: ro-2-0-2-op-c-im-okm-2-0-1-004
 
-  - forwarding-name: DeRegistrationBroadcast
-    uuid: ro-2-0-2-op-fc-is-011
-    forwarding-type: Subscription
-    management-requests:
-      operation-client-update:
-        - server-name: /v1/register-application
-          uuid: ro-2-0-2-op-s-is-001
-        - server-name: /v2/register-application
-          uuid: ro-2-0-2-op-s-is-012
-      fc-port-update:
-        - server-name: /v1/regard-updated-approval-status
-          uuid: ro-2-0-2-op-s-is-003
-      fc-port-deletion:
-        - server-name: /v1/regard-updated-approval-status
-          uuid: ro-2-0-2-op-s-is-003
-      operation-client-deletion:
-        - server-name: /v1/dispose-remainders-of-deregistered-application
-          uuid: ro-2-0-2-op-s-bm-013
-    initiating-requests:
-      - server-name: /v1/deregister-application
-        uuid: ro-2-0-2-op-s-is-002
-    consequent-requests:
-      - client-name: RegistryOffice://v1/dispose-remainders-of-deregistered-application
-        uuid: ro-2-0-2-op-c-im-ro-2-0-1-006
-      - client-name: TypeApprovalRegister://v1/dispose-remainders-of-deregistered-application
-        uuid: ro-2-0-2-op-c-im-tar-2-0-1-006
-      - client-name: ExecutionAndTraceLog://v1/dispose-remainders-of-deregistered-application
-        uuid: ro-2-0-2-op-c-im-eatl-2-0-1-006
-      - client-name: OamLog://v1/dispose-remainders-of-deregistered-application
-        uuid: ro-2-0-2-op-c-im-ol-2-0-1-006
-      - client-name: AdministratorAdministration://v1/dispose-remainders-of-deregistered-application
-        uuid: ro-2-0-2-op-c-im-aa-2-0-1-006
-      - client-name: ApplicationLayerTopology://v1/dispose-remainders-of-deregistered-application
-        uuid: ro-2-0-2-op-c-im-alt-2-0-1-006
-      - client-name: OperationKeyManagement://v1/dispose-remainders-of-deregistered-application
-        uuid: ro-2-0-2-op-c-im-okm-2-0-1-006
-
   - forwarding-name: TypeApprovalCausesRequestForEmbedding
     uuid: ro-2-0-2-op-fc-is-000
     forwarding-type: ProcessSnippet
@@ -698,8 +661,45 @@ forwardings:
       - client-name: OperationKeyManagement://v1/disregard-application
         uuid: ro-2-0-2-op-c-im-okm-2-0-1-004
 
+  - forwarding-name: DeRegistrationBroadcast
+    uuid: ro-2-0-2-op-fc-is-021
+    forwarding-type: Subscription
+    management-requests:
+      operation-client-update:
+        - server-name: /v1/register-application
+          uuid: ro-2-0-2-op-s-is-001
+        - server-name: /v2/register-application
+          uuid: ro-2-0-2-op-s-is-012
+      fc-port-update:
+        - server-name: /v1/regard-updated-approval-status
+          uuid: ro-2-0-2-op-s-is-003
+      fc-port-deletion:
+        - server-name: /v1/regard-updated-approval-status
+          uuid: ro-2-0-2-op-s-is-003
+      operation-client-deletion:
+        - server-name: /v1/dispose-remainders-of-deregistered-application
+          uuid: ro-2-0-2-op-s-bm-013
+    initiating-requests:
+      - server-name: /v1/deregister-application
+        uuid: ro-2-0-2-op-s-is-002
+    consequent-requests:
+      - client-name: RegistryOffice://v1/dispose-remainders-of-deregistered-application
+        uuid: ro-2-0-2-op-c-im-ro-2-0-1-006
+      - client-name: TypeApprovalRegister://v1/dispose-remainders-of-deregistered-application
+        uuid: ro-2-0-2-op-c-im-tar-2-0-1-006
+      - client-name: ExecutionAndTraceLog://v1/dispose-remainders-of-deregistered-application
+        uuid: ro-2-0-2-op-c-im-eatl-2-0-1-006
+      - client-name: OamLog://v1/dispose-remainders-of-deregistered-application
+        uuid: ro-2-0-2-op-c-im-ol-2-0-1-006
+      - client-name: AdministratorAdministration://v1/dispose-remainders-of-deregistered-application
+        uuid: ro-2-0-2-op-c-im-aa-2-0-1-006
+      - client-name: ApplicationLayerTopology://v1/dispose-remainders-of-deregistered-application
+        uuid: ro-2-0-2-op-c-im-alt-2-0-1-006
+      - client-name: OperationKeyManagement://v1/dispose-remainders-of-deregistered-application
+        uuid: ro-2-0-2-op-c-im-okm-2-0-1-006
+
   - forwarding-name: ServerReplacementBroadcast
-    uuid: ro-2-0-2-op-fc-is-009
+    uuid: ro-2-0-2-op-fc-is-022
     forwarding-type: Subscription
     management-requests:
       operation-client-update:
@@ -738,7 +738,7 @@ forwardings:
         uuid: ro-2-0-2-op-c-im-cc-1-0-0-001
 
   - forwarding-name: OperationUpdateBroadcast
-    uuid: ro-2-0-2-op-fc-is-010
+    uuid: ro-2-0-2-op-fc-is-023
     forwarding-type: Subscription
     management-requests:
       operation-client-update:
