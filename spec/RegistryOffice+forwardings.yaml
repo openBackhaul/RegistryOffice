@@ -173,36 +173,6 @@ forwardings:
       - client-name: NewRelease://v1/notify-deregistrations
         uuid: ro-2-0-2-op-c-im-nr-2-0-1-001
 
-  - forwarding-name: PromptForBequeathingDataCausesNewApplicationBeingRequestedToDocumentSubscriptionsForApprovalNotifications
-    uuid: ro-2-0-2-op-fc-im-112
-    forwarding-type: InvariantProcessSnippet
-    management-requests:
-      operation-client-update:
-      fc-port-update:
-      fc-port-deletion:
-      operation-client-deletion:
-    initiating-requests:
-      - server-name: /v1/bequeath-your-data-and-die
-        uuid: ro-2-0-2-op-s-im-000
-    consequent-requests:
-      - client-name: NewRelease://v1/notify-approvals
-        uuid: ro-2-0-2-op-c-im-nr-2-0-1-002
-
-  - forwarding-name: PromptForBequeathingDataCausesNewApplicationBeingRequestedToDocumentSubscriptionsForWithdrawnApprovalNotifications
-    uuid: ro-2-0-2-op-fc-im-113
-    forwarding-type: InvariantProcessSnippet
-    management-requests:
-      operation-client-update:
-      fc-port-update:
-      fc-port-deletion:
-      operation-client-deletion:
-    initiating-requests:
-      - server-name: /v1/bequeath-your-data-and-die
-        uuid: ro-2-0-2-op-s-im-000
-    consequent-requests:
-      - client-name: NewRelease://v1/notify-withdrawn-approvals
-        uuid: ro-2-0-2-op-c-im-nr-2-0-1-003
-
   - forwarding-name: PromptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredApplications
     uuid: ro-2-0-2-op-fc-im-114
     forwarding-type: InvariantProcessSnippet
@@ -532,6 +502,7 @@ forwardings:
         uuid: ro-2-0-2-op-c-im-tar-2-0-1-003
 
   - forwarding-name: DeregistrationNotification
+    # Deprecated, to be deleted with RO v3.0.0
     uuid: ro-2-0-2-op-fc-is-006
     forwarding-type: Subscription
     management-requests:
@@ -604,6 +575,7 @@ forwardings:
         uuid: ro-2-0-2-op-c-im-cc-1-0-0-000
 
   - forwarding-name: ApprovalNotification
+    # Deprecated, to be deleted with RO v3.0.0
     uuid: ro-2-0-2-op-fc-is-007
     forwarding-type: Subscription
     management-requests:
@@ -633,6 +605,7 @@ forwardings:
         uuid: ro-2-0-2-op-c-im-okm-2-0-1-003
 
   - forwarding-name: WithdrawnApprovalNotification
+    # Deprecated, to be deleted with RO v3.0.0
     uuid: ro-2-0-2-op-fc-is-008
     forwarding-type: Subscription
     management-requests:
@@ -775,3 +748,311 @@ forwardings:
         uuid: ro-2-0-2-op-c-im-okm-2-0-1-002
       - client-name: CurrentController://v1/update-operation-client
         uuid: ro-2-0-2-op-c-im-cc-1-0-0-002
+
+
+  - forwarding-name: BarringApplicationCausesDeregisteringOfApplication
+    uuid: ro-2-0-2-op-fc-is-030
+    forwarding-type: InvariantProcessSnippet
+    management-requests:
+      operation-client-update:
+      fc-port-update:
+      fc-port-deletion:
+      operation-client-deletion:
+    initiating-requests:
+      - server-name: /v1/regard-updated-approval-status
+        uuid: ro-2-0-2-op-s-is-003
+    consequent-requests:
+      - client-name: RegistryOffice://v1/deregister-application
+        uuid: ro-2-0-2-op-c-bm-ro-2-0-1-002
+
+
+  - forwarding-name: ApprovingApplicationCausesConnectingWith.Alt
+    uuid: ro-2-0-2-op-fc-is-035
+    forwarding-type: InvariantProcessSnippet
+    management-requests:
+      operation-client-update:
+      fc-port-update:
+      fc-port-deletion:
+      operation-client-deletion:
+    initiating-requests:
+      - server-name: /v1/regard-updated-approval-status
+        uuid: ro-2-0-2-op-s-is-003
+    consequent-requests:
+      - client-name: ALT://v1/regard-application
+        uuid: ro-2-0-2-op-c-im-alt-2-0-1-003
+
+  - forwarding-name: ApprovingApplicationCausesConnectingWith.Okm
+    uuid: ro-2-0-2-op-fc-is-036
+    forwarding-type: InvariantProcessSnippet
+    management-requests:
+      operation-client-update:
+      fc-port-update:
+      fc-port-deletion:
+      operation-client-deletion:
+    initiating-requests:
+      - server-name: /v1/regard-updated-approval-status
+        uuid: ro-2-0-2-op-s-is-003
+    consequent-requests:
+      - client-name: OKM://v1/regard-application
+        uuid: ro-2-0-2-op-c-im-okm-2-0-1-003
+
+  - forwarding-name: ApprovingApplicationCausesConnectingWith.Eatl
+    uuid: ro-2-0-2-op-fc-is-037
+    forwarding-type: InvariantProcessSnippet
+    management-requests:
+      operation-client-update:
+      fc-port-update:
+      fc-port-deletion:
+      operation-client-deletion:
+    initiating-requests:
+      - server-name: /v1/regard-updated-approval-status
+        uuid: ro-2-0-2-op-s-is-003
+    consequent-requests:
+      - client-name: EATL://v1/regard-application
+        uuid: ro-2-0-2-op-c-im-eatl-2-0-1-003
+
+  - forwarding-name: ApprovingApplicationCausesConnectingWith.Aa
+    uuid: ro-2-0-2-op-fc-is-038
+    forwarding-type: InvariantProcessSnippet
+    management-requests:
+      operation-client-update:
+      fc-port-update:
+      fc-port-deletion:
+      operation-client-deletion:
+    initiating-requests:
+      - server-name: /v1/regard-updated-approval-status
+        uuid: ro-2-0-2-op-s-is-003
+    consequent-requests:
+      - client-name: AA://v1/regard-application
+        uuid: ro-2-0-2-op-c-im-aa-2-0-1-003
+
+  - forwarding-name: ApprovingApplicationCausesConnectingWith.Ol
+    uuid: ro-2-0-2-op-fc-is-039
+    forwarding-type: InvariantProcessSnippet
+    management-requests:
+      operation-client-update:
+      fc-port-update:
+      fc-port-deletion:
+      operation-client-deletion:
+    initiating-requests:
+      - server-name: /v1/regard-updated-approval-status
+        uuid: ro-2-0-2-op-s-is-003
+    consequent-requests:
+      - client-name: OL://v1/regard-application
+        uuid: ro-2-0-2-op-c-im-ol-2-0-1-003
+
+
+  - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.CreateLinkToGetOldRelease
+    uuid: ro-2-0-2-op-fc-is-041
+    forwarding-type: InvariantProcessSnippet
+    management-requests:
+      operation-client-update:
+      fc-port-update:
+      fc-port-deletion:
+      operation-client-deletion:
+    initiating-requests:
+      - server-name: /v1/regard-updated-approval-status
+        uuid: ro-2-0-2-op-s-is-003
+    consequent-requests:
+      - client-name: ALT://v1/add-operation-client-to-link
+        uuid: ro-2-0-2-op-c-is-alt-2-0-1-000
+
+  - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.RequestForOldRelease
+    uuid: ro-2-0-2-op-fc-is-042
+    forwarding-type: InvariantProcessSnippet
+    management-requests:
+      operation-client-update:
+        - server-name: /v1/register-application
+          uuid: ro-2-0-2-op-s-is-001
+        - server-name: /v2/register-application
+          uuid: ro-2-0-2-op-s-is-012
+      fc-port-update:
+        - server-name: /v1/regard-updated-approval-status
+          uuid: ro-2-0-2-op-s-is-003
+      fc-port-deletion:
+        - server-name: /v1/dispose-remainders-of-deregistered-application
+          uuid: ro-2-0-2-op-s-bm-013
+      operation-client-deletion:
+        - server-name: /v1/dispose-remainders-of-deregistered-application
+          uuid: ro-2-0-2-op-s-bm-013
+    initiating-requests:
+      - server-name: /v1/regard-updated-approval-status
+        uuid: ro-2-0-2-op-s-is-003
+    consequent-requests:
+      - client-name: requestBody#applicationName://v1/inform-about-preceding-release
+        uuid: ro-2-0-2-op-c-im-*-*-*-*-008
+
+  - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.CreateLinkToUpdateNewReleaseClient
+    uuid: ro-2-0-2-op-fc-is-043
+    forwarding-type: InvariantProcessSnippet
+    management-requests:
+      operation-client-update:
+      fc-port-update:
+      fc-port-deletion:
+      operation-client-deletion:
+    initiating-requests:
+      - server-name: /v1/regard-updated-approval-status
+        uuid: ro-2-0-2-op-s-is-003
+    consequent-requests:
+      - client-name: ALT://v1/add-operation-client-to-link
+        uuid: ro-2-0-2-op-c-is-alt-2-0-1-000
+
+  - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.RequestForUpdatingNewReleaseClient
+    uuid: ro-2-0-2-op-fc-is-044
+    forwarding-type: InvariantProcessSnippet
+    management-requests:
+      operation-client-update:
+        - server-name: /v1/register-application
+          uuid: ro-2-0-2-op-s-is-001
+        - server-name: /v2/register-application
+          uuid: ro-2-0-2-op-s-is-012
+      fc-port-update:
+        - server-name: /v1/regard-updated-approval-status
+          uuid: ro-2-0-2-op-s-is-003
+      fc-port-deletion:
+        - server-name: /v1/dispose-remainders-of-deregistered-application
+          uuid: ro-2-0-2-op-s-bm-013
+      operation-client-deletion:
+        - server-name: /v1/dispose-remainders-of-deregistered-application
+          uuid: ro-2-0-2-op-s-bm-013
+    initiating-requests:
+      - server-name: /v1/regard-updated-approval-status
+        uuid: ro-2-0-2-op-s-is-003
+    consequent-requests:
+      - client-name: ApprovingApplicationCausesPreparingTheEmbedding.RequestForOldRelease.responseBody#applicationName://v1/update-client-of-subsequent-release
+        uuid: ro-2-0-2-op-c-im-*-*-*-*-009
+
+  - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.CreateLinkForPromptingEmbedding
+    uuid: ro-2-0-2-op-fc-is-046
+    forwarding-type: InvariantProcessSnippet
+    management-requests:
+      operation-client-update:
+      fc-port-update:
+      fc-port-deletion:
+      operation-client-deletion:
+    initiating-requests:
+      - server-name: /v1/regard-updated-approval-status
+        uuid: ro-2-0-2-op-s-is-003
+    consequent-requests:
+      - client-name: ALT://v1/add-operation-client-to-link
+        uuid: ro-2-0-2-op-c-is-alt-2-0-1-000
+
+  - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.CreateLinkForBequeathYourData
+    uuid: ro-2-0-2-op-fc-is-047
+    forwarding-type: InvariantProcessSnippet
+    management-requests:
+      operation-client-update:
+      fc-port-update:
+      fc-port-deletion:
+      operation-client-deletion:
+    initiating-requests:
+      - server-name: /v1/regard-updated-approval-status
+        uuid: ro-2-0-2-op-s-is-003
+    consequent-requests:
+      - client-name: ALT://v1/add-operation-client-to-link
+        uuid: ro-2-0-2-op-c-is-alt-2-0-1-000
+
+  - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.CreateFurtherLinksForTransferringData
+    uuid: ro-2-0-2-op-fc-is-048
+    forwarding-type: InvariantProcessSnippet
+    management-requests:
+      operation-client-update:
+      fc-port-update:
+      fc-port-deletion:
+      operation-client-deletion:
+    initiating-requests:
+      - server-name: /v1/regard-updated-approval-status
+        uuid: ro-2-0-2-op-s-is-003
+    consequent-requests:
+      - client-name: ALT://v1/add-operation-client-to-link
+        uuid: ro-2-0-2-op-c-is-alt-2-0-1-000
+
+  - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.RequestForEmbedding
+    uuid: ro-2-0-2-op-fc-is-049
+    forwarding-type: InvariantProcessSnippet
+    management-requests:
+      operation-client-update:
+        - server-name: /v1/register-application
+          uuid: ro-2-0-2-op-s-is-001
+        - server-name: /v2/register-application
+          uuid: ro-2-0-2-op-s-is-012
+      fc-port-update:
+        - server-name: /v1/regard-updated-approval-status
+          uuid: ro-2-0-2-op-s-is-003
+      fc-port-deletion:
+        - server-name: /v1/dispose-remainders-of-deregistered-application
+          uuid: ro-2-0-2-op-s-bm-013
+      operation-client-deletion:
+        - server-name: /v1/dispose-remainders-of-deregistered-application
+          uuid: ro-2-0-2-op-s-bm-013
+    initiating-requests:
+      - server-name: /v1/regard-updated-approval-status
+        uuid: ro-2-0-2-op-s-is-003
+    consequent-requests:
+      - client-name: requestBody#applicationName://v1/embed-yourself
+        uuid: ro-2-0-2-op-c-im-*-*-*-*-000
+
+
+  - forwarding-name: ApprovingApplicationCausesConnectingToBroadcast.CreateLinkForUpdatingClient
+    uuid: ro-2-0-2-op-fc-is-051
+    forwarding-type: InvariantProcessSnippet
+    management-requests:
+      operation-client-update:
+      fc-port-update:
+      fc-port-deletion:
+      operation-client-deletion:
+    initiating-requests:
+      - server-name: /v1/regard-updated-approval-status
+        uuid: ro-2-0-2-op-s-is-003
+    consequent-requests:
+      - client-name: ALT://v1/add-operation-client-to-link
+        uuid: ro-2-0-2-op-c-is-alt-2-0-1-000
+
+  - forwarding-name: ApprovingApplicationCausesConnectingToBroadcast.CreateLinkForUpdatingOperationClient
+    uuid: ro-2-0-2-op-fc-is-052
+    forwarding-type: InvariantProcessSnippet
+    management-requests:
+      operation-client-update:
+      fc-port-update:
+      fc-port-deletion:
+      operation-client-deletion:
+    initiating-requests:
+      - server-name: /v1/regard-updated-approval-status
+        uuid: ro-2-0-2-op-s-is-003
+    consequent-requests:
+      - client-name: ALT://v1/add-operation-client-to-link
+        uuid: ro-2-0-2-op-c-is-alt-2-0-1-000
+
+  - forwarding-name: ApprovingApplicationCausesConnectingToBroadcast.CreateLinkForDisposingRemainders
+    uuid: ro-2-0-2-op-fc-is-053
+    forwarding-type: InvariantProcessSnippet
+    management-requests:
+      operation-client-update:
+      fc-port-update:
+      fc-port-deletion:
+      operation-client-deletion:
+    initiating-requests:
+      - server-name: /v1/regard-updated-approval-status
+        uuid: ro-2-0-2-op-s-is-003
+    consequent-requests:
+      - client-name: ALT://v1/add-operation-client-to-link
+        uuid: ro-2-0-2-op-c-is-alt-2-0-1-000
+
+  - forwarding-name: ApprovingApplicationCausesResponding
+    uuid: ro-2-0-2-op-fc-is-060
+    forwarding-type: InvariantProcessSnippet
+    management-requests:
+      operation-client-update:
+        - server-name: /v1/regard-updated-approval-status
+          uuid: ro-2-0-2-op-s-is-003
+      fc-port-update:
+        - server-name: /v1/regard-updated-approval-status
+          uuid: ro-2-0-2-op-s-is-003
+      fc-port-deletion:
+      operation-client-deletion:
+    initiating-requests:
+      - server-name: /v1/regard-updated-approval-status
+        uuid: ro-2-0-2-op-s-is-003
+    consequent-requests:
+      - client-name: TAR://v1/document-embedding-status
+        uuid: ro-2-0-2-op-c-im-tar-2-0-1-007

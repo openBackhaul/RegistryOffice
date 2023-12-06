@@ -2,31 +2,36 @@
 skinparam responseMessageBelowArrow true
 
 title
-RegardUpdatedApprovalStatusCausesSequence
+BarringApplicationCausesDeregisteringOfApplication
+ApprovingApplicationCausesConnectingWith
+ApprovingApplicationCausesPreparingTheEmbedding
+ApprovingApplicationCausesConnectingToBroadcast
 end title
 
 participant "TAR" as tar
+participant "TAR://v1/document-embedding-status" as tarReceiver
 participant "RO://v1/regard-updated-approval-status" as ro
 
 participant "RO://v1/deregister-application" as roDeRegister
 
 participant "ALT://v1/regard-application" as altRegardApplication
 participant "OKM://v1/regard-application" as okmRegardApplication
-participant "AA://v1/regard-application" as aaRegardApplication
 participant "EaTL://v1/regard-application" as eatlRegardApplication
+participant "AA://v1/regard-application" as aaRegardApplication
 participant "OL://v1/regard-application" as olRegardApplication
 
 participant "ALT://v1/add-operation-client-to-link" as altAddClientToLink
 participant "NA://v1/inform-about-preceding-release" as naInformAboutOR
+participant "OR://v1/update-client-of-subsequent-release" as orUpdateNR
 participant "NA://v1/embed-yourself" as newApplication
 
 tar -> ro : {newApplicationName, releaseNumber, approvalStatus}
 activate ro
+tar <-- ro : {processId}
 
-' schon erledigt
 note right ro
 IF approvalStatus == BARRED
-<u>DeRegisteringBarredApplication</u>
+<u>BarringApplicationCausesDeregisteringOfApplication</u>
 end note
 ro -> roDeRegister : {newApplicationName, releaseNumber)
 ro <-- roDeRegister : 204
@@ -34,12 +39,11 @@ ro <-- roDeRegister : 204
 note over roDeRegister #WhiteSmoke
 New application will be totally removed
 from the entire MW SDN application layer
+(includes TAR, so no response required)
 end note
 
-tar <-- ro : ???
-
 note over ro
-ELSE
+<u>ApprovingApplicationCausesConnectingWith.Alt</u>
 end note
 ro -> altRegardApplication : {newApplicationName, releaseNumber, TCP/IP address}
 ro <-- altRegardApplication : {successfully-connected,  reason-of-failure}
@@ -48,10 +52,14 @@ note left ro
 IF (NOT 200) OR (successfully-connected==false)
 terminate process with response
 end note
-tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
 
 note over ro
 ELSE
+end note
+
+note over ro
+<u>ApprovingApplicationCausesConnectingWith.Okm</u>
 end note
 ro -> okmRegardApplication : {newApplicationName, releaseNumber, TCP/IP address}
 ro <-- okmRegardApplication : {successfully-connected,  reason-of-failure}
@@ -60,22 +68,14 @@ note left ro
 IF (NOT 200) OR (successfully-connected==false)
 terminate process with response
 end note
-tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
 
 note over ro
 ELSE
 end note
-ro -> aaRegardApplication : {newApplicationName, releaseNumber, TCP/IP address}
-ro <-- aaRegardApplication : {successfully-connected,  reason-of-failure}
-
-note left ro
-IF (NOT 200) OR (successfully-connected==false)
-terminate process with response
-end note
-tar <-- ro : {successfully-embedded==false,  reason-of-failure}
 
 note over ro
-ELSE
+<u>ApprovingApplicationCausesConnectingWith.Eatl</u>
 end note
 ro -> eatlRegardApplication : {newApplicationName, releaseNumber, TCP/IP address}
 ro <-- eatlRegardApplication : {successfully-connected,  reason-of-failure}
@@ -84,10 +84,30 @@ note left ro
 IF (NOT 200) OR (successfully-connected==false)
 terminate process with response
 end note
-tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
 
 note over ro
 ELSE
+end note
+
+note over ro
+<u>ApprovingApplicationCausesConnectingWith.Aa</u>
+end note
+ro -> aaRegardApplication : {newApplicationName, releaseNumber, TCP/IP address}
+ro <-- aaRegardApplication : {successfully-connected,  reason-of-failure}
+
+note left ro
+IF (NOT 200) OR (successfully-connected==false)
+terminate process with response
+end note
+tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
+
+note over ro
+ELSE
+end note
+
+note over ro
+<u>ApprovingApplicationCausesConnectingWith.Ol</u>
 end note
 ro -> olRegardApplication : {newApplicationName, releaseNumber, TCP/IP address}
 ro <-- olRegardApplication : {successfully-connected,  reason-of-failure}
@@ -96,7 +116,7 @@ note left ro
 IF (NOT 200) OR (successfully-connected==false)
 terminate process with response
 end note
-tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
 
 note over ro
 ELSE
@@ -114,7 +134,7 @@ note left ro
 IF (NOT 200) OR (client-successfully-added==false)
 terminate process with response
 end note
-tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
 
 note over ro
 ELSE
@@ -124,13 +144,47 @@ note over ro
 <u>RequestForOldRelease</u>
 end note
 ro -> naInformAboutOR
-ro <-- naInformAboutOR : {oldReleaseApplicationName, releaseNumber, dataTransferOperationsList}
+ro <-- naInformAboutOR : {oldReleaseApplicationName, releaseNumber}
 
 note left ro
 IF (NOT 200)
 terminate process with response
 end note
-tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
+
+note over ro
+ELSE
+end note
+
+note over ro
+<u>CreateLinkToUpdateNewReleaseClient</u>
+Request for automatically creating the Link:
+RO => OR://v1/update-client-of-subsequent-release
+end note
+ro -> altAddClientToLink : { servingApplicationName == RequestForOldRelease.responseBody#applicationName,\n servingApplicationReleaseNumber == RequestForOldRelease.responseBody#releaseNumber,\n operationName == /v1/update-client-of-subsequent-release,\n consumingApplicationName == RegistryOffice,\n consumingApplicationReleaseNumber == 2.1.0 } (apiKey)
+ro <-- altAddClientToLink : {client-successfully-added, reason-of-failure}
+
+note left ro
+IF (NOT 200) OR (client-successfully-added==false)
+terminate process with response
+end note
+tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
+
+note over ro
+ELSE
+end note
+
+note over ro
+<u>RequestForUpdatingNewReleaseClient</u>
+end note
+ro -> orUpdateNR :  {newApplicationName, releaseNumber, TCP/IP address}
+ro <-- orUpdateNR : {bequeathYourDataAndDieOperation, dataTransferOperationsList}
+
+note left ro
+IF (NOT 200)
+terminate process with response
+end note
+tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
 
 note over ro
 ELSE
@@ -148,7 +202,7 @@ note left ro
 IF (NOT 200) OR (client-successfully-added==false)
 terminate process with response
 end note
-tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
 
 note over ro
 ELSE
@@ -166,7 +220,7 @@ note left ro
 IF (NOT 200) OR (client-successfully-added==false)
 terminate process with response
 end note
-tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
 
 note over ro
 ELSE
@@ -175,7 +229,7 @@ end note
 note over ro
 <u>CreateFurtherLinksForTransferringData</u>
 Potentially several requests for automatically creating Links:
-OR => NA:// ... according to RequestForOldRelease.responseBody#dataTransferOperationsList
+OR => NA:// ... according to RequestForUpdatingNewReleaseClient.responseBody#dataTransferOperationsList
 end note
 ro -> altAddClientToLink : { servingApplicationName == requestBody.newApplicationName,\n servingApplicationReleaseNumber == requestBody.releaseNumber,\n operationName == [RequestForOldRelease.responseBody#dataTransferOperationsList],\n consumingApplicationName == oldReleaseApplicationName,\n consumingApplicationReleaseNumber == releaseNumber } (apiKey)
 ro <-- altAddClientToLink : {client-successfully-added, reason-of-failure}
@@ -184,7 +238,8 @@ note left ro
 IF (NOT 200) OR (client-successfully-added==false)
 terminate process with response
 end note
-tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
+
 
 note over ro
 ELSE
@@ -200,7 +255,7 @@ note right ro #WhiteSmoke
 This will start an embedding process, which is individual to the respective application.
 A Link between the new application and the /v1/bequeath-your-data-and-die service at the preceding release got created,
 but further Links might be required for the individual embedding process.
-The Links required for the bequeath-your-data-and-die process should be covered mostly, either by former operations or by 
+The Links required for the bequeath-your-data-and-die process should be covered mostly, either by former operating or by 
 the by dataTransferOperationsList.
 end note
 
@@ -208,12 +263,11 @@ note left ro
 IF (NOT 200)
 terminate process with response
 end note
-tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
 
 note over ro
 ELSE
 end note
-
 
 
 note over ro
@@ -228,7 +282,7 @@ note left ro
 IF (NOT 200) OR (client-successfully-added==false)
 terminate process with response
 end note
-tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
 
 note over ro
 ELSE
@@ -246,7 +300,7 @@ note left ro
 IF (NOT 200) OR (client-successfully-added==false)
 terminate process with response
 end note
-tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
 
 note over ro
 ELSE
@@ -264,12 +318,12 @@ note left ro
 IF (NOT 200) OR (client-successfully-added==false)
 terminate process with response
 end note
-tar <-- ro : {successfully-embedded==false,  reason-of-failure}
+tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
 
 note over ro
 ELSE
 end note
-tar <-- ro : {successfully-embedded==true }
+tarReceiver <- ro : {successfully-embedded==true }
 
 deactivate ro
 
