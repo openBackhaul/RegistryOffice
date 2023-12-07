@@ -191,24 +191,6 @@ ELSE
 end note
 
 note over ro
-<u>CreateLinkForPromptingEmbedding</u>
-Request for automatically creating the Link:
-RO => NA://v1/embed-yourself
-end note
-ro -> altAddClientToLink : { servingApplicationName == requestBody.newApplicationName,\n servingApplicationReleaseNumber == requestBody.releaseNumber,\n operationName == /v1/embed-yourself,\n consumingApplicationName == RegistryOffice,\n consumingApplicationReleaseNumber == 2.1.0 } (apiKey)
-ro <-- altAddClientToLink : {client-successfully-added, reason-of-failure}
-
-note left ro
-IF (NOT 200) OR (client-successfully-added==false)
-terminate process with response
-end note
-tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
-
-note over ro
-ELSE
-end note
-
-note over ro
 <u>CreateLinkForBequeathYourData</u>
 Request for automatically creating the Link:
 NA => OR://v1/bequeath-your-data-and-die
@@ -240,12 +222,38 @@ terminate process with response
 end note
 tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
 
-
 note over ro
 ELSE
 end note
 
 note over ro
+<u>CreateLinkForPromptingEmbedding</u>
+Request for automatically creating the Link:
+RO => NA://v1/embed-yourself
+end note
+ro -> altAddClientToLink : { servingApplicationName == requestBody.newApplicationName,\n servingApplicationReleaseNumber == requestBody.releaseNumber,\n operationName == /v1/embed-yourself,\n consumingApplicationName == RegistryOffice,\n consumingApplicationReleaseNumber == 2.1.0 } (apiKey)
+ro <-- altAddClientToLink : {client-successfully-added, reason-of-failure}
+
+note left ro
+IF (NOT 200) OR (client-successfully-added==false)
+terminate process with response
+end note
+tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
+
+note over ro
+ELSE
+end note
+
+note right ro #WhiteSmoke
+Attention:
+The next process step should be initiated by all Links from CreateLinkForBequeathYourData, CreateFurtherLinksForTransferringData and CreateLinkForPromptingEmbedding being actually created.
+In other cases, the next step gets initiated by its OperationKey being updated.
+Links from CreateLinkForBequeathYourData and CreateFurtherLinksForTransferringData will be created between the new application and the old release.
+RO receives no indication of successful execution.
+Consequently, RO might trigger the embedding process before all Links that are required for its successful execution have been created.
+end note
+
+note over ro   #yellow
 <u>RequestForEmbedding</u>
 end note
 ro -> newApplication : {..., oldReleaseProtocol, oldReleaseAddress, oldReleasePort, ...}

@@ -878,6 +878,8 @@ forwardings:
     initiating-requests:
       - server-name: /v1/regard-updated-approval-status
         uuid: ro-2-0-2-op-s-is-003
+      - server-name: /v1/update-operation-key
+        uuid: ro-2-0-2-op-s-bm-010
     consequent-requests:
       - client-name: requestBody#applicationName://v1/inform-about-preceding-release
         uuid: ro-2-0-2-op-c-im-*-*-*-*-008
@@ -918,6 +920,8 @@ forwardings:
     initiating-requests:
       - server-name: /v1/regard-updated-approval-status
         uuid: ro-2-0-2-op-s-is-003
+      - server-name: /v1/update-operation-key
+        uuid: ro-2-0-2-op-s-bm-010
     consequent-requests:
       - client-name: ApprovingApplicationCausesPreparingTheEmbedding.RequestForOldRelease.responseBody#applicationName://v1/update-client-of-subsequent-release
         uuid: ro-2-0-2-op-c-im-*-*-*-*-009
@@ -988,6 +992,8 @@ forwardings:
     initiating-requests:
       - server-name: /v1/regard-updated-approval-status
         uuid: ro-2-0-2-op-s-is-003
+      - server-name: /v1/update-operation-key
+        uuid: ro-2-0-2-op-s-bm-010
     consequent-requests:
       - client-name: requestBody#applicationName://v1/embed-yourself
         uuid: ro-2-0-2-op-c-im-*-*-*-*-000
