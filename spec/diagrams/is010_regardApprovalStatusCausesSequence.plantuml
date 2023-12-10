@@ -253,7 +253,7 @@ RO receives no indication of successful execution.
 Consequently, RO might trigger the embedding process before all Links that are required for its successful execution have been created.
 end note
 
-note over ro   #yellow
+note over ro
 <u>RequestForEmbedding</u>
 end note
 ro -> newApplication : {..., oldReleaseProtocol, oldReleaseAddress, oldReleasePort, ...}
@@ -263,7 +263,7 @@ note right ro #WhiteSmoke
 This will start an embedding process, which is individual to the respective application.
 A Link between the new application and the /v1/bequeath-your-data-and-die service at the preceding release got created,
 but further Links might be required for the individual embedding process.
-The Links required for the bequeath-your-data-and-die process should be covered mostly, either by former operating or by 
+The Links required for the bequeath-your-data-and-die process should be covered mostly, either by former operating or by
 the by dataTransferOperationsList.
 end note
 

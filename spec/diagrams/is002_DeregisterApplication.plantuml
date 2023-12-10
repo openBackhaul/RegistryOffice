@@ -19,7 +19,7 @@ note left RO
 Remark:
 Service /v1/deregister-application
 and Callback DeregistrationNotification
-got obsoleted by introducing the Basic Service 
+got obsoleted by introducing the Basic Service
 /v1/dispose-remainders-of-deregistered-application
 in ApplicationPattern v2.1.0
 end note
