@@ -1188,7 +1188,7 @@ paths:
                   client-update-operation: '/v1/update-client'
                   operation-client-update-operation: '/v1/update-operation-client'
                   dispose-remainders-operation: '/v1/dispose-remainders-of-deregistered-application'
-                  preceding-release-operation:  '/v1/inform-about-preceding-release'
+                  preceding-release-operation: '/v1/inform-about-preceding-release'
                   subsequent-release-operation: '/v1/update-client-of-subsequent-release'
                   tcp-server:
                     protocol: 'HTTP'
