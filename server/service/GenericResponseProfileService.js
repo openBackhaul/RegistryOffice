@@ -1,5 +1,5 @@
 'use strict';
-var fileOperation = require('onf-core-model-ap/applicationPattern/databaseDriver/JSONDriver');
+const fileOperation = require('onf-core-model-ap/applicationPattern/databaseDriver/JSONDriver');
 const onfPaths = require('onf-core-model-ap/applicationPattern/onfModel/constants/OnfPaths');
 
 /**
@@ -8,24 +8,12 @@ const onfPaths = require('onf-core-model-ap/applicationPattern/onfModel/constant
  * uuid String 
  * returns inline_response_200_14
  **/
-exports.getGenericResponseProfileDatatype = function (url) {
-  return new Promise(async function (resolve, reject) {
-    try {
-      var value = await fileOperation.readFromDatabaseAsync(url);
-      var response = {};
-      response['application/json'] = {
-        "response-profile-1-0:datatype": value
-      };
-      if (Object.keys(response).length > 0) {
-        resolve(response[Object.keys(response)[0]]);
-      } else {
-        resolve();
-      }
-    } catch (error) {}
-    reject();
-  });
+exports.getGenericResponseProfileDatatype = async function (url) {
+  const value = await fileOperation.readFromDatabaseAsync(url);
+  return {
+    "response-profile-1-0:datatype": value
+  };
 }
-
 
 /**
  * Returns the Description of the Field
@@ -33,24 +21,12 @@ exports.getGenericResponseProfileDatatype = function (url) {
  * uuid String 
  * returns inline_response_200_13
  **/
-exports.getGenericResponseProfileDescription = function (url) {
-  return new Promise(async function (resolve, reject) {
-    try {
-      var value = await fileOperation.readFromDatabaseAsync(url);
-      var response = {};
-      response['application/json'] = {
-        "response-profile-1-0:description": value
-      };
-      if (Object.keys(response).length > 0) {
-        resolve(response[Object.keys(response)[0]]);
-      } else {
-        resolve();
-      }
-    } catch (error) {}
-    reject();
-  });
+exports.getGenericResponseProfileDescription = async function (url) {
+  const value = await fileOperation.readFromDatabaseAsync(url);
+  return {
+    "response-profile-1-0:description": value
+  };
 }
-
 
 /**
  * Returns the name of the Field
@@ -58,24 +34,12 @@ exports.getGenericResponseProfileDescription = function (url) {
  * uuid String 
  * returns inline_response_200_12
  **/
-exports.getGenericResponseProfileFieldName = function (url) {
-  return new Promise(async function (resolve, reject) {
-    try {
-      var value = await fileOperation.readFromDatabaseAsync(url);
-      var response = {};
-      response['application/json'] = {
-        "response-profile-1-0:field-name": value
-      };
-      if (Object.keys(response).length > 0) {
-        resolve(response[Object.keys(response)[0]]);
-      } else {
-        resolve();
-      }
-    } catch (error) {}
-    reject();
-  });
+exports.getGenericResponseProfileFieldName = async function (url) {
+  const value = await fileOperation.readFromDatabaseAsync(url);
+  return {
+    "response-profile-1-0:field-name": value
+  };
 }
-
 
 /**
  * Returns the name of the Operation
@@ -83,24 +47,12 @@ exports.getGenericResponseProfileFieldName = function (url) {
  * uuid String 
  * returns inline_response_200_11
  **/
-exports.getGenericResponseProfileOperationName = function (url) {
-  return new Promise(async function (resolve, reject) {
-    try {
-      var value = await fileOperation.readFromDatabaseAsync(url);
-      var response = {};
-      response['application/json'] = {
-        "response-profile-1-0:operation-name": value
-      };
-      if (Object.keys(response).length > 0) {
-        resolve(response[Object.keys(response)[0]]);
-      } else {
-        resolve();
-      }
-    } catch (error) {}
-    reject();
-  });
+exports.getGenericResponseProfileOperationName = async function (url) {
+  const value = await fileOperation.readFromDatabaseAsync(url);
+  return {
+    "response-profile-1-0:operation-name": value
+  };
 }
-
 
 /**
  * Returns the Value of the Field
@@ -108,24 +60,12 @@ exports.getGenericResponseProfileOperationName = function (url) {
  * uuid String 
  * returns inline_response_200_15
  **/
-exports.getGenericResponseProfileValue = function (url) {
-  return new Promise(async function (resolve, reject) {
-    try {
-      var value = await fileOperation.readFromDatabaseAsync(url);
-      var response = {};
-      response['application/json'] = {
-        "response-profile-1-0:value": value
-      };
-      if (Object.keys(response).length > 0) {
-        resolve(response[Object.keys(response)[0]]);
-      } else {
-        resolve();
-      }
-    } catch (error) {}
-    reject();
-  });
+exports.getGenericResponseProfileValue = async function (url) {
+  const value = await fileOperation.readFromDatabaseAsync(url);
+  return {
+    "response-profile-1-0:value": value
+  };
 }
-
 
 /**
  * Configures the Value of the Field
@@ -134,44 +74,31 @@ exports.getGenericResponseProfileValue = function (url) {
  * uuid String 
  * no response value expected for this operation
  **/
-exports.putGenericResponseProfileValue = function (body, url, uuid) {
-  return new Promise(async function (resolve, reject) {
-    try {
-      let isInputHasValueReference = "value-reference" in body["response-profile-1-0:value"];
-      let isValueReferenceExist = await fileOperation.readFromDatabaseAsync(
-        onfPaths.RESPONSE_PROFILE_VALUE_REFERENCE.replace("{profileUuid}", uuid));
-      if (isInputHasValueReference) {
-        if (isValueReferenceExist != undefined) {
-          await fileOperation.writeToDatabaseAsync(url, body, false);
-        } else {
-          let isDeleted = await fileOperation.deletefromDatabaseAsync(
-            onfPaths.RESPONSE_PROFILE_STATIC_VALUE.replace(
-              "{profileUuid}", uuid),
-            "",
-            false
-          );
-          if (isDeleted) {
-            await fileOperation.writeToDatabaseAsync(url, body, false);
-          }
-        }
-      } else {
-        if (isValueReferenceExist != undefined) {
-          let isDeleted = await fileOperation.deletefromDatabaseAsync(
-            onfPaths.RESPONSE_PROFILE_VALUE_REFERENCE.replace(
-              "{profileUuid}", uuid),
-            "",
-            false
-          );
-          if (isDeleted) {
-            await fileOperation.writeToDatabaseAsync(url, body, false);
-          }
-        } else {
-          await fileOperation.writeToDatabaseAsync(url, body, false);
-        }
+exports.putGenericResponseProfileValue = async function (body, url, uuid) {
+  let isInputHasValueReference = "value-reference" in body["response-profile-1-0:value"];
+  let isValueReferenceExist = await fileOperation.readFromDatabaseAsync(
+    onfPaths.RESPONSE_PROFILE_VALUE_REFERENCE.replace("{profileUuid}", uuid));
+  if (isInputHasValueReference) {
+    if (isValueReferenceExist != undefined) {
+      await fileOperation.writeToDatabaseAsync(url, body, false);
+    } else {
+      let isDeleted = await fileOperation.deletefromDatabaseAsync(
+        onfPaths.RESPONSE_PROFILE_STATIC_VALUE.replace(
+          "{profileUuid}", uuid));
+      if (isDeleted) {
+        await fileOperation.writeToDatabaseAsync(url, body, false);
       }
-
-      resolve();
-    } catch (error) {}
-    reject();
-  });
+    }
+  } else {
+    if (isValueReferenceExist != undefined) {
+      let isDeleted = await fileOperation.deletefromDatabaseAsync(
+        onfPaths.RESPONSE_PROFILE_VALUE_REFERENCE.replace(
+          "{profileUuid}", uuid));
+      if (isDeleted) {
+        await fileOperation.writeToDatabaseAsync(url, body, false);
+      }
+    } else {
+      await fileOperation.writeToDatabaseAsync(url, body, false);
+    }
+  }
 }

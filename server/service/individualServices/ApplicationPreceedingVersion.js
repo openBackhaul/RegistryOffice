@@ -29,7 +29,7 @@ exports.addEntryToPreceedingVersionList = async function (preceedingApplicationN
                     if (_futureApplicationName == futureApplicationName && _futureReleaseNumber == futureReleaseNumber) {
                         isfutureApplicationInformationExist = true;
                         if(preceedingApplicationName==undefined){ 
-                            preceedingApplicationInformation["preceeding-application-name"] = futureApplicationName;
+                            delete preceedingApplicationInformation["preceeding-application-name"];
                             fs.writeFileSync(applicationDataFile, JSON.stringify(applicationData));
                             isUpdated = true;
                         }
@@ -40,7 +40,7 @@ exports.addEntryToPreceedingVersionList = async function (preceedingApplicationN
                         }
 
                         if(preceedingReleaseNumber==undefined){ 
-                            preceedingApplicationInformation["preceeding-release-number"] = futureReleaseNumber;
+                            delete preceedingApplicationInformation["preceeding-release-number"];
                             fs.writeFileSync(applicationDataFile, JSON.stringify(applicationData));
                             isUpdated = true;
                         }
@@ -53,11 +53,16 @@ exports.addEntryToPreceedingVersionList = async function (preceedingApplicationN
                 }
                 if (isfutureApplicationInformationExist == false) {
                     let preceedingApplicationInformation = {
-                        "preceeding-application-name": preceedingApplicationName,
-                        "preceeding-release-number": preceedingReleaseNumber,
                         "future-application-name": futureApplicationName,
                         "future-release-number": futureReleaseNumber
                     };
+                    if(preceedingApplicationName != undefined){
+                        preceedingApplicationInformation["preceeding-application-name"] = preceedingApplicationName;
+                    }
+
+                    if(preceedingReleaseNumber != undefined){
+                        preceedingApplicationInformation["preceeding-release-number"] = preceedingReleaseNumber;
+                    }
                     preceedingApplicationInformationList.push(preceedingApplicationInformation);
                     fs.writeFileSync(applicationDataFile, JSON.stringify(applicationData));
                     isUpdated = true;

@@ -1,7 +1,5 @@
 'use strict';
-var fileOperation = require('onf-core-model-ap/applicationPattern/databaseDriver/JSONDriver');
-var tcpServerInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/TcpServerInterface');
-
+const fileOperation = require('onf-core-model-ap/applicationPattern/databaseDriver/JSONDriver');
 const prepareForwardingAutomation = require('./individualServices/PrepareForwardingAutomation');
 const ForwardingAutomationService = require('onf-core-model-ap/applicationPattern/onfModel/services/ForwardingConstructAutomationServices');
 
@@ -11,25 +9,12 @@ const ForwardingAutomationService = require('onf-core-model-ap/applicationPatter
  * uuid String 
  * returns inline_response_200_37
  **/
-exports.getTcpServerDescription = function (url) {
-  return new Promise(async function (resolve, reject) {
-    try {
-      var value = await fileOperation.readFromDatabaseAsync(url);
-      var response = {};
-      response['application/json'] = {
-        "tcp-server-interface-1-0:description": value
-      };
-      if (Object.keys(response).length > 0) {
-        resolve(response[Object.keys(response)[0]]);
-      } else {
-        resolve();
-      }
-    } catch (error) {
-      reject();
-    }
-  });
+exports.getTcpServerDescription = async function (url) {
+  const value = await fileOperation.readFromDatabaseAsync(url);
+  return {
+    "tcp-server-interface-1-0:description": value
+  };
 }
-
 
 /**
  * Returns address of the server
@@ -37,25 +22,12 @@ exports.getTcpServerDescription = function (url) {
  * uuid String 
  * returns inline_response_200_39
  **/
-exports.getTcpServerLocalAddress = function (url) {
-  return new Promise(async function (resolve, reject) {
-    try {
-      var value = await fileOperation.readFromDatabaseAsync(url);
-      var response = {};
-      response['application/json'] = {
-        "tcp-server-interface-1-0:local-address": value
-      };
-      if (Object.keys(response).length > 0) {
-        resolve(response[Object.keys(response)[0]]);
-      } else {
-        resolve();
-      }
-    } catch (error) {
-      reject();
-    }
-  });
+exports.getTcpServerLocalAddress = async function (url) {
+  const value = await fileOperation.readFromDatabaseAsync(url);
+  return {
+    "tcp-server-interface-1-0:local-address": value
+  };
 }
-
 
 /**
  * Returns TCP port of the server
@@ -63,25 +35,12 @@ exports.getTcpServerLocalAddress = function (url) {
  * uuid String 
  * returns inline_response_200_20
  **/
-exports.getTcpServerLocalPort = function (url) {
-  return new Promise(async function (resolve, reject) {
-    try {
-      var value = await fileOperation.readFromDatabaseAsync(url);
-      var response = {};
-      response['application/json'] = {
-        "tcp-server-interface-1-0:local-port": value
-      };
-      if (Object.keys(response).length > 0) {
-        resolve(response[Object.keys(response)[0]]);
-      } else {
-        resolve();
-      }
-    } catch (error) {
-      reject();
-    }
-  });
+exports.getTcpServerLocalPort = async function (url) {
+  const value = await fileOperation.readFromDatabaseAsync(url);
+  return {
+    "tcp-server-interface-1-0:local-port": value
+  };
 }
-
 
 /**
  * Returns Protocol of TcpServer
@@ -90,13 +49,11 @@ exports.getTcpServerLocalPort = function (url) {
  * returns inline_response_200_38
  **/
 exports.getTcpServerLocalProtocol = async function (url) {
-  var value = await fileOperation.readFromDatabaseAsync(url);
-  var response = {
+  const value = await fileOperation.readFromDatabaseAsync(url);
+  return {
     "tcp-server-interface-1-0:local-protocol": value
   };
-  return response;
 }
-
 
 /**
  * Documents Description of TcpServer
@@ -105,30 +62,17 @@ exports.getTcpServerLocalProtocol = async function (url) {
  * uuid String 
  * no response value expected for this operation
  **/
-exports.putTcpServerDescription = function (url, body, uuid) {
-  return new Promise(async function (resolve, reject) {
-    try {
-      let isUpdated = await fileOperation.writeToDatabaseAsync(url, body, false);
-
-      /****************************************************************************************
-       * Prepare attributes to automate forwarding-construct
-       ****************************************************************************************/
-      if (isUpdated) {
-        let forwardingAutomationInputList = await prepareForwardingAutomation.OAMLayerRequest(
-          uuid
-        );
-        ForwardingAutomationService.automateForwardingConstructWithoutInputAsync(
-          forwardingAutomationInputList
-        );
-      }
-
-      resolve();
-    } catch (error) {
-      reject();
-    }
-  });
+exports.putTcpServerDescription = async function (url, body, uuid) {
+  let isUpdated = await fileOperation.writeToDatabaseAsync(url, body, false);
+  if (isUpdated) {
+    let forwardingAutomationInputList = await prepareForwardingAutomation.OAMLayerRequest(
+      uuid
+    );
+    ForwardingAutomationService.automateForwardingConstructWithoutInputAsync(
+      forwardingAutomationInputList
+    );
+  }
 }
-
 
 /**
  * Documents address of the server
@@ -137,29 +81,17 @@ exports.putTcpServerDescription = function (url, body, uuid) {
  * uuid String 
  * no response value expected for this operation
  **/
-exports.putTcpServerLocalAddress = function (url, body, uuid) {
-  return new Promise(async function (resolve, reject) {
-    try {
-      let isUpdated = await fileOperation.writeToDatabaseAsync(url, body, false);
-      /****************************************************************************************
-       * Prepare attributes to automate forwarding-construct
-       ****************************************************************************************/
-      if (isUpdated) {
-        let forwardingAutomationInputList = await prepareForwardingAutomation.OAMLayerRequest(
-          uuid
-        );
-        ForwardingAutomationService.automateForwardingConstructWithoutInputAsync(
-          forwardingAutomationInputList
-        );
-      }
-
-      resolve();
-    } catch (error) {
-      reject();
-    }
-  });
+exports.putTcpServerLocalAddress = async function (url, body, uuid) {
+  let isUpdated = await fileOperation.writeToDatabaseAsync(url, body, false);
+  if (isUpdated) {
+    let forwardingAutomationInputList = await prepareForwardingAutomation.OAMLayerRequest(
+      uuid
+    );
+    ForwardingAutomationService.automateForwardingConstructWithoutInputAsync(
+      forwardingAutomationInputList
+    );
+  }
 }
-
 
 /**
  * Documents TCP port of the server
@@ -168,28 +100,16 @@ exports.putTcpServerLocalAddress = function (url, body, uuid) {
  * uuid String 
  * no response value expected for this operation
  **/
-exports.putTcpServerLocalPort = function (url, body, uuid) {
-  return new Promise(async function (resolve, reject) {
-    try {
-      let isUpdated = await fileOperation.writeToDatabaseAsync(url, body, false);
-
-      /****************************************************************************************
-       * Prepare attributes to automate forwarding-construct
-       ****************************************************************************************/
-      if (isUpdated) {
-        let forwardingAutomationInputList = await prepareForwardingAutomation.OAMLayerRequest(
-          uuid
-        );
-        ForwardingAutomationService.automateForwardingConstructWithoutInputAsync(
-          forwardingAutomationInputList
-        );
-      }
-
-      resolve();
-    } catch (error) {
-      reject();
-    }
-  });
+exports.putTcpServerLocalPort = async function (url, body, uuid) {
+  let isUpdated = await fileOperation.writeToDatabaseAsync(url, body, false);
+  if (isUpdated) {
+    let forwardingAutomationInputList = await prepareForwardingAutomation.OAMLayerRequest(
+      uuid
+    );
+    ForwardingAutomationService.automateForwardingConstructWithoutInputAsync(
+      forwardingAutomationInputList
+    );
+  }
 }
 
 /**

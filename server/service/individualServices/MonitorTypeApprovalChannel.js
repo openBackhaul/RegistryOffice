@@ -10,7 +10,7 @@ const LogicalTerminationPoint = require('onf-core-model-ap/applicationPattern/on
 const ForwardingDomain = require('onf-core-model-ap/applicationPattern/onfModel/models/ForwardingDomain');
 const IntegerProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/IntegerProfile');
 const eventDispatcher = require('onf-core-model-ap/applicationPattern/rest/client/eventDispatcher');
-const applicationProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/ApplicationProfile');
+const Profile = require('onf-core-model-ap/applicationPattern/onfModel/models/Profile');
 const fileProfileOperation = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/FileProfile')
 const ProfileCollection = require('onf-core-model-ap/applicationPattern/onfModel/models/ProfileCollection');
 const onfAttributes = require('onf-core-model-ap/applicationPattern/onfModel/constants/OnfAttributes');
@@ -181,7 +181,7 @@ async function triggerDeregistration(applicationName, releaseNumber) {
 }
 
 exports.getWaitTimeApproveValue = async function() {
-    let integerProfiles = await ProfileCollection.getProfileListForProfileNameAsync(applicationProfile.profileNameEnum.INTEGER_PROFILE);
+    let integerProfiles = await ProfileCollection.getProfileListForProfileNameAsync(Profile.profileNameEnum.INTEGER_PROFILE);
     let config = integerProfiles[0][onfAttributes.INTEGER_PROFILE.PAC][onfAttributes.INTEGER_PROFILE.CONFIGURATION];
     return config[onfAttributes.INTEGER_PROFILE.INTEGER_VALUE];
  }
