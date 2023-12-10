@@ -1,0 +1,40 @@
+@startuml is002_DeregisterApplication
+skinparam responseMessageBelowArrow true
+
+title
+is-006: DeregistrationNotification
+is-011: DeRegistrationBroadcast
+end title
+
+participant "OR://v1/bequeath-your-data-and-die" as OldRelease
+participant "RO://v1/deregister-application" as RO
+participant "TAC://v1/disregard-application" as TacDisregardApp
+participant "ALL://v1/dispose-remainders-of-deregistered-application" as AllDisposeRemainders
+
+OldRelease -> RO : {applicationName, releaseNumber}
+activate RO
+
+skinparam NoteBackgroundColor salmon
+note left RO
+Remark:
+Service /v1/deregister-application
+and Callback DeregistrationNotification
+got obsoleted by introducing the Basic Service
+/v1/dispose-remainders-of-deregistered-application
+in ApplicationPattern v2.1.0
+end note
+skinparam NoteBackgroundColor default
+
+RO -> TacDisregardApp : {applicationName, releaseNumber}
+TacDisregardApp --> RO : 204
+
+skinparam NoteBackgroundColor lightgreen
+note left RO
+new
+end note
+RO -> AllDisposeRemainders : {applicationName, releaseNumber}
+AllDisposeRemainders --> RO : 204
+
+deactivate RO
+
+@enduml
