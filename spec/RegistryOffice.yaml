@@ -2847,6 +2847,7 @@ paths:
                 default:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
           CreateLinkToUpdateNewReleaseClient: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-alt-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-alt-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-alt-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-alt-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-is-alt-2-0-1-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
+            description: 'To be executed, IF (oldReleaseApplicationName != "OldRelease") AND (HttpClient for oldReleaseApplicationName exists in RO)'
             post:
               parameters:
                 - $ref: '#/components/parameters/user'
@@ -2939,7 +2940,9 @@ paths:
                 default:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
           RequestForUpdatingNewReleaseClient: #for [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]=={$RequestForOldRelease.responses.body#application-name}: [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-009/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
-            description: 'This request is initiated by receiving /v1/update-operation-key of {$ApprovingApplicationCausesPreparingTheEmbedding.RequestForOldRelease.responses.body#applicationName}://v1/update-client-of-subsequent-release'
+            description: >
+              'To be executed, IF (oldReleaseApplicationName != "OldRelease") AND (HttpClient for oldReleaseApplicationName exists in RO)
+              This request is initiated by receiving /v1/update-operation-key of {$ApprovingApplicationCausesPreparingTheEmbedding.RequestForOldRelease.responses.body#applicationName}://v1/update-client-of-subsequent-release'
             post:
               parameters:
                 - $ref: '#/components/parameters/user'
@@ -3139,6 +3142,7 @@ paths:
                 default:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
           CreateLinkForBequeathYourData: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-alt-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-alt-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-alt-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-alt-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-is-alt-2-0-1-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
+            description: 'To be executed, IF (oldReleaseApplicationName != "OldRelease") AND (HttpClient for oldReleaseApplicationName exists in RO)'
             post:
               parameters:
                 - $ref: '#/components/parameters/user'
@@ -3231,7 +3235,9 @@ paths:
                 default:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
           CreateFurtherLinksForTransferringData: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-alt-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-alt-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-alt-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-alt-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-is-alt-2-0-1-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
-            description: 'This request might be sent multiple times, according to the number of entries in {$RequestForUpdatingNewReleaseClient.responses.body#data-transfer-operations-list}'
+            description: >
+              'To be executed, IF (oldReleaseApplicationName != "OldRelease") AND (HttpClient for oldReleaseApplicationName exists in RO)
+              This request might be sent multiple times, according to the number of entries in {$RequestForUpdatingNewReleaseClient.responses.body#data-transfer-operations-list}'
             post:
               parameters:
                 - $ref: '#/components/parameters/user'
