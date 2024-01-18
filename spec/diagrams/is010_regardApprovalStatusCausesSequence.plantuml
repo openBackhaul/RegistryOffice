@@ -123,24 +123,6 @@ ELSE
 end note
 
 note over ro
-<u>CreateLinkToGetOldRelease</u>
-Request for automatically creating the Link:
-RO => NA://v1/inform-about-preceding-release
-end note
-ro -> altAddClientToLink : { servingApplicationName == requestBody.newApplicationName,\n servingApplicationReleaseNumber == requestBody.releaseNumber,\n operationName == /v1/inform-about-preceding-release,\n consumingApplicationName == RegistryOffice,\n consumingApplicationReleaseNumber == 2.1.0 } (apiKey)
-ro <-- altAddClientToLink : {client-successfully-added, reason-of-failure}
-
-note left ro
-IF (NOT 200) OR (client-successfully-added==false)
-terminate process with response
-end note
-tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
-
-note over ro
-ELSE
-end note
-
-note over ro
 <u>RequestForOldRelease</u>
 end note
 ro -> naInformAboutOR

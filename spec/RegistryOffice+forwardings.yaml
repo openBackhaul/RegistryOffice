@@ -854,21 +854,6 @@ forwardings:
         uuid: ro-2-1-0-op-c-im-ol-2-0-1-003
 
 
-  - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.CreateLinkToGetOldRelease
-    uuid: ro-2-1-0-op-fc-is-041
-    forwarding-type: InvariantProcessSnippet
-    management-requests:
-      operation-client-update:
-      fc-port-update:
-      fc-port-deletion:
-      operation-client-deletion:
-    initiating-requests:
-      - server-name: /v1/regard-updated-approval-status
-        uuid: ro-2-1-0-op-s-is-003
-    consequent-requests:
-      - client-name: ALT://v1/add-operation-client-to-link
-        uuid: ro-2-1-0-op-c-is-alt-2-0-1-000
-
   - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.RequestForOldRelease
     uuid: ro-2-1-0-op-fc-is-042
     forwarding-type: InvariantProcessSnippet
