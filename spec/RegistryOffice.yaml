@@ -1758,7 +1758,6 @@ paths:
               description: >
                   'Life cycle state of the consumed service
                   find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-op-s-is-003/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
-
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '401':
@@ -2152,7 +2151,7 @@ paths:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
                 default:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
-          Aa: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-aa-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-eatl-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-eatl-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-eatl-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-aa-2-0-1-003/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
+          Aa: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-aa-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-aa-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-aa-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-aa-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-aa-2-0-1-003/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
             post:
               parameters:
                 - $ref: '#/components/parameters/user'
@@ -5653,6 +5652,16 @@ paths:
                   application/json:
                     schema:
                       type: object
+                      required:
+                        - application-name
+                        - release-number
+                        - embedding-operation
+                        - client-update-operation
+                        - operation-client-update-operation
+                        - dispose-remainders-operation
+                        - preceding-release-operation
+                        - subsequent-release-operation
+                        - tcp-server
                       properties:
                         application-name:
                           type: string
@@ -6802,6 +6811,12 @@ paths:
                   application/json:
                     schema:
                       type: object
+                      required:
+                        - Authorization
+                        - application-name
+                        - release-number
+                        - operation-name
+                        - method
                       properties:
                         Authorization:
                           type: string
@@ -6836,16 +6851,28 @@ paths:
                   content:
                     application/json:
                       schema:
-                        type: object
-                        properties:
-                          basic-auth-request-is-approved:
-                            type: boolean
-                            description: 'If true, BasicAuth request can be executed'
-                          reason-of-objection:
-                            type: string
-                            description: >
-                              'if AUTHORIZATION_CODE_UNKNOWN BasicAuth request to be aborted and 401 to be sent
-                              else BasicAuth request to be aborted and 403 to be sent'
+                        oneOf:
+                          - description: 'AdministratorAdministration is responding'
+                            type: object
+                            properties:
+                              oam-request-is-approved:
+                                type: boolean
+                              reason-of-objection:
+                                type: string
+                                description: >
+                                  'This attribute to be represented, if response::oam-request-is-approved==false.
+                                  Reasons to be checked and indicated according to the sequence defined in the enumeration.'
+                          - description: 'AccessAdministration is responding'
+                            type: object
+                            properties:
+                              basic-auth-request-is-approved:
+                                type: boolean
+                                description: 'If true, BasicAuth request can be executed'
+                              reason-of-objection:
+                                type: string
+                                description: >
+                                  'if AUTHORIZATION_CODE_UNKNOWN BasicAuth request to be aborted and 401 to be sent
+                                  else BasicAuth request to be aborted and 403 to be sent'
                   headers:
                     x-correlator:
                       schema:
@@ -8492,6 +8519,12 @@ paths:
                   application/json:
                     schema:
                       type: object
+                      required:
+                        - Authorization
+                        - application-name
+                        - release-number
+                        - operation-name
+                        - method
                       properties:
                         Authorization:
                           type: string
@@ -8797,7 +8830,7 @@ paths:
                       description: >
                         'Domain name to be used during the bequeath-your-data-and-die process
                         update [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-nr-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
-                future-port:
+                port:
                   type: integer
                   minimum: 0
                   maximum: 65535
