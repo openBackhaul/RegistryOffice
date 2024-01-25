@@ -124,15 +124,11 @@ clients:
         basic:
         individual:
           - operation-name: /v1/inquire-application-type-approvals
-            uuid: ro-2-1-0-op-c-im-nr-2-1-0-000
-          - operation-name: /v1/notify-deregistrations
-            uuid: ro-2-1-0-op-c-im-nr-2-1-0-001
-          - operation-name: /v1/notify-approvals
             uuid: ro-2-1-0-op-c-im-nr-2-1-0-002
-          - operation-name: /v1/notify-withdrawn-approvals
-            uuid: ro-2-1-0-op-c-im-nr-2-1-0-003
           - operation-name: /v2/register-application
             uuid: ro-2-1-0-op-c-im-nr-2-1-0-005
+          - operation-name: /v1/notify-embedding-status-changes
+            uuid: ro-2-1-0-op-c-im-nr-2-1-0-006
       service:
         basic:
         individual:
