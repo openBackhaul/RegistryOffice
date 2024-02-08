@@ -72,7 +72,7 @@ exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, 
         return;
       }
 
-      
+
       let logicalTerminationPointConfigurationStatus = {};
       let newReleaseHttpClientLtpUuid = appNameAndUuidFromForwarding.httpClientLtpUuid;
       if (newReleaseHttpClientLtpUuid != undefined) {
@@ -120,8 +120,8 @@ exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, 
             customerJourney
           );
         }
-      softwareUpgrade.upgradeSoftwareVersion(user, xCorrelator, traceIndicator, customerJourney,forwardingAutomationInputList.length)
-        .catch(err => console.log(`upgradeSoftwareVersion failed with error: ${err}`));
+        softwareUpgrade.upgradeSoftwareVersion(user, xCorrelator, traceIndicator, customerJourney, forwardingAutomationInputList.length)
+          .catch(err => console.log(`upgradeSoftwareVersion failed with error: ${err}`));
 
       }
       resolve();
@@ -158,7 +158,7 @@ exports.deregisterApplication = async function (body, user, originator, xCorrela
   );
 
   /****************************************************************************************
-   * Prepare attributes to configure forwarding-construct
+   * Prepare attributes to remove fc-ports from forwarding-construct
    ****************************************************************************************/
 
   let forwardingConfigurationInputList = [];
@@ -229,7 +229,7 @@ exports.inquireApplicationTypeApprovals = async function (body, user, originator
   let operationNamesByAttributes = new Map();
   operationNamesByAttributes.set("approval-operation", approvalOperation);
 
-  let tcpObjectList = [new TcpObject(applicationProtocol, applicationAddress, applicationPort)];
+  let tcpObject = new TcpObject(applicationProtocol, applicationAddress, applicationPort);
 
   let httpClientUuid = await httpClientInterface.getHttpClientUuidAsync(
     applicationName, releaseNumber
@@ -238,7 +238,7 @@ exports.inquireApplicationTypeApprovals = async function (body, user, originator
     httpClientUuid,
     applicationName,
     releaseNumber,
-    tcpObjectList,
+    tcpObject,
     operationServerName,
     operationNamesByAttributes,
     individualServicesOperationsMapping.individualServicesOperationsMapping
@@ -314,6 +314,7 @@ exports.listApplicationsInGenericRepresentation = async function () {
 }
 
 /**
+ * @deprecated since version 2.1.0
  * Offers subscribing to notifications about new approvals
  *
  * body V1_notifyapprovals_body 
@@ -340,7 +341,7 @@ exports.notifyApprovals = async function (body, user, originator, xCorrelator, t
   let operationNamesByAttributes = new Map();
   operationNamesByAttributes.set("subscriber-operation", subscriberOperation);
 
-  let tcpObjectList = [new TcpObject(applicationProtocol, applicationAddress, applicationPort)];
+  let tcpObject = new TcpObject(applicationProtocol, applicationAddress, applicationPort);
 
   let httpClientLtpUuid = await httpClientInterface.getHttpClientUuidAsync(
     applicationName,
@@ -350,7 +351,7 @@ exports.notifyApprovals = async function (body, user, originator, xCorrelator, t
     httpClientLtpUuid,
     applicationName,
     releaseNumber,
-    tcpObjectList,
+    tcpObject,
     operationServerName,
     operationNamesByAttributes,
     individualServicesOperationsMapping.individualServicesOperationsMapping
@@ -397,6 +398,7 @@ exports.notifyApprovals = async function (body, user, originator, xCorrelator, t
 }
 
 /**
+ * @deprecated since version 2.1.0
  * Offers subscribing to notifications about withdrawn registrations
  *
  * body V1_notifyderegistrations_body 
@@ -422,7 +424,7 @@ exports.notifyDeregistrations = async function (body, user, originator, xCorrela
   let operationNamesByAttributes = new Map();
   operationNamesByAttributes.set("subscriber-operation", subscriberOperation);
 
-  let tcpObjectList = [new TcpObject(applicationProtocol, applicationAddress, applicationPort)];
+  let tcpObject = new TcpObject(applicationProtocol, applicationAddress, applicationPort);
 
   let httpClientLtpUuid = await httpClientInterface.getHttpClientUuidAsync(
     applicationName,
@@ -432,7 +434,7 @@ exports.notifyDeregistrations = async function (body, user, originator, xCorrela
     httpClientLtpUuid,
     applicationName,
     releaseNumber,
-    tcpObjectList,
+    tcpObject,
     operationServerName,
     operationNamesByAttributes,
     individualServicesOperationsMapping.individualServicesOperationsMapping
@@ -480,6 +482,7 @@ exports.notifyDeregistrations = async function (body, user, originator, xCorrela
 
 
 /**
+ * @deprecated since version 2.1.0
  * Offers subscribing to notifications about withdrawn approvals
  *
  * body V1_notifywithdrawnapprovals_body 
@@ -506,7 +509,7 @@ exports.notifyWithdrawnApprovals = async function (body, user, originator, xCorr
   let operationNamesByAttributes = new Map();
   operationNamesByAttributes.set("subscriber-operation", subscriberOperation);
 
-  let tcpObjectList = [new TcpObject(applicationProtocol, applicationAddress, applicationPort)];
+  let tcpObject = new TcpObject(applicationProtocol, applicationAddress, applicationPort);
 
   let httpClientUuid = await httpClientInterface.getHttpClientUuidAsync(
     applicationName,
@@ -516,7 +519,7 @@ exports.notifyWithdrawnApprovals = async function (body, user, originator, xCorr
     httpClientUuid,
     applicationName,
     releaseNumber,
-    tcpObjectList,
+    tcpObject,
     operationServerName,
     operationNamesByAttributes,
     individualServicesOperationsMapping.individualServicesOperationsMapping
@@ -563,6 +566,24 @@ exports.notifyWithdrawnApprovals = async function (body, user, originator, xCorr
 }
 
 /**
+ * Offers subscribing to notifications about changes of the embedding status
+ *
+ * body V1_notifyembeddingstatuschanges_body 
+ * user String User identifier from the system starting the service call
+ * originator String 'Identification for the system consuming the API, as defined in  [/core-model-1-4:control-construct/logical-termination-point={uuid}/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]' 
+ * xCorrelator String UUID for the service execution flow that allows to correlate requests and responses
+ * traceIndicator String Sequence of request numbers along the flow
+ * customerJourney String Holds information supporting customer’s journey to which the execution applies
+ * no response value expected for this operation
+ **/
+exports.notifyEmbeddingStatusChanges = function (body, user, originator, xCorrelator, traceIndicator, customerJourney) {
+  return new Promise(function (resolve, reject) {
+    resolve();
+  });
+}
+
+/**
+ * @deprecated since version 2.1.0
  * Adds to the list of known applications
  *
  * body V1_registerapplication_body 
@@ -571,12 +592,13 @@ exports.notifyWithdrawnApprovals = async function (body, user, originator, xCorr
  * xCorrelator String UUID for the service execution flow that allows to correlate requests and responses
  * traceIndicator String Sequence of request numbers along the flow
  * customerJourney String Holds information supporting customer’s journey to which the execution applies
+ * operationServerName contains name of addressed request
  * no response value expected for this operation
  **/
 exports.registerApplication = async function (body, user, originator, xCorrelator, traceIndicator, customerJourney, operationServerName) {
   let applicationName = body["application-name"];
   let releaseNumber = body["release-number"];
-  let tcpServerList = body["tcp-server-list"];
+  let tcpServer = body["tcp-server-list"][0];
   let embeddingOperation = body["embedding-operation"];
   let clientUpdateOperation = body["client-update-operation"];
   let clientOperationUpdateOperation = body["operation-client-update-operation"];
@@ -592,12 +614,8 @@ exports.registerApplication = async function (body, user, originator, xCorrelato
   operationNamesByAttributes.set("embedding-operation", embeddingOperation);
   operationNamesByAttributes.set("client-update-operation", clientUpdateOperation);
   operationNamesByAttributes.set("operation-client-update-operation", clientOperationUpdateOperation);
-  
-  let tcpObjectList = [];
-  for (let tcpServer of tcpServerList) {
-    let tcpObject = new TcpObject(tcpServer.protocol, tcpServer.address, tcpServer.port);
-    tcpObjectList.push(tcpObject);
-  }
+
+  let tcpObject = new TcpObject(tcpServer.protocol, tcpServer.address, tcpServer.port);
 
   let httpClientUuid = await httpClientInterface.getHttpClientUuidExcludingOldReleaseAndNewRelease(
     applicationName, releaseNumber, NEW_RELEASE_FORWARDING_NAME
@@ -606,7 +624,7 @@ exports.registerApplication = async function (body, user, originator, xCorrelato
     httpClientUuid,
     applicationName,
     releaseNumber,
-    tcpObjectList,
+    tcpObject,
     operationServerName,
     operationNamesByAttributes,
     individualServicesOperationsMapping.individualServicesOperationsMapping
@@ -663,6 +681,122 @@ exports.registerApplication = async function (body, user, originator, xCorrelato
   includeGenericResponseProfile(applicationName, releaseNumber);
 }
 
+/**
+ * Adds to the list of known applications
+ * 'Registration service is not protected by operationKey. Receiving a de-registration request shall be assumed after passing wait time to approve from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-1-0-integer-p-000/integer-profile-1-0:integer-profile-pac/integer-profile-configuration/integer-value]' 
+ *
+ * body V2_registerapplication_body 
+ * user String User identifier from the system starting the service call
+ * originator String 'Identification for the system consuming the API, as defined in  [/core-model-1-4:control-construct/logical-termination-point={uuid}/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]' 
+ * xCorrelator String UUID for the service execution flow that allows to correlate requests and responses
+ * traceIndicator String Sequence of request numbers along the flow
+ * customerJourney String Holds information supporting customer’s journey to which the execution applies
+ * operationServerName contains name of addressed request
+ * no response value expected for this operation
+ **/
+exports.registerApplication2 = async function (body, user, originator, xCorrelator, traceIndicator, customerJourney, operationServerName) {
+    let applicationName = body["application-name"];
+    let releaseNumber = body["release-number"];
+    let embeddingOperation = body["embedding-operation"];
+    let clientUpdateOperation = body["client-update-operation"];
+    let clientOperationUpdateOperation = body["operation-client-update-operation"];
+
+    let preceedingApplicationName = body["preceding-application-name"];
+    let preceedingReleaseNumber = body["preceding-release-number"];
+
+    let operationNamesByAttributes = new Map();
+    operationNamesByAttributes.set("embedding-operation", embeddingOperation);
+    operationNamesByAttributes.set("client-update-operation", clientUpdateOperation);
+    operationNamesByAttributes.set("operation-client-update-operation", clientOperationUpdateOperation);
+
+    /****************************************************************************************
+     * Differentiate between two schemas  
+     * if schema has tcp-server-list attribute, it is old-multiple-TcpServers-format
+     * else if schema has tcp-server object attribute, it is new-single-TcpServer-format
+     ****************************************************************************************/
+    let tcpServer = {};
+    if (body.hasOwnProperty("tcp-server-list")) {
+      tcpServer = body["tcp-server-list"][0];
+    } else if (body.hasOwnProperty("tcp-server")) {
+      tcpServer = body["tcp-server"];
+      let disposeRemaindersOperation = body["dispose-remainders-operation"];
+      let precedingReleaseOperation = body["preceding-release-operation"];
+      let subsequentReleaseOperation = body["subsequent-release-operation"];
+      operationNamesByAttributes.set("dispose-remainders-operation", disposeRemaindersOperation);
+      operationNamesByAttributes.set("preceding-release-operation", precedingReleaseOperation);
+      operationNamesByAttributes.set("subsequent-release-operation", subsequentReleaseOperation);
+    }
+
+    /****************************************************************************************
+     * Prepare logicalTerminatinPointConfigurationInput object to 
+     * configure logical-termination-point
+     ****************************************************************************************/
+    let tcpObject = new TcpObject(tcpServer.protocol, tcpServer.address, tcpServer.port);
+
+    let httpClientUuid = await httpClientInterface.getHttpClientUuidExcludingOldReleaseAndNewRelease(
+      applicationName, releaseNumber, NEW_RELEASE_FORWARDING_NAME
+    );
+    let logicalTerminatinPointConfigurationInput = new LogicalTerminationPointConfigurationInput(
+      httpClientUuid,
+      applicationName,
+      releaseNumber,
+      tcpObject,
+      operationServerName,
+      operationNamesByAttributes,
+      individualServicesOperationsMapping.individualServicesOperationsMapping
+    );
+    let ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(
+      logicalTerminatinPointConfigurationInput
+    );
+
+    await ApplicationPreceedingVersion.addEntryToPreceedingVersionList(
+      preceedingApplicationName,
+      preceedingReleaseNumber,
+      applicationName,
+      releaseNumber
+    );
+    /****************************************************************************************
+     * Prepare attributes to configure forwarding-construct
+     ****************************************************************************************/
+
+    let forwardingConfigurationInputList = [];
+    let forwardingConstructConfigurationStatus;
+    let operationClientConfigurationStatusList = ltpConfigurationStatus.operationClientConfigurationStatusList;
+
+    if (operationClientConfigurationStatusList) {
+      forwardingConfigurationInputList = await prepareForwardingConfiguration.registerApplication(
+        operationClientConfigurationStatusList,
+        embeddingOperation
+      );
+      forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
+        configureForwardingConstructAsync(
+          operationServerName,
+          forwardingConfigurationInputList
+        );
+    }
+
+    /****************************************************************************************
+     * Prepare attributes to automate forwarding-construct
+     ****************************************************************************************/
+    let forwardingAutomationInputList = await prepareForwardingAutomation.registerApplication(
+      ltpConfigurationStatus,
+      forwardingConstructConfigurationStatus,
+      applicationName,
+      releaseNumber
+    );
+    ForwardingAutomationService.automateForwardingConstructAsync(
+      operationServerName,
+      forwardingAutomationInputList,
+      user,
+      xCorrelator,
+      traceIndicator,
+      customerJourney
+    );
+
+    MonitorTypeApprovalChannel.AddEntryToMonitorApprovalStatusChannel(applicationName, releaseNumber);
+    includeGenericResponseProfile(applicationName, releaseNumber);
+}
+
 
 /**
  * Offers broadcasting of information about backward compatible operations
@@ -691,7 +825,9 @@ exports.relayOperationUpdate = function (body, user, originator, xCorrelator, tr
        * decision making before proceeding with relay the server information
        ****************************************************************************************/
       let isRequestEligibleForRelaying = true;
-      let httpClientUuidOfNewApplication = await httpClientInterface.getHttpClientUuidAsync(applicationName, releaseNumber);
+      let httpClientUuidOfNewApplication = await httpClientInterface.getHttpClientUuidExcludingOldReleaseAndNewRelease(
+        applicationName, releaseNumber, NEW_RELEASE_FORWARDING_NAME
+      );
       if (httpClientUuidOfNewApplication == undefined) {
         isRequestEligibleForRelaying = false;
       } else {
@@ -767,7 +903,9 @@ exports.relayServerReplacement = function (body, user, originator, xCorrelator, 
        * decision making before proceeding with relay the server information
        ****************************************************************************************/
       let isRequestEligibleForRelaying = true;
-      let httpClientUuidOfNewApplication = await httpClientInterface.getHttpClientUuidAsync(futureApplicationName, futureReleaseNumber);
+      let httpClientUuidOfNewApplication = await httpClientInterface.getHttpClientUuidExcludingOldReleaseAndNewRelease(
+        futureApplicationName, futureReleaseNumber, NEW_RELEASE_FORWARDING_NAME
+      );
       if (httpClientUuidOfNewApplication == undefined) {
         isRequestEligibleForRelaying = false;
       } else {
@@ -871,7 +1009,7 @@ exports.startApplicationInGenericRepresentation = async function () {
  * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * no response value expected for this operation
  **/
-exports.updateApprovalStatus = async function (body, user, originator, xCorrelator, traceIndicator, customerJourney, operationServerName) {
+exports.regardUpdatedApprovalStatus = async function (body, user, originator, xCorrelator, traceIndicator, customerJourney, operationServerName) {
   let applicationName = body["application-name"];
   let releaseNumber = body["release-number"];
   let approvalStatus = body["approval-status"];
@@ -955,23 +1093,23 @@ exports.updateApprovalStatus = async function (body, user, originator, xCorrelat
               forwardingConfigurationInputList
             );
           await MonitorTypeApprovalChannel.removeEntryFromMonitorApprovalStatusChannel(applicationName, releaseNumber);
-        }else if (isApplicationAlreadyApproved && approvalStatus == 'REGISTERED') {
+        } else if (isApplicationAlreadyApproved && approvalStatus == 'REGISTERED') {
           forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
-          unConfigureForwardingConstructAsync(
-            operationServerName,
-            forwardingConfigurationInputList
-          );
+            unConfigureForwardingConstructAsync(
+              operationServerName,
+              forwardingConfigurationInputList
+            );
           await MonitorTypeApprovalChannel.AddEntryToMonitorApprovalStatusChannel(applicationName, releaseNumber);
         } else if (approvalStatus == 'BARRED') {
-          let forwardingConfigurationListForBarredApplication = 
-              await prepareForwardingConfiguration.updateApprovalStatusBarred(operationClientUuidList);
+          let forwardingConfigurationListForBarredApplication =
+            await prepareForwardingConfiguration.updateApprovalStatusBarred(operationClientUuidList);
           forwardingConfigurationInputList.push.apply(forwardingConfigurationInputList, forwardingConfigurationListForBarredApplication);
           forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
-          unConfigureForwardingConstructAsync(
-            operationServerName,
-            forwardingConfigurationInputList,
-            true
-          );
+            unConfigureForwardingConstructAsync(
+              operationServerName,
+              forwardingConfigurationInputList,
+              true
+            );
           await MonitorTypeApprovalChannel.removeEntryFromMonitorApprovalStatusChannel(applicationName, releaseNumber);
           await ApplicationPreceedingVersion.removeEntryFromPrecedingVersionList(applicationName, releaseNumber);
         }
@@ -1010,7 +1148,7 @@ exports.updateApprovalStatus = async function (body, user, originator, xCorrelat
       applicationName,
       releaseNumber
     );
-  } else if (approvalStatus == 'BARRED' || (approvalStatus == 'REGISTERED' && isApplicationAlreadyApproved )) {
+  } else if (approvalStatus == 'BARRED' || (approvalStatus == 'REGISTERED' && isApplicationAlreadyApproved)) {
     forwardingAutomationInputList = await prepareForwardingAutomation.updateApprovalStatusBarred(
       ltpConfigurationStatus,
       forwardingConstructConfigurationStatus,
@@ -1071,7 +1209,7 @@ async function checkApplicationApprovalStatus(clientLTPs) {
 function getAllRegisteredApplicationList(protocol) {
   return new Promise(async function (resolve, reject) {
     let clientApplicationList = [];
-    const forwardingName = "TypeApprovalCausesRequestForEmbedding";
+    const forwardingName = "ApprovingApplicationCausesPreparingTheEmbedding.RequestForEmbedding";
     try {
 
       /** 

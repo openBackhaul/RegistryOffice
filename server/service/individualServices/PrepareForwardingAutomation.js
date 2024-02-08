@@ -69,12 +69,28 @@ exports.deregisterApplication = function (logicalTerminationPointconfigurationSt
             deregistrationNotificationRequestBody.applicationName = applicationName;
             deregistrationNotificationRequestBody.releaseNumber = applicationReleaseNumber;
             deregistrationNotificationRequestBody = onfFormatter.modifyJsonObjectKeysToKebabCase(deregistrationNotificationRequestBody);
-            let forwardingAutomation = new forwardingConstructAutomationInput(
+            let forwardingAutomationForDeregistrationNotification = new forwardingConstructAutomationInput(
                 deregistrationNotificationForwardingName,
                 deregistrationNotificationRequestBody,
                 deregistrationNotificationContext
             );
-            forwardingConstructAutomationList.push(forwardingAutomation);
+            forwardingConstructAutomationList.push(forwardingAutomationForDeregistrationNotification);
+
+            /***********************************************************************************
+             * DeRegistrationBroadcast /v1/dispose-remainders-of-deregistered-application
+             ************************************************************************************/
+            let deregistrationBroadcastForwardingName = "DeRegistrationBroadcast";
+            let deregistrationBroadcastContext;
+            let deregistrationBroadcastRequestBody = {};
+            deregistrationBroadcastRequestBody.applicationName = applicationName;
+            deregistrationBroadcastRequestBody.releaseNumber = applicationReleaseNumber;
+            deregistrationBroadcastRequestBody = onfFormatter.modifyJsonObjectKeysToKebabCase(deregistrationBroadcastRequestBody);
+            let forwardingAutomationForDeregistrationBroadcast = new forwardingConstructAutomationInput(
+                deregistrationBroadcastForwardingName,
+                deregistrationBroadcastRequestBody,
+                deregistrationBroadcastContext
+            );
+            forwardingConstructAutomationList.push(forwardingAutomationForDeregistrationBroadcast);
 
             /***********************************************************************************
              * forwardings for application layer topology

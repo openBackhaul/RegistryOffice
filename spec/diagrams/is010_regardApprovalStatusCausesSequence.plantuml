@@ -4,6 +4,7 @@ skinparam responseMessageBelowArrow true
 title
 BarringApplicationCausesDeregisteringOfApplication
 ApprovingApplicationCausesConnectingWith
+ApprovalNotification
 ApprovingApplicationCausesPreparingTheEmbedding
 ApprovingApplicationCausesConnectingToBroadcast
 end title
@@ -19,6 +20,8 @@ participant "OKM://v1/regard-application" as okmRegardApplication
 participant "EaTL://v1/regard-application" as eatlRegardApplication
 participant "AA://v1/regard-application" as aaRegardApplication
 participant "OL://v1/regard-application" as olRegardApplication
+
+participant "subscribers://v1/regard-application" as RegardApplicationNotification
 
 participant "ALT://v1/add-operation-client-to-link" as altAddClientToLink
 participant "NA://v1/inform-about-preceding-release" as naInformAboutOR
@@ -118,27 +121,16 @@ terminate process with response
 end note
 tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
 
-note over ro
+note over ro #LightSkyBlue
 ELSE
 end note
 
-note over ro
-<u>CreateLinkToGetOldRelease</u>
-Request for automatically creating the Link:
-RO => NA://v1/inform-about-preceding-release
+note over ro #LightSkyBlue
+<u>ApprovalNotification</u>
 end note
-ro -> altAddClientToLink : { servingApplicationName == requestBody.newApplicationName,\n servingApplicationReleaseNumber == requestBody.releaseNumber,\n operationName == /v1/inform-about-preceding-release,\n consumingApplicationName == RegistryOffice,\n consumingApplicationReleaseNumber == 2.1.0 } (apiKey)
-ro <-- altAddClientToLink : {client-successfully-added, reason-of-failure}
+ro -> RegardApplicationNotification : {newApplicationName, releaseNumber, TCP/IP address}
+ro <-- RegardApplicationNotification : 204
 
-note left ro
-IF (NOT 200) OR (client-successfully-added==false)
-terminate process with response
-end note
-tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
-
-note over ro
-ELSE
-end note
 
 note over ro
 <u>RequestForOldRelease</u>

@@ -16,7 +16,7 @@ exports.registerApplication = function (operationClientConfigurationStatusList, 
                 let forwardingName;
                 if (operationClientName == embeddingOperation) {
                     forwardingName =
-                        "TypeApprovalCausesRequestForEmbedding";
+                        "ApprovingApplicationCausesPreparingTheEmbedding.RequestForEmbedding";
                     forwardingConfigurationInput = new forwardingConstructConfigurationInput(
                         forwardingName,
                         operationClientUuid

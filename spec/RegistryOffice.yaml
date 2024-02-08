@@ -1,7 +1,7 @@
 ﻿openapi: 3.0.0
 info:
   title: RegistryOffice
-  version: 2.1.0
+  version: 2.1.1
 
 x-gui-paths:
 ########################################################################################################################
@@ -165,7 +165,7 @@ paths:
           $ref: '#/components/responses/responseForErroredServiceRequests'
       callbacks:
         PromptForBequeathingDataCausesNewApplicationBeingRequestedToInquireForApplicationTypeApprovals:
-          url: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-nr-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-nr-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-nr-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-nr-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-nr-2-1-0-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
+          url: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-nr-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-nr-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-nr-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-nr-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-nr-2-1-0-002/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
             post:
               parameters:
                 - $ref: '#/components/parameters/user'
@@ -280,8 +280,8 @@ paths:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
                 default:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
-        PromptForBequeathingDataCausesNewApplicationBeingRequestedToDocumentSubscriptionsForDeregistrationNotifications:
-          url: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-nr-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-nr-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-nr-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-nr-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-nr-2-1-0-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
+        PromptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredApplications:
+          url: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-nr-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-nr-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-nr-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-nr-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-nr-2-1-0-005/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
             post:
               parameters:
                 - $ref: '#/components/parameters/user'
@@ -296,66 +296,98 @@ paths:
                     schema:
                       type: object
                       required:
-                        - subscriber-application
-                        - subscriber-release-number
-                        - subscriber-operation
-                        - subscriber-protocol
-                        - subscriber-address
-                        - subscriber-port
+                        - application-name
+                        - release-number
+                        - embedding-operation
+                        - client-update-operation
+                        - operation-client-update-operation
+                        - dispose-remainders-operation
+                        - preceding-release-operation
+                        - subsequent-release-operation
+                        - tcp-server
                       properties:
-                        subscriber-application:
+                        application-name:
                           type: string
                           description: >
-                            'Name of application that wants to receive notifications about obsolete registrations
+                            'Name of application that wants to register
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
-                        subscriber-release-number:
+                        release-number:
                           type: string
                           description: >
-                            'Release of application that wants to receive notifications about obsolete registrations
+                            'Release of application that wants to register
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
-                        subscriber-operation:
+                        preceding-application-name:
                           type: string
                           description: >
-                            'Names of the operation that shall be addressed by notifications about obsolete registrations
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-004/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
-                        subscriber-protocol:
+                            'If provided, the new application will address /v1/bequeath-your-data-and-die at the preceding application after receiving /v1/embed-yourself
+                            from LOADfile'
+                        preceding-release-number:
                           type: string
                           description: >
-                            'Protocol to be used for addressing the application that wants to receive notifications about obsolete registrations
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
-                        subscriber-address:
+                            'If provided, the new application will address /v1/bequeath-your-data-and-die at the preceding release after receiving /v1/embed-yourself
+                            from LOADfile'
+                        embedding-operation:
+                          type: string
+                          description: >
+                            'Name of service for initiating embedding process
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                        client-update-operation:
+                          type: string
+                          description: >
+                            'Name of service for broadcasting server changes
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                        operation-client-update-operation:
+                          type: string
+                          description: >
+                            'Name of service for broadcasting replacements of operations by backward compatible substitutes
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-002/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                        dispose-remainders-operation:
+                          type: string
+                          description: >
+                            'Name of service for broadcasting de-registrations of applications
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-006/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                        preceding-release-operation:
+                          type: string
+                          description: >
+                            'Name of service for retrieving information about the preceding release of a new application
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-008/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                        subsequent-release-operation:
+                          type: string
+                          description: >
+                            'Name of service for configuring the newRelease at the existing application
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-009/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                        tcp-server:
                           type: object
                           properties:
-                            ip-address:
-                              type: object
-                              properties:
-                                ipv-4-address:
-                                  type: string
-                                  description: >
-                                    'IPv4 address of application that wants to receive notifications about obsolete registrations
-                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
-                            domain-name:
+                            protocol:
                               type: string
                               description: >
-                                'Domain name of application that wants to receive notifications about obsolete registrations
-                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
-                        subscriber-port:
-                          type: integer
-                          description: >
-                            'TCP port of application that wants to receive notifications about obsolete registrations
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
-                      example:
-                        subscriber-application: 'TypeApprovalRegister'
-                        subscriber-release-number: '2.0.1'
-                        subscriber-operation: '/v1/disregard-application'
-                        subscriber-protocol: 'HTTP'
-                        subscriber-address:
-                          ip-address:
-                            ipv-4-address: '127.0.0.1'
-                        subscriber-port: 3009
+                                'Protocol to be used for addressing the application that wants to register
+                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
+                            address:
+                              type: object
+                              properties:
+                                ip-address:
+                                  type: object
+                                  properties:
+                                    ipv-4-address:
+                                      type: string
+                                      description: >
+                                        'IPv4 address of application that wants to register
+                                        from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
+                                domain-name:
+                                  type: string
+                                  description: >
+                                    'Domain name of application that wants to register
+                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
+                            port:
+                              type: integer
+                              description: >
+                                'TCP port of application that wants to register
+                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
               responses:
                 '204':
-                  description: 'Subscribed for notifications about deregistrations'
+                  description: 'Application registered'
                   headers:
                     x-correlator:
                       schema:
@@ -396,8 +428,8 @@ paths:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
                 default:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
-        PromptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredApplications:
-          url: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-nr-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-nr-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-nr-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-nr-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-nr-2-1-0-005/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
+        PromptForBequeathingDataCausesTransferOfListOfSubscriptionsForEmbeddingStatusChanges:
+          url: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-nr-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-nr-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-nr-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-nr-2-1-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-nr-2-1-0-006/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
             post:
               parameters:
                 - $ref: '#/components/parameters/user'
@@ -411,79 +443,63 @@ paths:
                   application/json:
                     schema:
                       type: object
+                      required:
+                        - subscriber-application
+                        - subscriber-release-number
+                        - subscriber-operation
+                        - subscriber-protocol
+                        - subscriber-address
+                        - subscriber-port
                       properties:
-                        application-name:
+                        subscriber-application:
                           type: string
                           description: >
-                            'Name of application that wants to register
+                            'Name of application that wants to receive notifications about changes of the embedding status
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
-                        release-number:
+                        subscriber-release-number:
                           type: string
                           description: >
-                            'Release of application that wants to register
+                            'Release of application that wants to receive notifications about changes of the embedding status
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
-                        preceding-application-name:
+                        subscriber-operation:
                           type: string
                           description: >
-                            'If provided, the new application will address /v1/bequeath-your-data-and-die at the preceding application after receiving /v1/embed-yourself
-                            from LOADfile'
-                        preceding-release-number:
+                            'Names of the operation that shall be addressed by notifications about changes of the embedding status
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-007/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                        subscriber-protocol:
                           type: string
                           description: >
-                            'If provided, the new application will address /v1/bequeath-your-data-and-die at the preceding release after receiving /v1/embed-yourself
-                            from LOADfile'
-                        embedding-operation:
-                          type: string
-                          description: >
-                            'Name of service for initiating embedding process
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
-                        dispose-remainders-operation:
-                          type: string
-                          description: >
-                            'Name of service for broadcasting de-registrations of applications
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-006/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
-                        client-update-operation:
-                          type: string
-                          description: >
-                            'Name of service for broadcasting server changes
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
-                        operation-client-update-operation:
-                          type: string
-                          description: >
-                            'Name of service for broadcasting replacements of operations by backward compatible substitutes
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-002/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
-                        tcp-server:
+                            'Protocol to be used for addressing the application that wants to receive notifications about changes of the embedding status
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
+                        subscriber-address:
                           type: object
+                          minProperties: 1
+                          maxProperties: 1
+                          additionalProperties: false
                           properties:
-                            protocol:
-                              type: string
-                              description: >
-                                'Protocol to be used for addressing the application that wants to register
-                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
-                            address:
+                            ip-address:
                               type: object
+                              minProperties: 1
+                              additionalProperties: false
                               properties:
-                                ip-address:
-                                  type: object
-                                  properties:
-                                    ipv-4-address:
-                                      type: string
-                                      description: >
-                                        'IPv4 address of application that wants to register
-                                        from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
-                                domain-name:
+                                ipv-4-address:
                                   type: string
                                   description: >
-                                    'Domain name of application that wants to register
-                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
-                            port:
-                              type: integer
+                                    'IPv4 address of application that wants to receive notifications about changes of the embedding status
+                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
+                            domain-name:
+                              type: string
                               description: >
-                                'TCP port of application that wants to register
-                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
+                                'Domain name of application that wants to receive notifications about changes of the embedding status
+                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
+                        subscriber-port:
+                          type: integer
+                          description: >
+                            'TCP port of application that wants to receive notifications about changes of the embedding status
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
               responses:
                 '204':
-                  description: 'Application registered'
+                  description: 'Subscribed for notifications about changes of the embedding status'
                   headers:
                     x-correlator:
                       schema:
@@ -938,6 +954,188 @@ paths:
         content:
           application/json:
             schema:
+              type: object
+              required:
+                - application-name
+                - release-number
+                - embedding-operation
+                - client-update-operation
+                - operation-client-update-operation
+                - tcp-server-list
+              properties:
+                application-name:
+                  type: string
+                  pattern: '^([A-Z][a-z0-9]+){2,}$'
+                  description: >
+                    'Name of application that wants to register
+                    find, but not at OldRelease or NewRelease, or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
+                release-number:
+                  type: string
+                  pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
+                  description: >
+                    'Release of application that wants to register
+                    find, but not at OldRelease or NewRelease, or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
+                preceding-application-name:
+                  type: string
+                  minLength: 3
+                  description: >
+                    'If provided, the new application will address /v1/bequeath-your-data-and-die at the preceding application after receiving /v1/embed-yourself
+                    update or create in LOADfile'
+                preceding-release-number:
+                  type: string
+                  pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
+                  description: >
+                    'If provided, the new application will address /v1/bequeath-your-data-and-die at the preceding release after receiving /v1/embed-yourself
+                    update or create in LOADfile'
+                embedding-operation:
+                  type: string
+                  minLength: 6
+                  description: >
+                    'Name of service for initiating embedding process
+                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                client-update-operation:
+                  type: string
+                  minLength: 6
+                  description: >
+                    'Name of service for broadcasting server changes
+                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                operation-client-update-operation:
+                  type: string
+                  minLength: 6
+                  description: >
+                    'Name of service for broadcasting replacements of operations by backward compatible substitutes
+                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-002/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                tcp-server-list:
+                  type: array
+                  minItems: 1
+                  items:
+                    type: object
+                    required:
+                      - protocol
+                      - address
+                      - port
+                    properties:
+                      protocol:
+                        type: string
+                        enum:
+                          - 'HTTP'
+                          - 'HTTPS'
+                        description: >
+                          'Protocol to be used for addressing the application that wants to register
+                          find or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
+                      address:
+                        type: object
+                        minProperties: 1
+                        maxProperties: 1
+                        additionalProperties: false
+                        properties:
+                          ip-address:
+                            type: object
+                            minProperties: 1
+                            additionalProperties: false
+                            properties:
+                              ipv-4-address:
+                                type: string
+                                pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+                                description: >
+                                  'IPv4 address of application that wants to register
+                                  update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
+                          domain-name:
+                            type: string
+                            pattern: '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$'
+                            description: >
+                              'Domain name of application that wants to register
+                              update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
+                      port:
+                        type: integer
+                        minimum: 0
+                        maximum: 65535
+                        description: >
+                          'TCP port of application that wants to register
+                          update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
+              example:
+                application-name: 'TypeApprovalRegister'
+                release-number: '2.0.1'
+                preceding-application-name: 'TypeApprovalRegister'
+                preceding-release-number: '1.0.0'
+                embedding-operation: '/v1/embed-yourself'
+                client-update-operation: '/v1/update-client'
+                operation-client-update-operation: '/v1/update-operation-client'
+                tcp-server-list:
+                  - protocol: 'HTTP'
+                    address:
+                      ip-address:
+                        ipv-4-address: '127.0.0.1'
+                    port: 3009
+                  - protocol: 'HTTPS'
+                    address:
+                      ip-address:
+                        ipv-4-address: '1.2.3.9'
+                    port: 3209
+      responses:
+        '204':
+          description: 'Application registered'
+          headers:
+            x-correlator:
+              schema:
+                type: string
+                example: '550e8400-e29b-11d4-a716-446655440000'
+              description: 'UUID for the service execution flow that allows to correlate requests and responses. Its value must be identical at the response compared with its corresponding request'
+            exec-time:
+              schema:
+                type: integer
+                example: 1100
+              description: 'Value written by the service provider, reporting the total elapsed time for the execution, including all the additional processing needed to retrieve the data from the backend service. Expressed in milliseconds'
+            backend-time:
+              schema:
+                type: integer
+                example: 850
+              description: 'Value written by the service provider, reporting the elapsed time for data retrieval from the backend (service invocation, database access…). Expressed in milliseconds'
+            life-cycle-state:
+              schema:
+                type: string
+                enum:
+                  - 'EXPERIMENTAL'
+                  - 'OPERATIONAL'
+                  - 'DEPRECATED'
+                  - 'OBSOLETE'
+                  - 'UNKNOWN'
+                  - 'NOT_YET_DEFINED'
+                example: 'EXPERIMENTAL'
+              description: >
+                'Life cycle state of the consumed service
+                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-s-is-001/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+        '400':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '403':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '404':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        '500':
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+        default:
+          $ref: '#/components/responses/responseForErroredServiceRequests'
+  /v2/register-application:
+    parameters:
+      - $ref: '#/components/parameters/user'
+      - $ref: '#/components/parameters/originator'
+      - $ref: '#/components/parameters/x-correlator'
+      - $ref: '#/components/parameters/trace-indicator'
+      - $ref: '#/components/parameters/customer-journey'
+    post:
+      operationId: registerApplication2
+      summary: 'Adds to the list of known applications'
+      tags:
+        - IndividualServices
+      description: >
+        'Registration service is not protected by operationKey.
+        Receiving a de-registration request shall be assumed after passing wait time to approve
+        from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-1-0-integer-p-000/integer-profile-1-0:integer-profile-pac/integer-profile-configuration/integer-value]'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
               oneOf:
                 - description: 'old-multiple-TcpServers-format, to be deleted with RO v3.0.0'
                   type: object
@@ -954,13 +1152,13 @@ paths:
                       pattern: '^([A-Z][a-z0-9]+){2,}$'
                       description: >
                         'Name of application that wants to register
-                        find or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
+                        find, but not at OldRelease or NewRelease, or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
                     release-number:
                       type: string
                       pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
                       description: >
                         'Release of application that wants to register
-                        find or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
+                        find, but not at OldRelease or NewRelease, or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
                     preceding-application-name:
                       type: string
                       minLength: 3
@@ -1057,13 +1255,13 @@ paths:
                       pattern: '^([A-Z][a-z0-9]+){2,}$'
                       description: >
                         'Name of application that wants to register
-                        find or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
+                        find, but not at OldRelease or NewRelease, or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
                     release-number:
                       type: string
                       pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
                       description: >
                         'Release of application that wants to register
-                        find or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
+                        find, but not at OldRelease or NewRelease, or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
                     preceding-application-name:
                       type: string
                       minLength: 3
@@ -1239,607 +1437,6 @@ paths:
           $ref: '#/components/responses/responseForErroredServiceRequests'
         default:
           $ref: '#/components/responses/responseForErroredServiceRequests'
-      callbacks:
-        TypeApprovalCausesRequestForEmbedding:
-          url: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
-            post:
-              parameters:
-                - $ref: '#/components/parameters/user'
-                - $ref: '#/components/parameters/originator'
-                - $ref: '#/components/parameters/x-correlator'
-                - $ref: '#/components/parameters/trace-indicator'
-                - $ref: '#/components/parameters/customer-journey'
-              requestBody:
-                required: true
-                content:
-                  application/json:
-                    schema:
-                      type: object
-                      required:
-                        - registry-office-application
-                        - registry-office-application-release-number
-                        - relay-server-replacement-operation
-                        - relay-operation-update-operation
-                        - deregistration-operation
-                        - registry-office-protocol
-                        - registry-office-address
-                        - registry-office-port
-                        - old-release-protocol
-                        - old-release-address
-                        - old-release-port
-                      properties:
-                        registry-office-application:
-                          type: string
-                          description: >
-                            'Own application name
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-name]'
-                        registry-office-application-release-number:
-                          type: string
-                          description: >
-                            'Own release number
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-number]'
-                        relay-server-replacement-operation:
-                          type: string
-                          description: >
-                            'Operation for requesting for broadcasting a new server address
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-s-is-010/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name]'
-                        relay-operation-update-operation:
-                          type: string
-                          description: >
-                            'Operation for requesting for broadcasting a backward compatible replacement of an operation
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-s-is-011/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name]'
-                        deregistration-operation:
-                          type: string
-                          description: >
-                            'Operation for deregistering from the application layer
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-s-is-002/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name]'
-                        registry-office-protocol:
-                          type: string
-                          description: >
-                            'Protocol for addressing the RegistryOffice application
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-s-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-protocol]'
-                        registry-office-address:
-                          type: object
-                          properties:
-                            ip-address:
-                              type: object
-                              properties:
-                                ipv-4-address:
-                                  type: string
-                                  description: >
-                                    'Own IP address
-                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-s-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address]'
-                            domain-name:
-                              type: string
-                              description: >
-                                  'Own domain name
-                                  from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-s-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/domain-name]'
-                        registry-office-port:
-                          type: integer
-                          description: >
-                            'Own TCP port
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-s-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-port]'
-                        old-release-protocol:
-                          type: string
-                          description: >
-                            'If application of the same name (but lower release number is already registered), Protocol for addressing the old release of the same application
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*-*-*-*-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]
-                            otherwise protocol for addressing the newly approved application.'
-                        old-release-address:
-                          type: object
-                          properties:
-                            ip-address:
-                              type: object
-                              properties:
-                                ipv-4-address:
-                                  type: string
-                                  description: >
-                                    'If application of the same name (but lower release number is already registered), IPv4 address of the OldRelease
-                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*-*-*-*-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]
-                                    otherwise IPv4 address of the newly approved application.'
-                            domain-name:
-                              type: string
-                              description: >
-                                'If application of the same name (but lower release number is already registered), domain name of the OldRelease
-                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*-*-*-*-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]
-                                otherwise domain-name of the newly approved application.'
-                        old-release-port:
-                          type: integer
-                          description: >
-                            'If application of the same name (but lower release number is already registered), TCP port of the OldRelease
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*-*-*-*-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]
-                            otherwise TCP port of the newly approved application.'
-                      example:
-                        registry-office-application: 'RegistryOffice'
-                        registry-office-application-release-number: '2.0.1'
-                        relay-server-replacement-operation: '/v1/relay-server-replacement'
-                        relay-operation-update-operation: '/v1/relay-operation-update'
-                        deregistration-operation: '/v1/deregister-application'
-                        registry-office-protocol: 'HTTP'
-                        registry-office-address:
-                          ip-address:
-                            ipv-4-address: '127.0.0.1'
-                        registry-office-port: 3024
-                        old-release-protocol: 'HTTP'
-                        old-release-address:
-                          ip-address:
-                            ipv-4-address: '1.1.3.1'
-                        old-release-port: 3001
-              responses:
-                '204':
-                  description: 'Will embed into the MBH SDN application layer'
-                  headers:
-                    x-correlator:
-                      schema:
-                        type: string
-                        example: '550e8400-e29b-11d4-a716-446655440000'
-                      description: 'UUID for the service execution flow that allows to correlate requests and responses. Its value must be identical at the response compared with its corresponding request'
-                    exec-time:
-                      schema:
-                        type: integer
-                        example: 1100
-                      description: 'Value written by the service provider, reporting the total elapsed time for the execution, including all the additional processing needed to retrieve the data from the backend service. Expressed in milliseconds'
-                    backend-time:
-                      schema:
-                        type: integer
-                        example: 850
-                      description: 'Value written by the service provider, reporting the elapsed time for data retrieval from the backend (service invocation, database access…). Expressed in milliseconds'
-                    life-cycle-state:
-                      schema:
-                        type: string
-                        enum:
-                          - 'EXPERIMENTAL'
-                          - 'OPERATIONAL'
-                          - 'DEPRECATED'
-                          - 'OBSOLETE'
-                          - 'UNKNOWN'
-                          - 'NOT_YET_DEFINED'
-                        example: 'EXPERIMENTAL'
-                      description: 'Life cycle state of the consumed service'
-                '400':
-                  $ref: '#/components/responses/responseForErroredServiceRequests'
-                '401':
-                  $ref: '#/components/responses/responseForErroredServiceRequests'
-                '403':
-                  $ref: '#/components/responses/responseForErroredServiceRequests'
-                '404':
-                  $ref: '#/components/responses/responseForErroredServiceRequests'
-                '500':
-                  $ref: '#/components/responses/responseForErroredServiceRequests'
-                default:
-                  $ref: '#/components/responses/responseForErroredServiceRequests'
-  /v2/register-application:
-    parameters:
-      - $ref: '#/components/parameters/user'
-      - $ref: '#/components/parameters/originator'
-      - $ref: '#/components/parameters/x-correlator'
-      - $ref: '#/components/parameters/trace-indicator'
-      - $ref: '#/components/parameters/customer-journey'
-    post:
-      operationId: registerApplication2
-      summary: 'Adds to the list of known applications'
-      tags:
-        - IndividualServices
-      description: >
-        'Registration service is not protected by operationKey.
-        Receiving a de-registration request shall be assumed after passing wait time to approve
-        from [/core-model-1-4:control-construct/profile-collection/profile=ro-2-1-0-integer-p-000/integer-profile-1-0:integer-profile-pac/integer-profile-configuration/integer-value]'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              oneOf:
-                - description: 'old-multiple-TcpServers-format, to be deleted with RO v3.0.0'
-                  type: object
-                  required:
-                    - application-name
-                    - release-number
-                    - embedding-operation
-                    - client-update-operation
-                    - operation-client-update-operation
-                    - tcp-server-list
-                  properties:
-                    application-name:
-                      type: string
-                      pattern: '^([A-Z][a-z0-9]+){2,}$'
-                      description: >
-                        'Name of application that wants to register
-                        find, but not at OldRelease or NewRelease, or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
-                    release-number:
-                      type: string
-                      pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
-                      description: >
-                        'Release of application that wants to register
-                        find, but not at OldRelease or NewRelease, or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
-                    preceding-application-name:
-                      type: string
-                      minLength: 3
-                      description: >
-                        'If provided, the new application will address /v1/bequeath-your-data-and-die at the preceding application after receiving /v1/embed-yourself
-                        update or create in LOADfile'
-                    preceding-release-number:
-                      type: string
-                      pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
-                      description: >
-                        'If provided, the new application will address /v1/bequeath-your-data-and-die at the preceding release after receiving /v1/embed-yourself
-                        update or create in LOADfile'
-                    embedding-operation:
-                      type: string
-                      minLength: 6
-                      description: >
-                        'Name of service for initiating embedding process
-                        update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
-                    client-update-operation:
-                      type: string
-                      minLength: 6
-                      description: >
-                        'Name of service for broadcasting server changes
-                        update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
-                    operation-client-update-operation:
-                      type: string
-                      minLength: 6
-                      description: >
-                        'Name of service for broadcasting replacements of operations by backward compatible substitutes
-                        update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-002/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
-                    tcp-server-list:
-                      type: array
-                      minItems: 1
-                      items:
-                        type: object
-                        required:
-                          - protocol
-                          - address
-                          - port
-                        properties:
-                          protocol:
-                            type: string
-                            enum:
-                              - 'HTTP'
-                              - 'HTTPS'
-                            description: >
-                              'Protocol to be used for addressing the application that wants to register
-                              find or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
-                          address:
-                            type: object
-                            minProperties: 1
-                            maxProperties: 1
-                            additionalProperties: false
-                            properties:
-                              ip-address:
-                                type: object
-                                minProperties: 1
-                                additionalProperties: false
-                                properties:
-                                  ipv-4-address:
-                                    type: string
-                                    pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
-                                    description: >
-                                      'IPv4 address of application that wants to register
-                                      update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
-                              domain-name:
-                                type: string
-                                pattern: '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$'
-                                description: >
-                                  'Domain name of application that wants to register
-                                  update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
-                          port:
-                            type: integer
-                            minimum: 0
-                            maximum: 65535
-                            description: >
-                              'TCP port of application that wants to register
-                              update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
-                - description: 'new-single-TcpServer-format'
-                  type: object
-                  required:
-                    - application-name
-                    - release-number
-                    - embedding-operation
-                    - dispose-remainders-operation
-                    - client-update-operation
-                    - operation-client-update-operation
-                    - tcp-server
-                  properties:
-                    application-name:
-                      type: string
-                      pattern: '^([A-Z][a-z0-9]+){2,}$'
-                      description: >
-                        'Name of application that wants to register
-                        find, but not at OldRelease or NewRelease, or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
-                    release-number:
-                      type: string
-                      pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
-                      description: >
-                        'Release of application that wants to register
-                        find, but not at OldRelease or NewRelease, or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
-                    preceding-application-name:
-                      type: string
-                      minLength: 3
-                      description: >
-                        'If provided, the new application will address /v1/bequeath-your-data-and-die at the preceding application after receiving /v1/embed-yourself
-                        update or create in LOADfile'
-                    preceding-release-number:
-                      type: string
-                      pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
-                      description: >
-                        'If provided, the new application will address /v1/bequeath-your-data-and-die at the preceding release after receiving /v1/embed-yourself
-                        update or create in LOADfile'
-                    embedding-operation:
-                      type: string
-                      minLength: 6
-                      description: >
-                        'Name of service for initiating embedding process
-                        update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
-                    dispose-remainders-operation:
-                      type: string
-                      minLength: 6
-                      description: >
-                        'Name of service for broadcasting de-registrations of applications
-                        update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-006/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
-                    client-update-operation:
-                      type: string
-                      minLength: 6
-                      description: >
-                        'Name of service for broadcasting server changes
-                        update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-001/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
-                    operation-client-update-operation:
-                      type: string
-                      minLength: 6
-                      description: >
-                        'Name of service for broadcasting replacements of operations by backward compatible substitutes
-                        update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-002/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
-                    tcp-server:
-                      type: object
-                      required:
-                        - protocol
-                        - address
-                        - port
-                      properties:
-                        protocol:
-                          type: string
-                          enum:
-                            - 'HTTP'
-                            - 'HTTPS'
-                          description: >
-                            'Protocol to be used for addressing the application that wants to register
-                            find or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
-                        address:
-                          type: object
-                          minProperties: 1
-                          maxProperties: 1
-                          additionalProperties: false
-                          properties:
-                            ip-address:
-                              type: object
-                              minProperties: 1
-                              additionalProperties: false
-                              properties:
-                                ipv-4-address:
-                                  type: string
-                                  pattern: '^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
-                                  description: >
-                                    'IPv4 address of application that wants to register
-                                    update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
-                            domain-name:
-                              type: string
-                              pattern: '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$'
-                              description: >
-                                'Domain name of application that wants to register
-                                update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
-                        port:
-                          type: integer
-                          minimum: 0
-                          maximum: 65535
-                          description: >
-                            'TCP port of application that wants to register
-                            update or create [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
-            examples:
-              old-multiple-TcpServers-format:
-                value:
-                  application-name: 'TypeApprovalRegister'
-                  release-number: '2.0.1'
-                  preceding-application-name: 'TypeApprovalRegister'
-                  preceding-release-number: '1.0.0'
-                  embedding-operation: '/v1/embed-yourself'
-                  client-update-operation: '/v1/update-client'
-                  operation-client-update-operation: '/v1/update-operation-client'
-                  tcp-server-list:
-                    - protocol: 'HTTP'
-                      address:
-                        ip-address:
-                          ipv-4-address: '127.0.0.1'
-                      port: 3009
-              new-single-TcpServer-format:
-                value:
-                  application-name: 'TypeApprovalRegister'
-                  release-number: '2.0.1'
-                  preceding-application-name: 'TypeApprovalRegister'
-                  preceding-release-number: '1.0.0'
-                  embedding-operation: '/v1/embed-yourself'
-                  dispose-remainders-operation: '/v1/dispose-remainders-of-deregistered-application'
-                  client-update-operation: '/v1/update-client'
-                  operation-client-update-operation: '/v1/update-operation-client'
-                  tcp-server:
-                    protocol: 'HTTP'
-                    address:
-                      ip-address:
-                        ipv-4-address: '127.0.0.1'
-                    port: 3009
-      responses:
-        '204':
-          description: 'Application registered'
-          headers:
-            x-correlator:
-              schema:
-                type: string
-                example: '550e8400-e29b-11d4-a716-446655440000'
-              description: 'UUID for the service execution flow that allows to correlate requests and responses. Its value must be identical at the response compared with its corresponding request'
-            exec-time:
-              schema:
-                type: integer
-                example: 1100
-              description: 'Value written by the service provider, reporting the total elapsed time for the execution, including all the additional processing needed to retrieve the data from the backend service. Expressed in milliseconds'
-            backend-time:
-              schema:
-                type: integer
-                example: 850
-              description: 'Value written by the service provider, reporting the elapsed time for data retrieval from the backend (service invocation, database access…). Expressed in milliseconds'
-            life-cycle-state:
-              schema:
-                type: string
-                enum:
-                  - 'EXPERIMENTAL'
-                  - 'OPERATIONAL'
-                  - 'DEPRECATED'
-                  - 'OBSOLETE'
-                  - 'UNKNOWN'
-                  - 'NOT_YET_DEFINED'
-                example: 'EXPERIMENTAL'
-              description: >
-                'Life cycle state of the consumed service
-                find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-s-is-001/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
-        '400':
-          $ref: '#/components/responses/responseForErroredServiceRequests'
-        '403':
-          $ref: '#/components/responses/responseForErroredServiceRequests'
-        '404':
-          $ref: '#/components/responses/responseForErroredServiceRequests'
-        '500':
-          $ref: '#/components/responses/responseForErroredServiceRequests'
-        default:
-          $ref: '#/components/responses/responseForErroredServiceRequests'
-      callbacks:
-        TypeApprovalCausesRequestForEmbedding:
-          url: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
-            post:
-              parameters:
-                - $ref: '#/components/parameters/user'
-                - $ref: '#/components/parameters/originator'
-                - $ref: '#/components/parameters/x-correlator'
-                - $ref: '#/components/parameters/trace-indicator'
-                - $ref: '#/components/parameters/customer-journey'
-              requestBody:
-                required: true
-                content:
-                  application/json:
-                    schema:
-                      type: object
-                      required:
-                        - registry-office-application
-                        - registry-office-application-release-number
-                        - relay-server-replacement-operation
-                        - relay-operation-update-operation
-                        - deregistration-operation
-                        - registry-office-protocol
-                        - registry-office-address
-                        - registry-office-port
-                      properties:
-                        registry-office-application:
-                          type: string
-                          description: >
-                            'Own application name
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-name]'
-                        registry-office-application-release-number:
-                          type: string
-                          description: >
-                            'Own release number
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-number]'
-                        relay-server-replacement-operation:
-                          type: string
-                          description: >
-                            'Operation for requesting for broadcasting a new server address
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-s-is-010/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name]'
-                        relay-operation-update-operation:
-                          type: string
-                          description: >
-                            'Operation for requesting for broadcasting a backward compatible replacement of an operation
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-s-is-011/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name]'
-                        deregistration-operation:
-                          type: string
-                          description: >
-                            'Operation for deregistering from the application layer
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-s-is-002/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name]'
-                        registry-office-protocol:
-                          type: string
-                          description: >
-                            'Protocol for addressing the RegistryOffice application
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-s-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-protocol]'
-                        registry-office-address:
-                          type: object
-                          properties:
-                            ip-address:
-                              type: object
-                              properties:
-                                ipv-4-address:
-                                  type: string
-                                  description: >
-                                    'Own IP address
-                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-s-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address]'
-                            domain-name:
-                              type: string
-                              description: >
-                                  'Own domain name
-                                  from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-s-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/domain-name]'
-                        registry-office-port:
-                          type: integer
-                          description: >
-                            'Own TCP port
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-s-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-port]'
-                      example:
-                        registry-office-application: 'RegistryOffice'
-                        registry-office-application-release-number: '2.1.0'
-                        relay-server-replacement-operation: '/v1/relay-server-replacement'
-                        relay-operation-update-operation: '/v1/relay-operation-update'
-                        deregistration-operation: '/v1/deregister-application'
-                        registry-office-protocol: 'HTTP'
-                        registry-office-address:
-                          ip-address:
-                            ipv-4-address: '1.1.3.17'
-                        registry-office-port: 3017
-              responses:
-                '204':
-                  description: 'Will embed into the MBH SDN application layer'
-                  headers:
-                    x-correlator:
-                      schema:
-                        type: string
-                        example: '550e8400-e29b-11d4-a716-446655440000'
-                      description: 'UUID for the service execution flow that allows to correlate requests and responses. Its value must be identical at the response compared with its corresponding request'
-                    exec-time:
-                      schema:
-                        type: integer
-                        example: 1100
-                      description: 'Value written by the service provider, reporting the total elapsed time for the execution, including all the additional processing needed to retrieve the data from the backend service. Expressed in milliseconds'
-                    backend-time:
-                      schema:
-                        type: integer
-                        example: 850
-                      description: 'Value written by the service provider, reporting the elapsed time for data retrieval from the backend (service invocation, database access…). Expressed in milliseconds'
-                    life-cycle-state:
-                      schema:
-                        type: string
-                        enum:
-                          - 'EXPERIMENTAL'
-                          - 'OPERATIONAL'
-                          - 'DEPRECATED'
-                          - 'OBSOLETE'
-                          - 'UNKNOWN'
-                          - 'NOT_YET_DEFINED'
-                        example: 'EXPERIMENTAL'
-                      description: 'Life cycle state of the consumed service'
-                '400':
-                  $ref: '#/components/responses/responseForErroredServiceRequests'
-                '401':
-                  $ref: '#/components/responses/responseForErroredServiceRequests'
-                '403':
-                  $ref: '#/components/responses/responseForErroredServiceRequests'
-                '404':
-                  $ref: '#/components/responses/responseForErroredServiceRequests'
-                '500':
-                  $ref: '#/components/responses/responseForErroredServiceRequests'
-                default:
-                  $ref: '#/components/responses/responseForErroredServiceRequests'
   /v1/deregister-application:
     parameters:
       - $ref: '#/components/parameters/user'
@@ -2013,42 +1610,75 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              required:
-                - application-name
-                - release-number
-                - approval-status
-                - response-receiver-operation
-              properties:
-                application-name:
-                  type: string
-                  description: 'Name of application with updated approval status'
-                release-number:
-                  type: string
-                  pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
-                  description: 'Release of application with updated approval status'
-                approval-status:
-                  type: string
-                  enum:
-                    - 'REGISTERED'
-                    - 'APPROVED'
-                    - 'BARRED'
-                    - 'NOT_YET_DEFINED'
-                  description: 'Updated approval status'
-                response-receiver-operation:
-                  type: string
-                  minLength: 6
-                  description: >
-                    'Name of the operation that shall be addressed for documenting the embedding status
-                    update [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-tar-2-0-1-007/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
-              example:
-                application-name: 'BadApplication'
-                release-number: '1.0.0'
-                approval-status: 'BARRED'
-                response-receiver-operation: '/v1/document-embedding-status'
+              oneOf:
+                - description: 'requestBody according to v2.1'
+                  type: object
+                  required:
+                    - application-name
+                    - release-number
+                    - approval-status
+                    - response-receiver-operation
+                  properties:
+                    application-name:
+                      type: string
+                      description: 'Name of application with updated approval status'
+                    release-number:
+                      type: string
+                      pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
+                      description: 'Release of application with updated approval status'
+                    approval-status:
+                      type: string
+                      enum:
+                        - 'REGISTERED'
+                        - 'APPROVED'
+                        - 'BARRED'
+                        - 'NOT_YET_DEFINED'
+                      description: 'Updated approval status'
+                    response-receiver-operation:
+                      type: string
+                      minLength: 6
+                      description: >
+                        'Name of the operation that shall be addressed for documenting the embedding status
+                        update [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-tar-2-0-1-007/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
+                - description: 'requestBody according to v2.0; DEPRECATED; to be deleted with RO v3.0.0'
+                  type: object
+                  required:
+                    - application-name
+                    - release-number
+                    - approval-status
+                  properties:
+                    application-name:
+                      type: string
+                      description: 'Name of application with updated approval status'
+                    release-number:
+                      type: string
+                      pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
+                      description: 'Release of application with updated approval status'
+                    approval-status:
+                      type: string
+                      enum:
+                        - 'REGISTERED'
+                        - 'APPROVED'
+                        - 'BARRED'
+                        - 'NOT_YET_DEFINED'
+                      description: 'Updated approval status'
+            examples:
+              requestBody-according-to-v2.1:
+                value:
+                  application-name: 'BadApplication'
+                  release-number: '1.0.0'
+                  approval-status: 'BARRED'
+                  response-receiver-operation: '/v1/document-embedding-status'
+              requestBody-according-to-v2.0:
+                value:
+                  application-name: 'BadApplication'
+                  release-number: '1.0.0'
+                  approval-status: 'BARRED'
       responses:
         '200':
-          description: 'Approval status updated'
+          description: >
+            'Approval status updated
+            ResponseCode 200 is to be sent, if the requestBody is according to v2.1 or later'
           content:
             application/json:
               schema:
@@ -2091,6 +1721,43 @@ paths:
               description: >
                 'Life cycle state of the consumed service
                 find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-s-is-003/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
+        '204':
+          description: >
+            'Approval status updated
+            DEPRECATED
+            ResponseCode 204 is just for assuring backward compatibility during the upgrade process of the TAC applications
+            It shall be deleted with RO v3.0.0
+            Is is to be sent, if the requestBody is according to v2.0'
+          headers:
+            x-correlator:
+              schema:
+                type: string
+                example: '550e8400-e29b-11d4-a716-446655440000'
+              description: 'UUID for the service execution flow that allows to correlate requests and responses. Its value must be identical at the response compared with its corresponding request'
+            exec-time:
+              schema:
+                type: integer
+                example: 1100
+              description: 'Value written by the service provider, reporting the total elapsed time for the execution, including all the additional processing needed to retrieve the data from the backend service. Expressed in milliseconds'
+            backend-time:
+              schema:
+                type: integer
+                example: 850
+              description: 'Value written by the service provider, reporting the elapsed time for data retrieval from the backend (service invocation, database access…). Expressed in milliseconds'
+            life-cycle-state:
+              schema:
+                type: string
+                enum:
+                  - 'EXPERIMENTAL'
+                  - 'OPERATIONAL'
+                  - 'DEPRECATED'
+                  - 'OBSOLETE'
+                  - 'UNKNOWN'
+                  - 'NOT_YET_DEFINED'
+                example: 'EXPERIMENTAL'
+              description: >
+                  'Life cycle state of the consumed service
+                  find in [/core-model-1-4:control-construct/logical-termination-point=ro-2-0-1-op-s-is-003/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-configuration/life-cycle-state]'
         '400':
           $ref: '#/components/responses/responseForErroredServiceRequests'
         '401':
@@ -2484,7 +2151,7 @@ paths:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
                 default:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
-          Aa: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-aa-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-eatl-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-eatl-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-eatl-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-aa-2-0-1-003/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
+          Aa: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-aa-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-aa-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-aa-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-aa-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-aa-2-0-1-003/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
             post:
               parameters:
                 - $ref: '#/components/parameters/user'
@@ -2690,8 +2357,10 @@ paths:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
                 default:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
-        ApprovingApplicationCausesPreparingTheEmbedding:
-          CreateLinkToGetOldRelease: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-alt-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-alt-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-alt-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-alt-2-0-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-is-alt-2-0-1-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
+        ApprovalNotification:
+          url: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-003/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
+            description: >
+              'To be activated, if received /v1/regard-updated-approval-status::requestBody::approval-status == APPROVED'
             post:
               parameters:
                 - $ref: '#/components/parameters/user'
@@ -2705,44 +2374,60 @@ paths:
                   application/json:
                     schema:
                       type: object
+                      required:
+                        - application-name
+                        - release-number
+                        - protocol
+                        - address
+                        - port
                       properties:
-                        serving-application-name:
+                        application-name:
                           type: string
                           description: >
-                            'Name of application that holds the OperationServer of the link, which is to be complemented
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]=={$request.body#application-name}'
-                        serving-application-release-number:
+                            'Name of application that is approved
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
+                        release-number:
                           type: string
                           description: >
-                            'Release of application that holds the OperationServer of the link, which is to be complemented
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]=={$request.body#release-number}'
-                        operation-name:
+                            'Release of application that is approved
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
+                        protocol:
                           type: string
                           description: >
-                            'Name of the operation, which is made available via the link
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-008/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]'
-                        consuming-application-name:
-                          type: string
+                            'Protocol to be used for addressing the application that is approved
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
+                        address:
+                          type: object
+                          properties:
+                            ip-address:
+                              type: object
+                              properties:
+                                ipv-4-address:
+                                  type: string
+                                  description: >
+                                    'IPv4 address of application that is approved
+                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
+                            domain-name:
+                              type: string
+                              description: >
+                                'Domain name of application that is approved
+                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
+                        port:
+                          type: integer
                           description: >
-                            'Name of application that holds the OperationClient, which shall be connected via the link
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-name]'
-                        consuming-application-release-number:
-                          type: string
-                          description: >
-                            'Release of application that holds the OperationClient, which shall be connected via the link
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-number]'
+                            'TCP port of application that is approved
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
+                      example:
+                        application-name: 'CurrentController'
+                        release-number: '1.0.0'
+                        protocol: 'HTTP'
+                        address:
+                          ip-address:
+                            ipv-4-address: '1.1.4.1'
+                        port: 4001
               responses:
-                '200':
-                  description: 'OperationClient connected with OperationServer'
-                  content:
-                    application/json:
-                      schema:
-                        type: object
-                        properties:
-                          client-successfully-added:
-                            type: boolean
-                          reason-of-failure:
-                            type: string
+                '204':
+                  description: 'Application will be regarded'
                   headers:
                     x-correlator:
                       schema:
@@ -2783,8 +2468,8 @@ paths:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
                 default:
                   $ref: '#/components/responses/responseForErroredServiceRequests'
+        ApprovingApplicationCausesPreparingTheEmbedding:
           RequestForOldRelease: #for [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]=={$request.body#application-name}: [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-008/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
-            description: 'This request is initiated by receiving /v1/update-operation-key of {$request.body#application-name}://v1/inform-about-preceding-release'
             post:
               parameters:
                 - $ref: '#/components/parameters/user'
@@ -3345,16 +3030,25 @@ paths:
                   application/json:
                     schema:
                       type: object
+                      required:
+                        - registry-office-application
+                        - registry-office-application-release-number
+                        - relay-server-replacement-operation
+                        - relay-operation-update-operation
+                        - deregistration-operation
+                        - registry-office-protocol
+                        - registry-office-address
+                        - registry-office-port
                       properties:
                         registry-office-application:
                           type: string
                           description: >
-                            'Own application name
+                            'Name of RegistryOffice application
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-name]'
                         registry-office-application-release-number:
                           type: string
                           description: >
-                            'Own release number
+                            'Release of RegistryOffice application
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-number]'
                         relay-server-replacement-operation:
                           type: string
@@ -3374,29 +3068,73 @@ paths:
                         registry-office-protocol:
                           type: string
                           description: >
-                            'Protocol for addressing the RegistryOffice application
+                            'Protocol for addressing RegistryOffice application
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-s-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-protocol]'
                         registry-office-address:
                           type: object
+                          minProperties: 1
+                          maxProperties: 1
+                          additionalProperties: false
                           properties:
                             ip-address:
                               type: object
+                              minProperties: 1
+                              additionalProperties: false
                               properties:
                                 ipv-4-address:
                                   type: string
                                   description: >
-                                    'Own IP address
+                                    'IPv4 address of RegistryOffice application
                                     from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-s-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/ipv-4-address]'
                             domain-name:
                               type: string
                               description: >
-                                  'Own domain name
-                                  from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-s-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/domain-name]'
+                                'Domain name of RegistryOffice application
+                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-s-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-address/domain-name]'
                         registry-office-port:
                           type: integer
                           description: >
-                            'Own TCP port
+                            'Port of RegistryOffice application
                             from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-s-000/layer-protocol=0/tcp-server-interface-1-0:tcp-server-interface-pac/tcp-server-interface-configuration/local-port]'
+                        old-release-protocol:
+                          type: string
+                          description: >
+                            'Protocol for addressing the currently running old release of the same application
+                            for [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*-*-*-*-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]=={$RequestForOldRelease.responses.body#application-name}
+                                AND [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*-*-*-*-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]=={$RequestForOldRelease.responses.body#release-number}
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*-*-*-*-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
+                        old-release-address:
+                          type: object
+                          minProperties: 1
+                          maxProperties: 1
+                          additionalProperties: false
+                          properties:
+                            ip-address:
+                              type: object
+                              minProperties: 1
+                              additionalProperties: false
+                              properties:
+                                ipv-4-address:
+                                  type: string
+                                  description: >
+                                    'IPv4 address of currently running old release of the same application
+                                    for [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*-*-*-*-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]=={$RequestForOldRelease.responses.body#application-name}
+                                        AND [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*-*-*-*-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]=={$RequestForOldRelease.responses.body#release-number}
+                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*-*-*-*-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
+                            domain-name:
+                              type: string
+                              description: >
+                                'Domain name of currently running old release of the same application
+                                for [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*-*-*-*-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]=={$RequestForOldRelease.responses.body#application-name}
+                                    AND [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*-*-*-*-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]=={$RequestForOldRelease.responses.body#release-number}
+                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*-*-*-*-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
+                        old-release-port:
+                          type: integer
+                          description: >
+                            'Port of currently running old release of the same application
+                            for [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*-*-*-*-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]=={$RequestForOldRelease.responses.body#application-name}
+                                AND [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*-*-*-*-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]=={$RequestForOldRelease.responses.body#release-number}
+                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*-*-*-*-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
               responses:
                 '204':
                   description: 'Will embed into the MBH SDN application layer'
@@ -4621,121 +4359,6 @@ paths:
           $ref: '#/components/responses/responseForErroredServiceRequests'
         default:
           $ref: '#/components/responses/responseForErroredServiceRequests'
-      callbacks:
-        ApprovalNotification:
-          url: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-c-im-*-*-*-*-003/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
-            description: >
-              'DEPRECATED
-              Callback shall be deleted with RO v3.0.0
-              Starting from RO v2.1.0, sending notifications has been substituded by a concrete sequence for addressing the TAC components
-              To be activated, if received /v1/regard-updated-approval-status::requestBody::approval-status == APPROVED'
-            post:
-              parameters:
-                - $ref: '#/components/parameters/user'
-                - $ref: '#/components/parameters/originator'
-                - $ref: '#/components/parameters/x-correlator'
-                - $ref: '#/components/parameters/trace-indicator'
-                - $ref: '#/components/parameters/customer-journey'
-              requestBody:
-                required: true
-                content:
-                  application/json:
-                    schema:
-                      type: object
-                      required:
-                        - application-name
-                        - release-number
-                        - protocol
-                        - address
-                        - port
-                      properties:
-                        application-name:
-                          type: string
-                          description: >
-                            'Name of application that is approved
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]'
-                        release-number:
-                          type: string
-                          description: >
-                            'Release of application that is approved
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]'
-                        protocol:
-                          type: string
-                          description: >
-                            'Protocol to be used for addressing the application that is approved
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]'
-                        address:
-                          type: object
-                          properties:
-                            ip-address:
-                              type: object
-                              properties:
-                                ipv-4-address:
-                                  type: string
-                                  description: >
-                                    'IPv4 address of application that is approved
-                                    from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]'
-                            domain-name:
-                              type: string
-                              description: >
-                                'Domain name of application that is approved
-                                from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
-                        port:
-                          type: integer
-                          description: >
-                            'TCP port of application that is approved
-                            from [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-*/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port]'
-                      example:
-                        application-name: 'CurrentController'
-                        release-number: '1.0.0'
-                        protocol: 'HTTP'
-                        address:
-                          ip-address:
-                            ipv-4-address: '1.1.4.1'
-                        port: 4001
-              responses:
-                '204':
-                  description: 'Application will be regarded'
-                  headers:
-                    x-correlator:
-                      schema:
-                        type: string
-                        example: '550e8400-e29b-11d4-a716-446655440000'
-                      description: 'UUID for the service execution flow that allows to correlate requests and responses. Its value must be identical at the response compared with its corresponding request'
-                    exec-time:
-                      schema:
-                        type: integer
-                        example: 1100
-                      description: 'Value written by the service provider, reporting the total elapsed time for the execution, including all the additional processing needed to retrieve the data from the backend service. Expressed in milliseconds'
-                    backend-time:
-                      schema:
-                        type: integer
-                        example: 850
-                      description: 'Value written by the service provider, reporting the elapsed time for data retrieval from the backend (service invocation, database access…). Expressed in milliseconds'
-                    life-cycle-state:
-                      schema:
-                        type: string
-                        enum:
-                          - 'EXPERIMENTAL'
-                          - 'OPERATIONAL'
-                          - 'DEPRECATED'
-                          - 'OBSOLETE'
-                          - 'UNKNOWN'
-                          - 'NOT_YET_DEFINED'
-                        example: 'EXPERIMENTAL'
-                      description: 'Life cycle state of the consumed service'
-                '400':
-                  $ref: '#/components/responses/responseForErroredServiceRequests'
-                '401':
-                  $ref: '#/components/responses/responseForErroredServiceRequests'
-                '403':
-                  $ref: '#/components/responses/responseForErroredServiceRequests'
-                '404':
-                  $ref: '#/components/responses/responseForErroredServiceRequests'
-                '500':
-                  $ref: '#/components/responses/responseForErroredServiceRequests'
-                default:
-                  $ref: '#/components/responses/responseForErroredServiceRequests'
   /v1/notify-withdrawn-approvals:
     description: >
       'DEPRECATED
@@ -6029,6 +5652,16 @@ paths:
                   application/json:
                     schema:
                       type: object
+                      required:
+                        - application-name
+                        - release-number
+                        - embedding-operation
+                        - client-update-operation
+                        - operation-client-update-operation
+                        - dispose-remainders-operation
+                        - preceding-release-operation
+                        - subsequent-release-operation
+                        - tcp-server
                       properties:
                         application-name:
                           type: string
@@ -7178,6 +6811,12 @@ paths:
                   application/json:
                     schema:
                       type: object
+                      required:
+                        - Authorization
+                        - application-name
+                        - release-number
+                        - operation-name
+                        - method
                       properties:
                         Authorization:
                           type: string
@@ -7212,16 +6851,28 @@ paths:
                   content:
                     application/json:
                       schema:
-                        type: object
-                        properties:
-                          basic-auth-request-is-approved:
-                            type: boolean
-                            description: 'If true, BasicAuth request can be executed'
-                          reason-of-objection:
-                            type: string
-                            description: >
-                              'if AUTHORIZATION_CODE_UNKNOWN BasicAuth request to be aborted and 401 to be sent
-                              else BasicAuth request to be aborted and 403 to be sent'
+                        oneOf:
+                          - description: 'AdministratorAdministration is responding'
+                            type: object
+                            properties:
+                              oam-request-is-approved:
+                                type: boolean
+                              reason-of-objection:
+                                type: string
+                                description: >
+                                  'This attribute to be represented, if response::oam-request-is-approved==false.
+                                  Reasons to be checked and indicated according to the sequence defined in the enumeration.'
+                          - description: 'AccessAdministration is responding'
+                            type: object
+                            properties:
+                              basic-auth-request-is-approved:
+                                type: boolean
+                                description: 'If true, BasicAuth request can be executed'
+                              reason-of-objection:
+                                type: string
+                                description: >
+                                  'if AUTHORIZATION_CODE_UNKNOWN BasicAuth request to be aborted and 401 to be sent
+                                  else BasicAuth request to be aborted and 403 to be sent'
                   headers:
                     x-correlator:
                       schema:
@@ -8868,6 +8519,12 @@ paths:
                   application/json:
                     schema:
                       type: object
+                      required:
+                        - Authorization
+                        - application-name
+                        - release-number
+                        - operation-name
+                        - method
                       properties:
                         Authorization:
                           type: string
@@ -9042,8 +8699,6 @@ paths:
       summary: 'Provides name and number of the preceding release'
       tags:
         - BasicServices
-      security:
-        - apiKeyAuth: []
       responses:
         '200':
           description: 'Name and number of the preceding release provided'
@@ -9175,7 +8830,7 @@ paths:
                       description: >
                         'Domain name to be used during the bequeath-your-data-and-die process
                         update [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-tcp-c-nr-1-0-0-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name]'
-                future-port:
+                port:
                   type: integer
                   minimum: 0
                   maximum: 65535
@@ -11331,7 +10986,7 @@ paths:
               properties:
                 action-profile-1-0:consequent-operation-reference:
                   type: string
-                  example: '/core-model-1-4:control-construct/logical-termination-point=xx-1-0-0-op-s-bs-002/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name'
+                  example: '/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-s-bs-002/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name'
       responses:
         '204':
           description: 'Reference on the consequent operation configured'
@@ -11560,7 +11215,7 @@ paths:
                         type: string
                 example:
                   response-profile-1-0:value:
-                    value-reference: '/core-model-1-4:control-construct/logical-termination-point=xx-1-0-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-name'
+                    value-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-name'
         '400':
           $ref: '#/components/responses/responseForErroredOamRequests'
         '401':
@@ -11601,7 +11256,7 @@ paths:
                       type: string
             example:
               response-profile-1-0:value:
-                value-reference: '/core-model-1-4:control-construct/logical-termination-point=xx-1-0-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-name'
+                value-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-name'
       responses:
         '204':
           description: 'Request path configured'

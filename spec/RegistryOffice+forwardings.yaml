@@ -1,6 +1,25 @@
 forwardings:
 
   - forwarding-name: PromptForRegisteringCausesRegistrationRequest
+    uuid: ro-2-1-0-op-fc-bm-999
+    forwarding-type: InvariantProcessSnippet
+    management-requests:
+      operation-client-update:
+        - server-name: /v1/register-yourself
+          uuid: ro-2-1-0-op-s-bm-000
+      fc-port-update:
+        - server-name: /v1/register-yourself
+          uuid: ro-2-1-0-op-s-bm-000
+      fc-port-deletion:
+      operation-client-deletion:
+    initiating-requests:
+      - server-name: /v1/register-yourself
+        uuid: ro-2-1-0-op-s-bm-000
+    consequent-requests:
+      - client-name: RegistryOffice://v1/register-application
+        uuid: ro-2-1-0-op-c-bm-ro-2-0-1-000
+
+  - forwarding-name: PromptForRegisteringCausesRegistrationRequest2
     uuid: ro-2-1-0-op-fc-bm-000
     forwarding-type: InvariantProcessSnippet
     management-requests:
@@ -71,6 +90,12 @@ forwardings:
         uuid: ro-2-1-0-op-s-bm-011
       - server-name: /v1/inquire-basic-auth-approvals
         uuid: ro-2-1-0-op-s-bm-012
+      - server-name: /v1/dispose-remainders-of-deregistered-application
+        uuid: ro-2-1-0-op-s-bm-013
+      - server-name: /v1/inform-about-preceding-release
+        uuid: ro-2-1-0-op-s-bm-014
+      - server-name: /v1/update-client-of-subsequent-release
+        uuid: ro-2-1-0-op-s-bm-015
       - server-name: /v1/bequeath-your-data-and-die
         uuid: ro-2-1-0-op-s-im-000
       - server-name: /v1/start-application-in-generic-representation
@@ -166,25 +191,10 @@ forwardings:
         uuid: ro-2-1-0-op-s-im-000
     consequent-requests:
       - client-name: NewRelease://v1/inquire-application-type-approvals
-        uuid: ro-2-1-0-op-c-im-nr-2-1-0-000
-
-  - forwarding-name: PromptForBequeathingDataCausesNewApplicationBeingRequestedToDocumentSubscriptionsForDeregistrationNotifications
-    uuid: ro-2-1-0-op-fc-im-111
-    forwarding-type: InvariantProcessSnippet
-    management-requests:
-      operation-client-update:
-      fc-port-update:
-      fc-port-deletion:
-      operation-client-deletion:
-    initiating-requests:
-      - server-name: /v1/bequeath-your-data-and-die
-        uuid: ro-2-1-0-op-s-im-000
-    consequent-requests:
-      - client-name: NewRelease://v1/notify-deregistrations
-        uuid: ro-2-1-0-op-c-im-nr-2-1-0-001
+        uuid: ro-2-1-0-op-c-im-nr-2-1-0-002
 
   - forwarding-name: PromptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredApplications
-    uuid: ro-2-1-0-op-fc-im-114
+    uuid: ro-2-1-0-op-fc-im-112
     forwarding-type: InvariantProcessSnippet
     management-requests:
       operation-client-update:
@@ -197,6 +207,21 @@ forwardings:
     consequent-requests:
       - client-name: NewRelease://v2/register-application
         uuid: ro-2-1-0-op-c-im-nr-2-1-0-005
+
+  - forwarding-name: PromptForBequeathingDataCausesTransferOfListOfSubscriptionsForEmbeddingStatusChanges
+    uuid: ro-2-1-0-op-fc-im-113
+    forwarding-type: InvariantProcessSnippet
+    management-requests:
+      operation-client-update:
+      fc-port-update:
+      fc-port-deletion:
+      operation-client-deletion:
+    initiating-requests:
+      - server-name: /v1/bequeath-your-data-and-die
+        uuid: ro-2-1-0-op-s-im-000
+    consequent-requests:
+      - client-name: NewRelease://v1/notify-embedding-status-changes
+        uuid: ro-2-1-0-op-c-im-nr-2-1-0-006
 
   - forwarding-name: PromptForBequeathingDataCausesTARbeingRequestedToRedirectInfoAboutApprovalsToNewApplication
     uuid: ro-2-1-0-op-fc-im-115
@@ -301,6 +326,8 @@ forwardings:
         uuid: ro-2-1-0-op-s-bm-011
       - server-name: /v1/inquire-basic-auth-approvals
         uuid: ro-2-1-0-op-s-bm-012
+      - server-name: /v1/update-client-of-subsequent-release
+        uuid: ro-2-1-0-op-s-bm-015
       - server-name: /v1/bequeath-your-data-and-die
         uuid: ro-2-1-0-op-s-im-000
       - server-name: /v1/register-application
@@ -317,6 +344,8 @@ forwardings:
         uuid: ro-2-1-0-op-s-is-010
       - server-name: /v2/register-application
         uuid: ro-2-1-0-op-s-is-012
+      - server-name: /v1/notify-embedding-status-changes
+        uuid: ro-2-1-0-op-s-is-013
     consequent-requests:
       - client-name: ApplicationLayerTopology://v1/update-ltp
         uuid: ro-2-1-0-op-c-bm-alt-2-0-1-001
@@ -336,6 +365,8 @@ forwardings:
     initiating-requests:
       - server-name: /v1/dispose-remainders-of-deregistered-application
         uuid: ro-2-1-0-op-s-bm-013
+      - server-name: /v1/deregister-application
+        uuid: ro-2-1-0-op-s-is-002
     consequent-requests:
       - client-name: ApplicationLayerTopology://v1/delete-ltp-and-dependents
         uuid: ro-2-1-0-op-c-bm-alt-2-0-1-002
@@ -513,6 +544,29 @@ forwardings:
       - client-name: TypeApprovalRegister://v1/regard-application
         uuid: ro-2-1-0-op-c-im-tar-2-0-1-003
 
+  - forwarding-name: EmbeddingStatusNotification
+    uuid: ro-2-1-0-op-fc-is-010
+    forwarding-type: Subscription
+    management-requests:
+      operation-client-update:
+        - server-name: /v1/notify-embedding-status-changes
+          uuid: ro-2-1-0-op-s-is-013
+      fc-port-update:
+        - server-name: /v1/notify-embedding-status-changes
+          uuid: ro-2-1-0-op-s-is-013
+      fc-port-deletion:
+        - server-name: /v1/end-subscription
+          uuid: ro-2-1-0-op-s-bm-004
+      operation-client-deletion:
+        - server-name: /v1/dispose-remainders-of-deregistered-application
+          uuid: ro-2-1-0-op-s-bm-013
+    initiating-requests:
+      - server-name: /v1/regard-updated-approval-status
+        uuid: ro-2-1-0-op-s-is-003
+    consequent-requests:
+      - client-name: TypeApprovalRegister://v1/document-embedding-status
+        uuid: ro-2-1-0-op-c-im-tar-2-0-1-007
+
   - forwarding-name: DeregistrationNotification
     # Deprecated, to be deleted with RO v3.0.0
     uuid: ro-2-1-0-op-fc-is-006
@@ -528,6 +582,8 @@ forwardings:
         - server-name: /v1/end-subscription
           uuid: ro-2-1-0-op-s-bm-004
       operation-client-deletion:
+        - server-name: /v1/dispose-remainders-of-deregistered-application
+          uuid: ro-2-1-0-op-s-bm-013
     initiating-requests:
       - server-name: /v1/deregister-application
         uuid: ro-2-1-0-op-s-is-002
@@ -545,77 +601,6 @@ forwardings:
       - client-name: OperationKeyManagement://v1/disregard-application
         uuid: ro-2-1-0-op-c-im-okm-2-0-1-004
 
-  - forwarding-name: TypeApprovalCausesRequestForEmbedding
-    uuid: ro-2-1-0-op-fc-is-000
-    forwarding-type: ProcessSnippet
-    management-requests:
-      operation-client-update:
-        - server-name: /v1/register-application
-          uuid: ro-2-1-0-op-s-is-001
-        - server-name: /v2/register-application
-          uuid: ro-2-1-0-op-s-is-012
-      fc-port-update:
-        - server-name: /v1/register-application
-          uuid: ro-2-1-0-op-s-is-001
-        - server-name: /v2/register-application
-          uuid: ro-2-1-0-op-s-is-012
-      fc-port-deletion:
-        - server-name: /v1/dispose-remainders-of-deregistered-application
-          uuid: ro-2-1-0-op-s-bm-013
-      operation-client-deletion:
-        - server-name: /v1/dispose-remainders-of-deregistered-application
-          uuid: ro-2-1-0-op-s-bm-013
-    initiating-requests:
-      - server-name: /v1/regard-updated-approval-status
-        uuid: ro-2-1-0-op-s-is-003
-    consequent-requests:
-      - client-name: NewRelease://v1/embed-yourself
-        uuid: ro-2-1-0-op-c-bm-nr-2-1-0-000
-      - client-name: TypeApprovalRegister://v1/embed-yourself
-        uuid: ro-2-1-0-op-c-im-tar-2-0-1-000
-      - client-name: ExecutionAndTraceLog://v1/embed-yourself
-        uuid: ro-2-1-0-op-c-im-eatl-2-0-1-000
-      - client-name: OamLog://v1/embed-yourself
-        uuid: ro-2-1-0-op-c-im-ol-2-0-1-000
-      - client-name: AdministratorAdministration://v1/embed-yourself
-        uuid: ro-2-1-0-op-c-im-aa-2-0-1-000
-      - client-name: ApplicationLayerTopology://v1/embed-yourself
-        uuid: ro-2-1-0-op-c-im-alt-2-0-1-000
-      - client-name: OperationKeyManagement://v1/embed-yourself
-        uuid: ro-2-1-0-op-c-im-okm-2-0-1-000
-      - client-name: CurrentController://v1/embed-yourself
-        uuid: ro-2-1-0-op-c-im-cc-1-0-0-000
-
-  - forwarding-name: ApprovalNotification
-    # Deprecated, to be deleted with RO v3.0.0
-    uuid: ro-2-1-0-op-fc-is-007
-    forwarding-type: Subscription
-    management-requests:
-      operation-client-update:
-        - server-name: /v1/notify-approvals
-          uuid: ro-2-1-0-op-s-is-008
-      fc-port-update:
-        - server-name: /v1/notify-approvals
-          uuid: ro-2-1-0-op-s-is-008
-      fc-port-deletion:
-        - server-name: /v1/end-subscription
-          uuid: ro-2-1-0-op-s-bm-004
-      operation-client-deletion:
-    initiating-requests:
-      - server-name: /v1/regard-updated-approval-status
-        uuid: ro-2-1-0-op-s-is-003
-    consequent-requests:
-      - client-name: ExecutionAndTraceLog://v1/regard-application
-        uuid: ro-2-1-0-op-c-im-eatl-2-0-1-003
-      - client-name: OamLog://v1/regard-application
-        uuid: ro-2-1-0-op-c-im-ol-2-0-1-003
-      - client-name: AdministratorAdministration://v1/regard-application
-        uuid: ro-2-1-0-op-c-im-aa-2-0-1-003
-      - client-name: ApplicationLayerTopology://v1/regard-application
-        uuid: ro-2-1-0-op-c-im-alt-2-0-1-003
-      - client-name: OperationKeyManagement://v1/regard-application
-        uuid: ro-2-1-0-op-c-im-okm-2-0-1-003
-
   - forwarding-name: WithdrawnApprovalNotification
     # Deprecated, to be deleted with RO v3.0.0
     uuid: ro-2-1-0-op-fc-is-008
@@ -631,6 +616,8 @@ forwardings:
         - server-name: /v1/end-subscription
           uuid: ro-2-1-0-op-s-bm-004
       operation-client-deletion:
+        - server-name: /v1/dispose-remainders-of-deregistered-application
+          uuid: ro-2-1-0-op-s-bm-013
     initiating-requests:
       - server-name: /v1/regard-updated-approval-status
         uuid: ro-2-1-0-op-s-is-003
@@ -651,8 +638,6 @@ forwardings:
     forwarding-type: Subscription
     management-requests:
       operation-client-update:
-        - server-name: /v1/register-application
-          uuid: ro-2-1-0-op-s-is-001
         - server-name: /v2/register-application
           uuid: ro-2-1-0-op-s-is-012
       fc-port-update:
@@ -719,8 +704,6 @@ forwardings:
         uuid: ro-2-1-0-op-c-im-alt-2-0-1-001
       - client-name: OperationKeyManagement://v1/update-client
         uuid: ro-2-1-0-op-c-im-okm-2-0-1-001
-      - client-name: CurrentController://v1/update-client
-        uuid: ro-2-1-0-op-c-im-cc-1-0-0-001
 
   - forwarding-name: OperationUpdateBroadcast
     uuid: ro-2-1-0-op-fc-is-023
@@ -758,8 +741,6 @@ forwardings:
         uuid: ro-2-1-0-op-c-im-alt-2-0-1-002
       - client-name: OperationKeyManagement://v1/update-operation-client
         uuid: ro-2-1-0-op-c-im-okm-2-0-1-002
-      - client-name: CurrentController://v1/update-operation-client
-        uuid: ro-2-1-0-op-c-im-cc-1-0-0-002
 
 
   - forwarding-name: BarringApplicationCausesDeregisteringOfApplication
@@ -853,34 +834,38 @@ forwardings:
       - client-name: OL://v1/regard-application
         uuid: ro-2-1-0-op-c-im-ol-2-0-1-003
 
-
-  - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.CreateLinkToGetOldRelease
-    uuid: ro-2-1-0-op-fc-is-041
-    forwarding-type: InvariantProcessSnippet
+  - forwarding-name: ApprovalNotification
+    uuid: ro-2-1-0-op-fc-is-040
+    forwarding-type: Subscription
     management-requests:
       operation-client-update:
+        - server-name: /v1/notify-approvals
+          uuid: ro-2-1-0-op-s-is-008
       fc-port-update:
+        - server-name: /v1/notify-approvals
+          uuid: ro-2-1-0-op-s-is-008
       fc-port-deletion:
+        - server-name: /v1/end-subscription
+          uuid: ro-2-1-0-op-s-bm-004
       operation-client-deletion:
+        - server-name: /v1/dispose-remainders-of-deregistered-application
+          uuid: ro-2-1-0-op-s-bm-013
     initiating-requests:
       - server-name: /v1/regard-updated-approval-status
         uuid: ro-2-1-0-op-s-is-003
     consequent-requests:
-      - client-name: ALT://v1/add-operation-client-to-link
-        uuid: ro-2-1-0-op-c-is-alt-2-0-1-000
+        
 
   - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.RequestForOldRelease
     uuid: ro-2-1-0-op-fc-is-042
-    forwarding-type: InvariantProcessSnippet
+    forwarding-type: ProcessSnippet
     management-requests:
       operation-client-update:
-        - server-name: /v1/register-application
-          uuid: ro-2-1-0-op-s-is-001
         - server-name: /v2/register-application
           uuid: ro-2-1-0-op-s-is-012
       fc-port-update:
-        - server-name: /v1/regard-updated-approval-status
-          uuid: ro-2-1-0-op-s-is-003
+        - server-name: /v2/register-application
+          uuid: ro-2-1-0-op-s-is-012
       fc-port-deletion:
         - server-name: /v1/dispose-remainders-of-deregistered-application
           uuid: ro-2-1-0-op-s-bm-013
@@ -890,11 +875,21 @@ forwardings:
     initiating-requests:
       - server-name: /v1/regard-updated-approval-status
         uuid: ro-2-1-0-op-s-is-003
-      - server-name: /v1/update-operation-key
-        uuid: ro-2-1-0-op-s-bm-010
     consequent-requests:
-      - client-name: requestBody#applicationName://v1/inform-about-preceding-release
-        uuid: ro-2-1-0-op-c-im-*-*-*-*-008
+      - client-name: RegistryOffice://v1/inform-about-preceding-release
+        uuid: ro-2-1-0-op-c-im-ro-2-0-1-008
+      - client-name: TypeApprovalRegister://v1/inform-about-preceding-release
+        uuid: ro-2-1-0-op-c-im-tar-2-0-1-008
+      - client-name: ExecutionAndTraceLog://v1/inform-about-preceding-release
+        uuid: ro-2-1-0-op-c-im-eatl-2-0-1-008
+      - client-name: OamLog://v1/inform-about-preceding-release
+        uuid: ro-2-1-0-op-c-im-ol-2-0-1-008
+      - client-name: AdministratorAdministration://v1/inform-about-preceding-release
+        uuid: ro-2-1-0-op-c-im-aa-2-0-1-008
+      - client-name: ApplicationLayerTopology://v1/inform-about-preceding-release
+        uuid: ro-2-1-0-op-c-im-alt-2-0-1-008
+      - client-name: OperationKeyManagement://v1/inform-about-preceding-release
+        uuid: ro-2-1-0-op-c-im-okm-2-0-1-008
 
   - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.CreateLinkToUpdateNewReleaseClient
     uuid: ro-2-1-0-op-fc-is-043
@@ -913,16 +908,14 @@ forwardings:
 
   - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.RequestForUpdatingNewReleaseClient
     uuid: ro-2-1-0-op-fc-is-044
-    forwarding-type: InvariantProcessSnippet
+    forwarding-type: ProcessSnippet
     management-requests:
       operation-client-update:
-        - server-name: /v1/register-application
-          uuid: ro-2-1-0-op-s-is-001
         - server-name: /v2/register-application
           uuid: ro-2-1-0-op-s-is-012
       fc-port-update:
-        - server-name: /v1/regard-updated-approval-status
-          uuid: ro-2-1-0-op-s-is-003
+        - server-name: /v2/register-application
+          uuid: ro-2-1-0-op-s-is-012
       fc-port-deletion:
         - server-name: /v1/dispose-remainders-of-deregistered-application
           uuid: ro-2-1-0-op-s-bm-013
@@ -935,8 +928,20 @@ forwardings:
       - server-name: /v1/update-operation-key
         uuid: ro-2-1-0-op-s-bm-010
     consequent-requests:
-      - client-name: ApprovingApplicationCausesPreparingTheEmbedding.RequestForOldRelease.responseBody#applicationName://v1/update-client-of-subsequent-release
-        uuid: ro-2-1-0-op-c-im-*-*-*-*-009
+      - client-name: RegistryOffice://v1/update-client-of-subsequent-release
+        uuid: ro-2-1-0-op-c-im-ro-2-0-1-009
+      - client-name: TypeApprovalRegister://v1/update-client-of-subsequent-release
+        uuid: ro-2-1-0-op-c-im-tar-2-0-1-009
+      - client-name: ExecutionAndTraceLog://v1/update-client-of-subsequent-release
+        uuid: ro-2-1-0-op-c-im-eatl-2-0-1-009
+      - client-name: OamLog://v1/update-client-of-subsequent-release
+        uuid: ro-2-1-0-op-c-im-ol-2-0-1-009
+      - client-name: AdministratorAdministration://v1/update-client-of-subsequent-release
+        uuid: ro-2-1-0-op-c-im-aa-2-0-1-009
+      - client-name: ApplicationLayerTopology://v1/update-client-of-subsequent-release
+        uuid: ro-2-1-0-op-c-im-alt-2-0-1-009
+      - client-name: OperationKeyManagement://v1/update-client-of-subsequent-release
+        uuid: ro-2-1-0-op-c-im-okm-2-0-1-009
 
   - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.CreateLinkForPromptingEmbedding
     uuid: ro-2-1-0-op-fc-is-046
@@ -985,7 +990,7 @@ forwardings:
 
   - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.RequestForEmbedding
     uuid: ro-2-1-0-op-fc-is-049
-    forwarding-type: InvariantProcessSnippet
+    forwarding-type: ProcessSnippet
     management-requests:
       operation-client-update:
         - server-name: /v1/register-application
@@ -993,8 +998,10 @@ forwardings:
         - server-name: /v2/register-application
           uuid: ro-2-1-0-op-s-is-012
       fc-port-update:
-        - server-name: /v1/regard-updated-approval-status
-          uuid: ro-2-1-0-op-s-is-003
+        - server-name: /v1/register-application
+          uuid: ro-2-1-0-op-s-is-001
+        - server-name: /v2/register-application
+          uuid: ro-2-1-0-op-s-is-012
       fc-port-deletion:
         - server-name: /v1/dispose-remainders-of-deregistered-application
           uuid: ro-2-1-0-op-s-bm-013
@@ -1007,8 +1014,20 @@ forwardings:
       - server-name: /v1/update-operation-key
         uuid: ro-2-1-0-op-s-bm-010
     consequent-requests:
-      - client-name: requestBody#applicationName://v1/embed-yourself
-        uuid: ro-2-1-0-op-c-im-*-*-*-*-000
+      - client-name: RegistryOffice://v1/embed-yourself
+        uuid: ro-2-1-0-op-c-im-ro-2-0-1-000
+      - client-name: TypeApprovalRegister://v1/embed-yourself
+        uuid: ro-2-1-0-op-c-im-tar-2-0-1-000
+      - client-name: ExecutionAndTraceLog://v1/embed-yourself
+        uuid: ro-2-1-0-op-c-im-eatl-2-0-1-000
+      - client-name: OamLog://v1/embed-yourself
+        uuid: ro-2-1-0-op-c-im-ol-2-0-1-000
+      - client-name: AdministratorAdministration://v1/embed-yourself
+        uuid: ro-2-1-0-op-c-im-aa-2-0-1-000
+      - client-name: ApplicationLayerTopology://v1/embed-yourself
+        uuid: ro-2-1-0-op-c-im-alt-2-0-1-000
+      - client-name: OperationKeyManagement://v1/embed-yourself
+        uuid: ro-2-1-0-op-c-im-okm-2-0-1-000
 
 
   - forwarding-name: ApprovingApplicationCausesConnectingToBroadcast.CreateLinkForUpdatingClient
