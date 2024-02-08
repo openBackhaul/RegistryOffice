@@ -168,10 +168,25 @@ note over ro
 ELSE
 end note
 
+note left ro #Pink
+OKM addressing RO://v1/update-operation-key
+is indicating successful creation of the Link
+IF waiting > maximumWaitTimeToReceiveOperationKey
+end note
+tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
+
+note over ro
+ELSE
+end note
+
 note over ro #orange
 IF (oldReleaseApplicationName != "OldRelease")
    AND (HttpClient for oldReleaseApplicationName exists in RO)
 <u>RequestForUpdatingNewReleaseClient</u>
+
+After receiving an updated operation-key
+for the operation-client
+oldReleaseApplicationName://v1/update-client-of-subsequent-release:
 end note
 ro -> orUpdateNR :  {newApplicationName, releaseNumber, TCP/IP address}
 ro <-- orUpdateNR : {bequeathYourDataAndDieOperation, dataTransferOperationsList}
@@ -186,6 +201,23 @@ note over ro
 ELSE
 end note
 
+note over ro #LightCoral
+RO does not know, whether ALT already 
+contains an updated NewRelease client at the OldRelease
+end note
+
+note over ro #Pink
+attempts = 0 
+end note
+
+note over ro #Pink
+mark#1
+end note
+
+note over ro #Pink
+attempts = attempts + 1 
+end note
+
 note over ro #orange
 IF (oldReleaseApplicationName != "OldRelease")
    AND (HttpClient for oldReleaseApplicationName exists in RO)
@@ -195,6 +227,21 @@ NA => OR://v1/bequeath-your-data-and-die
 end note
 ro -> altAddClientToLink : { servingApplicationName == oldReleaseApplicationName,\n servingApplicationReleaseNumber == releaseNumber,\n operationName == /v1/bequeath-your-data-and-die,\n consumingApplicationName == requestBody.newApplicationName,\n consumingApplicationReleaseNumber == requestBody.releaseNumber } (apiKey)
 ro <-- altAddClientToLink : {client-successfully-added, reason-of-failure}
+
+note left ro #Pink
+IF ( (attempts<=maximumNumberOfAttemptsToCreateLink)
+      AND 
+      (client-successfully-added==false)
+      AND
+      ( (reason-of-failure==ALT_SERVING_APPLICATION_NAME_UNKNOWN)
+        OR (reason-of-failure==ALT_SERVING_APPLICATION_RELEASE_NUMBER_UNKNOWN)
+  Return to mark#1
+)
+end note
+
+note over ro
+ELSE
+end note
 
 note left ro
 IF (NOT 200) OR (client-successfully-added==false)
@@ -244,16 +291,22 @@ note over ro
 ELSE
 end note
 
-note right ro #WhiteSmoke
-Attention:
-The next process step should be initiated by all Links from CreateLinkForBequeathYourData, CreateFurtherLinksForTransferringData and CreateLinkForPromptingEmbedding being actually created.
-In other cases, the next step gets initiated by its OperationKey being updated.
-Links from CreateLinkForBequeathYourData and CreateFurtherLinksForTransferringData will be created between the new application and the old release.
-RO receives no indication of successful execution.
-Consequently, RO might trigger the embedding process before all Links that are required for its successful execution have been created.
+note left ro #Pink
+OKM addressing RO://v1/update-operation-key
+is indicating successful creation of the Link
+IF waiting > maximumWaitTimeToReceiveOperationKey
+end note
+tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
+
+note over ro
+ELSE
 end note
 
 note over ro
+After receiving an updated operation-key
+for the operation-client
+NewApp://v1/embed-yourself
+
 <u>RequestForEmbedding</u>
 end note
 ro -> newApplication : {..., oldReleaseProtocol, oldReleaseAddress, oldReleasePort, ...}
@@ -296,7 +349,22 @@ note over ro
 ELSE
 end note
 
+note left ro #Pink
+OKM addressing RO://v1/update-operation-key
+is indicating successful creation of the Link
+IF waiting > maximumWaitTimeToReceiveOperationKey
+end note
+tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
+
 note over ro
+ELSE
+end note
+
+note over ro
+After receiving an updated operation-key
+for the operation-client
+NewApp://v1/update-client
+
 <u>CreateLinkForUpdatingOperationClient</u>
 Request for automatically creating the Link:
 RO => NA://v1/update-operation-client
@@ -314,7 +382,22 @@ note over ro
 ELSE
 end note
 
+note left ro #Pink
+OKM addressing RO://v1/update-operation-key
+is indicating successful creation of the Link
+IF waiting > maximumWaitTimeToReceiveOperationKey
+end note
+tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
+
 note over ro
+ELSE
+end note
+
+note over ro
+After receiving an updated operation-key
+for the operation-client
+NewApp://v1/update-operation-client
+
 <u>CreateLinkForDisposingRemainders</u>
 Request for automatically creating the Link:
 RO => NA://v1/dispose-remainders-of-deregistered-application
@@ -331,6 +414,24 @@ tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure
 note over ro
 ELSE
 end note
+
+note left ro #Pink
+OKM addressing RO://v1/update-operation-key
+is indicating successful creation of the Link
+IF waiting > maximumWaitTimeToReceiveOperationKey
+end note
+tarReceiver <- ro : {processId, successfully-embedded==false,  reason-of-failure}
+
+note over ro
+ELSE
+end note
+
+note over ro #Pink
+After receiving an updated operation-key
+for the operation-client
+NewApp://v1/dispose-remainders-of-deregistered-application
+end note
+
 tarReceiver <- ro : {successfully-embedded==true }
 
 deactivate ro

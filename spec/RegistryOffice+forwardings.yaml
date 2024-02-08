@@ -943,7 +943,7 @@ forwardings:
       - client-name: OperationKeyManagement://v1/update-client-of-subsequent-release
         uuid: ro-2-1-0-op-c-im-okm-2-0-1-009
 
-  - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.CreateLinkForPromptingEmbedding
+  - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.CreateLinkForBequeathYourData
     uuid: ro-2-1-0-op-fc-is-046
     forwarding-type: InvariantProcessSnippet
     management-requests:
@@ -958,7 +958,7 @@ forwardings:
       - client-name: ALT://v1/add-operation-client-to-link
         uuid: ro-2-1-0-op-c-is-alt-2-0-1-000
 
-  - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.CreateLinkForBequeathYourData
+  - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.CreateFurtherLinksForTransferringData
     uuid: ro-2-1-0-op-fc-is-047
     forwarding-type: InvariantProcessSnippet
     management-requests:
@@ -973,7 +973,7 @@ forwardings:
       - client-name: ALT://v1/add-operation-client-to-link
         uuid: ro-2-1-0-op-c-is-alt-2-0-1-000
 
-  - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.CreateFurtherLinksForTransferringData
+  - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.CreateLinkForPromptingEmbedding
     uuid: ro-2-1-0-op-fc-is-048
     forwarding-type: InvariantProcessSnippet
     management-requests:
