@@ -1646,6 +1646,7 @@ paths:
                     - application-name
                     - release-number
                     - approval-status
+                  additionalProperties: false
                   properties:
                     application-name:
                       type: string
