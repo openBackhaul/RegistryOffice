@@ -396,6 +396,8 @@ forwardings:
         uuid: ro-2-1-0-op-s-is-009
       - server-name: /v2/register-application
         uuid: ro-2-1-0-op-s-is-012
+      - server-name: /v1/notify-embedding-status-changes
+        uuid: ro-2-1-0-op-s-is-013
     consequent-requests:
       - client-name: ApplicationLayerTopology://v1/update-fc
         uuid: ro-2-1-0-op-c-bm-alt-2-0-1-003
