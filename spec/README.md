@@ -1,5 +1,8 @@
 # RegistryOffice Specification
 
+### Diagrams  
+- [Collection of Diagrams](./diagrams)
+
 ### ServiceList
 - [RegistryOffice+services](./RegistryOffice+services.yaml)
 
