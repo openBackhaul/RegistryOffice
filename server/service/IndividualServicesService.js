@@ -576,10 +576,75 @@ exports.notifyWithdrawnApprovals = async function (body, user, originator, xCorr
  * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * no response value expected for this operation
  **/
-exports.notifyEmbeddingStatusChanges = function (body, user, originator, xCorrelator, traceIndicator, customerJourney) {
-  return new Promise(function (resolve, reject) {
-    resolve();
-  });
+exports.notifyEmbeddingStatusChanges = async function (body, user, originator, xCorrelator, traceIndicator, customerJourney, operationServerName) {
+  let applicationName = body["subscriber-application"];
+  let releaseNumber = body["subscriber-release-number"];
+  let applicationProtocol = body["subscriber-protocol"];
+  let applicationAddress = body["subscriber-address"];
+  let applicationPort = body["subscriber-port"];
+  let subscriberOperation = body["subscriber-operation"];
+
+  /****************************************************************************************
+   * Prepare logicalTerminatinPointConfigurationInput object to 
+   * configure logical-termination-point
+   ****************************************************************************************/
+
+  let operationNamesByAttributes = new Map();
+  operationNamesByAttributes.set("subscriber-operation", subscriberOperation);
+
+  let tcpObject = new TcpObject(applicationProtocol, applicationAddress, applicationPort);
+
+  let httpClientUuid = await httpClientInterface.getHttpClientUuidExcludingOldReleaseAndNewRelease(
+    applicationName, releaseNumber, NEW_RELEASE_FORWARDING_NAME
+  );
+  let logicalTerminatinPointConfigurationInput = new LogicalTerminationPointConfigurationInput(
+    httpClientUuid,
+    applicationName,
+    releaseNumber,
+    tcpObject,
+    operationServerName,
+    operationNamesByAttributes,
+    individualServicesOperationsMapping.individualServicesOperationsMapping
+  );
+  let ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(
+    logicalTerminatinPointConfigurationInput
+  );
+
+  /****************************************************************************************
+   * Prepare attributes to configure forwarding-construct
+   ****************************************************************************************/
+
+  let forwardingConfigurationInputList = [];
+  let forwardingConstructConfigurationStatus;
+  let operationClientConfigurationStatusList = ltpConfigurationStatus.operationClientConfigurationStatusList;
+
+  if (operationClientConfigurationStatusList) {
+    forwardingConfigurationInputList = await prepareForwardingConfiguration.notifyEmbeddingStatusChange(
+      operationClientConfigurationStatusList,
+      subscriberOperation
+    );
+    forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
+      configureForwardingConstructAsync(
+        operationServerName,
+        forwardingConfigurationInputList
+      );
+  }
+
+  /****************************************************************************************
+   * Prepare attributes to automate forwarding-construct
+   ****************************************************************************************/
+  let forwardingAutomationInputList = await prepareForwardingAutomation.notifyEmbeddingStatusChange(
+    ltpConfigurationStatus,
+    forwardingConstructConfigurationStatus
+  );
+  ForwardingAutomationService.automateForwardingConstructAsync(
+    operationServerName,
+    forwardingAutomationInputList,
+    user,
+    xCorrelator,
+    traceIndicator,
+    customerJourney
+  );
 }
 
 /**
