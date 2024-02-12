@@ -854,7 +854,6 @@ forwardings:
       - server-name: /v1/regard-updated-approval-status
         uuid: ro-2-1-0-op-s-is-003
     consequent-requests:
-        
 
   - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.RequestForOldRelease
     uuid: ro-2-1-0-op-fc-is-042
