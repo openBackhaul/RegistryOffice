@@ -265,6 +265,36 @@ exports.inquireApplicationTypeApprovals = function (operationClientConfiguration
     });
 }
 
+exports.notifyEmbeddingStatusChange = function (operationClientConfigurationStatusList, subscriberOperation) {
+    return new Promise(async function (resolve, reject) {
+        let forwardingConfigurationInputList = [];
+        try {
+            for (let i = 0; i < operationClientConfigurationStatusList.length; i++) {
+                let configurationStatus = operationClientConfigurationStatusList[i];
+                let operationClientUuid = configurationStatus.uuid;
+                let operationClientName = await operationClientInterface.
+                getOperationNameAsync(operationClientUuid);
+                let forwardingConfigurationInput;
+                let forwardingName;
+                if (operationClientName == subscriberOperation) {
+                    forwardingName =
+                        "EmbeddingStatusNotification";
+                    forwardingConfigurationInput = new forwardingConstructConfigurationInput(
+                        forwardingName,
+                        operationClientUuid
+                    );
+                }
+                forwardingConfigurationInputList.push(
+                    forwardingConfigurationInput
+                );
+            }
+            resolve(forwardingConfigurationInputList);
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
 
 /**
  * @description This function automates the forwarding construct by calling the appropriate call back operations based on the fcPort input and output directions.

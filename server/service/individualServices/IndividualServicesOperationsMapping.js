@@ -63,5 +63,11 @@ module.exports.individualServicesOperationsMapping =
           "api-segment": "im",
           "sequence": "004"
         }
+      },
+      "/v1/notify-embedding-status-changes": {
+        "subscriber-operation": {
+          "api-segment": "im",
+          "sequence": "007"
+        }
       }
 }

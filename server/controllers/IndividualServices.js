@@ -169,7 +169,7 @@ module.exports.notifyEmbeddingStatusChanges = async function notifyEmbeddingStat
   let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.NO_CONTENT;
   let responseBodyToDocument = {};
-  await IndividualServices.notifyEmbeddingStatusChanges(body, user, originator, xCorrelator, traceIndicator, customerJourney)
+  await IndividualServices.notifyEmbeddingStatusChanges(body, user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
     .then(async function (responseBody) {
       responseBodyToDocument = responseBody;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
