@@ -2,6 +2,7 @@
 
 const LogicalTerminationPointConfigurationInput = require('onf-core-model-ap/applicationPattern/onfModel/services/models/logicalTerminationPoint/ConfigurationInput');
 const LogicalTerminationPointService = require('onf-core-model-ap/applicationPattern/onfModel/services/LogicalTerminationPointServices');
+const ServiceUtils = require('onf-core-model-ap-bs/basicServices/utility/LogicalTerminationPoint');
 const ForwardingConfigurationService = require('onf-core-model-ap/applicationPattern/onfModel/services/ForwardingConstructConfigurationServices');
 const ForwardingAutomationService = require('onf-core-model-ap/applicationPattern/onfModel/services/ForwardingConstructAutomationServices');
 const prepareForwardingConfiguration = require('./individualServices/PrepareForwardingConfiguration');
@@ -48,87 +49,80 @@ const NEW_RELEASE_FORWARDING_NAME = 'PromptForBequeathingDataCausesTransferOfLis
  * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * no response value expected for this operation
  **/
-exports.bequeathYourDataAndDie = function (body, user, originator, xCorrelator, traceIndicator, customerJourney, operationServerName) {
-  return new Promise(async function (resolve, reject) {
-    try {
+exports.bequeathYourDataAndDie = async function (body, user, originator, xCorrelator, traceIndicator, customerJourney, operationServerName) {
+  try {
 
-      /****************************************************************************************
-       * Setting up required local variables from the request body
-       ****************************************************************************************/
-      let applicationName = body["new-application-name"];
-      let releaseNumber = body["new-application-release"];
-      let applicationProtocol = body["new-application-protocol"];
-      let applicationAddress = body["new-application-address"];
-      let applicationPort = body["new-application-port"];
+    /****************************************************************************************
+     * Setting up required local variables from the request body
+     ****************************************************************************************/
+    let applicationName = body["new-application-name"];
+    let releaseNumber = body["new-application-release"];
+    let applicationProtocol = body["new-application-protocol"];
+    let applicationAddress = body["new-application-address"];
+    let applicationPort = body["new-application-port"];
 
-      /****************************************************************************************
-       * Prepare logicalTerminatinPointConfigurationInput object to 
-       * configure logical-termination-point
-       ****************************************************************************************/
+    /****************************************************************************************
+     * Prepare logicalTerminatinPointConfigurationInput object to 
+     * configure logical-termination-point
+     ****************************************************************************************/
 
-      const appNameAndUuidFromForwarding = await resolveApplicationNameAndHttpClientLtpUuidFromForwardingName('PromptForBequeathingDataCausesNewApplicationBeingRequestedToInquireForApplicationTypeApprovals');
-      if (appNameAndUuidFromForwarding?.httpClientLtpUuid == undefined) {
-        reject(new createHttpError.BadRequest(`The new-release ${applicationName} was not found.`));
-        return;
-      }
-
-
-      let logicalTerminationPointConfigurationStatus = {};
-      let newReleaseHttpClientLtpUuid = appNameAndUuidFromForwarding.httpClientLtpUuid;
-      if (newReleaseHttpClientLtpUuid != undefined) {
-        let isReleaseUpdated = await httpClientInterface.setReleaseNumberAsync(newReleaseHttpClientLtpUuid, releaseNumber);
-        let isApplicationNameUpdated = await httpClientInterface.setApplicationNameAsync(newReleaseHttpClientLtpUuid, applicationName);
-
-        if (isReleaseUpdated || isApplicationNameUpdated) {
-          let configurationStatus = new ConfigurationStatus(
-            newReleaseHttpClientLtpUuid,
-            undefined,
-            true);
-          logicalTerminationPointConfigurationStatus.httpClientConfigurationStatus = configurationStatus;
-        }
-        // ALT should know about this change
-
-        let newReleaseTcpClientUuidList = await logicalTerminationPoint.getServerLtpListAsync(newReleaseHttpClientLtpUuid);
-        let newReleaseTcpClientUuid = newReleaseTcpClientUuidList[0];
-
-        let isProtocolUpdated = await tcpClientInterface.setRemoteProtocolAsync(newReleaseTcpClientUuid, applicationProtocol);
-        let isAddressUpdated = await tcpClientInterface.setRemoteAddressAsync(newReleaseTcpClientUuid, applicationAddress);
-        let isPortUpdated = await tcpClientInterface.setRemotePortAsync(newReleaseTcpClientUuid, applicationPort);
-
-        if (isProtocolUpdated || isAddressUpdated || isPortUpdated) {
-          let configurationStatus = new ConfigurationStatus(
-            newReleaseTcpClientUuid,
-            undefined,
-            true);
-          logicalTerminationPointConfigurationStatus.tcpClientConfigurationStatusList = [configurationStatus];
-        }
-        let forwardingAutomationInputList;
-        if (logicalTerminationPointConfigurationStatus != undefined) {
-
-          /****************************************************************************************
-           * Prepare attributes to automate forwarding-construct
-           ****************************************************************************************/
-          forwardingAutomationInputList = await prepareForwardingAutomation.bequeathYourDataAndDie(
-            logicalTerminationPointConfigurationStatus
-          );
-          ForwardingAutomationService.automateForwardingConstructAsync(
-            operationServerName,
-            forwardingAutomationInputList,
-            user,
-            xCorrelator,
-            traceIndicator,
-            customerJourney
-          );
-        }
-        softwareUpgrade.upgradeSoftwareVersion(user, xCorrelator, traceIndicator, customerJourney, forwardingAutomationInputList.length)
-          .catch(err => console.log(`upgradeSoftwareVersion failed with error: ${err}`));
-
-      }
-      resolve();
-    } catch (error) {
-      reject(error);
+    const newReleaseApplicationName = await ServiceUtils.resolveApplicationNameFromForwardingAsync("PromptForBequeathingDataCausesNewApplicationBeingRequestedToInquireForApplicationTypeApprovals");
+    if (newReleaseApplicationName === undefined) {
+      throw new createHttpError.BadRequest(`The new-release ${applicationName} was not found.`);
     }
-  });
+
+    let ltpConfigurationStatus = {};
+    let newReleaseHttpClientLtpUuid = await httpClientInterface.getHttpClientUuidFromForwarding("PromptForBequeathingDataCausesNewApplicationBeingRequestedToInquireForApplicationTypeApprovals");
+    if (newReleaseHttpClientLtpUuid != undefined) {
+      let isReleaseUpdated = await httpClientInterface.setReleaseNumberAsync(newReleaseHttpClientLtpUuid, releaseNumber);
+      let isApplicationNameUpdated = await httpClientInterface.setApplicationNameAsync(newReleaseHttpClientLtpUuid, applicationName);
+
+      if (isReleaseUpdated || isApplicationNameUpdated) {
+        let configurationStatus = new ConfigurationStatus(
+          newReleaseHttpClientLtpUuid,
+          '',
+          true);
+        ltpConfigurationStatus.httpClientConfigurationStatus = configurationStatus;
+      }
+
+      let newReleaseTcpClientUuidList = await logicalTerminationPoint.getServerLtpListAsync(newReleaseHttpClientLtpUuid);
+      let newReleaseTcpClientUuid = newReleaseTcpClientUuidList[0];
+
+      let isProtocolUpdated = await tcpClientInterface.setRemoteProtocolAsync(newReleaseTcpClientUuid, applicationProtocol);
+      let isAddressUpdated = await tcpClientInterface.setRemoteAddressAsync(newReleaseTcpClientUuid, applicationAddress);
+      let isPortUpdated = await tcpClientInterface.setRemotePortAsync(newReleaseTcpClientUuid, applicationPort);
+
+      if (isProtocolUpdated || isAddressUpdated || isPortUpdated) {
+        let configurationStatus = new ConfigurationStatus(
+          newReleaseTcpClientUuid,
+          '',
+          true);
+        ltpConfigurationStatus.tcpClientConfigurationStatusList = [configurationStatus];
+      }
+      let forwardingAutomationInputList;
+      if (ltpConfigurationStatus != undefined) {
+
+        /****************************************************************************************
+          * Prepare attributes to automate forwarding-construct
+          ****************************************************************************************/
+        forwardingAutomationInputList = await prepareForwardingAutomation.bequeathYourDataAndDie(
+          ltpConfigurationStatus
+        );
+        ForwardingAutomationService.automateForwardingConstructAsync(
+          operationServerName,
+          forwardingAutomationInputList,
+          user,
+          xCorrelator,
+          traceIndicator,
+          customerJourney
+        );
+      }
+      softwareUpgrade.upgradeSoftwareVersion(user, xCorrelator, traceIndicator, customerJourney, forwardingAutomationInputList.length)
+        .catch(err => console.log(`upgradeSoftwareVersion failed with error: ${err}`));
+    }
+  } catch (error) {
+    console.log(`bequeathing process failed with error: ${error}`);
+  }
 }
 
 
@@ -216,8 +210,8 @@ exports.inquireApplicationTypeApprovals = async function (body, user, originator
   let applicationPort = body["approval-application-port"];
   let approvalOperation = body["approval-operation"];
 
-  const appNameAndUuidFromForwarding = await resolveApplicationNameAndHttpClientLtpUuidFromForwardingName('RegistrationCausesInquiryForApplicationTypeApproval');
-  if (appNameAndUuidFromForwarding?.applicationName !== applicationName) {
+  const tarApplicationName = await ServiceUtils.resolveApplicationNameFromForwardingAsync("RegistrationCausesInquiryForApplicationTypeApproval");
+  if (tarApplicationName !== applicationName) {
     throw new createHttpError.BadRequest(`The approval-application ${applicationName} was not found.`);
   }
 
@@ -234,7 +228,7 @@ exports.inquireApplicationTypeApprovals = async function (body, user, originator
   let httpClientUuid = await httpClientInterface.getHttpClientUuidAsync(
     applicationName, releaseNumber
   );
-  let logicalTerminationPointConfigurationInput = new LogicalTerminationPointConfigurationInput(
+  let lpConfigurationInput = new LogicalTerminationPointConfigurationInput(
     httpClientUuid,
     applicationName,
     releaseNumber,
@@ -246,7 +240,7 @@ exports.inquireApplicationTypeApprovals = async function (body, user, originator
   let ltpConfigurationStatus;
   if (httpClientUuid) {
     ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(
-      logicalTerminationPointConfigurationInput
+      lpConfigurationInput, false
     );
   }
 
@@ -347,7 +341,7 @@ exports.notifyApprovals = async function (body, user, originator, xCorrelator, t
     applicationName,
     releaseNumber
   );
-  let logicalTerminatinPointConfigurationInput = new LogicalTerminationPointConfigurationInput(
+  let ltpConfigurationInput = new LogicalTerminationPointConfigurationInput(
     httpClientLtpUuid,
     applicationName,
     releaseNumber,
@@ -356,8 +350,10 @@ exports.notifyApprovals = async function (body, user, originator, xCorrelator, t
     operationNamesByAttributes,
     individualServicesOperationsMapping.individualServicesOperationsMapping
   );
-  let ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(
-    logicalTerminatinPointConfigurationInput
+  const roApplicationName = await ServiceUtils.resolveRegistryOfficeApplicationNameFromForwardingAsync();
+  const ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(
+    ltpConfigurationInput,
+    roApplicationName === applicationName
   );
 
   /****************************************************************************************
@@ -430,7 +426,7 @@ exports.notifyDeregistrations = async function (body, user, originator, xCorrela
     applicationName,
     releaseNumber
   );
-  let logicalTerminatinPointConfigurationInput = new LogicalTerminationPointConfigurationInput(
+  let ltpConfigurationInput = new LogicalTerminationPointConfigurationInput(
     httpClientLtpUuid,
     applicationName,
     releaseNumber,
@@ -439,8 +435,10 @@ exports.notifyDeregistrations = async function (body, user, originator, xCorrela
     operationNamesByAttributes,
     individualServicesOperationsMapping.individualServicesOperationsMapping
   );
-  let ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(
-    logicalTerminatinPointConfigurationInput
+  const roApplicationName = await ServiceUtils.resolveRegistryOfficeApplicationNameFromForwardingAsync();
+  const ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(
+    ltpConfigurationInput,
+    roApplicationName === applicationName
   );
 
   /****************************************************************************************
@@ -515,7 +513,7 @@ exports.notifyWithdrawnApprovals = async function (body, user, originator, xCorr
     applicationName,
     releaseNumber
   );
-  let logicalTerminatinPointConfigurationInput = new LogicalTerminationPointConfigurationInput(
+  let ltpConfigurationInput = new LogicalTerminationPointConfigurationInput(
     httpClientUuid,
     applicationName,
     releaseNumber,
@@ -524,8 +522,10 @@ exports.notifyWithdrawnApprovals = async function (body, user, originator, xCorr
     operationNamesByAttributes,
     individualServicesOperationsMapping.individualServicesOperationsMapping
   );
-  let ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(
-    logicalTerminatinPointConfigurationInput
+  const roApplicationName = await ServiceUtils.resolveRegistryOfficeApplicationNameFromForwardingAsync();
+  const ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(
+    ltpConfigurationInput,
+    roApplicationName === applicationName
   );
 
   /****************************************************************************************
@@ -597,7 +597,7 @@ exports.notifyEmbeddingStatusChanges = async function (body, user, originator, x
   let httpClientUuid = await httpClientInterface.getHttpClientUuidExcludingOldReleaseAndNewRelease(
     applicationName, releaseNumber, NEW_RELEASE_FORWARDING_NAME
   );
-  let logicalTerminatinPointConfigurationInput = new LogicalTerminationPointConfigurationInput(
+  let ltpConfigurationInput = new LogicalTerminationPointConfigurationInput(
     httpClientUuid,
     applicationName,
     releaseNumber,
@@ -606,8 +606,10 @@ exports.notifyEmbeddingStatusChanges = async function (body, user, originator, x
     operationNamesByAttributes,
     individualServicesOperationsMapping.individualServicesOperationsMapping
   );
-  let ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(
-    logicalTerminatinPointConfigurationInput
+  const roApplicationName = await ServiceUtils.resolveRegistryOfficeApplicationNameFromForwardingAsync();
+  const ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(
+    ltpConfigurationInput,
+    roApplicationName === applicationName
   );
 
   /****************************************************************************************
@@ -760,106 +762,106 @@ exports.registerApplication = async function (body, user, originator, xCorrelato
  * no response value expected for this operation
  **/
 exports.registerApplication2 = async function (body, user, originator, xCorrelator, traceIndicator, customerJourney, operationServerName) {
-    let applicationName = body["application-name"];
-    let releaseNumber = body["release-number"];
-    let embeddingOperation = body["embedding-operation"];
-    let clientUpdateOperation = body["client-update-operation"];
-    let clientOperationUpdateOperation = body["operation-client-update-operation"];
+  let applicationName = body["application-name"];
+  let releaseNumber = body["release-number"];
+  let embeddingOperation = body["embedding-operation"];
+  let clientUpdateOperation = body["client-update-operation"];
+  let clientOperationUpdateOperation = body["operation-client-update-operation"];
 
-    let preceedingApplicationName = body["preceding-application-name"];
-    let preceedingReleaseNumber = body["preceding-release-number"];
+  let preceedingApplicationName = body["preceding-application-name"];
+  let preceedingReleaseNumber = body["preceding-release-number"];
 
-    let operationNamesByAttributes = new Map();
-    operationNamesByAttributes.set("embedding-operation", embeddingOperation);
-    operationNamesByAttributes.set("client-update-operation", clientUpdateOperation);
-    operationNamesByAttributes.set("operation-client-update-operation", clientOperationUpdateOperation);
+  let operationNamesByAttributes = new Map();
+  operationNamesByAttributes.set("embedding-operation", embeddingOperation);
+  operationNamesByAttributes.set("client-update-operation", clientUpdateOperation);
+  operationNamesByAttributes.set("operation-client-update-operation", clientOperationUpdateOperation);
 
-    /****************************************************************************************
-     * Differentiate between two schemas  
-     * if schema has tcp-server-list attribute, it is old-multiple-TcpServers-format
-     * else if schema has tcp-server object attribute, it is new-single-TcpServer-format
-     ****************************************************************************************/
-    let tcpServer = {};
-    if (body.hasOwnProperty("tcp-server-list")) {
-      tcpServer = body["tcp-server-list"][0];
-    } else if (body.hasOwnProperty("tcp-server")) {
-      tcpServer = body["tcp-server"];
-      let disposeRemaindersOperation = body["dispose-remainders-operation"];
-      let precedingReleaseOperation = body["preceding-release-operation"];
-      let subsequentReleaseOperation = body["subsequent-release-operation"];
-      operationNamesByAttributes.set("dispose-remainders-operation", disposeRemaindersOperation);
-      operationNamesByAttributes.set("preceding-release-operation", precedingReleaseOperation);
-      operationNamesByAttributes.set("subsequent-release-operation", subsequentReleaseOperation);
-    }
+  /****************************************************************************************
+   * Differentiate between two schemas  
+   * if schema has tcp-server-list attribute, it is old-multiple-TcpServers-format
+   * else if schema has tcp-server object attribute, it is new-single-TcpServer-format
+   ****************************************************************************************/
+  let tcpServer = {};
+  if (body.hasOwnProperty("tcp-server-list")) {
+    tcpServer = body["tcp-server-list"][0];
+  } else if (body.hasOwnProperty("tcp-server")) {
+    tcpServer = body["tcp-server"];
+    let disposeRemaindersOperation = body["dispose-remainders-operation"];
+    let precedingReleaseOperation = body["preceding-release-operation"];
+    let subsequentReleaseOperation = body["subsequent-release-operation"];
+    operationNamesByAttributes.set("dispose-remainders-operation", disposeRemaindersOperation);
+    operationNamesByAttributes.set("preceding-release-operation", precedingReleaseOperation);
+    operationNamesByAttributes.set("subsequent-release-operation", subsequentReleaseOperation);
+  }
 
-    /****************************************************************************************
-     * Prepare logicalTerminatinPointConfigurationInput object to 
-     * configure logical-termination-point
-     ****************************************************************************************/
-    let tcpObject = new TcpObject(tcpServer.protocol, tcpServer.address, tcpServer.port);
+  /****************************************************************************************
+   * Prepare logicalTerminatinPointConfigurationInput object to 
+   * configure logical-termination-point
+   ****************************************************************************************/
+  let tcpObject = new TcpObject(tcpServer.protocol, tcpServer.address, tcpServer.port);
 
-    let httpClientUuid = await httpClientInterface.getHttpClientUuidExcludingOldReleaseAndNewRelease(
-      applicationName, releaseNumber, NEW_RELEASE_FORWARDING_NAME
+  let httpClientUuid = await httpClientInterface.getHttpClientUuidExcludingOldReleaseAndNewRelease(
+    applicationName, releaseNumber, NEW_RELEASE_FORWARDING_NAME
+  );
+  let logicalTerminatinPointConfigurationInput = new LogicalTerminationPointConfigurationInput(
+    httpClientUuid,
+    applicationName,
+    releaseNumber,
+    tcpObject,
+    operationServerName,
+    operationNamesByAttributes,
+    individualServicesOperationsMapping.individualServicesOperationsMapping
+  );
+  let ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(
+    logicalTerminatinPointConfigurationInput
+  );
+
+  await ApplicationPreceedingVersion.addEntryToPreceedingVersionList(
+    preceedingApplicationName,
+    preceedingReleaseNumber,
+    applicationName,
+    releaseNumber
+  );
+  /****************************************************************************************
+   * Prepare attributes to configure forwarding-construct
+   ****************************************************************************************/
+
+  let forwardingConfigurationInputList = [];
+  let forwardingConstructConfigurationStatus;
+  let operationClientConfigurationStatusList = ltpConfigurationStatus.operationClientConfigurationStatusList;
+
+  if (operationClientConfigurationStatusList) {
+    forwardingConfigurationInputList = await prepareForwardingConfiguration.registerApplication(
+      operationClientConfigurationStatusList,
+      embeddingOperation
     );
-    let logicalTerminatinPointConfigurationInput = new LogicalTerminationPointConfigurationInput(
-      httpClientUuid,
-      applicationName,
-      releaseNumber,
-      tcpObject,
-      operationServerName,
-      operationNamesByAttributes,
-      individualServicesOperationsMapping.individualServicesOperationsMapping
-    );
-    let ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(
-      logicalTerminatinPointConfigurationInput
-    );
-
-    await ApplicationPreceedingVersion.addEntryToPreceedingVersionList(
-      preceedingApplicationName,
-      preceedingReleaseNumber,
-      applicationName,
-      releaseNumber
-    );
-    /****************************************************************************************
-     * Prepare attributes to configure forwarding-construct
-     ****************************************************************************************/
-
-    let forwardingConfigurationInputList = [];
-    let forwardingConstructConfigurationStatus;
-    let operationClientConfigurationStatusList = ltpConfigurationStatus.operationClientConfigurationStatusList;
-
-    if (operationClientConfigurationStatusList) {
-      forwardingConfigurationInputList = await prepareForwardingConfiguration.registerApplication(
-        operationClientConfigurationStatusList,
-        embeddingOperation
+    forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
+      configureForwardingConstructAsync(
+        operationServerName,
+        forwardingConfigurationInputList
       );
-      forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
-        configureForwardingConstructAsync(
-          operationServerName,
-          forwardingConfigurationInputList
-        );
-    }
+  }
 
-    /****************************************************************************************
-     * Prepare attributes to automate forwarding-construct
-     ****************************************************************************************/
-    let forwardingAutomationInputList = await prepareForwardingAutomation.registerApplication(
-      ltpConfigurationStatus,
-      forwardingConstructConfigurationStatus,
-      applicationName,
-      releaseNumber
-    );
-    ForwardingAutomationService.automateForwardingConstructAsync(
-      operationServerName,
-      forwardingAutomationInputList,
-      user,
-      xCorrelator,
-      traceIndicator,
-      customerJourney
-    );
+  /****************************************************************************************
+   * Prepare attributes to automate forwarding-construct
+   ****************************************************************************************/
+  let forwardingAutomationInputList = await prepareForwardingAutomation.registerApplication(
+    ltpConfigurationStatus,
+    forwardingConstructConfigurationStatus,
+    applicationName,
+    releaseNumber
+  );
+  ForwardingAutomationService.automateForwardingConstructAsync(
+    operationServerName,
+    forwardingAutomationInputList,
+    user,
+    xCorrelator,
+    traceIndicator,
+    customerJourney
+  );
 
-    MonitorTypeApprovalChannel.AddEntryToMonitorApprovalStatusChannel(applicationName, releaseNumber);
-    includeGenericResponseProfile(applicationName, releaseNumber);
+  MonitorTypeApprovalChannel.AddEntryToMonitorApprovalStatusChannel(applicationName, releaseNumber);
+  includeGenericResponseProfile(applicationName, releaseNumber);
 }
 
 
@@ -1408,39 +1410,6 @@ function getApiSegmentOfOperationClient(operationClientUuid) {
   }
   return APISegment;
 }
-
-async function resolveApplicationNameAndHttpClientLtpUuidFromForwardingName(forwardingName) {
-  const forwardingConstruct = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(forwardingName);
-  if (forwardingConstruct === undefined) {
-    return null;
-  }
-
-  let fcPortOutputDirectionLogicalTerminationPointList = [];
-  const fcPortList = forwardingConstruct[onfAttributes.FORWARDING_CONSTRUCT.FC_PORT];
-  for (const fcPort of fcPortList) {
-    const portDirection = fcPort[onfAttributes.FC_PORT.PORT_DIRECTION];
-    if (FcPort.portDirectionEnum.OUTPUT === portDirection) {
-      fcPortOutputDirectionLogicalTerminationPointList.push(fcPort[onfAttributes.FC_PORT.LOGICAL_TERMINATION_POINT]);
-    }
-  }
-
-  if (fcPortOutputDirectionLogicalTerminationPointList.length !== 1) {
-    return null;
-  }
-
-  const opLtpUuid = fcPortOutputDirectionLogicalTerminationPointList[0];
-  const httpLtpUuidList = await LogicalTerminationPoint.getServerLtpListAsync(opLtpUuid);
-  const httpClientLtpUuid = httpLtpUuidList[0];
-  const applicationName = await httpClientInterface.getApplicationNameAsync(httpClientLtpUuid);
-  return applicationName === undefined ? {
-    applicationName: null,
-    httpClientLtpUuid
-  } : {
-    applicationName,
-    httpClientLtpUuid
-  };
-}
-
 
 async function resolveApplicationNameAndHttpClientLtpUuidFromForwardingNameOfTypeSubscription(forwardingName, applicationName, releaseNumber) {
   let httpClientUuidOfTheSubscribedApplication = undefined;
