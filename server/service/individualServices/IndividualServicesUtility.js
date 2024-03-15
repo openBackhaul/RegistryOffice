@@ -1,6 +1,16 @@
 'use strict';
 
 const eventDispatcher = require('onf-core-model-ap/applicationPattern/rest/client/eventDispatcher');
+const httpClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/HttpClientInterface');
+const onfPaths = require('onf-core-model-ap/applicationPattern/onfModel/constants/OnfPaths');
+const ResponseProfile = require('onf-core-model-ap/applicationPattern/onfModel/models/profile/ResponseProfile');
+const ProfileCollection = require('onf-core-model-ap/applicationPattern/onfModel/models/ProfileCollection');
+const ForwardingDomain = require('onf-core-model-ap/applicationPattern/onfModel/models/ForwardingDomain');
+const ForwardingConstruct = require('onf-core-model-ap/applicationPattern/onfModel/models/ForwardingConstruct');
+const logicalTerminationPoint = require('onf-core-model-ap/applicationPattern/onfModel/models/LogicalTerminationPoint');
+const tcpClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/TcpClientInterface');
+const onfAttributes = require('onf-core-model-ap/applicationPattern/onfModel/constants/OnfAttributes');
+const FcPort = require('onf-core-model-ap/applicationPattern/onfModel/models/FcPort');
 
 /**
  * @description This function returns list of registered application information application-name , release-number, application-address, application-port.
@@ -90,7 +100,7 @@ exports.includeGenericResponseProfile = function (applicationName, releaseNumber
     return new Promise(async function (resolve, reject) {
         let isUpdated = true;
         try {
-            let httpClientUuid = await HttpClientInterface.getHttpClientUuidAsync(applicationName, releaseNumber);
+            let httpClientUuid = await httpClientInterface.getHttpClientUuidAsync(applicationName, releaseNumber);
             if (httpClientUuid != undefined) {
                 let applicationNameReference = onfPaths.HTTP_CLIENT_APPLICATION_NAME.replace("{uuid}", httpClientUuid);
                 let isResponseProfileAlreadyExist = await ResponseProfile.findProfileUuidForFieldNameReferenceAsync(applicationNameReference);
@@ -109,7 +119,7 @@ exports.includeGenericResponseProfile = function (applicationName, releaseNumber
             }
             resolve(isUpdated);
         } catch (error) {
-            reject();
+            reject(error);
         }
     });
 }
@@ -122,7 +132,7 @@ exports.excludeGenericResponseProfile = function (applicationName, releaseNumber
     return new Promise(async function (resolve, reject) {
         let isUpdated = true;
         try {
-            let httpClientUuid = await HttpClientInterface.getHttpClientUuidAsync(applicationName, releaseNumber);
+            let httpClientUuid = await httpClientInterface.getHttpClientUuidAsync(applicationName, releaseNumber);
             if (httpClientUuid != undefined) {
                 let applicationNameReference = onfPaths.HTTP_CLIENT_APPLICATION_NAME.replace("{uuid}", httpClientUuid);
                 let responseProfileUuid = await ResponseProfile.findProfileUuidForFieldNameReferenceAsync(applicationNameReference);
@@ -173,7 +183,7 @@ exports.resolveApplicationNameAndHttpClientLtpUuidFromForwardingNameOfTypeSubscr
 
     for (let i = 0; i < fcPortOutputDirectionLogicalTerminationPointList.length; i++) {
         const opLtpUuid = fcPortOutputDirectionLogicalTerminationPointList[i];
-        const httpLtpUuidList = await LogicalTerminationPoint.getServerLtpListAsync(opLtpUuid);
+        const httpLtpUuidList = await logicalTerminationPoint.getServerLtpListAsync(opLtpUuid);
         const httpClientLtpUuid = httpLtpUuidList[0];
         const _applicationName = await httpClientInterface.getApplicationNameAsync(httpClientLtpUuid);
         const _releaseNumber = await httpClientInterface.getReleaseNumberAsync(httpClientLtpUuid);
@@ -198,7 +208,7 @@ exports.forwardRequest = function (forwardingKindName, attributeList, user, xCor
     return new Promise(async function (resolve, reject) {
         try {
             let forwardingConstructInstance = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(forwardingKindName);
-            let operationClientUuid = (getFcPortOutputLogicalTerminationPointList(forwardingConstructInstance))[0];
+            let operationClientUuid = (await exports.getFcPortOutputLogicalTerminationPointList(forwardingConstructInstance))[0];
             let result = await eventDispatcher.dispatchEvent(
                 operationClientUuid,
                 attributeList,
@@ -212,4 +222,19 @@ exports.forwardRequest = function (forwardingKindName, attributeList, user, xCor
             reject(error);
         }
     });
+}
+
+exports.getFcPortOutputLogicalTerminationPointList = async function (forwardingConstructInstance) {
+    let fcPortOutputLogicalTerminationPointList = [];
+    let fcPortList = forwardingConstructInstance[onfAttributes.FORWARDING_CONSTRUCT.FC_PORT];
+    for (let i = 0; i < fcPortList.length; i++) {
+        let fcPort = fcPortList[i];
+        let fcPortPortDirection = fcPort[onfAttributes.FC_PORT.PORT_DIRECTION];
+        if (fcPortPortDirection == FcPort.portDirectionEnum.OUTPUT) {
+            let fclogicalTerminationPoint = fcPort[onfAttributes.FC_PORT.LOGICAL_TERMINATION_POINT];
+            fcPortOutputLogicalTerminationPointList.push(fclogicalTerminationPoint);
+        }
+    }
+    return fcPortOutputLogicalTerminationPointList;
+
 }

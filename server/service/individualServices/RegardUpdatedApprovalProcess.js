@@ -8,7 +8,6 @@ const logicalTerminationPoint = require('onf-core-model-ap/applicationPattern/on
 const OperationClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/OperationClientInterface');
 const ForwardingConfigurationService = require('onf-core-model-ap/applicationPattern/onfModel/services/ForwardingConstructConfigurationServices');
 const ForwardingAutomationService = require('onf-core-model-ap/applicationPattern/onfModel/services/ForwardingConstructAutomationServices');
-const LogicalTerminationPointService = require('onf-core-model-ap/applicationPattern/onfModel/services/LogicalTerminationPointServices');
 const ForwardingDomain = require('onf-core-model-ap/applicationPattern/onfModel/models/ForwardingDomain');
 const ForwardingConstruct = require('onf-core-model-ap/applicationPattern/onfModel/models/ForwardingConstruct');
 const ConfigurationStatus = require('onf-core-model-ap/applicationPattern/onfModel/services/models/ConfigurationStatus');
@@ -17,6 +16,7 @@ const MonitorTypeApprovalChannel = require('./MonitorTypeApprovalChannel');
 const IndividualServicesUtility = require('./IndividualServicesUtility');
 const prepareForwardingConfiguration = require('./PrepareForwardingConfiguration');
 const prepareForwardingAutomation = require('./PrepareForwardingAutomation');
+const createHttpError = require('http-errors');
 
 const NEW_RELEASE_FORWARDING_NAME = 'PromptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredApplications';
 
@@ -107,6 +107,7 @@ exports.updateApprovalStatusInConfig = async function (requestBody, requestHeade
         let forwardingConfigurationInputList;
         let ltpConfigurationStatus;
         let forwardingConstructConfigurationStatus;
+        let isApplicationAlreadyApproved;
         if (operationListForConfiguration.length > 0) {
             forwardingConfigurationInputList = await prepareForwardingConfiguration.updateApprovalStatus(
                 operationListForConfiguration,
@@ -115,7 +116,7 @@ exports.updateApprovalStatusInConfig = async function (requestBody, requestHeade
                 disposeRemaindersOperationName
             );
 
-            let isApplicationAlreadyApproved = await checkApplicationApprovalStatus(operationClientUuidList)
+            isApplicationAlreadyApproved = await checkApplicationApprovalStatus(operationClientUuidList)
 
             if (approvalStatus == 'APPROVED') {
                 forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
@@ -133,8 +134,9 @@ exports.updateApprovalStatusInConfig = async function (requestBody, requestHeade
                 await MonitorTypeApprovalChannel.AddEntryToMonitorApprovalStatusChannel(applicationName, releaseNumber);
             } else if (approvalStatus == 'BARRED') {
                 // need not send explicit requests to update ALT because /v1/deregister-application will send delete notifications to ALT
+                requestHeaders.traceIndicatorIncrementer = 1;
                 BarringApplicationCausesDeregisteringOfApplication(applicationName, releaseNumber, requestHeaders);
-                resolve(processId);
+                return processId;
             }
         }
         /****************************************************************************************
@@ -150,7 +152,7 @@ exports.updateApprovalStatusInConfig = async function (requestBody, requestHeade
                 applicationName,
                 releaseNumber
             );
-        } else if (approvalStatus == 'BARRED' || (approvalStatus == 'REGISTERED' && isApplicationAlreadyApproved)) {
+        } else if (approvalStatus == 'REGISTERED' && isApplicationAlreadyApproved) {
             forwardingAutomationInputList = await prepareForwardingAutomation.updateApprovalStatusBarred(
                 ltpConfigurationStatus,
                 forwardingConstructConfigurationStatus,
@@ -172,8 +174,7 @@ exports.updateApprovalStatusInConfig = async function (requestBody, requestHeade
     } catch (error) {
         console.log(`error in updateApprovalStatus`, error);
         throw new createHttpError.InternalServerError(`${error}`);
-    }
-    
+    } 
 }
 
 exports.regardUpdatedApprovalProcess = async function (applicationName, releaseNumber, approvalStatus, processId, requestHeaders) {
@@ -275,12 +276,10 @@ async function BarringApplicationCausesDeregisteringOfApplication(applicationNam
                 requestHeaders.customerJourney
             );
         }
+        return result;
     } catch (error) {
         console.log(error);
-        throw "operation is not success";
     }
-
-    resolve(result);
 }
 
 async function ApprovingApplicationCausesConnectingWith(processId, applicationName, releaseNumber, requestHeaders) {

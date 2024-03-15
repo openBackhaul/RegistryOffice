@@ -738,8 +738,8 @@ exports.registerApplication = async function (body, user, originator, xCorrelato
     customerJourney
   );
 
-  MonitorTypeApprovalChannel.AddEntryToMonitorApprovalStatusChannel(applicationName, releaseNumber);
-  IndividualServicesUtility.includeGenericResponseProfile(applicationName, releaseNumber);
+  await MonitorTypeApprovalChannel.AddEntryToMonitorApprovalStatusChannel(applicationName, releaseNumber);
+  await IndividualServicesUtility.includeGenericResponseProfile(applicationName, releaseNumber);
 }
 
 /**
@@ -756,6 +756,7 @@ exports.registerApplication = async function (body, user, originator, xCorrelato
  * no response value expected for this operation
  **/
 exports.registerApplication2 = async function (body, user, originator, xCorrelator, traceIndicator, customerJourney, operationServerName) {
+  try {
     let applicationName = body["application-name"];
     let releaseNumber = body["release-number"];
     let embeddingOperation = body["embedding-operation"];
@@ -857,8 +858,11 @@ exports.registerApplication2 = async function (body, user, originator, xCorrelat
       customerJourney
     );
 
-    MonitorTypeApprovalChannel.AddEntryToMonitorApprovalStatusChannel(applicationName, releaseNumber);
-    IndividualServicesUtility.includeGenericResponseProfile(applicationName, releaseNumber);
+    await MonitorTypeApprovalChannel.AddEntryToMonitorApprovalStatusChannel(applicationName, releaseNumber);
+    await IndividualServicesUtility.includeGenericResponseProfile(applicationName, releaseNumber);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 
