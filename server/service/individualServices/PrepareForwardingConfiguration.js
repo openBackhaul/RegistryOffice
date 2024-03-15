@@ -11,7 +11,7 @@ exports.registerApplication = function (operationClientConfigurationStatusList, 
                 let configurationStatus = operationClientConfigurationStatusList[i];
                 let operationClientUuid = configurationStatus.uuid;
                 let operationClientName = await operationClientInterface.
-                getOperationNameAsync(operationClientUuid);
+                    getOperationNameAsync(operationClientUuid);
                 let forwardingConfigurationInput;
                 let forwardingName;
                 if (operationClientName == embeddingOperation) {
@@ -24,6 +24,41 @@ exports.registerApplication = function (operationClientConfigurationStatusList, 
                     forwardingConfigurationInputList.push(
                         forwardingConfigurationInput
                     );
+                }
+            }
+            resolve(forwardingConfigurationInputList);
+        } catch (error) {
+            reject(error);
+        }
+    });
+}
+
+exports.registerApplication2 = function (operationClientConfigurationStatusList, embeddingOperation, precedingReleaseOperation, subsequentReleaseOperation) {
+    return new Promise(async function (resolve, reject) {
+        let forwardingConfigurationInputList = [];
+        try {
+            for (let i = 0; i < operationClientConfigurationStatusList.length; i++) {
+                let configurationStatus = operationClientConfigurationStatusList[i];
+                let operationClientUuid = configurationStatus.uuid;
+                let operationClientName = await operationClientInterface.
+                    getOperationNameAsync(operationClientUuid);
+                let forwardingConfigurationInput;
+                let forwardingName;
+                if (operationClientName == embeddingOperation) {
+                    forwardingName =
+                        "ApprovingApplicationCausesPreparingTheEmbedding.RequestForEmbedding";
+                        forwardingConfigurationInput = new forwardingConstructConfigurationInput(forwardingName, operationClientUuid);
+                        forwardingConfigurationInputList.push(forwardingConfigurationInput);
+                } else if(operationClientName == precedingReleaseOperation) {
+                    forwardingName =
+                        "ApprovingApplicationCausesPreparingTheEmbedding.RequestForOldRelease";
+                        forwardingConfigurationInput = new forwardingConstructConfigurationInput(forwardingName, operationClientUuid);
+                        forwardingConfigurationInputList.push(forwardingConfigurationInput);
+                } else if(operationClientName == subsequentReleaseOperation) {
+                    forwardingName =
+                        "ApprovingApplicationCausesPreparingTheEmbedding.RequestForUpdatingNewReleaseClient";
+                        forwardingConfigurationInput = new forwardingConstructConfigurationInput(forwardingName, operationClientUuid);
+                        forwardingConfigurationInputList.push(forwardingConfigurationInput);
                 }
             }
             resolve(forwardingConfigurationInputList);
@@ -56,7 +91,7 @@ exports.deregisterApplication = function (operationClientConfigurationStatusList
                     forwardingConfigurationInputList.push(
                         forwardingConfigurationInput
                     );
-                }                
+                }
             }
             resolve(forwardingConfigurationInputList);
         } catch (error) {
@@ -87,7 +122,7 @@ exports.updateApprovalStatusBarred = function (operationClientList) {
                     forwardingConfigurationInputList.push(
                         forwardingConfigurationInput
                     );
-                }                
+                }
             }
             resolve(forwardingConfigurationInputList);
         } catch (error) {
@@ -96,14 +131,13 @@ exports.updateApprovalStatusBarred = function (operationClientList) {
     });
 }
 
-exports.updateApprovalStatus = function (operationClientList, updateClientOperationName, updateOperationClientOperationName, embeddingOperation) {
+exports.updateApprovalStatus = function (operationClientList, updateClientOperationName, updateOperationClientOperationName, disposeRemaindersOperationName) {
     return new Promise(async function (resolve, reject) {
         let forwardingConfigurationInputList = [];
         try {
             for (let i = 0; i < operationClientList.length; i++) {
                 let operationClientUuid = operationClientList[i];
-                let operationClientName = await operationClientInterface.
-                getOperationNameAsync(operationClientUuid);
+                let operationClientName = await operationClientInterface.getOperationNameAsync(operationClientUuid);
                 let forwardingConfigurationInput;
                 let forwardingName;
                 if (operationClientName == updateClientOperationName) {
@@ -126,9 +160,9 @@ exports.updateApprovalStatus = function (operationClientList, updateClientOperat
                     forwardingConfigurationInputList.push(
                         forwardingConfigurationInput
                     );
-                } else if (operationClientName == embeddingOperation) {
+                } else if (operationClientName == disposeRemaindersOperationName) {
                     forwardingName =
-                        "TypeApprovalCausesRequestForEmbedding";
+                        "DeRegistrationBroadcast";
                     forwardingConfigurationInput = new forwardingConstructConfigurationInput(
                         forwardingName,
                         operationClientUuid
@@ -153,7 +187,7 @@ exports.notifyWithdrawnApprovals = function (operationClientConfigurationStatusL
                 let configurationStatus = operationClientConfigurationStatusList[i];
                 let operationClientUuid = configurationStatus.uuid;
                 let operationClientName = await operationClientInterface.
-                getOperationNameAsync(operationClientUuid);
+                    getOperationNameAsync(operationClientUuid);
                 let forwardingConfigurationInput;
                 let forwardingName;
                 if (operationClientName == subscriberOperation) {
@@ -183,7 +217,7 @@ exports.notifyDeregistrations = function (operationClientConfigurationStatusList
                 let configurationStatus = operationClientConfigurationStatusList[i];
                 let operationClientUuid = configurationStatus.uuid;
                 let operationClientName = await operationClientInterface.
-                getOperationNameAsync(operationClientUuid);
+                    getOperationNameAsync(operationClientUuid);
                 let forwardingConfigurationInput;
                 let forwardingName;
                 if (operationClientName == subscriberOperation) {
@@ -213,7 +247,7 @@ exports.notifyApprovals = function (operationClientConfigurationStatusList, subs
                 let configurationStatus = operationClientConfigurationStatusList[i];
                 let operationClientUuid = configurationStatus.uuid;
                 let operationClientName = await operationClientInterface.
-                getOperationNameAsync(operationClientUuid);
+                    getOperationNameAsync(operationClientUuid);
                 let forwardingConfigurationInput;
                 let forwardingName;
                 if (operationClientName == subscriberOperation) {
@@ -243,7 +277,7 @@ exports.inquireApplicationTypeApprovals = function (operationClientConfiguration
                 let configurationStatus = operationClientConfigurationStatusList[i];
                 let operationClientUuid = configurationStatus.uuid;
                 let operationClientName = await operationClientInterface.
-                getOperationNameAsync(operationClientUuid);
+                    getOperationNameAsync(operationClientUuid);
                 let forwardingConfigurationInput;
                 let forwardingName;
                 if (operationClientName == subscriberOperation) {
@@ -273,7 +307,7 @@ exports.notifyEmbeddingStatusChange = function (operationClientConfigurationStat
                 let configurationStatus = operationClientConfigurationStatusList[i];
                 let operationClientUuid = configurationStatus.uuid;
                 let operationClientName = await operationClientInterface.
-                getOperationNameAsync(operationClientUuid);
+                    getOperationNameAsync(operationClientUuid);
                 let forwardingConfigurationInput;
                 let forwardingName;
                 if (operationClientName == subscriberOperation) {
