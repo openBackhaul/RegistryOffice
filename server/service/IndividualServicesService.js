@@ -1091,8 +1091,8 @@ exports.regardUpdatedApprovalStatus = function (body, user, originator, xCorrela
       } else {
         resolve();
       }
-      //RegardUpdatedApprovalProcess.regardUpdatedApprovalProcess(applicationName, releaseNumber, approvalStatus, processId, requestHeaders);
     } catch (error) {
+      console.log(error)
       console.log(`${error} in regardUpdatedApprovalStatus`);
       reject(error);
     }

@@ -12,6 +12,7 @@ const ForwardingDomain = require('onf-core-model-ap/applicationPattern/onfModel/
 const ForwardingConstruct = require('onf-core-model-ap/applicationPattern/onfModel/models/ForwardingConstruct');
 const ConfigurationStatus = require('onf-core-model-ap/applicationPattern/onfModel/services/models/ConfigurationStatus');
 const onfAttributes = require('onf-core-model-ap/applicationPattern/onfModel/constants/OnfAttributes');
+const forwardingConstructAutomationInput = require('onf-core-model-ap/applicationPattern/onfModel/services/models/forwardingConstruct/AutomationInput');
 const MonitorTypeApprovalChannel = require('./MonitorTypeApprovalChannel');
 const IndividualServicesUtility = require('./IndividualServicesUtility');
 const prepareForwardingConfiguration = require('./PrepareForwardingConfiguration');
@@ -26,6 +27,7 @@ const NEW_RELEASE_FORWARDING_NAME = 'PromptForBequeathingDataCausesTransferOfLis
  * {String} releaseNumber of application regarded
  * {String} approvalStatus of application regarded
  * {Object} requestHeaders that came in incoming requests
+ * {return} processId identifier for a request
  */
 exports.updateApprovalStatusInConfig = async function (requestBody, requestHeaders, operationServerName) {
     let processId;
@@ -144,7 +146,6 @@ exports.updateApprovalStatusInConfig = async function (requestBody, requestHeade
          * If the approval status is approved , then embed-yourself, regard-application will be executed
          * If the approval status is barred , then disregard-application will be executed
          ****************************************************************************************/
-
         if (approvalStatus == 'APPROVED') {
             forwardingAutomationInputList = await prepareForwardingAutomation.updateApprovalStatusApproved(
                 ltpConfigurationStatus,
@@ -170,42 +171,51 @@ exports.updateApprovalStatusInConfig = async function (requestBody, requestHeade
                 requestHeaders.customerJourney
             );
         }
+        /****************************************************************************************
+         * Initiating sequence to start embedding of the approved application into architecture
+         * Reference:https://github.com/openBackhaul/RegistryOffice/blob/develop/spec/diagrams/is010_regardApprovalStatusCausesSequence.plantuml
+         ****************************************************************************************/
+        if (approvalStatus == 'APPROVED') {
+            applicationApprovalCausesSequenceForEmbedding(requestBody, requestHeaders, operationServerName, processId);
+        }
         return processId;
     } catch (error) {
         console.log(`error in updateApprovalStatus`, error);
         throw new createHttpError.InternalServerError(`${error}`);
-    } 
+    }
 }
 
-exports.regardUpdatedApprovalProcess = async function (applicationName, releaseNumber, approvalStatus, processId, requestHeaders) {
+/**
+* This method initiates embedding sequence for an approved application
+* @param {Object} requestBody incoming request body in request
+* @param {Object} requestHeaders request header from incoming request and attached traceIndicatorIncrementor to be used for further callbacks
+* @param {String} operationServerName 
+* @param {String} processId request Identifier
+*/
+async function applicationApprovalCausesSequenceForEmbedding(requestBody, requestHeaders, operationServerName, processId) {
     try {
-        requestHeaders.traceIndicatorIncrementer = 1;
-        if (approvalStatus === "BARRED") {
-            BarringApplicationCausesDeregisteringOfApplication(applicationName, releaseNumber, requestHeaders);
-            resolve();
+        let applicationName = requestBody["application-name"];
+        let releaseNumber = requestBody["release-number"];
+        let result = await ApprovingApplicationCausesConnectingWith(processId, applicationName, releaseNumber, requestHeaders);
+
+        if (!result["successfully-embedded"]) {
+            ApprovingApplicationCausesResponding(result, requestHeaders);
+            return;
         }
-        if (approvalStatus == "APPROVED") {
-            let result = await ApprovingApplicationCausesConnectingWith(processId, applicationName, releaseNumber, requestHeaders);
-            if (!result["successfully-embedded"]) {
-                ApprovingApplicationCausesResponding(result, requestHeaders);
-                resolve();
-            }
+        ApprovalNotification(applicationName, releaseNumber, requestHeaders, operationServerName);
+//further code calling functions here
 
 
-        } else if (approvalStatus == "REGISTERED") {
-            // code shall need to be added
-        }
+
     } catch (error) {
         console.log(error);
-        reject(error);
     }
-
-
-
 }
 
-/*
+/**
 * This method is to check if application is APPROVED
+* @param {List} clientLtps list of op-c uuid(s)
+* @returns {Boolean} true if op-c is present in OUTPUT fc-port list of ServerReplacementBroadcast
 */
 async function checkApplicationApprovalStatus(clientLTPs) {
     return new Promise(async function (resolve, reject) {
@@ -230,6 +240,9 @@ async function checkApplicationApprovalStatus(clientLTPs) {
  * This method generates a new process-id based on 
  *   - current date and time
  *   - incoming application-name and release-number of application
+ * @param {String} applicationName name of the application for which approval-status is updated
+ * @param {String} releaseNumber release of the application for which approval-status is updated
+ * @returns {String} processId - identifier of a request
  */
 const generateProcessId = async function (applicationName, releaseNumber) {
     try {
@@ -282,18 +295,32 @@ async function BarringApplicationCausesDeregisteringOfApplication(applicationNam
     }
 }
 
+/**
+ * Prepare attributes and automate ApprovingApplicationCausesConnectingWith series that notifies to Alt, OKM, EATL, AA, OL
+ * @param {String} processId identifier for a request
+ * @param {String} applicationName name of the application for which approval-status is updated
+ * @param {String} releaseNumber release of the application for which approval-status is updated
+ * @param {Object} requestHeaders this object contains all request header attributes like user, xCorrelator, 
+ *          traceIndicator, customerJourney as well as traceIndicatorIncrementor
+ * @returns {Object} result  Object that contains actual embedding status
+ */
 async function ApprovingApplicationCausesConnectingWith(processId, applicationName, releaseNumber, requestHeaders) {
     let result = {};
+    result["process-id"] = processId;
     try {
-        let forwardingsList = ["ApprovingApplicationCausesConnectingWith.Alt", "ApprovingApplicationCausesConnectingWith.Okm", "ApprovingApplicationCausesConnectingWith.Eatl", "ApprovingApplicationCausesConnectingWith.Aa", "ApprovingApplicationCausesConnectingWith.Ol"];
+        let forwardingsList = [
+            "ApprovingApplicationCausesConnectingWith.Alt",
+            "ApprovingApplicationCausesConnectingWith.Okm",
+            "ApprovingApplicationCausesConnectingWith.Eatl",
+            "ApprovingApplicationCausesConnectingWith.Aa",
+            "ApprovingApplicationCausesConnectingWith.Ol"
+        ];
         let httpClientUuid = await httpClientInterface.getHttpClientUuidExcludingOldReleaseAndNewRelease(
             applicationName,
-            applicationReleaseNumber,
+            releaseNumber,
             NEW_RELEASE_FORWARDING_NAME
         );
-        let requestBody = {
-            applicationName, releaseNumber
-        };
+        let requestBody = { applicationName, releaseNumber };
         let tcpClient = (await logicalTerminationPoint.getServerLtpListAsync(httpClientUuid))[0];
         requestBody.protocol = await tcpClientInterface.getRemoteProtocolAsync(tcpClient);
         requestBody.address = await tcpClientInterface.getRemoteAddressAsync(tcpClient);
@@ -310,7 +337,6 @@ async function ApprovingApplicationCausesConnectingWith(processId, applicationNa
             );
             let responseCode = response.code;
             let responseData = response.data;
-            result["process-id"] = processId;
             if (!responseCode.toString().startsWith("2")) {
                 result["successfully-embedded"] = false;
                 result["reason-of-failure"] = `${forwardingName} resulted in response code ${responseCode}`;
@@ -321,20 +347,27 @@ async function ApprovingApplicationCausesConnectingWith(processId, applicationNa
                 result["successfully-embedded"] = responseData["successfully-connected"];
             }
             if (!result["successfully-embedded"]) {
+                console.log(`embedding sequence terminated at ${forwardingName} because of ${result["reason-of-failure"]}`)
                 return result;
             }
         }
         return result;
     } catch (error) {
         console.log(error);
-        reject(error);
+        return error;
     }
 }
 
-function ApprovingApplicationCausesResponding(requestBody) {
+/**
+ * Prepare attributes and automate ApprovingApplicationCausesResponding
+ * @param {Object} requestBody Object containing request-body to the request
+ * @param {Object} requestHeaders this object contains all request header attributes like user, xCorrelator, 
+ *          traceIndicator, customerJourney as well as traceIndicatorIncrementor
+ */
+async function ApprovingApplicationCausesResponding(requestBody, requestHeaders) {
     try {
         let forwardingName = "ApprovingApplicationCausesResponding";
-        IndividualServicesUtility.forwardRequest(
+        let result = await IndividualServicesUtility.forwardRequest(
             forwardingName,
             requestBody,
             requestHeaders.user,
@@ -342,8 +375,46 @@ function ApprovingApplicationCausesResponding(requestBody) {
             requestHeaders.traceIndicator + "." + requestHeaders.traceIndicatorIncrementer++,
             requestHeaders.customerJourney
         );
+        console.log(`Embedding status is sent to TypeApprovalRegister for ${JSON.stringify(requestBody)} with response code: ${result.code} `);
     } catch (error) {
-        console.log(error)
+        console.log(error);
+    }
+}
+/**
+ * Prepare attributes and automate ApprovalNotification
+ * @param {String} applicationName name of the application for which approval-status is updated
+ * @param {String} releaseNumber release of the application for which approval-status is updated
+ * @param {Object} requestHeaders this object contains all request header attributes like user, xCorrelator, 
+ *          traceIndicator, customerJourney as well as traceIndicatorIncrementor
+ * @param {String} operationServerName op-s that has been called
+ */
+async function ApprovalNotification(applicationName, releaseNumber, requestHeaders, operationServerName) {
+    let forwardingConstructAutomationList = [];
+    try {
+        let forwardingName = "ApprovalNotification";
+        let httpClientUuid = await httpClientInterface.getHttpClientUuidExcludingOldReleaseAndNewRelease(
+            applicationName,
+            releaseNumber,
+            NEW_RELEASE_FORWARDING_NAME
+        );
+        let requestBody = { applicationName, releaseNumber };
+        let tcpClient = (await logicalTerminationPoint.getServerLtpListAsync(httpClientUuid))[0];
+        requestBody.protocol = await tcpClientInterface.getRemoteProtocolAsync(tcpClient);
+        requestBody.address = await tcpClientInterface.getRemoteAddressAsync(tcpClient);
+        requestBody.port = await tcpClientInterface.getRemotePortAsync(tcpClient);
+        requestBody = onfAttributeFormatter.modifyJsonObjectKeysToKebabCase(requestBody);
+        let forwardingAutomation = new forwardingConstructAutomationInput(forwardingName, requestBody);
+        forwardingConstructAutomationList.push(forwardingAutomation);
+        ForwardingAutomationService.automateForwardingConstructAsync(
+            operationServerName,
+            forwardingConstructAutomationList,
+            requestHeaders.user,
+            requestHeaders.xCorrelator,
+            requestHeaders.traceIndicator + "." + requestHeaders.traceIndicatorIncrementer++,
+            requestHeaders.customerJourney
+        );
+    } catch (error) {
+        console.log(error);
     }
 }
 
