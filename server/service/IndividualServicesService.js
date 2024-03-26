@@ -13,6 +13,7 @@ const httpServerInterface = require('onf-core-model-ap/applicationPattern/onfMod
 const tcpServerInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/TcpServerInterface');
 const operationServerInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/OperationServerInterface');
 const httpClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/HttpClientInterface');
+const OperationClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/OperationClientInterface');
 const onfAttributeFormatter = require('onf-core-model-ap/applicationPattern/onfModel/utility/OnfAttributeFormatter');
 const consequentAction = require('onf-core-model-ap/applicationPattern/rest/server/responseBody/ConsequentAction');
 const responseValue = require('onf-core-model-ap/applicationPattern/rest/server/responseBody/ResponseValue');
@@ -1080,9 +1081,11 @@ exports.startApplicationInGenericRepresentation = async function () {
 exports.regardUpdatedApprovalStatus = function (body, user, originator, xCorrelator, traceIndicator, customerJourney, operationServerName) {
   return new Promise(async function (resolve, reject) {
     try {
+      let timestampOfCurrentRequest = new Date();
       let requestHeaders = {
-        user, xCorrelator, traceIndicator, customerJourney
+        user, xCorrelator, traceIndicator, customerJourney, timestampOfCurrentRequest
       };
+      OperationClientInterface.turnONNotificationChannel(timestampOfCurrentRequest);
       let processId = await RegardUpdatedApprovalProcess.updateApprovalStatusInConfig(body, requestHeaders, operationServerName);
       if (processId) {
         resolve({

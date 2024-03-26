@@ -204,11 +204,25 @@ exports.resolveApplicationNameAndHttpClientLtpUuidFromForwardingNameOfTypeSubscr
  * @param {string} traceIndicator trace indicator of the request
  * @param {string} customerJourney customer journey of the request
  **/
-exports.forwardRequest = function (forwardingKindName, attributeList, user, xCorrelator, traceIndicator, customerJourney) {
+exports.forwardRequest = function (forwardingKindName, attributeList, user, xCorrelator, traceIndicator, customerJourney, context) {
     return new Promise(async function (resolve, reject) {
         try {
             let forwardingConstructInstance = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(forwardingKindName);
-            let operationClientUuid = (await exports.getFcPortOutputLogicalTerminationPointList(forwardingConstructInstance))[0];
+            let operationClientUuid = "";
+            if (context) {
+                let fcPortList = forwardingConstructInstance["fc-port"];
+                for (let fcPort of fcPortList) {
+                    let fcPortDirection = fcPort["port-direction"];
+                    if (fcPortDirection == FcPort.portDirectionEnum.OUTPUT) {
+                        let isOutputMatchesContext = await isOutputMatchesContextAsync(fcPort, context);
+                        if (isOutputMatchesContext) {
+                            operationClientUuid = fcPort["logical-termination-point"];
+                        }
+                    }
+                }
+            } else {
+                operationClientUuid = (await exports.getFcPortOutputLogicalTerminationPointList(forwardingConstructInstance))[0];
+            }
             let result = await eventDispatcher.dispatchEvent(
                 operationClientUuid,
                 attributeList,
@@ -236,5 +250,33 @@ exports.getFcPortOutputLogicalTerminationPointList = async function (forwardingC
         }
     }
     return fcPortOutputLogicalTerminationPointList;
+}
 
+exports.getConsequentOperationClientUuid = async function (forwardingName, applicationName, releaseNumber) {
+    let forwardingConstruct = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(
+        forwardingName);
+    let fcPortList = forwardingConstruct["fc-port"];
+    for (let fcPort of fcPortList) {
+        let fcPortDirection = fcPort["port-direction"];
+        if (fcPortDirection == FcPort.portDirectionEnum.OUTPUT) {
+            let fcLogicalTerminationPoint = fcPort["logical-termination-point"];
+            let serverLtpList = await logicalTerminationPoint.getServerLtpListAsync(fcLogicalTerminationPoint);
+            let httpClientUuid = serverLtpList[0];
+            let applicationNameOfClient = await httpClientInterface.getApplicationNameAsync(httpClientUuid);
+            let releaseNumberOfClient = await httpClientInterface.getReleaseNumberAsync(httpClientUuid);
+            if (applicationNameOfClient == applicationName && releaseNumberOfClient == releaseNumber) {
+                return fcLogicalTerminationPoint;
+            }
+        }
+    }
+    return undefined;
+}
+
+async function isOutputMatchesContextAsync(fcPort, context) {
+    let fcLogicalTerminationPoint = fcPort["logical-termination-point"];
+    let serverLtpList = await logicalTerminationPoint.getServerLtpListAsync(fcLogicalTerminationPoint);
+    let httpClientUuid = serverLtpList[0];
+    let applicationName = await httpClientInterface.getApplicationNameAsync(httpClientUuid);
+    let releaseNumber = await httpClientInterface.getReleaseNumberAsync(httpClientUuid);
+    return (context == (applicationName + releaseNumber));
 }
