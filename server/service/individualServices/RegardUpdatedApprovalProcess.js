@@ -458,7 +458,7 @@ async function ApprovingApplicationCausesPreparingTheEmbedding(processId, applic
         if (oldReleaseApplicationName == "OldRelease" || !oldReleaseHttpClientUuid) {
             isCallBackEligible = false;
         }
-        /* if old-release of an application is acctually present, further callbacks to be triggered */
+        /* if old-release of an application is actually present, further callbacks to be triggered */
         if (isCallBackEligible) {
             /* CreateLinkToUpdateNewReleaseClient */
             result = await CreateLinkToUpdateNewReleaseClient(oldReleaseApplicationName, oldReleaseReleaseNumber, requestHeaders, result);
@@ -514,6 +514,16 @@ async function RequestForOldRelease(applicationName, releaseNumber, requestHeade
     return [result, responseData];
 }
 
+/**
+ * Prepare attributes and automate ApprovingApplicationCausesPreparingTheEmbedding.CreateLinkToUpdateNewReleaseClient
+ * This callback helps creating link between old-release of application and RegistryOffice for /v1/update-client-of-subsequent-release
+ * @param {String} oldReleaseApplicationName name of old-release of the application for which approval-status is updated
+ * @param {String} oldReleaseReleaseNumber release of old-release of the application for which approval-status is updated
+ * @param {Object} requestHeaders this object contains all request header attributes like user, xCorrelator, 
+ *          traceIndicator, customerJourney as well as traceIndicatorIncrementor
+ * @param {Object} result contains process-id and previous result
+ * @returns {Object} result contains the embedding status and process-id
+ */
 async function CreateLinkToUpdateNewReleaseClient(oldReleaseApplicationName, oldReleaseReleaseNumber, requestHeaders, result) {
     let forwardingName = "ApprovingApplicationCausesPreparingTheEmbedding.CreateLinkToUpdateNewReleaseClient";
     let forwardingForUpdatingNewReleaseClient = "ApprovingApplicationCausesPreparingTheEmbedding.RequestForUpdatingNewReleaseClient";
@@ -558,13 +568,21 @@ async function CreateLinkToUpdateNewReleaseClient(oldReleaseApplicationName, old
     return result;
 }
 
+/**
+ * After ApprovingApplicationCausesPreparingTheEmbedding.CreateLinkToUpdateNewReleaseClient, this function autmates further callbacks after receiving /v1/update-operation-key for OR://v1/update-client-of-subsequent-release
+ * @param {String} oldReleaseApplicationName name of old-release of the application for which approval-status is updated
+ * @param {String} oldReleaseReleaseNumber release of old-release of the application for which approval-status is updated
+ * @param {Object} requestHeaders this object contains all request header attributes like user, xCorrelator, 
+ *          traceIndicator, customerJourney as well as traceIndicatorIncrementor
+ * @param {Object} result contains process-id and previous result
+ */
 async function proceedToUpdatingNewReleaseClientAfterReceivingOperationKey(applicationName, releaseNumber, oldReleaseApplicationName, oldReleaseReleaseNumber, requestHeaders, result, isCallBackEligible) {
     let isOperationKeyUpdated = false;
     let responseData = {};
     try {
         if (isCallBackEligible) {
             let forwardingNameForUpdatingNewReleaseClient = "ApprovingApplicationCausesPreparingTheEmbedding.RequestForUpdatingNewReleaseClient";
-            let operationClientUuid = await IndividualServicesUtility.getConsequentOperationClientUuid(forwardingNameForUpdatingNewReleaseClient, applicationName, releaseNumber);
+            let operationClientUuid = await IndividualServicesUtility.getConsequentOperationClientUuid(forwardingNameForUpdatingNewReleaseClient, oldReleaseApplicationName, oldReleaseReleaseNumber);
             let waitingTime = await integerProfileOperation.getIntegerValueForTheIntegerProfileNameAsync("maximumWaitTimeToReceiveOperationKey");
             isOperationKeyUpdated = await OperationClientInterface.waitUntilOperationKeyIsUpdated(operationClientUuid, requestHeaders.timestampOfCurrentRequest, waitingTime);
             if (!isOperationKeyUpdated) {
@@ -575,7 +593,7 @@ async function proceedToUpdatingNewReleaseClientAfterReceivingOperationKey(appli
             }
 
             /* RequestForUpdatingNewReleaseClient */
-            [result, responseData] = await RequestForUpdatingNewReleaseClient(applicationName, releaseNumber, requestHeaders, result);
+            [result, responseData] = await RequestForUpdatingNewReleaseClient(oldReleaseApplicationName, oldReleaseReleaseNumber, applicationName, releaseNumber, requestHeaders, result);
             if (!result["successfully-embedded"]) {
                 ApprovingApplicationCausesResponding(result, requestHeaders);
                 return;
@@ -609,37 +627,70 @@ async function proceedToUpdatingNewReleaseClientAfterReceivingOperationKey(appli
     return;
 }
 
-async function proceedToEmbeddingAfterReceivingOperationKey(applicationName, releaseNumber, oldReleaseApplicationName, oldReleaseReleaseNumber, requestHeaders, result) {
-    let isOperationKeyUpdated = false;
+/**
+ * Prepare attributes and automate ApprovingApplicationCausesPreparingTheEmbedding.RequestForUpdatingNewReleaseClient
+ * @param {String} oldReleaseApplicationName name of old-release of the application for which approval-status is updated
+ * @param {String} oldReleaseReleaseNumber release of old-release of the application for which approval-status is updated
+ * @param {String} applicationName name of the application for which approval-status is updated
+ * @param {String} releaseNumber release of the application for which approval-status is updated
+ * @param {Object} requestHeaders this object contains all request header attributes like user, xCorrelator, 
+ *          traceIndicator, customerJourney as well as traceIndicatorIncrementor
+ * @param {Object} result contains process-id and previous result
+ * @returns {Object, Object} {result, responseData} result contains the embedding status and process-id while responseData contains actual response body on success
+ */
+async function RequestForUpdatingNewReleaseClient(oldReleaseApplicationName, oldReleaseReleaseNumber, applicationName, releaseNumber, requestHeaders, result) {
+    let forwardingName = "ApprovingApplicationCausesPreparingTheEmbedding.RequestForUpdatingNewReleaseClient";
+    let responseData = {};
     try {
-        let forwardingNameForEmbedding = "ApprovingApplicationCausesPreparingTheEmbedding.RequestForEmbedding";
-        let operationClientUuid = await IndividualServicesUtility.getConsequentOperationClientUuid(forwardingNameForEmbedding, applicationName, releaseNumber);
-        let waitingTime = await integerProfileOperation.getIntegerValueForTheIntegerProfileNameAsync("maximumWaitTimeToReceiveOperationKey");
-        isOperationKeyUpdated = await OperationClientInterface.waitUntilOperationKeyIsUpdated(operationClientUuid, requestHeaders.timestampOfCurrentRequest, waitingTime);
-        if (!isOperationKeyUpdated) {
-            result["successfully-embedded"] = 'false';
-            result["reason-of-failure"] = `/v1/update-operation-key not received for ${applicationName}, ${releaseNumber} /v1/embed-yourself during RequestForEmbedding`;
-            ApprovingApplicationCausesResponding(result, requestHeaders);
-            return;
+        /* formulating request body*/
+        let requestBody = {};
+        requestBody["application-name"] = applicationName;
+        requestBody["release-number"] = releaseNumber;
+        let httpClientUuid = await httpClientInterface.getHttpClientUuidAsync(applicationName, releaseNumber);
+        let tcpClient = (await logicalTerminationPoint.getServerLtpListAsync(httpClientUuid))[0];
+        requestBody.protocol = await tcpClientInterface.getRemoteProtocolAsync(tcpClient);
+        requestBody.address = await tcpClientInterface.getRemoteAddressAsync(tcpClient);
+        requestBody.port = await tcpClientInterface.getRemotePortAsync(tcpClient);
+        let response = await IndividualServicesUtility.forwardRequest(
+            forwardingName,
+            requestBody,
+            requestHeaders.user,
+            requestHeaders.xCorrelator,
+            requestHeaders.traceIndicator + "." + requestHeaders.traceIndicatorIncrementer++,
+            requestHeaders.customerJourney,
+            oldReleaseApplicationName + oldReleaseReleaseNumber
+        );
+        /* processing the response */
+        let responseCode = response.status;
+        if (!responseCode.toString().startsWith("2")) {
+            result["successfully-embedded"] = false;
+            result["reason-of-failure"] = `${forwardingName} resulted in response code ${responseCode}`;
+        } else {
+            responseData = response.data;
+            result["successfully-embedded"] = true;
         }
-        /* RequestForEmbedding */
-        result = await RequestForEmbedding(applicationName, releaseNumber, oldReleaseApplicationName, oldReleaseReleaseNumber, requestHeaders, result); // to be initiated by update-operation-key
-        if (!result["successfully-embedded"]) {
-            ApprovingApplicationCausesResponding(result, requestHeaders);
-            return;
-        }
-        /**
-         *  ApprovingApplicationCausesConnectingToBroadcast has been triggered after successful embedding of application
-         */
-        result = await ApprovingApplicationCausesConnectingToBroadcast(applicationName, releaseNumber, requestHeaders, result);
-        ApprovingApplicationCausesResponding(result, requestHeaders);
+        console.log(`${forwardingName} has been triggered`);
     } catch (error) {
         console.log(error);
-        throw error;
+        result["successfully-embedded"] = false;
+        result["reason-of-failure"] = ` error occurred in ${forwardingName} callback ${error} `;
     }
-    return;
+    return [result, responseData];
 }
 
+/**
+ * Prepare attributes and automate ApprovingApplicationCausesPreparingTheEmbedding.CreateLinkForBequeathYourData
+ * This callback helps creating link between old-release and new-release of application for /v1/bequeath-your-data-and-die
+ * @param {String} oldReleaseApplicationName name of old-release of the application for which approval-status is updated
+ * @param {String} oldReleaseReleaseNumber release of old-release of the application for which approval-status is updated
+ * @param {Object} responseDataOfRequestForUpdatingNewReleaseClient response received from RequestForUpdatingNewReleaseClient callback
+ * @param {String} applicationName name of the application for which approval-status is updated
+ * @param {String} releaseNumber release of the application for which approval-status is updated
+ * @param {Object} requestHeaders this object contains all request header attributes like user, xCorrelator, 
+ *          traceIndicator, customerJourney as well as traceIndicatorIncrementor
+ * @param {Object} result contains process-id and previous result
+ * @returns {Object} result contains the embedding status and process-id
+ */
 async function CreateLinkForBequeathYourData(oldReleaseApplicationName, oldReleaseReleaseNumber, responseDataOfRequestForUpdatingNewReleaseClient, applicationName, releaseNumber, requestHeaders, result) {
     let forwardingName = "ApprovingApplicationCausesPreparingTheEmbedding.CreateLinkForBequeathYourData";
     try {
@@ -682,6 +733,19 @@ async function CreateLinkForBequeathYourData(oldReleaseApplicationName, oldRelea
     return result;
 }
 
+/**
+ * Prepare attributes and automate ApprovingApplicationCausesPreparingTheEmbedding.CreateFurtherLinksForTransferringData
+ * This callback helps creating link between old-release and new-release of application for each operation-clients received in RequestForUpdatingNewReleaseClient["data-transfer-operations-list"]
+ * @param {String} oldReleaseApplicationName name of old-release of the application for which approval-status is updated
+ * @param {String} oldReleaseReleaseNumber release of old-release of the application for which approval-status is updated
+ * @param {Object} responseDataOfRequestForUpdatingNewReleaseClient response received from RequestForUpdatingNewReleaseClient callback
+ * @param {String} applicationName name of the application for which approval-status is updated
+ * @param {String} releaseNumber release of the application for which approval-status is updated
+ * @param {Object} requestHeaders this object contains all request header attributes like user, xCorrelator, 
+ *          traceIndicator, customerJourney as well as traceIndicatorIncrementor
+ * @param {Object} result contains process-id and previous result
+ * @returns {Object} result contains the embedding status and process-id
+ */
 async function CreateFurtherLinksForTransferringData(applicationName, releaseNumber, responseDataOfRequestForUpdatingNewReleaseClient, oldReleaseApplicationName, oldReleaseReleaseNumber, requestHeaders, result) {
     let forwardingName = "ApprovingApplicationCausesPreparingTheEmbedding.CreateFurtherLinksForTransferringData";
     try {
@@ -728,6 +792,16 @@ async function CreateFurtherLinksForTransferringData(applicationName, releaseNum
     return result;
 }
 
+/**
+ * Prepare attributes and automate ApprovingApplicationCausesPreparingTheEmbedding.CreateLinkForPromptingEmbedding
+ * This callback helps creating link between new-release of application and RegistryOffice for /v1/embed-yourself
+ * @param {String} applicationName name of the application for which approval-status is updated
+ * @param {String} releaseNumber release of the application for which approval-status is updated
+ * @param {Object} requestHeaders this object contains all request header attributes like user, xCorrelator, 
+ *          traceIndicator, customerJourney as well as traceIndicatorIncrementor
+ * @param {Object} result contains process-id and previous result
+ * @returns {Object} result contains the embedding status and process-id
+ */
 async function CreateLinkForPromptingEmbedding(applicationName, releaseNumber, requestHeaders, result) {
     let forwardingName = "ApprovingApplicationCausesPreparingTheEmbedding.CreateLinkForPromptingEmbedding";
     let forwardingForEmbedding = "ApprovingApplicationCausesPreparingTheEmbedding.RequestForEmbedding";
@@ -772,46 +846,58 @@ async function CreateLinkForPromptingEmbedding(applicationName, releaseNumber, r
     return result;
 }
 
-async function RequestForUpdatingNewReleaseClient(applicationName, releaseNumber, requestHeaders, result) {
-    let forwardingName = "ApprovingApplicationCausesPreparingTheEmbedding.RequestForUpdatingNewReleaseClient";
-    let responseData = {};
+/**
+ * After ApprovingApplicationCausesPreparingTheEmbedding.CreateLinkForPromptingEmbedding, this function autmates further callbacks after receiving /v1/update-operation-key for NR://v1/embed-yourself
+ * @param {String} applicationName name of the application for which approval-status is updated
+ * @param {String} releaseNumber release of the application for which approval-status is updated
+ * @param {String} oldReleaseApplicationName name of old-release of the application for which approval-status is updated
+ * @param {String} oldReleaseReleaseNumber release of old-release of the application for which approval-status is updated
+ * @param {Object} requestHeaders this object contains all request header attributes like user, xCorrelator, 
+ *          traceIndicator, customerJourney as well as traceIndicatorIncrementor
+ * @param {Object} result contains process-id and previous result
+ */
+async function proceedToEmbeddingAfterReceivingOperationKey(applicationName, releaseNumber, oldReleaseApplicationName, oldReleaseReleaseNumber, requestHeaders, result) {
+    let isOperationKeyUpdated = false;
     try {
-        /* formulating request body*/
-        let requestBody = {};
-        requestBody["application-name"] = applicationName;
-        requestBody["release-number"] = releaseNumber;
-        let httpClientUuid = await httpClientInterface.getHttpClientUuidAsync(applicationName, releaseNumber);
-        let tcpClient = (await logicalTerminationPoint.getServerLtpListAsync(httpClientUuid))[0];
-        requestBody.protocol = await tcpClientInterface.getRemoteProtocolAsync(tcpClient);
-        requestBody.address = await tcpClientInterface.getRemoteAddressAsync(tcpClient);
-        requestBody.port = await tcpClientInterface.getRemotePortAsync(tcpClient);
-        let response = await IndividualServicesUtility.forwardRequest(
-            forwardingName,
-            requestBody,
-            requestHeaders.user,
-            requestHeaders.xCorrelator,
-            requestHeaders.traceIndicator + "." + requestHeaders.traceIndicatorIncrementer++,
-            requestHeaders.customerJourney,
-            applicationName + releaseNumber
-        );
-        /* processing the response */
-        let responseCode = response.status;
-        if (!responseCode.toString().startsWith("2")) {
-            result["successfully-embedded"] = false;
-            result["reason-of-failure"] = `${forwardingName} resulted in response code ${responseCode}`;
-        } else {
-            responseData = response.data;
-            result["successfully-embedded"] = true;
+        let forwardingNameForEmbedding = "ApprovingApplicationCausesPreparingTheEmbedding.RequestForEmbedding";
+        let operationClientUuid = await IndividualServicesUtility.getConsequentOperationClientUuid(forwardingNameForEmbedding, applicationName, releaseNumber);
+        let waitingTime = await integerProfileOperation.getIntegerValueForTheIntegerProfileNameAsync("maximumWaitTimeToReceiveOperationKey");
+        isOperationKeyUpdated = await OperationClientInterface.waitUntilOperationKeyIsUpdated(operationClientUuid, requestHeaders.timestampOfCurrentRequest, waitingTime);
+        if (!isOperationKeyUpdated) {
+            result["successfully-embedded"] = 'false';
+            result["reason-of-failure"] = `/v1/update-operation-key not received for ${applicationName}, ${releaseNumber} /v1/embed-yourself during RequestForEmbedding`;
+            ApprovingApplicationCausesResponding(result, requestHeaders);
+            return;
         }
-        console.log(`${forwardingName} has been triggered`);
+        /* RequestForEmbedding */
+        result = await RequestForEmbedding(applicationName, releaseNumber, oldReleaseApplicationName, oldReleaseReleaseNumber, requestHeaders, result); // to be initiated by update-operation-key
+        if (!result["successfully-embedded"]) {
+            ApprovingApplicationCausesResponding(result, requestHeaders);
+            return;
+        }
+        /**
+         *  ApprovingApplicationCausesConnectingToBroadcast has been triggered after successful embedding of application
+         */
+        result = await ApprovingApplicationCausesConnectingToBroadcast(applicationName, releaseNumber, requestHeaders, result);
+        ApprovingApplicationCausesResponding(result, requestHeaders);
     } catch (error) {
         console.log(error);
-        result["successfully-embedded"] = false;
-        result["reason-of-failure"] = ` error occurred in ${forwardingName} callback ${error} `;
+        throw error;
     }
-    return [result, responseData];
+    return;
 }
 
+/**
+ * Prepare attributes and automate ApprovingApplicationCausesPreparingTheEmbedding.RequestForEmbedding
+ * @param {String} applicationName name of the application for which approval-status is updated
+ * @param {String} releaseNumber release of the application for which approval-status is updated
+ * @param {String} oldReleaseApplicationName name of old-release of the application for which approval-status is updated
+ * @param {String} oldReleaseReleaseNumber release of old-release of the application for which approval-status is updated
+ * @param {Object} requestHeaders this object contains all request header attributes like user, xCorrelator, 
+ *          traceIndicator, customerJourney as well as traceIndicatorIncrementor
+ * @param {Object} result contains process-id and previous result
+ * @returns {Object} result result contains the embedding status and process-id
+ */
 async function RequestForEmbedding(applicationName, releaseNumber, oldReleaseApplicationName, oldReleaseReleaseNumber, requestHeaders, result) {
     let forwardingName = "ApprovingApplicationCausesPreparingTheEmbedding.RequestForEmbedding";
     try {
@@ -894,15 +980,25 @@ async function ApprovingApplicationCausesConnectingToBroadcast(applicationName, 
     return result;
 }
 
+/**
+ * Prepare attributes and automate ApprovingApplicationCausesConnectingToBroadcast.CreateLinkForUpdatingClient
+ * This callback helps creating link between new-release of application and RegistryOffice for /v1/update-client
+ * @param {String} applicationName name of the application for which approval-status is updated
+ * @param {String} releaseNumber release of the application for which approval-status is updated
+ * @param {Object} requestHeaders this object contains all request header attributes like user, xCorrelator, 
+ *          traceIndicator, customerJourney as well as traceIndicatorIncrementor
+ * @param {Object} result contains process-id and previous result
+ * @returns {Object} result contains the embedding status and process-id
+ */
 async function CreateLinkForUpdatingClient(applicationName, releaseNumber, requestHeaders, result) {
     let forwardingName = "ApprovingApplicationCausesConnectingToBroadcast.CreateLinkForUpdatingClient";
-    let forwardingForEmbedding = "ServerReplacementBroadcast";
+    let forwardingForBroadcast = "ServerReplacementBroadcast";
     try {
         /* formulating request body*/
         let requestBody = {};
         requestBody["serving-application-name"] = applicationName;
         requestBody["serving-application-release-number"] = releaseNumber;
-        let operationClientUuid = await IndividualServicesUtility.getConsequentOperationClientUuid(forwardingForEmbedding, applicationName, releaseNumber);
+        let operationClientUuid = await IndividualServicesUtility.getConsequentOperationClientUuid(forwardingForBroadcast, applicationName, releaseNumber);
         requestBody["operation-name"] = await OperationClientInterface.getOperationNameAsync(operationClientUuid);
         requestBody["consuming-application-name"] = await httpServerInterface.getApplicationNameAsync();
         requestBody["consuming-application-release-number"] = await httpServerInterface.getReleaseNumberAsync();
@@ -938,15 +1034,25 @@ async function CreateLinkForUpdatingClient(applicationName, releaseNumber, reque
     return result;
 }
 
+/**
+ * Prepare attributes and automate ApprovingApplicationCausesConnectingToBroadcast.CreateLinkForUpdatingOperationClient
+ * This callback helps creating link between new-release of application and RegistryOffice for /v1/update-operation-client
+ * @param {String} applicationName name of the application for which approval-status is updated
+ * @param {String} releaseNumber release of the application for which approval-status is updated
+ * @param {Object} requestHeaders this object contains all request header attributes like user, xCorrelator, 
+ *          traceIndicator, customerJourney as well as traceIndicatorIncrementor
+ * @param {Object} result contains process-id and previous result
+ * @returns {Object} result contains the embedding status and process-id
+ */
 async function CreateLinkForUpdatingOperationClient(applicationName, releaseNumber, requestHeaders, result) {
     let forwardingName = "ApprovingApplicationCausesConnectingToBroadcast.CreateLinkForUpdatingOperationClient";
-    let forwardingForEmbedding = "OperationUpdateBroadcast";
+    let forwardingForBroadcast = "OperationUpdateBroadcast";
     try {
         /* formulating request body*/
         let requestBody = {};
         requestBody["serving-application-name"] = applicationName;
         requestBody["serving-application-release-number"] = releaseNumber;
-        let operationClientUuid = await IndividualServicesUtility.getConsequentOperationClientUuid(forwardingForEmbedding, applicationName, releaseNumber);
+        let operationClientUuid = await IndividualServicesUtility.getConsequentOperationClientUuid(forwardingForBroadcast, applicationName, releaseNumber);
         requestBody["operation-name"] = await OperationClientInterface.getOperationNameAsync(operationClientUuid);
         requestBody["consuming-application-name"] = await httpServerInterface.getApplicationNameAsync();
         requestBody["consuming-application-release-number"] = await httpServerInterface.getReleaseNumberAsync();
@@ -982,15 +1088,25 @@ async function CreateLinkForUpdatingOperationClient(applicationName, releaseNumb
     return result;
 }
 
+/**
+ * Prepare attributes and automate ApprovingApplicationCausesConnectingToBroadcast.CreateLinkForDisposingRemainders
+ * This callback helps creating link between new-release of application and RegistryOffice for /v1/dispose-remainders-of-deregistered-application
+ * @param {String} applicationName name of the application for which approval-status is updated
+ * @param {String} releaseNumber release of the application for which approval-status is updated
+ * @param {Object} requestHeaders this object contains all request header attributes like user, xCorrelator, 
+ *          traceIndicator, customerJourney as well as traceIndicatorIncrementor
+ * @param {Object} result contains process-id and previous result
+ * @returns {Object} result contains the embedding status and process-id
+ */
 async function CreateLinkForDisposingRemainders(applicationName, releaseNumber, requestHeaders, result) {
     let forwardingName = "ApprovingApplicationCausesConnectingToBroadcast.CreateLinkForDisposingRemainders";
-    let forwardingForEmbedding = "DeRegistrationBroadcast";
+    let forwardingForBroadcast = "DeRegistrationBroadcast";
     try {
         /* formulating request body*/
         let requestBody = {};
         requestBody["serving-application-name"] = applicationName;
         requestBody["serving-application-release-number"] = releaseNumber;
-        let operationClientUuid = await IndividualServicesUtility.getConsequentOperationClientUuid(forwardingForEmbedding, applicationName, releaseNumber);
+        let operationClientUuid = await IndividualServicesUtility.getConsequentOperationClientUuid(forwardingForBroadcast, applicationName, releaseNumber);
         requestBody["operation-name"] = await OperationClientInterface.getOperationNameAsync(operationClientUuid);
         requestBody["consuming-application-name"] = await httpServerInterface.getApplicationNameAsync();
         requestBody["consuming-application-release-number"] = await httpServerInterface.getReleaseNumberAsync();
