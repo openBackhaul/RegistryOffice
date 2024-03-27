@@ -186,10 +186,15 @@ module.exports.notifyEmbeddingStatusChanges = async function notifyEmbeddingStat
 
 module.exports.regardUpdatedApprovalStatus = async function regardUpdatedApprovalStatus(req, res, next, body, user, originator, xCorrelator, traceIndicator, customerJourney) {
   let startTime = process.hrtime();
-  let responseCode = responseCodeEnum.code.OK;
+  let responseCode;
   let responseBodyToDocument = {};
   await IndividualServices.regardUpdatedApprovalStatus(body, user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
     .then(async function (responseBody) {
+      if(responseBody != undefined && responseBody.hasOwnProperty("process-id")) {
+        responseCode = responseCodeEnum.code.OK;
+      } else {
+        responseCode = responseCodeEnum.code.NO_CONTENT;
+      }
       responseBodyToDocument = responseBody;
       let responseHeader = await restResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
       restResponseBuilder.buildResponse(res, responseCode, responseBody, responseHeader);
