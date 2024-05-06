@@ -345,10 +345,10 @@ async function ApprovingApplicationCausesConnectingWith(processId, applicationNa
             let responseData = response.data;
             if (!responseCode.toString().startsWith("2")) {
                 result["successfully-embedded"] = false;
-                result["reason-of-failure"] = `${forwardingName} resulted in response code ${responseCode}`;
+                result["reason-of-failure"] = `RO_REQUEST_UNANSWERED`;
             } else if (!responseData["successfully-connected"]) {
                 result["successfully-embedded"] = responseData["successfully-connected"];
-                result["reason-of-failure"] = `${forwardingName} received ${responseData["reason-of-failure"]}`;
+                result["reason-of-failure"] = `RO_${responseData["reason-of-failure"]}`;
             } else {
                 result["successfully-embedded"] = responseData["successfully-connected"];
             }
@@ -500,7 +500,7 @@ async function RequestForOldRelease(applicationName, releaseNumber, requestHeade
         let responseCode = response.status;
         if (!responseCode.toString().startsWith("2")) {
             result["successfully-embedded"] = false;
-            result["reason-of-failure"] = `${forwardingName} resulted in response code ${responseCode}`;
+            result["reason-of-failure"] = `RO_REQUEST_UNANSWERED`;
         } else {
             responseData = response.data;
             result["successfully-embedded"] = true;
@@ -509,7 +509,7 @@ async function RequestForOldRelease(applicationName, releaseNumber, requestHeade
     } catch (error) {
         console.log(error);
         result["successfully-embedded"] = false;
-        result["reason-of-failure"] = ` error occurred in ${forwardingName} callback ${error} `;
+        result["reason-of-failure"] = `RO_OTHERS`;
     }
     return [result, responseData];
 }
@@ -549,12 +549,12 @@ async function CreateLinkToUpdateNewReleaseClient(oldReleaseApplicationName, old
         let responseCode = response.status;
         if (!responseCode.toString().startsWith("2")) {
             result["successfully-embedded"] = false;
-            result["reason-of-failure"] = `${forwardingName} resulted in response code ${responseCode}`;
+            result["reason-of-failure"] = `RO_REQUEST_UNANSWERED`;
         } else {
             let responseData = response.data;
             if (!responseData["client-successfully-added"]) {
                 result["successfully-embedded"] = false;
-                result["reason-of-failure"] = ` ${forwardingName} failed with ${responseData["reason-of-failure"]}`;
+                result["reason-of-failure"] = `RO_${responseData["reason-of-failure"]}`;
             } else {
                 result["successfully-embedded"] = true;
             }
@@ -563,7 +563,7 @@ async function CreateLinkToUpdateNewReleaseClient(oldReleaseApplicationName, old
     } catch (error) {
         console.log(error);
         result["successfully-embedded"] = false;
-        result["reason-of-failure"] = ` error occurred in ${forwardingName} callback ${error} `;
+        result["reason-of-failure"] = `RO_OTHERS`;
     }
     return result;
 }
@@ -587,7 +587,7 @@ async function proceedToUpdatingNewReleaseClientAfterReceivingOperationKey(appli
             isOperationKeyUpdated = await OperationClientInterface.waitUntilOperationKeyIsUpdated(operationClientUuid, requestHeaders.timestampOfCurrentRequest, waitingTime);
             if (!isOperationKeyUpdated) {
                 result["successfully-embedded"] = 'false';
-                result["reason-of-failure"] = `/v1/update-operation-key not received for ${oldReleaseApplicationName}, ${oldReleaseReleaseNumber} /v1/update-client-of-subsequent-release during RequestForUpdatingNewReleaseClient`;
+                result["reason-of-failure"] = `RO_OPERATIONKEY_NOT_RECEIVED_1`;
                 ApprovingApplicationCausesResponding(result, requestHeaders);
                 return;
             }
@@ -664,7 +664,7 @@ async function RequestForUpdatingNewReleaseClient(oldReleaseApplicationName, old
         let responseCode = response.status;
         if (!responseCode.toString().startsWith("2")) {
             result["successfully-embedded"] = false;
-            result["reason-of-failure"] = `${forwardingName} resulted in response code ${responseCode}`;
+            result["reason-of-failure"] = `RO_REQUEST_UNANSWERED`;
         } else {
             responseData = response.data;
             result["successfully-embedded"] = true;
@@ -673,7 +673,7 @@ async function RequestForUpdatingNewReleaseClient(oldReleaseApplicationName, old
     } catch (error) {
         console.log(error);
         result["successfully-embedded"] = false;
-        result["reason-of-failure"] = ` error occurred in ${forwardingName} callback ${error} `;
+        result["reason-of-failure"] = `RO_OTHERS`;
     }
     return [result, responseData];
 }
@@ -714,12 +714,12 @@ async function CreateLinkForBequeathYourData(oldReleaseApplicationName, oldRelea
         let responseCode = response.status;
         if (!responseCode.toString().startsWith("2")) {
             result["successfully-embedded"] = false;
-            result["reason-of-failure"] = `${forwardingName} resulted in response code ${responseCode}`;
+            result["reason-of-failure"] = `RO_REQUEST_UNANSWERED`;
         } else {
             let responseData = response.data;
             if (!responseData["client-successfully-added"]) {
                 result["successfully-embedded"] = false;
-                result["reason-of-failure"] = ` ${forwardingName} failed with ${responseData["reason-of-failure"]}`;
+                result["reason-of-failure"] = `RO_${responseData["reason-of-failure"]}`;
             } else {
                 result["successfully-embedded"] = true;
             }
@@ -728,7 +728,7 @@ async function CreateLinkForBequeathYourData(oldReleaseApplicationName, oldRelea
     } catch (error) {
         console.log(error);
         result["successfully-embedded"] = false;
-        result["reason-of-failure"] = ` error occurred in ${forwardingName} callback ${error} `;
+        result["reason-of-failure"] = `RO_OTHERS`;
     }
     return result;
 }
@@ -770,13 +770,13 @@ async function CreateFurtherLinksForTransferringData(applicationName, releaseNum
             let responseCode = response.status;
             if (!responseCode.toString().startsWith("2")) {
                 result["successfully-embedded"] = false;
-                result["reason-of-failure"] = `${forwardingName} resulted in response code ${responseCode}`;
+                result["reason-of-failure"] = `RO_REQUEST_UNANSWERED`;
                 break;
             } else {
                 let responseData = response.data;
                 if (!responseData["client-successfully-added"]) {
                     result["successfully-embedded"] = false;
-                    result["reason-of-failure"] = ` ${forwardingName} failed with ${responseData["reason-of-failure"]}`;
+                    result["reason-of-failure"] = `RO_${responseData["reason-of-failure"]}`;
                     break;
                 } else {
                     result["successfully-embedded"] = true;
@@ -787,7 +787,7 @@ async function CreateFurtherLinksForTransferringData(applicationName, releaseNum
     } catch (error) {
         console.log(error);
         result["successfully-embedded"] = false;
-        result["reason-of-failure"] = ` error occurred in ${forwardingName} callback ${error} `;
+        result["reason-of-failure"] = `RO_OTHERS`;
     }
     return result;
 }
@@ -827,12 +827,12 @@ async function CreateLinkForPromptingEmbedding(applicationName, releaseNumber, r
         let responseCode = response.status;
         if (!responseCode.toString().startsWith("2")) {
             result["successfully-embedded"] = false;
-            result["reason-of-failure"] = `${forwardingName} resulted in response code ${responseCode}`;
+            result["reason-of-failure"] = `RO_REQUEST_UNANSWERED`;
         } else {
             let responseData = response.data;
             if (!responseData["client-successfully-added"]) {
                 result["successfully-embedded"] = false;
-                result["reason-of-failure"] = ` ${forwardingName} failed with ${responseData["reason-of-failure"]}`;
+                result["reason-of-failure"] = `RO_${responseData["reason-of-failure"]}`;
             } else {
                 result["successfully-embedded"] = true;
             }
@@ -841,7 +841,7 @@ async function CreateLinkForPromptingEmbedding(applicationName, releaseNumber, r
     } catch (error) {
         console.log(error);
         result["successfully-embedded"] = false;
-        result["reason-of-failure"] = ` error occurred in ${forwardingName} callback ${error} `;
+        result["reason-of-failure"] = `RO_OTHERS`;
     }
     return result;
 }
@@ -865,7 +865,7 @@ async function proceedToEmbeddingAfterReceivingOperationKey(applicationName, rel
         isOperationKeyUpdated = await OperationClientInterface.waitUntilOperationKeyIsUpdated(operationClientUuid, requestHeaders.timestampOfCurrentRequest, waitingTime);
         if (!isOperationKeyUpdated) {
             result["successfully-embedded"] = 'false';
-            result["reason-of-failure"] = `/v1/update-operation-key not received for ${applicationName}, ${releaseNumber} /v1/embed-yourself during RequestForEmbedding`;
+            result["reason-of-failure"] = `RO_OPERATIONKEY_NOT_RECEIVED_2`;
             ApprovingApplicationCausesResponding(result, requestHeaders);
             return;
         }
@@ -944,7 +944,7 @@ async function RequestForEmbedding(applicationName, releaseNumber, oldReleaseApp
         let responseCode = response.status;
         if (!responseCode.toString().startsWith("2")) {
             result["successfully-embedded"] = false;
-            result["reason-of-failure"] = `${forwardingName} resulted in response code ${responseCode}`;
+            result["reason-of-failure"] = `RO_REQUEST_UNANSWERED`;
         } else {
             result["successfully-embedded"] = true;
         }
@@ -952,7 +952,7 @@ async function RequestForEmbedding(applicationName, releaseNumber, oldReleaseApp
     } catch (error) {
         console.log(error)
         result["successfully-embedded"] = false;
-        result["reason-of-failure"] = ` error occurred in ${forwardingName} callback ${error} `;
+        result["reason-of-failure"] = `RO_OTHERS`;
     }
     return result;
 }
@@ -1015,12 +1015,12 @@ async function CreateLinkForUpdatingClient(applicationName, releaseNumber, reque
         let responseCode = response.status;
         if (!responseCode.toString().startsWith("2")) {
             result["successfully-embedded"] = false;
-            result["reason-of-failure"] = `${forwardingName} resulted in response code ${responseCode}`;
+            result["reason-of-failure"] = `RO_REQUEST_UNANSWERED`;
         } else {
             let responseData = response.data;
             if (!responseData["client-successfully-added"]) {
                 result["successfully-embedded"] = false;
-                result["reason-of-failure"] = ` ${forwardingName} failed with ${responseData["reason-of-failure"]}`;
+                result["reason-of-failure"] = `RO_${responseData["reason-of-failure"]}`;
             } else {
                 result["successfully-embedded"] = true;
             }
@@ -1029,7 +1029,7 @@ async function CreateLinkForUpdatingClient(applicationName, releaseNumber, reque
     } catch (error) {
         console.log(error);
         result["successfully-embedded"] = false;
-        result["reason-of-failure"] = ` error occurred in ${forwardingName} callback ${error} `;
+        result["reason-of-failure"] = `RO_OTHERS`;
     }
     return result;
 }
@@ -1069,12 +1069,12 @@ async function CreateLinkForUpdatingOperationClient(applicationName, releaseNumb
         let responseCode = response.status;
         if (!responseCode.toString().startsWith("2")) {
             result["successfully-embedded"] = false;
-            result["reason-of-failure"] = `${forwardingName} resulted in response code ${responseCode}`;
+            result["reason-of-failure"] = `RO_REQUEST_UNANSWERED`;
         } else {
             let responseData = response.data;
             if (!responseData["client-successfully-added"]) {
                 result["successfully-embedded"] = false;
-                result["reason-of-failure"] = ` ${forwardingName} failed with ${responseData["reason-of-failure"]}`;
+                result["reason-of-failure"] = `RO_${responseData["reason-of-failure"]}`;
             } else {
                 result["successfully-embedded"] = true;
             }
@@ -1083,7 +1083,7 @@ async function CreateLinkForUpdatingOperationClient(applicationName, releaseNumb
     } catch (error) {
         console.log(error);
         result["successfully-embedded"] = false;
-        result["reason-of-failure"] = ` error occurred in ${forwardingName} callback ${error} `;
+        result["reason-of-failure"] = `RO_OTHERS`;
     }
     return result;
 }
@@ -1123,12 +1123,12 @@ async function CreateLinkForDisposingRemainders(applicationName, releaseNumber, 
         let responseCode = response.status;
         if (!responseCode.toString().startsWith("2")) {
             result["successfully-embedded"] = false;
-            result["reason-of-failure"] = `${forwardingName} resulted in response code ${responseCode}`;
+            result["reason-of-failure"] = `RO_REQUEST_UNANSWERED`;
         } else {
             let responseData = response.data;
             if (!responseData["client-successfully-added"]) {
                 result["successfully-embedded"] = false;
-                result["reason-of-failure"] = ` ${forwardingName} failed with ${responseData["reason-of-failure"]}`;
+                result["reason-of-failure"] = `RO_${responseData["reason-of-failure"]}`;
             } else {
                 result["successfully-embedded"] = true;
             }
@@ -1137,7 +1137,7 @@ async function CreateLinkForDisposingRemainders(applicationName, releaseNumber, 
     } catch (error) {
         console.log(error);
         result["successfully-embedded"] = false;
-        result["reason-of-failure"] = ` error occurred in ${forwardingName} callback ${error} `;
+        result["reason-of-failure"] = `RO_OTHERS`;
     }
     return result;
 }
