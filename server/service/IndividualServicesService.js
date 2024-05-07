@@ -1059,11 +1059,9 @@ exports.startApplicationInGenericRepresentation = async function () {
 exports.regardUpdatedApprovalStatus = function (body, user, originator, xCorrelator, traceIndicator, customerJourney, operationServerName) {
   return new Promise(async function (resolve, reject) {
     try {
-      let timestampOfCurrentRequest = new Date();
       let requestHeaders = {
-        user, xCorrelator, traceIndicator, customerJourney, timestampOfCurrentRequest
+        user, xCorrelator, traceIndicator, customerJourney
       };
-      OperationClientInterface.turnONNotificationChannel(timestampOfCurrentRequest);
       let processId = await RegardUpdatedApprovalProcess.updateApprovalStatusInConfig(body, requestHeaders, operationServerName);
       if (processId) {
         resolve({
@@ -1078,6 +1076,5 @@ exports.regardUpdatedApprovalStatus = function (body, user, originator, xCorrela
       reject(error);
     }
   });
-
 }
 

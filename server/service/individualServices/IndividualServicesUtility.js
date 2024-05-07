@@ -229,7 +229,10 @@ exports.forwardRequest = function (forwardingKindName, attributeList, user, xCor
                 user,
                 xCorrelator,
                 traceIndicator,
-                customerJourney
+                customerJourney,
+                "POST",
+                undefined,
+                true
             );
             resolve(result);
         } catch (error) {

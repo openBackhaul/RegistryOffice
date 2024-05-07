@@ -35,6 +35,7 @@ const NEW_RELEASE_FORWARDING_NAME = 'PromptForBequeathingDataCausesTransferOfLis
  */
 exports.updateApprovalStatusInConfig = async function (requestBody, requestHeaders, operationServerName) {
     let processId;
+    requestHeaders.traceIndicatorIncrementer = 1;
     try {
         //extracting data from request-body
         let applicationName = requestBody["application-name"];
@@ -61,6 +62,11 @@ exports.updateApprovalStatusInConfig = async function (requestBody, requestHeade
                     true);
                 forwardingAutomationInputList = await prepareForwardingAutomation.getOperationClientForwardingAutomationInputListAsync([configurationStatus]);
             }
+        }
+        if (approvalStatus == 'BARRED') {
+            // need not send explicit requests to update ALT because /v1/deregister-application will send delete notifications to ALT
+            BarringApplicationCausesDeregisteringOfApplication(applicationName, releaseNumber, requestHeaders);
+            return processId;
         }
         /****************************************************************************************
          * code block to check if application is registered to registry office (finding if LTP instances is present in config file)
@@ -108,7 +114,7 @@ exports.updateApprovalStatusInConfig = async function (requestBody, requestHeade
         /****************************************************************************************
          * Prepare attributes to configure forwarding-construct
          * If the approval status is approved , then create forwarding construct for update-operation-client and update-client
-         * If the approval status is not barred , check if any fc-port created, if so delete them 
+         * If the approval status is not approved , check if any fc-port created, if so delete them 
          ****************************************************************************************/
         let forwardingConfigurationInputList;
         let ltpConfigurationStatus;
@@ -138,11 +144,6 @@ exports.updateApprovalStatusInConfig = async function (requestBody, requestHeade
                         forwardingConfigurationInputList
                     );
                 await MonitorTypeApprovalChannel.AddEntryToMonitorApprovalStatusChannel(applicationName, releaseNumber);
-            } else if (approvalStatus == 'BARRED') {
-                // need not send explicit requests to update ALT because /v1/deregister-application will send delete notifications to ALT
-                requestHeaders.traceIndicatorIncrementer = 1;
-                BarringApplicationCausesDeregisteringOfApplication(applicationName, releaseNumber, requestHeaders);
-                return processId;
             }
         }
         /****************************************************************************************
@@ -153,17 +154,10 @@ exports.updateApprovalStatusInConfig = async function (requestBody, requestHeade
         if (approvalStatus == 'APPROVED') {
             forwardingAutomationInputList = await prepareForwardingAutomation.updateApprovalStatusApproved(
                 ltpConfigurationStatus,
-                forwardingConstructConfigurationStatus,
-                applicationName,
-                releaseNumber
+                forwardingConstructConfigurationStatus
             );
         } else if (approvalStatus == 'REGISTERED' && isApplicationAlreadyApproved) {
-            forwardingAutomationInputList = await prepareForwardingAutomation.updateApprovalStatusBarred(
-                ltpConfigurationStatus,
-                forwardingConstructConfigurationStatus,
-                applicationName,
-                releaseNumber
-            );
+            forwardingAutomationInputList = await prepareForwardingAutomation.updateApprovalStatusRegistered(forwardingConstructConfigurationStatus);
         }
         if (forwardingAutomationInputList) {
             ForwardingAutomationService.automateForwardingConstructAsync(
@@ -179,7 +173,10 @@ exports.updateApprovalStatusInConfig = async function (requestBody, requestHeade
          * Initiating sequence to start embedding of the approved application into architecture
          * Reference:https://github.com/openBackhaul/RegistryOffice/blob/develop/spec/diagrams/is010_regardApprovalStatusCausesSequence.plantuml
          ****************************************************************************************/
-        if (approvalStatus == 'APPROVED') {
+        if (approvalStatus == 'APPROVED' && processId) {
+            let timestampOfCurrentRequest = new Date();
+            requestHeaders.timestampOfCurrentRequest = timestampOfCurrentRequest;
+            OperationClientInterface.turnONNotificationChannel(timestampOfCurrentRequest);
             applicationApprovalCausesSequenceForEmbedding(requestBody, requestHeaders, operationServerName, processId);
         }
         return processId;
@@ -200,7 +197,7 @@ async function applicationApprovalCausesSequenceForEmbedding(requestBody, reques
     try {
         let applicationName = requestBody["application-name"];
         let releaseNumber = requestBody["release-number"];
-        
+
         let connectionWithTACResult = await ApprovingApplicationCausesConnectingWith(processId, applicationName, releaseNumber, requestHeaders);
 
         if (!connectionWithTACResult["successfully-embedded"]) {
@@ -282,7 +279,7 @@ async function BarringApplicationCausesDeregisteringOfApplication(applicationNam
         requestBody.applicationName = applicationName;
         requestBody.releaseNumber = releaseNumber;
         requestBody = onfAttributeFormatter.modifyJsonObjectKeysToKebabCase(requestBody);
-        if (httpServerApplicationName != applicationName && httpServerReleaseNumber != releaseNumber) {
+        if (httpServerApplicationName != applicationName || httpServerReleaseNumber != releaseNumber) {
             result = await IndividualServicesUtility.forwardRequest(
                 forwardingName,
                 requestBody,
@@ -330,6 +327,7 @@ async function ApprovingApplicationCausesConnectingWith(processId, applicationNa
         requestBody.protocol = await tcpClientInterface.getRemoteProtocolAsync(tcpClient);
         requestBody.address = await tcpClientInterface.getRemoteAddressAsync(tcpClient);
         requestBody.port = await tcpClientInterface.getRemotePortAsync(tcpClient);
+        requestBody = onfAttributeFormatter.modifyJsonObjectKeysToKebabCase(requestBody);
         /* send regard-application to each application based on forwardingList */
         for (let i = 0; i < forwardingsList.length; i++) {
             let forwardingName = forwardingsList[i];
