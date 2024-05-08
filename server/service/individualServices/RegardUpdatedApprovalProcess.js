@@ -35,14 +35,13 @@ const NEW_RELEASE_FORWARDING_NAME = 'PromptForBequeathingDataCausesTransferOfLis
  */
 exports.updateApprovalStatusInConfig = async function (requestBody, requestHeaders, operationServerName) {
     let processId;
-    requestHeaders.traceIndicatorIncrementer = 1;
     try {
         //extracting data from request-body
         let applicationName = requestBody["application-name"];
         let releaseNumber = requestBody["release-number"];
         let approvalStatus = requestBody["approval-status"];
 
-        let forwardingAutomationInputList;
+        let forwardingAutomationInputList = [];
         /****************************************************************************************
          * updating response-receiver-operation to corresponding LTP using ApprovingApplicationCausesResponding
         ****************************************************************************************/
@@ -54,13 +53,16 @@ exports.updateApprovalStatusInConfig = async function (requestBody, requestHeade
             let forwardingConstructUuid = forwardingConstructForTheForwardingName[onfAttributes.GLOBAL_CLASS.UUID];
             let fcPortList = await ForwardingConstruct.getOutputFcPortsAsync(forwardingConstructUuid);
             let operationClientUuid = fcPortList[0][onfAttributes.FC_PORT.LOGICAL_TERMINATION_POINT];
-            let isOperationNameUpdated = await OperationClientInterface.setOperationNameAsync(operationClientUuid, responseReceiverOperation);
-            if (isOperationNameUpdated) {
-                let configurationStatus = new ConfigurationStatus(
-                    operationClientUuid,
-                    '',
-                    true);
-                forwardingAutomationInputList = await prepareForwardingAutomation.getOperationClientForwardingAutomationInputListAsync([configurationStatus]);
+            let existingOperationName = await OperationClientInterface.getOperationNameAsync(operationClientUuid);
+            if (existingOperationName != responseReceiverOperation) {
+                let isOperationNameUpdated = await OperationClientInterface.setOperationNameAsync(operationClientUuid, responseReceiverOperation);
+                if (isOperationNameUpdated) {
+                    let configurationStatus = new ConfigurationStatus(
+                        operationClientUuid,
+                        '',
+                        true);
+                    forwardingAutomationInputList = await prepareForwardingAutomation.getOperationClientForwardingAutomationInputListAsync([configurationStatus]);
+                }
             }
         }
         if (approvalStatus == 'BARRED') {
@@ -151,14 +153,16 @@ exports.updateApprovalStatusInConfig = async function (requestBody, requestHeade
          * If the approval status is approved , then embed-yourself, regard-application will be executed
          * If the approval status is barred , then disregard-application will be executed
          ****************************************************************************************/
+        let forwardingInputList;
         if (approvalStatus == 'APPROVED') {
-            forwardingAutomationInputList = await prepareForwardingAutomation.updateApprovalStatusApproved(
+            forwardingInputList = await prepareForwardingAutomation.updateApprovalStatusApproved(
                 ltpConfigurationStatus,
                 forwardingConstructConfigurationStatus
             );
         } else if (approvalStatus == 'REGISTERED' && isApplicationAlreadyApproved) {
-            forwardingAutomationInputList = await prepareForwardingAutomation.updateApprovalStatusRegistered(forwardingConstructConfigurationStatus);
+            forwardingInputList = await prepareForwardingAutomation.updateApprovalStatusRegistered(forwardingConstructConfigurationStatus);
         }
+        if (forwardingInputList.length >= 1) forwardingAutomationInputList.push(forwardingInputList);
         if (forwardingAutomationInputList) {
             ForwardingAutomationService.automateForwardingConstructAsync(
                 operationServerName,
@@ -169,6 +173,9 @@ exports.updateApprovalStatusInConfig = async function (requestBody, requestHeade
                 requestHeaders.customerJourney
             );
         }
+        // formulate trace-indicator for further requests
+        requestHeaders.traceIndicatorIncrementer = forwardingAutomationInputList.length + 1;
+
         /****************************************************************************************
          * Initiating sequence to start embedding of the approved application into architecture
          * Reference:https://github.com/openBackhaul/RegistryOffice/blob/develop/spec/diagrams/is010_regardApprovalStatusCausesSequence.plantuml
