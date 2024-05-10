@@ -114,104 +114,10 @@ exports.deregisterApplication = function (logicalTerminationPointconfigurationSt
     });
 }
 
-exports.updateApprovalStatusApproved = function (logicalTerminationPointconfigurationStatus, forwardingConstructConfigurationStatus,
-    applicationName, releaseNumber) {
+exports.updateApprovalStatusApproved = function (logicalTerminationPointconfigurationStatus, forwardingConstructConfigurationStatus) {
     return new Promise(async function (resolve, reject) {
         let forwardingConstructAutomationList = [];
-        let forwardingAutomation;
         try {
-            // /***********************************************************************************
-            //  * TypeApprovalCausesRequestForEmbedding /v1/embed-yourself
-            //  ************************************************************************************/
-            // let embedYourselfForwardingName = "TypeApprovalCausesRequestForEmbedding";
-            // let embedYourselfContext = applicationName + releaseNumber;
-            // let embedYourselfRequestBody = {};
-            // embedYourselfRequestBody.registryOfficeApplication = await httpServerInterface.getApplicationNameAsync();
-            // embedYourselfRequestBody.registryOfficeApplicationReleaseNumber = await httpServerInterface.getReleaseNumberAsync();
-
-            // let controlConstructUuid = await ControlConstruct.getUuidAsync();
-
-            // let relayServerReplacementOperationUuid = controlConstructUuid + "-op-s-is-010";
-            // embedYourselfRequestBody.relayServerReplacementOperation = await operationServerInterface.getOperationNameAsync(relayServerReplacementOperationUuid);
-
-            // let relayOperationUpdateOperationUuid = controlConstructUuid + "-op-s-is-011";
-            // embedYourselfRequestBody.relayOperationUpdateOperation = await operationServerInterface.getOperationNameAsync(relayOperationUpdateOperationUuid);
-
-            // let deregistrationOperationUuid = controlConstructUuid + "-op-s-is-002";
-            // embedYourselfRequestBody.deregistrationOperation = await operationServerInterface.getOperationNameAsync(deregistrationOperationUuid);
-            
-            // embedYourselfRequestBody.registryOfficeAddress =  await tcpServerInterface.getLocalAddressForForwarding();
-            // embedYourselfRequestBody.registryOfficePort = await tcpServerInterface.getLocalPort();
-            // embedYourselfRequestBody.registryOfficeProtocol = await tcpServerInterface.getLocalProtocol()
-
-            // //What is the preceeding release number and application for the embedding one
-            // let preceedingApplicationName = applicationName;
-            // let preceedingApplicationReleaseNumber = releaseNumber;
-            // let preceedingApplicationInformation = await ApplicationPreceedingVersion.getPreceedingApplicationInformation(
-            //     applicationName,
-            //     releaseNumber
-            // );
-
-            // let httpClientOfpreceedingApplication;
-            // if (preceedingApplicationInformation != undefined) {
-            //     let _preceedingApplicationName = preceedingApplicationInformation.preceedingApplicationName;
-            //     let _preceedingApplicationReleaseNumber = preceedingApplicationInformation.preceedingReleaseNumber;
-            //     httpClientOfpreceedingApplication = await httpClientInterface.getHttpClientUuidAsync(
-            //         _preceedingApplicationName,
-            //         _preceedingApplicationReleaseNumber);
-            //     if (httpClientOfpreceedingApplication != undefined) {
-            //         preceedingApplicationName = _preceedingApplicationName;
-            //         preceedingApplicationReleaseNumber = _preceedingApplicationReleaseNumber;
-            //     }
-            // }
-
-            // if(httpClientOfpreceedingApplication == undefined){
-            //     httpClientOfpreceedingApplication = await httpClientInterface.getHttpClientUuidAsync(
-            //         preceedingApplicationName,
-            //         preceedingApplicationReleaseNumber);
-            // }
-            
-            // //get the oldRelease tcp client information
-
-            // if(httpClientOfpreceedingApplication!=undefined){
-            //     let serverLtpsOfPreceedingApplication = await LogicalTerminationPoint.getServerLtpListAsync(httpClientOfpreceedingApplication);
-            //     let tcpClientUuidOfPreceedingApplication = serverLtpsOfPreceedingApplication[0];
-            //     if(tcpClientUuidOfPreceedingApplication != undefined){
-            //         embedYourselfRequestBody.oldReleaseProtocol = await tcpClientInterface.getRemoteProtocolAsync(tcpClientUuidOfPreceedingApplication);
-            //         embedYourselfRequestBody.oldReleaseAddress = await tcpClientInterface.getRemoteAddressAsync(tcpClientUuidOfPreceedingApplication);
-            //         embedYourselfRequestBody.oldReleasePort = await tcpClientInterface.getRemotePortAsync(tcpClientUuidOfPreceedingApplication);
-            //     }
-            // }
-
-            // embedYourselfRequestBody = onfFormatter.modifyJsonObjectKeysToKebabCase(embedYourselfRequestBody);
-            // forwardingAutomation = new forwardingConstructAutomationInput(
-            //     embedYourselfForwardingName,
-            //     embedYourselfRequestBody,
-            //     embedYourselfContext
-            // );
-            // forwardingConstructAutomationList.push(forwardingAutomation);
-
-            // /***********************************************************************************
-            //  * ApprovalNotification /v1/regard-application
-            //  ************************************************************************************/
-            // let approvalNotificationForwardingName = "ApprovalNotification";
-            // let approvalNotificationContext;
-            // let approvalNotificationRequestBody = {};
-            // let httpClientUuid = await httpClientInterface.getHttpClientUuidAsync(applicationName, releaseNumber)
-            // let tcpClientUuid = (await logicalTerminationPoint.getServerLtpListAsync(httpClientUuid))[0];
-            // approvalNotificationRequestBody.applicationName = applicationName;
-            // approvalNotificationRequestBody.releaseNumber = releaseNumber;
-            // approvalNotificationRequestBody.protocol = await tcpClientInterface.getRemoteProtocolAsync(tcpClientUuid);
-            // approvalNotificationRequestBody.address = await tcpClientInterface.getRemoteAddressAsync(tcpClientUuid);
-            // approvalNotificationRequestBody.port = await tcpClientInterface.getRemotePortAsync(tcpClientUuid);
-            // approvalNotificationRequestBody = onfFormatter.modifyJsonObjectKeysToKebabCase(approvalNotificationRequestBody);
-            // forwardingAutomation = new forwardingConstructAutomationInput(
-            //     approvalNotificationForwardingName,
-            //     approvalNotificationRequestBody,
-            //     approvalNotificationContext
-            // );
-            // forwardingConstructAutomationList.push(forwardingAutomation);
-
             /***********************************************************************************
              * forwardings for application layer topology
              ************************************************************************************/
@@ -234,32 +140,14 @@ exports.updateApprovalStatusApproved = function (logicalTerminationPointconfigur
     });
 }
 
-exports.updateApprovalStatusBarred = function (logicalTerminationPointconfigurationStatus, forwardingConstructConfigurationStatus) {
+exports.updateApprovalStatusRegistered = function (forwardingConstructConfigurationStatus) {
     return new Promise(async function (resolve, reject) {
         let forwardingConstructAutomationList = [];
         try {
-
-            // /***********************************************************************************
-            //  * WithdrawnApprovalNotification /v1/disregard-application
-            //  ************************************************************************************/
-            // let withdrawnApprovalNotificationForwardingName = "WithdrawnApprovalNotification";
-            // let withdrawnApprovalNotificationContext;
-            // let withdrawnApprovalNotificationRequestBody = {};
-            // withdrawnApprovalNotificationRequestBody.applicationName = applicationName;
-            // withdrawnApprovalNotificationRequestBody.releaseNumber = releaseNumber;
-            // withdrawnApprovalNotificationRequestBody = onfFormatter.modifyJsonObjectKeysToKebabCase(withdrawnApprovalNotificationRequestBody);
-            // let forwardingAutomation = new forwardingConstructAutomationInput(
-            //     withdrawnApprovalNotificationForwardingName,
-            //     withdrawnApprovalNotificationRequestBody,
-            //     withdrawnApprovalNotificationContext
-            // );
-            // forwardingConstructAutomationList.push(forwardingAutomation);
-
             /***********************************************************************************
              * forwardings for application layer topology
              ************************************************************************************/
-            let applicationLayerTopologyForwardingInputList = await prepareALTForwardingAutomation.getALTUnConfigureForwardingAutomationInputAsync(
-                logicalTerminationPointconfigurationStatus,
+            let applicationLayerTopologyForwardingInputList = await prepareALTForwardingAutomation.getFDUnconfigureForwardingAutomationInputList(
                 forwardingConstructConfigurationStatus
             );
 

@@ -1,7 +1,7 @@
 'use strict';
 
-const LogicalTerminationPointConfigurationInput = require('onf-core-model-ap/applicationPattern/onfModel/services/models/logicalTerminationPoint/ConfigurationInput');
-const LogicalTerminationPointService = require('onf-core-model-ap/applicationPattern/onfModel/services/LogicalTerminationPointServices');
+const LogicalTerminationPointConfigurationInput = require('onf-core-model-ap/applicationPattern/onfModel/services/models/logicalTerminationPoint/ConfigurationInputV2');
+const LogicalTerminationPointService = require('onf-core-model-ap/applicationPattern/onfModel/services/LogicalTerminationPointServicesV2');
 const ServiceUtils = require('onf-core-model-ap-bs/basicServices/utility/LogicalTerminationPoint');
 const ForwardingConfigurationService = require('onf-core-model-ap/applicationPattern/onfModel/services/ForwardingConstructConfigurationServices');
 const ForwardingAutomationService = require('onf-core-model-ap/applicationPattern/onfModel/services/ForwardingConstructAutomationServices');
@@ -234,9 +234,7 @@ exports.inquireApplicationTypeApprovals = async function (body, user, originator
   );
   let ltpConfigurationStatus;
   if (httpClientUuid) {
-    ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(
-      lpConfigurationInput, false
-    );
+    ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(lpConfigurationInput);
   }
 
   /****************************************************************************************
@@ -345,11 +343,7 @@ exports.notifyApprovals = async function (body, user, originator, xCorrelator, t
     operationNamesByAttributes,
     individualServicesOperationsMapping.individualServicesOperationsMapping
   );
-  const roApplicationName = await ServiceUtils.resolveRegistryOfficeApplicationNameFromForwardingAsync();
-  const ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(
-    ltpConfigurationInput,
-    roApplicationName === applicationName
-  );
+  const ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(ltpConfigurationInput);
 
   /****************************************************************************************
    * Prepare attributes to configure forwarding-construct
@@ -430,11 +424,7 @@ exports.notifyDeregistrations = async function (body, user, originator, xCorrela
     operationNamesByAttributes,
     individualServicesOperationsMapping.individualServicesOperationsMapping
   );
-  const roApplicationName = await ServiceUtils.resolveRegistryOfficeApplicationNameFromForwardingAsync();
-  const ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(
-    ltpConfigurationInput,
-    roApplicationName === applicationName
-  );
+  const ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(ltpConfigurationInput);
 
   /****************************************************************************************
    * Prepare attributes to configure forwarding-construct
@@ -517,11 +507,7 @@ exports.notifyWithdrawnApprovals = async function (body, user, originator, xCorr
     operationNamesByAttributes,
     individualServicesOperationsMapping.individualServicesOperationsMapping
   );
-  const roApplicationName = await ServiceUtils.resolveRegistryOfficeApplicationNameFromForwardingAsync();
-  const ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(
-    ltpConfigurationInput,
-    roApplicationName === applicationName
-  );
+  const ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(ltpConfigurationInput);
 
   /****************************************************************************************
    * Prepare attributes to configure forwarding-construct
@@ -601,11 +587,7 @@ exports.notifyEmbeddingStatusChanges = async function (body, user, originator, x
     operationNamesByAttributes,
     individualServicesOperationsMapping.individualServicesOperationsMapping
   );
-  const roApplicationName = await ServiceUtils.resolveRegistryOfficeApplicationNameFromForwardingAsync();
-  const ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(
-    ltpConfigurationInput,
-    roApplicationName === applicationName
-  );
+  const ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(ltpConfigurationInput);
 
   /****************************************************************************************
    * Prepare attributes to configure forwarding-construct
@@ -691,9 +673,7 @@ exports.registerApplication = async function (body, user, originator, xCorrelato
     operationNamesByAttributes,
     individualServicesOperationsMapping.individualServicesOperationsMapping
   );
-  let ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(
-    logicalTerminatinPointConfigurationInput
-  );
+  let ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(logicalTerminatinPointConfigurationInput);
 
   await ApplicationPreceedingVersion.addEntryToPreceedingVersionList(
     preceedingApplicationName,
@@ -811,9 +791,7 @@ exports.registerApplication2 = async function (body, user, originator, xCorrelat
       operationNamesByAttributes,
       individualServicesOperationsMapping.individualServicesOperationsMapping
     );
-    let ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(
-      logicalTerminatinPointConfigurationInput
-    );
+    let ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(logicalTerminatinPointConfigurationInput);
 
     await ApplicationPreceedingVersion.addEntryToPreceedingVersionList(
       preceedingApplicationName,
@@ -1081,11 +1059,9 @@ exports.startApplicationInGenericRepresentation = async function () {
 exports.regardUpdatedApprovalStatus = function (body, user, originator, xCorrelator, traceIndicator, customerJourney, operationServerName) {
   return new Promise(async function (resolve, reject) {
     try {
-      let timestampOfCurrentRequest = new Date();
       let requestHeaders = {
-        user, xCorrelator, traceIndicator, customerJourney, timestampOfCurrentRequest
+        user, xCorrelator, traceIndicator, customerJourney
       };
-      OperationClientInterface.turnONNotificationChannel(timestampOfCurrentRequest);
       let processId = await RegardUpdatedApprovalProcess.updateApprovalStatusInConfig(body, requestHeaders, operationServerName);
       if (processId) {
         resolve({
@@ -1100,6 +1076,5 @@ exports.regardUpdatedApprovalStatus = function (body, user, originator, xCorrela
       reject(error);
     }
   });
-
 }
 
