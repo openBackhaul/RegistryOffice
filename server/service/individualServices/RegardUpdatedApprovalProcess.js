@@ -153,7 +153,7 @@ exports.updateApprovalStatusInConfig = async function (requestBody, requestHeade
          * If the approval status is approved , then embed-yourself, regard-application will be executed
          * If the approval status is barred , then disregard-application will be executed
          ****************************************************************************************/
-        let forwardingInputList;
+        let forwardingInputList = [];
         if (approvalStatus == 'APPROVED') {
             forwardingInputList = await prepareForwardingAutomation.updateApprovalStatusApproved(
                 ltpConfigurationStatus,
