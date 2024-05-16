@@ -661,19 +661,10 @@ exports.registerApplication = async function (body, user, originator, xCorrelato
 
   let tcpObject = new TcpObject(tcpServer.protocol, tcpServer.address, tcpServer.port);
 
-  let httpClientUuid = await httpClientInterface.getHttpClientUuidExcludingOldReleaseAndNewRelease(
-    applicationName, releaseNumber, NEW_RELEASE_FORWARDING_NAME
-  );
-  let logicalTerminatinPointConfigurationInput = new LogicalTerminationPointConfigurationInput(
-    httpClientUuid,
-    applicationName,
-    releaseNumber,
-    tcpObject,
-    operationServerName,
-    operationNamesByAttributes,
-    individualServicesOperationsMapping.individualServicesOperationsMapping
-  );
-  let ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(logicalTerminatinPointConfigurationInput);
+  let ltpConfigurationStatus = await IndividualServicesUtility.updateRegisteringApplicationDataInConfigFile(applicationName, releaseNumber, tcpObject, operationServerName, operationNamesByAttributes);
+  if (!ltpConfigurationStatus) {
+    throw new createHttpError.InternalServerError(`application could not be registered `);
+  }
 
   await ApplicationPreceedingVersion.addEntryToPreceedingVersionList(
     preceedingApplicationName,
@@ -779,19 +770,10 @@ exports.registerApplication2 = async function (body, user, originator, xCorrelat
      ****************************************************************************************/
     let tcpObject = new TcpObject(tcpServer.protocol, tcpServer.address, tcpServer.port);
 
-    let httpClientUuid = await httpClientInterface.getHttpClientUuidExcludingOldReleaseAndNewRelease(
-      applicationName, releaseNumber, NEW_RELEASE_FORWARDING_NAME
-    );
-    let logicalTerminatinPointConfigurationInput = new LogicalTerminationPointConfigurationInput(
-      httpClientUuid,
-      applicationName,
-      releaseNumber,
-      tcpObject,
-      operationServerName,
-      operationNamesByAttributes,
-      individualServicesOperationsMapping.individualServicesOperationsMapping
-    );
-    let ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(logicalTerminatinPointConfigurationInput);
+    let ltpConfigurationStatus = await IndividualServicesUtility.updateRegisteringApplicationDataInConfigFile(applicationName, releaseNumber, tcpObject, operationServerName, operationNamesByAttributes);
+    if (!ltpConfigurationStatus) {
+      throw new createHttpError.InternalServerError(`application could not be registered `);
+    }
 
     await ApplicationPreceedingVersion.addEntryToPreceedingVersionList(
       preceedingApplicationName,

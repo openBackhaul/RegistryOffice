@@ -11,6 +11,13 @@ const logicalTerminationPoint = require('onf-core-model-ap/applicationPattern/on
 const tcpClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/TcpClientInterface');
 const onfAttributes = require('onf-core-model-ap/applicationPattern/onfModel/constants/OnfAttributes');
 const FcPort = require('onf-core-model-ap/applicationPattern/onfModel/models/FcPort');
+const individualServicesOperationsMapping = require('./IndividualServicesOperationsMapping');
+const LogicalTerminationPointConfigurationInput = require('onf-core-model-ap/applicationPattern/onfModel/services/models/logicalTerminationPoint/ConfigurationInputV2');
+const LogicalTerminationPointService = require('onf-core-model-ap/applicationPattern/onfModel/services/LogicalTerminationPointServicesV2');
+
+const NEW_RELEASE_FORWARDING_NAME = 'PromptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredApplications';
+const AsyncLock = require('async-lock');
+const lock = new AsyncLock();
 
 /**
  * @description This function returns list of registered application information application-name , release-number, application-address, application-port.
@@ -282,4 +289,28 @@ async function isOutputMatchesContextAsync(fcPort, context) {
     let applicationName = await httpClientInterface.getApplicationNameAsync(httpClientUuid);
     let releaseNumber = await httpClientInterface.getReleaseNumberAsync(httpClientUuid);
     return (context == (applicationName + releaseNumber));
+}
+
+exports.updateRegisteringApplicationDataInConfigFile = async function (applicationName, releaseNumber, tcpObject, operationServerName, operationNamesByAttributes) {
+    try {
+        return await lock.acquire("Register", async () => {
+            let httpClientUuid = await httpClientInterface.getHttpClientUuidExcludingOldReleaseAndNewRelease(
+                applicationName, releaseNumber, NEW_RELEASE_FORWARDING_NAME
+            );
+            let logicalTerminatinPointConfigurationInput = new LogicalTerminationPointConfigurationInput(
+                httpClientUuid,
+                applicationName,
+                releaseNumber,
+                tcpObject,
+                operationServerName,
+                operationNamesByAttributes,
+                individualServicesOperationsMapping.individualServicesOperationsMapping
+            );
+            let ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(logicalTerminatinPointConfigurationInput);
+            return ltpConfigurationStatus;
+        });
+    } catch (error) {
+        console.log(error);
+        return undefined;
+    }
 }

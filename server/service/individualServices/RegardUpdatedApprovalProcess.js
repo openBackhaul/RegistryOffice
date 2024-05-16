@@ -35,6 +35,7 @@ const NEW_RELEASE_FORWARDING_NAME = 'PromptForBequeathingDataCausesTransferOfLis
  */
 exports.updateApprovalStatusInConfig = async function (requestBody, requestHeaders, operationServerName) {
     let processId;
+    requestHeaders.traceIndicatorIncrementer = 1;
     try {
         //extracting data from request-body
         let applicationName = requestBody["application-name"];
@@ -65,6 +66,7 @@ exports.updateApprovalStatusInConfig = async function (requestBody, requestHeade
                 }
             }
         }
+
         if (approvalStatus == 'BARRED') {
             // need not send explicit requests to update ALT because /v1/deregister-application will send delete notifications to ALT
             BarringApplicationCausesDeregisteringOfApplication(applicationName, releaseNumber, requestHeaders);
@@ -153,7 +155,7 @@ exports.updateApprovalStatusInConfig = async function (requestBody, requestHeade
          * If the approval status is approved , then embed-yourself, regard-application will be executed
          * If the approval status is barred , then disregard-application will be executed
          ****************************************************************************************/
-        let forwardingInputList;
+        let forwardingInputList = [];
         if (approvalStatus == 'APPROVED') {
             forwardingInputList = await prepareForwardingAutomation.updateApprovalStatusApproved(
                 ltpConfigurationStatus,
@@ -162,7 +164,7 @@ exports.updateApprovalStatusInConfig = async function (requestBody, requestHeade
         } else if (approvalStatus == 'REGISTERED' && isApplicationAlreadyApproved) {
             forwardingInputList = await prepareForwardingAutomation.updateApprovalStatusRegistered(forwardingConstructConfigurationStatus);
         }
-        if (forwardingInputList.length >= 1) forwardingAutomationInputList.push(forwardingInputList);
+        if (forwardingInputList.length >= 1) forwardingAutomationInputList.push.apply(forwardingAutomationInputList, forwardingInputList);
         if (forwardingAutomationInputList) {
             ForwardingAutomationService.automateForwardingConstructAsync(
                 operationServerName,
@@ -617,14 +619,14 @@ async function proceedToUpdatingNewReleaseClientAfterReceivingOperationKey(appli
                 ApprovingApplicationCausesResponding(result, requestHeaders);
                 return;
             }
-            /* CreateLinkForPromptingEmbedding */
-            result = await CreateLinkForPromptingEmbedding(applicationName, releaseNumber, requestHeaders, result);
-            if (!result["successfully-embedded"]) {
-                ApprovingApplicationCausesResponding(result, requestHeaders);
-                return;
-            }
-            proceedToEmbeddingAfterReceivingOperationKey(applicationName, releaseNumber, oldReleaseApplicationName, oldReleaseReleaseNumber, requestHeaders, result);
         }
+        /* CreateLinkForPromptingEmbedding */
+        result = await CreateLinkForPromptingEmbedding(applicationName, releaseNumber, requestHeaders, result);
+        if (!result["successfully-embedded"]) {
+            ApprovingApplicationCausesResponding(result, requestHeaders);
+            return;
+        }
+        proceedToEmbeddingAfterReceivingOperationKey(applicationName, releaseNumber, oldReleaseApplicationName, oldReleaseReleaseNumber, requestHeaders, result);
     } catch (error) {
         console.log(error);
         throw error;
