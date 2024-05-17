@@ -220,9 +220,10 @@ exports.inquireApplicationTypeApprovals = async function (body, user, originator
 
   let tcpObject = new TcpObject(applicationProtocol, applicationAddress, applicationPort);
 
-  let httpClientUuid = await httpClientInterface.getHttpClientUuidAsync(
-    applicationName, releaseNumber
-  );
+  let httpClientUuid = await httpClientInterface.getHttpClientUuidAsync(applicationName, releaseNumber);
+  if (!httpClientUuid) {
+    httpClientUuid = await httpClientInterface.getHttpClientUuidAsync(applicationName);
+  }
   let lpConfigurationInput = new LogicalTerminationPointConfigurationInput(
     httpClientUuid,
     applicationName,
@@ -232,10 +233,7 @@ exports.inquireApplicationTypeApprovals = async function (body, user, originator
     operationNamesByAttributes,
     individualServicesOperationsMapping.individualServicesOperationsMapping
   );
-  let ltpConfigurationStatus;
-  if (httpClientUuid) {
-    ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(lpConfigurationInput);
-  }
+  let ltpConfigurationStatus = await LogicalTerminationPointService.FindAndUpdateApplicationLtpsAsync(lpConfigurationInput);
 
   /****************************************************************************************
    * Prepare attributes to configure forwarding-construct
@@ -862,7 +860,7 @@ exports.relayOperationUpdate = function (body, user, originator, xCorrelator, tr
       } else {
         // check whether application is approved ??
         const appNameAndUuidFromForwarding = await IndividualServicesUtility.resolveApplicationNameAndHttpClientLtpUuidFromForwardingNameOfTypeSubscription(
-          'ServerReplacementBroadcast',
+          'OperationUpdateBroadcast',
           applicationName,
           releaseNumber);
         if (appNameAndUuidFromForwarding != httpClientUuidOfNewApplication) {
