@@ -24,6 +24,8 @@ const prepareForwardingAutomation = require('./PrepareForwardingAutomation');
 const createHttpError = require('http-errors');
 
 const NEW_RELEASE_FORWARDING_NAME = 'PromptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredApplications';
+const AsyncLock = require('async-lock');
+const lock = new AsyncLock();
 
 /**
  * This function is responsible for making initial configurations in config file as soon as regard-updated-approval-status has been received.  
@@ -124,32 +126,34 @@ exports.updateApprovalStatusInConfig = async function (requestBody, requestHeade
         let ltpConfigurationStatus;
         let forwardingConstructConfigurationStatus;
         let isApplicationAlreadyApproved;
-        if (operationListForConfiguration.length > 0) {
-            forwardingConfigurationInputList = await prepareForwardingConfiguration.updateApprovalStatus(
-                operationListForConfiguration,
-                updateClientOperationName,
-                updateOperationClientOperationName,
-                disposeRemaindersOperationName
-            );
+        await lock.acquire("regard updated approval status", async () => {
+            if (operationListForConfiguration.length > 0) {
+                forwardingConfigurationInputList = await prepareForwardingConfiguration.updateApprovalStatus(
+                    operationListForConfiguration,
+                    updateClientOperationName,
+                    updateOperationClientOperationName,
+                    disposeRemaindersOperationName
+                );
 
-            isApplicationAlreadyApproved = await checkApplicationApprovalStatus(operationClientUuidList)
+                isApplicationAlreadyApproved = await checkApplicationApprovalStatus(operationClientUuidList)
 
-            if (approvalStatus == 'APPROVED') {
-                forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
-                    configureForwardingConstructAsync(
-                        operationServerName,
-                        forwardingConfigurationInputList
-                    );
-                await MonitorTypeApprovalChannel.removeEntryFromMonitorApprovalStatusChannel(applicationName, releaseNumber);
-            } else if (isApplicationAlreadyApproved && approvalStatus == 'REGISTERED') {
-                forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
-                    unConfigureForwardingConstructAsync(
-                        operationServerName,
-                        forwardingConfigurationInputList
-                    );
-                await MonitorTypeApprovalChannel.AddEntryToMonitorApprovalStatusChannel(applicationName, releaseNumber);
+                if (approvalStatus == 'APPROVED') {
+                    forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
+                        configureForwardingConstructAsync(
+                            operationServerName,
+                            forwardingConfigurationInputList
+                        );
+                    await MonitorTypeApprovalChannel.removeEntryFromMonitorApprovalStatusChannel(applicationName, releaseNumber);
+                } else if (isApplicationAlreadyApproved && approvalStatus == 'REGISTERED') {
+                    forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
+                        unConfigureForwardingConstructAsync(
+                            operationServerName,
+                            forwardingConfigurationInputList
+                        );
+                    await MonitorTypeApprovalChannel.AddEntryToMonitorApprovalStatusChannel(applicationName, releaseNumber);
+                }
             }
-        }
+        });
         /****************************************************************************************
          * Prepare attributes to automate forwarding-construct
          * If the approval status is approved , then embed-yourself, regard-application will be executed
