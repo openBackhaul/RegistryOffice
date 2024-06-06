@@ -17,8 +17,6 @@ const OperationClientInterface = require('onf-core-model-ap/applicationPattern/o
 const onfAttributeFormatter = require('onf-core-model-ap/applicationPattern/onfModel/utility/OnfAttributeFormatter');
 const consequentAction = require('onf-core-model-ap/applicationPattern/rest/server/responseBody/ConsequentAction');
 const responseValue = require('onf-core-model-ap/applicationPattern/rest/server/responseBody/ResponseValue');
-const onfPaths = require('onf-core-model-ap/applicationPattern/onfModel/constants/OnfPaths');
-const onfAttributes = require('onf-core-model-ap/applicationPattern/onfModel/constants/OnfAttributes');
 const logicalTerminationPoint = require('onf-core-model-ap/applicationPattern/onfModel/models/LogicalTerminationPoint');
 const tcpClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/TcpClientInterface');
 const FcPort = require('onf-core-model-ap/applicationPattern/onfModel/models/FcPort');
@@ -32,6 +30,8 @@ const RegardUpdatedApprovalProcess = require('./individualServices/RegardUpdated
 const IndividualServicesUtility = require('./individualServices/IndividualServicesUtility');
 
 const NEW_RELEASE_FORWARDING_NAME = 'PromptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredApplications';
+const AsyncLock = require('async-lock');
+const lock = new AsyncLock();
 
 /**
  * Initiates process of embedding a new release
@@ -659,57 +659,68 @@ exports.registerApplication = async function (body, user, originator, xCorrelato
 
   let tcpObject = new TcpObject(tcpServer.protocol, tcpServer.address, tcpServer.port);
 
-  let ltpConfigurationStatus = await IndividualServicesUtility.updateRegisteringApplicationDataInConfigFile(applicationName, releaseNumber, tcpObject, operationServerName, operationNamesByAttributes);
-  if (!ltpConfigurationStatus) {
-    throw new createHttpError.InternalServerError(`application could not be registered `);
-  }
-
-  await ApplicationPreceedingVersion.addEntryToPreceedingVersionList(
-    preceedingApplicationName,
-    preceedingReleaseNumber,
-    applicationName,
-    releaseNumber
-  );
-  /****************************************************************************************
-   * Prepare attributes to configure forwarding-construct
-   ****************************************************************************************/
-
-  let forwardingConfigurationInputList = [];
-  let forwardingConstructConfigurationStatus;
-  let operationClientConfigurationStatusList = ltpConfigurationStatus.operationClientConfigurationStatusList;
-
-  if (operationClientConfigurationStatusList) {
-    forwardingConfigurationInputList = await prepareForwardingConfiguration.registerApplication(
-      operationClientConfigurationStatusList,
-      embeddingOperation
+  await lock.acquire("Register application", async () => {
+    let httpClientUuid = await httpClientInterface.getHttpClientUuidExcludingOldReleaseAndNewRelease(
+      applicationName, releaseNumber, NEW_RELEASE_FORWARDING_NAME
     );
-    forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
-      configureForwardingConstructAsync(
-        operationServerName,
-        forwardingConfigurationInputList
+    let logicalTerminatinPointConfigurationInput = new LogicalTerminationPointConfigurationInput(
+      httpClientUuid,
+      applicationName,
+      releaseNumber,
+      tcpObject,
+      operationServerName,
+      operationNamesByAttributes,
+      individualServicesOperationsMapping.individualServicesOperationsMapping
+    );
+    let ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(logicalTerminatinPointConfigurationInput);
+
+    await ApplicationPreceedingVersion.addEntryToPreceedingVersionList(
+      preceedingApplicationName,
+      preceedingReleaseNumber,
+      applicationName,
+      releaseNumber
+    );
+    /****************************************************************************************
+     * Prepare attributes to configure forwarding-construct
+     ****************************************************************************************/
+
+    let forwardingConfigurationInputList = [];
+    let forwardingConstructConfigurationStatus;
+    let operationClientConfigurationStatusList = ltpConfigurationStatus.operationClientConfigurationStatusList;
+
+    if (operationClientConfigurationStatusList) {
+      forwardingConfigurationInputList = await prepareForwardingConfiguration.registerApplication(
+        operationClientConfigurationStatusList,
+        embeddingOperation
       );
-  }
+      forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
+        configureForwardingConstructAsync(
+          operationServerName,
+          forwardingConfigurationInputList
+        );
+    }
 
-  /****************************************************************************************
-   * Prepare attributes to automate forwarding-construct
-   ****************************************************************************************/
-  let forwardingAutomationInputList = await prepareForwardingAutomation.registerApplication(
-    ltpConfigurationStatus,
-    forwardingConstructConfigurationStatus,
-    applicationName,
-    releaseNumber
-  );
-  ForwardingAutomationService.automateForwardingConstructAsync(
-    operationServerName,
-    forwardingAutomationInputList,
-    user,
-    xCorrelator,
-    traceIndicator,
-    customerJourney
-  );
+    /****************************************************************************************
+     * Prepare attributes to automate forwarding-construct
+     ****************************************************************************************/
+    let forwardingAutomationInputList = await prepareForwardingAutomation.registerApplication(
+      ltpConfigurationStatus,
+      forwardingConstructConfigurationStatus,
+      applicationName,
+      releaseNumber
+    );
+    ForwardingAutomationService.automateForwardingConstructAsync(
+      operationServerName,
+      forwardingAutomationInputList,
+      user,
+      xCorrelator,
+      traceIndicator,
+      customerJourney
+    );
 
-  await MonitorTypeApprovalChannel.AddEntryToMonitorApprovalStatusChannel(applicationName, releaseNumber);
-  await IndividualServicesUtility.includeGenericResponseProfile(applicationName, releaseNumber);
+    await MonitorTypeApprovalChannel.AddEntryToMonitorApprovalStatusChannel(applicationName, releaseNumber);
+    await IndividualServicesUtility.includeGenericResponseProfile(applicationName, releaseNumber);
+  });
 }
 
 /**
@@ -768,57 +779,69 @@ exports.registerApplication2 = async function (body, user, originator, xCorrelat
      ****************************************************************************************/
     let tcpObject = new TcpObject(tcpServer.protocol, tcpServer.address, tcpServer.port);
 
-    let ltpConfigurationStatus = await IndividualServicesUtility.updateRegisteringApplicationDataInConfigFile(applicationName, releaseNumber, tcpObject, operationServerName, operationNamesByAttributes);
-    if (!ltpConfigurationStatus) {
-      throw new createHttpError.InternalServerError(`application could not be registered `);
-    }
-
-    await ApplicationPreceedingVersion.addEntryToPreceedingVersionList(
-      preceedingApplicationName,
-      preceedingReleaseNumber,
-      applicationName,
-      releaseNumber
-    );
-    /****************************************************************************************
-     * Prepare attributes to configure forwarding-construct
-     ****************************************************************************************/
-
-    let forwardingConfigurationInputList = [];
-    let forwardingConstructConfigurationStatus;
-    let operationClientConfigurationStatusList = ltpConfigurationStatus.operationClientConfigurationStatusList;
-
-    if (operationClientConfigurationStatusList) {
-      forwardingConfigurationInputList = await prepareForwardingConfiguration.registerApplication2(
-        operationClientConfigurationStatusList,
-        embeddingOperation, precedingReleaseOperation, subsequentReleaseOperation
+    await lock.acquire("Register application", async () => {
+      let httpClientUuid = await httpClientInterface.getHttpClientUuidExcludingOldReleaseAndNewRelease(
+        applicationName, releaseNumber, NEW_RELEASE_FORWARDING_NAME
       );
-      forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
-        configureForwardingConstructAsync(
-          operationServerName,
-          forwardingConfigurationInputList
+      let logicalTerminatinPointConfigurationInput = new LogicalTerminationPointConfigurationInput(
+        httpClientUuid,
+        applicationName,
+        releaseNumber,
+        tcpObject,
+        operationServerName,
+        operationNamesByAttributes,
+        individualServicesOperationsMapping.individualServicesOperationsMapping
+      );
+      let ltpConfigurationStatus = await LogicalTerminationPointService.createOrUpdateApplicationLtpsAsync(logicalTerminatinPointConfigurationInput);
+
+      await ApplicationPreceedingVersion.addEntryToPreceedingVersionList(
+        preceedingApplicationName,
+        preceedingReleaseNumber,
+        applicationName,
+        releaseNumber
+      );
+      /****************************************************************************************
+       * Prepare attributes to configure forwarding-construct
+       ****************************************************************************************/
+
+      let forwardingConfigurationInputList = [];
+      let forwardingConstructConfigurationStatus;
+      let operationClientConfigurationStatusList = ltpConfigurationStatus.operationClientConfigurationStatusList;
+
+      if (operationClientConfigurationStatusList) {
+        forwardingConfigurationInputList = await prepareForwardingConfiguration.registerApplication2(
+          operationClientConfigurationStatusList,
+          embeddingOperation, precedingReleaseOperation, subsequentReleaseOperation
         );
-    }
+        forwardingConstructConfigurationStatus = await ForwardingConfigurationService.
+          configureForwardingConstructAsync(
+            operationServerName,
+            forwardingConfigurationInputList
+          );
+      }
 
-    /****************************************************************************************
-     * Prepare attributes to automate forwarding-construct
-     ****************************************************************************************/
-    let forwardingAutomationInputList = await prepareForwardingAutomation.registerApplication(
-      ltpConfigurationStatus,
-      forwardingConstructConfigurationStatus,
-      applicationName,
-      releaseNumber
-    );
-    ForwardingAutomationService.automateForwardingConstructAsync(
-      operationServerName,
-      forwardingAutomationInputList,
-      user,
-      xCorrelator,
-      traceIndicator,
-      customerJourney
-    );
+      /****************************************************************************************
+       * Prepare attributes to automate forwarding-construct
+       ****************************************************************************************/
+      let forwardingAutomationInputList = await prepareForwardingAutomation.registerApplication(
+        ltpConfigurationStatus,
+        forwardingConstructConfigurationStatus,
+        applicationName,
+        releaseNumber
+      );
+      ForwardingAutomationService.automateForwardingConstructAsync(
+        operationServerName,
+        forwardingAutomationInputList,
+        user,
+        xCorrelator,
+        traceIndicator,
+        customerJourney
+      );
 
-    await MonitorTypeApprovalChannel.AddEntryToMonitorApprovalStatusChannel(applicationName, releaseNumber);
-    await IndividualServicesUtility.includeGenericResponseProfile(applicationName, releaseNumber);
+      await MonitorTypeApprovalChannel.AddEntryToMonitorApprovalStatusChannel(applicationName, releaseNumber);
+      await IndividualServicesUtility.includeGenericResponseProfile(applicationName, releaseNumber);
+    });
+
   } catch (error) {
     console.log(error);
   }
