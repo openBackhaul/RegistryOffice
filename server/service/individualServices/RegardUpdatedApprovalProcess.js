@@ -9,6 +9,7 @@ const operationServerInterface = require('onf-core-model-ap/applicationPattern/o
 const OperationClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/OperationClientInterface');
 const ForwardingConfigurationService = require('onf-core-model-ap/applicationPattern/onfModel/services/ForwardingConstructConfigurationServices');
 const ForwardingAutomationService = require('onf-core-model-ap/applicationPattern/onfModel/services/ForwardingConstructAutomationServices');
+const operationKeyUpdateNotificationService = require('onf-core-model-ap/applicationPattern/onfModel/services/OperationKeyUpdateNotificationService');
 const ForwardingDomain = require('onf-core-model-ap/applicationPattern/onfModel/models/ForwardingDomain');
 const ForwardingConstruct = require('onf-core-model-ap/applicationPattern/onfModel/models/ForwardingConstruct');
 const ConfigurationStatus = require('onf-core-model-ap/applicationPattern/onfModel/services/models/ConfigurationStatus');
@@ -170,7 +171,7 @@ exports.updateApprovalStatusInConfig = async function (requestBody, requestHeade
         }
         if (forwardingInputList.length >= 1) forwardingAutomationInputList.push.apply(forwardingAutomationInputList, forwardingInputList);
         if (forwardingAutomationInputList) {
-            ForwardingAutomationService.automateForwardingConstructAsync(
+            await ForwardingAutomationService.automateForwardingConstructAsync(
                 operationServerName,
                 forwardingAutomationInputList,
                 requestHeaders.user,
@@ -189,7 +190,7 @@ exports.updateApprovalStatusInConfig = async function (requestBody, requestHeade
         if (approvalStatus == 'APPROVED' && processId) {
             let timestampOfCurrentRequest = new Date();
             requestHeaders.timestampOfCurrentRequest = timestampOfCurrentRequest;
-            OperationClientInterface.turnONNotificationChannel(timestampOfCurrentRequest);
+            operationKeyUpdateNotificationService.turnONNotificationChannel(timestampOfCurrentRequest);
             applicationApprovalCausesSequenceForEmbedding(requestBody, requestHeaders, operationServerName, processId);
         }
         return processId;
@@ -385,7 +386,7 @@ async function ApprovingApplicationCausesConnectingWith(processId, applicationNa
 async function ApprovingApplicationCausesResponding(requestBody, requestHeaders) {
     try {
         let forwardingName = "ApprovingApplicationCausesResponding";
-        OperationClientInterface.turnOFFNotificationChannel(requestHeaders.timestampOfCurrentRequest);
+        operationKeyUpdateNotificationService.turnOFFNotificationChannel(requestHeaders.timestampOfCurrentRequest);
         let result = await IndividualServicesUtility.forwardRequest(
             forwardingName,
             requestBody,
@@ -595,10 +596,10 @@ async function proceedToUpdatingNewReleaseClientAfterReceivingOperationKey(appli
             let forwardingNameForUpdatingNewReleaseClient = "ApprovingApplicationCausesPreparingTheEmbedding.RequestForUpdatingNewReleaseClient";
             let operationClientUuid = await IndividualServicesUtility.getConsequentOperationClientUuid(forwardingNameForUpdatingNewReleaseClient, oldReleaseApplicationName, oldReleaseReleaseNumber);
             let waitingTime = await integerProfileOperation.getIntegerValueForTheIntegerProfileNameAsync("maximumWaitTimeToReceiveOperationKey");
-            isOperationKeyUpdated = await OperationClientInterface.waitUntilOperationKeyIsUpdated(operationClientUuid, requestHeaders.timestampOfCurrentRequest, waitingTime);
+            isOperationKeyUpdated = await operationKeyUpdateNotificationService.waitUntilOperationKeyIsUpdated(operationClientUuid, requestHeaders.timestampOfCurrentRequest, waitingTime);
             if (!isOperationKeyUpdated) {
                 result["successfully-embedded"] = 'false';
-                result["reason-of-failure"] = `RO_OPERATIONKEY_NOT_RECEIVED_1`;
+                result["reason-of-failure"] = `RO_MAXIMUM_WAIT_TIME_TO_RECEIVE_OPERATION_KEY_EXCEEDED`;
                 ApprovingApplicationCausesResponding(result, requestHeaders);
                 return;
             }
@@ -873,10 +874,10 @@ async function proceedToEmbeddingAfterReceivingOperationKey(applicationName, rel
         let forwardingNameForEmbedding = "ApprovingApplicationCausesPreparingTheEmbedding.RequestForEmbedding";
         let operationClientUuid = await IndividualServicesUtility.getConsequentOperationClientUuid(forwardingNameForEmbedding, applicationName, releaseNumber);
         let waitingTime = await integerProfileOperation.getIntegerValueForTheIntegerProfileNameAsync("maximumWaitTimeToReceiveOperationKey");
-        isOperationKeyUpdated = await OperationClientInterface.waitUntilOperationKeyIsUpdated(operationClientUuid, requestHeaders.timestampOfCurrentRequest, waitingTime);
+        isOperationKeyUpdated = await operationKeyUpdateNotificationService.waitUntilOperationKeyIsUpdated(operationClientUuid, requestHeaders.timestampOfCurrentRequest, waitingTime);
         if (!isOperationKeyUpdated) {
             result["successfully-embedded"] = 'false';
-            result["reason-of-failure"] = `RO_OPERATIONKEY_NOT_RECEIVED_2`;
+            result["reason-of-failure"] = `RO_MAXIMUM_WAIT_TIME_TO_RECEIVE_OPERATION_KEY_EXCEEDED`;
             ApprovingApplicationCausesResponding(result, requestHeaders);
             return;
         }
