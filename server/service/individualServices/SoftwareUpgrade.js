@@ -112,7 +112,7 @@ async function promptForBequeathingDataCausesNewApplicationBeingRequestedToInqui
 
             let inquiryForApplicationTypeApprovalFCName = "RegistrationCausesInquiryForApplicationTypeApproval";
             let forwardingConstructInstance = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(inquiryForApplicationTypeApprovalFCName);
-            let operationClientUuidList = IndividualServicesUtility.getFcPortOutputLogicalTerminationPointList(forwardingConstructInstance);
+            let operationClientUuidList = await IndividualServicesUtility.getFcPortOutputLogicalTerminationPointList(forwardingConstructInstance);
 
             for (let i = 0; i < operationClientUuidList.length; i++) {
                 try {
@@ -189,7 +189,7 @@ async function promptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredAp
 
             let approvalCausesRequestForEmbeddingFCName = "ApprovingApplicationCausesPreparingTheEmbedding.RequestForEmbedding";
             let forwardingConstructInstance = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(approvalCausesRequestForEmbeddingFCName);
-            let operationClientUuidList = IndividualServicesUtility.getFcPortOutputLogicalTerminationPointList(forwardingConstructInstance);
+            let operationClientUuidList = await IndividualServicesUtility.getFcPortOutputLogicalTerminationPointList(forwardingConstructInstance);
 
             for (let i = 0; i < operationClientUuidList.length; i++) {
                 try {
@@ -351,7 +351,7 @@ async function PromptForBequeathingDataCausesTransferOfListOfSubscriptionsForEmb
 
             let embeddingStatusNotificationFCName = "EmbeddingStatusNotification";
             let forwardingConstructInstance = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(embeddingStatusNotificationFCName);
-            let operationClientUuidList = IndividualServicesUtility.getFcPortOutputLogicalTerminationPointList(forwardingConstructInstance);
+            let operationClientUuidList = await IndividualServicesUtility.getFcPortOutputLogicalTerminationPointList(forwardingConstructInstance);
 
             for (let i = 0; i < operationClientUuidList.length; i++) {
                 try {
@@ -427,7 +427,7 @@ async function promptForBequeathingDataCausesTARbeingRequestedToRedirectInfoAbou
             try {
                 let newReleaseFcName = "PromptForBequeathingDataCausesNewApplicationBeingRequestedToInquireForApplicationTypeApprovals";
                 let forwardingConstructInstance = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(newReleaseFcName);
-                let operationClientUuid = IndividualServicesUtility.getFcPortOutputLogicalTerminationPointList(forwardingConstructInstance)[0];
+                let operationClientUuid = (await IndividualServicesUtility.getFcPortOutputLogicalTerminationPointList(forwardingConstructInstance))[0];
                 let newReleaseHttpClientUuid = (await logicalTerminationPoint.getServerLtpListAsync(operationClientUuid))[0];
                 let newReleaseTcpClientUuid = (await logicalTerminationPoint.getServerLtpListAsync(newReleaseHttpClientUuid))[0];
                 let regardUpdateApprovalOperationUuidSuffix = "-op-s-is-003";
@@ -503,7 +503,7 @@ async function promptForBequeathingDataCausesRequestForBroadcastingInfoAboutServ
 
                 let newReleaseFcName = "PromptForBequeathingDataCausesNewApplicationBeingRequestedToInquireForApplicationTypeApprovals";
                 let forwardingConstructInstance = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(newReleaseFcName);
-                let operationClientUuid = IndividualServicesUtility.getFcPortOutputLogicalTerminationPointList(forwardingConstructInstance)[0];
+                let operationClientUuid = (await IndividualServicesUtility.getFcPortOutputLogicalTerminationPointList(forwardingConstructInstance))[0];
                 let newReleaseHttpClientUuid = (await logicalTerminationPoint.getServerLtpListAsync(operationClientUuid))[0];
                 let newReleaseTcpClientUuid = (await logicalTerminationPoint.getServerLtpListAsync(newReleaseHttpClientUuid))[0];
 
@@ -577,7 +577,7 @@ async function promptForBequeathingDataCausesRequestForDeregisteringOfOldRelease
             try {
                 let newReleaseFcName = "PromptForBequeathingDataCausesNewApplicationBeingRequestedToInquireForApplicationTypeApprovals";
                 let forwardingConstructInstance = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(newReleaseFcName);
-                let operationClientUuid = IndividualServicesUtility.getFcPortOutputLogicalTerminationPointList(forwardingConstructInstance)[0];
+                let operationClientUuid = (await IndividualServicesUtility.getFcPortOutputLogicalTerminationPointList(forwardingConstructInstance))[0];
                 let newReleaseHttpClientUuid = (await logicalTerminationPoint.getServerLtpListAsync(operationClientUuid))[0];
                 let oldApplicationName = await httpServerInterface.getApplicationNameAsync();
                 let oldReleaseNumber = await httpServerInterface.getReleaseNumberAsync();
