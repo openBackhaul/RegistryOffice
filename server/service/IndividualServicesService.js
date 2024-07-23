@@ -1,3 +1,4 @@
+// @ts-check
 'use strict';
 
 const LogicalTerminationPointConfigurationInput = require('onf-core-model-ap/applicationPattern/onfModel/services/models/logicalTerminationPoint/ConfigurationInputV2');
@@ -120,7 +121,6 @@ exports.bequeathYourDataAndDie = async function (body, user, originator, xCorrel
   }
 }
 
-
 /**
  * Removes an application
  *
@@ -205,6 +205,8 @@ exports.inquireApplicationTypeApprovals = async function (body, user, originator
   let applicationPort = body["approval-application-port"];
   let approvalOperation = body["approval-operation"];
 
+  const tarApplicationName = await ServiceUtils.resolveApplicationNameFromForwardingAsync("RegistrationCausesInquiryForApplicationTypeApproval");
+  if (tarApplicationName !== applicationName) {
   const tarApplicationName = await ServiceUtils.resolveApplicationNameFromForwardingAsync("RegistrationCausesInquiryForApplicationTypeApproval");
   if (tarApplicationName !== applicationName) {
     throw new createHttpError.BadRequest(`The approval-application ${applicationName} was not found.`);

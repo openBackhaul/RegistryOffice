@@ -396,6 +396,8 @@ forwardings:
         uuid: ro-2-1-0-op-s-is-009
       - server-name: /v2/register-application
         uuid: ro-2-1-0-op-s-is-012
+      - server-name: /v1/notify-embedding-status-changes
+        uuid: ro-2-1-0-op-s-is-013
     consequent-requests:
       - client-name: ApplicationLayerTopology://v1/update-fc
         uuid: ro-2-1-0-op-c-bm-alt-2-0-1-003
@@ -854,7 +856,6 @@ forwardings:
       - server-name: /v1/regard-updated-approval-status
         uuid: ro-2-1-0-op-s-is-003
     consequent-requests:
-        
 
   - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.RequestForOldRelease
     uuid: ro-2-1-0-op-fc-is-042
@@ -943,7 +944,7 @@ forwardings:
       - client-name: OperationKeyManagement://v1/update-client-of-subsequent-release
         uuid: ro-2-1-0-op-c-im-okm-2-0-1-009
 
-  - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.CreateLinkForPromptingEmbedding
+  - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.CreateLinkForBequeathYourData
     uuid: ro-2-1-0-op-fc-is-046
     forwarding-type: InvariantProcessSnippet
     management-requests:
@@ -958,7 +959,7 @@ forwardings:
       - client-name: ALT://v1/add-operation-client-to-link
         uuid: ro-2-1-0-op-c-is-alt-2-0-1-000
 
-  - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.CreateLinkForBequeathYourData
+  - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.CreateFurtherLinksForTransferringData
     uuid: ro-2-1-0-op-fc-is-047
     forwarding-type: InvariantProcessSnippet
     management-requests:
@@ -973,7 +974,7 @@ forwardings:
       - client-name: ALT://v1/add-operation-client-to-link
         uuid: ro-2-1-0-op-c-is-alt-2-0-1-000
 
-  - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.CreateFurtherLinksForTransferringData
+  - forwarding-name: ApprovingApplicationCausesPreparingTheEmbedding.CreateLinkForPromptingEmbedding
     uuid: ro-2-1-0-op-fc-is-048
     forwarding-type: InvariantProcessSnippet
     management-requests:
@@ -1071,6 +1072,8 @@ forwardings:
     initiating-requests:
       - server-name: /v1/regard-updated-approval-status
         uuid: ro-2-1-0-op-s-is-003
+      - server-name: /v1/update-operation-key
+        uuid: ro-2-1-0-op-s-bm-010
     consequent-requests:
       - client-name: ALT://v1/add-operation-client-to-link
         uuid: ro-2-1-0-op-c-is-alt-2-0-1-000
@@ -1090,6 +1093,8 @@ forwardings:
     initiating-requests:
       - server-name: /v1/regard-updated-approval-status
         uuid: ro-2-1-0-op-s-is-003
+      - server-name: /v1/update-operation-key
+        uuid: ro-2-1-0-op-s-bm-010
     consequent-requests:
       - client-name: TAR://v1/document-embedding-status
         uuid: ro-2-1-0-op-c-im-tar-2-0-1-007
