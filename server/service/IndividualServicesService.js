@@ -1,3 +1,4 @@
+// @ts-check
 'use strict';
 
 const LogicalTerminationPointConfigurationInput = require('onf-core-model-ap/applicationPattern/onfModel/services/models/logicalTerminationPoint/ConfigurationInputV2');
