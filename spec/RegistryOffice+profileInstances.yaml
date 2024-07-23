@@ -187,16 +187,6 @@ profile-instances:
     configuration:
       value-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-okm-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number'
 
-  - profile-name: 'GenericResponseProfile'
-    uuid: 'ro-2-1-0-response-p-015'
-    capability:
-      operation-name: '/v1/list-applications-in-generic-representation'
-      field-name-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-cc-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name'
-      description: 'List of registered application names and release numbers'
-      datatype: 'string'
-    configuration:
-      value-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-cc-1-0-0-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number'
-
 
   - profile-name: 'FileProfile'
     uuid: 'ro-2-1-0-file-p-000'
@@ -212,6 +202,28 @@ profile-instances:
 
   - profile-name: 'IntegerProfile'
     uuid: 'ro-2-1-0-integer-p-000'
+    capability:
+      integer-name: 'maximumWaitTimeToReceiveOperationKey'
+      purpose: 'Creating a Link in ALT was successful if an OperationKey could be received. This attribute limits waiting for the OperationKey to be received.'
+      unit: 'millisecond'
+      minimum: 0
+      maximum: 5000
+    configuration:
+      integer-value: 500
+
+  - profile-name: 'IntegerProfile'
+    uuid: 'ro-2-1-0-integer-p-001'
+    capability:
+      integer-name: 'maximumNumberOfAttemptsToCreateLink'
+      purpose: 'Creating a Link in ALT may fail because background processes are not finished. This attribute limits the number of attempts to create the Link.'
+      unit: 'attempt'
+      minimum: 0
+      maximum: 20
+    configuration:
+      integer-value: 5
+
+  - profile-name: 'IntegerProfile'
+    uuid: 'ro-2-1-0-integer-p-010'
     capability:
       integer-name: 'waitTimeToApprove'
       unit: 'second'

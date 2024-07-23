@@ -1,3 +1,4 @@
+// @ts-check
 'use strict';
 
 const LogicalTerminationPointConfigurationInput = require('onf-core-model-ap/applicationPattern/onfModel/services/models/logicalTerminationPoint/ConfigurationInputV2');
@@ -119,7 +120,6 @@ exports.bequeathYourDataAndDie = async function (body, user, originator, xCorrel
     console.log(`bequeathing process failed with error: ${error}`);
   }
 }
-
 
 /**
  * Removes an application
