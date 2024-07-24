@@ -13,13 +13,11 @@ const httpServerInterface = require('onf-core-model-ap/applicationPattern/onfMod
 const tcpServerInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/TcpServerInterface');
 const operationServerInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/OperationServerInterface');
 const httpClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/HttpClientInterface');
-const OperationClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/OperationClientInterface');
 const onfAttributeFormatter = require('onf-core-model-ap/applicationPattern/onfModel/utility/OnfAttributeFormatter');
 const consequentAction = require('onf-core-model-ap/applicationPattern/rest/server/responseBody/ConsequentAction');
 const responseValue = require('onf-core-model-ap/applicationPattern/rest/server/responseBody/ResponseValue');
 const logicalTerminationPoint = require('onf-core-model-ap/applicationPattern/onfModel/models/LogicalTerminationPoint');
 const tcpClientInterface = require('onf-core-model-ap/applicationPattern/onfModel/models/layerProtocols/TcpClientInterface');
-const FcPort = require('onf-core-model-ap/applicationPattern/onfModel/models/FcPort');
 const MonitorTypeApprovalChannel = require('./individualServices/MonitorTypeApprovalChannel');
 const ApplicationPreceedingVersion = require('./individualServices/ApplicationPreceedingVersion');
 const individualServicesOperationsMapping = require('./individualServices/IndividualServicesOperationsMapping');
@@ -761,9 +759,9 @@ exports.registerApplication2 = async function (body, user, originator, xCorrelat
     let disposeRemaindersOperation;
     let precedingReleaseOperation;
     let subsequentReleaseOperation;
-    if (body.hasOwnProperty("tcp-server-list")) {
+    if (Object.prototype.hasOwnProperty.call(body, "tcp-server-list")) {
       tcpServer = body["tcp-server-list"][0];
-    } else if (body.hasOwnProperty("tcp-server")) {
+    } else if (Object.prototype.hasOwnProperty.call(body, "tcp-server")) {
       tcpServer = body["tcp-server"];
       disposeRemaindersOperation = body["dispose-remainders-operation"];
       precedingReleaseOperation = body["preceding-release-operation"];
