@@ -121,6 +121,7 @@ exports.bequeathYourDataAndDie = async function (body, user, originator, xCorrel
   }
 }
 
+
 /**
  * Removes an application
  *
@@ -1083,3 +1084,104 @@ exports.regardUpdatedApprovalStatus = function (body, user, originator, xCorrela
   });
 }
 
+/**
+ * @description This function includes a new response profile if not exists for a registered application
+ * @return {Promise} return true if operation is successful
+ **/
+function includeGenericResponseProfile(applicationName, releaseNumber) {
+  return new Promise(async function (resolve, reject) {
+    let isUpdated = true;
+    try {
+      let httpClientUuid = await HttpClientInterface.getHttpClientUuidAsync(applicationName, releaseNumber);
+      if (httpClientUuid != undefined) {
+        let applicationNameReference = onfPaths.HTTP_CLIENT_APPLICATION_NAME.replace("{uuid}", httpClientUuid);
+        let isResponseProfileAlreadyExist = await ResponseProfile.findProfileUuidForFieldNameReferenceAsync(applicationNameReference);
+        if (!isResponseProfileAlreadyExist) {
+          let releaseNumberReference = onfPaths.HTTP_CLIENT_RELEASE_NUMBER.replace("{uuid}", httpClientUuid);
+          let operationName = "/v1/list-applications-in-generic-representation";
+          let description = "List of registered application names and release numbers";
+          let datatype = "string";
+          let responseProfile = await ResponseProfile.createProfileAsync(operationName,
+            applicationNameReference,
+            description,
+            datatype,
+            releaseNumberReference);
+          isUpdated = await ProfileCollection.addProfileAsync(responseProfile);
+        }
+      }
+      resolve(isUpdated);
+    } catch (error) {
+      reject();
+    }
+  });
+}
+
+/**
+ * @description This function excludes an existing response profile if not exists for a registered application
+ * @return {Promise} return true if operation is successful
+ **/
+function excludeGenericResponseProfile(applicationName, releaseNumber) {
+  return new Promise(async function (resolve, reject) {
+    let isUpdated = true;
+    try {
+      let httpClientUuid = await HttpClientInterface.getHttpClientUuidAsync(applicationName, releaseNumber);
+      if (httpClientUuid != undefined) {
+        let applicationNameReference = onfPaths.HTTP_CLIENT_APPLICATION_NAME.replace("{uuid}", httpClientUuid);
+        let responseProfileUuid = await ResponseProfile.findProfileUuidForFieldNameReferenceAsync(applicationNameReference);
+        if (responseProfileUuid) {
+          isUpdated = await ProfileCollection.deleteProfileAsync(responseProfileUuid);
+        }
+      }
+      resolve(isUpdated);
+    } catch (error) {
+      reject();
+    }
+  });
+}
+
+/**
+ * @description This function helps to get the APISegment of the operationClient uuid
+ * @return {Promise} returns the APISegment
+ **/
+function getApiSegmentOfOperationClient(operationClientUuid) {
+  let APISegment;
+  try {
+    APISegment = operationClientUuid.split("-")[6];
+  } catch (error) {
+    console.log("error in extracting the APISegment");
+  }
+  return APISegment;
+}
+
+async function resolveApplicationNameAndHttpClientLtpUuidFromForwardingNameOfTypeSubscription(forwardingName, applicationName, releaseNumber) {
+  let httpClientUuidOfTheSubscribedApplication = undefined;
+  const forwardingConstruct = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(forwardingName);
+  if (forwardingConstruct === undefined) {
+    return null;
+  }
+
+  let fcPortOutputDirectionLogicalTerminationPointList = [];
+  const fcPortList = forwardingConstruct[onfAttributes.FORWARDING_CONSTRUCT.FC_PORT];
+  for (const fcPort of fcPortList) {
+    const portDirection = fcPort[onfAttributes.FC_PORT.PORT_DIRECTION];
+    if (FcPort.portDirectionEnum.OUTPUT === portDirection) {
+      fcPortOutputDirectionLogicalTerminationPointList.push(fcPort[onfAttributes.FC_PORT.LOGICAL_TERMINATION_POINT]);
+    }
+  }
+
+  if (fcPortOutputDirectionLogicalTerminationPointList.length == 0) {
+    return null;
+  }
+
+  for (let i = 0; i < fcPortOutputDirectionLogicalTerminationPointList.length; i++) {
+    const opLtpUuid = fcPortOutputDirectionLogicalTerminationPointList[i];
+    const httpLtpUuidList = await LogicalTerminationPoint.getServerLtpListAsync(opLtpUuid);
+    const httpClientLtpUuid = httpLtpUuidList[0];
+    const _applicationName = await httpClientInterface.getApplicationNameAsync(httpClientLtpUuid);
+    const _releaseNumber = await httpClientInterface.getReleaseNumberAsync(httpClientLtpUuid);
+    if (_applicationName == applicationName && _releaseNumber == releaseNumber) {
+      httpClientUuidOfTheSubscribedApplication = httpClientLtpUuid;
+    }
+  }
+  return httpClientUuidOfTheSubscribedApplication;
+}
