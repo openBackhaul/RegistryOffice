@@ -49,7 +49,7 @@ exports.updateApprovalStatusInConfig = async function (requestBody, requestHeade
         /****************************************************************************************
          * updating response-receiver-operation to corresponding LTP using ApprovingApplicationCausesResponding
         ****************************************************************************************/
-        if (requestBody.hasOwnProperty("response-receiver-operation")) {
+        if (Object.prototype.hasOwnProperty.call(requestBody, "response-receiver-operation")) {
             processId = await generateProcessId(applicationName, releaseNumber);
             let responseReceiverOperation = requestBody["response-receiver-operation"];
             let forwardingName = "ApprovingApplicationCausesResponding";

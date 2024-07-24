@@ -218,7 +218,7 @@ module.exports.regardUpdatedApprovalStatus = async function regardUpdatedApprova
   let responseBodyToDocument = {};
   await IndividualServices.regardUpdatedApprovalStatus(body, user, originator, xCorrelator, traceIndicator, customerJourney, req.url)
     .then(async function (responseBody) {
-      if (responseBody != undefined && responseBody.hasOwnProperty("process-id")) {
+      if (responseBody != undefined && Object.prototype.hasOwnProperty.call(responseBody, "process-id")) {
         responseCode = responseCodeEnum.code.OK;
       } else {
         responseCode = responseCodeEnum.code.NO_CONTENT;

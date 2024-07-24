@@ -57,7 +57,17 @@ exports.dispatchEvent = async function (operationClientUuid, httpRequestBody, us
     if (response.code.toString().startsWith("2")) {
         response.data = responseReceived.data;
     } else {
-        ExecutionAndTraceService.recordServiceRequestFromClient(serverApplicationName, serverApplicationReleaseNumber, xCorrelator, traceIndicator, user, originator, operationName, responseCode, httpRequestBody, response.data)
+        ExecutionAndTraceService.recordServiceRequestFromClient(
+            serverApplicationName, 
+            serverApplicationReleaseNumber, 
+            xCorrelator, 
+            traceIndicator, 
+            user, 
+            originator, 
+            operationName, 
+            response.code, 
+            httpRequestBody, 
+            response.data)
             .catch((error) => console.log(`record service request ${JSON.stringify({
                 xCorrelator,
                 traceIndicator,
@@ -66,7 +76,7 @@ exports.dispatchEvent = async function (operationClientUuid, httpRequestBody, us
                 serverApplicationName,
                 serverApplicationReleaseNumber,
                 operationName,
-                responseCode,
+                resCode : response.code,
                 reqBody: httpRequestBody,
                 resBody: response.data
             })} failed with error: ${error.message}`));
