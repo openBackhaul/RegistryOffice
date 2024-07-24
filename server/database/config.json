@@ -1288,7 +1288,7 @@
                         "http-server-interface-1-0:http-server-interface-pac": {
                             "http-server-interface-capability": {
                                 "application-name": "RegistryOffice",
-                                "release-number": "2.1.0",
+                                "release-number": "2.1.1",
                                 "application-purpose": "All applications being part of the MW SDN must register here.",
                                 "data-update-period": "http-server-interface-1-0:DATA_UPDATE_PERIOD_TYPE_REAL_TIME",
                                 "owner-name": "Thorsten Heinze",
@@ -1503,7 +1503,7 @@
                         "http-client-interface-1-0:http-client-interface-pac": {
                             "http-client-interface-configuration": {
                                 "application-name": "NewRelease",
-                                "release-number": "2.1.0"
+                                "release-number": "2.1.1"
                             }
                         }
                     }
@@ -1799,7 +1799,7 @@
                         "http-client-interface-1-0:http-client-interface-pac": {
                             "http-client-interface-configuration": {
                                 "application-name": "RegistryOffice",
-                                "release-number": "2.0.1"
+                                "release-number": "2.1.1"
                             }
                         }
                     }
@@ -2095,7 +2095,7 @@
                         "http-client-interface-1-0:http-client-interface-pac": {
                             "http-client-interface-configuration": {
                                 "application-name": "TypeApprovalRegister",
-                                "release-number": "2.0.1"
+                                "release-number": "2.1.1"
                             }
                         }
                     }
@@ -2367,7 +2367,7 @@
                         "http-client-interface-1-0:http-client-interface-pac": {
                             "http-client-interface-configuration": {
                                 "application-name": "ExecutionAndTraceLog",
-                                "release-number": "2.0.1"
+                                "release-number": "2.1.1"
                             }
                         }
                     }
@@ -2638,7 +2638,7 @@
                         "http-client-interface-1-0:http-client-interface-pac": {
                             "http-client-interface-configuration": {
                                 "application-name": "OamLog",
-                                "release-number": "2.0.1"
+                                "release-number": "2.1.1"
                             }
                         }
                     }
@@ -2909,7 +2909,7 @@
                         "http-client-interface-1-0:http-client-interface-pac": {
                             "http-client-interface-configuration": {
                                 "application-name": "AdministratorAdministration",
-                                "release-number": "2.0.1"
+                                "release-number": "2.1.1"
                             }
                         }
                     }
@@ -3330,7 +3330,7 @@
                         "http-client-interface-1-0:http-client-interface-pac": {
                             "http-client-interface-configuration": {
                                 "application-name": "ApplicationLayerTopology",
-                                "release-number": "2.0.1"
+                                "release-number": "2.1.1"
                             }
                         }
                     }
@@ -3576,7 +3576,7 @@
                         "http-client-interface-1-0:http-client-interface-pac": {
                             "http-client-interface-configuration": {
                                 "application-name": "OperationKeyManagement",
-                                "release-number": "2.0.1"
+                                "release-number": "2.1.1"
                             }
                         }
                     }
