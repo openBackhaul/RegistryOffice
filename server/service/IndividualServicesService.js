@@ -207,6 +207,8 @@ exports.inquireApplicationTypeApprovals = async function (body, user, originator
 
   const tarApplicationName = await ServiceUtils.resolveApplicationNameFromForwardingAsync("RegistrationCausesInquiryForApplicationTypeApproval");
   if (tarApplicationName !== applicationName) {
+  const tarApplicationName = await ServiceUtils.resolveApplicationNameFromForwardingAsync("RegistrationCausesInquiryForApplicationTypeApproval");
+  if (tarApplicationName !== applicationName) {
     throw new createHttpError.BadRequest(`The approval-application ${applicationName} was not found.`);
   }
 
