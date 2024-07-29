@@ -426,15 +426,21 @@ async function ApprovalNotification(applicationName, releaseNumber, requestHeade
         requestBody = onfAttributeFormatter.modifyJsonObjectKeysToKebabCase(requestBody);
         let forwardingAutomation = new forwardingConstructAutomationInput(forwardingName, requestBody);
         forwardingConstructAutomationList.push(forwardingAutomation);
-        ForwardingAutomationService.automateForwardingConstructAsync(
-            operationServerName,
-            forwardingConstructAutomationList,
-            requestHeaders.user,
-            requestHeaders.xCorrelator,
-            requestHeaders.traceIndicator + "." + requestHeaders.traceIndicatorIncrementer++,
-            requestHeaders.customerJourney
-        );
-        console.log(`${forwardingName} has been triggered`)
+        let forwardingConstruct = await ForwardingDomain.getForwardingConstructForTheForwardingNameAsync(
+            forwardingName);
+        let fcUuid = forwardingConstruct["uuid"];
+        let outputFcPortList = await ForwardingConstruct.getOutputFcPortsAsync(fcUuid);
+        if(outputFcPortList.length !=0 ) {
+            ForwardingAutomationService.automateForwardingConstructAsync(
+                operationServerName,
+                forwardingConstructAutomationList,
+                requestHeaders.user,
+                requestHeaders.xCorrelator,
+                requestHeaders.traceIndicator + "." + requestHeaders.traceIndicatorIncrementer++,
+                requestHeaders.customerJourney
+            );
+            console.log(`${forwardingName} has been triggered`)
+        }
     } catch (error) {
         console.log(error);
     }

@@ -42,7 +42,7 @@ const lock = new AsyncLock();
  * customerJourney String Holds information supporting customer’s journey to which the execution applies
  * no response value expected for this operation
  **/
-exports.bequeathYourDataAndDie = async function (body, user, originator, xCorrelator, traceIndicator, customerJourney, operationServerName) {
+exports.bequeathYourDataAndDie = async function (body, user, xCorrelator, traceIndicator, customerJourney, operationServerName) {
   try {
 
     /****************************************************************************************
@@ -110,7 +110,7 @@ exports.bequeathYourDataAndDie = async function (body, user, originator, xCorrel
           customerJourney
         );
       }
-      softwareUpgrade.upgradeSoftwareVersion(user, xCorrelator, traceIndicator, customerJourney, forwardingAutomationInputList.length)
+      softwareUpgrade.upgradeSoftwareVersion(user, xCorrelator, traceIndicator, customerJourney, (forwardingAutomationInputList.length + 1))
         .catch(err => console.log(`upgradeSoftwareVersion failed with error: ${err}`));
     }
   } catch (error) {
