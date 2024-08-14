@@ -187,6 +187,36 @@ profile-instances:
     configuration:
       value-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-okm-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number'
 
+  - profile-name: 'GenericResponseProfile'
+    uuid: 'ro-2-1-0-response-p-016'
+    capability:
+      operation-name: '/v1/inform-about-release-history-in-generic-representation'
+      field-name-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-list=1/release-number'
+      description: 'Represents v2.0.1'
+      datatype: string
+    configuration:
+      value-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-list=1/changes'
+
+  - profile-name: 'GenericResponseProfile'
+    uuid: 'ro-2-1-0-response-p-017'
+    capability:
+      operation-name: '/v1/inform-about-release-history-in-generic-representation'
+      field-name-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-list=2/release-number'
+      description: 'Represents v2.1.1'
+      datatype: string
+    configuration:
+      value-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-list=2/changes'
+
+  - profile-name: 'GenericResponseProfile'
+    uuid: 'ro-2-1-0-response-p-018'
+    capability:
+      operation-name: '/v1/inform-about-release-history-in-generic-representation'
+      field-name-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-list=3/release-number'
+      description: 'Represents v2.1.2'
+      datatype: string
+    configuration:
+      value-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-list=3/changes'
+
 
   - profile-name: 'FileProfile'
     uuid: 'ro-2-1-0-file-p-000'
