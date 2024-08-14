@@ -194,9 +194,7 @@ profile-instances:
       file-identifier: 'LOADfile'
       file-description: 'Application name, release number, registration time stamp, preceding-application-name and preceding-release-number'
     configuration:
-      file-path: '../application-data/application-data.json'
-      user-name: 'RegistryOffice'
-      password: 'Operations to add password'
+      file-name: 'application-data.json'
       operation: 'write'
 
 
