@@ -332,6 +332,8 @@ forwardings:
         uuid: ro-2-1-0-op-s-im-000
       - server-name: /v1/register-application
         uuid: ro-2-1-0-op-s-is-001
+      - server-name: /v1/regard-updated-approval-status
+        uuid: ro-2-1-0-op-s-is-003
       - server-name: /v1/inquire-application-type-approvals
         uuid: ro-2-1-0-op-s-is-006
       - server-name: /v1/notify-deregistrations

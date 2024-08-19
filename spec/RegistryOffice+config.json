@@ -1828,7 +1828,7 @@
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-0-http-c-ro-2-0-1-000"
         ],
         "layer-protocol": [
           {
@@ -1853,7 +1853,7 @@
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-0-http-c-ro-2-0-1-000"
         ],
         "layer-protocol": [
           {
@@ -2135,7 +2135,7 @@
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-0-http-c-tar-2-0-1-000"
         ],
         "layer-protocol": [
           {
@@ -2160,7 +2160,7 @@
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-0-http-c-tar-2-0-1-000"
         ],
         "layer-protocol": [
           {
@@ -2418,7 +2418,7 @@
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-0-http-c-eatl-2-0-1-000"
         ],
         "layer-protocol": [
           {
@@ -2443,7 +2443,7 @@
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-0-http-c-eatl-2-0-1-000"
         ],
         "layer-protocol": [
           {
@@ -2699,7 +2699,7 @@
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-0-http-c-ol-2-0-1-000"
         ],
         "layer-protocol": [
           {
@@ -2724,7 +2724,7 @@
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-0-http-c-ol-2-0-1-000"
         ],
         "layer-protocol": [
           {
@@ -2980,7 +2980,7 @@
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-0-http-c-aa-2-0-1-000"
         ],
         "layer-protocol": [
           {
@@ -3005,7 +3005,7 @@
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-0-http-c-aa-2-0-1-000"
         ],
         "layer-protocol": [
           {
@@ -4381,6 +4381,11 @@
                 "logical-termination-point": "ro-2-1-0-op-s-is-001"
               },
               {
+                "local-id": "143",
+                "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+              },
+              {
                 "local-id": "146",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
                 "logical-termination-point": "ro-2-1-0-op-s-is-006"
@@ -5302,7 +5307,7 @@
             "name": [
               {
                 "value-name": "ForwardingKind",
-                "value": "core-model-1-4:FORWARDING_KIND_TYPE_INVARIANT_PROCESS_SNIPPET"
+                "value": "core-model-1-4:FORWARDING_KIND_TYPE_PROCESS_SNIPPET"
               },
               {
                 "value-name": "ForwardingName",
@@ -5397,7 +5402,7 @@
             "name": [
               {
                 "value-name": "ForwardingKind",
-                "value": "core-model-1-4:FORWARDING_KIND_TYPE_INVARIANT_PROCESS_SNIPPET"
+                "value": "core-model-1-4:FORWARDING_KIND_TYPE_PROCESS_SNIPPET"
               },
               {
                 "value-name": "ForwardingName",
