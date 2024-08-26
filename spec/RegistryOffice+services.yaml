@@ -93,7 +93,7 @@ clients:
 
   - http-client:
       application-name: RegistryOffice
-      release-number: 2.0.1
+      release-number: 2.1.1
       uuid: ro-2-1-2-http-c-or-2-1-1-000
     tcp-client:
       remote-protocol: http
@@ -112,7 +112,7 @@ clients:
 
   - http-client:
       application-name: NewRelease
-      release-number: 2.1.0
+      release-number: 2.1.2
       uuid: ro-2-1-2-http-c-nr-2-1-2-000
     tcp-client:
       remote-protocol: http
@@ -135,7 +135,7 @@ clients:
 
   - http-client:
       application-name: RegistryOffice
-      release-number: 2.0.1
+      release-number: 2.1.2
       uuid: ro-2-1-2-http-c-ro-2-1-2-000
     tcp-client:
       remote-protocol: http
@@ -172,7 +172,7 @@ clients:
 
   - http-client:
       application-name: TypeApprovalRegister
-      release-number: 2.0.1
+      release-number: 2.1.2
       uuid: ro-2-1-2-http-c-tar-2-1-2-000
     tcp-client:
       remote-protocol: http
@@ -209,7 +209,7 @@ clients:
 
   - http-client:
       application-name: ExecutionAndTraceLog
-      release-number: 2.0.1
+      release-number: 2.1.2
       uuid: ro-2-1-2-http-c-eatl-2-1-2-000
     tcp-client:
       remote-protocol: http
@@ -244,7 +244,7 @@ clients:
 
   - http-client:
       application-name: OamLog
-      release-number: 2.0.1
+      release-number: 2.1.2
       uuid: ro-2-1-2-http-c-ol-2-1-2-000
     tcp-client:
       remote-protocol: http
@@ -279,7 +279,7 @@ clients:
 
   - http-client:
       application-name: AccessAdministration
-      release-number: 2.0.1
+      release-number: 2.1.2
       uuid: ro-2-1-2-http-c-aa-2-1-2-000
     tcp-client:
       remote-protocol: http
@@ -314,7 +314,7 @@ clients:
 
   - http-client:
       application-name: ApplicationLayerTopology
-      release-number: 2.0.1
+      release-number: 2.1.2
       uuid: ro-2-1-2-http-c-alt-2-1-2-000
     tcp-client:
       remote-protocol: http
@@ -361,7 +361,7 @@ clients:
 
   - http-client:
       application-name: OperationKeyManagement
-      release-number: 2.0.1
+      release-number: 2.1.2
       uuid: ro-2-1-2-http-c-okm-2-1-2-000
     tcp-client:
       remote-protocol: http
