@@ -4646,27 +4646,23 @@ paths:
                   type: string
                   description: >
                     'Current name of the application that has updated connection data
-                    find [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]
                     and forward to [$/v1/regard-updated-approval-status.callbacks.ServerReplacementBroadcast.body#current-application-name]'
                 current-release-number:
                   type: string
                   pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
                   description: >
                     'Current release number of the application that has updated connection data
-                    find [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]
                     and forward to [$/v1/regard-updated-approval-status.callbacks.ServerReplacementBroadcast.body#current-release-number]'
                 future-application-name:
                   type: string
                   description: >
                     'Future name of the application that has updated connection data
-                    find [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name]
                     and forward to [$/v1/regard-updated-approval-status.callbacks.ServerReplacementBroadcast.body#future-application-name]'
                 future-release-number:
                   type: string
                   pattern: '^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$'
                   description: >
                     'Future release number of the application that has updated connection data
-                    find [/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-c-*/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number]
                     forward to [$/v1/regard-updated-approval-status.callbacks.ServerReplacementBroadcast.body#future-release-number]'
                 future-protocol:
                   type: string
@@ -6015,7 +6011,7 @@ paths:
           $ref: '#/components/responses/responseForErroredServiceRequests'
       callbacks:
         PromptForEmbeddingCausesRequestForBequeathingData:
-          url: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-tcp-c-ro-2-1-2-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-tcp-c-or-2-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-tcp-c-or-2-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-tcp-c-or-2-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-op-c-bm-or-2-1-1-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
+          url: #[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-tcp-c-or-2-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-protocol]://[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-tcp-c-or-2-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/domain-name or /core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-tcp-c-or-2-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-address/ip-address/ipv-4-address]:[/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-tcp-c-or-2-1-1-000/layer-protocol=0/tcp-client-interface-1-0:tcp-client-interface-pac/tcp-client-interface-configuration/remote-port][/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-op-c-bm-or-2-1-1-000/layer-protocol=0/operation-client-interface-1-0:operation-client-interface-pac/operation-client-interface-configuration/operation-name]
             post:
               parameters:
                 - $ref: '#/components/parameters/user'

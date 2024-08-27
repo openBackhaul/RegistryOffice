@@ -202,7 +202,7 @@ profile-instances:
     capability:
       operation-name: '/v1/inform-about-release-history-in-generic-representation'
       field-name-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-list=2/release-number'
-      description: 'Represents v2.1.2'
+      description: 'Represents v2.1.1'
       datatype: string
     configuration:
       value-reference: '/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-list=2/changes'
