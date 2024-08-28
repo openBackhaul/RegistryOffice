@@ -150,7 +150,6 @@ end note
 
 note over ro #orange
 IF (oldReleaseApplicationName != "OldRelease")
-   AND (HttpClient for oldReleaseApplicationName exists in RO)
 <u>CreateLinkToUpdateNewReleaseClient</u>
 Request for automatically creating the Link:
 RO => OR://v1/update-client-of-subsequent-release
@@ -181,7 +180,6 @@ end note
 
 note over ro #orange
 IF (oldReleaseApplicationName != "OldRelease")
-   AND (HttpClient for oldReleaseApplicationName exists in RO)
 <u>RequestForUpdatingNewReleaseClient</u>
 
 After receiving an updated operation-key
@@ -220,7 +218,6 @@ end note
 
 note over ro #orange
 IF (oldReleaseApplicationName != "OldRelease")
-   AND (HttpClient for oldReleaseApplicationName exists in RO)
 <u>CreateLinkForBequeathYourData</u>
 Request for automatically creating the Link:
 NA => OR://v1/bequeath-your-data-and-die
@@ -255,7 +252,6 @@ end note
 
 note over ro #orange
 IF (oldReleaseApplicationName != "OldRelease")
-   AND (HttpClient for oldReleaseApplicationName exists in RO)
 <u>CreateFurtherLinksForTransferringData</u>
 Potentially several requests for automatically creating Links:
 OR => NA:// ... according to RequestForUpdatingNewReleaseClient.responseBody#dataTransferOperationsList
