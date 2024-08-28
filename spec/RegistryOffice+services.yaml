@@ -4,107 +4,107 @@ servers:
     own-oam:
       basic:
         - operation-name: /v1/register-yourself
-          uuid: ro-2-1-0-op-s-bm-000
+          uuid: ro-2-1-2-op-s-bm-000
         - operation-name: /v1/embed-yourself
-          uuid: ro-2-1-0-op-s-bm-001
+          uuid: ro-2-1-2-op-s-bm-001
         - operation-name: /v1/redirect-service-request-information
-          uuid: ro-2-1-0-op-s-bm-002
+          uuid: ro-2-1-2-op-s-bm-002
         - operation-name: /v1/redirect-oam-request-information
-          uuid: ro-2-1-0-op-s-bm-003
+          uuid: ro-2-1-2-op-s-bm-003
         - operation-name: /v1/end-subscription
-          uuid: ro-2-1-0-op-s-bm-004
+          uuid: ro-2-1-2-op-s-bm-004
         - operation-name: /v1/inquire-oam-request-approvals
-          uuid: ro-2-1-0-op-s-bm-005
+          uuid: ro-2-1-2-op-s-bm-005
         - operation-name: /v1/update-client
-          uuid: ro-2-1-0-op-s-bm-007
+          uuid: ro-2-1-2-op-s-bm-007
         - operation-name: /v1/list-ltps-and-fcs
-          uuid: ro-2-1-0-op-s-bm-008
+          uuid: ro-2-1-2-op-s-bm-008
         - operation-name: /v1/redirect-topology-change-information
-          uuid: ro-2-1-0-op-s-bm-009
+          uuid: ro-2-1-2-op-s-bm-009
         - operation-name: /v1/update-operation-key
-          uuid: ro-2-1-0-op-s-bm-010
+          uuid: ro-2-1-2-op-s-bm-010
         - operation-name: /v1/update-operation-client
-          uuid: ro-2-1-0-op-s-bm-011
+          uuid: ro-2-1-2-op-s-bm-011
         - operation-name: /v1/inquire-basic-auth-approvals
-          uuid: ro-2-1-0-op-s-bm-012
+          uuid: ro-2-1-2-op-s-bm-012
         - operation-name: /v1/dispose-remainders-of-deregistered-application
-          uuid: ro-2-1-0-op-s-bm-013
+          uuid: ro-2-1-2-op-s-bm-013
         - operation-name: /v1/inform-about-preceding-release
-          uuid: ro-2-1-0-op-s-bm-014
+          uuid: ro-2-1-2-op-s-bm-014
         - operation-name: /v1/update-client-of-subsequent-release
-          uuid: ro-2-1-0-op-s-bm-015
+          uuid: ro-2-1-2-op-s-bm-015
       individual:
         - operation-name: /v1/bequeath-your-data-and-die
-          uuid: ro-2-1-0-op-s-im-000
+          uuid: ro-2-1-2-op-s-im-000
     service:
       basic:
         - operation-name: /v1/start-application-in-generic-representation
-          uuid: ro-2-1-0-op-s-bs-000
+          uuid: ro-2-1-2-op-s-bs-000
         - operation-name: /v1/inform-about-application
-          uuid: ro-2-1-0-op-s-bs-001
+          uuid: ro-2-1-2-op-s-bs-001
         - operation-name: /v1/inform-about-application-in-generic-representation
-          uuid: ro-2-1-0-op-s-bs-002
+          uuid: ro-2-1-2-op-s-bs-002
         - operation-name: /v1/inform-about-release-history
-          uuid: ro-2-1-0-op-s-bs-003
+          uuid: ro-2-1-2-op-s-bs-003
         - operation-name: /v1/inform-about-release-history-in-generic-representation
-          uuid: ro-2-1-0-op-s-bs-004
+          uuid: ro-2-1-2-op-s-bs-004
         - operation-name: /docs
-          uuid: ro-2-1-0-op-s-bs-005
+          uuid: ro-2-1-2-op-s-bs-005
       individual:
         - operation-name: /v1/register-application
-          uuid: ro-2-1-0-op-s-is-001
+          uuid: ro-2-1-2-op-s-is-001
         - operation-name: /v1/deregister-application
-          uuid: ro-2-1-0-op-s-is-002
+          uuid: ro-2-1-2-op-s-is-002
         - operation-name: /v1/regard-updated-approval-status
-          uuid: ro-2-1-0-op-s-is-003
+          uuid: ro-2-1-2-op-s-is-003
         - operation-name: /v1/list-applications
-          uuid: ro-2-1-0-op-s-is-004
+          uuid: ro-2-1-2-op-s-is-004
         - operation-name: /v1/list-applications-in-generic-representation
-          uuid: ro-2-1-0-op-s-is-005
+          uuid: ro-2-1-2-op-s-is-005
         - operation-name: /v1/inquire-application-type-approvals
-          uuid: ro-2-1-0-op-s-is-006
+          uuid: ro-2-1-2-op-s-is-006
         - operation-name: /v1/notify-deregistrations
-          uuid: ro-2-1-0-op-s-is-007
+          uuid: ro-2-1-2-op-s-is-007
         - operation-name: /v1/notify-approvals
-          uuid: ro-2-1-0-op-s-is-008
+          uuid: ro-2-1-2-op-s-is-008
         - operation-name: /v1/notify-withdrawn-approvals
-          uuid: ro-2-1-0-op-s-is-009
+          uuid: ro-2-1-2-op-s-is-009
         - operation-name: /v1/relay-server-replacement
-          uuid: ro-2-1-0-op-s-is-010
+          uuid: ro-2-1-2-op-s-is-010
         - operation-name: /v1/relay-operation-update
-          uuid: ro-2-1-0-op-s-is-011
+          uuid: ro-2-1-2-op-s-is-011
         - operation-name: /v2/register-application
-          uuid: ro-2-1-0-op-s-is-012
+          uuid: ro-2-1-2-op-s-is-012
         - operation-name: /v1/notify-embedding-status-changes
-          uuid: ro-2-1-0-op-s-is-013
+          uuid: ro-2-1-2-op-s-is-013
   http-server:
     own-application-name: RegistryOffice
-    own-release-number: 2.1.1
-    uuid: ro-2-1-0-http-s-000
+    own-release-number: 2.1.2
+    uuid: ro-2-1-2-http-s-000
   tcp-server:
     - description: Without TLS layer
       local-protocol: http
       own-ip-address: 127.0.0.1
-      own-tcp-port: 3024
-      uuid: ro-2-1-0-tcp-s-000
+      own-tcp-port: 3031
+      uuid: ro-2-1-2-tcp-s-000
 
 
 clients:
 
   - http-client:
       application-name: RegistryOffice
-      release-number: 2.0.1
-      uuid: ro-2-1-0-http-c-or-2-0-1-000
+      release-number: 2.1.1
+      uuid: ro-2-1-2-http-c-or-2-1-1-000
     tcp-client:
       remote-protocol: http
       ip-address: 127.0.0.1
-      tcp-port: 3008
-      uuid: ro-2-1-0-tcp-c-or-2-0-1-000
+      tcp-port: 3024
+      uuid: ro-2-1-2-tcp-c-or-2-1-1-000
     operation-clients:
       own-oam:
         basic:
           - operation-name: /v1/bequeath-your-data-and-die
-            uuid: ro-2-1-0-op-c-bm-or-2-0-1-000
+            uuid: ro-2-1-2-op-c-bm-or-2-1-1-000
         individual:
       service:
         basic:
@@ -112,282 +112,282 @@ clients:
 
   - http-client:
       application-name: NewRelease
-      release-number: 2.1.0
-      uuid: ro-2-1-0-http-c-nr-2-1-0-000
+      release-number: 2.1.2
+      uuid: ro-2-1-2-http-c-nr-2-1-2-000
     tcp-client:
       remote-protocol: http
       ip-address: 127.0.0.1
-      tcp-port: 3024
-      uuid: ro-2-1-0-tcp-c-nr-2-1-0-000
+      tcp-port: 3031
+      uuid: ro-2-1-2-tcp-c-nr-2-1-2-000
     operation-clients:
       own-oam:
         basic:
         individual:
           - operation-name: /v1/inquire-application-type-approvals
-            uuid: ro-2-1-0-op-c-im-nr-2-1-0-002
+            uuid: ro-2-1-2-op-c-im-nr-2-1-2-002
           - operation-name: /v2/register-application
-            uuid: ro-2-1-0-op-c-im-nr-2-1-0-005
+            uuid: ro-2-1-2-op-c-im-nr-2-1-2-005
           - operation-name: /v1/notify-embedding-status-changes
-            uuid: ro-2-1-0-op-c-im-nr-2-1-0-006
+            uuid: ro-2-1-2-op-c-im-nr-2-1-2-006
       service:
         basic:
         individual:
 
   - http-client:
       application-name: RegistryOffice
-      release-number: 2.0.1
-      uuid: ro-2-1-0-http-c-ro-2-0-1-000
+      release-number: 2.1.2
+      uuid: ro-2-1-2-http-c-ro-2-1-2-000
     tcp-client:
       remote-protocol: http
       ip-address: 127.0.0.1
-      tcp-port: 3008
-      uuid: ro-2-1-0-tcp-c-ro-2-0-1-000
+      tcp-port: 3031
+      uuid: ro-2-1-2-tcp-c-ro-2-1-2-000
     operation-clients:
       own-oam:
         basic:
-          - operation-name: /v1/register-application
-            uuid: ro-2-1-0-op-c-bm-ro-2-0-1-000
+          - operation-name: /v2/register-application
+            uuid: ro-2-1-2-op-c-bm-ro-2-1-2-000
           - operation-name: /v1/relay-server-replacement
-            uuid: ro-2-1-0-op-c-bm-ro-2-0-1-001
+            uuid: ro-2-1-2-op-c-bm-ro-2-1-2-001
           - operation-name: /v1/deregister-application
-            uuid: ro-2-1-0-op-c-bm-ro-2-0-1-002
+            uuid: ro-2-1-2-op-c-bm-ro-2-1-2-002
           - operation-name: /v1/relay-operation-update
-            uuid: ro-2-1-0-op-c-bm-ro-2-0-1-003
+            uuid: ro-2-1-2-op-c-bm-ro-2-1-2-003
         individual:
           - operation-name: /v1/embed-yourself
-            uuid: ro-2-1-0-op-c-im-ro-2-0-1-000
+            uuid: ro-2-1-2-op-c-im-ro-2-1-2-000
           - operation-name: /v1/update-client
-            uuid: ro-2-1-0-op-c-im-ro-2-0-1-001
+            uuid: ro-2-1-2-op-c-im-ro-2-1-2-001
           - operation-name: /v1/update-operation-client
-            uuid: ro-2-1-0-op-c-im-ro-2-0-1-002
+            uuid: ro-2-1-2-op-c-im-ro-2-1-2-002
           - operation-name: /v1/dispose-remainders-of-deregistered-application
-            uuid: ro-2-1-0-op-c-im-ro-2-0-1-006
+            uuid: ro-2-1-2-op-c-im-ro-2-1-2-006
           - operation-name: /v1/inform-about-preceding-release
-            uuid: ro-2-1-0-op-c-im-ro-2-0-1-008
+            uuid: ro-2-1-2-op-c-im-ro-2-1-2-008
           - operation-name: /v1/update-client-of-subsequent-release
-            uuid: ro-2-1-0-op-c-im-ro-2-0-1-009
+            uuid: ro-2-1-2-op-c-im-ro-2-1-2-009
       service:
         basic:
         individual:
 
   - http-client:
       application-name: TypeApprovalRegister
-      release-number: 2.0.1
-      uuid: ro-2-1-0-http-c-tar-2-0-1-000
+      release-number: 2.1.2
+      uuid: ro-2-1-2-http-c-tar-2-1-2-000
     tcp-client:
       remote-protocol: http
       ip-address: 127.0.0.1
-      tcp-port: 3009
-      uuid: ro-2-1-0-tcp-c-tar-2-0-1-000
+      tcp-port: 3032
+      uuid: ro-2-1-2-tcp-c-tar-2-1-2-000
     operation-clients:
       own-oam:
         basic:
         individual:
           - operation-name: /v1/embed-yourself
-            uuid: ro-2-1-0-op-c-im-tar-2-0-1-000
+            uuid: ro-2-1-2-op-c-im-tar-2-1-2-000
           - operation-name: /v1/update-client
-            uuid: ro-2-1-0-op-c-im-tar-2-0-1-001
+            uuid: ro-2-1-2-op-c-im-tar-2-1-2-001
           - operation-name: /v1/update-operation-client
-            uuid: ro-2-1-0-op-c-im-tar-2-0-1-002
+            uuid: ro-2-1-2-op-c-im-tar-2-1-2-002
           - operation-name: /v1/regard-application
-            uuid: ro-2-1-0-op-c-im-tar-2-0-1-003
+            uuid: ro-2-1-2-op-c-im-tar-2-1-2-003
           - operation-name: /v1/disregard-application
-            uuid: ro-2-1-0-op-c-im-tar-2-0-1-004
+            uuid: ro-2-1-2-op-c-im-tar-2-1-2-004
           - operation-name: /v1/redirect-info-about-approval-status-changes
-            uuid: ro-2-1-0-op-c-im-tar-2-0-1-005
+            uuid: ro-2-1-2-op-c-im-tar-2-1-2-005
           - operation-name: /v1/dispose-remainders-of-deregistered-application
-            uuid: ro-2-1-0-op-c-im-tar-2-0-1-006
+            uuid: ro-2-1-2-op-c-im-tar-2-1-2-006
           - operation-name: /v1/document-embedding-status
-            uuid: ro-2-1-0-op-c-im-tar-2-0-1-007
+            uuid: ro-2-1-2-op-c-im-tar-2-1-2-007
           - operation-name: /v1/inform-about-preceding-release
-            uuid: ro-2-1-0-op-c-im-tar-2-0-1-008
+            uuid: ro-2-1-2-op-c-im-tar-2-1-2-008
           - operation-name: /v1/update-client-of-subsequent-release
-            uuid: ro-2-1-0-op-c-im-tar-2-0-1-009
+            uuid: ro-2-1-2-op-c-im-tar-2-1-2-009
       service:
         basic:
         individual:
 
   - http-client:
       application-name: ExecutionAndTraceLog
-      release-number: 2.0.1
-      uuid: ro-2-1-0-http-c-eatl-2-0-1-000
+      release-number: 2.1.2
+      uuid: ro-2-1-2-http-c-eatl-2-1-2-000
     tcp-client:
       remote-protocol: http
       ip-address: 127.0.0.1
-      tcp-port: 3010
-      uuid: ro-2-1-0-tcp-c-eatl-2-0-1-000
+      tcp-port: 3033
+      uuid: ro-2-1-2-tcp-c-eatl-2-1-2-000
     operation-clients:
       own-oam:
         basic:
         individual:
           - operation-name: /v1/embed-yourself
-            uuid: ro-2-1-0-op-c-im-eatl-2-0-1-000
+            uuid: ro-2-1-2-op-c-im-eatl-2-1-2-000
           - operation-name: /v1/update-client
-            uuid: ro-2-1-0-op-c-im-eatl-2-0-1-001
+            uuid: ro-2-1-2-op-c-im-eatl-2-1-2-001
           - operation-name: /v1/update-operation-client
-            uuid: ro-2-1-0-op-c-im-eatl-2-0-1-002
+            uuid: ro-2-1-2-op-c-im-eatl-2-1-2-002
           - operation-name: /v1/regard-application
-            uuid: ro-2-1-0-op-c-im-eatl-2-0-1-003
+            uuid: ro-2-1-2-op-c-im-eatl-2-1-2-003
           - operation-name: /v1/disregard-application
-            uuid: ro-2-1-0-op-c-im-eatl-2-0-1-004
+            uuid: ro-2-1-2-op-c-im-eatl-2-1-2-004
           - operation-name: /v1/dispose-remainders-of-deregistered-application
-            uuid: ro-2-1-0-op-c-im-eatl-2-0-1-006
+            uuid: ro-2-1-2-op-c-im-eatl-2-1-2-006
           - operation-name: /v1/inform-about-preceding-release
-            uuid: ro-2-1-0-op-c-im-eatl-2-0-1-008
+            uuid: ro-2-1-2-op-c-im-eatl-2-1-2-008
           - operation-name: /v1/update-client-of-subsequent-release
-            uuid: ro-2-1-0-op-c-im-eatl-2-0-1-009
+            uuid: ro-2-1-2-op-c-im-eatl-2-1-2-009
       service:
         basic:
           - operation-name: /v1/record-service-request
-            uuid: ro-2-1-0-op-c-bs-eatl-2-0-1-000
+            uuid: ro-2-1-2-op-c-bs-eatl-2-1-2-000
         individual:
 
   - http-client:
       application-name: OamLog
-      release-number: 2.0.1
-      uuid: ro-2-1-0-http-c-ol-2-0-1-000
+      release-number: 2.1.2
+      uuid: ro-2-1-2-http-c-ol-2-1-2-000
     tcp-client:
       remote-protocol: http
       ip-address: 127.0.0.1
-      tcp-port: 3011
-      uuid: ro-2-1-0-tcp-c-ol-2-0-1-000
+      tcp-port: 3034
+      uuid: ro-2-1-2-tcp-c-ol-2-1-2-000
     operation-clients:
       own-oam:
         basic:
         individual:
           - operation-name: /v1/embed-yourself
-            uuid: ro-2-1-0-op-c-im-ol-2-0-1-000
+            uuid: ro-2-1-2-op-c-im-ol-2-1-2-000
           - operation-name: /v1/update-client
-            uuid: ro-2-1-0-op-c-im-ol-2-0-1-001
+            uuid: ro-2-1-2-op-c-im-ol-2-1-2-001
           - operation-name: /v1/update-operation-client
-            uuid: ro-2-1-0-op-c-im-ol-2-0-1-002
+            uuid: ro-2-1-2-op-c-im-ol-2-1-2-002
           - operation-name: /v1/regard-application
-            uuid: ro-2-1-0-op-c-im-ol-2-0-1-003
+            uuid: ro-2-1-2-op-c-im-ol-2-1-2-003
           - operation-name: /v1/disregard-application
-            uuid: ro-2-1-0-op-c-im-ol-2-0-1-004
+            uuid: ro-2-1-2-op-c-im-ol-2-1-2-004
           - operation-name: /v1/dispose-remainders-of-deregistered-application
-            uuid: ro-2-1-0-op-c-im-ol-2-0-1-006
+            uuid: ro-2-1-2-op-c-im-ol-2-1-2-006
           - operation-name: /v1/inform-about-preceding-release
-            uuid: ro-2-1-0-op-c-im-ol-2-0-1-008
+            uuid: ro-2-1-2-op-c-im-ol-2-1-2-008
           - operation-name: /v1/update-client-of-subsequent-release
-            uuid: ro-2-1-0-op-c-im-ol-2-0-1-009
+            uuid: ro-2-1-2-op-c-im-ol-2-1-2-009
       service:
         basic:
           - operation-name: /v1/record-oam-request
-            uuid: ro-2-1-0-op-c-bs-ol-2-0-1-000
+            uuid: ro-2-1-2-op-c-bs-ol-2-1-2-000
         individual:
 
   - http-client:
-      application-name: AdministratorAdministration
-      release-number: 2.0.1
-      uuid: ro-2-1-0-http-c-aa-2-0-1-000
+      application-name: AccessAdministration
+      release-number: 2.1.2
+      uuid: ro-2-1-2-http-c-aa-2-1-2-000
     tcp-client:
       remote-protocol: http
       ip-address: 127.0.0.1
-      tcp-port: 3012
-      uuid: ro-2-1-0-tcp-c-aa-2-0-1-000
+      tcp-port: 3035
+      uuid: ro-2-1-2-tcp-c-aa-2-1-2-000
     operation-clients:
       own-oam:
         basic:
         individual:
           - operation-name: /v1/embed-yourself
-            uuid: ro-2-1-0-op-c-im-aa-2-0-1-000
+            uuid: ro-2-1-2-op-c-im-aa-2-1-2-000
           - operation-name: /v1/update-client
-            uuid: ro-2-1-0-op-c-im-aa-2-0-1-001
+            uuid: ro-2-1-2-op-c-im-aa-2-1-2-001
           - operation-name: /v1/update-operation-client
-            uuid: ro-2-1-0-op-c-im-aa-2-0-1-002
+            uuid: ro-2-1-2-op-c-im-aa-2-1-2-002
           - operation-name: /v1/regard-application
-            uuid: ro-2-1-0-op-c-im-aa-2-0-1-003
+            uuid: ro-2-1-2-op-c-im-aa-2-1-2-003
           - operation-name: /v1/disregard-application
-            uuid: ro-2-1-0-op-c-im-aa-2-0-1-004
+            uuid: ro-2-1-2-op-c-im-aa-2-1-2-004
           - operation-name: /v1/dispose-remainders-of-deregistered-application
-            uuid: ro-2-1-0-op-c-im-aa-2-0-1-006
+            uuid: ro-2-1-2-op-c-im-aa-2-1-2-006
           - operation-name: /v1/inform-about-preceding-release
-            uuid: ro-2-1-0-op-c-im-aa-2-0-1-008
+            uuid: ro-2-1-2-op-c-im-aa-2-1-2-008
           - operation-name: /v1/update-client-of-subsequent-release
-            uuid: ro-2-1-0-op-c-im-aa-2-0-1-009
+            uuid: ro-2-1-2-op-c-im-aa-2-1-2-009
       service:
         basic:
-          - operation-name: /v1/approve-oam-request
-            uuid: ro-2-1-0-op-c-bs-aa-2-0-1-000
+          - operation-name: /v1/approve-basic-auth-request
+            uuid: ro-2-1-2-op-c-bs-aa-2-1-2-000
         individual:
 
   - http-client:
       application-name: ApplicationLayerTopology
-      release-number: 2.0.1
-      uuid: ro-2-1-0-http-c-alt-2-0-1-000
+      release-number: 2.1.2
+      uuid: ro-2-1-2-http-c-alt-2-1-2-000
     tcp-client:
       remote-protocol: http
       ip-address: 127.0.0.1
-      tcp-port: 3013
-      uuid: ro-2-1-0-tcp-c-alt-2-0-1-000
+      tcp-port: 3036
+      uuid: ro-2-1-2-tcp-c-alt-2-1-2-000
     operation-clients:
       own-oam:
         basic:
           - operation-name: /v1/update-all-ltps-and-fcs
-            uuid: ro-2-1-0-op-c-bm-alt-2-0-1-000
+            uuid: ro-2-1-2-op-c-bm-alt-2-1-2-000
           - operation-name: /v1/update-ltp
-            uuid: ro-2-1-0-op-c-bm-alt-2-0-1-001
+            uuid: ro-2-1-2-op-c-bm-alt-2-1-2-001
           - operation-name: /v1/delete-ltp-and-dependents
-            uuid: ro-2-1-0-op-c-bm-alt-2-0-1-002
+            uuid: ro-2-1-2-op-c-bm-alt-2-1-2-002
           - operation-name: /v1/update-fc
-            uuid: ro-2-1-0-op-c-bm-alt-2-0-1-003
+            uuid: ro-2-1-2-op-c-bm-alt-2-1-2-003
           - operation-name: /v1/update-fc-port
-            uuid: ro-2-1-0-op-c-bm-alt-2-0-1-004
+            uuid: ro-2-1-2-op-c-bm-alt-2-1-2-004
           - operation-name: /v1/delete-fc-port
-            uuid: ro-2-1-0-op-c-bm-alt-2-0-1-005
+            uuid: ro-2-1-2-op-c-bm-alt-2-1-2-005
         individual:
           - operation-name: /v1/embed-yourself
-            uuid: ro-2-1-0-op-c-im-alt-2-0-1-000
+            uuid: ro-2-1-2-op-c-im-alt-2-1-2-000
           - operation-name: /v1/update-client
-            uuid: ro-2-1-0-op-c-im-alt-2-0-1-001
+            uuid: ro-2-1-2-op-c-im-alt-2-1-2-001
           - operation-name: /v1/update-operation-client
-            uuid: ro-2-1-0-op-c-im-alt-2-0-1-002
+            uuid: ro-2-1-2-op-c-im-alt-2-1-2-002
           - operation-name: /v1/regard-application
-            uuid: ro-2-1-0-op-c-im-alt-2-0-1-003
+            uuid: ro-2-1-2-op-c-im-alt-2-1-2-003
           - operation-name: /v1/disregard-application
-            uuid: ro-2-1-0-op-c-im-alt-2-0-1-004
+            uuid: ro-2-1-2-op-c-im-alt-2-1-2-004
           - operation-name: /v1/dispose-remainders-of-deregistered-application
-            uuid: ro-2-1-0-op-c-im-alt-2-0-1-006
+            uuid: ro-2-1-2-op-c-im-alt-2-1-2-006
           - operation-name: /v1/inform-about-preceding-release
-            uuid: ro-2-1-0-op-c-im-alt-2-0-1-008
+            uuid: ro-2-1-2-op-c-im-alt-2-1-2-008
           - operation-name: /v1/update-client-of-subsequent-release
-            uuid: ro-2-1-0-op-c-im-alt-2-0-1-009
+            uuid: ro-2-1-2-op-c-im-alt-2-1-2-009
       service:
         basic:
         individual:
           - operation-name: /v1/add-operation-client-to-link
-            uuid: ro-2-1-0-op-c-is-alt-2-0-1-000
+            uuid: ro-2-1-2-op-c-is-alt-2-1-2-000
 
   - http-client:
       application-name: OperationKeyManagement
-      release-number: 2.0.1
-      uuid: ro-2-1-0-http-c-okm-2-0-1-000
+      release-number: 2.1.2
+      uuid: ro-2-1-2-http-c-okm-2-1-2-000
     tcp-client:
       remote-protocol: http
       ip-address: 127.0.0.1
-      tcp-port: 3014
-      uuid: ro-2-1-0-tcp-c-okm-2-0-1-000
+      tcp-port: 3037
+      uuid: ro-2-1-2-tcp-c-okm-2-1-2-000
     operation-clients:
       own-oam:
         basic:
         individual:
           - operation-name: /v1/embed-yourself
-            uuid: ro-2-1-0-op-c-im-okm-2-0-1-000
+            uuid: ro-2-1-2-op-c-im-okm-2-1-2-000
           - operation-name: /v1/update-client
-            uuid: ro-2-1-0-op-c-im-okm-2-0-1-001
+            uuid: ro-2-1-2-op-c-im-okm-2-1-2-001
           - operation-name: /v1/update-operation-client
-            uuid: ro-2-1-0-op-c-im-okm-2-0-1-002
+            uuid: ro-2-1-2-op-c-im-okm-2-1-2-002
           - operation-name: /v1/regard-application
-            uuid: ro-2-1-0-op-c-im-okm-2-0-1-003
+            uuid: ro-2-1-2-op-c-im-okm-2-1-2-003
           - operation-name: /v1/disregard-application
-            uuid: ro-2-1-0-op-c-im-okm-2-0-1-004
+            uuid: ro-2-1-2-op-c-im-okm-2-1-2-004
           - operation-name: /v1/dispose-remainders-of-deregistered-application
-            uuid: ro-2-1-0-op-c-im-okm-2-0-1-006
+            uuid: ro-2-1-2-op-c-im-okm-2-1-2-006
           - operation-name: /v1/inform-about-preceding-release
-            uuid: ro-2-1-0-op-c-im-okm-2-0-1-008
+            uuid: ro-2-1-2-op-c-im-okm-2-1-2-008
           - operation-name: /v1/update-client-of-subsequent-release
-            uuid: ro-2-1-0-op-c-im-okm-2-0-1-009
+            uuid: ro-2-1-2-op-c-im-okm-2-1-2-009
       service:
         basic:
         individual:

@@ -1,10 +1,10 @@
 {
   "core-model-1-4:control-construct": {
-    "uuid": "ro-2-1-0",
+    "uuid": "ro-2-1-2",
     "profile-collection": {
       "profile": [
         {
-          "uuid": "ro-2-1-0-action-p-000",
+          "uuid": "ro-2-1-2-action-p-000",
           "profile-name": "action-profile-1-0:PROFILE_NAME_TYPE_ACTION_PROFILE",
           "action-profile-1-0:action-profile-pac": {
             "action-profile-capability": {
@@ -15,12 +15,12 @@
               "display-in-new-browser-window": false
             },
             "action-profile-configuration": {
-              "consequent-operation-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-s-bs-002/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name"
+              "consequent-operation-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-op-s-bs-002/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name"
             }
           }
         },
         {
-          "uuid": "ro-2-1-0-action-p-001",
+          "uuid": "ro-2-1-2-action-p-001",
           "profile-name": "action-profile-1-0:PROFILE_NAME_TYPE_ACTION_PROFILE",
           "action-profile-1-0:action-profile-pac": {
             "action-profile-capability": {
@@ -31,12 +31,12 @@
               "display-in-new-browser-window": false
             },
             "action-profile-configuration": {
-              "consequent-operation-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-s-bs-004/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name"
+              "consequent-operation-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-op-s-bs-004/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name"
             }
           }
         },
         {
-          "uuid": "ro-2-1-0-action-p-002",
+          "uuid": "ro-2-1-2-action-p-002",
           "profile-name": "action-profile-1-0:PROFILE_NAME_TYPE_ACTION_PROFILE",
           "action-profile-1-0:action-profile-pac": {
             "action-profile-capability": {
@@ -47,12 +47,12 @@
               "display-in-new-browser-window": true
             },
             "action-profile-configuration": {
-              "consequent-operation-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-s-bs-005/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name"
+              "consequent-operation-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-op-s-bs-005/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name"
             }
           }
         },
         {
-          "uuid": "ro-2-1-0-action-p-003",
+          "uuid": "ro-2-1-2-action-p-003",
           "profile-name": "action-profile-1-0:PROFILE_NAME_TYPE_ACTION_PROFILE",
           "action-profile-1-0:action-profile-pac": {
             "action-profile-capability": {
@@ -63,12 +63,12 @@
               "display-in-new-browser-window": false
             },
             "action-profile-configuration": {
-              "consequent-operation-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-op-s-is-005/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name"
+              "consequent-operation-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-op-s-is-005/layer-protocol=0/operation-server-interface-1-0:operation-server-interface-pac/operation-server-interface-capability/operation-name"
             }
           }
         },
         {
-          "uuid": "ro-2-1-0-response-p-000",
+          "uuid": "ro-2-1-2-response-p-000",
           "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
           "response-profile-1-0:response-profile-pac": {
             "response-profile-capability": {
@@ -81,13 +81,13 @@
             },
             "response-profile-configuration": {
               "value": {
-                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-name"
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-name"
               }
             }
           }
         },
         {
-          "uuid": "ro-2-1-0-response-p-001",
+          "uuid": "ro-2-1-2-response-p-001",
           "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
           "response-profile-1-0:response-profile-pac": {
             "response-profile-capability": {
@@ -100,13 +100,13 @@
             },
             "response-profile-configuration": {
               "value": {
-                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-name"
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-name"
               }
             }
           }
         },
         {
-          "uuid": "ro-2-1-0-response-p-002",
+          "uuid": "ro-2-1-2-response-p-002",
           "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
           "response-profile-1-0:response-profile-pac": {
             "response-profile-capability": {
@@ -119,13 +119,13 @@
             },
             "response-profile-configuration": {
               "value": {
-                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-number"
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-number"
               }
             }
           }
         },
         {
-          "uuid": "ro-2-1-0-response-p-003",
+          "uuid": "ro-2-1-2-response-p-003",
           "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
           "response-profile-1-0:response-profile-pac": {
             "response-profile-capability": {
@@ -138,13 +138,13 @@
             },
             "response-profile-configuration": {
               "value": {
-                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-purpose"
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/application-purpose"
               }
             }
           }
         },
         {
-          "uuid": "ro-2-1-0-response-p-004",
+          "uuid": "ro-2-1-2-response-p-004",
           "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
           "response-profile-1-0:response-profile-pac": {
             "response-profile-capability": {
@@ -157,13 +157,13 @@
             },
             "response-profile-configuration": {
               "value": {
-                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/data-update-period"
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/data-update-period"
               }
             }
           }
         },
         {
-          "uuid": "ro-2-1-0-response-p-005",
+          "uuid": "ro-2-1-2-response-p-005",
           "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
           "response-profile-1-0:response-profile-pac": {
             "response-profile-capability": {
@@ -176,13 +176,13 @@
             },
             "response-profile-configuration": {
               "value": {
-                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/owner-name"
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/owner-name"
               }
             }
           }
         },
         {
-          "uuid": "ro-2-1-0-response-p-006",
+          "uuid": "ro-2-1-2-response-p-006",
           "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
           "response-profile-1-0:response-profile-pac": {
             "response-profile-capability": {
@@ -195,184 +195,222 @@
             },
             "response-profile-configuration": {
               "value": {
-                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/owner-email-address"
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/owner-email-address"
               }
             }
           }
         },
         {
-          "uuid": "ro-2-1-0-response-p-007",
+          "uuid": "ro-2-1-2-response-p-007",
           "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
           "response-profile-1-0:response-profile-pac": {
             "response-profile-capability": {
               "operation-name": "/v1/inform-about-release-history-in-generic-representation",
               "field-name": {
-                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-list=0/release-number"
+                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-list=0/release-number"
               },
               "description": "Represents the first entry in the list of releases",
               "datatype": "string"
             },
             "response-profile-configuration": {
               "value": {
-                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-list=0/changes"
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-list=0/changes"
               }
             }
           }
         },
         {
-          "uuid": "ro-2-1-0-response-p-008",
+          "uuid": "ro-2-1-2-response-p-008",
           "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
           "response-profile-1-0:response-profile-pac": {
             "response-profile-capability": {
               "operation-name": "/v1/list-applications-in-generic-representation",
               "field-name": {
-                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-ro-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
+                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-c-ro-2-1-2-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
               },
               "description": "List of release numbers and changes",
               "datatype": "string"
             },
             "response-profile-configuration": {
               "value": {
-                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-ro-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-c-ro-2-1-2-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
               }
             }
           }
         },
         {
-          "uuid": "ro-2-1-0-response-p-009",
+          "uuid": "ro-2-1-2-response-p-009",
           "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
           "response-profile-1-0:response-profile-pac": {
             "response-profile-capability": {
               "operation-name": "/v1/list-applications-in-generic-representation",
               "field-name": {
-                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-tar-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
+                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-c-tar-2-1-2-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
               },
               "description": "List of registered application names and release numbers",
               "datatype": "string"
             },
             "response-profile-configuration": {
               "value": {
-                "value-reference": "core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-tar-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
+                "value-reference": "core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-c-tar-2-1-2-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
               }
             }
           }
         },
         {
-          "uuid": "ro-2-1-0-response-p-010",
+          "uuid": "ro-2-1-2-response-p-010",
           "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
           "response-profile-1-0:response-profile-pac": {
             "response-profile-capability": {
               "operation-name": "/v1/list-applications-in-generic-representation",
               "field-name": {
-                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-eatl-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
+                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-c-eatl-2-1-2-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
               },
               "description": "List of registered application names and release numbers",
               "datatype": "string"
             },
             "response-profile-configuration": {
               "value": {
-                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-eatl-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-c-eatl-2-1-2-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
               }
             }
           }
         },
         {
-          "uuid": "ro-2-1-0-response-p-011",
+          "uuid": "ro-2-1-2-response-p-011",
           "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
           "response-profile-1-0:response-profile-pac": {
             "response-profile-capability": {
               "operation-name": "/v1/list-applications-in-generic-representation",
               "field-name": {
-                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-ol-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
+                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-c-ol-2-1-2-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
               },
               "description": "List of registered application names and release numbers",
               "datatype": "string"
             },
             "response-profile-configuration": {
               "value": {
-                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-ol-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-c-ol-2-1-2-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
               }
             }
           }
         },
         {
-          "uuid": "ro-2-1-0-response-p-012",
+          "uuid": "ro-2-1-2-response-p-012",
           "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
           "response-profile-1-0:response-profile-pac": {
             "response-profile-capability": {
               "operation-name": "/v1/list-applications-in-generic-representation",
               "field-name": {
-                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-aa-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
+                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-c-aa-2-1-2-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
               },
               "description": "List of registered application names and release numbers",
               "datatype": "string"
             },
             "response-profile-configuration": {
               "value": {
-                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-aa-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-c-aa-2-1-2-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
               }
             }
           }
         },
         {
-          "uuid": "ro-2-1-0-response-p-013",
+          "uuid": "ro-2-1-2-response-p-013",
           "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
           "response-profile-1-0:response-profile-pac": {
             "response-profile-capability": {
               "operation-name": "/v1/list-applications-in-generic-representation",
               "field-name": {
-                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-alt-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
+                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-c-alt-2-1-2-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
               },
               "description": "List of registered application names and release numbers",
               "datatype": "string"
             },
             "response-profile-configuration": {
               "value": {
-                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-alt-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-c-alt-2-1-2-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
               }
             }
           }
         },
         {
-          "uuid": "ro-2-1-0-response-p-014",
+          "uuid": "ro-2-1-2-response-p-014",
           "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
           "response-profile-1-0:response-profile-pac": {
             "response-profile-capability": {
               "operation-name": "/v1/list-applications-in-generic-representation",
               "field-name": {
-                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-okm-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
+                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-c-okm-2-1-2-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/application-name"
               },
               "description": "List of registered application names and release numbers",
               "datatype": "string"
             },
             "response-profile-configuration": {
               "value": {
-                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-c-okm-2-0-1-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-c-okm-2-1-2-000/layer-protocol=0/http-client-interface-1-0:http-client-interface-pac/http-client-interface-configuration/release-number"
               }
             }
           }
         },
         {
-          "uuid": "ro-2-1-0-response-p-016",
+          "uuid": "ro-2-1-2-response-p-016",
           "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
           "response-profile-1-0:response-profile-pac": {
             "response-profile-capability": {
               "operation-name": "/v1/inform-about-release-history-in-generic-representation",
               "field-name": {
-                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-list=1/release-number"
+                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-list=1/release-number"
               },
-              "description": "Represents the first entry in the list of releases",
+              "description": "Represents v2.0.1",
               "datatype": "string"
             },
             "response-profile-configuration": {
               "value": {
-                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-0-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-list=1/changes"
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-list=1/changes"
               }
             }
           }
         },
         {
-          "uuid": "ro-2-1-0-file-p-000",
+          "uuid": "ro-2-1-2-response-p-017",
+          "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
+          "response-profile-1-0:response-profile-pac": {
+            "response-profile-capability": {
+              "operation-name": "/v1/inform-about-release-history-in-generic-representation",
+              "field-name": {
+                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-list=2/release-number"
+              },
+              "description": "Represents v2.1.1",
+              "datatype": "string"
+            },
+            "response-profile-configuration": {
+              "value": {
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-list=2/changes"
+              }
+            }
+          }
+        },
+        {
+          "uuid": "ro-2-1-2-response-p-018",
+          "profile-name": "response-profile-1-0:PROFILE_NAME_TYPE_GENERIC_RESPONSE_PROFILE",
+          "response-profile-1-0:response-profile-pac": {
+            "response-profile-capability": {
+              "operation-name": "/v1/inform-about-release-history-in-generic-representation",
+              "field-name": {
+                "field-name-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-list=3/release-number"
+              },
+              "description": "Represents v2.1.2",
+              "datatype": "string"
+            },
+            "response-profile-configuration": {
+              "value": {
+                "value-reference": "/core-model-1-4:control-construct/logical-termination-point=ro-2-1-2-http-s-000/layer-protocol=0/http-server-interface-1-0:http-server-interface-pac/http-server-interface-capability/release-list=3/changes"
+              }
+            }
+          }
+        },
+        {
+          "uuid": "ro-2-1-2-file-p-000",
           "profile-name": "file-profile-1-0:PROFILE_NAME_TYPE_FILE_PROFILE",
           "file-profile-1-0:file-profile-pac": {
             "file-profile-capability": {
@@ -380,15 +418,13 @@
               "file-description": "Application name, release number and registration time stamp"
             },
             "file-profile-configuration": {
-              "file-path": "../application-data/application-data.json",
-              "user-name": "RegistryOffice",
-              "password": "Operations to add password",
+              "file-name": "application-data.json",
               "operation": "file-profile-1-0:OPERATION_TYPE_READ_WRITE"
             }
           }
         },
         {
-          "uuid": "ro-2-1-0-integer-p-000",
+          "uuid": "ro-2-1-2-integer-p-000",
           "profile-name": "integer-profile-1-0:PROFILE_NAME_TYPE_INTEGER_PROFILE",
           "integer-profile-1-0:integer-profile-pac": {
             "integer-profile-capability": {
@@ -404,7 +440,7 @@
           }
         },
         {
-          "uuid": "ro-2-1-0-integer-p-001",
+          "uuid": "ro-2-1-2-integer-p-001",
           "profile-name": "integer-profile-1-0:PROFILE_NAME_TYPE_INTEGER_PROFILE",
           "integer-profile-1-0:integer-profile-pac": {
             "integer-profile-capability": {
@@ -420,7 +456,7 @@
           }
         },
         {
-          "uuid": "ro-2-1-0-integer-p-010",
+          "uuid": "ro-2-1-2-integer-p-010",
           "profile-name": "integer-profile-1-0:PROFILE_NAME_TYPE_INTEGER_PROFILE",
           "integer-profile-1-0:integer-profile-pac": {
             "integer-profile-capability": {
@@ -438,12 +474,12 @@
     },
     "logical-termination-point": [
       {
-        "uuid": "ro-2-1-0-op-s-bm-000",
+        "uuid": "ro-2-1-2-op-s-bm-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -462,12 +498,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-bm-001",
+        "uuid": "ro-2-1-2-op-s-bm-001",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -486,12 +522,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-bm-002",
+        "uuid": "ro-2-1-2-op-s-bm-002",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -510,12 +546,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-bm-003",
+        "uuid": "ro-2-1-2-op-s-bm-003",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -534,12 +570,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-bm-004",
+        "uuid": "ro-2-1-2-op-s-bm-004",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -558,12 +594,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-bm-005",
+        "uuid": "ro-2-1-2-op-s-bm-005",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -582,12 +618,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-bm-007",
+        "uuid": "ro-2-1-2-op-s-bm-007",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -606,12 +642,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-bm-008",
+        "uuid": "ro-2-1-2-op-s-bm-008",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -630,12 +666,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-bm-009",
+        "uuid": "ro-2-1-2-op-s-bm-009",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -654,12 +690,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-bm-010",
+        "uuid": "ro-2-1-2-op-s-bm-010",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -678,12 +714,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-bm-011",
+        "uuid": "ro-2-1-2-op-s-bm-011",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -702,12 +738,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-bm-012",
+        "uuid": "ro-2-1-2-op-s-bm-012",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -726,12 +762,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-bm-013",
+        "uuid": "ro-2-1-2-op-s-bm-013",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -750,12 +786,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-bm-014",
+        "uuid": "ro-2-1-2-op-s-bm-014",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -774,12 +810,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-bm-015",
+        "uuid": "ro-2-1-2-op-s-bm-015",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -798,12 +834,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-im-000",
+        "uuid": "ro-2-1-2-op-s-im-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -822,12 +858,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-bs-000",
+        "uuid": "ro-2-1-2-op-s-bs-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -846,12 +882,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-bs-001",
+        "uuid": "ro-2-1-2-op-s-bs-001",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -870,12 +906,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-bs-002",
+        "uuid": "ro-2-1-2-op-s-bs-002",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -894,12 +930,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-bs-003",
+        "uuid": "ro-2-1-2-op-s-bs-003",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -918,12 +954,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-bs-004",
+        "uuid": "ro-2-1-2-op-s-bs-004",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -942,12 +978,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-bs-005",
+        "uuid": "ro-2-1-2-op-s-bs-005",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -966,12 +1002,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-is-001",
+        "uuid": "ro-2-1-2-op-s-is-001",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -990,12 +1026,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-is-002",
+        "uuid": "ro-2-1-2-op-s-is-002",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -1014,12 +1050,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-is-003",
+        "uuid": "ro-2-1-2-op-s-is-003",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -1038,12 +1074,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-is-004",
+        "uuid": "ro-2-1-2-op-s-is-004",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -1062,12 +1098,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-is-005",
+        "uuid": "ro-2-1-2-op-s-is-005",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -1086,12 +1122,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-is-006",
+        "uuid": "ro-2-1-2-op-s-is-006",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -1110,12 +1146,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-is-007",
+        "uuid": "ro-2-1-2-op-s-is-007",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -1134,12 +1170,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-is-008",
+        "uuid": "ro-2-1-2-op-s-is-008",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -1158,12 +1194,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-is-009",
+        "uuid": "ro-2-1-2-op-s-is-009",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -1182,12 +1218,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-is-010",
+        "uuid": "ro-2-1-2-op-s-is-010",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -1206,12 +1242,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-is-011",
+        "uuid": "ro-2-1-2-op-s-is-011",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -1230,12 +1266,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-is-012",
+        "uuid": "ro-2-1-2-op-s-is-012",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -1254,12 +1290,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-s-is-013",
+        "uuid": "ro-2-1-2-op-s-is-013",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "layer-protocol": [
           {
@@ -1278,47 +1314,47 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-http-s-000",
+        "uuid": "ro-2-1-2-http-s-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
-          "ro-2-1-0-op-s-bm-000",
-          "ro-2-1-0-op-s-bm-001",
-          "ro-2-1-0-op-s-bm-002",
-          "ro-2-1-0-op-s-bm-003",
-          "ro-2-1-0-op-s-bm-004",
-          "ro-2-1-0-op-s-bm-005",
-          "ro-2-1-0-op-s-bm-007",
-          "ro-2-1-0-op-s-bm-008",
-          "ro-2-1-0-op-s-bm-009",
-          "ro-2-1-0-op-s-bm-010",
-          "ro-2-1-0-op-s-bm-011",
-          "ro-2-1-0-op-s-bm-012",
-          "ro-2-1-0-op-s-bm-013",
-          "ro-2-1-0-op-s-bm-014",
-          "ro-2-1-0-op-s-bm-015",
-          "ro-2-1-0-op-s-im-000",
-          "ro-2-1-0-op-s-bs-000",
-          "ro-2-1-0-op-s-bs-001",
-          "ro-2-1-0-op-s-bs-002",
-          "ro-2-1-0-op-s-bs-003",
-          "ro-2-1-0-op-s-bs-004",
-          "ro-2-1-0-op-s-bs-005",
-          "ro-2-1-0-op-s-is-001",
-          "ro-2-1-0-op-s-is-002",
-          "ro-2-1-0-op-s-is-003",
-          "ro-2-1-0-op-s-is-004",
-          "ro-2-1-0-op-s-is-005",
-          "ro-2-1-0-op-s-is-006",
-          "ro-2-1-0-op-s-is-007",
-          "ro-2-1-0-op-s-is-008",
-          "ro-2-1-0-op-s-is-009",
-          "ro-2-1-0-op-s-is-010",
-          "ro-2-1-0-op-s-is-011",
-          "ro-2-1-0-op-s-is-012",
-          "ro-2-1-0-op-s-is-013"
+          "ro-2-1-2-op-s-bm-000",
+          "ro-2-1-2-op-s-bm-001",
+          "ro-2-1-2-op-s-bm-002",
+          "ro-2-1-2-op-s-bm-003",
+          "ro-2-1-2-op-s-bm-004",
+          "ro-2-1-2-op-s-bm-005",
+          "ro-2-1-2-op-s-bm-007",
+          "ro-2-1-2-op-s-bm-008",
+          "ro-2-1-2-op-s-bm-009",
+          "ro-2-1-2-op-s-bm-010",
+          "ro-2-1-2-op-s-bm-011",
+          "ro-2-1-2-op-s-bm-012",
+          "ro-2-1-2-op-s-bm-013",
+          "ro-2-1-2-op-s-bm-014",
+          "ro-2-1-2-op-s-bm-015",
+          "ro-2-1-2-op-s-im-000",
+          "ro-2-1-2-op-s-bs-000",
+          "ro-2-1-2-op-s-bs-001",
+          "ro-2-1-2-op-s-bs-002",
+          "ro-2-1-2-op-s-bs-003",
+          "ro-2-1-2-op-s-bs-004",
+          "ro-2-1-2-op-s-bs-005",
+          "ro-2-1-2-op-s-is-001",
+          "ro-2-1-2-op-s-is-002",
+          "ro-2-1-2-op-s-is-003",
+          "ro-2-1-2-op-s-is-004",
+          "ro-2-1-2-op-s-is-005",
+          "ro-2-1-2-op-s-is-006",
+          "ro-2-1-2-op-s-is-007",
+          "ro-2-1-2-op-s-is-008",
+          "ro-2-1-2-op-s-is-009",
+          "ro-2-1-2-op-s-is-010",
+          "ro-2-1-2-op-s-is-011",
+          "ro-2-1-2-op-s-is-012",
+          "ro-2-1-2-op-s-is-013"
         ],
         "server-ltp": [
-          "ro-2-1-0-tcp-s-000"
+          "ro-2-1-2-tcp-s-000"
         ],
         "layer-protocol": [
           {
@@ -1327,7 +1363,7 @@
             "http-server-interface-1-0:http-server-interface-pac": {
               "http-server-interface-capability": {
                 "application-name": "RegistryOffice",
-                "release-number": "2.1.1",
+                "release-number": "2.1.2",
                 "application-purpose": "All applications being part of the MW SDN must register here.",
                 "data-update-period": "http-server-interface-1-0:DATA_UPDATE_PERIOD_TYPE_REAL_TIME",
                 "owner-name": "Thorsten Heinze",
@@ -1350,6 +1386,12 @@
                     "release-number": "2.1.1",
                     "release-date": "12.02.2024",
                     "changes": "Update on ApplicationPattern 2.1.1 and fixing several findings."
+                  },
+                  {
+                    "local-id": "3",
+                    "release-number": "2.1.2",
+                    "release-date": "14.08.2024",
+                    "changes": "Fixing several findings from 2.1.2."
                   }
                 ]
               }
@@ -1358,10 +1400,10 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-tcp-s-000",
+        "uuid": "ro-2-1-2-tcp-s-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SOURCE",
         "client-ltp": [
-          "ro-2-1-0-http-s-000"
+          "ro-2-1-2-http-s-000"
         ],
         "server-ltp": [
         ],
@@ -1376,19 +1418,19 @@
                 "local-address": {
                   "ipv-4-address": "127.0.0.1"
                 },
-                "local-port": 3024
+                "local-port": 3031
               }
             }
           }
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-bm-or-2-0-1-000",
+        "uuid": "ro-2-1-2-op-c-bm-or-2-1-1-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-or-2-0-1-000"
+          "ro-2-1-2-http-c-or-2-1-1-000"
         ],
         "layer-protocol": [
           {
@@ -1408,13 +1450,13 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-http-c-or-2-0-1-000",
+        "uuid": "ro-2-1-2-http-c-or-2-1-1-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
-          "ro-2-1-0-op-c-bm-or-2-0-1-000"
+          "ro-2-1-2-op-c-bm-or-2-1-1-000"
         ],
         "server-ltp": [
-          "ro-2-1-0-tcp-c-or-2-0-1-000"
+          "ro-2-1-2-tcp-c-or-2-1-1-000"
         ],
         "layer-protocol": [
           {
@@ -1423,142 +1465,17 @@
             "http-client-interface-1-0:http-client-interface-pac": {
               "http-client-interface-configuration": {
                 "application-name": "RegistryOffice",
-                "release-number": "2.0.1"
+                "release-number": "2.1.1"
               }
             }
           }
         ]
       },
       {
-        "uuid": "ro-2-1-0-tcp-c-or-2-0-1-000",
+        "uuid": "ro-2-1-2-tcp-c-or-2-1-1-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
-          "ro-2-1-0-http-c-or-2-0-1-000"
-        ],
-        "server-ltp": [
-        ],
-        "layer-protocol": [
-          {
-            "local-id": "0",
-            "layer-protocol-name": "tcp-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_TCP_LAYER",
-            "tcp-client-interface-1-0:tcp-client-interface-pac": {
-              "tcp-client-interface-configuration": {
-                "remote-protocol": "tcp-client-interface-1-0:PROTOCOL_TYPE_HTTP",
-                "remote-address": {
-                  "ip-address": {
-                    "ipv-4-address": "127.0.0.1"
-                  }
-                },
-                "remote-port": 3008
-              }
-            }
-          }
-        ]
-      },
-      {
-        "uuid": "ro-2-1-0-op-c-im-nr-2-1-0-002",
-        "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
-        "client-ltp": [
-        ],
-        "server-ltp": [
-          "ro-2-1-0-http-c-nr-2-1-0-000"
-        ],
-        "layer-protocol": [
-          {
-            "local-id": "0",
-            "layer-protocol-name": "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
-            "operation-client-interface-1-0:operation-client-interface-pac": {
-              "operation-client-interface-configuration": {
-                "operation-name": "/v1/inquire-application-type-approvals",
-                "operation-key": "Operation key not yet provided."
-              },
-              "operation-client-interface-status": {
-                "operational-state": "operation-client-interface-1-0:OPERATIONAL_STATE_TYPE_NOT_YET_DEFINED",
-                "life-cycle-state": "operation-client-interface-1-0:LIFE_CYCLE_STATE_TYPE_NOT_YET_DEFINED"
-              }
-            }
-          }
-        ]
-      },
-      {
-        "uuid": "ro-2-1-0-op-c-im-nr-2-1-0-005",
-        "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
-        "client-ltp": [
-        ],
-        "server-ltp": [
-          "ro-2-1-0-http-c-nr-2-1-0-000"
-        ],
-        "layer-protocol": [
-          {
-            "local-id": "0",
-            "layer-protocol-name": "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
-            "operation-client-interface-1-0:operation-client-interface-pac": {
-              "operation-client-interface-configuration": {
-                "operation-name": "/v2/register-application",
-                "operation-key": "n.a."
-              },
-              "operation-client-interface-status": {
-                "operational-state": "operation-client-interface-1-0:OPERATIONAL_STATE_TYPE_NOT_YET_DEFINED",
-                "life-cycle-state": "operation-client-interface-1-0:LIFE_CYCLE_STATE_TYPE_NOT_YET_DEFINED"
-              }
-            }
-          }
-        ]
-      },
-      {
-        "uuid": "ro-2-1-0-op-c-im-nr-2-1-0-006",
-        "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
-        "client-ltp": [
-        ],
-        "server-ltp": [
-          "ro-2-1-0-http-c-nr-2-1-0-000"
-        ],
-        "layer-protocol": [
-          {
-            "local-id": "0",
-            "layer-protocol-name": "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
-            "operation-client-interface-1-0:operation-client-interface-pac": {
-              "operation-client-interface-configuration": {
-                "operation-name": "/v1/notify-embedding-status-changes",
-                "operation-key": "Operation key not yet provided."
-              },
-              "operation-client-interface-status": {
-                "operational-state": "operation-client-interface-1-0:OPERATIONAL_STATE_TYPE_NOT_YET_DEFINED",
-                "life-cycle-state": "operation-client-interface-1-0:LIFE_CYCLE_STATE_TYPE_NOT_YET_DEFINED"
-              }
-            }
-          }
-        ]
-      },
-      {
-        "uuid": "ro-2-1-0-http-c-nr-2-1-0-000",
-        "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
-        "client-ltp": [
-          "ro-2-1-0-op-c-im-nr-2-1-0-002",
-          "ro-2-1-0-op-c-im-nr-2-1-0-005",
-          "ro-2-1-0-op-c-im-nr-2-1-0-006"
-        ],
-        "server-ltp": [
-          "ro-2-1-0-tcp-c-nr-2-1-0-000"
-        ],
-        "layer-protocol": [
-          {
-            "local-id": "0",
-            "layer-protocol-name": "http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER",
-            "http-client-interface-1-0:http-client-interface-pac": {
-              "http-client-interface-configuration": {
-                "application-name": "NewRelease",
-                "release-number": "2.1.0"
-              }
-            }
-          }
-        ]
-      },
-      {
-        "uuid": "ro-2-1-0-tcp-c-nr-2-1-0-000",
-        "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
-        "client-ltp": [
-          "ro-2-1-0-http-c-nr-2-1-0-000"
+          "ro-2-1-2-http-c-or-2-1-1-000"
         ],
         "server-ltp": [
         ],
@@ -1581,12 +1498,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-bm-ro-2-0-1-000",
+        "uuid": "ro-2-1-2-op-c-im-nr-2-1-2-002",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-ro-2-0-1-000"
+          "ro-2-1-2-http-c-nr-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -1594,7 +1511,32 @@
             "layer-protocol-name": "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
             "operation-client-interface-1-0:operation-client-interface-pac": {
               "operation-client-interface-configuration": {
-                "operation-name": "/v1/register-application",
+                "operation-name": "/v1/inquire-application-type-approvals",
+                "operation-key": "Operation key not yet provided."
+              },
+              "operation-client-interface-status": {
+                "operational-state": "operation-client-interface-1-0:OPERATIONAL_STATE_TYPE_NOT_YET_DEFINED",
+                "life-cycle-state": "operation-client-interface-1-0:LIFE_CYCLE_STATE_TYPE_NOT_YET_DEFINED"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "uuid": "ro-2-1-2-op-c-im-nr-2-1-2-005",
+        "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
+        "client-ltp": [
+        ],
+        "server-ltp": [
+          "ro-2-1-2-http-c-nr-2-1-2-000"
+        ],
+        "layer-protocol": [
+          {
+            "local-id": "0",
+            "layer-protocol-name": "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
+            "operation-client-interface-1-0:operation-client-interface-pac": {
+              "operation-client-interface-configuration": {
+                "operation-name": "/v2/register-application",
                 "operation-key": "n.a."
               },
               "operation-client-interface-status": {
@@ -1606,12 +1548,112 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-bm-ro-2-0-1-001",
+        "uuid": "ro-2-1-2-op-c-im-nr-2-1-2-006",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-ro-2-0-1-000"
+          "ro-2-1-2-http-c-nr-2-1-2-000"
+        ],
+        "layer-protocol": [
+          {
+            "local-id": "0",
+            "layer-protocol-name": "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
+            "operation-client-interface-1-0:operation-client-interface-pac": {
+              "operation-client-interface-configuration": {
+                "operation-name": "/v1/notify-embedding-status-changes",
+                "operation-key": "Operation key not yet provided."
+              },
+              "operation-client-interface-status": {
+                "operational-state": "operation-client-interface-1-0:OPERATIONAL_STATE_TYPE_NOT_YET_DEFINED",
+                "life-cycle-state": "operation-client-interface-1-0:LIFE_CYCLE_STATE_TYPE_NOT_YET_DEFINED"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "uuid": "ro-2-1-2-http-c-nr-2-1-2-000",
+        "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
+        "client-ltp": [
+          "ro-2-1-2-op-c-im-nr-2-1-2-002",
+          "ro-2-1-2-op-c-im-nr-2-1-2-005",
+          "ro-2-1-2-op-c-im-nr-2-1-2-006"
+        ],
+        "server-ltp": [
+          "ro-2-1-2-tcp-c-nr-2-1-2-000"
+        ],
+        "layer-protocol": [
+          {
+            "local-id": "0",
+            "layer-protocol-name": "http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER",
+            "http-client-interface-1-0:http-client-interface-pac": {
+              "http-client-interface-configuration": {
+                "application-name": "NewRelease",
+                "release-number": "2.1.2"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "uuid": "ro-2-1-2-tcp-c-nr-2-1-2-000",
+        "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
+        "client-ltp": [
+          "ro-2-1-2-http-c-nr-2-1-2-000"
+        ],
+        "server-ltp": [
+        ],
+        "layer-protocol": [
+          {
+            "local-id": "0",
+            "layer-protocol-name": "tcp-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_TCP_LAYER",
+            "tcp-client-interface-1-0:tcp-client-interface-pac": {
+              "tcp-client-interface-configuration": {
+                "remote-protocol": "tcp-client-interface-1-0:PROTOCOL_TYPE_HTTP",
+                "remote-address": {
+                  "ip-address": {
+                    "ipv-4-address": "127.0.0.1"
+                  }
+                },
+                "remote-port": 3031
+              }
+            }
+          }
+        ]
+      },
+      {
+        "uuid": "ro-2-1-2-op-c-bm-ro-2-1-2-000",
+        "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
+        "client-ltp": [
+        ],
+        "server-ltp": [
+          "ro-2-1-2-http-c-ro-2-1-2-000"
+        ],
+        "layer-protocol": [
+          {
+            "local-id": "0",
+            "layer-protocol-name": "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
+            "operation-client-interface-1-0:operation-client-interface-pac": {
+              "operation-client-interface-configuration": {
+                "operation-name": "/v2/register-application",
+                "operation-key": "n.a."
+              },
+              "operation-client-interface-status": {
+                "operational-state": "operation-client-interface-1-0:OPERATIONAL_STATE_TYPE_NOT_YET_DEFINED",
+                "life-cycle-state": "operation-client-interface-1-0:LIFE_CYCLE_STATE_TYPE_NOT_YET_DEFINED"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "uuid": "ro-2-1-2-op-c-bm-ro-2-1-2-001",
+        "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
+        "client-ltp": [
+        ],
+        "server-ltp": [
+          "ro-2-1-2-http-c-ro-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -1631,12 +1673,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-bm-ro-2-0-1-002",
+        "uuid": "ro-2-1-2-op-c-bm-ro-2-1-2-002",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-ro-2-0-1-000"
+          "ro-2-1-2-http-c-ro-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -1656,12 +1698,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-bm-ro-2-0-1-003",
+        "uuid": "ro-2-1-2-op-c-bm-ro-2-1-2-003",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-ro-2-0-1-000"
+          "ro-2-1-2-http-c-ro-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -1681,12 +1723,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-ro-2-0-1-000",
+        "uuid": "ro-2-1-2-op-c-im-ro-2-1-2-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-ro-2-0-1-000"
+          "ro-2-1-2-http-c-ro-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -1706,12 +1748,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-ro-2-0-1-001",
+        "uuid": "ro-2-1-2-op-c-im-ro-2-1-2-001",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-ro-2-0-1-000"
+          "ro-2-1-2-http-c-ro-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -1731,12 +1773,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-ro-2-0-1-002",
+        "uuid": "ro-2-1-2-op-c-im-ro-2-1-2-002",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-ro-2-0-1-000"
+          "ro-2-1-2-http-c-ro-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -1756,12 +1798,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-ro-2-0-1-006",
+        "uuid": "ro-2-1-2-op-c-im-ro-2-1-2-006",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-ro-2-0-1-000"
+          "ro-2-1-2-http-c-ro-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -1781,12 +1823,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-ro-2-0-1-008",
+        "uuid": "ro-2-1-2-op-c-im-ro-2-1-2-008",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-2-http-c-ro-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -1806,12 +1848,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-ro-2-0-1-009",
+        "uuid": "ro-2-1-2-op-c-im-ro-2-1-2-009",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-2-http-c-ro-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -1831,22 +1873,22 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-http-c-ro-2-0-1-000",
+        "uuid": "ro-2-1-2-http-c-ro-2-1-2-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
-          "ro-2-1-0-op-c-bm-ro-2-0-1-000",
-          "ro-2-1-0-op-c-bm-ro-2-0-1-001",
-          "ro-2-1-0-op-c-bm-ro-2-0-1-002",
-          "ro-2-1-0-op-c-bm-ro-2-0-1-003",
-          "ro-2-1-0-op-c-im-ro-2-0-1-000",
-          "ro-2-1-0-op-c-im-ro-2-0-1-001",
-          "ro-2-1-0-op-c-im-ro-2-0-1-002",
-          "ro-2-1-0-op-c-im-ro-2-0-1-006",
-          "ro-2-1-0-op-c-im-ro-2-0-1-008",
-          "ro-2-1-0-op-c-im-ro-2-0-1-009"
+          "ro-2-1-2-op-c-bm-ro-2-1-2-000",
+          "ro-2-1-2-op-c-bm-ro-2-1-2-001",
+          "ro-2-1-2-op-c-bm-ro-2-1-2-002",
+          "ro-2-1-2-op-c-bm-ro-2-1-2-003",
+          "ro-2-1-2-op-c-im-ro-2-1-2-000",
+          "ro-2-1-2-op-c-im-ro-2-1-2-001",
+          "ro-2-1-2-op-c-im-ro-2-1-2-002",
+          "ro-2-1-2-op-c-im-ro-2-1-2-006",
+          "ro-2-1-2-op-c-im-ro-2-1-2-008",
+          "ro-2-1-2-op-c-im-ro-2-1-2-009"
         ],
         "server-ltp": [
-          "ro-2-1-0-tcp-c-ro-2-0-1-000"
+          "ro-2-1-2-tcp-c-ro-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -1855,17 +1897,17 @@
             "http-client-interface-1-0:http-client-interface-pac": {
               "http-client-interface-configuration": {
                 "application-name": "RegistryOffice",
-                "release-number": "2.0.1"
+                "release-number": "2.1.2"
               }
             }
           }
         ]
       },
       {
-        "uuid": "ro-2-1-0-tcp-c-ro-2-0-1-000",
+        "uuid": "ro-2-1-2-tcp-c-ro-2-1-2-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
-          "ro-2-1-0-http-c-ro-2-0-1-000"
+          "ro-2-1-2-http-c-ro-2-1-2-000"
         ],
         "server-ltp": [
         ],
@@ -1881,19 +1923,19 @@
                     "ipv-4-address": "127.0.0.1"
                   }
                 },
-                "remote-port": 3008
+                "remote-port": 3031
               }
             }
           }
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-tar-2-0-1-000",
+        "uuid": "ro-2-1-2-op-c-im-tar-2-1-2-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-tar-2-0-1-000"
+          "ro-2-1-2-http-c-tar-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -1913,12 +1955,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-tar-2-0-1-001",
+        "uuid": "ro-2-1-2-op-c-im-tar-2-1-2-001",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-tar-2-0-1-000"
+          "ro-2-1-2-http-c-tar-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -1938,12 +1980,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-tar-2-0-1-002",
+        "uuid": "ro-2-1-2-op-c-im-tar-2-1-2-002",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-tar-2-0-1-000"
+          "ro-2-1-2-http-c-tar-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -1963,12 +2005,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-tar-2-0-1-003",
+        "uuid": "ro-2-1-2-op-c-im-tar-2-1-2-003",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-tar-2-0-1-000"
+          "ro-2-1-2-http-c-tar-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -1988,12 +2030,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-tar-2-0-1-004",
+        "uuid": "ro-2-1-2-op-c-im-tar-2-1-2-004",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-tar-2-0-1-000"
+          "ro-2-1-2-http-c-tar-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2013,12 +2055,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-tar-2-0-1-005",
+        "uuid": "ro-2-1-2-op-c-im-tar-2-1-2-005",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-tar-2-0-1-000"
+          "ro-2-1-2-http-c-tar-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2038,12 +2080,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-tar-2-0-1-006",
+        "uuid": "ro-2-1-2-op-c-im-tar-2-1-2-006",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-tar-2-0-1-000"
+          "ro-2-1-2-http-c-tar-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2063,12 +2105,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-tar-2-0-1-007",
+        "uuid": "ro-2-1-2-op-c-im-tar-2-1-2-007",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-tar-2-0-1-000"
+          "ro-2-1-2-http-c-tar-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2088,12 +2130,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-tar-2-0-1-008",
+        "uuid": "ro-2-1-2-op-c-im-tar-2-1-2-008",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-2-http-c-tar-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2113,12 +2155,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-tar-2-0-1-009",
+        "uuid": "ro-2-1-2-op-c-im-tar-2-1-2-009",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-2-http-c-tar-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2138,22 +2180,22 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-http-c-tar-2-0-1-000",
+        "uuid": "ro-2-1-2-http-c-tar-2-1-2-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
-          "ro-2-1-0-op-c-im-tar-2-0-1-000",
-          "ro-2-1-0-op-c-im-tar-2-0-1-001",
-          "ro-2-1-0-op-c-im-tar-2-0-1-002",
-          "ro-2-1-0-op-c-im-tar-2-0-1-003",
-          "ro-2-1-0-op-c-im-tar-2-0-1-004",
-          "ro-2-1-0-op-c-im-tar-2-0-1-005",
-          "ro-2-1-0-op-c-im-tar-2-0-1-006",
-          "ro-2-1-0-op-c-im-tar-2-0-1-007",
-          "ro-2-1-0-op-c-im-tar-2-0-1-008",
-          "ro-2-1-0-op-c-im-tar-2-0-1-009"
+          "ro-2-1-2-op-c-im-tar-2-1-2-000",
+          "ro-2-1-2-op-c-im-tar-2-1-2-001",
+          "ro-2-1-2-op-c-im-tar-2-1-2-002",
+          "ro-2-1-2-op-c-im-tar-2-1-2-003",
+          "ro-2-1-2-op-c-im-tar-2-1-2-004",
+          "ro-2-1-2-op-c-im-tar-2-1-2-005",
+          "ro-2-1-2-op-c-im-tar-2-1-2-006",
+          "ro-2-1-2-op-c-im-tar-2-1-2-007",
+          "ro-2-1-2-op-c-im-tar-2-1-2-008",
+          "ro-2-1-2-op-c-im-tar-2-1-2-009"
         ],
         "server-ltp": [
-          "ro-2-1-0-tcp-c-tar-2-0-1-000"
+          "ro-2-1-2-tcp-c-tar-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2162,17 +2204,17 @@
             "http-client-interface-1-0:http-client-interface-pac": {
               "http-client-interface-configuration": {
                 "application-name": "TypeApprovalRegister",
-                "release-number": "2.0.1"
+                "release-number": "2.1.2"
               }
             }
           }
         ]
       },
       {
-        "uuid": "ro-2-1-0-tcp-c-tar-2-0-1-000",
+        "uuid": "ro-2-1-2-tcp-c-tar-2-1-2-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
-          "ro-2-1-0-http-c-tar-2-0-1-000"
+          "ro-2-1-2-http-c-tar-2-1-2-000"
         ],
         "server-ltp": [
         ],
@@ -2188,19 +2230,19 @@
                     "ipv-4-address": "127.0.0.1"
                   }
                 },
-                "remote-port": 3009
+                "remote-port": 3032
               }
             }
           }
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-bs-eatl-2-0-1-000",
+        "uuid": "ro-2-1-2-op-c-bs-eatl-2-1-2-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-eatl-2-0-1-000"
+          "ro-2-1-2-http-c-eatl-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2221,12 +2263,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-eatl-2-0-1-000",
+        "uuid": "ro-2-1-2-op-c-im-eatl-2-1-2-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-eatl-2-0-1-000"
+          "ro-2-1-2-http-c-eatl-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2246,12 +2288,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-eatl-2-0-1-001",
+        "uuid": "ro-2-1-2-op-c-im-eatl-2-1-2-001",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-eatl-2-0-1-000"
+          "ro-2-1-2-http-c-eatl-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2271,12 +2313,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-eatl-2-0-1-002",
+        "uuid": "ro-2-1-2-op-c-im-eatl-2-1-2-002",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-eatl-2-0-1-000"
+          "ro-2-1-2-http-c-eatl-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2296,12 +2338,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-eatl-2-0-1-003",
+        "uuid": "ro-2-1-2-op-c-im-eatl-2-1-2-003",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-eatl-2-0-1-000"
+          "ro-2-1-2-http-c-eatl-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2321,12 +2363,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-eatl-2-0-1-004",
+        "uuid": "ro-2-1-2-op-c-im-eatl-2-1-2-004",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-eatl-2-0-1-000"
+          "ro-2-1-2-http-c-eatl-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2346,12 +2388,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-eatl-2-0-1-006",
+        "uuid": "ro-2-1-2-op-c-im-eatl-2-1-2-006",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-eatl-2-0-1-000"
+          "ro-2-1-2-http-c-eatl-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2371,12 +2413,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-eatl-2-0-1-008",
+        "uuid": "ro-2-1-2-op-c-im-eatl-2-1-2-008",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-2-http-c-eatl-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2396,12 +2438,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-eatl-2-0-1-009",
+        "uuid": "ro-2-1-2-op-c-im-eatl-2-1-2-009",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-2-http-c-eatl-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2421,21 +2463,21 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-http-c-eatl-2-0-1-000",
+        "uuid": "ro-2-1-2-http-c-eatl-2-1-2-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
-          "ro-2-1-0-op-c-bs-eatl-2-0-1-000",
-          "ro-2-1-0-op-c-im-eatl-2-0-1-000",
-          "ro-2-1-0-op-c-im-eatl-2-0-1-001",
-          "ro-2-1-0-op-c-im-eatl-2-0-1-002",
-          "ro-2-1-0-op-c-im-eatl-2-0-1-003",
-          "ro-2-1-0-op-c-im-eatl-2-0-1-004",
-          "ro-2-1-0-op-c-im-eatl-2-0-1-006",
-          "ro-2-1-0-op-c-im-eatl-2-0-1-008",
-          "ro-2-1-0-op-c-im-eatl-2-0-1-009"
+          "ro-2-1-2-op-c-bs-eatl-2-1-2-000",
+          "ro-2-1-2-op-c-im-eatl-2-1-2-000",
+          "ro-2-1-2-op-c-im-eatl-2-1-2-001",
+          "ro-2-1-2-op-c-im-eatl-2-1-2-002",
+          "ro-2-1-2-op-c-im-eatl-2-1-2-003",
+          "ro-2-1-2-op-c-im-eatl-2-1-2-004",
+          "ro-2-1-2-op-c-im-eatl-2-1-2-006",
+          "ro-2-1-2-op-c-im-eatl-2-1-2-008",
+          "ro-2-1-2-op-c-im-eatl-2-1-2-009"
         ],
         "server-ltp": [
-          "ro-2-1-0-tcp-c-eatl-2-0-1-000"
+          "ro-2-1-2-tcp-c-eatl-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2444,17 +2486,17 @@
             "http-client-interface-1-0:http-client-interface-pac": {
               "http-client-interface-configuration": {
                 "application-name": "ExecutionAndTraceLog",
-                "release-number": "2.0.1"
+                "release-number": "2.1.2"
               }
             }
           }
         ]
       },
       {
-        "uuid": "ro-2-1-0-tcp-c-eatl-2-0-1-000",
+        "uuid": "ro-2-1-2-tcp-c-eatl-2-1-2-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
-          "ro-2-1-0-http-c-eatl-2-0-1-000"
+          "ro-2-1-2-http-c-eatl-2-1-2-000"
         ],
         "server-ltp": [
         ],
@@ -2470,19 +2512,19 @@
                     "ipv-4-address": "127.0.0.1"
                   }
                 },
-                "remote-port": 3010
+                "remote-port": 3033
               }
             }
           }
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-bs-ol-2-0-1-000",
+        "uuid": "ro-2-1-2-op-c-bs-ol-2-1-2-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-ol-2-0-1-000"
+          "ro-2-1-2-http-c-ol-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2502,12 +2544,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-ol-2-0-1-000",
+        "uuid": "ro-2-1-2-op-c-im-ol-2-1-2-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-ol-2-0-1-000"
+          "ro-2-1-2-http-c-ol-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2527,12 +2569,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-ol-2-0-1-001",
+        "uuid": "ro-2-1-2-op-c-im-ol-2-1-2-001",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-ol-2-0-1-000"
+          "ro-2-1-2-http-c-ol-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2552,12 +2594,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-ol-2-0-1-002",
+        "uuid": "ro-2-1-2-op-c-im-ol-2-1-2-002",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-ol-2-0-1-000"
+          "ro-2-1-2-http-c-ol-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2577,12 +2619,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-ol-2-0-1-003",
+        "uuid": "ro-2-1-2-op-c-im-ol-2-1-2-003",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-ol-2-0-1-000"
+          "ro-2-1-2-http-c-ol-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2602,12 +2644,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-ol-2-0-1-004",
+        "uuid": "ro-2-1-2-op-c-im-ol-2-1-2-004",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-ol-2-0-1-000"
+          "ro-2-1-2-http-c-ol-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2627,12 +2669,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-ol-2-0-1-006",
+        "uuid": "ro-2-1-2-op-c-im-ol-2-1-2-006",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-ol-2-0-1-000"
+          "ro-2-1-2-http-c-ol-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2652,12 +2694,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-ol-2-0-1-008",
+        "uuid": "ro-2-1-2-op-c-im-ol-2-1-2-008",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-2-http-c-ol-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2677,12 +2719,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-ol-2-0-1-009",
+        "uuid": "ro-2-1-2-op-c-im-ol-2-1-2-009",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-2-http-c-ol-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2702,21 +2744,21 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-http-c-ol-2-0-1-000",
+        "uuid": "ro-2-1-2-http-c-ol-2-1-2-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
-          "ro-2-1-0-op-c-bs-ol-2-0-1-000",
-          "ro-2-1-0-op-c-im-ol-2-0-1-000",
-          "ro-2-1-0-op-c-im-ol-2-0-1-001",
-          "ro-2-1-0-op-c-im-ol-2-0-1-002",
-          "ro-2-1-0-op-c-im-ol-2-0-1-003",
-          "ro-2-1-0-op-c-im-ol-2-0-1-004",
-          "ro-2-1-0-op-c-im-ol-2-0-1-006",
-          "ro-2-1-0-op-c-im-ol-2-0-1-008",
-          "ro-2-1-0-op-c-im-ol-2-0-1-009"
+          "ro-2-1-2-op-c-bs-ol-2-1-2-000",
+          "ro-2-1-2-op-c-im-ol-2-1-2-000",
+          "ro-2-1-2-op-c-im-ol-2-1-2-001",
+          "ro-2-1-2-op-c-im-ol-2-1-2-002",
+          "ro-2-1-2-op-c-im-ol-2-1-2-003",
+          "ro-2-1-2-op-c-im-ol-2-1-2-004",
+          "ro-2-1-2-op-c-im-ol-2-1-2-006",
+          "ro-2-1-2-op-c-im-ol-2-1-2-008",
+          "ro-2-1-2-op-c-im-ol-2-1-2-009"
         ],
         "server-ltp": [
-          "ro-2-1-0-tcp-c-ol-2-0-1-000"
+          "ro-2-1-2-tcp-c-ol-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2725,17 +2767,17 @@
             "http-client-interface-1-0:http-client-interface-pac": {
               "http-client-interface-configuration": {
                 "application-name": "OamLog",
-                "release-number": "2.0.1"
+                "release-number": "2.1.2"
               }
             }
           }
         ]
       },
       {
-        "uuid": "ro-2-1-0-tcp-c-ol-2-0-1-000",
+        "uuid": "ro-2-1-2-tcp-c-ol-2-1-2-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
-          "ro-2-1-0-http-c-ol-2-0-1-000"
+          "ro-2-1-2-http-c-ol-2-1-2-000"
         ],
         "server-ltp": [
         ],
@@ -2751,19 +2793,19 @@
                     "ipv-4-address": "127.0.0.1"
                   }
                 },
-                "remote-port": 3011
+                "remote-port": 3034
               }
             }
           }
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-bs-aa-2-0-1-000",
+        "uuid": "ro-2-1-2-op-c-bs-aa-2-1-2-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-aa-2-0-1-000"
+          "ro-2-1-2-http-c-aa-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2771,7 +2813,7 @@
             "layer-protocol-name": "operation-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_OPERATION_LAYER",
             "operation-client-interface-1-0:operation-client-interface-pac": {
               "operation-client-interface-configuration": {
-                "operation-name": "/v1/approve-oam-request",
+                "operation-name": "/v1/approve-basic-auth-request",
                 "operation-key": "Operation key not yet provided."
               },
               "operation-client-interface-status": {
@@ -2783,12 +2825,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-aa-2-0-1-000",
+        "uuid": "ro-2-1-2-op-c-im-aa-2-1-2-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-aa-2-0-1-000"
+          "ro-2-1-2-http-c-aa-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2808,12 +2850,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-aa-2-0-1-001",
+        "uuid": "ro-2-1-2-op-c-im-aa-2-1-2-001",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-aa-2-0-1-000"
+          "ro-2-1-2-http-c-aa-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2833,12 +2875,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-aa-2-0-1-002",
+        "uuid": "ro-2-1-2-op-c-im-aa-2-1-2-002",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-aa-2-0-1-000"
+          "ro-2-1-2-http-c-aa-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2858,12 +2900,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-aa-2-0-1-003",
+        "uuid": "ro-2-1-2-op-c-im-aa-2-1-2-003",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-aa-2-0-1-000"
+          "ro-2-1-2-http-c-aa-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2883,12 +2925,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-aa-2-0-1-004",
+        "uuid": "ro-2-1-2-op-c-im-aa-2-1-2-004",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-aa-2-0-1-000"
+          "ro-2-1-2-http-c-aa-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2908,12 +2950,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-aa-2-0-1-006",
+        "uuid": "ro-2-1-2-op-c-im-aa-2-1-2-006",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-aa-2-0-1-000"
+          "ro-2-1-2-http-c-aa-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2933,12 +2975,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-aa-2-0-1-008",
+        "uuid": "ro-2-1-2-op-c-im-aa-2-1-2-008",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-2-http-c-aa-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2958,12 +3000,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-aa-2-0-1-009",
+        "uuid": "ro-2-1-2-op-c-im-aa-2-1-2-009",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-2-http-c-aa-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -2983,21 +3025,21 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-http-c-aa-2-0-1-000",
+        "uuid": "ro-2-1-2-http-c-aa-2-1-2-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
-          "ro-2-1-0-op-c-bs-aa-2-0-1-000",
-          "ro-2-1-0-op-c-im-aa-2-0-1-000",
-          "ro-2-1-0-op-c-im-aa-2-0-1-001",
-          "ro-2-1-0-op-c-im-aa-2-0-1-002",
-          "ro-2-1-0-op-c-im-aa-2-0-1-003",
-          "ro-2-1-0-op-c-im-aa-2-0-1-004",
-          "ro-2-1-0-op-c-im-aa-2-0-1-006",
-          "ro-2-1-0-op-c-im-aa-2-0-1-008",
-          "ro-2-1-0-op-c-im-aa-2-0-1-009"
+          "ro-2-1-2-op-c-bs-aa-2-1-2-000",
+          "ro-2-1-2-op-c-im-aa-2-1-2-000",
+          "ro-2-1-2-op-c-im-aa-2-1-2-001",
+          "ro-2-1-2-op-c-im-aa-2-1-2-002",
+          "ro-2-1-2-op-c-im-aa-2-1-2-003",
+          "ro-2-1-2-op-c-im-aa-2-1-2-004",
+          "ro-2-1-2-op-c-im-aa-2-1-2-006",
+          "ro-2-1-2-op-c-im-aa-2-1-2-008",
+          "ro-2-1-2-op-c-im-aa-2-1-2-009"
         ],
         "server-ltp": [
-          "ro-2-1-0-tcp-c-aa-2-0-1-000"
+          "ro-2-1-2-tcp-c-aa-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -3005,18 +3047,18 @@
             "layer-protocol-name": "http-client-interface-1-0:LAYER_PROTOCOL_NAME_TYPE_HTTP_LAYER",
             "http-client-interface-1-0:http-client-interface-pac": {
               "http-client-interface-configuration": {
-                "application-name": "AdministratorAdministration",
-                "release-number": "2.0.1"
+                "application-name": "AccessAdministration",
+                "release-number": "2.1.2"
               }
             }
           }
         ]
       },
       {
-        "uuid": "ro-2-1-0-tcp-c-aa-2-0-1-000",
+        "uuid": "ro-2-1-2-tcp-c-aa-2-1-2-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
-          "ro-2-1-0-http-c-aa-2-0-1-000"
+          "ro-2-1-2-http-c-aa-2-1-2-000"
         ],
         "server-ltp": [
         ],
@@ -3032,19 +3074,19 @@
                     "ipv-4-address": "127.0.0.1"
                   }
                 },
-                "remote-port": 3012
+                "remote-port": 3035
               }
             }
           }
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-bm-alt-2-0-1-000",
+        "uuid": "ro-2-1-2-op-c-bm-alt-2-1-2-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-alt-2-0-1-000"
+          "ro-2-1-2-http-c-alt-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -3064,12 +3106,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-bm-alt-2-0-1-001",
+        "uuid": "ro-2-1-2-op-c-bm-alt-2-1-2-001",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-alt-2-0-1-000"
+          "ro-2-1-2-http-c-alt-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -3089,12 +3131,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-bm-alt-2-0-1-002",
+        "uuid": "ro-2-1-2-op-c-bm-alt-2-1-2-002",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-alt-2-0-1-000"
+          "ro-2-1-2-http-c-alt-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -3114,12 +3156,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-bm-alt-2-0-1-003",
+        "uuid": "ro-2-1-2-op-c-bm-alt-2-1-2-003",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-alt-2-0-1-000"
+          "ro-2-1-2-http-c-alt-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -3139,12 +3181,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-bm-alt-2-0-1-004",
+        "uuid": "ro-2-1-2-op-c-bm-alt-2-1-2-004",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-alt-2-0-1-000"
+          "ro-2-1-2-http-c-alt-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -3164,12 +3206,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-bm-alt-2-0-1-005",
+        "uuid": "ro-2-1-2-op-c-bm-alt-2-1-2-005",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-alt-2-0-1-000"
+          "ro-2-1-2-http-c-alt-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -3189,12 +3231,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-alt-2-0-1-000",
+        "uuid": "ro-2-1-2-op-c-im-alt-2-1-2-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-alt-2-0-1-000"
+          "ro-2-1-2-http-c-alt-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -3214,12 +3256,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-alt-2-0-1-001",
+        "uuid": "ro-2-1-2-op-c-im-alt-2-1-2-001",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-alt-2-0-1-000"
+          "ro-2-1-2-http-c-alt-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -3239,12 +3281,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-alt-2-0-1-002",
+        "uuid": "ro-2-1-2-op-c-im-alt-2-1-2-002",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-alt-2-0-1-000"
+          "ro-2-1-2-http-c-alt-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -3264,12 +3306,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-alt-2-0-1-003",
+        "uuid": "ro-2-1-2-op-c-im-alt-2-1-2-003",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-alt-2-0-1-000"
+          "ro-2-1-2-http-c-alt-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -3289,12 +3331,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-alt-2-0-1-004",
+        "uuid": "ro-2-1-2-op-c-im-alt-2-1-2-004",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-alt-2-0-1-000"
+          "ro-2-1-2-http-c-alt-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -3314,12 +3356,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-alt-2-0-1-006",
+        "uuid": "ro-2-1-2-op-c-im-alt-2-1-2-006",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-alt-2-0-1-000"
+          "ro-2-1-2-http-c-alt-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -3339,12 +3381,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-alt-2-0-1-008",
+        "uuid": "ro-2-1-2-op-c-im-alt-2-1-2-008",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-alt-2-0-1-000"
+          "ro-2-1-2-http-c-alt-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -3364,12 +3406,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-alt-2-0-1-009",
+        "uuid": "ro-2-1-2-op-c-im-alt-2-1-2-009",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-alt-2-0-1-000"
+          "ro-2-1-2-http-c-alt-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -3389,12 +3431,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-is-alt-2-0-1-000",
+        "uuid": "ro-2-1-2-op-c-is-alt-2-1-2-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-alt-2-0-1-000"
+          "ro-2-1-2-http-c-alt-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -3414,27 +3456,27 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-http-c-alt-2-0-1-000",
+        "uuid": "ro-2-1-2-http-c-alt-2-1-2-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
-          "ro-2-1-0-op-c-bm-alt-2-0-1-000",
-          "ro-2-1-0-op-c-bm-alt-2-0-1-001",
-          "ro-2-1-0-op-c-bm-alt-2-0-1-002",
-          "ro-2-1-0-op-c-bm-alt-2-0-1-003",
-          "ro-2-1-0-op-c-bm-alt-2-0-1-004",
-          "ro-2-1-0-op-c-bm-alt-2-0-1-005",
-          "ro-2-1-0-op-c-im-alt-2-0-1-000",
-          "ro-2-1-0-op-c-im-alt-2-0-1-001",
-          "ro-2-1-0-op-c-im-alt-2-0-1-002",
-          "ro-2-1-0-op-c-im-alt-2-0-1-003",
-          "ro-2-1-0-op-c-im-alt-2-0-1-004",
-          "ro-2-1-0-op-c-im-alt-2-0-1-006",
-          "ro-2-1-0-op-c-im-alt-2-0-1-008",
-          "ro-2-1-0-op-c-im-alt-2-0-1-009",
-          "ro-2-1-0-op-c-is-alt-2-0-1-000"
+          "ro-2-1-2-op-c-bm-alt-2-1-2-000",
+          "ro-2-1-2-op-c-bm-alt-2-1-2-001",
+          "ro-2-1-2-op-c-bm-alt-2-1-2-002",
+          "ro-2-1-2-op-c-bm-alt-2-1-2-003",
+          "ro-2-1-2-op-c-bm-alt-2-1-2-004",
+          "ro-2-1-2-op-c-bm-alt-2-1-2-005",
+          "ro-2-1-2-op-c-im-alt-2-1-2-000",
+          "ro-2-1-2-op-c-im-alt-2-1-2-001",
+          "ro-2-1-2-op-c-im-alt-2-1-2-002",
+          "ro-2-1-2-op-c-im-alt-2-1-2-003",
+          "ro-2-1-2-op-c-im-alt-2-1-2-004",
+          "ro-2-1-2-op-c-im-alt-2-1-2-006",
+          "ro-2-1-2-op-c-im-alt-2-1-2-008",
+          "ro-2-1-2-op-c-im-alt-2-1-2-009",
+          "ro-2-1-2-op-c-is-alt-2-1-2-000"
         ],
         "server-ltp": [
-          "ro-2-1-0-tcp-c-alt-2-0-1-000"
+          "ro-2-1-2-tcp-c-alt-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -3443,17 +3485,17 @@
             "http-client-interface-1-0:http-client-interface-pac": {
               "http-client-interface-configuration": {
                 "application-name": "ApplicationLayerTopology",
-                "release-number": "2.0.1"
+                "release-number": "2.1.2"
               }
             }
           }
         ]
       },
       {
-        "uuid": "ro-2-1-0-tcp-c-alt-2-0-1-000",
+        "uuid": "ro-2-1-2-tcp-c-alt-2-1-2-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
-          "ro-2-1-0-http-c-alt-2-0-1-000"
+          "ro-2-1-2-http-c-alt-2-1-2-000"
         ],
         "server-ltp": [
         ],
@@ -3469,19 +3511,19 @@
                     "ipv-4-address": "127.0.0.1"
                   }
                 },
-                "remote-port": 3013
+                "remote-port": 3036
               }
             }
           }
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-okm-2-0-1-000",
+        "uuid": "ro-2-1-2-op-c-im-okm-2-1-2-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-2-http-c-okm-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -3501,12 +3543,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-okm-2-0-1-001",
+        "uuid": "ro-2-1-2-op-c-im-okm-2-1-2-001",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-2-http-c-okm-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -3526,12 +3568,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-okm-2-0-1-002",
+        "uuid": "ro-2-1-2-op-c-im-okm-2-1-2-002",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-2-http-c-okm-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -3551,12 +3593,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-okm-2-0-1-003",
+        "uuid": "ro-2-1-2-op-c-im-okm-2-1-2-003",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-2-http-c-okm-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -3576,12 +3618,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-okm-2-0-1-004",
+        "uuid": "ro-2-1-2-op-c-im-okm-2-1-2-004",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-2-http-c-okm-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -3601,12 +3643,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-okm-2-0-1-006",
+        "uuid": "ro-2-1-2-op-c-im-okm-2-1-2-006",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-2-http-c-okm-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -3626,12 +3668,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-okm-2-0-1-008",
+        "uuid": "ro-2-1-2-op-c-im-okm-2-1-2-008",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-2-http-c-okm-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -3651,12 +3693,12 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-op-c-im-okm-2-0-1-009",
+        "uuid": "ro-2-1-2-op-c-im-okm-2-1-2-009",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
         ],
         "server-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-2-http-c-okm-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -3676,20 +3718,20 @@
         ]
       },
       {
-        "uuid": "ro-2-1-0-http-c-okm-2-0-1-000",
+        "uuid": "ro-2-1-2-http-c-okm-2-1-2-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
-          "ro-2-1-0-op-c-im-okm-2-0-1-000",
-          "ro-2-1-0-op-c-im-okm-2-0-1-001",
-          "ro-2-1-0-op-c-im-okm-2-0-1-002",
-          "ro-2-1-0-op-c-im-okm-2-0-1-003",
-          "ro-2-1-0-op-c-im-okm-2-0-1-004",
-          "ro-2-1-0-op-c-im-okm-2-0-1-006",
-          "ro-2-1-0-op-c-im-okm-2-0-1-008",
-          "ro-2-1-0-op-c-im-okm-2-0-1-009"
+          "ro-2-1-2-op-c-im-okm-2-1-2-000",
+          "ro-2-1-2-op-c-im-okm-2-1-2-001",
+          "ro-2-1-2-op-c-im-okm-2-1-2-002",
+          "ro-2-1-2-op-c-im-okm-2-1-2-003",
+          "ro-2-1-2-op-c-im-okm-2-1-2-004",
+          "ro-2-1-2-op-c-im-okm-2-1-2-006",
+          "ro-2-1-2-op-c-im-okm-2-1-2-008",
+          "ro-2-1-2-op-c-im-okm-2-1-2-009"
         ],
         "server-ltp": [
-          "ro-2-1-0-tcp-c-okm-2-0-1-000"
+          "ro-2-1-2-tcp-c-okm-2-1-2-000"
         ],
         "layer-protocol": [
           {
@@ -3698,17 +3740,17 @@
             "http-client-interface-1-0:http-client-interface-pac": {
               "http-client-interface-configuration": {
                 "application-name": "OperationKeyManagement",
-                "release-number": "2.0.1"
+                "release-number": "2.1.2"
               }
             }
           }
         ]
       },
       {
-        "uuid": "ro-2-1-0-tcp-c-okm-2-0-1-000",
+        "uuid": "ro-2-1-2-tcp-c-okm-2-1-2-000",
         "ltp-direction": "core-model-1-4:TERMINATION_DIRECTION_SINK",
         "client-ltp": [
-          "ro-2-1-0-http-c-okm-2-0-1-000"
+          "ro-2-1-2-http-c-okm-2-1-2-000"
         ],
         "server-ltp": [
         ],
@@ -3724,7 +3766,7 @@
                     "ipv-4-address": "127.0.0.1"
                   }
                 },
-                "remote-port": 3014
+                "remote-port": 3037
               }
             }
           }
@@ -3733,10 +3775,10 @@
     ],
     "forwarding-domain": [
       {
-        "uuid": "ro-2-1-0-op-fd-000",
+        "uuid": "ro-2-1-2-op-fd-000",
         "forwarding-construct": [
           {
-            "uuid": "ro-2-1-0-op-fc-bm-999",
+            "uuid": "ro-2-1-2-op-fc-bm-999",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -3751,22 +3793,22 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-000"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-000"
               },
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-000"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-000"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-bm-ro-2-0-1-000"
+                "logical-termination-point": "ro-2-1-2-op-c-bm-ro-2-1-2-000"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-bm-000",
+            "uuid": "ro-2-1-2-op-fc-bm-000",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -3781,22 +3823,22 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-000"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-000"
               },
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-000"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-000"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-bm-ro-2-0-1-000"
+                "logical-termination-point": "ro-2-1-2-op-c-bm-ro-2-1-2-000"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-bm-001",
+            "uuid": "ro-2-1-2-op-fc-bm-001",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -3811,17 +3853,17 @@
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-001"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-001"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-bm-or-2-0-1-000"
+                "logical-termination-point": "ro-2-1-2-op-c-bm-or-2-1-1-000"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-bm-002",
+            "uuid": "ro-2-1-2-op-fc-bm-002",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -3836,187 +3878,187 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-002"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-002"
               },
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-000"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-000"
               },
               {
                 "local-id": "101",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-001"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-001"
               },
               {
                 "local-id": "102",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-002"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-002"
               },
               {
                 "local-id": "103",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-003"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-003"
               },
               {
                 "local-id": "104",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-004"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-004"
               },
               {
                 "local-id": "105",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-005"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-005"
               },
               {
                 "local-id": "107",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-007"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-007"
               },
               {
                 "local-id": "108",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-008"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-008"
               },
               {
                 "local-id": "109",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-009"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-009"
               },
               {
                 "local-id": "110",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-010"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-010"
               },
               {
                 "local-id": "111",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-011"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-011"
               },
               {
                 "local-id": "112",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-012"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-012"
               },
               {
                 "local-id": "113",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-013"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-013"
               },
               {
                 "local-id": "114",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-014"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-014"
               },
               {
                 "local-id": "115",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-015"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-015"
               },
               {
                 "local-id": "130",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-im-000"
+                "logical-termination-point": "ro-2-1-2-op-s-im-000"
               },
               {
                 "local-id": "150",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bs-000"
+                "logical-termination-point": "ro-2-1-2-op-s-bs-000"
               },
               {
                 "local-id": "151",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bs-001"
+                "logical-termination-point": "ro-2-1-2-op-s-bs-001"
               },
               {
                 "local-id": "152",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bs-002"
+                "logical-termination-point": "ro-2-1-2-op-s-bs-002"
               },
               {
                 "local-id": "153",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bs-003"
+                "logical-termination-point": "ro-2-1-2-op-s-bs-003"
               },
               {
                 "local-id": "154",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bs-004"
+                "logical-termination-point": "ro-2-1-2-op-s-bs-004"
               },
               {
                 "local-id": "155",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bs-005"
+                "logical-termination-point": "ro-2-1-2-op-s-bs-005"
               },
               {
                 "local-id": "170",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-001"
+                "logical-termination-point": "ro-2-1-2-op-s-is-001"
               },
               {
                 "local-id": "171",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-002"
+                "logical-termination-point": "ro-2-1-2-op-s-is-002"
               },
               {
                 "local-id": "172",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "173",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-004"
+                "logical-termination-point": "ro-2-1-2-op-s-is-004"
               },
               {
                 "local-id": "174",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-005"
+                "logical-termination-point": "ro-2-1-2-op-s-is-005"
               },
               {
                 "local-id": "175",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-006"
+                "logical-termination-point": "ro-2-1-2-op-s-is-006"
               },
               {
                 "local-id": "176",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-007"
+                "logical-termination-point": "ro-2-1-2-op-s-is-007"
               },
               {
                 "local-id": "177",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-008"
+                "logical-termination-point": "ro-2-1-2-op-s-is-008"
               },
               {
                 "local-id": "178",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-009"
+                "logical-termination-point": "ro-2-1-2-op-s-is-009"
               },
               {
                 "local-id": "179",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-010"
+                "logical-termination-point": "ro-2-1-2-op-s-is-010"
               },
               {
                 "local-id": "180",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-011"
+                "logical-termination-point": "ro-2-1-2-op-s-is-011"
               },
               {
                 "local-id": "181",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-012"
+                "logical-termination-point": "ro-2-1-2-op-s-is-012"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-bs-eatl-2-0-1-000"
+                "logical-termination-point": "ro-2-1-2-op-c-bs-eatl-2-1-2-000"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-bm-003",
+            "uuid": "ro-2-1-2-op-fc-bm-003",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -4031,17 +4073,17 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-003"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-003"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-bs-ol-2-0-1-000"
+                "logical-termination-point": "ro-2-1-2-op-c-bs-ol-2-1-2-000"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-bm-005",
+            "uuid": "ro-2-1-2-op-fc-bm-005",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -4056,22 +4098,22 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-012"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-012"
               },
               {
                 "local-id": "001",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-005"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-005"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-bs-aa-2-0-1-000"
+                "logical-termination-point": "ro-2-1-2-op-c-bs-aa-2-1-2-000"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-im-110",
+            "uuid": "ro-2-1-2-op-fc-im-110",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -4086,17 +4128,17 @@
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-im-000"
+                "logical-termination-point": "ro-2-1-2-op-s-im-000"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-nr-2-1-0-002"
+                "logical-termination-point": "ro-2-1-2-op-c-im-nr-2-1-2-002"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-im-112",
+            "uuid": "ro-2-1-2-op-fc-im-112",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -4111,17 +4153,17 @@
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-im-000"
+                "logical-termination-point": "ro-2-1-2-op-s-im-000"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-nr-2-1-0-005"
+                "logical-termination-point": "ro-2-1-2-op-c-im-nr-2-1-2-005"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-im-113",
+            "uuid": "ro-2-1-2-op-fc-im-113",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -4136,17 +4178,17 @@
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-im-000"
+                "logical-termination-point": "ro-2-1-2-op-s-im-000"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-nr-2-1-0-006"
+                "logical-termination-point": "ro-2-1-2-op-c-im-nr-2-1-2-006"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-im-115",
+            "uuid": "ro-2-1-2-op-fc-im-115",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -4161,17 +4203,17 @@
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-im-000"
+                "logical-termination-point": "ro-2-1-2-op-s-im-000"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-tar-2-0-1-005"
+                "logical-termination-point": "ro-2-1-2-op-c-im-tar-2-1-2-005"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-bm-105",
+            "uuid": "ro-2-1-2-op-fc-bm-105",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -4186,22 +4228,22 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-001"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-001"
               },
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-im-000"
+                "logical-termination-point": "ro-2-1-2-op-s-im-000"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-bm-ro-2-0-1-001"
+                "logical-termination-point": "ro-2-1-2-op-c-bm-ro-2-1-2-001"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-bm-106",
+            "uuid": "ro-2-1-2-op-fc-bm-106",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -4216,22 +4258,22 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-001"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-001"
               },
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-im-000"
+                "logical-termination-point": "ro-2-1-2-op-s-im-000"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-bm-ro-2-0-1-002"
+                "logical-termination-point": "ro-2-1-2-op-c-bm-ro-2-1-2-002"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-bm-107",
+            "uuid": "ro-2-1-2-op-fc-bm-107",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -4246,22 +4288,22 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-001"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-001"
               },
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-007"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-007"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-bm-ro-2-0-1-003"
+                "logical-termination-point": "ro-2-1-2-op-c-bm-ro-2-1-2-003"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-bm-006",
+            "uuid": "ro-2-1-2-op-fc-bm-006",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -4276,112 +4318,117 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-009"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-009"
               },
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-000"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-000"
               },
               {
                 "local-id": "101",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-001"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-001"
               },
               {
                 "local-id": "102",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-002"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-002"
               },
               {
                 "local-id": "103",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-003"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-003"
               },
               {
                 "local-id": "105",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-005"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-005"
               },
               {
                 "local-id": "107",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-007"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-007"
               },
               {
                 "local-id": "109",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-009"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-009"
               },
               {
                 "local-id": "111",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-011"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-011"
               },
               {
                 "local-id": "112",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-012"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-012"
               },
               {
                 "local-id": "115",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-015"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-015"
               },
               {
                 "local-id": "130",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-im-000"
+                "logical-termination-point": "ro-2-1-2-op-s-im-000"
               },
               {
                 "local-id": "141",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-001"
+                "logical-termination-point": "ro-2-1-2-op-s-is-001"
+              },
+              {
+                "local-id": "143",
+                "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "146",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-006"
+                "logical-termination-point": "ro-2-1-2-op-s-is-006"
               },
               {
                 "local-id": "147",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-007"
+                "logical-termination-point": "ro-2-1-2-op-s-is-007"
               },
               {
                 "local-id": "148",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-008"
+                "logical-termination-point": "ro-2-1-2-op-s-is-008"
               },
               {
                 "local-id": "149",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-009"
+                "logical-termination-point": "ro-2-1-2-op-s-is-009"
               },
               {
                 "local-id": "150",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-010"
+                "logical-termination-point": "ro-2-1-2-op-s-is-010"
               },
               {
                 "local-id": "152",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-012"
+                "logical-termination-point": "ro-2-1-2-op-s-is-012"
               },
               {
                 "local-id": "153",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-013"
+                "logical-termination-point": "ro-2-1-2-op-s-is-013"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-bm-alt-2-0-1-001"
+                "logical-termination-point": "ro-2-1-2-op-c-bm-alt-2-1-2-001"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-bm-007",
+            "uuid": "ro-2-1-2-op-fc-bm-007",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -4396,27 +4443,27 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-009"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-009"
               },
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-013"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-013"
               },
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-002"
+                "logical-termination-point": "ro-2-1-2-op-s-is-002"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-bm-alt-2-0-1-002"
+                "logical-termination-point": "ro-2-1-2-op-c-bm-alt-2-1-2-002"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-bm-008",
+            "uuid": "ro-2-1-2-op-fc-bm-008",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -4431,52 +4478,52 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-009"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-009"
               },
               {
                 "local-id": "110",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-001"
+                "logical-termination-point": "ro-2-1-2-op-s-is-001"
               },
               {
                 "local-id": "111",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "112",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-007"
+                "logical-termination-point": "ro-2-1-2-op-s-is-007"
               },
               {
                 "local-id": "113",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-008"
+                "logical-termination-point": "ro-2-1-2-op-s-is-008"
               },
               {
                 "local-id": "114",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-009"
+                "logical-termination-point": "ro-2-1-2-op-s-is-009"
               },
               {
                 "local-id": "115",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-012"
+                "logical-termination-point": "ro-2-1-2-op-s-is-012"
               },
               {
                 "local-id": "116",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-013"
+                "logical-termination-point": "ro-2-1-2-op-s-is-013"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-bm-alt-2-0-1-003"
+                "logical-termination-point": "ro-2-1-2-op-c-bm-alt-2-1-2-003"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-bm-009",
+            "uuid": "ro-2-1-2-op-fc-bm-009",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -4491,17 +4538,17 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-009"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-009"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-bm-alt-2-0-1-004"
+                "logical-termination-point": "ro-2-1-2-op-c-bm-alt-2-1-2-004"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-bm-010",
+            "uuid": "ro-2-1-2-op-fc-bm-010",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -4516,27 +4563,27 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-009"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-009"
               },
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-004"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-004"
               },
               {
                 "local-id": "101",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-bm-alt-2-0-1-005"
+                "logical-termination-point": "ro-2-1-2-op-c-bm-alt-2-1-2-005"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-bm-011",
+            "uuid": "ro-2-1-2-op-fc-bm-011",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -4551,17 +4598,17 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-009"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-009"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-bm-alt-2-0-1-001"
+                "logical-termination-point": "ro-2-1-2-op-c-bm-alt-2-1-2-001"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-bm-012",
+            "uuid": "ro-2-1-2-op-fc-bm-012",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -4576,17 +4623,17 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-009"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-009"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-bm-alt-2-0-1-002"
+                "logical-termination-point": "ro-2-1-2-op-c-bm-alt-2-1-2-002"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-bm-013",
+            "uuid": "ro-2-1-2-op-fc-bm-013",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -4601,17 +4648,17 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-009"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-009"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-bm-alt-2-0-1-003"
+                "logical-termination-point": "ro-2-1-2-op-c-bm-alt-2-1-2-003"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-bm-014",
+            "uuid": "ro-2-1-2-op-fc-bm-014",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -4626,17 +4673,17 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-009"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-009"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-bm-alt-2-0-1-004"
+                "logical-termination-point": "ro-2-1-2-op-c-bm-alt-2-1-2-004"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-bm-015",
+            "uuid": "ro-2-1-2-op-fc-bm-015",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -4651,17 +4698,17 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-009"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-009"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-bm-alt-2-0-1-005"
+                "logical-termination-point": "ro-2-1-2-op-c-bm-alt-2-1-2-005"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-is-005",
+            "uuid": "ro-2-1-2-op-fc-is-005",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -4676,27 +4723,27 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-006"
+                "logical-termination-point": "ro-2-1-2-op-s-is-006"
               },
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-001"
+                "logical-termination-point": "ro-2-1-2-op-s-is-001"
               },
               {
                 "local-id": "101",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-012"
+                "logical-termination-point": "ro-2-1-2-op-s-is-012"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-tar-2-0-1-003"
+                "logical-termination-point": "ro-2-1-2-op-c-im-tar-2-1-2-003"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-is-010",
+            "uuid": "ro-2-1-2-op-fc-is-010",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -4711,32 +4758,32 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-013"
+                "logical-termination-point": "ro-2-1-2-op-s-is-013"
               },
               {
                 "local-id": "001",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-004"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-004"
               },
               {
                 "local-id": "003",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-013"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-013"
               },
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-tar-2-0-1-007"
+                "logical-termination-point": "ro-2-1-2-op-c-im-tar-2-1-2-007"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-is-006",
+            "uuid": "ro-2-1-2-op-fc-is-006",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -4751,52 +4798,52 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-007"
+                "logical-termination-point": "ro-2-1-2-op-s-is-007"
               },
               {
                 "local-id": "001",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-004"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-004"
               },
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-002"
+                "logical-termination-point": "ro-2-1-2-op-s-is-002"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-tar-2-0-1-004"
+                "logical-termination-point": "ro-2-1-2-op-c-im-tar-2-1-2-004"
               },
               {
                 "local-id": "201",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-eatl-2-0-1-004"
+                "logical-termination-point": "ro-2-1-2-op-c-im-eatl-2-1-2-004"
               },
               {
                 "local-id": "202",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-ol-2-0-1-004"
+                "logical-termination-point": "ro-2-1-2-op-c-im-ol-2-1-2-004"
               },
               {
                 "local-id": "203",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-aa-2-0-1-004"
+                "logical-termination-point": "ro-2-1-2-op-c-im-aa-2-1-2-004"
               },
               {
                 "local-id": "204",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-alt-2-0-1-004"
+                "logical-termination-point": "ro-2-1-2-op-c-im-alt-2-1-2-004"
               },
               {
                 "local-id": "205",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-okm-2-0-1-004"
+                "logical-termination-point": "ro-2-1-2-op-c-im-okm-2-1-2-004"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-is-008",
+            "uuid": "ro-2-1-2-op-fc-is-008",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -4811,47 +4858,47 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-009"
+                "logical-termination-point": "ro-2-1-2-op-s-is-009"
               },
               {
                 "local-id": "001",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-004"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-004"
               },
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-eatl-2-0-1-004"
+                "logical-termination-point": "ro-2-1-2-op-c-im-eatl-2-1-2-004"
               },
               {
                 "local-id": "201",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-ol-2-0-1-004"
+                "logical-termination-point": "ro-2-1-2-op-c-im-ol-2-1-2-004"
               },
               {
                 "local-id": "202",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-aa-2-0-1-004"
+                "logical-termination-point": "ro-2-1-2-op-c-im-aa-2-1-2-004"
               },
               {
                 "local-id": "203",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-alt-2-0-1-004"
+                "logical-termination-point": "ro-2-1-2-op-c-im-alt-2-1-2-004"
               },
               {
                 "local-id": "204",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-okm-2-0-1-004"
+                "logical-termination-point": "ro-2-1-2-op-c-im-okm-2-1-2-004"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-is-021",
+            "uuid": "ro-2-1-2-op-fc-is-021",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -4866,67 +4913,67 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-001"
+                "logical-termination-point": "ro-2-1-2-op-s-is-001"
               },
               {
                 "local-id": "001",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-012"
+                "logical-termination-point": "ro-2-1-2-op-s-is-012"
               },
               {
                 "local-id": "002",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "003",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-013"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-013"
               },
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-002"
+                "logical-termination-point": "ro-2-1-2-op-s-is-002"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-ro-2-0-1-006"
+                "logical-termination-point": "ro-2-1-2-op-c-im-ro-2-1-2-006"
               },
               {
                 "local-id": "201",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-tar-2-0-1-006"
+                "logical-termination-point": "ro-2-1-2-op-c-im-tar-2-1-2-006"
               },
               {
                 "local-id": "202",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-eatl-2-0-1-006"
+                "logical-termination-point": "ro-2-1-2-op-c-im-eatl-2-1-2-006"
               },
               {
                 "local-id": "203",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-ol-2-0-1-006"
+                "logical-termination-point": "ro-2-1-2-op-c-im-ol-2-1-2-006"
               },
               {
                 "local-id": "204",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-aa-2-0-1-006"
+                "logical-termination-point": "ro-2-1-2-op-c-im-aa-2-1-2-006"
               },
               {
                 "local-id": "205",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-alt-2-0-1-006"
+                "logical-termination-point": "ro-2-1-2-op-c-im-alt-2-1-2-006"
               },
               {
                 "local-id": "206",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-okm-2-0-1-006"
+                "logical-termination-point": "ro-2-1-2-op-c-im-okm-2-1-2-006"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-is-022",
+            "uuid": "ro-2-1-2-op-fc-is-022",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -4941,67 +4988,67 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-001"
+                "logical-termination-point": "ro-2-1-2-op-s-is-001"
               },
               {
                 "local-id": "001",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-012"
+                "logical-termination-point": "ro-2-1-2-op-s-is-012"
               },
               {
                 "local-id": "002",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "003",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-013"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-013"
               },
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-010"
+                "logical-termination-point": "ro-2-1-2-op-s-is-010"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-ro-2-0-1-001"
+                "logical-termination-point": "ro-2-1-2-op-c-im-ro-2-1-2-001"
               },
               {
                 "local-id": "201",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-tar-2-0-1-001"
+                "logical-termination-point": "ro-2-1-2-op-c-im-tar-2-1-2-001"
               },
               {
                 "local-id": "202",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-eatl-2-0-1-001"
+                "logical-termination-point": "ro-2-1-2-op-c-im-eatl-2-1-2-001"
               },
               {
                 "local-id": "203",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-ol-2-0-1-001"
+                "logical-termination-point": "ro-2-1-2-op-c-im-ol-2-1-2-001"
               },
               {
                 "local-id": "204",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-aa-2-0-1-001"
+                "logical-termination-point": "ro-2-1-2-op-c-im-aa-2-1-2-001"
               },
               {
                 "local-id": "205",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-alt-2-0-1-001"
+                "logical-termination-point": "ro-2-1-2-op-c-im-alt-2-1-2-001"
               },
               {
                 "local-id": "206",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-okm-2-0-1-001"
+                "logical-termination-point": "ro-2-1-2-op-c-im-okm-2-1-2-001"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-is-023",
+            "uuid": "ro-2-1-2-op-fc-is-023",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -5016,67 +5063,67 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-001"
+                "logical-termination-point": "ro-2-1-2-op-s-is-001"
               },
               {
                 "local-id": "001",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-012"
+                "logical-termination-point": "ro-2-1-2-op-s-is-012"
               },
               {
                 "local-id": "002",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "003",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-013"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-013"
               },
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-011"
+                "logical-termination-point": "ro-2-1-2-op-s-is-011"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-ro-2-0-1-002"
+                "logical-termination-point": "ro-2-1-2-op-c-im-ro-2-1-2-002"
               },
               {
                 "local-id": "201",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-tar-2-0-1-002"
+                "logical-termination-point": "ro-2-1-2-op-c-im-tar-2-1-2-002"
               },
               {
                 "local-id": "202",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-eatl-2-0-1-002"
+                "logical-termination-point": "ro-2-1-2-op-c-im-eatl-2-1-2-002"
               },
               {
                 "local-id": "203",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-ol-2-0-1-002"
+                "logical-termination-point": "ro-2-1-2-op-c-im-ol-2-1-2-002"
               },
               {
                 "local-id": "204",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-aa-2-0-1-002"
+                "logical-termination-point": "ro-2-1-2-op-c-im-aa-2-1-2-002"
               },
               {
                 "local-id": "205",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-alt-2-0-1-002"
+                "logical-termination-point": "ro-2-1-2-op-c-im-alt-2-1-2-002"
               },
               {
                 "local-id": "206",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-okm-2-0-1-002"
+                "logical-termination-point": "ro-2-1-2-op-c-im-okm-2-1-2-002"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-is-030",
+            "uuid": "ro-2-1-2-op-fc-is-030",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -5091,17 +5138,17 @@
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-bm-ro-2-0-1-002"
+                "logical-termination-point": "ro-2-1-2-op-c-bm-ro-2-1-2-002"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-is-035",
+            "uuid": "ro-2-1-2-op-fc-is-035",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -5116,17 +5163,17 @@
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-alt-2-0-1-003"
+                "logical-termination-point": "ro-2-1-2-op-c-im-alt-2-1-2-003"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-is-036",
+            "uuid": "ro-2-1-2-op-fc-is-036",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -5141,17 +5188,17 @@
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-okm-2-0-1-003"
+                "logical-termination-point": "ro-2-1-2-op-c-im-okm-2-1-2-003"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-is-037",
+            "uuid": "ro-2-1-2-op-fc-is-037",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -5166,17 +5213,17 @@
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-eatl-2-0-1-003"
+                "logical-termination-point": "ro-2-1-2-op-c-im-eatl-2-1-2-003"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-is-038",
+            "uuid": "ro-2-1-2-op-fc-is-038",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -5191,17 +5238,17 @@
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-aa-2-0-1-003"
+                "logical-termination-point": "ro-2-1-2-op-c-im-aa-2-1-2-003"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-is-039",
+            "uuid": "ro-2-1-2-op-fc-is-039",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -5216,17 +5263,17 @@
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-ol-2-0-1-003"
+                "logical-termination-point": "ro-2-1-2-op-c-im-ol-2-1-2-003"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-is-040",
+            "uuid": "ro-2-1-2-op-fc-is-040",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -5241,26 +5288,26 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-008"
+                "logical-termination-point": "ro-2-1-2-op-s-is-008"
               },
               {
                 "local-id": "001",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-004"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-004"
               },
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-is-042",
+            "uuid": "ro-2-1-2-op-fc-is-042",
             "name": [
               {
                 "value-name": "ForwardingKind",
-                "value": "core-model-1-4:FORWARDING_KIND_TYPE_INVARIANT_PROCESS_SNIPPET"
+                "value": "core-model-1-4:FORWARDING_KIND_TYPE_PROCESS_SNIPPET"
               },
               {
                 "value-name": "ForwardingName",
@@ -5271,62 +5318,62 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-001"
+                "logical-termination-point": "ro-2-1-2-op-s-is-001"
               },
               {
                 "local-id": "001",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-012"
+                "logical-termination-point": "ro-2-1-2-op-s-is-012"
               },
               {
                 "local-id": "002",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-013"
+                "logical-termination-point": "ro-2-1-2-op-s-is-013"
               },
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-ro-2-0-1-008"
+                "logical-termination-point": "ro-2-1-2-op-c-im-ro-2-1-2-008"
               },
               {
                 "local-id": "201",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-tar-2-0-1-008"
+                "logical-termination-point": "ro-2-1-2-op-c-im-tar-2-1-2-008"
               },
               {
                 "local-id": "202",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-eatl-2-0-1-008"
+                "logical-termination-point": "ro-2-1-2-op-c-im-eatl-2-1-2-008"
               },
               {
                 "local-id": "203",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-ol-2-0-1-008"
+                "logical-termination-point": "ro-2-1-2-op-c-im-ol-2-1-2-008"
               },
               {
                 "local-id": "204",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-aa-2-0-1-008"
+                "logical-termination-point": "ro-2-1-2-op-c-im-aa-2-1-2-008"
               },
               {
                 "local-id": "205",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-alt-2-0-1-008"
+                "logical-termination-point": "ro-2-1-2-op-c-im-alt-2-1-2-008"
               },
               {
                 "local-id": "206",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-okm-2-0-1-008"
+                "logical-termination-point": "ro-2-1-2-op-c-im-okm-2-1-2-008"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-is-043",
+            "uuid": "ro-2-1-2-op-fc-is-043",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -5341,21 +5388,21 @@
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-is-alt-2-0-1-000"
+                "logical-termination-point": "ro-2-1-2-op-c-is-alt-2-1-2-000"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-is-044",
+            "uuid": "ro-2-1-2-op-fc-is-044",
             "name": [
               {
                 "value-name": "ForwardingKind",
-                "value": "core-model-1-4:FORWARDING_KIND_TYPE_INVARIANT_PROCESS_SNIPPET"
+                "value": "core-model-1-4:FORWARDING_KIND_TYPE_PROCESS_SNIPPET"
               },
               {
                 "value-name": "ForwardingName",
@@ -5366,67 +5413,67 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-001"
+                "logical-termination-point": "ro-2-1-2-op-s-is-001"
               },
               {
                 "local-id": "001",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-012"
+                "logical-termination-point": "ro-2-1-2-op-s-is-012"
               },
               {
                 "local-id": "002",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-013"
+                "logical-termination-point": "ro-2-1-2-op-s-is-013"
               },
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "101",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-010"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-010"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-ro-2-0-1-009"
+                "logical-termination-point": "ro-2-1-2-op-c-im-ro-2-1-2-009"
               },
               {
                 "local-id": "201",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-tar-2-0-1-009"
+                "logical-termination-point": "ro-2-1-2-op-c-im-tar-2-1-2-009"
               },
               {
                 "local-id": "202",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-eatl-2-0-1-009"
+                "logical-termination-point": "ro-2-1-2-op-c-im-eatl-2-1-2-009"
               },
               {
                 "local-id": "203",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-ol-2-0-1-009"
+                "logical-termination-point": "ro-2-1-2-op-c-im-ol-2-1-2-009"
               },
               {
                 "local-id": "204",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-aa-2-0-1-009"
+                "logical-termination-point": "ro-2-1-2-op-c-im-aa-2-1-2-009"
               },
               {
                 "local-id": "205",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-alt-2-0-1-009"
+                "logical-termination-point": "ro-2-1-2-op-c-im-alt-2-1-2-009"
               },
               {
                 "local-id": "206",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-okm-2-0-1-009"
+                "logical-termination-point": "ro-2-1-2-op-c-im-okm-2-1-2-009"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-is-046",
+            "uuid": "ro-2-1-2-op-fc-is-046",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -5441,17 +5488,17 @@
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-is-alt-2-0-1-000"
+                "logical-termination-point": "ro-2-1-2-op-c-is-alt-2-1-2-000"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-is-047",
+            "uuid": "ro-2-1-2-op-fc-is-047",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -5466,17 +5513,17 @@
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-is-alt-2-0-1-000"
+                "logical-termination-point": "ro-2-1-2-op-c-is-alt-2-1-2-000"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-is-048",
+            "uuid": "ro-2-1-2-op-fc-is-048",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -5491,17 +5538,17 @@
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-is-alt-2-0-1-000"
+                "logical-termination-point": "ro-2-1-2-op-c-is-alt-2-1-2-000"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-is-049",
+            "uuid": "ro-2-1-2-op-fc-is-049",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -5516,67 +5563,67 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-001"
+                "logical-termination-point": "ro-2-1-2-op-s-is-001"
               },
               {
                 "local-id": "001",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-012"
+                "logical-termination-point": "ro-2-1-2-op-s-is-012"
               },
               {
                 "local-id": "002",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-013"
+                "logical-termination-point": "ro-2-1-2-op-s-is-013"
               },
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "101",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-010"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-010"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-ro-2-0-1-000"
+                "logical-termination-point": "ro-2-1-2-op-c-im-ro-2-1-2-000"
               },
               {
                 "local-id": "201",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-tar-2-0-1-000"
+                "logical-termination-point": "ro-2-1-2-op-c-im-tar-2-1-2-000"
               },
               {
                 "local-id": "202",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-eatl-2-0-1-000"
+                "logical-termination-point": "ro-2-1-2-op-c-im-eatl-2-1-2-000"
               },
               {
                 "local-id": "203",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-ol-2-0-1-000"
+                "logical-termination-point": "ro-2-1-2-op-c-im-ol-2-1-2-000"
               },
               {
                 "local-id": "204",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-aa-2-0-1-000"
+                "logical-termination-point": "ro-2-1-2-op-c-im-aa-2-1-2-000"
               },
               {
                 "local-id": "205",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-alt-2-0-1-000"
+                "logical-termination-point": "ro-2-1-2-op-c-im-alt-2-1-2-000"
               },
               {
                 "local-id": "206",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-okm-2-0-1-000"
+                "logical-termination-point": "ro-2-1-2-op-c-im-okm-2-1-2-000"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-is-051",
+            "uuid": "ro-2-1-2-op-fc-is-051",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -5591,17 +5638,17 @@
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-is-alt-2-0-1-000"
+                "logical-termination-point": "ro-2-1-2-op-c-is-alt-2-1-2-000"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-is-052",
+            "uuid": "ro-2-1-2-op-fc-is-052",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -5616,17 +5663,17 @@
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-is-alt-2-0-1-000"
+                "logical-termination-point": "ro-2-1-2-op-c-is-alt-2-1-2-000"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-is-053",
+            "uuid": "ro-2-1-2-op-fc-is-053",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -5641,22 +5688,22 @@
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "101",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-010"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-010"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-is-alt-2-0-1-000"
+                "logical-termination-point": "ro-2-1-2-op-c-is-alt-2-1-2-000"
               }
             ]
           },
           {
-            "uuid": "ro-2-1-0-op-fc-is-060",
+            "uuid": "ro-2-1-2-op-fc-is-060",
             "name": [
               {
                 "value-name": "ForwardingKind",
@@ -5671,22 +5718,22 @@
               {
                 "local-id": "000",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_MANAGEMENT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "100",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-is-003"
+                "logical-termination-point": "ro-2-1-2-op-s-is-003"
               },
               {
                 "local-id": "101",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_INPUT",
-                "logical-termination-point": "ro-2-1-0-op-s-bm-010"
+                "logical-termination-point": "ro-2-1-2-op-s-bm-010"
               },
               {
                 "local-id": "200",
                 "port-direction": "core-model-1-4:PORT_DIRECTION_TYPE_OUTPUT",
-                "logical-termination-point": "ro-2-1-0-op-c-im-tar-2-0-1-007"
+                "logical-termination-point": "ro-2-1-2-op-c-im-tar-2-1-2-007"
               }
             ]
           }
