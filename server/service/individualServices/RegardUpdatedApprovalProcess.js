@@ -472,8 +472,9 @@ async function ApprovingApplicationCausesPreparingTheEmbedding(processId, applic
         let isCallBackEligible = true;
         let oldReleaseApplicationName = responseData["application-name"];
         let oldReleaseReleaseNumber = responseData["release-number"];
-        let oldReleaseHttpClientUuid = await httpClientInterface.getHttpClientUuidExcludingOldReleaseAndNewRelease(oldReleaseApplicationName, oldReleaseReleaseNumber, NEW_RELEASE_FORWARDING_NAME);
-        if (oldReleaseApplicationName == "OldRelease" || !oldReleaseHttpClientUuid) {
+        //commenting below lines for RO#607
+       // let oldReleaseHttpClientUuid = await httpClientInterface.getHttpClientUuidExcludingOldReleaseAndNewRelease(oldReleaseApplicationName, oldReleaseReleaseNumber, NEW_RELEASE_FORWARDING_NAME);
+        if (oldReleaseApplicationName == "OldRelease" ){ //|| !oldReleaseHttpClientUuid) {
             isCallBackEligible = false;
         }
         /* if old-release of an application is actually present, further callbacks to be triggered */
