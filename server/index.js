@@ -32,12 +32,12 @@ http.createServer(app).listen(serverPort, function () {
 //setting the path to the database 
 global.databasePath = './database/config.json';
 global.applicationDataPath = './application-data/';
-// let getWaitTimeApproveValue = MonitorTypeApprovalChannel.getWaitTimeApproveValue()
-// getWaitTimeApproveValue.then((waitTimeApproveValue)=>{
-//     setInterval( MonitorTypeApprovalChannel.MonitorApprovalStatusChannel, waitTimeApproveValue);
-// }).catch((error)=>{
-//     console.error(error)
-// })
+let getWaitTimeApproveValue = MonitorTypeApprovalChannel.getWaitTimeApproveValue()
+getWaitTimeApproveValue.then((waitTimeApproveValue)=>{
+    setInterval( MonitorTypeApprovalChannel.MonitorApprovalStatusChannel, waitTimeApproveValue);
+}).catch((error)=>{
+    console.error(error)
+})
 appCommons.performApplicationRegistration();    
 
 
