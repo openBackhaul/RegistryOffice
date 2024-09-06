@@ -5,7 +5,7 @@ var path = require('path');
 var http = require('http');
 var oas3Tools = require('openbackhaul-oas3-tools');
 var appCommons = require('onf-core-model-ap/applicationPattern/commons/AppCommons');
-var serverPort = 3024;
+var serverPort = 3031;
 
 // uncomment if you do not want to validate security e.g. operation-key, basic auth, etc
 // appCommons.openApiValidatorOptions.validateSecurity = false;
@@ -32,12 +32,12 @@ http.createServer(app).listen(serverPort, function () {
 //setting the path to the database 
 global.databasePath = './database/config.json';
 global.applicationDataPath = './application-data/';
-let getWaitTimeApproveValue = MonitorTypeApprovalChannel.getWaitTimeApproveValue()
-getWaitTimeApproveValue.then((waitTimeApproveValue)=>{
-    setInterval( MonitorTypeApprovalChannel.MonitorApprovalStatusChannel, waitTimeApproveValue);
-}).catch((error)=>{
-    console.error(error)
-})
+// let getWaitTimeApproveValue = MonitorTypeApprovalChannel.getWaitTimeApproveValue()
+// getWaitTimeApproveValue.then((waitTimeApproveValue)=>{
+//     setInterval( MonitorTypeApprovalChannel.MonitorApprovalStatusChannel, waitTimeApproveValue);
+// }).catch((error)=>{
+//     console.error(error)
+// })
 appCommons.performApplicationRegistration();    
 
 
