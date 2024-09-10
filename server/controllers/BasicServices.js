@@ -6,6 +6,7 @@ var responseCodeEnum = require('onf-core-model-ap/applicationPattern/rest/server
 var RestResponseHeader = require('onf-core-model-ap/applicationPattern/rest/server/ResponseHeader');
 var RestResponseBuilder = require('onf-core-model-ap/applicationPattern/rest/server/ResponseBuilder');
 var ExecutionAndTraceService = require('onf-core-model-ap/applicationPattern/services/ExecutionAndTraceService');
+var BasicServiceCustom = require('../service/BasicServicesService');
 
 const NEW_RELEASE_FORWARDING_NAME = 'PromptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredApplications';
 const OLD_RELEASE_FORWARDING_NAME = 'PromptForEmbeddingCausesRequestForBequeathingData';
@@ -396,7 +397,7 @@ module.exports.disposeRemaindersOfDeregisteredApplication = async function dispo
   let startTime = process.hrtime();
   let responseCode = responseCodeEnum.code.NO_CONTENT;
   let responseBodyToDocument;
-  await BasicServices.disposeRemaindersOfDeregisteredApplication(body, user, originator, xCorrelator, traceIndicator, customerJourney, req.url, NEW_RELEASE_FORWARDING_NAME)
+  await BasicServiceCustom.disposeRemaindersOfDeregisteredApplication(body, user, originator, xCorrelator, traceIndicator, customerJourney, req.url, NEW_RELEASE_FORWARDING_NAME)
     .then(async function (responseBody) {
       responseBodyToDocument = responseBody;
       let responseHeader = await RestResponseHeader.createResponseHeader(xCorrelator, startTime, req.url);
