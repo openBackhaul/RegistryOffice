@@ -948,29 +948,29 @@ exports.relayServerReplacement = function (body, user, originator, xCorrelator, 
       let futurePort = body["future-port"];
 
       /****************************************************************************************
-       * decision making before proceeding with relay the server information
+       * As per RO#issue608, this service will only forward the incoming request without any internal checking
        ****************************************************************************************/
-      let isRequestEligibleForRelaying = true;
-      let httpClientUuidOfNewApplication = await httpClientInterface.getHttpClientUuidExcludingOldReleaseAndNewRelease(
-        futureApplicationName, futureReleaseNumber, NEW_RELEASE_FORWARDING_NAME
-      );
-      if (httpClientUuidOfNewApplication == undefined) {
-        isRequestEligibleForRelaying = false;
-      } else {
-        // check whether application is approved ??
-        const appNameAndUuidFromForwarding = await IndividualServicesUtility.resolveApplicationNameAndHttpClientLtpUuidFromForwardingNameOfTypeSubscription(
-          'ServerReplacementBroadcast',
-          futureApplicationName,
-          futureReleaseNumber);
-        if (appNameAndUuidFromForwarding != httpClientUuidOfNewApplication) {
-          isRequestEligibleForRelaying = false;
-        }
-      }
+      // let isRequestEligibleForRelaying = true;
+      // let httpClientUuidOfNewApplication = await httpClientInterface.getHttpClientUuidExcludingOldReleaseAndNewRelease(
+      //   futureApplicationName, futureReleaseNumber, NEW_RELEASE_FORWARDING_NAME
+      // );
+      // if (httpClientUuidOfNewApplication == undefined) {
+      //   isRequestEligibleForRelaying = false;
+      // } else {
+      //   // check whether application is approved ??
+      //   const appNameAndUuidFromForwarding = await IndividualServicesUtility.resolveApplicationNameAndHttpClientLtpUuidFromForwardingNameOfTypeSubscription(
+      //     'ServerReplacementBroadcast',
+      //     futureApplicationName,
+      //     futureReleaseNumber);
+      //   if (appNameAndUuidFromForwarding != httpClientUuidOfNewApplication) {
+      //     isRequestEligibleForRelaying = false;
+      //   }
+      // }
 
       /****************************************************************************************
        * Prepare attributes to automate forwarding-construct
        ****************************************************************************************/
-      if (isRequestEligibleForRelaying) {
+      //if (isRequestEligibleForRelaying) {
         let forwardingAutomationInputList;
 
         forwardingAutomationInputList = await prepareForwardingAutomation.relayServerReplacement(
@@ -993,7 +993,7 @@ exports.relayServerReplacement = function (body, user, originator, xCorrelator, 
             customerJourney
           );
         }
-      }
+      //}
       resolve();
     } catch (error) {
       reject(error);
