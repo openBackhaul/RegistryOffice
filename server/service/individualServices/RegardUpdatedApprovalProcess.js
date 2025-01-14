@@ -22,6 +22,7 @@ const MonitorTypeApprovalChannel = require('./MonitorTypeApprovalChannel');
 const IndividualServicesUtility = require('./IndividualServicesUtility');
 const prepareForwardingConfiguration = require('./PrepareForwardingConfiguration');
 const prepareForwardingAutomation = require('./PrepareForwardingAutomation');
+const ApplicationPreceedingVersion = require('./ApplicationPreceedingVersion');
 const createHttpError = require('http-errors');
 
 const NEW_RELEASE_FORWARDING_NAME = 'PromptForBequeathingDataCausesTransferOfListOfAlreadyRegisteredApplications';
@@ -188,6 +189,8 @@ exports.updateApprovalStatusInConfig = async function (requestBody, requestHeade
          * Reference:https://github.com/openBackhaul/RegistryOffice/blob/develop/spec/diagrams/is010_regardApprovalStatusCausesSequence.plantuml
          ****************************************************************************************/
         if (approvalStatus == 'APPROVED' && processId) {
+            
+            RequestForEmbedding(applicationName, releaseNumber, undefined, undefined, requestHeaders, undefined); // undefined values are part of this hotfix 2.1.2-hotfix.1
             let timestampOfCurrentRequest = new Date();
             requestHeaders.timestampOfCurrentRequest = timestampOfCurrentRequest;
             operationKeyUpdateNotificationService.turnONNotificationChannel(timestampOfCurrentRequest);
@@ -888,12 +891,13 @@ async function proceedToEmbeddingAfterReceivingOperationKey(applicationName, rel
             ApprovingApplicationCausesResponding(result, requestHeaders);
             return;
         }
-        /* RequestForEmbedding */
+        /* RequestForEmbedding
         result = await RequestForEmbedding(applicationName, releaseNumber, oldReleaseApplicationName, oldReleaseReleaseNumber, requestHeaders, result); // to be initiated by update-operation-key
         if (!result["successfully-embedded"]) {
             ApprovingApplicationCausesResponding(result, requestHeaders);
             return;
         }
+        */
         /**
          *  ApprovingApplicationCausesConnectingToBroadcast has been triggered after successful embedding of application
          */
@@ -939,6 +943,7 @@ async function RequestForEmbedding(applicationName, releaseNumber, oldReleaseApp
         let deregistrationOperationUuid = controlConstructUuid + "-op-s-is-002";
         requestBody["deregistration-operation"] = await operationServerInterface.getOperationNameAsync(deregistrationOperationUuid);
 
+        /**
         let oldReleaseHttpClientUuid = await httpClientInterface.getHttpClientUuidAsync(oldReleaseApplicationName, oldReleaseReleaseNumber);
 
         //get the oldRelease tcp client information
@@ -950,6 +955,7 @@ async function RequestForEmbedding(applicationName, releaseNumber, oldReleaseApp
                 requestBody["old-release-port"] = await tcpClientInterface.getRemotePortAsync(tcpClientOfOldRelease);
             }
         }
+        */
         let response = await IndividualServicesUtility.forwardRequest(
             forwardingName,
             requestBody,
@@ -959,7 +965,7 @@ async function RequestForEmbedding(applicationName, releaseNumber, oldReleaseApp
             requestHeaders.customerJourney,
             applicationName + releaseNumber
         );
-        /* processing the response */
+        /* processing the response 
         let responseCode = response.status;
         if (!responseCode.toString().startsWith("2")) {
             result["successfully-embedded"] = false;
@@ -967,13 +973,16 @@ async function RequestForEmbedding(applicationName, releaseNumber, oldReleaseApp
         } else {
             result["successfully-embedded"] = true;
         }
+        */
         console.log(`${forwardingName} has been triggered`);
     } catch (error) {
         console.log(error)
+        /**
         result["successfully-embedded"] = false;
         result["reason-of-failure"] = `RO_OTHERS`;
+         */
     }
-    return result;
+    //return result;
 }
 
 /**
