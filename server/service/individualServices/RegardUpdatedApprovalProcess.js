@@ -943,8 +943,8 @@ async function RequestForEmbedding(applicationName, releaseNumber, oldReleaseApp
         let deregistrationOperationUuid = controlConstructUuid + "-op-s-is-002";
         requestBody["deregistration-operation"] = await operationServerInterface.getOperationNameAsync(deregistrationOperationUuid);
 
-        /**
-        let oldReleaseHttpClientUuid = await httpClientInterface.getHttpClientUuidAsync(oldReleaseApplicationName, oldReleaseReleaseNumber);
+        
+        let oldReleaseHttpClientUuid = await httpClientInterface.getHttpClientUuidAsync(applicationName, releaseNumber);
 
         //get the oldRelease tcp client information
         if (oldReleaseHttpClientUuid) {
@@ -955,7 +955,8 @@ async function RequestForEmbedding(applicationName, releaseNumber, oldReleaseApp
                 requestBody["old-release-port"] = await tcpClientInterface.getRemotePortAsync(tcpClientOfOldRelease);
             }
         }
-        */
+        
+
         let response = await IndividualServicesUtility.forwardRequest(
             forwardingName,
             requestBody,
